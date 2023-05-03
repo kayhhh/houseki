@@ -2,7 +2,7 @@
 
 A lightweight, modular, and extendable 3D game engine built for the web.
 
-## Desgin Goals
+## Design Goals
 
 - **Lightweight**: The engine is designed to be lightweight, aiming to be a minimal wrapper around the underlying technologies. We want to avoid adding unnecessary abstractions.
 - **Modular**: The engine is designed to be modular, allowing you to pick and choose which systems you want to use. This also allows for granular hot reloading, as you can modify and reload individual systems without having to reload the entire engine.
