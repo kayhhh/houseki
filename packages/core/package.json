@@ -13,7 +13,6 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --onSuccess \"tsc --emitDeclarationOnly\"",
     "dev": "pnpm build --watch",
-    "lint": "cd ../.. && eslint --fix packages/lattice --ext .js,.cjs,.mjs,.jsx,.ts,.tsx,.json --ignore-path .prettierignore",
     "test": "jest",
     "test:watch": "jest --watch"
   },
