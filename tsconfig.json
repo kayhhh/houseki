@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "inlineSources": false,
+    "isolatedModules": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "preserveWatchOutput": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ESNext"
+  }
+}
