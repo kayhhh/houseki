@@ -5,7 +5,6 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "incremental": true,
     "inlineSources": false,
     "isolatedModules": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],

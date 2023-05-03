@@ -1,0 +1,19 @@
+{
+  "name": "examples",
+  "version": "0.0.0",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@lattice-engine/core": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "~5.0.4",
+    "vite": "^4.3.4"
+  }
+}
