@@ -10,6 +10,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@lastolivegames/becsy": "^0.14.3",
     "@lattice-engine/core": "workspace:*"
   },
   "devDependencies": {

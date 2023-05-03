@@ -1,43 +1,82 @@
 import { System, system } from "@lastolivegames/becsy";
 import { PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from "three";
 
-import { Canvas, Scene } from "../components";
+import {
+  CanvasTarget,
+  PerspectiveCameraObject,
+  RenderView,
+  SceneObject,
+} from "../components";
 
 /**
  * The Renderer is responsible for rendering to the canvas.
  */
 @system
 export class Renderer extends System {
-  private readonly canvases = this.query((q) => q.addedOrChanged.with(Canvas));
+  private readonly sceneObjects = this.query((q) => q.with(SceneObject));
+  private readonly cameraObjects = this.query((q) =>
+    q.with(PerspectiveCameraObject)
+  );
+
+  private readonly targets = this.query((q) => q.current.with(CanvasTarget));
+  private readonly addedOrChangedTargets = this.query(
+    (q) => q.addedOrChanged.with(CanvasTarget).trackWrites
+  );
+  private readonly removedTargets = this.query((q) =>
+    q.removed.with(CanvasTarget)
+  );
+
+  private readonly views = this.query((q) => q.current.with(RenderView));
+
   private renderer = new WebGLRenderer();
 
-  private readonly scenes = this.query((q) => q.addedOrChanged.with(Scene));
-
-  override execute(): void {
-    const canvas = this.canvases.current[0];
-    if (!canvas) return;
-
-    // Update renderer on canvas change
-    this.canvases.addedOrChanged.forEach((entity) => {
-      const node = entity.read(Canvas).node;
-
+  override execute() {
+    // Create renderer
+    for (const entity of this.addedOrChangedTargets.addedOrChanged) {
       // Dispose of old renderer
       this.renderer.dispose();
+
+      // Get canvas
+      if (!entity.has(CanvasTarget)) continue;
+      const canvas = entity.read(CanvasTarget).canvas;
 
       // Create new renderer
       this.renderer = new WebGLRenderer({
         antialias: true,
-        canvas: node,
+        canvas,
         powerPreference: "high-performance",
       });
       this.renderer.outputEncoding = sRGBEncoding;
       this.renderer.shadowMap.enabled = true;
       this.renderer.shadowMap.type = PCFSoftShadowMap;
       this.renderer.setPixelRatio(window.devicePixelRatio);
-    });
+    }
+
+    // Dispose renderer
+    for (const _ of this.removedTargets.removed) {
+      this.renderer.dispose();
+    }
+
+    const canvas = this.targets.current[0]?.read(CanvasTarget).canvas;
+    if (!canvas) return;
 
     // Update renderer size
-    const node = canvas.read(Canvas).node;
-    this.renderer.setSize(node.clientWidth, node.clientHeight, false);
+    this.renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+
+    // Render each view
+    for (const entity of this.views.current) {
+      // Get camera
+      const camera = entity.read(RenderView).camera;
+      if (!camera.has(PerspectiveCameraObject)) continue;
+      const cameraObject = camera.read(PerspectiveCameraObject).object;
+
+      // Get scene
+      const scene = entity.read(RenderView).scene;
+      if (!scene.has(SceneObject)) continue;
+      const sceneObject = scene.read(SceneObject).object;
+
+      // Render
+      this.renderer.render(sceneObject, cameraObject);
+    }
   }
 }
