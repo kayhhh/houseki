@@ -1,17 +1,17 @@
 import { TypedArray } from "./types";
 
 /**
- * Stores raw ArrayBuffer and TypedArray data.
+ * Stores raw TypedArray data.
  * There is no good way to store this data in the ECS, so we store it here instead.
  */
 export class ResourceStore {
   #nextId = 1;
-  #map = new Map<number, ArrayBuffer | TypedArray>();
+  #map = new Map<number, TypedArray>();
 
   /**
    * Stores the given data and returns an ID that can be used to retrieve it later.
    */
-  store(data: ArrayBuffer | TypedArray) {
+  store(data: TypedArray) {
     const id = this.#nextId++;
     this.#map.set(id, data);
     return id;

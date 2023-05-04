@@ -106,9 +106,7 @@ function processNode(node: GltfNode, parent: Entity, system: GLTFLoader) {
 
 function processMesh(mesh: GltfMesh, node: Entity, system: GLTFLoader) {
   // Create mesh
-  const entity = system.createEntity();
-  entity.add(Mesh);
-  entity.add(Parent, { value: node });
+  node.add(Mesh);
 
   // Create geometries
   mesh.listPrimitives().forEach((primitive) => {
@@ -116,9 +114,7 @@ function processMesh(mesh: GltfMesh, node: Entity, system: GLTFLoader) {
     const normalId = processAttribute("NORMAL", primitive);
     const indexId = processAttribute("INDICES", primitive);
 
-    const geometry = system.createEntity();
-    geometry.add(Geometry, { indexId, normalId, positionId });
-    geometry.add(Parent, { value: entity });
+    node.add(Geometry, { indexId, normalId, positionId });
   });
 }
 

@@ -58,7 +58,13 @@ importers:
       '@lattice-engine/render':
         specifier: workspace:^
         version: link:../packages/render
+      three:
+        specifier: ^0.149.0
+        version: 0.149.0
     devDependencies:
+      '@types/three':
+        specifier: ^0.149.0
+        version: 0.149.0
       typescript:
         specifier: ~5.0.4
         version: 5.0.4

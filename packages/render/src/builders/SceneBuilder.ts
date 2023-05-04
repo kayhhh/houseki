@@ -1,6 +1,6 @@
 import { System, system } from "@lastolivegames/becsy";
 import { Scene } from "@lattice-engine/core";
-import { Scene as ThreeScene } from "three";
+import { AmbientLight, PointLight, Scene as ThreeScene } from "three";
 
 import { NodeObject, SceneObject } from "../components";
 import { Renderer } from "../Renderer";
@@ -24,6 +24,9 @@ export class SceneBuilder extends System {
     for (const entity of this.addedScenes.added) {
       const object = new ThreeScene();
       entity.add(SceneObject, { object });
+
+      object.add(new AmbientLight(0xffffff, 0.5));
+      object.add(new PointLight(0xffffff, 0.5));
     }
 
     // Sync objects

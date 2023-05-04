@@ -13,9 +13,11 @@
     "@lastolivegames/becsy": "^0.14.3",
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/gltf": "workspace:^",
-    "@lattice-engine/render": "workspace:^"
+    "@lattice-engine/render": "workspace:^",
+    "three": "^0.149.0"
   },
   "devDependencies": {
+    "@types/three": "^0.149.0",
     "typescript": "~5.0.4",
     "vite": "^4.3.4"
   }

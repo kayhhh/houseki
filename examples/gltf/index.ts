@@ -19,9 +19,25 @@ class CreateScene extends System {
   readonly #gltf = this.query((q) => q.with(GltfUri).write);
 
   override initialize() {
-    const camera = this.createEntity(PerspectiveCamera);
-    const root = this.createEntity(Node);
-    const scene = this.createEntity(Scene, { root });
+    // Set up the scene
+    const camera = this.createEntity();
+    camera.add(PerspectiveCamera, {
+      aspect: window.innerWidth / window.innerHeight,
+      far: 1000,
+      fov: 75,
+      near: 0.1,
+    });
+
+    const root = this.createEntity();
+    root.add(Node, {
+      position: [2, -2, -10],
+      rotation: [0, 0, 0, 1],
+      scale: [1, 1, 1],
+    });
+
+    const scene = this.createEntity();
+    scene.add(Scene, { root });
+
     this.createEntity(RenderView, { camera, scene });
 
     // Load gltf model

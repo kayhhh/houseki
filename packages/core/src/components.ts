@@ -48,6 +48,7 @@ export class Geometry {
   @field.uint16 declare indexId: number; // ResourceStore id
   @field.uint16 declare positionId: number; // ResourceStore id
   @field.uint16 declare normalId: number; // ResourceStore id
+  @field.uint16 declare uvId: number; // ResourceStore id
 }
 
 @component

@@ -1,5 +1,5 @@
 import { System, system } from "@lastolivegames/becsy";
-import { Node } from "@lattice-engine/core";
+import { Node, Parent } from "@lattice-engine/core";
 import { Object3D } from "three";
 
 import { NodeObject } from "../components";
@@ -11,6 +11,7 @@ import { Renderer } from "../Renderer";
 @system((s) => s.before(Renderer))
 export class NodeBuilder extends System {
   readonly #objects = this.query((q) => q.with(NodeObject).write);
+  readonly #parents = this.query((q) => q.with(Parent));
 
   readonly #addedNodes = this.query((q) => q.added.with(Node));
   readonly #addedOrChangedNodes = this.query(
@@ -21,7 +22,8 @@ export class NodeBuilder extends System {
   override execute() {
     // Create objects
     for (const entity of this.#addedNodes.added) {
-      entity.add(NodeObject, { object: new Object3D() });
+      const object = new Object3D();
+      entity.add(NodeObject, { object });
     }
 
     // Sync objects
@@ -32,6 +34,12 @@ export class NodeBuilder extends System {
       object.position.fromArray(node.position);
       object.quaternion.fromArray(node.rotation);
       object.scale.fromArray(node.scale);
+
+      if (entity.has(Parent)) {
+        const parent = entity.read(Parent).value;
+        const parentObject = parent.read(NodeObject).object;
+        parentObject.add(object);
+      }
     }
 
     // Remove objects
