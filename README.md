@@ -3,6 +3,10 @@
   <strong>A lightweight, modular, and extendable 3D game engine built for the web.</strong>
 </div>
 
+## 🤔 Motivation
+
+The web has a lot of independently awesome libraries for building games, but combining them all together can be a pain. Lattice aims to be a lightweight game framework for combining these libraries together - all while maintaining high performance via an Entity Component System (ECS), multi-threading using WebWorkers, and WebAssembly. Add physics or networking only if you need it, or add custom rendering components to suit your specific needs.
+
 ## 🏗️ Design Goals
 
 - **Lightweight**: The engine is designed to be lightweight, aiming to be a minimal wrapper around the underlying technologies. We want to avoid adding unnecessary abstractions.
