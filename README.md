@@ -21,3 +21,12 @@ The web has a lot of independently awesome libraries for building games, but com
 - [Three.js](https://threejs.org/) for 3D rendering
 - [Rapier](https://rapier.rs/) for physics
 - [WASM](https://webassembly.org/) for user scripting
+
+## 📦 Packages
+
+| Package                                                         | Description                                                                             |
+| --------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [`@lattice-engine/core`](./packages/core)                       | Core Three.js rendering engine                                                          |
+| [`@lattice-engine/physics`](./packages/physics)                 | Rapier physics                                                                          |
+| [`@lattice-engine/player-controls`](./packages/player-controls) | Player controls for first-person and third-person cameras                               |
+| [`@lattice-engine/wired-protocol`](./packages/wired-protocol)   | Multiplayer networking via the [Wired Protocol](https://github.com/wired-protocol/spec) |
