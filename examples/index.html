@@ -4,11 +4,64 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Examples</title>
+    <title>Lattice Examples</title>
+
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      body h1 {
+        text-align: center;
+      }
+
+      .top-link {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+      }
+
+      .top-link:hover {
+        color: #777;
+      }
+
+      main {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      main a {
+        padding: 2rem;
+        font-size: large;
+        border: 1px solid #333;
+        border-radius: 0.5rem;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      main a:hover {
+        background-color: #ddd;
+        transition: background-color 0.2s ease-in-out;
+      }
+    </style>
   </head>
   <body>
-    <nav>
+    <h1>💎 Lattice Examples</h1>
+
+    <a class="top-link" href="https://github.com/lattice-engine/lattice"
+      >GitHub</a
+    >
+
+    <main>
       <a href="./basic/index.html">Basic</a>
-    </nav>
+    </main>
   </body>
 </html>
