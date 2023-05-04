@@ -1,8 +1,6 @@
 <div align="center">
   <h1>Lattice 💎</h1>
   <strong>A lightweight, modular, and extendable 3D game engine built for the web.</strong>
-  <br />
-  <br />
 </div>
 
 ## 🏗️ Design Goals
