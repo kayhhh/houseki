@@ -5,9 +5,9 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        basic: resolve(__dirname, "basic/index.html"),
-        gltf: resolve(__dirname, "gltf/index.html"),
-        main: resolve(__dirname, "index.html"),
+        basic: resolve("basic/index.html"),
+        gltf: resolve("gltf/index.html"),
+        main: resolve("index.html"),
       },
     },
     target: "esnext",

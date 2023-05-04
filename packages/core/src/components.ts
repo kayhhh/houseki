@@ -45,9 +45,9 @@ export class Mesh {}
 
 @component
 export class Geometry {
-  @field.uint16 declare index: number; // ResourceStore id
-  @field.uint16 declare position: number; // ResourceStore id
-  @field.uint16 declare normal: number; // ResourceStore id
+  @field.uint16 declare indexId: number; // ResourceStore id
+  @field.uint16 declare positionId: number; // ResourceStore id
+  @field.uint16 declare normalId: number; // ResourceStore id
 }
 
 @component

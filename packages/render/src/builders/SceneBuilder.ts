@@ -8,7 +8,7 @@ import { Renderer } from "../Renderer";
 /**
  * Converts Scene components to Three.js objects.
  */
-@system((s) => s.before(Renderer).beforeReadersOf(SceneObject))
+@system((s) => s.before(Renderer))
 export class SceneBuilder extends System {
   private readonly objects = this.query((q) => q.with(SceneObject).write);
   private readonly nodeObjects = this.query((q) => q.with(NodeObject).read);

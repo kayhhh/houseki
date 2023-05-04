@@ -8,24 +8,24 @@ import { Renderer } from "../Renderer";
 /**
  * Converts Node components to Three.js objects.
  */
-@system((s) => s.before(Renderer).beforeReadersOf(NodeObject))
+@system((s) => s.before(Renderer))
 export class NodeBuilder extends System {
-  private readonly objects = this.query((q) => q.with(NodeObject).write);
+  readonly #objects = this.query((q) => q.with(NodeObject).write);
 
-  private readonly addedNodes = this.query((q) => q.added.with(Node));
-  private readonly addedOrChangedNodes = this.query(
+  readonly #addedNodes = this.query((q) => q.added.with(Node));
+  readonly #addedOrChangedNodes = this.query(
     (q) => q.addedOrChanged.with(Node).trackWrites
   );
-  private readonly removedNodes = this.query((q) => q.removed.with(Node));
+  readonly #removedNodes = this.query((q) => q.removed.with(Node));
 
   override execute() {
     // Create objects
-    for (const entity of this.addedNodes.added) {
+    for (const entity of this.#addedNodes.added) {
       entity.add(NodeObject, { object: new Object3D() });
     }
 
     // Sync objects
-    for (const entity of this.addedOrChangedNodes.addedOrChanged) {
+    for (const entity of this.#addedOrChangedNodes.addedOrChanged) {
       const node = entity.read(Node);
       const object = entity.read(NodeObject).object;
 
@@ -35,7 +35,7 @@ export class NodeBuilder extends System {
     }
 
     // Remove objects
-    for (const entity of this.removedNodes.removed) {
+    for (const entity of this.#removedNodes.removed) {
       const object = entity.read(NodeObject).object;
       object.removeFromParent();
       object.clear();

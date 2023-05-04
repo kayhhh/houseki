@@ -3,5 +3,5 @@
     "outDir": "./build"
   },
   "extends": "../tsconfig.json",
-  "include": ["basic"]
+  "exclude": ["node_modules", "build", "dist", ".turbo"]
 }

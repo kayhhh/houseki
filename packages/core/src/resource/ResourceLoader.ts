@@ -6,9 +6,11 @@ import { ResourceData, ResourcePointer, ResourceUri } from "./components";
  * Fetches and loads resources into the ECS.
  */
 @system
-export class Loader extends System {
+export class ResourceLoader extends System {
   readonly #resourcesToLoad = this.query(
-    (q) => q.addedOrChanged.with(ResourceUri).without(ResourcePointer).write
+    (q) =>
+      q.addedOrChanged.with(ResourceUri).trackWrites.without(ResourcePointer)
+        .write
   );
 
   readonly #removedUris = this.query((q) => q.removed.with(ResourceUri));
