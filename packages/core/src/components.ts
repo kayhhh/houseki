@@ -11,10 +11,7 @@ export class Parent {
 @component
 export class CanvasTarget {
   @field.object declare canvas: HTMLCanvasElement;
-
-  static options = {
-    capacity: 1,
-  };
+  static options = { capacity: 1 };
 }
 
 @component
@@ -47,34 +44,13 @@ export class Node {
 export class Mesh {}
 
 @component
-export class Geometry {}
+export class Geometry {
+  @field.uint16 declare index: number; // ResourceStore id
+  @field.uint16 declare position: number; // ResourceStore id
+  @field.uint16 declare normal: number; // ResourceStore id
+}
 
 @component
 export class Material {
   @field.float32.vector(4) declare color: number[];
-}
-
-@component
-export class SceneObject {
-  @field.object declare object: THREE.Scene;
-}
-
-@component
-export class PerspectiveCameraObject {
-  @field.object declare object: THREE.PerspectiveCamera;
-}
-
-@component
-export class NodeObject {
-  @field.object declare object: THREE.Object3D;
-}
-
-@component
-export class MeshObject {
-  @field.object declare object: THREE.Mesh;
-}
-
-@component
-export class MaterialObject {
-  @field.object declare object: THREE.Material;
 }

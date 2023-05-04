@@ -1,9 +1,9 @@
 import { System, system } from "@lastolivegames/becsy";
+import { PerspectiveCamera } from "@lattice-engine/core";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
 
-import { PerspectiveCamera } from "../components";
 import { PerspectiveCameraObject } from "../components";
-import { Renderer } from "./Renderer";
+import { Renderer } from "../Renderer";
 
 /**
  * Converts Camera components to Three.js objects.

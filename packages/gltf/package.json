@@ -1,10 +1,10 @@
 {
-  "name": "@lattice-engine/core",
+  "name": "@lattice-engine/gltf",
   "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/lattice-engine/lattice",
-    "directory": "packages/core"
+    "directory": "packages/gltf"
   },
   "license": "GPL-3.0-or-later",
   "type": "module",
@@ -15,7 +15,10 @@
     "dev": "pnpm build --watch"
   },
   "dependencies": {
-    "@lastolivegames/becsy": "^0.14.3"
+    "@gltf-transform/core": "^3.2.1",
+    "@gltf-transform/extensions": "^3.2.1",
+    "@lastolivegames/becsy": "^0.14.3",
+    "@lattice-engine/core": "workspace:^"
   },
   "devDependencies": {
     "tsup": "^6.7.0",

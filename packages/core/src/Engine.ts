@@ -1,7 +1,6 @@
-// Import all components and systems, so they are registered by the engine
-// TODO: Better way to do this? Manually register them?
-import "./render";
+// Import all core components and systems, so they are registered by the engine
 import "./components";
+import "./resource";
 
 import { World } from "@lastolivegames/becsy";
 
@@ -11,7 +10,7 @@ import { CanvasTarget } from "./components";
  * Stores the ECS world and manages the game loop.
  */
 export class Engine {
-  world: World;
+  readonly world: World;
 
   #animationFrame = 0;
 

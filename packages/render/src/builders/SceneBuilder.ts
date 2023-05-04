@@ -1,8 +1,9 @@
 import { System, system } from "@lastolivegames/becsy";
+import { Scene } from "@lattice-engine/core";
 import { Scene as ThreeScene } from "three";
 
-import { NodeObject, Scene, SceneObject } from "../components";
-import { Renderer } from "./Renderer";
+import { NodeObject, SceneObject } from "../components";
+import { Renderer } from "../Renderer";
 
 /**
  * Converts Scene components to Three.js objects.

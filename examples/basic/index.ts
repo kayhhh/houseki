@@ -3,10 +3,10 @@ import {
   Engine,
   Node,
   PerspectiveCamera,
-  Renderer,
   RenderView,
   Scene,
 } from "@lattice-engine/core";
+import { Renderer } from "@lattice-engine/render";
 
 /**
  * Define a system to create a scene
@@ -45,5 +45,5 @@ document.body.appendChild(canvas);
 // Create engine
 const engine = await Engine.create(canvas);
 
-// Start the render loop
+// Start the game loop
 engine.start();

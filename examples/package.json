@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@lastolivegames/becsy": "^0.14.3",
-    "@lattice-engine/core": "workspace:*"
+    "@lattice-engine/core": "workspace:^",
+    "@lattice-engine/gltf": "workspace:^",
+    "@lattice-engine/render": "workspace:^"
   },
   "devDependencies": {
     "typescript": "~5.0.4",

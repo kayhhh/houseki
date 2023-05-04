@@ -6,6 +6,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         basic: resolve(__dirname, "basic/index.html"),
+        gltf: resolve(__dirname, "gltf/index.html"),
         main: resolve(__dirname, "index.html"),
       },
     },

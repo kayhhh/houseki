@@ -1,8 +1,9 @@
 import { System, system } from "@lastolivegames/becsy";
+import { Node } from "@lattice-engine/core";
 import { Object3D } from "three";
 
-import { Node, NodeObject } from "../components";
-import { Renderer } from "./Renderer";
+import { NodeObject } from "../components";
+import { Renderer } from "../Renderer";
 
 /**
  * Converts Node components to Three.js objects.
