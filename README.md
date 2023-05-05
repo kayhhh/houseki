@@ -12,7 +12,7 @@ The web has a lot of independently awesome libraries for building games, but com
 - **Lightweight**: The engine is designed to be lightweight, aiming to be a minimal wrapper around the underlying technologies. We want to avoid adding unnecessary abstractions.
 - **Modular**: The engine is designed to be modular, allowing you to pick and choose which systems you want to use.
 - **Extendable**: The engine is designed to be extendable, allowing you to easily add your own systems and components.
-- **High Performance**: The engine is designed to be high performance, achieved through the use of an ECS architecture, WASM scripting, and WebWorkers.
+- **High Performance**: The engine is designed to be highly performant, using an ECS architecture, multi-threading via WebWorkers, and WASM where available.
 
 ## 📦 Packages
 
