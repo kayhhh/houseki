@@ -31,7 +31,7 @@ export class GeometryBuilder extends System {
       const object = entity.read(GeometryObject).object;
 
       const index = resourceStore.get(geometry.indexId);
-      const position = resourceStore.get(geometry.positionId);
+      const position = geometry.positions;
       const normal = resourceStore.get(geometry.normalId);
       const uv = resourceStore.get(geometry.uvId);
 
@@ -41,7 +41,11 @@ export class GeometryBuilder extends System {
       }
 
       if (position) {
-        const attribute = new BufferAttribute(position, 3);
+        const floatArray = new Float32Array(
+          position.buffer.slice(position.byteOffset, position.byteLength + 2)
+        );
+
+        const attribute = new BufferAttribute(floatArray, 3);
         object.setAttribute("position", attribute);
       }
 

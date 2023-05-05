@@ -69,14 +69,18 @@ class CreateScene extends System {
     const indexArray = indexAttribute.array as Uint16Array;
 
     // Store the geometry data in the resource store
-    const positionId = resourceStore.store(positionArray);
     const normalId = resourceStore.store(normalArray);
     const uvId = resourceStore.store(uvArray);
     const indexId = resourceStore.store(indexArray);
 
     // Add mesh to the root node
     root.add(Mesh);
-    root.add(Geometry, { indexId, normalId, positionId, uvId });
+    root.add(Geometry, {
+      indexId,
+      normalId,
+      positions: new Uint8Array(positionArray.buffer),
+      uvId,
+    });
   }
 }
 

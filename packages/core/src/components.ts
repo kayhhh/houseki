@@ -1,5 +1,7 @@
 import { component, Entity, field, Type } from "@lastolivegames/becsy";
 
+import { CustomType } from "./becsy";
+
 const vec3 = Type.vector(Type.float32, 3);
 const vec4 = Type.vector(Type.float32, 4);
 
@@ -26,7 +28,7 @@ export class Mesh {}
 @component
 export class Geometry {
   @field.uint16 declare indexId: number; // ResourceStore id
-  @field.uint16 declare positionId: number; // ResourceStore id
+  @field({ type: CustomType.Uint8Array(20_000) }) declare positions: Uint8Array;
   @field.uint16 declare normalId: number; // ResourceStore id
   @field.uint16 declare uvId: number; // ResourceStore id
 }

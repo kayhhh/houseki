@@ -110,11 +110,13 @@ function processMesh(mesh: GltfMesh, node: Entity, system: GLTFLoader) {
 
   // Create geometries
   mesh.listPrimitives().forEach((primitive) => {
-    const positionId = processAttribute("POSITION", primitive);
+    // const positionId = processAttribute("POSITION", primitive);
     const normalId = processAttribute("NORMAL", primitive);
     const indexId = processAttribute("INDICES", primitive);
 
-    node.add(Geometry, { indexId, normalId, positionId });
+    const positions = processPosition(primitive);
+
+    node.add(Geometry, { indexId, normalId, positions });
   });
 }
 
@@ -132,4 +134,14 @@ function processAttribute(name: string, primitive: Primitive) {
 
   const id = resourceStore.store(array);
   return id;
+}
+
+function processPosition(primitive: Primitive) {
+  const accessor = primitive.getAttribute("POSITION");
+  if (!accessor) return;
+
+  const array = accessor.getArray();
+  if (!array) return;
+
+  return new Uint8Array(array.buffer.slice(array.byteOffset, array.byteLength));
 }
