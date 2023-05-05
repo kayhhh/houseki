@@ -49,6 +49,11 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 document.body.appendChild(canvas);
 
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
 // Create canvas entity
 engine.world.createEntity(CanvasTarget, { canvas });
 

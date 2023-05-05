@@ -80,6 +80,7 @@ class CreateScene extends System {
     root.add(Geometry, { indexId, normalId, positionId, uvId });
   }
 }
+
 // Create engine
 const engine = await Engine.create();
 
@@ -88,6 +89,11 @@ const canvas = document.createElement("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 document.body.appendChild(canvas);
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
 
 // Create canvas entity
 engine.world.createEntity(CanvasTarget, { canvas });

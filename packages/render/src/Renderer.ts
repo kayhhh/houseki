@@ -61,7 +61,7 @@ export class Renderer extends System {
     if (!canvas) return;
 
     // Update renderer size
-    this.renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+    this.renderer.setSize(canvas.width, canvas.height, false);
 
     // Render each view
     for (const entity of this.views.current) {
@@ -69,6 +69,10 @@ export class Renderer extends System {
       const camera = entity.read(RenderView).camera;
       if (!camera.has(PerspectiveCameraObject)) continue;
       const cameraObject = camera.read(PerspectiveCameraObject).object;
+
+      // Update camera aspect ratio
+      cameraObject.aspect = canvas.width / canvas.height;
+      cameraObject.updateProjectionMatrix();
 
       // Get scene
       const scene = entity.read(RenderView).scene;
