@@ -17,7 +17,6 @@ class CreateScene extends System {
     // Set up the scene
     const camera = this.createEntity();
     camera.add(PerspectiveCamera, {
-      aspect: window.innerWidth / window.innerHeight,
       far: 1000,
       fov: 75,
       near: 0.1,

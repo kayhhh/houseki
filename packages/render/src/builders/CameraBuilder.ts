@@ -34,7 +34,6 @@ export class CameraBuilder extends System {
       const object = entity.read(PerspectiveCameraObject).object;
 
       object.fov = camera.fov;
-      object.aspect = camera.aspect;
       object.near = camera.near;
       object.far = camera.far;
     }
