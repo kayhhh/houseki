@@ -3,7 +3,10 @@ import { component, Entity, field } from "@lastolivegames/becsy";
 @component
 export class CanvasTarget {
   @field.object declare canvas: HTMLCanvasElement;
-  static options = { capacity: 1 };
+  static options = {
+    capacity: 1,
+    storage: "compact",
+  } as const;
 }
 
 @component
