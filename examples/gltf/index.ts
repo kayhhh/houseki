@@ -3,7 +3,7 @@ import "@lattice-engine/render";
 import { System, system } from "@lastolivegames/becsy";
 import { Engine, Node, PerspectiveCamera, Scene } from "@lattice-engine/core";
 import { GLTFLoader, GltfUri } from "@lattice-engine/gltf";
-import { RenderView } from "@lattice-engine/render";
+import { CanvasTarget, RenderView } from "@lattice-engine/render";
 
 @system((s) => s.before(GLTFLoader))
 class CreateScene extends System {
@@ -40,14 +40,17 @@ class CreateScene extends System {
   }
 }
 
+// Create engine
+const engine = await Engine.create();
+
 // Create canvas
 const canvas = document.createElement("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 document.body.appendChild(canvas);
 
-// Create engine
-const engine = await Engine.create(canvas);
+// Create canvas entity
+engine.world.createEntity(CanvasTarget, { canvas });
 
 // Start the game loop
 engine.start();

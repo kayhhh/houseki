@@ -8,7 +8,7 @@ import {
   PerspectiveCamera,
   Scene,
 } from "@lattice-engine/core";
-import { Renderer, RenderView } from "@lattice-engine/render";
+import { CanvasTarget, Renderer, RenderView } from "@lattice-engine/render";
 import { BoxGeometry, BufferAttribute } from "three";
 
 /**
@@ -80,6 +80,8 @@ class CreateScene extends System {
     root.add(Geometry, { indexId, normalId, positionId, uvId });
   }
 }
+// Create engine
+const engine = await Engine.create();
 
 // Create canvas
 const canvas = document.createElement("canvas");
@@ -87,8 +89,8 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 document.body.appendChild(canvas);
 
-// Create engine
-const engine = await Engine.create(canvas);
+// Create canvas entity
+engine.world.createEntity(CanvasTarget, { canvas });
 
 // Start the game loop
 engine.start();

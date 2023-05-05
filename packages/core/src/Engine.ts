@@ -4,8 +4,6 @@ import "./resource";
 
 import { World } from "@lastolivegames/becsy";
 
-import { CanvasTarget } from "./components";
-
 /**
  * Stores the ECS world and manages the game loop.
  */
@@ -17,12 +15,8 @@ export class Engine {
   /**
    * Creates a new Engine instance.
    */
-  static async create(canvas: HTMLCanvasElement) {
+  static async create() {
     const world = await World.create();
-
-    // Create canvas entity
-    world.createEntity(CanvasTarget, { canvas });
-
     return new Engine(world);
   }
 
