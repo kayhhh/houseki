@@ -9,28 +9,8 @@ export class Parent {
 }
 
 @component
-export class CanvasTarget {
-  @field.object declare canvas: HTMLCanvasElement;
-  static options = { capacity: 1 };
-}
-
-@component
-export class RenderView {
-  @field.ref declare scene: Entity;
-  @field.ref declare camera: Entity;
-}
-
-@component
 export class Scene {
-  @field.ref declare root: Entity;
-}
-
-@component
-export class PerspectiveCamera {
-  @field({ defaultValue: 75, type: Type.float32 }) declare fov: number;
-  @field({ defaultValue: 1, type: Type.float32 }) declare aspect: number;
-  @field({ defaultValue: 0.1, type: Type.float32 }) declare near: number;
-  @field({ defaultValue: 1000, type: Type.float32 }) declare far: number;
+  @field.ref declare root: Entity; // Node
 }
 
 @component
@@ -54,4 +34,12 @@ export class Geometry {
 @component
 export class Material {
   @field.float32.vector(4) declare color: number[];
+}
+
+@component
+export class PerspectiveCamera {
+  @field({ defaultValue: 75, type: Type.float32 }) declare fov: number;
+  @field({ defaultValue: 1, type: Type.float32 }) declare aspect: number;
+  @field({ defaultValue: 0.1, type: Type.float32 }) declare near: number;
+  @field({ defaultValue: 1000, type: Type.float32 }) declare far: number;
 }

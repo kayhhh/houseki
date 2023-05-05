@@ -1,8 +1,12 @@
 import { System, system } from "@lastolivegames/becsy";
-import { CanvasTarget, RenderView } from "@lattice-engine/core";
 import { PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from "three";
 
-import { PerspectiveCameraObject, SceneObject } from "./components";
+import {
+  CanvasTarget,
+  PerspectiveCameraObject,
+  RenderView,
+  SceneObject,
+} from "./components";
 
 /**
  * Renders RenderViews to CanvasTargets.

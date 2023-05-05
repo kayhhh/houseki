@@ -1,4 +1,16 @@
-import { component, field } from "@lastolivegames/becsy";
+import { component, Entity, field } from "@lastolivegames/becsy";
+
+@component
+export class CanvasTarget {
+  @field.object declare canvas: HTMLCanvasElement;
+  static options = { capacity: 1 };
+}
+
+@component
+export class RenderView {
+  @field.ref declare scene: Entity; // Scene
+  @field.ref declare camera: Entity; // PerspectiveCamera
+}
 
 @component
 export class SceneObject {

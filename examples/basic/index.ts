@@ -6,10 +6,9 @@ import {
   Mesh,
   Node,
   PerspectiveCamera,
-  RenderView,
   Scene,
 } from "@lattice-engine/core";
-import { Renderer } from "@lattice-engine/render";
+import { Renderer, RenderView } from "@lattice-engine/render";
 import { BoxGeometry, BufferAttribute } from "three";
 
 /**

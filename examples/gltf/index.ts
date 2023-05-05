@@ -1,14 +1,9 @@
 import "@lattice-engine/render";
 
 import { System, system } from "@lastolivegames/becsy";
-import {
-  Engine,
-  Node,
-  PerspectiveCamera,
-  RenderView,
-  Scene,
-} from "@lattice-engine/core";
+import { Engine, Node, PerspectiveCamera, Scene } from "@lattice-engine/core";
 import { GLTFLoader, GltfUri } from "@lattice-engine/gltf";
+import { RenderView } from "@lattice-engine/render";
 
 @system((s) => s.before(GLTFLoader))
 class CreateScene extends System {
