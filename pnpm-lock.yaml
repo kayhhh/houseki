@@ -46,9 +46,6 @@ importers:
 
   examples:
     dependencies:
-      '@lastolivegames/becsy':
-        specifier: ^0.14.3
-        version: 0.14.3
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../packages/core
@@ -61,6 +58,9 @@ importers:
       three:
         specifier: ^0.149.0
         version: 0.149.0
+      thyseus:
+        specifier: ^0.11.0
+        version: 0.11.0
     devDependencies:
       '@types/three':
         specifier: ^0.149.0
@@ -77,6 +77,9 @@ importers:
       '@lastolivegames/becsy':
         specifier: ^0.14.3
         version: 0.14.3
+      thyseus:
+        specifier: ^0.11.0
+        version: 0.11.0
     devDependencies:
       tsup:
         specifier: ^6.7.0
@@ -93,12 +96,12 @@ importers:
       '@gltf-transform/extensions':
         specifier: ^3.2.1
         version: 3.2.1
-      '@lastolivegames/becsy':
-        specifier: ^0.14.3
-        version: 0.14.3
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
+      thyseus:
+        specifier: ^0.11.0
+        version: 0.11.0
     devDependencies:
       tsup:
         specifier: ^6.7.0
@@ -109,15 +112,15 @@ importers:
 
   packages/render:
     dependencies:
-      '@lastolivegames/becsy':
-        specifier: ^0.14.3
-        version: 0.14.3
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
       three:
         specifier: ^0.149.0
         version: 0.149.0
+      thyseus:
+        specifier: ^0.11.0
+        version: 0.11.0
     devDependencies:
       '@types/three':
         specifier: ^0.149.0
@@ -1077,6 +1080,10 @@ packages:
       - supports-color
     dev: true
 
+  /esm-env@1.0.0:
+    resolution: {integrity: sha512-Cf6VksWPsTuW01vU9Mk/3vRue91Zevka5SjyNf3nEpokFRuqt/KjUQoGAwq9qMmhpLTHmXzSIrFRw8zxWzmFBA==}
+    dev: false
+
   /espree@6.2.1:
     resolution: {integrity: sha512-ysCxRQY3WaXJz9tdbWOwuWr5Y/XrPTGX9Kiz3yoUXwW0VZ4w30HTkQLaGx/+ttFjF8i+ACbArnB4ce68a9m5hw==}
     engines: {node: '>=6.0.0'}
@@ -1961,6 +1968,12 @@ packages:
 
   /three@0.149.0:
     resolution: {integrity: sha512-tohpUxPDht0qExRLDTM8sjRLc5d9STURNrdnK3w9A+V4pxaTBfKWWT/IqtiLfg23Vfc3Z+ImNfvRw1/0CtxrkQ==}
+    dev: false
+
+  /thyseus@0.11.0:
+    resolution: {integrity: sha512-1k5QbWTAilZMpfo5BsqIrGJ/KluutWj9uo4RfaGgLCMUMItKCguwxnVsFMOsZJYma6vExSjoSQRG9eXiDL5n3A==}
+    dependencies:
+      esm-env: 1.0.0
     dev: false
 
   /titleize@3.0.0:

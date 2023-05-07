@@ -10,11 +10,11 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@lastolivegames/becsy": "^0.14.3",
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/gltf": "workspace:^",
     "@lattice-engine/render": "workspace:^",
-    "three": "^0.149.0"
+    "three": "^0.149.0",
+    "thyseus": "^0.11.0"
   },
   "devDependencies": {
     "@types/three": "^0.149.0",

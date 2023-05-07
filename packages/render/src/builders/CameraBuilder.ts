@@ -1,50 +1,41 @@
-import { System, system } from "@lastolivegames/becsy";
 import { PerspectiveCamera } from "@lattice-engine/core";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
+import { defineSystem, Entity } from "thyseus";
 
-import { PerspectiveCameraObject } from "../components";
-import { Renderer } from "../Renderer";
+import { RenderStore } from "../RenderStore";
 
 /**
- * Converts Camera components to Three.js objects.
+ * Syncs PerspectiveCamera components with Three.js PerspectiveCamera objects.
  */
-@system((s) => s.before(Renderer))
-export class CameraBuilder extends System {
-  readonly #objects = this.query((q) => q.with(PerspectiveCameraObject).write);
+export const cameraBuilder = defineSystem(
+  ({ Res, Query }) => [Res(RenderStore), Query([PerspectiveCamera, Entity])],
+  (store, cameras) => {
+    const ids: bigint[] = [];
 
-  readonly #addedCameras = this.query((q) => q.added.with(PerspectiveCamera));
-  readonly #addedOrChangedCameras = this.query(
-    (q) => q.addedOrChanged.with(PerspectiveCamera).trackWrites
-  );
-  readonly #removedCameras = this.query((q) =>
-    q.removed.with(PerspectiveCamera)
-  );
+    for (const [camera, { id }] of cameras) {
+      ids.push(id);
 
-  override execute() {
-    // Create objects
-    for (const entity of this.#addedCameras.added) {
-      entity.add(PerspectiveCameraObject, {
-        object: new ThreePerspectiveCamera(),
-      });
-    }
+      let object = store.perspectiveCameras.get(id);
 
-    // Sync objects
-    for (const entity of this.#addedOrChangedCameras.addedOrChanged) {
-      const camera = entity.read(PerspectiveCamera);
-      const object = entity.read(PerspectiveCameraObject).object;
+      // Create new objects
+      if (!object) {
+        object = new ThreePerspectiveCamera();
+        store.perspectiveCameras.set(id, object);
+      }
+
+      // Sync object properties
+      const canvas = store.renderer.domElement;
+      object.aspect = canvas.width / canvas.height;
+      object.updateProjectionMatrix();
 
       object.fov = camera.fov;
       object.near = camera.near;
       object.far = camera.far;
     }
 
-    // Remove objects
-    for (const entity of this.#removedCameras.removed) {
-      const object = entity.read(PerspectiveCameraObject).object;
-      object.removeFromParent();
-      object.clear();
-
-      entity.remove(PerspectiveCameraObject);
+    // Remove objects that no longer exist
+    for (const [id] of store.perspectiveCameras) {
+      if (!ids.includes(id)) store.perspectiveCameras.delete(id);
     }
   }
-}
+);

@@ -15,9 +15,9 @@
     "dev": "pnpm build --watch"
   },
   "dependencies": {
-    "@lastolivegames/becsy": "^0.14.3",
     "@lattice-engine/core": "workspace:^",
-    "three": "^0.149.0"
+    "three": "^0.149.0",
+    "thyseus": "^0.11.0"
   },
   "devDependencies": {
     "@types/three": "^0.149.0",

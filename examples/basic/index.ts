@@ -1,91 +1,17 @@
-import { System, system } from "@lastolivegames/becsy";
-import { resourceStore } from "@lattice-engine/core";
-import { Geometry } from "@lattice-engine/core";
 import {
   Engine,
-  Mesh,
-  Node,
+  Geometry,
+  IsMesh,
+  IsNode,
+  IsScene,
+  Parent,
   PerspectiveCamera,
-  Scene,
+  Position,
+  warehouse,
 } from "@lattice-engine/core";
-import { CanvasTarget, Renderer, RenderView } from "@lattice-engine/render";
+import { renderPlugin, RenderStore } from "@lattice-engine/render";
 import { BoxGeometry, BufferAttribute } from "three";
-
-/**
- * Define a system to create a scene
- * The `@system` decorator will automatically register the system with the engine
- * We also use the `@system` decorator to define the order of systems
- * Here we tell the system to run after the Renderer system, which is at the end of the execution loop
- */
-@system((s) => s.after(Renderer))
-class CreateScene extends System {
-  /**
-   * Here we define queries to get entities with specific components
-   * These mark the system as needing `write` access to the components
-   */
-  readonly #cameras = this.query((q) => q.with(PerspectiveCamera).write);
-  readonly #nodes = this.query((q) => q.with(Node).write);
-  readonly #scenes = this.query((q) => q.with(Scene).write);
-  readonly #views = this.query((q) => q.with(RenderView).write);
-  readonly #meshes = this.query((q) => q.with(Mesh).write);
-  readonly #geometries = this.query((q) => q.with(Geometry).write);
-
-  /**
-   * The `initialize` method is called once when the system is added to the engine
-   */
-  override initialize() {
-    // Set up the scene
-    const camera = this.createEntity();
-    camera.add(PerspectiveCamera, {
-      far: 1000,
-      fov: 75,
-      near: 0.1,
-    });
-
-    const root = this.createEntity();
-    root.add(Node, {
-      position: [1, -1, -5],
-      rotation: [0, 0, 0, 1],
-      scale: [1, 1, 1],
-    });
-
-    const scene = this.createEntity();
-    scene.add(Scene, { root });
-
-    this.createEntity(RenderView, { camera, scene });
-
-    // Create a cube
-    // Use Three.js to generate the geometry data
-    const box = new BoxGeometry();
-
-    const positionAttribute = box.getAttribute("position") as BufferAttribute;
-    const normalAttribute = box.getAttribute("normal") as BufferAttribute;
-    const uvAttribute = box.getAttribute("uv") as BufferAttribute;
-    const indexAttribute = box.index as BufferAttribute;
-
-    const positionArray = positionAttribute.array as Float32Array;
-    const normalArray = normalAttribute.array as Float32Array;
-    const uvArray = uvAttribute.array as Float32Array;
-    const indexArray = indexAttribute.array as Uint16Array;
-
-    // Store the geometry data in the resource store
-    const normalId = resourceStore.store(normalArray);
-    const uvId = resourceStore.store(uvArray);
-    const indexId = resourceStore.store(indexArray);
-
-    // Add mesh to the root node
-    root.add(Mesh);
-    root.add(Geometry, {
-      indexId,
-      normalId,
-      positions: new Uint8Array(positionArray.buffer),
-      uvId,
-    });
-  }
-}
-
-// Create engine
-const engine = await Engine.create();
+import { defineSystem } from "thyseus";
 
 // Create canvas
 const canvas = document.createElement("canvas");
@@ -98,8 +24,72 @@ window.addEventListener("resize", () => {
   canvas.height = window.innerHeight;
 });
 
-// Create canvas entity
-engine.world.createEntity(CanvasTarget, { canvas });
+// Create system to initialize the scene
+const createScene = defineSystem(
+  ({ Res, Mut, Commands }) => [Res(Mut(RenderStore)), Commands()],
+  (store, commands) => {
+    // Set canvas
+    store.setCanvas(canvas);
+
+    // Create scene
+    const scene = commands.spawn().addType(IsScene);
+    store.activeScene = scene.id;
+
+    // Create camera
+    const cameraComponent = new PerspectiveCamera();
+    cameraComponent.fov = 75;
+    cameraComponent.near = 0.1;
+    cameraComponent.far = 1000;
+
+    const camera = commands.spawn().add(cameraComponent);
+    store.activeCamera = camera.id;
+
+    // Create a cube, using Three.js to generate the geometry
+    const box = new BoxGeometry();
+
+    const positionsAttribute = box.getAttribute("position") as BufferAttribute;
+    const normalsAttribute = box.getAttribute("normal") as BufferAttribute;
+    const indicesAttribute = box.index as BufferAttribute;
+
+    const positions = positionsAttribute.array as Float32Array;
+    const normals = normalsAttribute.array as Float32Array;
+    const indices = indicesAttribute.array as Uint16Array;
+
+    const positionsId = warehouse.store(positions);
+    const indicesId = warehouse.store(indices);
+    const normalsId = warehouse.store(normals);
+
+    const geometry = new Geometry();
+    geometry.positions.id = positionsId;
+    geometry.indices.id = indicesId;
+    geometry.normals.id = normalsId;
+
+    const parent = new Parent();
+    parent.id = scene.id;
+
+    const position = new Position();
+    position.x = 1;
+    position.y = -2;
+    position.z = -8;
+
+    commands
+      .spawn()
+      .addType(IsNode)
+      .add(parent)
+      .add(position)
+      .addType(IsMesh)
+      .add(geometry);
+  }
+);
+
+// Create world
+const world = await Engine.createWorld()
+  .addPlugin(renderPlugin)
+  .addStartupSystem(createScene.beforeAll())
+  .build();
+
+// Create Engine
+const engine = new Engine(world);
 
 // Start the game loop
 engine.start();

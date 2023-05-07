@@ -1,19 +1,10 @@
-import { component, field } from "@lastolivegames/becsy";
+import { Resource } from "@lattice-engine/core";
+import { struct } from "thyseus";
 
-/**
- * A URI pointing to a glTF file.
- * Add to an entity to load the glTF into the ECS.
- */
-@component
+@struct
 export class GltfUri {
-  @field.dynamicString(256) declare uri: string;
+  @struct.substruct(Resource) declare uri: Resource<string>;
 }
 
-/**
- * A glb file.
- * Add to an entity to load the glb into the ECS.
- */
-@component
-export class GltfBinary {
-  @field.object declare data: Uint8Array;
-}
+@struct
+export class GltfLoaded {}

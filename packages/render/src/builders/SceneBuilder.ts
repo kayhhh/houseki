@@ -1,54 +1,32 @@
-import { System, system } from "@lastolivegames/becsy";
-import { Scene } from "@lattice-engine/core";
+import { IsScene } from "@lattice-engine/core";
 import { AmbientLight, PointLight, Scene as ThreeScene } from "three";
+import { defineSystem, Entity } from "thyseus";
 
-import { NodeObject, SceneObject } from "../components";
-import { Renderer } from "../Renderer";
+import { RenderStore } from "../RenderStore";
 
-/**
- * Converts Scene components to Three.js objects.
- */
-@system((s) => s.before(Renderer))
-export class SceneBuilder extends System {
-  private readonly objects = this.query((q) => q.with(SceneObject).write);
-  private readonly nodeObjects = this.query((q) => q.with(NodeObject).read);
+export const sceneBuilder = defineSystem(
+  ({ Res, Query, With }) => [Res(RenderStore), Query(Entity, With(IsScene))],
+  (store, scenes) => {
+    const ids: bigint[] = [];
 
-  private readonly addedScenes = this.query((q) => q.added.with(Scene));
-  private readonly addedOrChangedScenes = this.query(
-    (q) => q.addedOrChanged.with(Scene).trackWrites
-  );
-  private readonly removedScenes = this.query((q) => q.removed.with(Scene));
+    for (const { id } of scenes) {
+      ids.push(id);
 
-  override execute() {
-    // Create objects
-    for (const entity of this.addedScenes.added) {
-      const object = new ThreeScene();
-      entity.add(SceneObject, { object });
+      let object = store.scenes.get(id);
 
-      object.add(new AmbientLight(0xffffff, 0.5));
-      object.add(new PointLight(0xffffff, 0.5));
+      // Create new objects
+      if (!object) {
+        object = new ThreeScene();
+        object.add(new AmbientLight(0xffffff, 0.5));
+        object.add(new PointLight(0xffffff, 0.5));
+
+        store.scenes.set(id, object);
+      }
     }
 
-    // Sync objects
-    for (const entity of this.addedOrChangedScenes.addedOrChanged) {
-      // Get root object
-      const root = entity.read(Scene).root;
-      if (!root.has(NodeObject)) continue;
-      const rootObject = root.read(NodeObject).object;
-
-      // Get scene object
-      const object = entity.read(SceneObject).object;
-
-      // Add root object to scene
-      object.add(rootObject);
-    }
-
-    // Remove objects
-    for (const entity of this.removedScenes.removed) {
-      const object = entity.read(SceneObject).object;
-      object.clear();
-
-      entity.remove(SceneObject);
+    // Remove objects that no longer exist
+    for (const [id] of store.scenes) {
+      if (!ids.includes(id)) store.scenes.delete(id);
     }
   }
-}
+);

@@ -1,71 +1,87 @@
-import { System, system } from "@lastolivegames/becsy";
-import { Geometry, resourceStore } from "@lattice-engine/core";
+import { Geometry } from "@lattice-engine/core";
 import { BufferAttribute, BufferGeometry } from "three";
+import { defineSystem, Entity } from "thyseus";
 
-import { GeometryObject } from "../components";
-import { Renderer } from "../Renderer";
+import { RenderStore } from "../RenderStore";
 
 /**
- * Converts Geometry components to Three.js objects.
+ * Syncs Geometry components with Three.js BufferGeomtry objects.
  */
-@system((s) => s.before(Renderer))
-export class GeometryBuilder extends System {
-  readonly #objects = this.query((q) => q.with(GeometryObject).write);
+export const geometryBuilder = defineSystem(
+  ({ Res, Query }) => [Res(RenderStore), Query([Geometry, Entity])],
+  (store, entities) => {
+    const ids: bigint[] = [];
 
-  readonly #addedGeometries = this.query((q) => q.added.with(Geometry));
-  readonly #addedOrChangedGeometries = this.query(
-    (q) => q.addedOrChanged.with(Geometry).trackWrites
-  );
-  readonly #removedGeometries = this.query((q) => q.removed.with(Geometry));
+    for (const [geometry, { id }] of entities) {
+      ids.push(id);
 
-  override execute() {
-    // Create objects
-    for (const entity of this.#addedGeometries.added) {
-      const object = new BufferGeometry();
-      entity.add(GeometryObject, { object });
-    }
+      let object = store.geometries.get(id);
 
-    // Sync objects
-    for (const entity of this.#addedOrChangedGeometries.addedOrChanged) {
-      const geometry = entity.read(Geometry);
-      const object = entity.read(GeometryObject).object;
-
-      const index = resourceStore.get(geometry.indexId);
-      const position = geometry.positions;
-      const normal = resourceStore.get(geometry.normalId);
-      const uv = resourceStore.get(geometry.uvId);
-
-      if (index) {
-        const attribute = new BufferAttribute(index, 1);
-        object.setIndex(attribute);
+      // Create new objects
+      if (!object) {
+        object = new BufferGeometry();
+        store.geometries.set(id, object);
       }
 
-      if (position) {
-        const floatArray = new Float32Array(
-          position.buffer.slice(position.byteOffset, position.byteLength + 2)
-        );
-
-        const attribute = new BufferAttribute(floatArray, 3);
-        object.setAttribute("position", attribute);
+      // Sync object properties
+      if (geometry.positions.id) {
+        const positions = geometry.positions.read();
+        setAttribute(object, "position", positions, 3);
       }
 
-      if (normal) {
-        const attribute = new BufferAttribute(normal, 3);
-        object.setAttribute("normal", attribute);
+      if (geometry.normals.id) {
+        const normals = geometry.normals.read();
+        setAttribute(object, "normal", normals, 3);
       }
 
-      if (uv) {
-        const attribute = new BufferAttribute(uv, 2);
-        object.setAttribute("uv", attribute);
+      if (geometry.uvs.id) {
+        const uvs = geometry.uvs.read();
+        setAttribute(object, "uv", uvs, 2);
+      }
+
+      if (geometry.indices.id) {
+        const indices = geometry.indices.read();
+        setAttribute(object, "index", indices, 1);
       }
     }
 
-    // Remove objects
-    for (const entity of this.#removedGeometries.removed) {
-      const object = entity.read(GeometryObject).object;
-      object.dispose();
+    // Remove objects that no longer exist
+    for (const [id] of store.geometries) {
+      if (!ids.includes(id)) {
+        const object = store.geometries.get(id);
+        object?.dispose();
 
-      entity.remove(GeometryObject);
+        store.geometries.delete(id);
+      }
     }
+  }
+);
+
+/**
+ * Sets a BufferGeometry attribute to a given array,
+ * creating a new attribute if one does not already exist.
+ * Also supports setting the index.
+ */
+function setAttribute(
+  geometry: BufferGeometry,
+  name: string,
+  data: ArrayLike<number>,
+  itemSize: number
+) {
+  const attribute =
+    name === "index" ? geometry.getIndex() : geometry.getAttribute(name);
+
+  if (attribute instanceof BufferAttribute && attribute.itemSize === itemSize) {
+    // Ignore if data is already set
+    if (attribute.array === data) return;
+
+    // Reuse existing attribute
+    attribute.set(data);
+  } else {
+    // Create new attribute
+    const attribute = new BufferAttribute(data, itemSize);
+
+    if (name === "index") geometry.setIndex(attribute);
+    else geometry.setAttribute(name, attribute);
   }
 }

@@ -1,54 +1,73 @@
-import { System, system } from "@lastolivegames/becsy";
-import { Node, Parent } from "@lattice-engine/core";
+import {
+  IsNode,
+  Parent,
+  Position,
+  Rotation,
+  Scale,
+} from "@lattice-engine/core";
 import { Object3D } from "three";
+import { defineSystem, Entity } from "thyseus";
 
-import { NodeObject } from "../components";
-import { Renderer } from "../Renderer";
+import { RenderStore } from "../RenderStore";
 
-/**
- * Converts Node components to Three.js objects.
- */
-@system((s) => s.before(Renderer))
-export class NodeBuilder extends System {
-  readonly #objects = this.query((q) => q.with(NodeObject).write);
-  readonly #parents = this.query((q) => q.with(Parent));
+export const nodeBuilder = defineSystem(
+  ({ Res, Query, Optional, With }) => [
+    Res(RenderStore),
+    Query(
+      [
+        Entity,
+        Optional(Parent),
+        Optional(Position),
+        Optional(Rotation),
+        Optional(Scale),
+      ],
+      With(IsNode)
+    ),
+  ],
+  (store, entities) => {
+    const ids: bigint[] = [];
 
-  readonly #addedNodes = this.query((q) => q.added.with(Node));
-  readonly #addedOrChangedNodes = this.query(
-    (q) => q.addedOrChanged.with(Node).trackWrites
-  );
-  readonly #removedNodes = this.query((q) => q.removed.with(Node));
+    for (const [{ id }, parent, position, rotation, scale] of entities) {
+      ids.push(id);
 
-  override execute() {
-    // Create objects
-    for (const entity of this.#addedNodes.added) {
-      const object = new Object3D();
-      entity.add(NodeObject, { object });
+      let object = store.nodes.get(id);
+
+      // Create new objects
+      if (!object) {
+        object = new Object3D();
+        store.nodes.set(id, object);
+      }
+
+      // Sync object properties
+      if (parent) {
+        const parentObject =
+          store.nodes.get(parent.id) ?? store.scenes.get(parent.id);
+
+        if (parentObject) parentObject.add(object);
+        else object.removeFromParent();
+      } else {
+        object.removeFromParent();
+      }
+
+      if (position) object.position.set(position.x, position.y, position.z);
+      else object.position.set(0, 0, 0);
+
+      if (rotation)
+        object.quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
+      else object.quaternion.set(0, 0, 0, 1);
+
+      if (scale) object.scale.set(scale.x, scale.y, scale.z);
+      else object.scale.set(1, 1, 1);
     }
 
-    // Sync objects
-    for (const entity of this.#addedOrChangedNodes.addedOrChanged) {
-      const node = entity.read(Node);
-      const object = entity.read(NodeObject).object;
+    // Remove objects that no longer exist
+    for (const [id] of store.nodes) {
+      if (!ids.includes(id)) {
+        const object = store.nodes.get(id);
+        object?.removeFromParent();
 
-      object.position.fromArray(node.position);
-      object.quaternion.fromArray(node.rotation);
-      object.scale.fromArray(node.scale);
-
-      if (entity.has(Parent)) {
-        const parent = entity.read(Parent).value;
-        const parentObject = parent.read(NodeObject).object;
-        parentObject.add(object);
+        store.nodes.delete(id);
       }
     }
-
-    // Remove objects
-    for (const entity of this.#removedNodes.removed) {
-      const object = entity.read(NodeObject).object;
-      object.removeFromParent();
-      object.clear();
-
-      entity.remove(NodeObject);
-    }
   }
-}
+);

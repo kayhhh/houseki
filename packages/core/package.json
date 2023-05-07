@@ -15,7 +15,8 @@
     "dev": "pnpm build --watch"
   },
   "dependencies": {
-    "@lastolivegames/becsy": "^0.14.3"
+    "@lastolivegames/becsy": "^0.14.3",
+    "thyseus": "^0.11.0"
   },
   "devDependencies": {
     "tsup": "^6.7.0",

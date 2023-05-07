@@ -1,65 +1,48 @@
-import { System, system } from "@lastolivegames/becsy";
-import { Mesh } from "@lattice-engine/core";
-import { Mesh as ThreeMesh, MeshStandardMaterial } from "three";
+import { Geometry, IsMesh, IsNode } from "@lattice-engine/core";
+import { BufferGeometry, Mesh } from "three";
+import { defineSystem, Entity } from "thyseus";
 
-import { GeometryObject, MeshObject, NodeObject } from "../components";
-import { Renderer } from "../Renderer";
+import { RenderStore } from "../RenderStore";
 
 /**
- * Converts Mesh components to Three.js objects.
+ * Syncs IsMesh components with Three.js Mesh objects.
  */
-@system((s) => s.before(Renderer))
-export class MeshBuilder extends System {
-  readonly #objects = this.query((q) => q.with(MeshObject).write);
-  readonly #nodeObjects = this.query((q) => q.with(NodeObject));
+export const meshBuilder = defineSystem(
+  ({ Res, Query, With }) => [
+    Res(RenderStore),
+    Query(Entity, With([IsNode, IsMesh, Geometry])),
+  ],
+  (store, entities) => {
+    const ids: bigint[] = [];
 
-  readonly #addedMeshes = this.query((q) => q.added.with(Mesh));
-  readonly #addedOrChangedMeshes = this.query(
-    (q) => q.addedOrChanged.with(Mesh).trackWrites
-  );
-  readonly #removedMeshes = this.query((q) => q.removed.with(Mesh));
+    for (const { id } of entities) {
+      ids.push(id);
 
-  readonly #addedOrChangedGeometries = this.query(
-    (q) => q.addedOrChanged.with(GeometryObject).trackWrites
-  );
+      let object = store.meshes.get(id);
 
-  override execute() {
-    // Create objects
-    for (const entity of this.#addedMeshes.added) {
-      const object = new ThreeMesh(undefined, new MeshStandardMaterial());
-      entity.add(MeshObject, { object });
-    }
-
-    // Sync objects
-    for (const entity of this.#addedOrChangedMeshes.addedOrChanged) {
-      const object = entity.read(MeshObject).object;
-
-      if (entity.has(NodeObject)) {
-        const nodeObject = entity.read(NodeObject).object;
-        nodeObject.add(object);
-      } else {
-        object.removeFromParent();
+      // Create new objects
+      if (!object) {
+        object = new Mesh();
+        store.meshes.set(id, object);
       }
+
+      // Sync object properties
+      const geometryObject = store.geometries.get(id);
+      object.geometry = geometryObject ?? new BufferGeometry();
+
+      const nodeObject = store.nodes.get(id);
+      if (nodeObject) nodeObject.add(object);
+      else object.removeFromParent();
     }
 
-    // Add geometries
-    for (const entity of this.#addedOrChangedGeometries.addedOrChanged) {
-      const object = entity.read(GeometryObject).object;
+    // Remove objects that no longer exist
+    for (const [id] of store.meshes) {
+      if (!ids.includes(id)) {
+        const object = store.meshes.get(id);
+        object?.removeFromParent();
 
-      if (entity.has(MeshObject)) {
-        // Add geometry to mesh
-        const meshObject = entity.read(MeshObject).object;
-        meshObject.geometry = object;
+        store.meshes.delete(id);
       }
-    }
-
-    // Remove objects
-    for (const entity of this.#removedMeshes.removed) {
-      const object = entity.read(MeshObject).object;
-      object.removeFromParent();
-      object.clear();
-
-      entity.remove(MeshObject);
     }
   }
-}
+);

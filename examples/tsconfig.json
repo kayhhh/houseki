@@ -2,6 +2,6 @@
   "compilerOptions": {
     "outDir": "./build"
   },
-  "extends": "../tsconfig.json",
-  "exclude": ["node_modules", "build", "dist", ".turbo"]
+  "exclude": ["node_modules", "build", "dist", ".turbo"],
+  "extends": "../tsconfig.json"
 }

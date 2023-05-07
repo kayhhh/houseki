@@ -1,46 +1,14 @@
-import "@lattice-engine/render";
-
-import { System, system } from "@lastolivegames/becsy";
-import { Engine, Node, PerspectiveCamera, Scene } from "@lattice-engine/core";
-import { GLTFLoader, GltfUri } from "@lattice-engine/gltf";
-import { CanvasTarget, RenderView } from "@lattice-engine/render";
-
-@system((s) => s.before(GLTFLoader))
-class CreateScene extends System {
-  readonly #cameras = this.query((q) => q.with(PerspectiveCamera).write);
-  readonly #nodes = this.query((q) => q.with(Node).write);
-  readonly #scenes = this.query((q) => q.with(Scene).write);
-  readonly #views = this.query((q) => q.with(RenderView).write);
-  readonly #gltf = this.query((q) => q.with(GltfUri).write);
-
-  override initialize() {
-    // Set up the scene
-    const camera = this.createEntity();
-    camera.add(PerspectiveCamera, {
-      far: 1000,
-      fov: 75,
-      near: 0.1,
-    });
-
-    const root = this.createEntity();
-    root.add(Node, {
-      position: [2, -2, -10],
-      rotation: [0, 0, 0, 1],
-      scale: [1, 1, 1],
-    });
-
-    const scene = this.createEntity();
-    scene.add(Scene, { root });
-
-    this.createEntity(RenderView, { camera, scene });
-
-    // Load gltf model
-    root.add(GltfUri, { uri: "/cube/Cube.gltf" });
-  }
-}
-
-// Create engine
-const engine = await Engine.create();
+import {
+  Engine,
+  IsNode,
+  IsScene,
+  Parent,
+  PerspectiveCamera,
+  Position,
+} from "@lattice-engine/core";
+import { gltfPlugin, GltfUri } from "@lattice-engine/gltf";
+import { renderPlugin, RenderStore } from "@lattice-engine/render";
+import { defineSystem } from "thyseus";
 
 // Create canvas
 const canvas = document.createElement("canvas");
@@ -53,8 +21,51 @@ window.addEventListener("resize", () => {
   canvas.height = window.innerHeight;
 });
 
-// Create canvas entity
-engine.world.createEntity(CanvasTarget, { canvas });
+// Create system to initialize the scene
+const createScene = defineSystem(
+  ({ Res, Mut, Commands }) => [Res(Mut(RenderStore)), Commands()],
+  (store, commands) => {
+    // Set canvas
+    store.setCanvas(canvas);
+
+    // Create scene
+    const scene = commands.spawn().addType(IsScene);
+    store.activeScene = scene.id;
+
+    // Create camera
+    const cameraComponent = new PerspectiveCamera();
+    cameraComponent.fov = 75;
+    cameraComponent.near = 0.1;
+    cameraComponent.far = 1000;
+
+    const camera = commands.spawn().add(cameraComponent);
+    store.activeCamera = camera.id;
+
+    // Add glTF model
+    const gltf = new GltfUri();
+    gltf.uri.write("/cube/Cube.gltf");
+
+    const parent = new Parent();
+    parent.id = scene.id;
+
+    const position = new Position();
+    position.x = 1;
+    position.y = -2;
+    position.z = -8;
+
+    commands.spawn().addType(IsNode).add(parent).add(position).add(gltf);
+  }
+);
+
+// Create world
+const world = await Engine.createWorld()
+  .addPlugin(renderPlugin)
+  .addPlugin(gltfPlugin)
+  .addStartupSystem(createScene)
+  .build();
+
+// Create Engine
+const engine = new Engine(world);
 
 // Start the game loop
 engine.start();

@@ -17,8 +17,8 @@
   "dependencies": {
     "@gltf-transform/core": "^3.2.1",
     "@gltf-transform/extensions": "^3.2.1",
-    "@lastolivegames/becsy": "^0.14.3",
-    "@lattice-engine/core": "workspace:^"
+    "@lattice-engine/core": "workspace:^",
+    "thyseus": "^0.11.0"
   },
   "devDependencies": {
     "tsup": "^6.7.0",

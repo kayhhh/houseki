@@ -1,8 +1,6 @@
-// Import all core components and systems, so they are registered by the engine
-import "./components";
-import "./resource";
+import { World } from "thyseus";
 
-import { World } from "@lastolivegames/becsy";
+import { corePlugin } from "./plugin";
 
 /**
  * Stores the ECS world and manages the game loop.
@@ -13,11 +11,10 @@ export class Engine {
   #animationFrame = 0;
 
   /**
-   * Creates a new Engine instance.
+   * Creates a new WorldBuilder, with all core components and systems registered.
    */
-  static async create() {
-    const world = await World.create();
-    return new Engine(world);
+  static createWorld() {
+    return World.new().addPlugin(corePlugin);
   }
 
   /**
@@ -31,7 +28,15 @@ export class Engine {
    * Starts the game loop.
    */
   async start() {
-    await this.world.execute();
+    this.stop();
+    await this.update();
+  }
+
+  /**
+   * Updates the world.
+   */
+  async update() {
+    await this.world.update();
     this.#animationFrame = requestAnimationFrame(this.start.bind(this));
   }
 
