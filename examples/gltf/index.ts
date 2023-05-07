@@ -49,7 +49,7 @@ const createScene = defineSystem(
     parent.id = scene.id;
 
     const position = new Position();
-    position.x = 1;
+    position.x = 2;
     position.y = -2;
     position.z = -8;
 

@@ -1,11 +1,11 @@
 import { definePlugin } from "thyseus";
 
 import { canvasRenderer } from "./canvasRenderer";
-import { cameraBuilder } from "./systems/cameraBuilder";
-import { geometryBuilder } from "./systems/geometryBuilder";
-import { meshBuilder } from "./systems/meshBuilder";
-import { nodeBuilder } from "./systems/nodeBuilder";
-import { sceneBuilder } from "./systems/sceneBuilder";
+import { cameraBuilder } from "./scene/cameraBuilder";
+import { geometryBuilder } from "./scene/geometryBuilder";
+import { meshBuilder } from "./scene/meshBuilder";
+import { nodeBuilder } from "./scene/nodeBuilder";
+import { sceneBuilder } from "./scene/sceneBuilder";
 
 /**
  * Registers all render components and systems.
