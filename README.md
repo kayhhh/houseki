@@ -16,12 +16,12 @@ The web has a lot of independently awesome libraries for building games, but com
 
 ## 📦 Packages
 
-| Package                                       | Description                                                                                         |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| [`@lattice-engine/core`](./packages/core)     | Core engine, built with [Becsy](https://lastolivegames.github.io/becsy/guide/introduction.html) ECS |
-| [`@lattice-engine/gltf`](./packages/gltf)     | [glTF](https://github.com/KhronosGroup/glTF) import and export                                      |
-| [`@lattice-engine/render`](./packages/render) | [Three.js](https://threejs.org/) rendering                                                          |
-| `@lattice-engine/physics`                     | [Rapier](https://rapier.rs/) physics                                                                |
-| `@lattice-engine/player-controls`             | Player controls for first-person and third-person cameras                                           |
-| `@lattice-engine/scripting`                   | [WASM](https://webassembly.org/) scripting                                                          |
-| `@lattice-engine/wired-protocol`              | Multiplayer networking via the [Wired Protocol](https://github.com/wired-protocol/spec)             |
+| Package                                       | Description                                                                             |
+| --------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [`@lattice-engine/core`](./packages/core)     | Core engine, built with [Thyseus](https://github.com/JaimeGensler/thyseus) ECS          |
+| [`@lattice-engine/gltf`](./packages/gltf)     | [glTF](https://github.com/KhronosGroup/glTF) import and export                          |
+| [`@lattice-engine/render`](./packages/render) | [Three.js](https://threejs.org/) rendering                                              |
+| `@lattice-engine/physics`                     | [Rapier](https://rapier.rs/) physics                                                    |
+| `@lattice-engine/player-controls`             | Player controls for first-person and third-person cameras                               |
+| `@lattice-engine/scripting`                   | [WASM](https://webassembly.org/) scripting                                              |
+| `@lattice-engine/wired-protocol`              | Multiplayer networking via the [Wired Protocol](https://github.com/wired-protocol/spec) |
