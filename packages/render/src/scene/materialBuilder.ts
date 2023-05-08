@@ -4,6 +4,7 @@ import {
   MaterialAlphaMode,
   Texture,
   TextureInfo,
+  Warehouse,
 } from "@lattice-engine/core";
 import {
   CanvasTexture,
@@ -41,11 +42,12 @@ class ImageStore {
  */
 export const materialBuilder = defineSystem(
   ({ Res, SystemRes, Query }) => [
+    Res(Warehouse),
     Res(RenderStore),
     SystemRes(ImageStore),
     Query([Entity, Material]),
   ],
-  (store, imageStore, entities) => {
+  (warehouse, store, imageStore, entities) => {
     const ids: bigint[] = [];
 
     for (const [{ id }, material] of entities) {
@@ -97,7 +99,8 @@ export const materialBuilder = defineSystem(
         object.map,
         material.baseColorTexture,
         material.baseColorTextureInfo,
-        imageStore
+        imageStore,
+        warehouse
       );
       if (object.map) object.map.encoding = sRGBEncoding;
 
@@ -105,21 +108,24 @@ export const materialBuilder = defineSystem(
         object.normalMap,
         material.normalTexture,
         material.normalTextureInfo,
-        imageStore
+        imageStore,
+        warehouse
       );
 
       object.aoMap = loadTexture(
         object.aoMap,
         material.occlusionTexture,
         material.occlusionTextureInfo,
-        imageStore
+        imageStore,
+        warehouse
       );
 
       object.emissiveMap = loadTexture(
         object.emissiveMap,
         material.emissiveTexture,
         material.emissiveTextureInfo,
-        imageStore
+        imageStore,
+        warehouse
       );
       if (object.emissiveMap) object.emissiveMap.encoding = sRGBEncoding;
 
@@ -127,7 +133,8 @@ export const materialBuilder = defineSystem(
         object.metalnessMap,
         material.metallicRoughnessTexture,
         material.metallicRoughnessTextureInfo,
-        imageStore
+        imageStore,
+        warehouse
       );
       object.roughnessMap = object.metalnessMap;
 
@@ -156,9 +163,10 @@ function loadTexture(
   object: ThreeTexture | null,
   texture: Texture,
   info: TextureInfo,
-  imageStore: ImageStore
+  imageStore: ImageStore,
+  warehouse: Readonly<Warehouse>
 ) {
-  const newObject = getTextureObject(object, texture, imageStore);
+  const newObject = getTextureObject(object, texture, imageStore, warehouse);
   if (!newObject) return null;
 
   applyTextureInfo(newObject, info);
@@ -169,7 +177,8 @@ function loadTexture(
 function getTextureObject(
   object: ThreeTexture | null,
   texture: Texture,
-  imageStore: ImageStore
+  imageStore: ImageStore,
+  warehouse: Readonly<Warehouse>
 ) {
   if (!texture.image.id) return null;
 
@@ -199,7 +208,7 @@ function getTextureObject(
   imageStore.processed.add(texture.image.id);
 
   // Start loading the image
-  const blob = new Blob([texture.image.read()], {
+  const blob = new Blob([texture.image.read(warehouse)], {
     type: ImageMimeType[texture.mimeType],
   });
 

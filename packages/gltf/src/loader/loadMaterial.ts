@@ -10,11 +10,18 @@ import {
   MaterialAlphaMode,
   Texture,
   TextureInfo,
-  warehouse,
+  Warehouse,
 } from "@lattice-engine/core";
 import { Commands } from "thyseus";
 
-export function loadMaterial(gltfMaterial: GltfMaterial, commands: Commands) {
+import { LoadingContext } from "./context";
+
+export function loadMaterial(
+  gltfMaterial: GltfMaterial,
+  commands: Commands,
+  warehouse: Readonly<Warehouse>,
+  context: LoadingContext
+) {
   const material = new Material();
 
   material.doubleSided = gltfMaterial.getDoubleSided();
@@ -28,7 +35,7 @@ export function loadMaterial(gltfMaterial: GltfMaterial, commands: Commands) {
     const info = gltfMaterial.getBaseColorTextureInfo();
     applyTextureInfo(material.baseColorTextureInfo, info);
     const texture = gltfMaterial.getBaseColorTexture();
-    applyTexture(material.baseColorTexture, texture);
+    applyTexture(material.baseColorTexture, texture, warehouse);
   }
 
   {
@@ -38,7 +45,7 @@ export function loadMaterial(gltfMaterial: GltfMaterial, commands: Commands) {
     const info = gltfMaterial.getEmissiveTextureInfo();
     applyTextureInfo(material.emissiveTextureInfo, info);
     const texture = gltfMaterial.getEmissiveTexture();
-    applyTexture(material.emissiveTexture, texture);
+    applyTexture(material.emissiveTexture, texture, warehouse);
   }
 
   {
@@ -47,7 +54,7 @@ export function loadMaterial(gltfMaterial: GltfMaterial, commands: Commands) {
     const info = gltfMaterial.getNormalTextureInfo();
     applyTextureInfo(material.normalTextureInfo, info);
     const texture = gltfMaterial.getNormalTexture();
-    applyTexture(material.normalTexture, texture);
+    applyTexture(material.normalTexture, texture, warehouse);
   }
 
   {
@@ -56,7 +63,7 @@ export function loadMaterial(gltfMaterial: GltfMaterial, commands: Commands) {
     const info = gltfMaterial.getOcclusionTextureInfo();
     applyTextureInfo(material.occlusionTextureInfo, info);
     const texture = gltfMaterial.getOcclusionTexture();
-    applyTexture(material.occlusionTexture, texture);
+    applyTexture(material.occlusionTexture, texture, warehouse);
   }
 
   {
@@ -66,11 +73,14 @@ export function loadMaterial(gltfMaterial: GltfMaterial, commands: Commands) {
     const info = gltfMaterial.getMetallicRoughnessTextureInfo();
     applyTextureInfo(material.metallicRoughnessTextureInfo, info);
     const texture = gltfMaterial.getMetallicRoughnessTexture();
-    applyTexture(material.metallicRoughnessTexture, texture);
+    applyTexture(material.metallicRoughnessTexture, texture, warehouse);
   }
 
-  // Create and return material entity
-  return commands.spawn().add(material);
+  // Create material entity
+  const entity = commands.spawn().add(material);
+  context.materials.push(entity.id);
+
+  return entity;
 }
 
 function applyTextureInfo(info: TextureInfo, gltfInfo: GltfTextureInfo | null) {
@@ -93,7 +103,11 @@ function applyTextureInfo(info: TextureInfo, gltfInfo: GltfTextureInfo | null) {
   }
 }
 
-function applyTexture(texture: Texture, gltfTexture: GltfTexture | null) {
+function applyTexture(
+  texture: Texture,
+  gltfTexture: GltfTexture | null,
+  warehouse: Readonly<Warehouse>
+) {
   if (!gltfTexture) return;
 
   const image = gltfTexture.getImage();

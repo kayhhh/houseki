@@ -16,9 +16,39 @@
         margin: 0;
         overflow: hidden;
       }
+
+      #btn-group {
+        position: absolute;
+        top: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        z-index: 1;
+      }
+
+      #btn-group button {
+        margin: 0 0.5rem;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.25rem;
+        background-color: #fff;
+        color: #000;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      #btn-group button:hover {
+        background-color: #ddd;
+      }
     </style>
   </head>
   <body>
     <script src="./index.ts" type="module"></script>
+
+    <div id="btn-group">
+      <button id="btn-cube">Cube</button>
+      <button id="btn-flight">Flight Helmet</button>
+      <button id="btn-damaged">Damaged Helmet</button>
+    </div>
   </body>
 </html>

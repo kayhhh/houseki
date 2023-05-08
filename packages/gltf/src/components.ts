@@ -5,6 +5,3 @@ import { struct } from "thyseus";
 export class GltfUri {
   @struct.substruct(Resource) declare uri: Resource<string>;
 }
-
-@struct
-export class GltfLoaded {}

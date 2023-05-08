@@ -1,4 +1,4 @@
-import { Geometry } from "@lattice-engine/core";
+import { Geometry, Warehouse } from "@lattice-engine/core";
 import { BufferAttribute, BufferGeometry } from "three";
 import { defineSystem, Entity } from "thyseus";
 
@@ -8,8 +8,12 @@ import { RenderStore } from "../RenderStore";
  * Syncs Geometry components with Three.js BufferGeomtry objects.
  */
 export const geometryBuilder = defineSystem(
-  ({ Res, Query }) => [Res(RenderStore), Query([Geometry, Entity])],
-  (store, entities) => {
+  ({ Res, Query }) => [
+    Res(Warehouse),
+    Res(RenderStore),
+    Query([Geometry, Entity]),
+  ],
+  (warehouse, store, entities) => {
     const ids: bigint[] = [];
 
     for (const [geometry, { id }] of entities) {
@@ -25,22 +29,22 @@ export const geometryBuilder = defineSystem(
 
       // Sync object properties
       if (geometry.positions.id) {
-        const positions = geometry.positions.read();
+        const positions = geometry.positions.read(warehouse);
         setAttribute(object, "position", positions, 3);
       }
 
       if (geometry.normals.id) {
-        const normals = geometry.normals.read();
+        const normals = geometry.normals.read(warehouse);
         setAttribute(object, "normal", normals, 3);
       }
 
       if (geometry.uvs.id) {
-        const uvs = geometry.uvs.read();
+        const uvs = geometry.uvs.read(warehouse);
         setAttribute(object, "uv", uvs, 2);
       }
 
       if (geometry.indices.id) {
-        const indices = geometry.indices.read();
+        const indices = geometry.indices.read(warehouse);
         setAttribute(object, "index", indices, 1);
       }
     }

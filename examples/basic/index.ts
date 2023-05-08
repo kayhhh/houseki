@@ -7,7 +7,7 @@ import {
   Parent,
   PerspectiveCamera,
   Position,
-  warehouse,
+  Warehouse,
 } from "@lattice-engine/core";
 import { renderPlugin, RenderStore } from "@lattice-engine/render";
 import { BoxGeometry, BufferAttribute } from "three";
@@ -26,8 +26,12 @@ window.addEventListener("resize", () => {
 
 // Create system to initialize the scene
 const createScene = defineSystem(
-  ({ Res, Mut, Commands }) => [Res(Mut(RenderStore)), Commands()],
-  (store, commands) => {
+  ({ Res, Mut, Commands }) => [
+    Res(Warehouse),
+    Res(Mut(RenderStore)),
+    Commands(),
+  ],
+  (warehouse, store, commands) => {
     // Set canvas
     store.setCanvas(canvas);
 

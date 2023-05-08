@@ -1,5 +1,6 @@
 import { definePlugin } from "thyseus";
 
+import { geometryCleanup, materialCleanup } from "./scene/cleanup";
 import {
   Geometry,
   IsScene,
@@ -25,5 +26,7 @@ export const corePlugin = definePlugin((builder) => {
     .registerComponent(PerspectiveCamera)
     .registerComponent(IsScene)
     .registerComponent(Mesh)
-    .registerComponent(Geometry);
+    .registerComponent(Geometry)
+    .addSystem(geometryCleanup)
+    .addSystem(materialCleanup);
 });

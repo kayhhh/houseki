@@ -5,9 +5,11 @@ import {
   Position,
   Rotation,
   Scale,
+  Warehouse,
 } from "@lattice-engine/core";
-import { Commands, Entity, EntityCommands } from "thyseus";
+import { Commands } from "thyseus";
 
+import { LoadingContext } from "./context";
 import { loadMesh } from "./loadMesh";
 
 /**
@@ -15,8 +17,10 @@ import { loadMesh } from "./loadMesh";
  */
 export function loadNode(
   node: Node,
-  parent: Readonly<Entity> | EntityCommands,
-  commands: Commands
+  parentId: bigint,
+  commands: Commands,
+  warehouse: Readonly<Warehouse>,
+  context: LoadingContext
 ) {
   const nodePosition = node.getTranslation();
   const nodeRotation = node.getRotation();
@@ -39,7 +43,7 @@ export function loadNode(
   scale.z = nodeScale[2];
 
   const parentComponent = new Parent();
-  parentComponent.id = parent.id;
+  parentComponent.id = parentId;
 
   const entity = commands
     .spawn()
@@ -49,8 +53,14 @@ export function loadNode(
     .add(rotation)
     .add(scale);
 
-  const mesh = node.getMesh();
-  if (mesh) loadMesh(mesh, entity, commands);
+  context.nodes.push(entity.id);
 
-  node.listChildren().forEach((child) => loadNode(child, entity, commands));
+  const mesh = node.getMesh();
+  if (mesh) loadMesh(mesh, entity, commands, warehouse, context);
+
+  node
+    .listChildren()
+    .forEach((child) =>
+      loadNode(child, entity.id, commands, warehouse, context)
+    );
 }

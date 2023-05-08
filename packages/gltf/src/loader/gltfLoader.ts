@@ -1,64 +1,97 @@
 import { Document, WebIO } from "@gltf-transform/core";
+import { Warehouse } from "@lattice-engine/core";
 import { defineSystem, Entity } from "thyseus";
 
-import { GltfLoaded, GltfUri } from "../components";
+import { GltfUri } from "../components";
 import { extensions } from "../extensions";
+import { LoadingContext } from "./context";
 import { loadDoc } from "./loadDoc";
+import { removeGltf } from "./removeGltf";
 
-class DocStore {
+class GltfStore {
+  /**
+   * All entity IDs that have a GltfUri component.
+   */
+  ids: bigint[] = [];
+
+  /**
+   * Entity ID -> loaded URI
+   */
+  readonly uris = new Map<bigint, string>();
+
   /**
    * Entity ID -> glTF Document
    */
   readonly docs = new Map<bigint, Document>();
+
+  /**
+   * Entity ID -> glTF Context
+   */
+  readonly contexts = new Map<bigint, LoadingContext>();
 }
 
 /**
- * Loads glTFs into the DocStore.
+ * Loads glTF documents into the DocStore.
  */
 export const gltfLoader = defineSystem(
-  ({ Query, Without, Res }) => [
-    Res(DocStore),
-    Query([GltfUri, Entity], Without(GltfLoaded)),
+  ({ Commands, Query, Res, SystemRes }) => [
+    Commands(),
+    Res(Warehouse),
+    SystemRes(GltfStore),
+    Query([GltfUri, Entity]),
   ],
-  (store, entities) => {
-    // Load glTFs
-    for (const [gltf, entity] of entities) {
-      if (!gltf.uri) continue;
+  (commands, warehouse, store, entities) => {
+    const ids: bigint[] = [];
 
-      // Mark as loaded
-      entity.addType(GltfLoaded);
+    for (const [gltf, entity] of entities) {
+      // If no uri, ignore
+      if (!gltf.uri.id) continue;
 
       const id = entity.id;
+      ids.push(id);
 
-      // Load uri
-      const io = new WebIO().registerExtensions(extensions);
-      io.read(gltf.uri.read()).then((doc) => store.docs.set(id, doc));
+      const uri = gltf.uri.read(warehouse);
+      const doc = store.docs.get(id);
+
+      // If URI has changed, load new document
+      if (store.uris.get(id) !== uri) {
+        // Mark loaded uri
+        store.uris.set(id, uri);
+
+        // Start loading document
+        const io = new WebIO().registerExtensions(extensions);
+        io.read(uri).then((doc) => store.docs.set(id, doc));
+      } else if (doc) {
+        // Remove old glTF entities
+        const oldContext = store.contexts.get(id);
+        if (oldContext) {
+          store.contexts.delete(id);
+          removeGltf(oldContext, commands);
+        }
+
+        // Load document into the ECS
+        const context = loadDoc(doc, entity, commands, warehouse);
+
+        // Add context to store, for cleanup
+        if (context) store.contexts.set(id, context);
+
+        // Remove document from store
+        store.docs.delete(id);
+      }
     }
-  }
-);
 
-/**
- * Loads documents from the DocStore into the ECS.
- */
-export const gltfDocumentLoader = defineSystem(
-  ({ Query, With, Commands, Res }) => [
-    Res(DocStore),
-    Commands(),
-    Query(Entity, With(GltfLoaded)),
-  ],
-  (store, commands, entities) => {
-    // Load documents
-    for (const entity of entities) {
-      // Ignore if document has not been loaded yet,
-      // Or has already been loaded into the ECS
-      const doc = store.docs.get(entity.id);
-      if (!doc) continue;
+    // Clean up removed entities
+    for (const id of store.ids) {
+      if (!ids.includes(id)) {
+        const context = store.contexts.get(id);
+        if (context) {
+          store.contexts.delete(id);
+          removeGltf(context, commands);
+        }
 
-      // Remove from store
-      store.docs.delete(entity.id);
-
-      // Load document
-      loadDoc(doc, entity, commands);
+        store.uris.delete(id);
+        store.docs.delete(id);
+      }
     }
   }
 );

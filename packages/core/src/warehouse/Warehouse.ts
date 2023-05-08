@@ -1,6 +1,6 @@
 /**
  * Used to store data outside of the ECS.
- * Useful for dynamically sized data like gltf accessors.
+ * Useful for dynamically sized data, which you don't know the size of at compile time.
  * Each item gets a unique ID which can be stored in the ECS.
  */
 export class Warehouse {
@@ -32,6 +32,8 @@ export class Warehouse {
   clear() {
     this.#map.clear();
   }
-}
 
-export const warehouse = new Warehouse();
+  get size() {
+    return this.#map.size;
+  }
+}

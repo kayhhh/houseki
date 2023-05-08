@@ -1,22 +1,28 @@
 import { Mesh as GltfMesh } from "@gltf-transform/core";
-import { Geometry, Mesh, warehouse } from "@lattice-engine/core";
+import {
+  Geometry,
+  IsNode,
+  Mesh,
+  Parent,
+  Warehouse,
+} from "@lattice-engine/core";
 import { Commands, EntityCommands } from "thyseus";
 
+import { LoadingContext } from "./context";
 import { loadMaterial } from "./loadMaterial";
 
 export function loadMesh(
   gltfMesh: GltfMesh,
   entity: EntityCommands,
-  commands: Commands
+  commands: Commands,
+  warehouse: Readonly<Warehouse>,
+  context: LoadingContext
 ) {
-  const mesh = new Mesh();
-
-  // Hack: Not having a geomtry before we add primitives breaks things ?
-  const geometry = new Geometry();
-  entity.add(geometry);
-
-  // Create geometries
   gltfMesh.listPrimitives().forEach((primitive) => {
+    const parent = new Parent();
+    parent.id = entity.id;
+
+    const mesh = new Mesh();
     const geometry = new Geometry();
 
     const positions = primitive.getAttribute("POSITION")?.getArray();
@@ -30,10 +36,23 @@ export function loadMesh(
     if (indices) geometry.indices.id = warehouse.store(indices);
 
     const material = primitive.getMaterial();
-    if (material) mesh.material = loadMaterial(material, commands).id;
+    if (material) {
+      const materialEntity = loadMaterial(
+        material,
+        commands,
+        warehouse,
+        context
+      );
+      mesh.material = materialEntity.id;
+    }
 
-    entity.add(geometry);
+    const meshEnity = commands
+      .spawn()
+      .addType(IsNode)
+      .add(parent)
+      .add(mesh)
+      .add(geometry);
+
+    context.meshes.push(meshEnity.id);
   });
-
-  entity.add(mesh);
 }

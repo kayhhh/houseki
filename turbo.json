@@ -5,6 +5,8 @@
       "dependsOn": ["^build"],
       "outputs": ["build/**", "dist/**"]
     },
-    "dev": { "cache": false, "persistent": true }
+    "dev": { "cache": false, "persistent": true },
+    "test": {},
+    "test:watch": { "cache": false, "persistent": true }
   }
 }
