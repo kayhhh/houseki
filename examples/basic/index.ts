@@ -1,9 +1,9 @@
 import {
   Engine,
   Geometry,
-  IsMesh,
   IsNode,
   IsScene,
+  Mesh,
   Parent,
   PerspectiveCamera,
   Position,
@@ -68,16 +68,16 @@ const createScene = defineSystem(
     parent.id = scene.id;
 
     const position = new Position();
-    position.x = 1;
+    position.x = 3;
     position.y = -2;
-    position.z = -8;
+    position.z = -10;
 
     commands
       .spawn()
       .addType(IsNode)
       .add(parent)
       .add(position)
-      .addType(IsMesh)
+      .addType(Mesh)
       .add(geometry);
   }
 );

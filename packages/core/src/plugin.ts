@@ -2,8 +2,8 @@ import { definePlugin } from "thyseus";
 
 import {
   Geometry,
-  IsMesh,
   IsScene,
+  Mesh,
   Parent,
   PerspectiveCamera,
   Position,
@@ -24,6 +24,6 @@ export const corePlugin = definePlugin((builder) => {
     .registerComponent(Parent)
     .registerComponent(PerspectiveCamera)
     .registerComponent(IsScene)
-    .registerComponent(IsMesh)
+    .registerComponent(Mesh)
     .registerComponent(Geometry);
 });

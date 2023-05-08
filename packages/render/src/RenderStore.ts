@@ -32,6 +32,8 @@ export class RenderStore {
     this.renderer.setPixelRatio(window.devicePixelRatio);
   }
 
+  readonly defaultMaterial = new MeshStandardMaterial();
+
   /**
    * Entity ID of the active camera.
    */

@@ -2,6 +2,7 @@ import { Document, WebIO } from "@gltf-transform/core";
 import { defineSystem, Entity } from "thyseus";
 
 import { GltfLoaded, GltfUri } from "../components";
+import { extensions } from "../extensions";
 import { loadDoc } from "./loadDoc";
 
 class DocStore {
@@ -30,7 +31,7 @@ export const gltfLoader = defineSystem(
       const id = entity.id;
 
       // Load uri
-      const io = new WebIO();
+      const io = new WebIO().registerExtensions(extensions);
       io.read(gltf.uri.read()).then((doc) => store.docs.set(id, doc));
     }
   }

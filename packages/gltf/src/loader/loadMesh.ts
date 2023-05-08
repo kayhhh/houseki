@@ -1,16 +1,22 @@
-import { Mesh } from "@gltf-transform/core";
-import { Geometry, IsMesh, warehouse } from "@lattice-engine/core";
-import { EntityCommands } from "thyseus";
+import { Mesh as GltfMesh } from "@gltf-transform/core";
+import { Geometry, Mesh, warehouse } from "@lattice-engine/core";
+import { Commands, EntityCommands } from "thyseus";
 
-export function loadMesh(mesh: Mesh, entity: EntityCommands) {
-  entity.addType(IsMesh);
+import { loadMaterial } from "./loadMaterial";
+
+export function loadMesh(
+  gltfMesh: GltfMesh,
+  entity: EntityCommands,
+  commands: Commands
+) {
+  const mesh = new Mesh();
 
   // Hack: Not having a geomtry before we add primitives breaks things ?
   const geometry = new Geometry();
   entity.add(geometry);
 
   // Create geometries
-  mesh.listPrimitives().forEach((primitive) => {
+  gltfMesh.listPrimitives().forEach((primitive) => {
     const geometry = new Geometry();
 
     const positions = primitive.getAttribute("POSITION")?.getArray();
@@ -23,6 +29,11 @@ export function loadMesh(mesh: Mesh, entity: EntityCommands) {
     if (uvs) geometry.uvs.id = warehouse.store(uvs);
     if (indices) geometry.indices.id = warehouse.store(indices);
 
+    const material = primitive.getMaterial();
+    if (material) mesh.material = loadMaterial(material, commands).id;
+
     entity.add(geometry);
   });
+
+  entity.add(mesh);
 }

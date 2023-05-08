@@ -50,7 +50,7 @@ export function loadNode(
     .add(scale);
 
   const mesh = node.getMesh();
-  if (mesh) loadMesh(mesh, entity);
+  if (mesh) loadMesh(mesh, entity, commands);
 
   node.listChildren().forEach((child) => loadNode(child, entity, commands));
 }

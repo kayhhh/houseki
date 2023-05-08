@@ -1,5 +1,5 @@
-import { Geometry, IsMesh, IsNode } from "@lattice-engine/core";
-import { BufferGeometry, Mesh } from "three";
+import { Geometry, IsNode, Mesh } from "@lattice-engine/core";
+import { BufferGeometry, Mesh as ThreeMesh } from "three";
 import { defineSystem, Entity } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
@@ -10,23 +10,26 @@ import { RenderStore } from "../RenderStore";
 export const meshBuilder = defineSystem(
   ({ Res, Query, With }) => [
     Res(RenderStore),
-    Query(Entity, With([IsNode, IsMesh, Geometry])),
+    Query([Entity, Mesh], With([IsNode, Geometry])),
   ],
   (store, entities) => {
     const ids: bigint[] = [];
 
-    for (const { id } of entities) {
+    for (const [{ id }, mesh] of entities) {
       ids.push(id);
 
       let object = store.meshes.get(id);
 
       // Create new objects
       if (!object) {
-        object = new Mesh();
+        object = new ThreeMesh();
         store.meshes.set(id, object);
       }
 
       // Sync object properties
+      const materialObject = store.materials.get(mesh.material);
+      object.material = materialObject ?? store.defaultMaterial;
+
       const geometryObject = store.geometries.get(id);
       object.geometry = geometryObject ?? new BufferGeometry();
 

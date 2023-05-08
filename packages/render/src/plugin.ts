@@ -3,6 +3,7 @@ import { definePlugin } from "thyseus";
 import { canvasRenderer } from "./canvasRenderer";
 import { cameraBuilder } from "./scene/cameraBuilder";
 import { geometryBuilder } from "./scene/geometryBuilder";
+import { materialBuilder } from "./scene/materialBuilder";
 import { meshBuilder } from "./scene/meshBuilder";
 import { nodeBuilder } from "./scene/nodeBuilder";
 import { sceneBuilder } from "./scene/sceneBuilder";
@@ -17,5 +18,6 @@ export const renderPlugin = definePlugin((builder) => {
     .addSystem(sceneBuilder.before(canvasRenderer))
     .addSystem(nodeBuilder.before(sceneBuilder))
     .addSystem(meshBuilder.before(nodeBuilder))
-    .addSystem(geometryBuilder.before(meshBuilder));
+    .addSystem(geometryBuilder.before(meshBuilder))
+    .addSystem(materialBuilder.before(meshBuilder));
 });
