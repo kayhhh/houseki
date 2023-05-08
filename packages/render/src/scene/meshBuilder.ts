@@ -1,4 +1,4 @@
-import { Geometry, IsNode, Mesh } from "@lattice-engine/core";
+import { Geometry, Mesh } from "@lattice-engine/core";
 import { BufferGeometry, Mesh as ThreeMesh } from "three";
 import { defineSystem, Entity } from "thyseus";
 
@@ -10,7 +10,7 @@ import { RenderStore } from "../RenderStore";
 export const meshBuilder = defineSystem(
   ({ Res, Query, With }) => [
     Res(RenderStore),
-    Query([Entity, Mesh], With([IsNode, Geometry])),
+    Query([Entity, Mesh], With(Geometry)),
   ],
   (store, entities) => {
     const ids: bigint[] = [];
@@ -33,6 +33,7 @@ export const meshBuilder = defineSystem(
       const geometryObject = store.geometries.get(id);
       object.geometry = geometryObject ?? new BufferGeometry();
 
+      // If this entity is a node, add the mesh to the node object
       const nodeObject = store.nodes.get(id);
       if (nodeObject) nodeObject.add(object);
       else object.removeFromParent();

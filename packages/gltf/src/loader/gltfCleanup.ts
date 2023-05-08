@@ -13,7 +13,7 @@ class EntityTracker {
 }
 
 /**
- * Cleans up gltf resources on removal.
+ * Cleans up GltfUri resources on removal.
  */
 export const gltfCleanup = defineSystem(
   ({ SystemRes, Res, Commands, Query }) => [

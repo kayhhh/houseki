@@ -36,7 +36,16 @@ export const sceneBuilder = defineSystem(
 
     // Remove objects that no longer exist
     for (const [id] of store.scenes) {
-      if (!ids.includes(id)) store.scenes.delete(id);
+      if (!ids.includes(id)) {
+        const object = store.scenes.get(id);
+        object?.environment?.dispose();
+
+        if (object?.background instanceof Texture) {
+          object?.background?.dispose();
+        }
+
+        store.scenes.delete(id);
+      }
     }
   }
 );

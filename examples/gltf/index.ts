@@ -99,7 +99,12 @@ const initScene = defineSystem(
     position.y = -2;
     position.z = -5;
 
-    commands.spawn().addType(IsNode).add(parent).add(position).addType(GltfUri);
+    const gltf = commands
+      .spawn()
+      .addType(IsNode)
+      .add(parent)
+      .add(position)
+      .addType(GltfUri);
   }
 );
 

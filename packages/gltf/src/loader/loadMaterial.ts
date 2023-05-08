@@ -113,7 +113,7 @@ function applyTexture(
   const image = gltfTexture.getImage();
   if (!image) return;
 
-  texture.image.id = warehouse.store(image);
+  texture.image.write(image, warehouse);
 
   const mimeType = gltfTexture.getMimeType();
 

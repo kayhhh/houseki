@@ -59,14 +59,10 @@ const createScene = defineSystem(
     const normals = normalsAttribute.array as Float32Array;
     const indices = indicesAttribute.array as Uint16Array;
 
-    const positionsId = warehouse.store(positions);
-    const indicesId = warehouse.store(indices);
-    const normalsId = warehouse.store(normals);
-
     const geometry = new Geometry();
-    geometry.positions.id = positionsId;
-    geometry.indices.id = indicesId;
-    geometry.normals.id = normalsId;
+    geometry.positions.write(positions, warehouse);
+    geometry.indices.write(indices, warehouse);
+    geometry.normals.write(normals, warehouse);
 
     const parent = new Parent();
     parent.id = scene.id;

@@ -30,10 +30,21 @@ export function loadMesh(
     const uvs = primitive.getAttribute("TEXCOORD_0")?.getArray();
     const indices = primitive.getIndices()?.getArray();
 
-    if (positions) geometry.positions.id = warehouse.store(positions);
-    if (normals) geometry.normals.id = warehouse.store(normals);
-    if (uvs) geometry.uvs.id = warehouse.store(uvs);
-    if (indices) geometry.indices.id = warehouse.store(indices);
+    if (positions instanceof Float32Array) {
+      geometry.positions.write(positions, warehouse);
+    }
+
+    if (normals instanceof Float32Array) {
+      geometry.normals.write(normals, warehouse);
+    }
+
+    if (uvs instanceof Float32Array) {
+      geometry.uvs.write(uvs, warehouse);
+    }
+
+    if (indices instanceof Uint16Array) {
+      geometry.indices.write(indices, warehouse);
+    }
 
     const material = primitive.getMaterial();
     if (material) {
