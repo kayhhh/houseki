@@ -1,5 +1,13 @@
 import { IsScene } from "@lattice-engine/core";
-import { AmbientLight, PointLight, Scene as ThreeScene } from "three";
+import {
+  AmbientLight,
+  CanvasTexture,
+  EquirectangularReflectionMapping,
+  PointLight,
+  Scene as ThreeScene,
+  sRGBEncoding,
+  Texture,
+} from "three";
 import { defineSystem, Entity } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
@@ -20,6 +28,8 @@ export const sceneBuilder = defineSystem(
         object.add(new AmbientLight(0xffffff, 0.5));
         object.add(new PointLight(0xffffff, 0.5));
 
+        loadSkybox(object, "/Skybox.jpg");
+
         store.scenes.set(id, object);
       }
     }
@@ -30,3 +40,29 @@ export const sceneBuilder = defineSystem(
     }
   }
 );
+
+async function loadSkybox(scene: ThreeScene, uri: string | null) {
+  // Clean up old skybox
+  if (scene.background instanceof Texture) scene.background.dispose();
+  if (scene.environment) scene.environment.dispose();
+
+  if (!uri) {
+    scene.environment = null;
+    scene.background = null;
+    return;
+  }
+
+  // Load skybox
+  const res = await fetch(uri);
+  const blob = await res.blob();
+  const bitmap = await createImageBitmap(blob, { imageOrientation: "flipY" });
+
+  const texture = new CanvasTexture(bitmap);
+  texture.mapping = EquirectangularReflectionMapping;
+  texture.encoding = sRGBEncoding;
+  texture.needsUpdate = true;
+
+  // Set skybox
+  scene.environment = texture;
+  scene.background = texture;
+}
