@@ -129,14 +129,15 @@ export const materialBuilder = defineSystem(
       );
       if (object.emissiveMap) object.emissiveMap.encoding = sRGBEncoding;
 
-      object.metalnessMap = loadTexture(
+      const mrTexture = loadTexture(
         object.metalnessMap,
         material.metallicRoughnessTexture,
         material.metallicRoughnessTextureInfo,
         imageStore,
         warehouse
       );
-      object.roughnessMap = object.metalnessMap;
+      object.metalnessMap = mrTexture;
+      object.roughnessMap = mrTexture;
 
       object.needsUpdate = true;
     }
