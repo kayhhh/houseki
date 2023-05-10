@@ -1,4 +1,4 @@
-import { Commands, Entity } from "thyseus";
+import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
 import {
   CommandsDescriptor,
   QueryDescriptor,
@@ -23,9 +23,9 @@ class EntityTracker {
  */
 export function geometryCleanup(
   commands: Commands,
-  warehouse: Warehouse,
-  tracker: EntityTracker,
-  entities: [Entity, Geometry][]
+  warehouse: Res<Warehouse>,
+  tracker: SystemRes<EntityTracker>,
+  entities: Query<[Entity, Geometry]>
 ) {
   const ids: bigint[] = [];
 
@@ -73,9 +73,9 @@ geometryCleanup.parameters = [
  */
 export function materialCleanup(
   commands: Commands,
-  warehouse: Warehouse,
-  tracker: EntityTracker,
-  entities: [Entity, Material][]
+  warehouse: Res<Warehouse>,
+  tracker: SystemRes<EntityTracker>,
+  entities: Query<[Entity, Material]>
 ) {
   const ids: bigint[] = [];
 

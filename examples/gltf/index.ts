@@ -13,8 +13,11 @@ import {
   Commands,
   CommandsDescriptor,
   CoreSchedule,
+  Mut,
   MutDescriptor,
+  Query,
   QueryDescriptor,
+  Res,
   ResourceDescriptor,
 } from "thyseus";
 
@@ -33,7 +36,7 @@ class GltfStore {
   uri = defaultModel;
 }
 
-function buttonSystem(store: GltfStore) {
+function buttonSystem(store: Res<Mut<GltfStore>>) {
   document.getElementById("btn-cube")?.addEventListener("click", () => {
     store.uri = "/Cube/Cube.gltf";
     window.location.hash = "";
@@ -53,7 +56,11 @@ function buttonSystem(store: GltfStore) {
 buttonSystem.parameters = [ResourceDescriptor(MutDescriptor(GltfStore))];
 
 // Load selected glTF model
-function loadGltf(warehouse: Warehouse, store: GltfStore, entities: GltfUri[]) {
+function loadGltf(
+  warehouse: Res<Warehouse>,
+  store: Res<GltfStore>,
+  entities: Query<GltfUri>
+) {
   for (const gltf of entities) {
     // Ignore if already set
     if (gltf.uri.read(warehouse) === store.uri) continue;
@@ -81,7 +88,7 @@ window.addEventListener("resize", () => {
 });
 
 // Initialize the scene
-function initScene(commands: Commands, store: RenderStore) {
+function initScene(commands: Commands, store: Res<Mut<RenderStore>>) {
   // Set canvas
   store.setCanvas(canvas);
 

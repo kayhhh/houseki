@@ -6,18 +6,18 @@ import {
   Scale,
 } from "@lattice-engine/core";
 import { Object3D } from "three";
-import { Entity, WithDescriptor } from "thyseus";
+import { Entity, Query, Res, With, WithDescriptor } from "thyseus";
 import { QueryDescriptor, ResourceDescriptor } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
 export function nodeBuilder(
-  store: RenderStore,
-  entities: Entity[],
-  withPosition: [Entity, Position][],
-  withRotation: [Entity, Rotation][],
-  withScale: [Entity, Scale][],
-  withParent: [Entity, Parent][]
+  store: Res<RenderStore>,
+  entities: Query<Entity, With<IsNode>>,
+  withPosition: Query<[Entity, Position], With<IsNode>>,
+  withRotation: Query<[Entity, Rotation], With<IsNode>>,
+  withScale: Query<[Entity, Scale], With<IsNode>>,
+  withParent: Query<[Entity, Parent], With<IsNode>>
 ) {
   const ids: bigint[] = [];
 

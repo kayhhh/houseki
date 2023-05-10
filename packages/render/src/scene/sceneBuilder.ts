@@ -8,12 +8,15 @@ import {
   sRGBEncoding,
   Texture,
 } from "three";
-import { Entity, WithDescriptor } from "thyseus";
+import { Entity, Query, Res, With, WithDescriptor } from "thyseus";
 import { QueryDescriptor, ResourceDescriptor } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
-export function sceneBuilder(store: RenderStore, entities: Entity[]) {
+export function sceneBuilder(
+  store: Res<RenderStore>,
+  entities: Query<Entity, With<IsScene>>
+) {
   const ids: bigint[] = [];
 
   for (const { id } of entities) {

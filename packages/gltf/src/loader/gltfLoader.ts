@@ -1,6 +1,6 @@
 import { Document, WebIO } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
-import { Commands, Entity } from "thyseus";
+import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
 import {
   CommandsDescriptor,
   QueryDescriptor,
@@ -41,9 +41,9 @@ class GltfStore {
  */
 export function gltfLoader(
   commands: Commands,
-  warehouse: Warehouse,
-  store: GltfStore,
-  entities: [Entity, GltfUri][]
+  warehouse: Res<Warehouse>,
+  store: SystemRes<GltfStore>,
+  entities: Query<[Entity, GltfUri]>
 ) {
   const ids: bigint[] = [];
 

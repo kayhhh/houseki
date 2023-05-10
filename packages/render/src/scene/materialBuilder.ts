@@ -23,7 +23,7 @@ import {
   sRGBEncoding,
   Texture as ThreeTexture,
 } from "three";
-import { Entity } from "thyseus";
+import { Entity, Query, Res, SystemRes } from "thyseus";
 import {
   QueryDescriptor,
   ResourceDescriptor,
@@ -46,10 +46,10 @@ class ImageStore {
  * Syncs Material components with Three.js Material objects.
  */
 export function materialBuilder(
-  warehouse: Warehouse,
-  store: RenderStore,
-  imageStore: ImageStore,
-  entities: [Entity, Material][]
+  warehouse: Res<Warehouse>,
+  store: Res<RenderStore>,
+  imageStore: SystemRes<ImageStore>,
+  entities: Query<[Entity, Material]>
 ) {
   const ids: bigint[] = [];
 

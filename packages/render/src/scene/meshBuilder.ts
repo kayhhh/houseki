@@ -1,6 +1,6 @@
 import { Geometry, Mesh } from "@lattice-engine/core";
 import { BufferGeometry, Mesh as ThreeMesh } from "three";
-import { Entity, WithDescriptor } from "thyseus";
+import { Entity, Query, Res, With, WithDescriptor } from "thyseus";
 import { QueryDescriptor, ResourceDescriptor } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
@@ -8,7 +8,10 @@ import { RenderStore } from "../RenderStore";
 /**
  * Syncs IsMesh components with Three.js Mesh objects.
  */
-export function meshBuilder(store: RenderStore, entities: [Entity, Mesh][]) {
+export function meshBuilder(
+  store: Res<RenderStore>,
+  entities: Query<[Entity, Mesh], With<Geometry>>
+) {
   const ids: bigint[] = [];
 
   for (const [{ id }, mesh] of entities) {

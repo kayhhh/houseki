@@ -1,6 +1,6 @@
 import { Geometry, Warehouse } from "@lattice-engine/core";
 import { BufferAttribute, BufferGeometry } from "three";
-import { Entity } from "thyseus";
+import { Entity, Query, Res } from "thyseus";
 import { QueryDescriptor, ResourceDescriptor } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
@@ -9,9 +9,9 @@ import { RenderStore } from "../RenderStore";
  * Syncs Geometry components with Three.js BufferGeomtry objects.
  */
 export function geometryBuilder(
-  warehouse: Warehouse,
-  store: RenderStore,
-  entities: [Geometry, Entity][]
+  warehouse: Res<Warehouse>,
+  store: Res<RenderStore>,
+  entities: Query<[Geometry, Entity]>
 ) {
   const ids: bigint[] = [];
 

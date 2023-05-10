@@ -11,7 +11,7 @@ import {
 } from "@lattice-engine/core";
 import { renderPlugin, RenderStore } from "@lattice-engine/render";
 import { BoxGeometry, BufferAttribute } from "three";
-import { Commands, CoreSchedule } from "thyseus";
+import { Commands, CoreSchedule, Mut, MutDescriptor, Res } from "thyseus";
 import { CommandsDescriptor, ResourceDescriptor } from "thyseus";
 
 // Create canvas
@@ -28,8 +28,8 @@ window.addEventListener("resize", () => {
 // Create system to initialize the scene
 function initScene(
   commands: Commands,
-  warehouse: Warehouse,
-  store: RenderStore
+  warehouse: Res<Warehouse>,
+  store: Res<Mut<RenderStore>>
 ) {
   // Set canvas
   store.setCanvas(canvas);
@@ -67,9 +67,8 @@ function initScene(
   parent.id = scene.id;
 
   const position = new Position();
-  position.x = 3;
-  position.y = -2;
-  position.z = -10;
+  position.y = -1;
+  position.z = -5;
 
   commands
     .spawn()
@@ -83,7 +82,7 @@ function initScene(
 initScene.parameters = [
   CommandsDescriptor(),
   ResourceDescriptor(Warehouse),
-  ResourceDescriptor(RenderStore),
+  ResourceDescriptor(MutDescriptor(RenderStore)),
 ];
 
 // Create world

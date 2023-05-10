@@ -1,5 +1,5 @@
 import { Warehouse } from "@lattice-engine/core";
-import { Commands, Entity } from "thyseus";
+import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
 import {
   CommandsDescriptor,
   QueryDescriptor,
@@ -23,9 +23,9 @@ class EntityTracker {
  */
 export function gltfCleanup(
   commands: Commands,
-  warehouse: Warehouse,
-  tracker: EntityTracker,
-  entities: [Entity, GltfUri][]
+  warehouse: Res<Warehouse>,
+  tracker: SystemRes<EntityTracker>,
+  entities: Query<[Entity, GltfUri]>
 ) {
   const ids: bigint[] = [];
 

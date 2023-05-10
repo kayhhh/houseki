@@ -2,6 +2,7 @@
  * Used to store data outside of the ECS.
  * Useful for dynamically sized data, which you don't know the size of at compile time.
  * Each item gets a unique ID which can be stored in the ECS.
+ * Will not be cleaned up automatically.
  */
 export class Warehouse {
   #nextId = 1;

@@ -1,6 +1,6 @@
 import { PerspectiveCamera } from "@lattice-engine/core";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
-import { Entity } from "thyseus";
+import { Entity, Query, Res } from "thyseus";
 import { QueryDescriptor, ResourceDescriptor } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
@@ -9,8 +9,8 @@ import { RenderStore } from "../RenderStore";
  * Syncs PerspectiveCamera components with Three.js PerspectiveCamera objects.
  */
 export function cameraBuilder(
-  store: RenderStore,
-  cameras: [PerspectiveCamera, Entity][]
+  store: Res<RenderStore>,
+  cameras: Query<[PerspectiveCamera, Entity]>
 ) {
   const ids: bigint[] = [];
 
