@@ -30,6 +30,7 @@ export function nodeBuilder(
     if (!object) {
       object = new Object3D();
       store.nodes.set(id, object);
+      if (store.nodes.size > 100) throw new Error("Too many nodes");
     }
 
     // Reset object properties
@@ -64,7 +65,6 @@ export function nodeBuilder(
         store.nodes.get(parent.id) ?? store.scenes.get(parent.id);
 
       if (parentObject) parentObject.add(object);
-      else object.removeFromParent();
     }
   }
 
