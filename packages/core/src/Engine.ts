@@ -1,4 +1,4 @@
-import { World } from "thyseus";
+import { CoreSchedule, World } from "thyseus";
 
 import { corePlugin } from "./plugin";
 
@@ -14,7 +14,9 @@ export class Engine {
    * Creates a new WorldBuilder, with all core components and systems registered.
    */
   static createWorld() {
-    return World.new().addPlugin(corePlugin);
+    const world = World.new();
+    corePlugin(world);
+    return world;
   }
 
   /**
@@ -29,6 +31,7 @@ export class Engine {
    */
   async start() {
     this.stop();
+    await this.world.runSchedule(CoreSchedule.Startup);
     await this.update();
   }
 
@@ -36,8 +39,8 @@ export class Engine {
    * Updates the world.
    */
   async update() {
-    await this.world.update();
-    this.#animationFrame = requestAnimationFrame(this.start.bind(this));
+    await this.world.runSchedule(CoreSchedule.Main);
+    this.#animationFrame = requestAnimationFrame(this.update.bind(this));
   }
 
   /**

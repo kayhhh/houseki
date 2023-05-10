@@ -1,65 +1,69 @@
 import { Geometry, Warehouse } from "@lattice-engine/core";
 import { BufferAttribute, BufferGeometry } from "three";
-import { defineSystem, Entity } from "thyseus";
+import { Entity } from "thyseus";
+import { QueryDescriptor, ResourceDescriptor } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
 /**
  * Syncs Geometry components with Three.js BufferGeomtry objects.
  */
-export const geometryBuilder = defineSystem(
-  ({ Res, Query }) => [
-    Res(Warehouse),
-    Res(RenderStore),
-    Query([Geometry, Entity]),
-  ],
-  (warehouse, store, entities) => {
-    const ids: bigint[] = [];
+export function geometryBuilder(
+  warehouse: Warehouse,
+  store: RenderStore,
+  entities: [Geometry, Entity][]
+) {
+  const ids: bigint[] = [];
 
-    for (const [geometry, { id }] of entities) {
-      ids.push(id);
+  for (const [geometry, { id }] of entities) {
+    ids.push(id);
 
-      let object = store.geometries.get(id);
+    let object = store.geometries.get(id);
 
-      // Create new objects
-      if (!object) {
-        object = new BufferGeometry();
-        store.geometries.set(id, object);
-      }
-
-      // Sync object properties
-      if (geometry.positions.id) {
-        const positions = geometry.positions.read(warehouse);
-        setAttribute(object, "position", positions, 3);
-      }
-
-      if (geometry.normals.id) {
-        const normals = geometry.normals.read(warehouse);
-        setAttribute(object, "normal", normals, 3);
-      }
-
-      if (geometry.uvs.id) {
-        const uvs = geometry.uvs.read(warehouse);
-        setAttribute(object, "uv", uvs, 2);
-      }
-
-      if (geometry.indices.id) {
-        const indices = geometry.indices.read(warehouse);
-        setAttribute(object, "index", indices, 1);
-      }
+    // Create new objects
+    if (!object) {
+      object = new BufferGeometry();
+      store.geometries.set(id, object);
     }
 
-    // Remove objects that no longer exist
-    for (const [id] of store.geometries) {
-      if (!ids.includes(id)) {
-        const object = store.geometries.get(id);
-        object?.dispose();
+    // Sync object properties
+    if (geometry.positions.id) {
+      const positions = geometry.positions.read(warehouse);
+      setAttribute(object, "position", positions, 3);
+    }
 
-        store.geometries.delete(id);
-      }
+    if (geometry.normals.id) {
+      const normals = geometry.normals.read(warehouse);
+      setAttribute(object, "normal", normals, 3);
+    }
+
+    if (geometry.uvs.id) {
+      const uvs = geometry.uvs.read(warehouse);
+      setAttribute(object, "uv", uvs, 2);
+    }
+
+    if (geometry.indices.id) {
+      const indices = geometry.indices.read(warehouse);
+      setAttribute(object, "index", indices, 1);
     }
   }
-);
+
+  // Remove objects that no longer exist
+  for (const [id] of store.geometries) {
+    if (!ids.includes(id)) {
+      const object = store.geometries.get(id);
+      object?.dispose();
+
+      store.geometries.delete(id);
+    }
+  }
+}
+
+geometryBuilder.parameters = [
+  ResourceDescriptor(Warehouse),
+  ResourceDescriptor(RenderStore),
+  QueryDescriptor([Geometry, Entity]),
+];
 
 /**
  * Sets a BufferGeometry attribute to a given array,

@@ -1,4 +1,4 @@
-import { definePlugin } from "thyseus";
+import { run, WorldBuilder } from "thyseus";
 
 import { canvasRenderer } from "./canvasRenderer";
 import { cameraBuilder } from "./scene/cameraBuilder";
@@ -11,13 +11,16 @@ import { sceneBuilder } from "./scene/sceneBuilder";
 /**
  * Registers all render components and systems.
  */
-export const renderPlugin = definePlugin((builder) => {
-  builder
-    .addSystem(canvasRenderer)
-    .addSystem(cameraBuilder.before(canvasRenderer))
-    .addSystem(sceneBuilder.before(canvasRenderer))
-    .addSystem(nodeBuilder.before(sceneBuilder))
-    .addSystem(meshBuilder.before(nodeBuilder))
-    .addSystem(geometryBuilder.before(meshBuilder))
-    .addSystem(materialBuilder.before(meshBuilder));
-});
+export function renderPlugin(builder: WorldBuilder) {
+  builder.addSystems(
+    ...run.chain(
+      materialBuilder,
+      geometryBuilder,
+      meshBuilder,
+      nodeBuilder,
+      sceneBuilder,
+      cameraBuilder,
+      canvasRenderer
+    )
+  );
+}

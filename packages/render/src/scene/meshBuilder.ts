@@ -1,52 +1,52 @@
 import { Geometry, Mesh } from "@lattice-engine/core";
 import { BufferGeometry, Mesh as ThreeMesh } from "three";
-import { defineSystem, Entity } from "thyseus";
+import { Entity, WithDescriptor } from "thyseus";
+import { QueryDescriptor, ResourceDescriptor } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
 /**
  * Syncs IsMesh components with Three.js Mesh objects.
  */
-export const meshBuilder = defineSystem(
-  ({ Res, Query, With }) => [
-    Res(RenderStore),
-    Query([Entity, Mesh], With(Geometry)),
-  ],
-  (store, entities) => {
-    const ids: bigint[] = [];
+export function meshBuilder(store: RenderStore, entities: [Entity, Mesh][]) {
+  const ids: bigint[] = [];
 
-    for (const [{ id }, mesh] of entities) {
-      ids.push(id);
+  for (const [{ id }, mesh] of entities) {
+    ids.push(id);
 
-      let object = store.meshes.get(id);
+    let object = store.meshes.get(id);
 
-      // Create new objects
-      if (!object) {
-        object = new ThreeMesh();
-        store.meshes.set(id, object);
-      }
-
-      // Sync object properties
-      const materialObject = store.materials.get(mesh.material);
-      object.material = materialObject ?? store.defaultMaterial;
-
-      const geometryObject = store.geometries.get(id);
-      object.geometry = geometryObject ?? new BufferGeometry();
-
-      // If this entity is a node, add the mesh to the node object
-      const nodeObject = store.nodes.get(id);
-      if (nodeObject) nodeObject.add(object);
-      else object.removeFromParent();
+    // Create new objects
+    if (!object) {
+      object = new ThreeMesh();
+      store.meshes.set(id, object);
     }
 
-    // Remove objects that no longer exist
-    for (const [id] of store.meshes) {
-      if (!ids.includes(id)) {
-        const object = store.meshes.get(id);
-        object?.removeFromParent();
+    // Sync object properties
+    const materialObject = store.materials.get(mesh.material);
+    object.material = materialObject ?? store.defaultMaterial;
 
-        store.meshes.delete(id);
-      }
+    const geometryObject = store.geometries.get(id);
+    object.geometry = geometryObject ?? new BufferGeometry();
+
+    // If this entity is a node, add the mesh to the node object
+    const nodeObject = store.nodes.get(id);
+    if (nodeObject) nodeObject.add(object);
+    else object.removeFromParent();
+  }
+
+  // Remove objects that no longer exist
+  for (const [id] of store.meshes) {
+    if (!ids.includes(id)) {
+      const object = store.meshes.get(id);
+      object?.removeFromParent();
+
+      store.meshes.delete(id);
     }
   }
-);
+}
+
+meshBuilder.parameters = [
+  ResourceDescriptor(RenderStore),
+  QueryDescriptor([Entity, Mesh], WithDescriptor(Geometry)),
+];

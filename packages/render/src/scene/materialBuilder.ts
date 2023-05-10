@@ -23,7 +23,12 @@ import {
   sRGBEncoding,
   Texture as ThreeTexture,
 } from "three";
-import { defineSystem, Entity } from "thyseus";
+import { Entity } from "thyseus";
+import {
+  QueryDescriptor,
+  ResourceDescriptor,
+  SystemResourceDescriptor,
+} from "thyseus";
 
 import { WEBGL_CONSTANTS } from "../constants";
 import { RenderStore } from "../RenderStore";
@@ -40,125 +45,129 @@ class ImageStore {
 /**
  * Syncs Material components with Three.js Material objects.
  */
-export const materialBuilder = defineSystem(
-  ({ Res, SystemRes, Query }) => [
-    Res(Warehouse),
-    Res(RenderStore),
-    SystemRes(ImageStore),
-    Query([Entity, Material]),
-  ],
-  (warehouse, store, imageStore, entities) => {
-    const ids: bigint[] = [];
+export function materialBuilder(
+  warehouse: Warehouse,
+  store: RenderStore,
+  imageStore: ImageStore,
+  entities: [Entity, Material][]
+) {
+  const ids: bigint[] = [];
 
-    for (const [{ id }, material] of entities) {
-      ids.push(id);
+  for (const [{ id }, material] of entities) {
+    ids.push(id);
 
-      let object = store.materials.get(id);
+    let object = store.materials.get(id);
 
-      // Create new objects
-      if (!object) {
-        object = new MeshStandardMaterial();
-        store.materials.set(id, object);
-      }
-
-      // Sync object properties
-      object.side = material.doubleSided ? DoubleSide : FrontSide;
-      object.opacity = material.baseColor[3] ?? 1;
-
-      switch (material.alphaMode) {
-        case MaterialAlphaMode.OPAQUE: {
-          object.transparent = false;
-          object.depthWrite = true;
-          object.alphaTest = 0;
-          break;
-        }
-
-        case MaterialAlphaMode.MASK: {
-          object.transparent = false;
-          object.depthWrite = true;
-          object.alphaTest = material.alphaCutOff;
-          break;
-        }
-
-        case MaterialAlphaMode.BLEND: {
-          object.transparent = true;
-          object.depthWrite = false;
-          object.alphaTest = 0;
-          break;
-        }
-      }
-
-      object.color.fromArray(material.baseColor);
-      object.emissive.fromArray(material.emissiveFactor);
-      object.normalScale.set(material.normalScale, material.normalScale);
-      object.aoMapIntensity = material.occlusionStrength;
-      object.metalness = material.metalness;
-      object.roughness = material.roughness;
-
-      object.map = loadTexture(
-        object.map,
-        material.baseColorTexture,
-        material.baseColorTextureInfo,
-        imageStore,
-        warehouse
-      );
-      if (object.map) object.map.encoding = sRGBEncoding;
-
-      object.normalMap = loadTexture(
-        object.normalMap,
-        material.normalTexture,
-        material.normalTextureInfo,
-        imageStore,
-        warehouse
-      );
-
-      object.aoMap = loadTexture(
-        object.aoMap,
-        material.occlusionTexture,
-        material.occlusionTextureInfo,
-        imageStore,
-        warehouse
-      );
-
-      object.emissiveMap = loadTexture(
-        object.emissiveMap,
-        material.emissiveTexture,
-        material.emissiveTextureInfo,
-        imageStore,
-        warehouse
-      );
-      if (object.emissiveMap) object.emissiveMap.encoding = sRGBEncoding;
-
-      const mrTexture = loadTexture(
-        object.metalnessMap,
-        material.metallicRoughnessTexture,
-        material.metallicRoughnessTextureInfo,
-        imageStore,
-        warehouse
-      );
-      object.metalnessMap = mrTexture;
-      object.roughnessMap = mrTexture;
-
-      object.needsUpdate = true;
+    // Create new objects
+    if (!object) {
+      object = new MeshStandardMaterial();
+      store.materials.set(id, object);
     }
 
-    // Remove objects that no longer exist
-    for (const [id] of store.materials) {
-      if (!ids.includes(id)) {
-        const object = store.materials.get(id);
-        object?.dispose();
-        object?.map?.dispose();
-        object?.normalMap?.dispose();
-        object?.aoMap?.dispose();
-        object?.emissiveMap?.dispose();
-        object?.metalnessMap?.dispose();
-        object?.roughnessMap?.dispose();
+    // Sync object properties
+    object.side = material.doubleSided ? DoubleSide : FrontSide;
+    object.opacity = material.baseColor[3] ?? 1;
 
-        store.materials.delete(id);
+    switch (material.alphaMode) {
+      case MaterialAlphaMode.OPAQUE: {
+        object.transparent = false;
+        object.depthWrite = true;
+        object.alphaTest = 0;
+        break;
       }
+
+      case MaterialAlphaMode.MASK: {
+        object.transparent = false;
+        object.depthWrite = true;
+        object.alphaTest = material.alphaCutOff;
+        break;
+      }
+
+      case MaterialAlphaMode.BLEND: {
+        object.transparent = true;
+        object.depthWrite = false;
+        object.alphaTest = 0;
+        break;
+      }
+    }
+
+    object.color.fromArray(material.baseColor);
+    object.emissive.fromArray(material.emissiveFactor);
+    object.normalScale.set(material.normalScale, material.normalScale);
+    object.aoMapIntensity = material.occlusionStrength;
+    object.metalness = material.metalness;
+    object.roughness = material.roughness;
+
+    object.map = loadTexture(
+      object.map,
+      material.baseColorTexture,
+      material.baseColorTextureInfo,
+      imageStore,
+      warehouse
+    );
+    if (object.map) object.map.encoding = sRGBEncoding;
+
+    object.normalMap = loadTexture(
+      object.normalMap,
+      material.normalTexture,
+      material.normalTextureInfo,
+      imageStore,
+      warehouse
+    );
+
+    object.aoMap = loadTexture(
+      object.aoMap,
+      material.occlusionTexture,
+      material.occlusionTextureInfo,
+      imageStore,
+      warehouse
+    );
+
+    object.emissiveMap = loadTexture(
+      object.emissiveMap,
+      material.emissiveTexture,
+      material.emissiveTextureInfo,
+      imageStore,
+      warehouse
+    );
+    if (object.emissiveMap) object.emissiveMap.encoding = sRGBEncoding;
+
+    const mrTexture = loadTexture(
+      object.metalnessMap,
+      material.metallicRoughnessTexture,
+      material.metallicRoughnessTextureInfo,
+      imageStore,
+      warehouse
+    );
+    object.metalnessMap = mrTexture;
+    object.roughnessMap = mrTexture;
+
+    object.needsUpdate = true;
+  }
+
+  // Remove objects that no longer exist
+  for (const [id] of store.materials) {
+    if (!ids.includes(id)) {
+      const object = store.materials.get(id);
+      object?.dispose();
+      object?.map?.dispose();
+      object?.normalMap?.dispose();
+      object?.aoMap?.dispose();
+      object?.emissiveMap?.dispose();
+      object?.metalnessMap?.dispose();
+      object?.roughnessMap?.dispose();
+
+      store.materials.delete(id);
     }
   }
-);
+}
+
+materialBuilder.parameters = [
+  ResourceDescriptor(Warehouse),
+  ResourceDescriptor(RenderStore),
+  SystemResourceDescriptor(ImageStore),
+  QueryDescriptor([Entity, Material]),
+];
 
 function loadTexture(
   object: ThreeTexture | null,

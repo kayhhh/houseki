@@ -1,4 +1,4 @@
-import { definePlugin } from "thyseus";
+import { WorldBuilder } from "thyseus";
 
 import { geometryCleanup, materialCleanup } from "./scene/cleanup";
 import {
@@ -16,7 +16,7 @@ import { Resource } from "./warehouse/components";
 /**
  * Registers all core components and systems.
  */
-export const corePlugin = definePlugin((builder) => {
+export function corePlugin(builder: WorldBuilder) {
   builder
     .registerComponent(Resource)
     .registerComponent(Position)
@@ -27,6 +27,5 @@ export const corePlugin = definePlugin((builder) => {
     .registerComponent(IsScene)
     .registerComponent(Mesh)
     .registerComponent(Geometry)
-    .addSystem(geometryCleanup)
-    .addSystem(materialCleanup);
-});
+    .addSystems(geometryCleanup, materialCleanup);
+}

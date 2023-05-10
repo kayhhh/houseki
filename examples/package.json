@@ -14,7 +14,7 @@
     "@lattice-engine/gltf": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "three": "^0.149.0",
-    "thyseus": "^0.11.0"
+    "thyseus": "0.12.0-beta.3"
   },
   "devDependencies": {
     "@types/three": "^0.149.0",

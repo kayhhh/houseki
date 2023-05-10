@@ -1,4 +1,10 @@
-import { defineSystem, Entity } from "thyseus";
+import { Commands, Entity } from "thyseus";
+import {
+  CommandsDescriptor,
+  QueryDescriptor,
+  ResourceDescriptor,
+  SystemResourceDescriptor,
+} from "thyseus";
 
 import { Warehouse } from "../warehouse/Warehouse";
 import { Geometry, Material } from "./components";
@@ -15,92 +21,100 @@ class EntityTracker {
 /**
  * Cleans up gemetry resources on removal.
  */
-export const geometryCleanup = defineSystem(
-  ({ Res, SystemRes, Commands, Query }) => [
-    Commands(),
-    Res(Warehouse),
-    SystemRes(EntityTracker),
-    Query([Entity, Geometry]),
-  ],
-  (commands, warehouse, tracker, entities) => {
-    const ids: bigint[] = [];
+export function geometryCleanup(
+  commands: Commands,
+  warehouse: Warehouse,
+  tracker: EntityTracker,
+  entities: [Entity, Geometry][]
+) {
+  const ids: bigint[] = [];
 
-    for (const [{ id }, geometry] of entities) {
-      ids.push(id);
-      tracker.ids.add(id);
+  for (const [{ id }, geometry] of entities) {
+    ids.push(id);
+    tracker.ids.add(id);
 
-      const resources = tracker.resources.get(id) ?? new Set();
+    const resources = tracker.resources.get(id) ?? new Set();
 
-      resources.add(geometry.positions.id);
-      resources.add(geometry.normals.id);
-      resources.add(geometry.uvs.id);
-      resources.add(geometry.indices.id);
+    resources.add(geometry.positions.id);
+    resources.add(geometry.normals.id);
+    resources.add(geometry.uvs.id);
+    resources.add(geometry.indices.id);
 
-      tracker.resources.set(id, resources);
-    }
+    tracker.resources.set(id, resources);
+  }
 
-    // Clean up removed entities
-    for (const id of tracker.ids) {
-      if (!ids.includes(id)) {
-        const resources = tracker.resources.get(id);
+  // Clean up removed entities
+  for (const id of tracker.ids) {
+    if (!ids.includes(id)) {
+      const resources = tracker.resources.get(id);
 
-        if (resources) {
-          for (const resource of resources) {
-            warehouse.delete(resource);
-          }
-
-          tracker.resources.delete(id);
+      if (resources) {
+        for (const resource of resources) {
+          warehouse.delete(resource);
         }
 
-        commands.despawn(id);
+        tracker.resources.delete(id);
       }
+
+      commands.despawn(id);
     }
   }
-);
+}
+
+geometryCleanup.parameters = [
+  CommandsDescriptor(),
+  ResourceDescriptor(Warehouse),
+  SystemResourceDescriptor(EntityTracker),
+  QueryDescriptor([Entity, Geometry]),
+];
 
 /**
  * Cleans up material resources on removal.
  */
-export const materialCleanup = defineSystem(
-  ({ Res, SystemRes, Commands, Query }) => [
-    Commands(),
-    Res(Warehouse),
-    SystemRes(EntityTracker),
-    Query([Entity, Material]),
-  ],
-  (commands, warehouse, tracker, entities) => {
-    const ids: bigint[] = [];
+export function materialCleanup(
+  commands: Commands,
+  warehouse: Warehouse,
+  tracker: EntityTracker,
+  entities: [Entity, Material][]
+) {
+  const ids: bigint[] = [];
 
-    for (const [{ id }, material] of entities) {
-      ids.push(id);
-      tracker.ids.add(id);
+  for (const [{ id }, material] of entities) {
+    ids.push(id);
+    tracker.ids.add(id);
 
-      const resources = tracker.resources.get(id) ?? new Set();
+    const resources = tracker.resources.get(id) ?? new Set();
 
-      resources.add(material.baseColorTexture.image.id);
-      resources.add(material.metallicRoughnessTexture.image.id);
-      resources.add(material.normalTexture.image.id);
-      resources.add(material.occlusionTexture.image.id);
-      resources.add(material.emissiveTexture.image.id);
+    resources.add(material.baseColorTexture.image.id);
+    resources.add(material.metallicRoughnessTexture.image.id);
+    resources.add(material.normalTexture.image.id);
+    resources.add(material.occlusionTexture.image.id);
+    resources.add(material.emissiveTexture.image.id);
 
-      tracker.resources.set(id, resources);
-    }
+    tracker.resources.set(id, resources);
+  }
 
-    // Clean up removed entities
-    for (const id of tracker.ids) {
-      if (!ids.includes(id)) {
-        const resources = tracker.resources.get(id);
+  // Clean up removed entities
+  for (const id of tracker.ids) {
+    if (!ids.includes(id)) {
+      const resources = tracker.resources.get(id);
 
-        if (resources) {
-          for (const resource of resources) {
-            warehouse.delete(resource);
-          }
-
-          tracker.resources.delete(id);
+      if (resources) {
+        for (const resource of resources) {
+          warehouse.delete(resource);
         }
 
-        commands.despawn(id);
+        tracker.resources.delete(id);
       }
+
+      commands.despawn(id);
     }
   }
-);
+}
+
+materialCleanup.parameters = [
+  CommandsDescriptor(),
+  ResourceDescriptor(Warehouse),
+  SystemResourceDescriptor(EntityTracker),
+  QueryDescriptor([Entity, Material]),
+];
