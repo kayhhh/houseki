@@ -29,7 +29,6 @@ export class RenderStore {
     this.renderer.outputEncoding = sRGBEncoding;
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = PCFSoftShadowMap;
-    this.renderer.setPixelRatio(window.devicePixelRatio);
   }
 
   readonly defaultMaterial = new MeshStandardMaterial();

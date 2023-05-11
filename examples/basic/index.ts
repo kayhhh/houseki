@@ -20,6 +20,7 @@ const canvas = document.createElement("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 canvas.style.touchAction = "none";
+canvas.style.position = "absolute";
 document.body.appendChild(canvas);
 
 window.addEventListener("resize", () => {
