@@ -75,24 +75,22 @@ export function orbitControls(
   localStore.mockElement.clientWidth = store.renderer.domElement.clientWidth;
   localStore.mockElement.clientHeight = store.renderer.domElement.clientHeight;
 
+  // Create new objects
   for (const { id } of entities) {
     ids.push(id);
 
-    let object = localStore.map.get(id);
+    if (localStore.map.has(id)) continue;
 
-    // Create new objects
-    if (!object) {
-      const cameraObject = store.perspectiveCameras.get(id);
-      if (!cameraObject) continue;
+    const cameraObject = store.perspectiveCameras.get(id);
+    if (!cameraObject) continue;
 
-      object = new ThreeOrbitControls(
-        cameraObject,
-        localStore.mockElement as any
-      );
-      object.enableDamping = true;
+    const object = new ThreeOrbitControls(
+      cameraObject,
+      localStore.mockElement as any
+    );
+    object.enableDamping = true;
 
-      localStore.map.set(id, object);
-    }
+    localStore.map.set(id, object);
   }
 
   // Send events to mock element

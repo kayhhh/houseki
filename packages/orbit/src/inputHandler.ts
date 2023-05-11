@@ -130,7 +130,6 @@ export function inputHandler(
   }
 
   function onKeyDown(event: KeyboardEvent) {
-    console.log("😠", event);
     localStore.keyDownEvents.push(keyboardEventToECS(event));
   }
 
