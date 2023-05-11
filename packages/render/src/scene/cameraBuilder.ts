@@ -1,6 +1,6 @@
-import { PerspectiveCamera } from "@lattice-engine/core";
+import { PerspectiveCamera, Position } from "@lattice-engine/core";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
-import { Entity, Query, Res } from "thyseus";
+import { Entity, Query, Res, With, WithDescriptor } from "thyseus";
 import { QueryDescriptor, ResourceDescriptor } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
@@ -10,7 +10,8 @@ import { RenderStore } from "../RenderStore";
  */
 export function cameraBuilder(
   store: Res<RenderStore>,
-  cameras: Query<[PerspectiveCamera, Entity]>
+  cameras: Query<[PerspectiveCamera, Entity]>,
+  withPosition: Query<[Entity, Position], With<PerspectiveCamera>>
 ) {
   const ids: bigint[] = [];
 
@@ -33,6 +34,14 @@ export function cameraBuilder(
     object.fov = camera.fov;
     object.near = camera.near;
     object.far = camera.far;
+
+    object.position.set(0, 0, 0);
+  }
+
+  // Sync object positions
+  for (const [{ id }, position] of withPosition) {
+    const object = store.perspectiveCameras.get(id);
+    if (object) object.position.set(position.x, position.y, position.z);
   }
 
   // Remove objects that no longer exist
@@ -44,4 +53,5 @@ export function cameraBuilder(
 cameraBuilder.parameters = [
   ResourceDescriptor(RenderStore),
   QueryDescriptor([PerspectiveCamera, Entity]),
+  QueryDescriptor([Entity, Position], WithDescriptor(PerspectiveCamera)),
 ];

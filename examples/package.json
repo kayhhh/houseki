@@ -12,6 +12,7 @@
   "dependencies": {
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/gltf": "workspace:^",
+    "@lattice-engine/orbit": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "three": "^0.149.0",
     "thyseus": "0.12.0-beta.3"

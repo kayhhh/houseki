@@ -52,6 +52,9 @@ importers:
       '@lattice-engine/gltf':
         specifier: workspace:^
         version: link:../packages/gltf
+      '@lattice-engine/orbit':
+        specifier: workspace:^
+        version: link:../packages/orbit
       '@lattice-engine/render':
         specifier: workspace:^
         version: link:../packages/render
@@ -103,6 +106,31 @@ importers:
         specifier: 0.12.0-beta.3
         version: 0.12.0-beta.3
     devDependencies:
+      tsup:
+        specifier: ^6.7.0
+        version: 6.7.0(typescript@5.0.4)
+      typescript:
+        specifier: ~5.0.4
+        version: 5.0.4
+
+  packages/orbit:
+    dependencies:
+      '@lattice-engine/core':
+        specifier: workspace:^
+        version: link:../core
+      '@lattice-engine/render':
+        specifier: workspace:^
+        version: link:../render
+      three:
+        specifier: ^0.149.0
+        version: 0.149.0
+      thyseus:
+        specifier: 0.12.0-beta.3
+        version: 0.12.0-beta.3
+    devDependencies:
+      '@types/three':
+        specifier: ^0.149.0
+        version: 0.149.0
       tsup:
         specifier: ^6.7.0
         version: 6.7.0(typescript@5.0.4)

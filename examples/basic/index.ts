@@ -9,6 +9,7 @@ import {
   Position,
   Warehouse,
 } from "@lattice-engine/core";
+import { IsOrbitControls, orbitPlugin } from "@lattice-engine/orbit";
 import { renderPlugin, RenderStore } from "@lattice-engine/render";
 import { BoxGeometry, BufferAttribute } from "three";
 import { Commands, CoreSchedule, Mut, MutDescriptor, Res } from "thyseus";
@@ -18,6 +19,7 @@ import { CommandsDescriptor, ResourceDescriptor } from "thyseus";
 const canvas = document.createElement("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+canvas.style.touchAction = "none";
 document.body.appendChild(canvas);
 
 window.addEventListener("resize", () => {
@@ -44,7 +46,15 @@ function initScene(
   cameraComponent.near = 0.1;
   cameraComponent.far = 1000;
 
-  const camera = commands.spawn().add(cameraComponent);
+  const cameraPosition = new Position();
+  cameraPosition.z = 5;
+
+  const camera = commands
+    .spawn()
+    .add(cameraComponent)
+    .add(cameraPosition)
+    .addType(IsOrbitControls);
+
   store.activeCamera = camera.id;
 
   // Create a cube, using Three.js to generate the geometry
@@ -66,17 +76,7 @@ function initScene(
   const parent = new Parent();
   parent.id = scene.id;
 
-  const position = new Position();
-  position.y = -1;
-  position.z = -5;
-
-  commands
-    .spawn()
-    .addType(IsNode)
-    .add(parent)
-    .add(position)
-    .addType(Mesh)
-    .add(geometry);
+  commands.spawn().addType(IsNode).add(parent).addType(Mesh).add(geometry);
 }
 
 initScene.parameters = [
@@ -92,6 +92,7 @@ const builder = Engine.createWorld().addSystemsToSchedule(
 );
 
 renderPlugin(builder);
+orbitPlugin(builder);
 
 const world = await builder.build();
 
