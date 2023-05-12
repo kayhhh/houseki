@@ -12,4 +12,16 @@ export default defineConfig({
     },
     target: "esnext",
   },
+  plugins: [
+    {
+      configureServer: (server) => {
+        server.middlewares.use((_req, res, next) => {
+          res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+          res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+          next();
+        });
+      },
+      name: "configure-response-headers",
+    },
+  ],
 });
