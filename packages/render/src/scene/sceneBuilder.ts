@@ -8,8 +8,15 @@ import {
   sRGBEncoding,
   Texture,
 } from "three";
-import { Entity, Query, Res, With, WithDescriptor } from "thyseus";
-import { QueryDescriptor, ResourceDescriptor } from "thyseus";
+import {
+  Entity,
+  Query,
+  QueryDescriptor,
+  Res,
+  ResourceDescriptor,
+  With,
+  WithDescriptor,
+} from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
@@ -27,8 +34,12 @@ export function sceneBuilder(
     // Create new objects
     if (!object) {
       object = new ThreeScene();
+
+      const pointLight = new PointLight(0xffffff, 0.5);
+      pointLight.castShadow = true;
+
       object.add(new AmbientLight(0xffffff, 0.5));
-      object.add(new PointLight(0xffffff, 0.5));
+      object.add(pointLight);
 
       loadSkybox(object, "/Skybox.jpg");
 

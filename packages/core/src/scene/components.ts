@@ -1,4 +1,4 @@
-import { struct } from "thyseus";
+import { Entity, EntityCommands, initStruct, struct } from "thyseus";
 
 import { Resource } from "../warehouse/components";
 
@@ -7,6 +7,14 @@ export class Position {
   @struct.f32 declare x: number;
   @struct.f32 declare y: number;
   @struct.f32 declare z: number;
+
+  constructor(x = 0, y = 0, z = 0) {
+    initStruct(this);
+
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
 }
 
 @struct
@@ -15,6 +23,15 @@ export class Rotation {
   @struct.f32 declare y: number;
   @struct.f32 declare z: number;
   @struct.f32 declare w: number;
+
+  constructor(x = 0, y = 0, z = 0, w = 1) {
+    initStruct(this);
+
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.w = w;
+  }
 }
 
 @struct
@@ -22,11 +39,25 @@ export class Scale {
   @struct.f32 declare x: number;
   @struct.f32 declare y: number;
   @struct.f32 declare z: number;
+
+  constructor(x = 1, y = 1, z = 1) {
+    initStruct(this);
+
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
 }
 
 @struct
 export class Parent {
   @struct.u64 declare id: bigint;
+
+  constructor(entity?: Entity | EntityCommands) {
+    initStruct(this);
+
+    if (entity) this.id = entity.id;
+  }
 }
 
 @struct
@@ -38,6 +69,12 @@ export class IsNode {}
 @struct
 export class Mesh {
   @struct.u64 declare material: bigint; // Entity ID
+
+  constructor(material?: Entity | EntityCommands) {
+    initStruct(this);
+
+    if (material) this.material = material.id;
+  }
 }
 
 @struct
@@ -94,6 +131,12 @@ export class Material {
   @struct.substruct(Texture) declare metallicRoughnessTexture: Texture;
   @struct.substruct(TextureInfo)
   declare metallicRoughnessTextureInfo: TextureInfo;
+
+  constructor(color = [1, 1, 1, 1]) {
+    initStruct(this);
+
+    this.baseColor = new Float32Array(color);
+  }
 }
 
 @struct
@@ -101,4 +144,12 @@ export class PerspectiveCamera {
   @struct.f32 declare fov: number;
   @struct.f32 declare near: number;
   @struct.f32 declare far: number;
+
+  constructor() {
+    initStruct(this);
+
+    this.fov = 75;
+    this.near = 0.1;
+    this.far = 1000;
+  }
 }

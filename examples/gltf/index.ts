@@ -22,6 +22,8 @@ import {
   ResourceDescriptor,
 } from "thyseus";
 
+import { createCanvas } from "../utils/createCanvas";
+
 const MODELS = {
   cube: "/Cube/Cube.gltf",
   damaged: "/DamagedHelmet/DamagedHelmet.glb",
@@ -77,22 +79,10 @@ loadGltf.parameters = [
   QueryDescriptor(GltfUri),
 ];
 
-// Create canvas
-const canvas = document.createElement("canvas");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-canvas.style.touchAction = "none";
-canvas.style.position = "absolute";
-document.body.appendChild(canvas);
-
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
 // Initialize the scene
 function initScene(commands: Commands, store: Res<Mut<RenderStore>>) {
   // Set canvas
+  const canvas = createCanvas();
   store.setCanvas(canvas);
 
   // Create scene
@@ -101,13 +91,7 @@ function initScene(commands: Commands, store: Res<Mut<RenderStore>>) {
 
   // Create camera
   const cameraComponent = new PerspectiveCamera();
-  cameraComponent.fov = 75;
-  cameraComponent.near = 0.1;
-  cameraComponent.far = 1000;
-
-  const cameraPosition = new Position();
-  cameraPosition.z = 5;
-
+  const cameraPosition = new Position(0, 0, 5);
   const camera = commands
     .spawn()
     .add(cameraComponent)
@@ -116,11 +100,16 @@ function initScene(commands: Commands, store: Res<Mut<RenderStore>>) {
 
   store.activeCamera = camera.id;
 
-  // Add node with glTF component
-  const parent = new Parent();
-  parent.id = scene.id;
+  // Add node to scene with glTF component
+  const parent = new Parent(scene);
 
-  commands.spawn().addType(IsNode).add(parent).addType(GltfUri);
+  commands
+    .spawn()
+    // Add to scene
+    .addType(IsNode)
+    .add(parent)
+    // Add glTF
+    .addType(GltfUri);
 }
 
 initScene.parameters = [

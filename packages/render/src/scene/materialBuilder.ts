@@ -23,10 +23,13 @@ import {
   sRGBEncoding,
   Texture as ThreeTexture,
 } from "three";
-import { Entity, Query, Res, SystemRes } from "thyseus";
 import {
+  Entity,
+  Query,
   QueryDescriptor,
+  Res,
   ResourceDescriptor,
+  SystemRes,
   SystemResourceDescriptor,
 } from "thyseus";
 

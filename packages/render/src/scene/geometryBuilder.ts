@@ -1,7 +1,6 @@
 import { Geometry, Warehouse } from "@lattice-engine/core";
 import { BufferAttribute, BufferGeometry } from "three";
-import { Entity, Query, Res } from "thyseus";
-import { QueryDescriptor, ResourceDescriptor } from "thyseus";
+import { Entity, Query, QueryDescriptor, Res , ResourceDescriptor } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 

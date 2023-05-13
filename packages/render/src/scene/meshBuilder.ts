@@ -1,7 +1,14 @@
 import { Geometry, Mesh } from "@lattice-engine/core";
 import { BufferGeometry, Mesh as ThreeMesh } from "three";
-import { Entity, Query, Res, With, WithDescriptor } from "thyseus";
-import { QueryDescriptor, ResourceDescriptor } from "thyseus";
+import {
+  Entity,
+  Query,
+  QueryDescriptor,
+  Res,
+  ResourceDescriptor,
+  With,
+  WithDescriptor,
+} from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
@@ -22,11 +29,15 @@ export function meshBuilder(
     // Create new objects
     if (!object) {
       object = new ThreeMesh();
+      object.castShadow = true;
+      object.receiveShadow = true;
+
       store.meshes.set(id, object);
     }
 
     // Sync object properties
-    const materialObject = store.materials.get(mesh.material);
+    const materialObject =
+      store.materials.get(mesh.material) ?? store.materials.get(id);
     object.material = materialObject ?? store.defaultMaterial;
 
     const geometryObject = store.geometries.get(id);

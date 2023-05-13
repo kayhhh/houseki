@@ -1,9 +1,8 @@
 import { Warehouse } from "@lattice-engine/core";
-import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
-import {
-  CommandsDescriptor,
-  QueryDescriptor,
-  ResourceDescriptor,
+import { Commands,   CommandsDescriptor,
+Entity, Query,   QueryDescriptor,
+Res,   ResourceDescriptor,
+SystemRes ,
   SystemResourceDescriptor,
 } from "thyseus";
 

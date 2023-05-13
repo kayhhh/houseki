@@ -1,0 +1,32 @@
+{
+  "name": "@lattice-engine/physics",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lattice-engine/lattice",
+    "directory": "packages/physics"
+  },
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --onSuccess \"tsc --emitDeclarationOnly\"",
+    "dev": "pnpm build --watch"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d": "^0.11.2",
+    "@lattice-engine/core": "workspace:^",
+    "thyseus": "0.12.0-beta.3"
+  },
+  "devDependencies": {
+    "tsup": "^6.7.0",
+    "typescript": "~5.0.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -3,7 +3,9 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jsonc/recommended-with-jsonc",
-    "turbo"
+    "turbo",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": [
@@ -26,5 +28,13 @@
     "simple-import-sort/imports": "warn",
     "sort-keys-fix/sort-keys-fix": ["warn", "asc", { "natural": true }],
     "unused-imports/no-unused-imports": "error"
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": true
+    }
   }
 }

@@ -9,6 +9,7 @@ export class Engine {
   readonly world: World;
 
   #animationFrame = 0;
+  #fixedInterval = 0;
 
   /**
    * Creates a new WorldBuilder, with all core components and systems registered.
@@ -27,26 +28,38 @@ export class Engine {
   }
 
   /**
-   * Starts the game loop.
+   * Starts the engine.
    */
   async start() {
     this.stop();
     await this.world.runSchedule(CoreSchedule.Startup);
-    await this.update();
+
+    this.#startMainLoop();
+    this.#startFixedLoop();
   }
 
-  /**
-   * Updates the world.
-   */
-  async update() {
+  #startMainLoop() {
+    this.#animationFrame = requestAnimationFrame(this.#mainLoop.bind(this));
+  }
+
+  async #mainLoop() {
     await this.world.runSchedule(CoreSchedule.Main);
-    this.#animationFrame = requestAnimationFrame(this.update.bind(this));
+    this.#animationFrame = requestAnimationFrame(this.#mainLoop.bind(this));
+  }
+
+  #startFixedLoop() {
+    this.#fixedInterval = setInterval(this.#fixedLoop.bind(this), 1000 / 60);
+  }
+
+  async #fixedLoop() {
+    await this.world.runSchedule(CoreSchedule.FixedUpdate);
   }
 
   /**
-   * Stops the game loop.
+   * Stops the engine.
    */
   stop() {
     cancelAnimationFrame(this.#animationFrame);
+    clearInterval(this.#fixedInterval);
   }
 }
