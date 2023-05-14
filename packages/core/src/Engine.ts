@@ -32,7 +32,8 @@ export class Engine {
     await this.world.runSchedule(CoreSchedule.Startup);
 
     this.#startMainLoop();
-    this.#startFixedLoop();
+
+    if (this.world.schedules[CoreSchedule.FixedUpdate]) this.#startFixedLoop();
   }
 
   #startMainLoop() {
