@@ -12,7 +12,7 @@ export class Engine {
   #fixedInterval = 0;
 
   /**
-   * Creates a new WorldBuilder, with all core components and systems registered.
+   * Creates a new WorldBuilder, with the core plugin already applied.
    */
   static createWorld() {
     const world = World.new();
@@ -20,9 +20,6 @@ export class Engine {
     return world;
   }
 
-  /**
-   * Should not be called directly. Use `Engine.create` instead.
-   */
   constructor(world: World) {
     this.world = world;
   }
