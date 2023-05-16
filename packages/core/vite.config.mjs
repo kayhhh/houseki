@@ -11,6 +11,9 @@ export default defineConfig({
       name: "core",
     },
     minify: false,
+    rollupOptions: {
+      external: ["thyseus"],
+    },
     target: "esnext",
   },
   plugins: [dts()],
