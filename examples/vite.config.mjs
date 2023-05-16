@@ -4,6 +4,7 @@ import wasm from "vite-plugin-wasm";
 
 export default defineConfig({
   build: {
+    minify: false,
     rollupOptions: {
       input: {
         basic: resolve("basic/index.html"),
