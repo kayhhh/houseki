@@ -21,7 +21,6 @@
   "devDependencies": {
     "@types/three": "^0.149.0",
     "typescript": "~5.0.4",
-    "vite": "^4.3.4",
-    "vite-plugin-wasm": "^3.2.2"
+    "vite": "^4.3.4"
   }
 }
