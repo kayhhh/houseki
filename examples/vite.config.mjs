@@ -1,9 +1,9 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
-import wasm from "vite-plugin-wasm";
 
 export default defineConfig({
   build: {
+    minify: false,
     rollupOptions: {
       input: {
         basic: resolve("basic/index.html"),
@@ -15,9 +15,6 @@ export default defineConfig({
     target: "esnext",
   },
   plugins: [
-    // WASM required for physics
-    wasm(),
-
     // Cross Origin Isolation required for multi-threading
     {
       configureServer: (server) => {

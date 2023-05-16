@@ -6,7 +6,15 @@ import {
   Scale,
 } from "@lattice-engine/core";
 import { Object3D } from "three";
-import { Entity, Query, QueryDescriptor, Res, ResourceDescriptor,With, WithDescriptor  } from "thyseus";
+import {
+  Entity,
+  Query,
+  QueryDescriptor,
+  Res,
+  ResourceDescriptor,
+  With,
+  WithDescriptor,
+} from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 

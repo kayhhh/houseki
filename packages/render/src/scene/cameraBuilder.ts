@@ -1,6 +1,14 @@
 import { PerspectiveCamera, Position } from "@lattice-engine/core";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
-import { Entity, Query, QueryDescriptor, Res, ResourceDescriptor,With, WithDescriptor  } from "thyseus";
+import {
+  Entity,
+  Query,
+  QueryDescriptor,
+  Res,
+  ResourceDescriptor,
+  With,
+  WithDescriptor,
+} from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 

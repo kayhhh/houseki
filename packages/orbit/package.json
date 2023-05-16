@@ -14,7 +14,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts --onSuccess \"tsc --emitDeclarationOnly\"",
+    "build": "vite build",
     "dev": "pnpm build --watch"
   },
   "dependencies": {
@@ -25,8 +25,9 @@
   },
   "devDependencies": {
     "@types/three": "^0.149.0",
-    "tsup": "^6.7.0",
-    "typescript": "~5.0.4"
+    "typescript": "~5.0.4",
+    "vite": "^4.3.4",
+    "vite-plugin-dts": "^2.3.0"
   },
   "publishConfig": {
     "access": "public"
