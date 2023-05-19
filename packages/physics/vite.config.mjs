@@ -5,6 +5,7 @@ import wasm from "vite-plugin-wasm";
 
 export default defineConfig({
   build: {
+    emptyOutDir: false,
     lib: {
       entry: resolve("src/index.ts"),
       fileName: "index",
