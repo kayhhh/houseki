@@ -1,4 +1,4 @@
-import { IsScene } from "@lattice-engine/core";
+import { IsScene } from "@lattice-engine/scene";
 import {
   AmbientLight,
   CanvasTexture,

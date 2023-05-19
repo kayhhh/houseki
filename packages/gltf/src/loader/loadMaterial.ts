@@ -4,14 +4,14 @@ import {
   TextureInfo as GltfTextureInfo,
 } from "@gltf-transform/core";
 import { Transform } from "@gltf-transform/extensions";
+import { Warehouse } from "@lattice-engine/core";
 import {
   ImageMimeType,
   Material,
   MaterialAlphaMode,
   Texture,
   TextureInfo,
-  Warehouse,
-} from "@lattice-engine/core";
+} from "@lattice-engine/scene";
 import { Commands } from "thyseus";
 
 import { LoadingContext } from "./context";

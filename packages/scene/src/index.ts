@@ -1,3 +1,3 @@
-export * from "./cleanup";
 export * from "./components";
+export * from "./plugin";
 export * from "./types";

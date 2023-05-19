@@ -1,11 +1,6 @@
 import { Mesh as GltfMesh } from "@gltf-transform/core";
-import {
-  Geometry,
-  IsNode,
-  Mesh,
-  Parent,
-  Warehouse,
-} from "@lattice-engine/core";
+import { Warehouse } from "@lattice-engine/core";
+import { Geometry, IsNode, Mesh, Parent } from "@lattice-engine/scene";
 import { Commands, EntityCommands } from "thyseus";
 
 import { LoadingContext } from "./context";

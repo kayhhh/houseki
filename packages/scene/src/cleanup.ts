@@ -1,3 +1,4 @@
+import { Warehouse } from "@lattice-engine/core";
 import {
   Commands,
   CommandsDescriptor,
@@ -10,7 +11,6 @@ import {
   SystemResourceDescriptor,
 } from "thyseus";
 
-import { Warehouse } from "../warehouse/Warehouse";
 import { Geometry, Material } from "./components";
 
 class EntityTracker {
@@ -23,7 +23,7 @@ class EntityTracker {
 }
 
 /**
- * Cleans up gemetry resources on removal.
+ * Cleans up geometry resources on removal.
  */
 export function geometryCleanup(
   commands: Commands,

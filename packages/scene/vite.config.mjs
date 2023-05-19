@@ -9,11 +9,11 @@ export default defineConfig({
       entry: resolve("src/index.ts"),
       fileName: "index",
       formats: ["es"],
-      name: "render",
+      name: "scene",
     },
     minify: false,
     rollupOptions: {
-      external: ["@lattice-engine/core", "@lattice-engine/scene", "thyseus"],
+      external: ["thyseus", "@lattice-engine/core"],
     },
     target: "esnext",
   },

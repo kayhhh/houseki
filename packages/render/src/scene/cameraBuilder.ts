@@ -1,4 +1,4 @@
-import { PerspectiveCamera, Position } from "@lattice-engine/core";
+import { PerspectiveCamera, Position } from "@lattice-engine/scene";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import {
   Entity,

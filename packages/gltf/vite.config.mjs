@@ -13,7 +13,7 @@ export default defineConfig({
     },
     minify: false,
     rollupOptions: {
-      external: ["thyseus", "@lattice-engine/core"],
+      external: ["@lattice-engine/core", "@lattice-engine/scene", "thyseus"],
     },
     target: "esnext",
   },

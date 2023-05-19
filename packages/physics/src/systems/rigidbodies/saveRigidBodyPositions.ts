@@ -1,4 +1,4 @@
-import { Position } from "@lattice-engine/core";
+import { Position } from "@lattice-engine/scene";
 import {
   Entity,
   Mut,

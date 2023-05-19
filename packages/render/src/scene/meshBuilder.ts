@@ -1,4 +1,4 @@
-import { Geometry, Mesh } from "@lattice-engine/core";
+import { Geometry, Mesh } from "@lattice-engine/scene";
 import { BufferGeometry, Mesh as ThreeMesh } from "three";
 import {
   Entity,

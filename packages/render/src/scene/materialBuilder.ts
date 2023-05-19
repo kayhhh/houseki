@@ -1,11 +1,11 @@
+import { Warehouse } from "@lattice-engine/core";
 import {
   ImageMimeType,
   Material,
   MaterialAlphaMode,
   Texture,
   TextureInfo,
-  Warehouse,
-} from "@lattice-engine/core";
+} from "@lattice-engine/scene";
 import {
   CanvasTexture,
   ClampToEdgeWrapping,

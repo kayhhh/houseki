@@ -4,7 +4,7 @@ import {
   Position,
   Rotation,
   Scale,
-} from "@lattice-engine/core";
+} from "@lattice-engine/scene";
 import { Object3D } from "three";
 import {
   Entity,

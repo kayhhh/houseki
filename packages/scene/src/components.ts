@@ -1,6 +1,5 @@
+import { Resource } from "@lattice-engine/core";
 import { Entity, EntityCommands, initStruct, struct } from "thyseus";
-
-import { Resource } from "../warehouse/components";
 
 @struct
 export class Position {

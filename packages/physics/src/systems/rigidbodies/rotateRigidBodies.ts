@@ -1,4 +1,4 @@
-import { Rotation } from "@lattice-engine/core";
+import { Rotation } from "@lattice-engine/scene";
 import {
   Entity,
   Or,

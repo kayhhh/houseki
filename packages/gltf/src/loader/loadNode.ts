@@ -1,12 +1,12 @@
 import { Node } from "@gltf-transform/core";
+import { Warehouse } from "@lattice-engine/core";
 import {
   IsNode,
   Parent,
   Position,
   Rotation,
   Scale,
-  Warehouse,
-} from "@lattice-engine/core";
+} from "@lattice-engine/scene";
 import { Commands } from "thyseus";
 
 import { LoadingContext } from "./context";

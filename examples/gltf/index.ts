@@ -1,14 +1,14 @@
+import { Engine } from "@lattice-engine/core";
+import { gltfPlugin, GltfUri } from "@lattice-engine/gltf";
+import { IsOrbitControls, orbitPlugin } from "@lattice-engine/orbit";
+import { renderPlugin, RenderStore } from "@lattice-engine/render";
 import {
-  Engine,
   IsNode,
   IsScene,
   Parent,
   PerspectiveCamera,
   Position,
-} from "@lattice-engine/core";
-import { gltfPlugin, GltfUri } from "@lattice-engine/gltf";
-import { IsOrbitControls, orbitPlugin } from "@lattice-engine/orbit";
-import { renderPlugin, RenderStore } from "@lattice-engine/render";
+} from "@lattice-engine/scene";
 import {
   Commands,
   CommandsDescriptor,

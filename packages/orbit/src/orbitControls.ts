@@ -1,12 +1,11 @@
 import {
   keyboardEventFromECS,
   mouseEventFromECS,
-  PerspectiveCamera,
   pointerEventFromECS,
-  Position,
   wheelEventFromECS,
 } from "@lattice-engine/core";
 import { RenderStore } from "@lattice-engine/render";
+import { PerspectiveCamera, Position } from "@lattice-engine/scene";
 import { OrbitControls as ThreeOrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import {
   Entity,
