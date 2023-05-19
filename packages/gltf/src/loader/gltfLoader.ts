@@ -53,22 +53,21 @@ export function gltfLoader(
 
   for (const [entity, gltf] of entities) {
     // If no uri, ignore
-    if (!gltf.uri.id) continue;
+    if (!gltf.uri) continue;
 
     const id = entity.id;
     ids.push(id);
 
-    const uri = gltf.uri.read(warehouse);
     const doc = store.docs.get(id);
 
     // If URI has changed, load new document
-    if (store.uris.get(id) !== uri) {
+    if (store.uris.get(id) !== gltf.uri) {
       // Mark loaded uri
-      store.uris.set(id, uri);
+      store.uris.set(id, gltf.uri);
 
       // Start loading document
       const io = new WebIO().registerExtensions(extensions);
-      io.read(uri).then((doc) => store.docs.set(id, doc));
+      io.read(gltf.uri).then((doc) => store.docs.set(id, doc));
     } else if (doc) {
       // Remove old glTF entities
       const oldContext = store.contexts.get(id);

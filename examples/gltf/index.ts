@@ -5,7 +5,6 @@ import {
   Parent,
   PerspectiveCamera,
   Position,
-  Warehouse,
 } from "@lattice-engine/core";
 import { gltfPlugin, GltfUri } from "@lattice-engine/gltf";
 import { IsOrbitControls, orbitPlugin } from "@lattice-engine/orbit";
@@ -59,24 +58,19 @@ function buttonSystem(store: Res<Mut<GltfStore>>) {
 buttonSystem.parameters = [ResourceDescriptor(MutDescriptor(GltfStore))];
 
 // Load selected glTF model
-function loadGltf(
-  warehouse: Res<Warehouse>,
-  store: Res<GltfStore>,
-  entities: Query<GltfUri>
-) {
+function loadGltf(store: Res<GltfStore>, entities: Query<Mut<GltfUri>>) {
   for (const gltf of entities) {
     // Ignore if already set
-    if (gltf.uri.read(warehouse) === store.uri) continue;
+    if (gltf.uri === store.uri) continue;
 
     // Set new uri
-    gltf.uri.write(store.uri, warehouse);
+    gltf.uri = store.uri;
   }
 }
 
 loadGltf.parameters = [
-  ResourceDescriptor(Warehouse),
   ResourceDescriptor(GltfStore),
-  QueryDescriptor(GltfUri),
+  QueryDescriptor(MutDescriptor(GltfUri)),
 ];
 
 // Initialize the scene
