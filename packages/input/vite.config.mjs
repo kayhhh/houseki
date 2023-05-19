@@ -9,16 +9,11 @@ export default defineConfig({
       entry: resolve("src/index.ts"),
       fileName: "index",
       formats: ["es"],
-      name: "orbit",
+      name: "input",
     },
     minify: false,
     rollupOptions: {
-      external: [
-        "@lattice-engine/input",
-        "@lattice-engine/render",
-        "@lattice-engine/scene",
-        "thyseus",
-      ],
+      external: ["thyseus"],
     },
     target: "esnext",
   },

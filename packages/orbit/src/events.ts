@@ -3,7 +3,7 @@ import {
   MouseEvent,
   PointerEvent,
   WheelEvent,
-} from "@lattice-engine/core";
+} from "@lattice-engine/input";
 
 export class PointerMoveEvent extends PointerEvent {}
 

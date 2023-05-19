@@ -3,7 +3,7 @@ import {
   mouseEventToECS,
   pointerEventToECS,
   wheelEventToECS,
-} from "@lattice-engine/core";
+} from "@lattice-engine/input";
 import { RenderStore } from "@lattice-engine/render";
 import {
   EventWriter,

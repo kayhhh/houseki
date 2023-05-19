@@ -1,10 +1,10 @@
 {
-  "name": "@lattice-engine/orbit",
+  "name": "@lattice-engine/input",
   "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/lattice-engine/lattice",
-    "directory": "packages/orbit"
+    "directory": "packages/input"
   },
   "license": "GPL-3.0-or-later",
   "type": "module",
@@ -18,14 +18,9 @@
     "dev": "pnpm build --watch"
   },
   "dependencies": {
-    "@lattice-engine/input": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
-    "three": "^0.149.0",
     "thyseus": "0.12.0-beta.3"
   },
   "devDependencies": {
-    "@types/three": "^0.149.0",
     "typescript": "~5.0.4",
     "vite": "^4.3.4",
     "vite-plugin-dts": "^2.3.0"

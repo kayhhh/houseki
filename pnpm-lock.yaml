@@ -131,11 +131,27 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0(vite@4.3.4)
 
+  packages/input:
+    dependencies:
+      thyseus:
+        specifier: 0.12.0-beta.3
+        version: 0.12.0-beta.3
+    devDependencies:
+      typescript:
+        specifier: ~5.0.4
+        version: 5.0.4
+      vite:
+        specifier: ^4.3.4
+        version: 4.3.4
+      vite-plugin-dts:
+        specifier: ^2.3.0
+        version: 2.3.0(vite@4.3.4)
+
   packages/orbit:
     dependencies:
-      '@lattice-engine/core':
+      '@lattice-engine/input':
         specifier: workspace:^
-        version: link:../core
+        version: link:../input
       '@lattice-engine/render':
         specifier: workspace:^
         version: link:../render
