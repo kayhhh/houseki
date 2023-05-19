@@ -54,7 +54,7 @@ export function loadMesh(
         warehouse,
         context
       );
-      mesh.material = materialEntity.id;
+      mesh.materialId = materialEntity.id;
     }
 
     const meshEnity = commands

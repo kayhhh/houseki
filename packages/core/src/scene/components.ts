@@ -68,12 +68,12 @@ export class IsNode {}
 
 @struct
 export class Mesh {
-  @struct.u64 declare material: bigint; // Entity ID
+  @struct.u64 declare materialId: bigint; // Entity ID
 
   constructor(material?: Entity | EntityCommands) {
     initStruct(this);
 
-    if (material) this.material = material.id;
+    if (material) this.materialId = material.id;
   }
 }
 

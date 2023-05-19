@@ -37,7 +37,7 @@ export function meshBuilder(
 
     // Sync object properties
     const materialObject =
-      store.materials.get(mesh.material) ?? store.materials.get(id);
+      store.materials.get(mesh.materialId) ?? store.materials.get(id);
     object.material = materialObject ?? store.defaultMaterial;
 
     const geometryObject = store.geometries.get(id);
