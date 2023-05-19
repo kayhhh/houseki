@@ -2,6 +2,7 @@ import "./App.css";
 
 import { Link, Route } from "wouter";
 
+import About from "./about/About";
 import Basic from "./pages/Basic";
 import Gltf from "./pages/Gltf";
 import Physics from "./pages/Physics";
@@ -27,17 +28,7 @@ export default function App() {
         </a>
       </div>
 
-      <Route path="/">
-        <div className="content">
-          <h1>Lattice Engine</h1>
-
-          <p>
-            A lightweight, modular, and extendable 3D game engine built for the
-            web.
-          </p>
-        </div>
-      </Route>
-
+      <Route path="/" component={About} />
       <Route path="/basic" component={Basic} />
       <Route path="/gltf" component={Gltf} />
       <Route path="/physics" component={Physics} />

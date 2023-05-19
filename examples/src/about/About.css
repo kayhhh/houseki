@@ -1,0 +1,15 @@
+.container {
+  width: 100%;
+}
+
+.content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.phos {
+  position: absolute;
+  width: 300px;
+  bottom: 0;
+}
