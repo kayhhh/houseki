@@ -1,20 +1,12 @@
-import { resolve } from "path";
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
-    minify: false,
-    rollupOptions: {
-      input: {
-        basic: resolve("basic/index.html"),
-        gltf: resolve("gltf/index.html"),
-        main: resolve("index.html"),
-        physics: resolve("physics/index.html"),
-      },
-    },
     target: "esnext",
   },
   plugins: [
+    react(),
     // Cross Origin Isolation required for multi-threading
     {
       configureServer: (server) => {

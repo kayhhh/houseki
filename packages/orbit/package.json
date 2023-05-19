@@ -27,7 +27,7 @@
   "devDependencies": {
     "@types/three": "^0.149.0",
     "typescript": "~5.0.4",
-    "vite": "^4.3.4",
+    "vite": "^4.3.8",
     "vite-plugin-dts": "^2.3.0"
   },
   "publishConfig": {

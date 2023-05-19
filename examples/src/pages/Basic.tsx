@@ -10,6 +10,7 @@ import {
   Position,
   scenePlugin,
 } from "@lattice-engine/scene";
+import { useEffect, useState } from "react";
 import {
   Commands,
   CommandsDescriptor,
@@ -20,17 +21,51 @@ import {
   ResourceDescriptor,
 } from "thyseus";
 
+import Canvas from "../utils/Canvas";
 import { createBoxGeometry } from "../utils/createBoxGeometry";
-import { createCanvas } from "../utils/createCanvas";
 
-// Create system to initialize the scene
+export default function Basic() {
+  const [engine, setEngine] = useState<Engine>();
+
+  // Create engine
+  useEffect(() => {
+    const builder = Engine.createWorld()
+      .addPlugin(scenePlugin)
+      .addPlugin(renderPlugin)
+      .addPlugin(orbitPlugin)
+      .addSystemsToSchedule(CoreSchedule.Startup, initScene);
+
+    builder.build().then((world) => {
+      const newEngine = new Engine(world);
+      setEngine(newEngine);
+    });
+  }, []);
+
+  // Run engine
+  useEffect(() => {
+    if (!engine) return;
+
+    engine.start();
+
+    return () => {
+      engine.stop();
+    };
+  }, [engine]);
+
+  return <Canvas />;
+}
+
+/**
+ * System to initialize the scene.
+ */
 function initScene(
   commands: Commands,
   warehouse: Res<Warehouse>,
   store: Res<Mut<RenderStore>>
 ) {
   // Set canvas
-  const canvas = createCanvas();
+  const canvas = document.querySelector("canvas");
+  if (!canvas) throw new Error("Canvas not found");
   store.setCanvas(canvas);
 
   // Create scene
@@ -45,21 +80,12 @@ function initScene(
     .add(cameraComponent)
     .add(cameraPosition)
     .addType(IsOrbitControls);
-
   store.activeCamera = camera.id;
 
-  // Create a cube
+  // Create cube
   const geometry = createBoxGeometry(warehouse);
   const parent = new Parent(scene);
-
-  commands
-    .spawn()
-    // Add to scene
-    .addType(IsNode)
-    .add(parent)
-    // Add mesh
-    .addType(Mesh)
-    .add(geometry);
+  commands.spawn().addType(IsNode).add(parent).addType(Mesh).add(geometry);
 }
 
 initScene.parameters = [
@@ -67,21 +93,3 @@ initScene.parameters = [
   ResourceDescriptor(Warehouse),
   ResourceDescriptor(MutDescriptor(RenderStore)),
 ];
-
-// Create world
-const builder = Engine.createWorld().addSystemsToSchedule(
-  CoreSchedule.Startup,
-  initScene
-);
-
-scenePlugin(builder);
-renderPlugin(builder);
-orbitPlugin(builder);
-
-const world = await builder.build();
-
-// Create Engine
-const engine = new Engine(world);
-
-// Start the game loop
-engine.start();

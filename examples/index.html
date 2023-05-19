@@ -2,77 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>💎</text></svg>"
     />
-
     <title>Lattice Examples</title>
-
-    <style>
-      body {
-        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-          "Lucida Sans", Arial, sans-serif;
-      }
-
-      h1 {
-        text-align: center;
-      }
-
-      .gh-link {
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
-        text-decoration: none;
-        color: black;
-        font-weight: bold;
-      }
-
-      .gh-link:hover {
-        color: #777;
-      }
-
-      main {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1rem;
-        padding: 1rem;
-      }
-
-      main a {
-        padding: 3rem;
-        font-size: large;
-        border: 1px solid #333;
-        border-radius: 0.5rem;
-        text-align: center;
-        text-decoration: none;
-        color: black;
-        font-weight: bold;
-        transition: background-color 0.2s ease-in-out;
-      }
-
-      main a:hover {
-        background-color: #ddd;
-        transition: background-color 0.2s ease-in-out;
-      }
-    </style>
   </head>
   <body>
-    <h1>💎 Lattice Examples</h1>
-
-    <a
-      class="gh-link"
-      href="https://github.com/lattice-engine/lattice"
-      target="_blank"
-      >GitHub</a
-    >
-
-    <main>
-      <a href="./basic/index.html">Basic</a>
-      <a href="./gltf/index.html">glTF</a>
-      <a href="./physics/index.html">Physics</a>
-    </main>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>
