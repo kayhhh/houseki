@@ -8,6 +8,7 @@ import {
   Parent,
   PerspectiveCamera,
   Position,
+  scenePlugin,
 } from "@lattice-engine/scene";
 import {
   Commands,
@@ -116,6 +117,7 @@ const builder = Engine.createWorld()
   .addSystemsToSchedule(CoreSchedule.Startup, initScene, buttonSystem)
   .addSystems(loadGltf);
 
+scenePlugin(builder);
 renderPlugin(builder);
 gltfPlugin(builder);
 orbitPlugin(builder);

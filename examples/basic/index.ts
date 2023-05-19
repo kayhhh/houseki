@@ -8,6 +8,7 @@ import {
   Parent,
   PerspectiveCamera,
   Position,
+  scenePlugin,
 } from "@lattice-engine/scene";
 import {
   Commands,
@@ -73,6 +74,7 @@ const builder = Engine.createWorld().addSystemsToSchedule(
   initScene
 );
 
+scenePlugin(builder);
 renderPlugin(builder);
 orbitPlugin(builder);
 
