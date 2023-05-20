@@ -13,7 +13,7 @@ import {
 import { RenderStore } from "../RenderStore";
 
 /**
- * Syncs IsMesh components with Three.js Mesh objects.
+ * Syncs Mesh components with Three.js Mesh objects.
  */
 export function meshBuilder(
   store: Res<RenderStore>,

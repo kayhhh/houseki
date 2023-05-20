@@ -1,4 +1,4 @@
-import { IsScene } from "@lattice-engine/scene";
+import { Scene } from "@lattice-engine/scene";
 import {
   AmbientLight,
   CanvasTexture,
@@ -22,7 +22,7 @@ import { RenderStore } from "../RenderStore";
 
 export function sceneBuilder(
   store: Res<RenderStore>,
-  entities: Query<Entity, With<IsScene>>
+  entities: Query<Entity, With<Scene>>
 ) {
   const ids: bigint[] = [];
 
@@ -64,7 +64,7 @@ export function sceneBuilder(
 
 sceneBuilder.parameters = [
   ResourceDescriptor(RenderStore),
-  QueryDescriptor(Entity, WithDescriptor(IsScene)),
+  QueryDescriptor(Entity, WithDescriptor(Scene)),
 ];
 
 async function loadSkybox(scene: ThreeScene, uri: string | null) {

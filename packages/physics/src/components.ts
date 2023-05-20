@@ -65,10 +65,10 @@ export class MeshCollider {
 }
 
 @struct
-export class IsStaticBody {}
+export class StaticBody {}
 
 @struct
-export class IsKinematicBody {}
+export class KinematicBody {}
 
 @struct
-export class IsDynamicBody {}
+export class DynamicBody {}

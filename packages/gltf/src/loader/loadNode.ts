@@ -1,12 +1,6 @@
-import { Node } from "@gltf-transform/core";
+import { Node as GltfNode } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
-import {
-  IsNode,
-  Parent,
-  Position,
-  Rotation,
-  Scale,
-} from "@lattice-engine/scene";
+import { Node, Parent, Position, Rotation, Scale } from "@lattice-engine/scene";
 import { Commands } from "thyseus";
 
 import { LoadingContext } from "./context";
@@ -16,7 +10,7 @@ import { loadMesh } from "./loadMesh";
  * Recursively loads a GLTF node and its children.
  */
 export function loadNode(
-  node: Node,
+  node: GltfNode,
   parentId: bigint,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
@@ -47,7 +41,7 @@ export function loadNode(
 
   const entity = commands
     .spawn()
-    .addType(IsNode)
+    .addType(Node)
     .add(parentComponent)
     .add(position)
     .add(rotation)

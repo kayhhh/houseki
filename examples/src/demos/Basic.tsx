@@ -1,9 +1,9 @@
 import { Engine, Warehouse } from "@lattice-engine/core";
-import { IsOrbitControls, orbitPlugin } from "@lattice-engine/orbit";
+import { OrbitControls, orbitPlugin } from "@lattice-engine/orbit";
 import { renderPlugin, RenderStore } from "@lattice-engine/render";
 import {
-  IsNode,
-  IsScene,
+  Node,
+  Scene,
   Mesh,
   Parent,
   PerspectiveCamera,
@@ -69,23 +69,22 @@ function initScene(
   store.setCanvas(canvas);
 
   // Create scene
-  const scene = commands.spawn().addType(IsScene);
+  const scene = commands.spawn().addType(Scene);
   store.activeScene = scene.id;
 
   // Create camera
-  const cameraComponent = new PerspectiveCamera();
   const cameraPosition = new Position(0, 0, 5);
   const camera = commands
     .spawn()
-    .add(cameraComponent)
     .add(cameraPosition)
-    .addType(IsOrbitControls);
+    .addType(PerspectiveCamera)
+    .addType(OrbitControls);
   store.activeCamera = camera.id;
 
   // Create cube
   const geometry = createBoxGeometry(warehouse);
   const parent = new Parent(scene);
-  commands.spawn().addType(IsNode).add(parent).addType(Mesh).add(geometry);
+  commands.spawn().addType(Node).add(parent).addType(Mesh).add(geometry);
 }
 
 initScene.parameters = [

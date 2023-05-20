@@ -3,13 +3,13 @@ import { WorldBuilder } from "thyseus";
 import { geometryCleanup, materialCleanup } from "./cleanup";
 import {
   Geometry,
-  IsScene,
   Mesh,
   Parent,
   PerspectiveCamera,
   Position,
   Rotation,
   Scale,
+  Scene,
 } from "./components";
 
 export function scenePlugin(builder: WorldBuilder) {
@@ -19,7 +19,7 @@ export function scenePlugin(builder: WorldBuilder) {
     .registerComponent(Scale)
     .registerComponent(Parent)
     .registerComponent(PerspectiveCamera)
-    .registerComponent(IsScene)
+    .registerComponent(Scene)
     .registerComponent(Mesh)
     .registerComponent(Geometry)
     .addSystems(geometryCleanup, materialCleanup);

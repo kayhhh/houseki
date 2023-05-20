@@ -9,12 +9,12 @@ import {
   WithDescriptor,
 } from "thyseus";
 
-import { IsKinematicBody } from "../../components";
+import { KinematicBody } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
 
 export function createKinematicBodies(
   store: Res<PhysicsStore>,
-  bodies: Query<Entity, With<IsKinematicBody>>
+  bodies: Query<Entity, With<KinematicBody>>
 ) {
   const ids: bigint[] = [];
 
@@ -42,5 +42,5 @@ export function createKinematicBodies(
 
 createKinematicBodies.parameters = [
   ResourceDescriptor(PhysicsStore),
-  QueryDescriptor(Entity, WithDescriptor(IsKinematicBody)),
+  QueryDescriptor(Entity, WithDescriptor(KinematicBody)),
 ];

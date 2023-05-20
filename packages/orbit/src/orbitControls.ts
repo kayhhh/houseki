@@ -23,7 +23,7 @@ import {
   WithDescriptor,
 } from "thyseus";
 
-import { IsOrbitControls } from "./components";
+import { OrbitControls } from "./components";
 import {
   ContextMenuEvent,
   KeyDownEvent,
@@ -58,7 +58,7 @@ class LocalStore {
 export function orbitControls(
   store: Res<RenderStore>,
   localStore: SystemRes<LocalStore>,
-  entities: Query<Entity, With<[IsOrbitControls, PerspectiveCamera]>>,
+  entities: Query<Entity, With<[OrbitControls, PerspectiveCamera]>>,
   withPositions: Query<[Entity, Mut<Position>], With<PerspectiveCamera>>,
   pointerMoveReader: EventReader<PointerMoveEvent>,
   pointerDownReader: EventReader<PointerDownEvent>,
@@ -169,7 +169,7 @@ export function orbitControls(
 orbitControls.parameters = [
   ResourceDescriptor(RenderStore),
   SystemResourceDescriptor(LocalStore),
-  QueryDescriptor(Entity, WithDescriptor(IsOrbitControls)),
+  QueryDescriptor(Entity, WithDescriptor(OrbitControls)),
   QueryDescriptor(
     [Entity, MutDescriptor(Position)],
     WithDescriptor(PerspectiveCamera)

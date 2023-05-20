@@ -9,12 +9,12 @@ import {
   WithDescriptor,
 } from "thyseus";
 
-import { IsStaticBody } from "../../components";
+import { StaticBody } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
 
 export function createStaticBodies(
   store: Res<PhysicsStore>,
-  bodies: Query<Entity, With<IsStaticBody>>
+  bodies: Query<Entity, With<StaticBody>>
 ) {
   const ids: bigint[] = [];
 
@@ -42,5 +42,5 @@ export function createStaticBodies(
 
 createStaticBodies.parameters = [
   ResourceDescriptor(PhysicsStore),
-  QueryDescriptor(Entity, WithDescriptor(IsStaticBody)),
+  QueryDescriptor(Entity, WithDescriptor(StaticBody)),
 ];

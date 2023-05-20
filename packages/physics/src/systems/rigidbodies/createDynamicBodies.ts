@@ -9,12 +9,12 @@ import {
   WithDescriptor,
 } from "thyseus";
 
-import { IsDynamicBody } from "../../components";
+import { DynamicBody } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
 
 export function createDynamicBodies(
   store: Res<PhysicsStore>,
-  bodies: Query<Entity, With<IsDynamicBody>>
+  bodies: Query<Entity, With<DynamicBody>>
 ) {
   const ids: bigint[] = [];
 
@@ -43,5 +43,5 @@ export function createDynamicBodies(
 
 createDynamicBodies.parameters = [
   ResourceDescriptor(PhysicsStore),
-  QueryDescriptor(Entity, WithDescriptor(IsDynamicBody)),
+  QueryDescriptor(Entity, WithDescriptor(DynamicBody)),
 ];

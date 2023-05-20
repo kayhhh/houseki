@@ -1,10 +1,10 @@
 import { Engine } from "@lattice-engine/core";
 import { gltfPlugin, GltfUri } from "@lattice-engine/gltf";
-import { IsOrbitControls, orbitPlugin } from "@lattice-engine/orbit";
+import { OrbitControls, orbitPlugin } from "@lattice-engine/orbit";
 import { renderPlugin, RenderStore } from "@lattice-engine/render";
 import {
-  IsNode,
-  IsScene,
+  Node,
+  Scene,
   Parent,
   PerspectiveCamera,
   Position,
@@ -88,22 +88,21 @@ function initScene(commands: Commands, store: Res<Mut<RenderStore>>) {
   store.setCanvas(canvas);
 
   // Create scene
-  const scene = commands.spawn().addType(IsScene);
+  const scene = commands.spawn().addType(Scene);
   store.activeScene = scene.id;
 
   // Create camera
-  const cameraComponent = new PerspectiveCamera();
   const cameraPosition = new Position(0, 0, 5);
   const camera = commands
     .spawn()
-    .add(cameraComponent)
     .add(cameraPosition)
-    .addType(IsOrbitControls);
+    .addType(PerspectiveCamera)
+    .addType(OrbitControls);
   store.activeCamera = camera.id;
 
   // Add node to scene with glTF component
   const parent = new Parent(scene);
-  commands.spawn().addType(IsNode).add(parent).addType(GltfUri);
+  commands.spawn().addType(Node).add(parent).addType(GltfUri);
 }
 
 initScene.parameters = [

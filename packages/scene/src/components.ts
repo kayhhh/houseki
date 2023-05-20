@@ -60,10 +60,10 @@ export class Parent {
 }
 
 @struct
-export class IsScene {}
+export class Scene {}
 
 @struct
-export class IsNode {}
+export class Node {}
 
 @struct
 export class Mesh {

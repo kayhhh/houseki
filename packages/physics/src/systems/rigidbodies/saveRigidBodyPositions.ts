@@ -13,14 +13,14 @@ import {
   WithDescriptor,
 } from "thyseus";
 
-import { IsDynamicBody, IsKinematicBody, IsStaticBody } from "../../components";
+import { DynamicBody, KinematicBody, StaticBody } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
 
 export function saveRigidBodyPositions(
   store: Res<PhysicsStore>,
   bodies: Query<
     [Entity, Mut<Position>],
-    Or<With<IsStaticBody>, Or<With<IsKinematicBody>, With<IsDynamicBody>>>
+    Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>
   >
 ) {
   for (const [entity, position] of bodies) {
@@ -40,11 +40,8 @@ saveRigidBodyPositions.parameters = [
   QueryDescriptor(
     [Entity, MutDescriptor(Position)],
     OrDescriptor(
-      WithDescriptor(IsStaticBody),
-      OrDescriptor(
-        WithDescriptor(IsKinematicBody),
-        WithDescriptor(IsDynamicBody)
-      )
+      WithDescriptor(StaticBody),
+      OrDescriptor(WithDescriptor(KinematicBody), WithDescriptor(DynamicBody))
     )
   ),
 ];

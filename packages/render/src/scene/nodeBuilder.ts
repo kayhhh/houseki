@@ -1,10 +1,4 @@
-import {
-  IsNode,
-  Parent,
-  Position,
-  Rotation,
-  Scale,
-} from "@lattice-engine/scene";
+import { Node, Parent, Position, Rotation, Scale } from "@lattice-engine/scene";
 import { Object3D } from "three";
 import {
   Entity,
@@ -20,11 +14,11 @@ import { RenderStore } from "../RenderStore";
 
 export function nodeBuilder(
   store: Res<RenderStore>,
-  entities: Query<Entity, With<IsNode>>,
-  withPosition: Query<[Entity, Position], With<IsNode>>,
-  withRotation: Query<[Entity, Rotation], With<IsNode>>,
-  withScale: Query<[Entity, Scale], With<IsNode>>,
-  withParent: Query<[Entity, Parent], With<IsNode>>
+  entities: Query<Entity, With<Node>>,
+  withPosition: Query<[Entity, Position], With<Node>>,
+  withRotation: Query<[Entity, Rotation], With<Node>>,
+  withScale: Query<[Entity, Scale], With<Node>>,
+  withParent: Query<[Entity, Parent], With<Node>>
 ) {
   const ids: bigint[] = [];
 
@@ -87,9 +81,9 @@ export function nodeBuilder(
 
 nodeBuilder.parameters = [
   ResourceDescriptor(RenderStore),
-  QueryDescriptor(Entity, WithDescriptor(IsNode)),
-  QueryDescriptor([Entity, Position], WithDescriptor(IsNode)),
-  QueryDescriptor([Entity, Rotation], WithDescriptor(IsNode)),
-  QueryDescriptor([Entity, Scale], WithDescriptor(IsNode)),
-  QueryDescriptor([Entity, Parent], WithDescriptor(IsNode)),
+  QueryDescriptor(Entity, WithDescriptor(Node)),
+  QueryDescriptor([Entity, Position], WithDescriptor(Node)),
+  QueryDescriptor([Entity, Rotation], WithDescriptor(Node)),
+  QueryDescriptor([Entity, Scale], WithDescriptor(Node)),
+  QueryDescriptor([Entity, Parent], WithDescriptor(Node)),
 ];

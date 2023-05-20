@@ -1,21 +1,21 @@
 import { Engine, Warehouse } from "@lattice-engine/core";
-import { IsOrbitControls, orbitPlugin } from "@lattice-engine/orbit";
+import { OrbitControls, orbitPlugin } from "@lattice-engine/orbit";
 import {
   BoxCollider,
-  IsDynamicBody,
-  IsStaticBody,
+  DynamicBody,
+  StaticBody,
   physicsPlugin,
   SphereCollider,
 } from "@lattice-engine/physics";
 import { renderPlugin, RenderStore } from "@lattice-engine/render";
 import {
-  IsNode,
-  IsScene,
   Material,
   Mesh,
+  Node,
   Parent,
   PerspectiveCamera,
   Position,
+  Scene,
   scenePlugin,
 } from "@lattice-engine/scene";
 import { useEffect, useState } from "react";
@@ -79,17 +79,16 @@ function initScene(
   store.setCanvas(canvas);
 
   // Create scene
-  const scene = commands.spawn().addType(IsScene);
+  const scene = commands.spawn().addType(Scene);
   store.activeScene = scene.id;
 
   // Create camera
-  const cameraComponent = new PerspectiveCamera();
   const cameraPosition = new Position(0, 0, 8);
   const camera = commands
     .spawn()
-    .add(cameraComponent)
     .add(cameraPosition)
-    .addType(IsOrbitControls);
+    .addType(PerspectiveCamera)
+    .addType(OrbitControls);
   store.activeCamera = camera.id;
 
   // Create ground
@@ -100,13 +99,13 @@ function initScene(
   const position = new Position(0, -2, 0);
   commands
     .spawn()
-    .addType(IsNode)
+    .addType(Node)
     .add(parent)
     .add(position)
     .addType(Mesh)
     .add(geometry)
     .add(collider)
-    .addType(IsStaticBody);
+    .addType(StaticBody);
 
   // Add dynamic balls
   function createBall(radius: number, position: [number, number, number]) {
@@ -117,14 +116,14 @@ function initScene(
     const ballPosition = new Position(...position);
     commands
       .spawn()
-      .addType(IsNode)
+      .addType(Node)
       .add(ballParent)
       .add(ballPosition)
       .addType(Mesh)
       .add(ballGeometry)
       .add(ballMaterial)
       .add(ballCollider)
-      .addType(IsDynamicBody);
+      .addType(DynamicBody);
   }
 
   const BALL_COUNT = 20;
