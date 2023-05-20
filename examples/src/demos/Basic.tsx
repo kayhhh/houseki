@@ -2,12 +2,12 @@ import { Engine, Warehouse } from "@lattice-engine/core";
 import { OrbitControls, orbitPlugin } from "@lattice-engine/orbit";
 import { renderPlugin, RenderStore } from "@lattice-engine/render";
 import {
-  Node,
-  Scene,
   Mesh,
+  Node,
   Parent,
   PerspectiveCamera,
   Position,
+  Scene,
   scenePlugin,
 } from "@lattice-engine/scene";
 import { useEffect, useState } from "react";

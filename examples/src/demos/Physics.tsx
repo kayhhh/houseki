@@ -3,9 +3,9 @@ import { OrbitControls, orbitPlugin } from "@lattice-engine/orbit";
 import {
   BoxCollider,
   DynamicBody,
-  StaticBody,
   physicsPlugin,
   SphereCollider,
+  StaticBody,
 } from "@lattice-engine/physics";
 import { renderPlugin, RenderStore } from "@lattice-engine/render";
 import {

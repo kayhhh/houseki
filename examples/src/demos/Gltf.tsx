@@ -4,10 +4,10 @@ import { OrbitControls, orbitPlugin } from "@lattice-engine/orbit";
 import { renderPlugin, RenderStore } from "@lattice-engine/render";
 import {
   Node,
-  Scene,
   Parent,
   PerspectiveCamera,
   Position,
+  Scene,
   scenePlugin,
 } from "@lattice-engine/scene";
 import { useControls } from "leva";

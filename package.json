@@ -7,7 +7,7 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "format": "prettier --write .",
-    "lint": "eslint --fix . --ext .ts,.json --ignore-path .gitignore --ignore-pattern package.json",
+    "lint": "eslint --fix . --ext .ts,.tsx,.mjs,.json --ignore-path .gitignore --ignore-pattern package.json",
     "test": "turbo test",
     "test:watch": "turbo test:watch"
   },
