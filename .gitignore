@@ -4,3 +4,4 @@ dist
 coverage
 .turbo
 *.tsbuildinfo
+vite.config.*.timestamp*
