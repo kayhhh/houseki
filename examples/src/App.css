@@ -6,10 +6,6 @@ body {
   overflow: hidden;
 }
 
-canvas {
-  flex: 1;
-}
-
 .layout {
   display: flex;
 }
@@ -50,4 +46,49 @@ canvas {
 
 .sidepanel > a:hover {
   background-color: #eee;
+}
+
+.sidepanel.open {
+  display: block;
+  transform: translateX(0);
+}
+
+.hamburger {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.4rem;
+  border-radius: 20rem;
+  aspect-ratio: 1;
+  background-color: #fff;
+  margin: 0.5rem;
+  border: none;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+}
+
+.hamburger:active {
+  background-color: #eee;
+}
+
+@media screen and (max-width: 768px) {
+  .sidepanel {
+    position: absolute;
+    z-index: 2000;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
+.line {
+  width: 1.5rem;
+  height: 0.2rem;
+  margin: 0.3rem;
+  background-color: #333;
+  border-radius: 0.2rem;
 }

@@ -1,3 +1,5 @@
+import "./Canvas.css";
+
 import { useEffect, useRef } from "react";
 
 /**
@@ -10,8 +12,12 @@ export default function Canvas() {
   useEffect(() => {
     function resize() {
       if (!canvas.current) return;
-      canvas.current.width = window.innerWidth - 232; // Subtract sidebar width
+
+      canvas.current.width = window.innerWidth;
       canvas.current.height = window.innerHeight;
+
+      // If not mobile, subtract sidebar width
+      if (window.innerWidth > 768) canvas.current.width -= 232;
     }
 
     resize();
