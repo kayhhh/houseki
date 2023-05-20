@@ -1,7 +1,8 @@
-import { Engine } from "@lattice-engine/core";
+import { CoreStore, Engine } from "@lattice-engine/core";
 import { gltfPlugin, GltfUri } from "@lattice-engine/gltf";
+import { inputPlugin } from "@lattice-engine/input";
 import { OrbitControls, orbitPlugin } from "@lattice-engine/orbit";
-import { renderPlugin, RenderStore } from "@lattice-engine/render";
+import { renderPlugin } from "@lattice-engine/render";
 import {
   Node,
   Parent,
@@ -46,6 +47,7 @@ export default function Gltf() {
   // Create engine
   useEffect(() => {
     const builder = Engine.createWorld()
+      .addPlugin(inputPlugin)
       .addPlugin(scenePlugin)
       .addPlugin(renderPlugin)
       .addPlugin(gltfPlugin)
@@ -81,11 +83,11 @@ export default function Gltf() {
 /**
  * System to initialize the scene.
  */
-function initScene(commands: Commands, store: Res<Mut<RenderStore>>) {
+function initScene(commands: Commands, store: Res<Mut<CoreStore>>) {
   // Set canvas
   const canvas = document.querySelector("canvas");
   if (!canvas) throw new Error("Canvas not found");
-  store.setCanvas(canvas);
+  store.canvas = canvas;
 
   // Create scene
   const scene = commands.spawn().addType(Scene);
@@ -105,7 +107,7 @@ function initScene(commands: Commands, store: Res<Mut<RenderStore>>) {
 
 initScene.parameters = [
   CommandsDescriptor(),
-  ResourceDescriptor(MutDescriptor(RenderStore)),
+  ResourceDescriptor(MutDescriptor(CoreStore)),
 ];
 
 /**

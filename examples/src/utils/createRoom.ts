@@ -66,7 +66,7 @@ export function createRoom(
 }
 
 /**
- * Creates a box, with a mesh, collider, and static body
+ * Creates a box with a mesh, collider, and static body
  */
 function createBox(
   size: Vec3,

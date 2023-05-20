@@ -1,5 +1,8 @@
 import { CoreSchedule, run, WorldBuilder } from "thyseus";
 
+import { createCharacters } from "./systems/characters/createCharacters";
+import { moveCharacters } from "./systems/characters/moveCharacters";
+import { saveCharacterPositions } from "./systems/characters/saveCharacterPositions";
 import { createBoxColliders } from "./systems/colliders/createBoxColliders";
 import { createCapsuleColliders } from "./systems/colliders/createCapsuleColliders";
 import { createCylinderColliders } from "./systems/colliders/createCylinderColliders";
@@ -27,7 +30,7 @@ const createColliders = [
 
 const transformRigidBodies = [moveRigidBodies, rotateRigidBodies];
 
-const saveRigidBodies = [saveRigidBodyPositions];
+const savePositions = [saveRigidBodyPositions, saveCharacterPositions];
 
 export function physicsPlugin(builder: WorldBuilder) {
   builder.addSystemsToSchedule(
@@ -35,7 +38,9 @@ export function physicsPlugin(builder: WorldBuilder) {
     ...createRigidBodies,
     ...createColliders.map((fn) => run(fn).after(...createRigidBodies)),
     ...transformRigidBodies.map((fn) => run(fn).after(...createColliders)),
-    run(stepWorld).after(...transformRigidBodies),
-    ...saveRigidBodies.map((fn) => run(fn).after(stepWorld))
+    createCharacters,
+    run(moveCharacters).after(createCharacters, ...transformRigidBodies),
+    run(stepWorld).after(moveCharacters),
+    ...savePositions.map((fn) => run(fn).after(stepWorld))
   );
 }

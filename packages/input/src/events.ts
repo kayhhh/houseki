@@ -63,3 +63,11 @@ export class KeyboardEvent {
   @struct.bool declare repeat: boolean;
   @struct.bool declare shiftKey: boolean;
 }
+
+export class PointerMoveEvent extends PointerEvent {}
+export class PointerDownEvent extends PointerEvent {}
+export class PointerUpEvent extends PointerEvent {}
+export class PointerCancelEvent extends PointerEvent {}
+export class ContextMenuEvent extends MouseEvent {}
+export class OnWheelEvent extends WheelEvent {}
+export class KeyDownEvent extends KeyboardEvent {}

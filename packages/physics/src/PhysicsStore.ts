@@ -1,4 +1,9 @@
-import { Collider, RigidBody, World } from "@dimforge/rapier3d";
+import {
+  Collider,
+  KinematicCharacterController,
+  RigidBody,
+  World,
+} from "@dimforge/rapier3d";
 
 export class PhysicsStore {
   readonly world = new World({ x: 0, y: -9.81, z: 0 });
@@ -21,6 +26,14 @@ export class PhysicsStore {
   readonly dynamicBodies = new Map<bigint, RigidBody>();
 
   /**
+   * Entity ID -> Rapier Character Controller
+   */
+  readonly characterControllers = new Map<
+    bigint,
+    KinematicCharacterController
+  >();
+
+  /**
    * Returns the Rapier rigidbody for the given entity ID.
    */
   getRigidBody(id: bigint) {
@@ -28,6 +41,20 @@ export class PhysicsStore {
       this.staticBodies.get(id) ??
       this.kinematicBodies.get(id) ??
       this.dynamicBodies.get(id)
+    );
+  }
+
+  /**
+   * Returns the Rapier collider for the given entity ID.
+   */
+  getCollider(id: bigint) {
+    return (
+      this.boxColliders.get(id) ??
+      this.sphereColliders.get(id) ??
+      this.capsuleColliders.get(id) ??
+      this.cylinderColliders.get(id) ??
+      this.hullColliders.get(id) ??
+      this.meshColliders.get(id)
     );
   }
 }

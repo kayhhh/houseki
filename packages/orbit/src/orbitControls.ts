@@ -1,7 +1,14 @@
 import {
+  ContextMenuEvent,
   keyboardEventFromECS,
+  KeyDownEvent,
   mouseEventFromECS,
+  OnWheelEvent,
+  PointerCancelEvent,
+  PointerDownEvent,
   pointerEventFromECS,
+  PointerMoveEvent,
+  PointerUpEvent,
   wheelEventFromECS,
 } from "@lattice-engine/input";
 import { RenderStore } from "@lattice-engine/render";
@@ -24,18 +31,9 @@ import {
 } from "thyseus";
 
 import { OrbitControls } from "./components";
-import {
-  ContextMenuEvent,
-  KeyDownEvent,
-  OnWheelEvent,
-  PointerCancelEvent,
-  PointerDownEvent,
-  PointerMoveEvent,
-  PointerUpEvent,
-} from "./events";
 
 /**
- * Mock Element we can pass into Three.js OrbitControls.
+ * A mock element we can pass into Three.js OrbitControls.
  * We use this to capture events from the ECS and pass them into OrbitControls.
  */
 class MockElement extends EventTarget {
@@ -55,6 +53,10 @@ class LocalStore {
   readonly map = new Map<bigint, ThreeOrbitControls>();
 }
 
+/**
+ * OrbitControls system.
+ * Uses the built in OrbitControls from Three.js.
+ */
 export function orbitControls(
   store: Res<RenderStore>,
   localStore: SystemRes<LocalStore>,

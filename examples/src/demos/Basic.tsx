@@ -1,6 +1,7 @@
-import { Engine, Warehouse } from "@lattice-engine/core";
+import { CoreStore, Engine, Warehouse } from "@lattice-engine/core";
+import { inputPlugin } from "@lattice-engine/input";
 import { OrbitControls, orbitPlugin } from "@lattice-engine/orbit";
-import { renderPlugin, RenderStore } from "@lattice-engine/render";
+import { renderPlugin } from "@lattice-engine/render";
 import {
   Mesh,
   Node,
@@ -30,6 +31,7 @@ export default function Basic() {
   // Create engine
   useEffect(() => {
     const builder = Engine.createWorld()
+      .addPlugin(inputPlugin)
       .addPlugin(scenePlugin)
       .addPlugin(renderPlugin)
       .addPlugin(orbitPlugin)
@@ -61,12 +63,12 @@ export default function Basic() {
 function initScene(
   commands: Commands,
   warehouse: Res<Warehouse>,
-  store: Res<Mut<RenderStore>>
+  store: Res<Mut<CoreStore>>
 ) {
   // Set canvas
   const canvas = document.querySelector("canvas");
   if (!canvas) throw new Error("Canvas not found");
-  store.setCanvas(canvas);
+  store.canvas = canvas;
 
   // Create scene
   const scene = commands.spawn().addType(Scene);
@@ -93,5 +95,5 @@ function initScene(
 initScene.parameters = [
   CommandsDescriptor(),
   ResourceDescriptor(Warehouse),
-  ResourceDescriptor(MutDescriptor(RenderStore)),
+  ResourceDescriptor(MutDescriptor(CoreStore)),
 ];

@@ -1,10 +1,4 @@
-import {
-  keyboardEventToECS,
-  mouseEventToECS,
-  pointerEventToECS,
-  wheelEventToECS,
-} from "@lattice-engine/input";
-import { RenderStore } from "@lattice-engine/render";
+import { CoreStore } from "@lattice-engine/core";
 import {
   EventWriter,
   EventWriterDescriptor,
@@ -23,6 +17,12 @@ import {
   PointerMoveEvent,
   PointerUpEvent,
 } from "./events";
+import {
+  keyboardEventToECS,
+  mouseEventToECS,
+  pointerEventToECS,
+  wheelEventToECS,
+} from "./utils";
 
 class LocalStore {
   canvas: HTMLCanvasElement | null = null;
@@ -41,8 +41,8 @@ class LocalStore {
 /**
  * Reads input events from the canvas and sends them into the ECS.
  */
-export function inputHandler(
-  store: Res<RenderStore>,
+export function inputWriter(
+  store: Res<CoreStore>,
   localStore: SystemRes<LocalStore>,
   pointerMoveWriter: EventWriter<PointerMoveEvent>,
   pointerDownWriter: EventWriter<PointerDownEvent>,
@@ -52,6 +52,15 @@ export function inputHandler(
   onWheelWriter: EventWriter<OnWheelEvent>,
   keyDownWriter: EventWriter<KeyDownEvent>
 ) {
+  // Clear events from last frame
+  pointerMoveWriter.clear();
+  pointerDownWriter.clear();
+  pointerUpWriter.clear();
+  pointerCancelWriter.clear();
+  contextMenuWriter.clear();
+  onWheelWriter.clear();
+  keyDownWriter.clear();
+
   // Process queued events
   for (const event of localStore.pointerMoveEvents) {
     pointerMoveWriter.createFrom(event);
@@ -81,7 +90,7 @@ export function inputHandler(
     keyDownWriter.createFrom(event);
   }
 
-  // Clear queues
+  // Clear local queues
   localStore.pointerMoveEvents.length = 0;
   localStore.pointerDownEvents.length = 0;
   localStore.pointerUpEvents.length = 0;
@@ -91,7 +100,7 @@ export function inputHandler(
   localStore.keyDownEvents.length = 0;
 
   // If canvas hasn't changed, we're done
-  const canvas = store.renderer.domElement;
+  const canvas = store.canvas;
   if (localStore.canvas === canvas) return;
 
   // Remove old listeners
@@ -100,9 +109,11 @@ export function inputHandler(
   // Set new canvas
   localStore.canvas = canvas;
 
+  if (!canvas) return;
+
   // Add new listeners
   function onPointerDown(event: PointerEvent) {
-    canvas.setPointerCapture(event.pointerId);
+    canvas?.setPointerCapture(event.pointerId);
     localStore.pointerDownEvents.push(pointerEventToECS(event));
   }
 
@@ -111,12 +122,12 @@ export function inputHandler(
   }
 
   function onPointerCancel(event: PointerEvent) {
-    canvas.releasePointerCapture(event.pointerId);
+    canvas?.releasePointerCapture(event.pointerId);
     localStore.pointerCancelEvents.push(pointerEventToECS(event));
   }
 
   function onPointerUp(event: PointerEvent) {
-    canvas.releasePointerCapture(event.pointerId);
+    canvas?.releasePointerCapture(event.pointerId);
     localStore.pointerUpEvents.push(pointerEventToECS(event));
   }
 
@@ -153,8 +164,8 @@ export function inputHandler(
   };
 }
 
-inputHandler.parameters = [
-  ResourceDescriptor(RenderStore),
+inputWriter.parameters = [
+  ResourceDescriptor(CoreStore),
   SystemResourceDescriptor(LocalStore),
   EventWriterDescriptor(PointerMoveEvent),
   EventWriterDescriptor(PointerDownEvent),

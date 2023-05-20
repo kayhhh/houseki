@@ -3,10 +3,8 @@ import {
   Mesh,
   MeshStandardMaterial,
   Object3D,
-  PCFSoftShadowMap,
   PerspectiveCamera,
   Scene,
-  sRGBEncoding,
   WebGLRenderer,
 } from "three";
 
@@ -14,34 +12,9 @@ import {
  * Stores Three.js objects and their associated data.
  */
 export class RenderStore {
-  renderer: WebGLRenderer = new WebGLRenderer();
-
-  setCanvas(canvas: HTMLCanvasElement) {
-    // Dispose old renderer
-    this.renderer.dispose();
-
-    // Create new renderer
-    this.renderer = new WebGLRenderer({
-      antialias: true,
-      canvas,
-      powerPreference: "high-performance",
-    });
-    this.renderer.outputEncoding = sRGBEncoding;
-    this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = PCFSoftShadowMap;
-  }
+  renderer = new WebGLRenderer();
 
   readonly defaultMaterial = new MeshStandardMaterial();
-
-  /**
-   * Entity ID of the active camera.
-   */
-  activeCamera: bigint | null = null;
-
-  /**
-   * Entity ID of the active scene.
-   */
-  activeScene: bigint | null = null;
 
   /**
    * Entity ID -> PerspectiveCamera object.

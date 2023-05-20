@@ -1,4 +1,4 @@
-import { initStruct, struct } from "thyseus";
+import { Entity, EntityCommands, initStruct, struct } from "thyseus";
 
 @struct
 export class BoxCollider {
@@ -57,11 +57,23 @@ export class CylinderCollider {
 @struct
 export class HullCollider {
   @struct.u64 declare meshId: bigint;
+
+  constructor(mesh?: Entity | EntityCommands) {
+    initStruct(this);
+
+    if (mesh) this.meshId = mesh.id;
+  }
 }
 
 @struct
 export class MeshCollider {
   @struct.u64 declare meshId: bigint;
+
+  constructor(mesh?: Entity | EntityCommands) {
+    initStruct(this);
+
+    if (mesh) this.meshId = mesh.id;
+  }
 }
 
 @struct
@@ -72,3 +84,36 @@ export class KinematicBody {}
 
 @struct
 export class DynamicBody {}
+
+@struct
+export class CharacterController {
+  @struct.f32 declare offset: number;
+
+  @struct.f32 declare maxSlopeClimbAngle: number;
+  @struct.f32 declare minSlopeSlideAngle: number;
+
+  @struct.bool declare enableAutostep: boolean;
+  @struct.f32 declare maxStepHeight: number;
+  @struct.f32 declare minStepWidth: number;
+  @struct.bool declare stepOnDynamicBodies: boolean;
+
+  @struct.bool declare enableSnapToGround: boolean;
+  @struct.f32 declare snapToGroundDistance: number;
+
+  constructor(offset = 0.01) {
+    initStruct(this);
+
+    this.offset = offset;
+
+    this.maxSlopeClimbAngle = (45 * Math.PI) / 180;
+    this.minSlopeSlideAngle = (30 * Math.PI) / 180;
+
+    this.enableAutostep = true;
+    this.maxStepHeight = 0.5;
+    this.minStepWidth = 0.2;
+    this.stepOnDynamicBodies = false;
+
+    this.enableSnapToGround = true;
+    this.snapToGroundDistance = 0.5;
+  }
+}

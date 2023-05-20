@@ -35,12 +35,15 @@ export function sceneBuilder(
     if (!object) {
       object = new ThreeScene();
 
+      // TODO: Move lights into ECS
       const pointLight = new PointLight(0xffffff, 0.5);
       pointLight.castShadow = true;
+      pointLight.shadow.mapSize.set(1024, 1024);
 
       object.add(new AmbientLight(0xffffff, 0.5));
       object.add(pointLight);
 
+      // TODO: Move skybox into ECS
       loadSkybox(object, "/Skybox.jpg");
 
       store.scenes.set(id, object);
