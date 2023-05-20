@@ -3,9 +3,9 @@ import "./App.css";
 import { Link, Route, useRoute } from "wouter";
 
 import About from "./about/About";
-import Basic from "./pages/Basic";
-import Gltf from "./pages/Gltf";
-import Physics from "./pages/Physics";
+import Basic from "./demos/Basic";
+import Gltf from "./demos/Gltf";
+import Physics from "./demos/Physics";
 
 function closeSidePanel() {
   document.querySelector(".sidepanel")?.classList.remove("open");
