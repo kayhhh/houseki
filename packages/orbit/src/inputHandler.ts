@@ -101,23 +101,24 @@ export function inputHandler(
   localStore.canvas = canvas;
 
   // Add new listeners
+
+  function onPointerDown(event: PointerEvent) {
+    canvas.setPointerCapture(event.pointerId);
+    localStore.pointerDownEvents.push(pointerEventToECS(event));
+  }
+
   function onPointerMove(event: PointerEvent) {
     localStore.pointerMoveEvents.push(pointerEventToECS(event));
+  }
+
+  function onPointerCancel(event: PointerEvent) {
+    canvas.releasePointerCapture(event.pointerId);
+    localStore.pointerCancelEvents.push(pointerEventToECS(event));
   }
 
   function onPointerUp(event: PointerEvent) {
     canvas.releasePointerCapture(event.pointerId);
     localStore.pointerUpEvents.push(pointerEventToECS(event));
-  }
-
-  function onPointerDown(event: PointerEvent) {
-    canvas.focus();
-    canvas.setPointerCapture(event.pointerId);
-    localStore.pointerDownEvents.push(pointerEventToECS(event));
-  }
-
-  function onPointerCancel(event: PointerEvent) {
-    localStore.pointerCancelEvents.push(pointerEventToECS(event));
   }
 
   function onContextMenu(event: MouseEvent) {
@@ -133,20 +134,20 @@ export function inputHandler(
     localStore.keyDownEvents.push(keyboardEventToECS(event));
   }
 
-  canvas.addEventListener("pointermove", onPointerMove);
-  canvas.addEventListener("pointerup", onPointerUp);
   canvas.addEventListener("pointerdown", onPointerDown);
+  canvas.addEventListener("pointermove", onPointerMove);
   canvas.addEventListener("pointercancel", onPointerCancel);
+  canvas.addEventListener("pointerup", onPointerUp);
   canvas.addEventListener("contextmenu", onContextMenu);
   canvas.addEventListener("wheel", onWheel);
   canvas.addEventListener("keydown", onKeyDown);
 
   // Set remove listeners function
   localStore.removeEventListeners = () => {
-    canvas.removeEventListener("pointermove", onPointerMove);
-    canvas.removeEventListener("pointerup", onPointerUp);
     canvas.removeEventListener("pointerdown", onPointerDown);
+    canvas.removeEventListener("pointermove", onPointerMove);
     canvas.removeEventListener("pointercancel", onPointerCancel);
+    canvas.removeEventListener("pointerup", onPointerUp);
     canvas.removeEventListener("contextmenu", onContextMenu);
     canvas.removeEventListener("wheel", onWheel);
     canvas.removeEventListener("keydown", onKeyDown);
