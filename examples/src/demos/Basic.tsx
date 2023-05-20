@@ -73,18 +73,21 @@ function initScene(
   store.activeScene = scene.id;
 
   // Create camera
-  const cameraPosition = new Position(0, 0, 5);
   const camera = commands
     .spawn()
-    .add(cameraPosition)
+    .add(new Position(0, 0, 5))
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
   store.activeCamera = camera.id;
 
   // Create cube
   const geometry = createBoxGeometry(warehouse);
-  const parent = new Parent(scene);
-  commands.spawn().addType(Node).add(parent).addType(Mesh).add(geometry);
+  commands
+    .spawn()
+    .addType(Node)
+    .add(new Parent(scene))
+    .addType(Mesh)
+    .add(geometry);
 }
 
 initScene.parameters = [

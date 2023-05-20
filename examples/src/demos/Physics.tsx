@@ -1,11 +1,9 @@
 import { Engine, Warehouse } from "@lattice-engine/core";
 import { OrbitControls, orbitPlugin } from "@lattice-engine/orbit";
 import {
-  BoxCollider,
   DynamicBody,
   physicsPlugin,
   SphereCollider,
-  StaticBody,
 } from "@lattice-engine/physics";
 import { renderPlugin, RenderStore } from "@lattice-engine/render";
 import {
@@ -30,7 +28,7 @@ import {
 } from "thyseus";
 
 import Canvas from "../utils/Canvas";
-import { createBoxGeometry } from "../utils/createBoxGeometry";
+import { createRoom } from "../utils/createRoom";
 import { createSphereGeometry } from "../utils/createSphereGeometry";
 
 export default function Physics() {
@@ -83,57 +81,41 @@ function initScene(
   store.activeScene = scene.id;
 
   // Create camera
-  const cameraPosition = new Position(0, 0, 8);
   const camera = commands
     .spawn()
-    .add(cameraPosition)
+    .add(new Position(0, 6, 10))
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
   store.activeCamera = camera.id;
 
-  // Create ground
-  const size = [10, 0.5, 10] as const;
-  const collider = new BoxCollider(size);
-  const geometry = createBoxGeometry(warehouse, size);
-  const parent = new Parent(scene);
-  const position = new Position(0, -2, 0);
-  commands
-    .spawn()
-    .addType(Node)
-    .add(parent)
-    .add(position)
-    .addType(Mesh)
-    .add(geometry)
-    .add(collider)
-    .addType(StaticBody);
+  // Create room
+  const room = createRoom([15, 2, 15], commands, warehouse);
+  room.add(new Parent(scene));
 
   // Add dynamic balls
+  const material = commands.spawn().add(new Material([1, 0.2, 0.5, 1]));
+
   function createBall(radius: number, position: [number, number, number]) {
-    const ballCollider = new SphereCollider(radius);
     const ballGeometry = createSphereGeometry(warehouse, radius);
-    const ballMaterial = new Material([1, 0.2, 0.5, 1]);
-    const ballParent = new Parent(scene);
-    const ballPosition = new Position(...position);
     commands
       .spawn()
       .addType(Node)
-      .add(ballParent)
-      .add(ballPosition)
-      .addType(Mesh)
+      .add(new Parent(scene))
+      .add(new Position(...position))
+      .add(new Mesh(material))
       .add(ballGeometry)
-      .add(ballMaterial)
-      .add(ballCollider)
+      .add(new SphereCollider(radius))
       .addType(DynamicBody);
   }
 
-  const BALL_COUNT = 20;
-  const BOUNDS = 4;
+  const BALL_COUNT = 50;
+  const BOUNDS = 5;
 
   for (let i = 0; i < BALL_COUNT; i++) {
     const radius = Math.random() * 0.4 + 0.2;
 
     const x = Math.random() * BOUNDS - BOUNDS / 2;
-    const y = Math.random() * 10;
+    const y = Math.random() * 20 + 4;
     const z = Math.random() * BOUNDS - BOUNDS / 2;
 
     createBall(radius, [x, y, z]);

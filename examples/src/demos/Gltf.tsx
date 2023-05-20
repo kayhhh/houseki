@@ -92,17 +92,15 @@ function initScene(commands: Commands, store: Res<Mut<RenderStore>>) {
   store.activeScene = scene.id;
 
   // Create camera
-  const cameraPosition = new Position(0, 0, 5);
   const camera = commands
     .spawn()
-    .add(cameraPosition)
+    .add(new Position(0, 0, 5))
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
   store.activeCamera = camera.id;
 
   // Add node to scene with glTF component
-  const parent = new Parent(scene);
-  commands.spawn().addType(Node).add(parent).addType(GltfUri);
+  commands.spawn().addType(Node).add(new Parent(scene)).addType(GltfUri);
 }
 
 initScene.parameters = [
