@@ -4,7 +4,7 @@ import { struct } from "thyseus";
 export class MouseEvent {
   @struct.bool declare altKey: boolean;
   @struct.u8 declare button: number;
-  @struct.u8 declare buttons: number;
+  @struct.u16 declare buttons: number;
   @struct.u16 declare clientX: number;
   @struct.u16 declare clientY: number;
   @struct.bool declare ctrlKey: boolean;
@@ -23,7 +23,7 @@ export class MouseEvent {
 export class PointerEvent {
   @struct.bool declare altKey: boolean;
   @struct.u8 declare button: number;
-  @struct.u8 declare buttons: number;
+  @struct.u16 declare buttons: number;
   @struct.u16 declare clientX: number;
   @struct.u16 declare clientY: number;
   @struct.bool declare ctrlKey: boolean;
@@ -34,7 +34,7 @@ export class PointerEvent {
   @struct.u16 declare screenY: number;
   @struct.bool declare shiftKey: boolean;
 
-  @struct.u8 declare pointerId: number;
+  @struct.u32 declare pointerId: number;
   @struct.u16 declare width: number;
   @struct.u16 declare height: number;
   @struct.f32 declare pressure: number;
