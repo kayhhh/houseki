@@ -96,25 +96,21 @@ export function orbitControls(
 
   for (const data of pointerDownReader) {
     const event = pointerEventFromECS("pointerdown", data);
-    console.log("👩‍👦‍👦", "down", event.pointerId);
     localStore.mockElement.dispatchEvent(event);
   }
 
   for (const data of pointerMoveReader) {
     const event = pointerEventFromECS("pointermove", data);
-    console.log("👷‍♀️", "move", event.pointerId);
     localStore.mockElement.dispatchEvent(event);
   }
 
   for (const data of pointerCancelReader) {
     const event = pointerEventFromECS("pointercancel", data);
-    console.log("🧥", "cancel", event.pointerId);
     localStore.mockElement.dispatchEvent(event);
   }
 
   for (const data of pointerUpReader) {
     const event = pointerEventFromECS("pointerup", data);
-    console.log("👩‍🏫", "up", event.pointerId);
     localStore.mockElement.dispatchEvent(event);
   }
 
