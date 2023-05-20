@@ -14,8 +14,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build",
-    "dev": "pnpm build --watch"
+    "build": "vite build --emptyOutDir",
+    "dev": "vite build --watch"
   },
   "dependencies": {
     "@lattice-engine/core": "workspace:^",
