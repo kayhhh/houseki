@@ -101,7 +101,6 @@ export function inputHandler(
   localStore.canvas = canvas;
 
   // Add new listeners
-
   function onPointerDown(event: PointerEvent) {
     canvas.setPointerCapture(event.pointerId);
     localStore.pointerDownEvents.push(pointerEventToECS(event));

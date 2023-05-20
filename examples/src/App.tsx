@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { Link, Route } from "wouter";
+import { Link, Route, useRoute } from "wouter";
 
 import About from "./about/About";
 import Basic from "./pages/Basic";
@@ -34,9 +34,9 @@ export default function App() {
 
         <h3>Examples</h3>
 
-        <Link href="/basic">Basic</Link>
-        <Link href="/gltf">glTF</Link>
-        <Link href="/physics">Physics</Link>
+        <RouteLink href="/basic">Basic</RouteLink>
+        <RouteLink href="/gltf">glTF</RouteLink>
+        <RouteLink href="/physics">Physics</RouteLink>
 
         <h3>Links</h3>
 
@@ -50,5 +50,16 @@ export default function App() {
       <Route path="/gltf" component={Gltf} />
       <Route path="/physics" component={Physics} />
     </div>
+  );
+}
+
+function RouteLink({ href, children }: { href: string; children: string }) {
+  const [isActive] = useRoute(href);
+  const linkClass = isActive ? "active" : "";
+
+  return (
+    <Link href={href} className={linkClass}>
+      {children}
+    </Link>
   );
 }

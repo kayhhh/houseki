@@ -93,7 +93,6 @@ export function orbitControls(
   }
 
   // Send events to mock element
-
   for (const data of pointerDownReader) {
     const event = pointerEventFromECS("pointerdown", data);
     localStore.mockElement.dispatchEvent(event);

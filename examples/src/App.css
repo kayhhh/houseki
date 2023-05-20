@@ -48,6 +48,23 @@ body {
   background-color: #eee;
 }
 
+.sidepanel > a:active {
+  background-color: #ddd;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.sidepanel > a.active {
+  background-color: #eee;
+}
+
+.sidepanel > a.active:hover {
+  background-color: #ddd;
+}
+
+.sidepanel > a.active:active {
+  background-color: #ccc;
+}
+
 .sidepanel.open {
   display: block;
   transform: translateX(0);
