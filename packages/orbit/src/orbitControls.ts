@@ -14,21 +14,7 @@ import {
 import { RenderStore } from "@lattice-engine/render";
 import { PerspectiveCamera, Position } from "@lattice-engine/scene";
 import { OrbitControls as ThreeOrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import {
-  Entity,
-  EventReader,
-  EventReaderDescriptor,
-  Mut,
-  MutDescriptor,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  SystemRes,
-  SystemResourceDescriptor,
-  With,
-  WithDescriptor,
-} from "thyseus";
+import { Entity, EventReader, Mut, Query, Res, SystemRes, With } from "thyseus";
 
 import { OrbitControls } from "./components";
 
@@ -169,20 +155,3 @@ export function orbitControls(
     }
   }
 }
-
-orbitControls.parameters = [
-  ResourceDescriptor(RenderStore),
-  SystemResourceDescriptor(LocalStore),
-  QueryDescriptor(Entity, WithDescriptor(OrbitControls)),
-  QueryDescriptor(
-    [Entity, MutDescriptor(Position)],
-    WithDescriptor(PerspectiveCamera)
-  ),
-  EventReaderDescriptor(PointerDownEvent),
-  EventReaderDescriptor(PointerMoveEvent),
-  EventReaderDescriptor(PointerCancelEvent),
-  EventReaderDescriptor(PointerUpEvent),
-  EventReaderDescriptor(ContextMenuEvent),
-  EventReaderDescriptor(OnWheelEvent),
-  EventReaderDescriptor(KeyDownEvent),
-];

@@ -1,13 +1,7 @@
 import { Warehouse } from "@lattice-engine/core";
 import { Geometry } from "@lattice-engine/scene";
 import { BufferAttribute, BufferGeometry } from "three";
-import {
-  Entity,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-} from "thyseus";
+import { Entity, Query, Res } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
@@ -64,12 +58,6 @@ export function geometryBuilder(
     }
   }
 }
-
-geometryBuilder.parameters = [
-  ResourceDescriptor(Warehouse),
-  ResourceDescriptor(RenderStore),
-  QueryDescriptor([Geometry, Entity]),
-];
 
 /**
  * Sets a BufferGeometry attribute to a given array,

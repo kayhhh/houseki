@@ -8,15 +8,7 @@ import {
   sRGBEncoding,
   Texture,
 } from "three";
-import {
-  Entity,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  With,
-  WithDescriptor,
-} from "thyseus";
+import { Entity, Query, Res, With } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
@@ -64,11 +56,6 @@ export function sceneBuilder(
     }
   }
 }
-
-sceneBuilder.parameters = [
-  ResourceDescriptor(RenderStore),
-  QueryDescriptor(Entity, WithDescriptor(Scene)),
-];
 
 async function loadSkybox(scene: ThreeScene, uri: string | null) {
   // Clean up old skybox

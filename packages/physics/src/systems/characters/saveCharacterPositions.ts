@@ -1,15 +1,5 @@
 import { Position } from "@lattice-engine/scene";
-import {
-  Entity,
-  Mut,
-  MutDescriptor,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  With,
-  WithDescriptor,
-} from "thyseus";
+import { Entity, Mut, Query, Res, With } from "thyseus";
 
 import { CharacterController } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
@@ -30,11 +20,3 @@ export function saveCharacterPositions(
     position.z = translation.z;
   }
 }
-
-saveCharacterPositions.parameters = [
-  ResourceDescriptor(PhysicsStore),
-  QueryDescriptor(
-    [Entity, MutDescriptor(Position)],
-    WithDescriptor(CharacterController)
-  ),
-];

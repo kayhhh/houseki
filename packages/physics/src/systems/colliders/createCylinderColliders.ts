@@ -1,11 +1,5 @@
 import { ColliderDesc } from "@dimforge/rapier3d";
-import {
-  Entity,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-} from "thyseus";
+import { Entity, Query, Res } from "thyseus";
 
 import { CylinderCollider } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
@@ -50,8 +44,3 @@ export function createCylinderColliders(
     }
   }
 }
-
-createCylinderColliders.parameters = [
-  ResourceDescriptor(PhysicsStore),
-  QueryDescriptor([Entity, CylinderCollider]),
-];

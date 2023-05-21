@@ -1,3 +1,4 @@
+import { thyseusPlugin } from "@thyseus/transformer-rollup";
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
@@ -23,5 +24,5 @@ export default defineConfig({
     },
     target: "esnext",
   },
-  plugins: [dts()],
+  plugins: [dts(), thyseusPlugin()],
 });

@@ -1,14 +1,6 @@
 import { Node, Parent, Position, Rotation, Scale } from "@lattice-engine/scene";
 import { Object3D } from "three";
-import {
-  Entity,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  With,
-  WithDescriptor,
-} from "thyseus";
+import { Entity, Query, Res, With } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
@@ -77,12 +69,3 @@ export function nodeBuilder(
     }
   }
 }
-
-nodeBuilder.parameters = [
-  ResourceDescriptor(RenderStore),
-  QueryDescriptor(Entity, WithDescriptor(Node)),
-  QueryDescriptor([Entity, Position], WithDescriptor(Node)),
-  QueryDescriptor([Entity, Rotation], WithDescriptor(Node)),
-  QueryDescriptor([Entity, Scale], WithDescriptor(Node)),
-  QueryDescriptor([Entity, Parent], WithDescriptor(Node)),
-];

@@ -1,13 +1,5 @@
 import { RigidBodyDesc } from "@dimforge/rapier3d";
-import {
-  Entity,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  With,
-  WithDescriptor,
-} from "thyseus";
+import { Entity, Query, Res, With } from "thyseus";
 
 import { StaticBody } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
@@ -39,8 +31,3 @@ export function createStaticBodies(
     }
   }
 }
-
-createStaticBodies.parameters = [
-  ResourceDescriptor(PhysicsStore),
-  QueryDescriptor(Entity, WithDescriptor(StaticBody)),
-];

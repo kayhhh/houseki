@@ -23,15 +23,7 @@ import {
   sRGBEncoding,
   Texture as ThreeTexture,
 } from "three";
-import {
-  Entity,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  SystemRes,
-  SystemResourceDescriptor,
-} from "thyseus";
+import { Entity, Query, Res, SystemRes } from "thyseus";
 
 import { WEBGL_CONSTANTS } from "../constants";
 import { RenderStore } from "../RenderStore";
@@ -164,13 +156,6 @@ export function materialBuilder(
     }
   }
 }
-
-materialBuilder.parameters = [
-  ResourceDescriptor(Warehouse),
-  ResourceDescriptor(RenderStore),
-  SystemResourceDescriptor(ImageStore),
-  QueryDescriptor([Entity, Material]),
-];
 
 function loadTexture(
   object: ThreeTexture | null,

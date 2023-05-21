@@ -1,17 +1,5 @@
 import { Position } from "@lattice-engine/scene";
-import {
-  Entity,
-  Mut,
-  MutDescriptor,
-  Or,
-  OrDescriptor,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  With,
-  WithDescriptor,
-} from "thyseus";
+import { Entity, Mut, Or, Query, Res, With } from "thyseus";
 
 import { DynamicBody, KinematicBody, StaticBody } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
@@ -34,14 +22,3 @@ export function saveRigidBodyPositions(
     }
   }
 }
-
-saveRigidBodyPositions.parameters = [
-  ResourceDescriptor(PhysicsStore),
-  QueryDescriptor(
-    [Entity, MutDescriptor(Position)],
-    OrDescriptor(
-      WithDescriptor(StaticBody),
-      OrDescriptor(WithDescriptor(KinematicBody), WithDescriptor(DynamicBody))
-    )
-  ),
-];

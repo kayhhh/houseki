@@ -1,14 +1,6 @@
 import { Geometry, Mesh } from "@lattice-engine/scene";
 import { BufferGeometry, Mesh as ThreeMesh } from "three";
-import {
-  Entity,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  With,
-  WithDescriptor,
-} from "thyseus";
+import { Entity, Query, Res, With } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
@@ -59,8 +51,3 @@ export function meshBuilder(
     }
   }
 }
-
-meshBuilder.parameters = [
-  ResourceDescriptor(RenderStore),
-  QueryDescriptor([Entity, Mesh], WithDescriptor(Geometry)),
-];

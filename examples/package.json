@@ -21,10 +21,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "three": "^0.149.0",
-    "thyseus": "0.12.0-beta.3",
+    "thyseus": "0.12.0-beta.5",
     "wouter": "^2.11.0"
   },
   "devDependencies": {
+    "@thyseus/transformer-rollup": "0.12.0-beta.5",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "@types/three": "^0.149.0",

@@ -1,15 +1,5 @@
 import { Position } from "@lattice-engine/scene";
-import {
-  Entity,
-  Or,
-  OrDescriptor,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  With,
-  WithDescriptor,
-} from "thyseus";
+import { Entity, Or, Query, Res, With } from "thyseus";
 
 import { DynamicBody, KinematicBody, StaticBody } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
@@ -36,14 +26,3 @@ export function moveRigidBodies(
     }
   }
 }
-
-moveRigidBodies.parameters = [
-  ResourceDescriptor(PhysicsStore),
-  QueryDescriptor(
-    [Entity, Position],
-    OrDescriptor(
-      WithDescriptor(StaticBody),
-      OrDescriptor(WithDescriptor(KinematicBody), WithDescriptor(DynamicBody))
-    )
-  ),
-];

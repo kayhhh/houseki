@@ -1,14 +1,6 @@
 import { PerspectiveCamera, Position, Rotation } from "@lattice-engine/scene";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
-import {
-  Entity,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  With,
-  WithDescriptor,
-} from "thyseus";
+import { Entity, Query, Res, With } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
@@ -64,10 +56,3 @@ export function cameraBuilder(
     if (!ids.includes(id)) store.perspectiveCameras.delete(id);
   }
 }
-
-cameraBuilder.parameters = [
-  ResourceDescriptor(RenderStore),
-  QueryDescriptor([PerspectiveCamera, Entity]),
-  QueryDescriptor([Entity, Position], WithDescriptor(PerspectiveCamera)),
-  QueryDescriptor([Entity, Rotation], WithDescriptor(PerspectiveCamera)),
-];

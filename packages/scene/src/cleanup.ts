@@ -1,15 +1,5 @@
 import { Warehouse } from "@lattice-engine/core";
-import {
-  Commands,
-  CommandsDescriptor,
-  Entity,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  SystemRes,
-  SystemResourceDescriptor,
-} from "thyseus";
+import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
 
 import { Geometry, Material } from "./components";
 
@@ -65,13 +55,6 @@ export function geometryCleanup(
   }
 }
 
-geometryCleanup.parameters = [
-  CommandsDescriptor(),
-  ResourceDescriptor(Warehouse),
-  SystemResourceDescriptor(EntityTracker),
-  QueryDescriptor([Entity, Geometry]),
-];
-
 /**
  * Cleans up material resources on removal.
  */
@@ -115,10 +98,3 @@ export function materialCleanup(
     }
   }
 }
-
-materialCleanup.parameters = [
-  CommandsDescriptor(),
-  ResourceDescriptor(Warehouse),
-  SystemResourceDescriptor(EntityTracker),
-  QueryDescriptor([Entity, Material]),
-];

@@ -1,6 +1,6 @@
 import { CoreStore, CoreStruct } from "@lattice-engine/core";
 import { PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from "three";
-import { ResourceDescriptor } from "thyseus";
+import { Mut, Res } from "thyseus";
 
 import { RenderStore } from "./RenderStore";
 
@@ -8,9 +8,9 @@ import { RenderStore } from "./RenderStore";
  * Renders the scene to the canvas.
  */
 export function canvasRenderer(
-  coreStore: CoreStore,
-  coreStruct: CoreStruct,
-  renderStore: RenderStore
+  coreStore: Res<CoreStore>,
+  coreStruct: Res<CoreStruct>,
+  renderStore: Res<Mut<RenderStore>>
 ) {
   let renderer = renderStore.renderer;
   const canvas = coreStore.canvas;
@@ -50,9 +50,3 @@ export function canvasRenderer(
   renderer.setSize(canvas.width, canvas.height, false);
   renderer.render(scene, camera);
 }
-
-canvasRenderer.parameters = [
-  ResourceDescriptor(CoreStore),
-  ResourceDescriptor(CoreStruct),
-  ResourceDescriptor(RenderStore),
-];

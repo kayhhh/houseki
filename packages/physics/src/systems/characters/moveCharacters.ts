@@ -1,13 +1,5 @@
 import { Position } from "@lattice-engine/scene";
-import {
-  Entity,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  With,
-  WithDescriptor,
-} from "thyseus";
+import { Entity, Query, Res, With } from "thyseus";
 
 import { CharacterController } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
@@ -45,8 +37,3 @@ export function moveCharacters(
     else collider.setTranslation(newPos);
   }
 }
-
-moveCharacters.parameters = [
-  ResourceDescriptor(PhysicsStore),
-  QueryDescriptor([Entity, Position], WithDescriptor(CharacterController)),
-];
