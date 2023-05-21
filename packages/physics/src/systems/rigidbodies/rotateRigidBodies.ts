@@ -1,15 +1,5 @@
 import { Rotation } from "@lattice-engine/scene";
-import {
-  Entity,
-  Or,
-  OrDescriptor,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  With,
-  WithDescriptor,
-} from "thyseus";
+import { Entity, Or, Query, Res, With } from "thyseus";
 
 import { DynamicBody, KinematicBody, StaticBody } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
@@ -37,14 +27,3 @@ export function rotateRigidBodies(
     }
   }
 }
-
-rotateRigidBodies.parameters = [
-  ResourceDescriptor(PhysicsStore),
-  QueryDescriptor(
-    [Entity, Rotation],
-    OrDescriptor(
-      WithDescriptor(StaticBody),
-      OrDescriptor(WithDescriptor(KinematicBody), WithDescriptor(DynamicBody))
-    )
-  ),
-];

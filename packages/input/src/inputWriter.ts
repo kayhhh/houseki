@@ -1,12 +1,5 @@
 import { CoreStore } from "@lattice-engine/core";
-import {
-  EventWriter,
-  EventWriterDescriptor,
-  Res,
-  ResourceDescriptor,
-  SystemRes,
-  SystemResourceDescriptor,
-} from "thyseus";
+import { EventWriter, Res, SystemRes } from "thyseus";
 
 import {
   ContextMenuEvent,
@@ -170,16 +163,3 @@ export function inputWriter(
     canvas.removeEventListener("keydown", onKeyDown);
   };
 }
-
-inputWriter.parameters = [
-  ResourceDescriptor(CoreStore),
-  ResourceDescriptor(InputStruct),
-  SystemResourceDescriptor(LocalStore),
-  EventWriterDescriptor(PointerMoveEvent),
-  EventWriterDescriptor(PointerDownEvent),
-  EventWriterDescriptor(PointerUpEvent),
-  EventWriterDescriptor(PointerCancelEvent),
-  EventWriterDescriptor(ContextMenuEvent),
-  EventWriterDescriptor(OnWheelEvent),
-  EventWriterDescriptor(KeyDownEvent),
-];

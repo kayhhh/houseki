@@ -12,15 +12,7 @@ import {
   scenePlugin,
 } from "@lattice-engine/scene";
 import { useEffect, useState } from "react";
-import {
-  Commands,
-  CommandsDescriptor,
-  CoreSchedule,
-  Mut,
-  MutDescriptor,
-  Res,
-  ResourceDescriptor,
-} from "thyseus";
+import { Commands, CoreSchedule, Mut, Res } from "thyseus";
 
 import Canvas from "../utils/Canvas";
 import { createBoxGeometry } from "../utils/createBoxGeometry";
@@ -92,10 +84,3 @@ function initScene(
     .addType(Mesh)
     .add(geometry);
 }
-
-initScene.parameters = [
-  CommandsDescriptor(),
-  ResourceDescriptor(Warehouse),
-  ResourceDescriptor(MutDescriptor(CoreStore)),
-  ResourceDescriptor(MutDescriptor(CoreStruct)),
-];

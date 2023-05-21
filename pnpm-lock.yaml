@@ -89,12 +89,15 @@ importers:
         specifier: ^0.149.0
         version: 0.149.0
       thyseus:
-        specifier: 0.12.0-beta.3
-        version: 0.12.0-beta.3
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5
       wouter:
         specifier: ^2.11.0
         version: 2.11.0(react@18.2.0)
     devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5(thyseus@0.12.0-beta.5)
       '@types/react':
         specifier: ^18.2.6
         version: 18.2.6
@@ -126,9 +129,12 @@ importers:
   packages/core:
     dependencies:
       thyseus:
-        specifier: 0.12.0-beta.3
-        version: 0.12.0-beta.3
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5
     devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5(thyseus@0.12.0-beta.5)
       typescript:
         specifier: ~5.0.4
         version: 5.0.4
@@ -154,9 +160,12 @@ importers:
         specifier: workspace:^
         version: link:../scene
       thyseus:
-        specifier: 0.12.0-beta.3
-        version: 0.12.0-beta.3
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5
     devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5(thyseus@0.12.0-beta.5)
       typescript:
         specifier: ~5.0.4
         version: 5.0.4
@@ -173,9 +182,12 @@ importers:
         specifier: workspace:^
         version: link:../core
       thyseus:
-        specifier: 0.12.0-beta.3
-        version: 0.12.0-beta.3
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5
     devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5(thyseus@0.12.0-beta.5)
       typescript:
         specifier: ~5.0.4
         version: 5.0.4
@@ -201,9 +213,12 @@ importers:
         specifier: ^0.149.0
         version: 0.149.0
       thyseus:
-        specifier: 0.12.0-beta.3
-        version: 0.12.0-beta.3
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5
     devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5(thyseus@0.12.0-beta.5)
       '@types/three':
         specifier: ^0.149.0
         version: 0.149.0
@@ -226,9 +241,12 @@ importers:
         specifier: workspace:^
         version: link:../scene
       thyseus:
-        specifier: 0.12.0-beta.3
-        version: 0.12.0-beta.3
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5
     devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5(thyseus@0.12.0-beta.5)
       typescript:
         specifier: ~5.0.4
         version: 5.0.4
@@ -257,9 +275,12 @@ importers:
         specifier: workspace:^
         version: link:../scene
       thyseus:
-        specifier: 0.12.0-beta.3
-        version: 0.12.0-beta.3
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5
     devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5(thyseus@0.12.0-beta.5)
       typescript:
         specifier: ~5.0.4
         version: 5.0.4
@@ -282,9 +303,12 @@ importers:
         specifier: ^0.149.0
         version: 0.149.0
       thyseus:
-        specifier: 0.12.0-beta.3
-        version: 0.12.0-beta.3
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5
     devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5(thyseus@0.12.0-beta.5)
       '@types/three':
         specifier: ^0.149.0
         version: 0.149.0
@@ -304,9 +328,12 @@ importers:
         specifier: workspace:^
         version: link:../core
       thyseus:
-        specifier: 0.12.0-beta.3
-        version: 0.12.0-beta.3
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5
     devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5(thyseus@0.12.0-beta.5)
       typescript:
         specifier: ~5.0.4
         version: 5.0.4
@@ -1232,6 +1259,24 @@ packages:
     dependencies:
       react: 18.2.0
     dev: false
+
+  /@thyseus/transformer-rollup@0.12.0-beta.5(thyseus@0.12.0-beta.5):
+    resolution: {integrity: sha512-FL270kkChS6BnlX7t/8JQhLJZfD3Ja47qvUosBHD2AqrEkv63tWRCovnQAq+mZb543K/eCJmivePpmCkASnnMQ==}
+    peerDependencies:
+      thyseus: 0.12.0-beta.5
+    dependencies:
+      '@rollup/pluginutils': 5.0.2
+      '@thyseus/typescript-transformer': 0.12.0-beta.5
+      thyseus: 0.12.0-beta.5
+    transitivePeerDependencies:
+      - rollup
+    dev: true
+
+  /@thyseus/typescript-transformer@0.12.0-beta.5:
+    resolution: {integrity: sha512-+iLxU5BAHRrvj0mzAJNCuntmszvqrF4a6KvWRNXnJZp6iRWaCqb59+cq0QGOfL8IoitFnleM6RPfVldatUbU/Q==}
+    dependencies:
+      typescript: 5.0.4
+    dev: true
 
   /@ts-morph/common@0.19.0:
     resolution: {integrity: sha512-Unz/WHmd4pGax91rdIKWi51wnVUW11QttMEPpBiBgIewnc9UQIX7UDLxr5vRlqeByXCwhkF6VabSsI0raWcyAQ==}
@@ -2231,7 +2276,6 @@ packages:
 
   /esm-env@1.0.0:
     resolution: {integrity: sha512-Cf6VksWPsTuW01vU9Mk/3vRue91Zevka5SjyNf3nEpokFRuqt/KjUQoGAwq9qMmhpLTHmXzSIrFRw8zxWzmFBA==}
-    dev: false
 
   /espree@6.2.1:
     resolution: {integrity: sha512-ysCxRQY3WaXJz9tdbWOwuWr5Y/XrPTGX9Kiz3yoUXwW0VZ4w30HTkQLaGx/+ttFjF8i+ACbArnB4ce68a9m5hw==}
@@ -3672,11 +3716,10 @@ packages:
     resolution: {integrity: sha512-tohpUxPDht0qExRLDTM8sjRLc5d9STURNrdnK3w9A+V4pxaTBfKWWT/IqtiLfg23Vfc3Z+ImNfvRw1/0CtxrkQ==}
     dev: false
 
-  /thyseus@0.12.0-beta.3:
-    resolution: {integrity: sha512-73OzeLzDaJaWelhnKK4bScHxcFT3206R+WYUvk6W7PQKx3c5ipj9S8Ya41/BC0YI5Qb+Y3avx1o/0WOyIkHDgQ==}
+  /thyseus@0.12.0-beta.5:
+    resolution: {integrity: sha512-It7mCJBZAz//vmdx57gDr0sMzl1McyOZ5Vr7GClIjXXqCmw+hMSKmN8sDRTNT+aPLQom0nkj2XRRFnlGFhXpag==}
     dependencies:
       esm-env: 1.0.0
-    dev: false
 
   /titleize@3.0.0:
     resolution: {integrity: sha512-KxVu8EYHDPBdUYdKZdKtU2aj2XfEx9AfjXxE/Aj0vT06w2icA09Vus1rh6eSu1y01akYg6BjIK/hxyLJINoMLQ==}

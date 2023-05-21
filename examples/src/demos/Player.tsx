@@ -12,15 +12,7 @@ import {
   scenePlugin,
 } from "@lattice-engine/scene";
 import { useEffect, useState } from "react";
-import {
-  Commands,
-  CommandsDescriptor,
-  CoreSchedule,
-  Mut,
-  MutDescriptor,
-  Res,
-  ResourceDescriptor,
-} from "thyseus";
+import { Commands, CoreSchedule, Mut, Res } from "thyseus";
 
 import Canvas from "../utils/Canvas";
 import { createRoom } from "../utils/createRoom";
@@ -92,11 +84,3 @@ function initScene(
 
   inputStruct.enablePointerLock = true;
 }
-
-initScene.parameters = [
-  CommandsDescriptor(),
-  ResourceDescriptor(Warehouse),
-  ResourceDescriptor(MutDescriptor(CoreStore)),
-  ResourceDescriptor(MutDescriptor(CoreStruct)),
-  ResourceDescriptor(MutDescriptor(InputStruct)),
-];

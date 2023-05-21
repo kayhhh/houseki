@@ -1,16 +1,6 @@
 import { Document, WebIO } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
-import {
-  Commands,
-  CommandsDescriptor,
-  Entity,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  SystemRes,
-  SystemResourceDescriptor,
-} from "thyseus";
+import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
 
 import { GltfUri } from "../components";
 import { extensions } from "../extensions";
@@ -101,10 +91,3 @@ export function gltfLoader(
     }
   }
 }
-
-gltfLoader.parameters = [
-  CommandsDescriptor(),
-  ResourceDescriptor(Warehouse),
-  SystemResourceDescriptor(GltfStore),
-  QueryDescriptor([Entity, GltfUri]),
-];

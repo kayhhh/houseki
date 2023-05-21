@@ -13,17 +13,7 @@ import {
 } from "@lattice-engine/scene";
 import { useControls } from "leva";
 import { useEffect, useState } from "react";
-import {
-  Commands,
-  CommandsDescriptor,
-  CoreSchedule,
-  Mut,
-  MutDescriptor,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-} from "thyseus";
+import { Commands, CoreSchedule, Mut, Query, Res } from "thyseus";
 
 import Canvas from "../utils/Canvas";
 
@@ -109,12 +99,6 @@ function initScene(
   commands.spawn().addType(Node).add(new Parent(scene)).addType(GltfUri);
 }
 
-initScene.parameters = [
-  CommandsDescriptor(),
-  ResourceDescriptor(MutDescriptor(CoreStore)),
-  ResourceDescriptor(MutDescriptor(CoreStruct)),
-];
-
 /**
  * System to update the glTF uri.
  */
@@ -123,5 +107,3 @@ function loadGltf(entities: Query<Mut<GltfUri>>) {
     gltf.uri = modelUri;
   }
 }
-
-loadGltf.parameters = [QueryDescriptor(MutDescriptor(GltfUri))];

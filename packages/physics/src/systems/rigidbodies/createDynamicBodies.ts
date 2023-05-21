@@ -1,13 +1,5 @@
 import { RigidBodyDesc } from "@dimforge/rapier3d";
-import {
-  Entity,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  With,
-  WithDescriptor,
-} from "thyseus";
+import { Entity, Query, Res, With } from "thyseus";
 
 import { DynamicBody } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
@@ -40,8 +32,3 @@ export function createDynamicBodies(
     }
   }
 }
-
-createDynamicBodies.parameters = [
-  ResourceDescriptor(PhysicsStore),
-  QueryDescriptor(Entity, WithDescriptor(DynamicBody)),
-];

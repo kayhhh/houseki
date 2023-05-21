@@ -1,18 +1,6 @@
 import { InputStruct, PointerMoveEvent } from "@lattice-engine/input";
 import { Rotation } from "@lattice-engine/scene";
-import {
-  Entity,
-  EventReader,
-  EventReaderDescriptor,
-  Mut,
-  MutDescriptor,
-  Query,
-  QueryDescriptor,
-  Res,
-  ResourceDescriptor,
-  With,
-  WithDescriptor,
-} from "thyseus";
+import { Entity, EventReader, Mut, Query, Res, With } from "thyseus";
 
 import { PlayerControls } from "./components";
 
@@ -56,13 +44,6 @@ export function playerControls(
     }
   }
 }
-
-playerControls.parameters = [
-  ResourceDescriptor(InputStruct),
-  EventReaderDescriptor(PointerMoveEvent),
-  QueryDescriptor(Entity, WithDescriptor(PlayerControls)),
-  QueryDescriptor(MutDescriptor(Rotation), WithDescriptor(PlayerControls)),
-];
 
 type Vec3 = [number, number, number];
 
