@@ -1,3 +1,3 @@
 # @lattice-engine/orbit
 
-Orbit controls.
+Orbit controls, using [Three.js OrbitControls](https://threejs.org/docs/#examples/en/controls/OrbitControls).

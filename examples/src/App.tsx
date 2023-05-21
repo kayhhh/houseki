@@ -6,6 +6,7 @@ import About from "./about/About";
 import Basic from "./demos/Basic";
 import Gltf from "./demos/Gltf";
 import Physics from "./demos/Physics";
+import Player from "./demos/Player";
 
 function closeSidePanel() {
   document.querySelector(".sidepanel")?.classList.remove("open");
@@ -37,6 +38,7 @@ export default function App() {
         <RouteLink href="/basic">Basic</RouteLink>
         <RouteLink href="/gltf">glTF</RouteLink>
         <RouteLink href="/physics">Physics</RouteLink>
+        <RouteLink href="/player">Player</RouteLink>
 
         <h3>Links</h3>
 
@@ -49,6 +51,7 @@ export default function App() {
       <Route path="/basic" component={Basic} />
       <Route path="/gltf" component={Gltf} />
       <Route path="/physics" component={Physics} />
+      <Route path="/player" component={Player} />
     </div>
   );
 }

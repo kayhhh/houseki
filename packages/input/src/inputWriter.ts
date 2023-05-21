@@ -17,6 +17,7 @@ import {
   PointerMoveEvent,
   PointerUpEvent,
 } from "./events";
+import { InputStruct } from "./resources";
 import {
   keyboardEventToECS,
   mouseEventToECS,
@@ -39,10 +40,11 @@ class LocalStore {
 }
 
 /**
- * Reads input events from the canvas and sends them into the ECS.
+ * Reads input events from the canvas and writes them into the ECS.
  */
 export function inputWriter(
   store: Res<CoreStore>,
+  inputStruct: Res<InputStruct>,
   localStore: SystemRes<LocalStore>,
   pointerMoveWriter: EventWriter<PointerMoveEvent>,
   pointerDownWriter: EventWriter<PointerDownEvent>,
@@ -113,7 +115,12 @@ export function inputWriter(
 
   // Add new listeners
   function onPointerDown(event: PointerEvent) {
-    canvas?.setPointerCapture(event.pointerId);
+    if (inputStruct.enablePointerLock) {
+      if (document.pointerLockElement !== canvas) canvas?.requestPointerLock();
+    } else {
+      canvas?.setPointerCapture(event.pointerId);
+    }
+
     localStore.pointerDownEvents.push(pointerEventToECS(event));
   }
 
@@ -166,6 +173,7 @@ export function inputWriter(
 
 inputWriter.parameters = [
   ResourceDescriptor(CoreStore),
+  ResourceDescriptor(InputStruct),
   SystemResourceDescriptor(LocalStore),
   EventWriterDescriptor(PointerMoveEvent),
   EventWriterDescriptor(PointerDownEvent),

@@ -67,6 +67,9 @@ importers:
       '@lattice-engine/physics':
         specifier: workspace:^
         version: link:../packages/physics
+      '@lattice-engine/player':
+        specifier: workspace:^
+        version: link:../packages/player
       '@lattice-engine/render':
         specifier: workspace:^
         version: link:../packages/render
@@ -244,9 +247,15 @@ importers:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
+      '@lattice-engine/input':
+        specifier: workspace:^
+        version: link:../input
       '@lattice-engine/physics':
         specifier: workspace:^
         version: link:../physics
+      '@lattice-engine/scene':
+        specifier: workspace:^
+        version: link:../scene
       thyseus:
         specifier: 0.12.0-beta.3
         version: 0.12.0-beta.3

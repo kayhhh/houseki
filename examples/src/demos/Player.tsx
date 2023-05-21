@@ -1,17 +1,16 @@
-import { CoreStore, CoreStruct, Engine } from "@lattice-engine/core";
-import { gltfPlugin, GltfUri } from "@lattice-engine/gltf";
-import { inputPlugin } from "@lattice-engine/input";
-import { OrbitControls, orbitPlugin } from "@lattice-engine/orbit";
+import { CoreStore, CoreStruct, Engine, Warehouse } from "@lattice-engine/core";
+import { inputPlugin, InputStruct } from "@lattice-engine/input";
+import { physicsPlugin } from "@lattice-engine/physics";
+import { PlayerControls, playerPlugin } from "@lattice-engine/player";
 import { renderPlugin } from "@lattice-engine/render";
 import {
-  Node,
   Parent,
   PerspectiveCamera,
   Position,
+  Rotation,
   Scene,
   scenePlugin,
 } from "@lattice-engine/scene";
-import { useControls } from "leva";
 import { useEffect, useState } from "react";
 import {
   Commands,
@@ -19,30 +18,15 @@ import {
   CoreSchedule,
   Mut,
   MutDescriptor,
-  Query,
-  QueryDescriptor,
   Res,
   ResourceDescriptor,
 } from "thyseus";
 
 import Canvas from "../utils/Canvas";
+import { createRoom } from "../utils/createRoom";
 
-const MODELS = {
-  Cube: "/Cube/Cube.gltf",
-  "Damaged Helmet": "/DamagedHelmet/DamagedHelmet.glb",
-  "Flight Helmet": "/FlightHelmet/FlightHelmet.gltf",
-};
-
-// Using a local variable like this will not work with multi-threading
-// TODO: Find a better solution
-let modelUri = "";
-
-export default function Gltf() {
+export default function Physics() {
   const [engine, setEngine] = useState<Engine>();
-
-  const { model } = useControls({
-    model: { options: MODELS },
-  });
 
   // Create engine
   useEffect(() => {
@@ -50,10 +34,9 @@ export default function Gltf() {
       .addPlugin(inputPlugin)
       .addPlugin(scenePlugin)
       .addPlugin(renderPlugin)
-      .addPlugin(gltfPlugin)
-      .addPlugin(orbitPlugin)
-      .addSystemsToSchedule(CoreSchedule.Startup, initScene)
-      .addSystems(loadGltf);
+      .addPlugin(physicsPlugin)
+      .addPlugin(playerPlugin)
+      .addSystemsToSchedule(CoreSchedule.Startup, initScene);
 
     builder.build().then((world) => {
       const newEngine = new Engine(world);
@@ -72,11 +55,6 @@ export default function Gltf() {
     };
   }, [engine]);
 
-  // Update glTF model
-  useEffect(() => {
-    modelUri = model;
-  }, [model]);
-
   return <Canvas />;
 }
 
@@ -85,8 +63,10 @@ export default function Gltf() {
  */
 function initScene(
   commands: Commands,
+  warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
-  coreStruct: Res<Mut<CoreStruct>>
+  coreStruct: Res<Mut<CoreStruct>>,
+  inputStruct: Res<Mut<InputStruct>>
 ) {
   // Set canvas
   const canvas = document.querySelector("canvas");
@@ -97,31 +77,26 @@ function initScene(
   const scene = commands.spawn().addType(Scene);
   coreStruct.activeScene = scene.id;
 
-  // Create camera
+  // Create room
+  const room = createRoom([15, 2, 15], commands, warehouse);
+  room.add(new Parent(scene));
+
+  // Create camera and player
   const camera = commands
     .spawn()
-    .add(new Position(0, 0, 5))
+    .add(new Position(0, 4, 0))
+    .add(new Rotation())
     .addType(PerspectiveCamera)
-    .addType(OrbitControls);
+    .addType(PlayerControls);
   coreStruct.activeCamera = camera.id;
 
-  // Add node to scene with glTF component
-  commands.spawn().addType(Node).add(new Parent(scene)).addType(GltfUri);
+  inputStruct.enablePointerLock = true;
 }
 
 initScene.parameters = [
   CommandsDescriptor(),
+  ResourceDescriptor(Warehouse),
   ResourceDescriptor(MutDescriptor(CoreStore)),
   ResourceDescriptor(MutDescriptor(CoreStruct)),
+  ResourceDescriptor(MutDescriptor(InputStruct)),
 ];
-
-/**
- * System to update the glTF uri.
- */
-function loadGltf(entities: Query<Mut<GltfUri>>) {
-  for (const gltf of entities) {
-    gltf.uri = modelUri;
-  }
-}
-
-loadGltf.parameters = [QueryDescriptor(MutDescriptor(GltfUri))];

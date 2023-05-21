@@ -50,22 +50,22 @@ class LocalStore {
   /**
    * Entity ID -> Three.js OrbitControls object
    */
-  readonly map = new Map<bigint, ThreeOrbitControls>();
+  readonly objects = new Map<bigint, ThreeOrbitControls>();
 }
 
 /**
- * OrbitControls system.
+ * Orbit controls system.
  * Uses the built in OrbitControls from Three.js.
  */
 export function orbitControls(
-  store: Res<RenderStore>,
+  renderStore: Res<RenderStore>,
   localStore: SystemRes<LocalStore>,
   entities: Query<Entity, With<[OrbitControls, PerspectiveCamera]>>,
   withPositions: Query<[Entity, Mut<Position>], With<PerspectiveCamera>>,
-  pointerMoveReader: EventReader<PointerMoveEvent>,
   pointerDownReader: EventReader<PointerDownEvent>,
-  pointerUpReader: EventReader<PointerUpEvent>,
+  pointerMoveReader: EventReader<PointerMoveEvent>,
   pointerCancelReader: EventReader<PointerCancelEvent>,
+  pointerUpReader: EventReader<PointerUpEvent>,
   contextMenuReader: EventReader<ContextMenuEvent>,
   onWheelReader: EventReader<OnWheelEvent>,
   keyDownReader: EventReader<KeyDownEvent>
@@ -73,16 +73,18 @@ export function orbitControls(
   const ids: bigint[] = [];
 
   // Update mock element size
-  localStore.mockElement.clientWidth = store.renderer.domElement.clientWidth;
-  localStore.mockElement.clientHeight = store.renderer.domElement.clientHeight;
+  localStore.mockElement.clientWidth =
+    renderStore.renderer.domElement.clientWidth;
+  localStore.mockElement.clientHeight =
+    renderStore.renderer.domElement.clientHeight;
 
   // Create new objects
   for (const { id } of entities) {
     ids.push(id);
 
-    if (localStore.map.has(id)) continue;
+    if (localStore.objects.has(id)) continue;
 
-    const cameraObject = store.perspectiveCameras.get(id);
+    const cameraObject = renderStore.perspectiveCameras.get(id);
     if (!cameraObject) continue;
 
     const object = new ThreeOrbitControls(
@@ -91,7 +93,7 @@ export function orbitControls(
     );
     object.enableDamping = true;
 
-    localStore.map.set(id, object);
+    localStore.objects.set(id, object);
   }
 
   // Send events to mock element
@@ -140,16 +142,16 @@ export function orbitControls(
   keyDownReader.clear();
 
   // Update objects
-  for (const object of localStore.map.values()) {
+  for (const object of localStore.objects.values()) {
     object.update();
   }
 
   // Copy positions into ECS
   for (const [{ id }, position] of withPositions) {
-    const object = localStore.map.get(id);
+    const object = localStore.objects.get(id);
     if (!object) continue;
 
-    const cameraObject = store.perspectiveCameras.get(id);
+    const cameraObject = renderStore.perspectiveCameras.get(id);
     if (!cameraObject) continue;
 
     position.x = cameraObject.position.x;
@@ -158,12 +160,12 @@ export function orbitControls(
   }
 
   // Remove objects that no longer exist
-  for (const id of localStore.map.keys()) {
+  for (const id of localStore.objects.keys()) {
     if (!ids.includes(id)) {
-      const object = localStore.map.get(id) as ThreeOrbitControls;
+      const object = localStore.objects.get(id) as ThreeOrbitControls;
       if (object) object.dispose();
 
-      localStore.map.delete(id);
+      localStore.objects.delete(id);
     }
   }
 }
@@ -176,10 +178,10 @@ orbitControls.parameters = [
     [Entity, MutDescriptor(Position)],
     WithDescriptor(PerspectiveCamera)
   ),
-  EventReaderDescriptor(PointerMoveEvent),
   EventReaderDescriptor(PointerDownEvent),
-  EventReaderDescriptor(PointerUpEvent),
+  EventReaderDescriptor(PointerMoveEvent),
   EventReaderDescriptor(PointerCancelEvent),
+  EventReaderDescriptor(PointerUpEvent),
   EventReaderDescriptor(ContextMenuEvent),
   EventReaderDescriptor(OnWheelEvent),
   EventReaderDescriptor(KeyDownEvent),

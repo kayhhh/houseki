@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "tsc --noEmit && vite build --minify",
     "dev": "vite",
     "preview": "vite preview"
   },
@@ -14,6 +14,7 @@
     "@lattice-engine/input": "workspace:^",
     "@lattice-engine/orbit": "workspace:^",
     "@lattice-engine/physics": "workspace:^",
+    "@lattice-engine/player": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
     "leva": "^0.9.34",

@@ -1,4 +1,4 @@
-import { CoreStore, Engine, Warehouse } from "@lattice-engine/core";
+import { CoreStore, CoreStruct, Engine, Warehouse } from "@lattice-engine/core";
 import { inputPlugin } from "@lattice-engine/input";
 import { OrbitControls, orbitPlugin } from "@lattice-engine/orbit";
 import { renderPlugin } from "@lattice-engine/render";
@@ -63,16 +63,17 @@ export default function Basic() {
 function initScene(
   commands: Commands,
   warehouse: Res<Warehouse>,
-  store: Res<Mut<CoreStore>>
+  coreStore: Res<Mut<CoreStore>>,
+  coreStruct: Res<Mut<CoreStruct>>
 ) {
   // Set canvas
   const canvas = document.querySelector("canvas");
   if (!canvas) throw new Error("Canvas not found");
-  store.canvas = canvas;
+  coreStore.canvas = canvas;
 
   // Create scene
   const scene = commands.spawn().addType(Scene);
-  store.activeScene = scene.id;
+  coreStruct.activeScene = scene.id;
 
   // Create camera
   const camera = commands
@@ -80,7 +81,7 @@ function initScene(
     .add(new Position(0, 0, 5))
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
-  store.activeCamera = camera.id;
+  coreStruct.activeCamera = camera.id;
 
   // Create cube
   const geometry = createBoxGeometry(warehouse);
@@ -96,4 +97,5 @@ initScene.parameters = [
   CommandsDescriptor(),
   ResourceDescriptor(Warehouse),
   ResourceDescriptor(MutDescriptor(CoreStore)),
+  ResourceDescriptor(MutDescriptor(CoreStruct)),
 ];

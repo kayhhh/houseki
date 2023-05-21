@@ -43,19 +43,18 @@ export function nodeBuilder(
   // Sync object properties
   for (const [{ id }, position] of withPosition) {
     const object = store.nodes.get(id);
-    if (object && position)
-      object.position.set(position.x, position.y, position.z);
+    if (object) object.position.set(position.x, position.y, position.z);
   }
 
   for (const [{ id }, rotation] of withRotation) {
     const object = store.nodes.get(id);
-    if (object && rotation)
+    if (object)
       object.quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
   }
 
   for (const [{ id }, scale] of withScale) {
     const object = store.nodes.get(id);
-    if (object && scale) object.scale.set(scale.x, scale.y, scale.z);
+    if (object) object.scale.set(scale.x, scale.y, scale.z);
   }
 
   for (const [{ id }, parent] of withParent) {
