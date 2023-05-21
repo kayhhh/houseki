@@ -29,4 +29,4 @@ The web has a lot of independently awesome libraries for building games, but com
 | `@lattice-engine/vrm`                            | [VRM](https://vrm.dev/en/) avatars                                                      |
 | `@lattice-engine/scripting`                      | [WASM](https://webassembly.org/) scripting                                              |
 | `@lattice-engine/wired-protocol`                 | Multiplayer networking via [The Wired Protocol](https://github.com/wired-protocol/spec) |
-| `@lattice-engine/xr`                             | [WebXR](https://immersive-web.github.io/webxr/) support                                 |
+| `@lattice-engine/xr`                             | [WebXR](https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API) support      |
