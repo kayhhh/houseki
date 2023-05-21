@@ -3,10 +3,10 @@ import "./App.css";
 import { Link, Route, useRoute } from "wouter";
 
 import About from "./about/About";
-import Basic from "./demos/Basic";
-import Gltf from "./demos/Gltf";
-import Physics from "./demos/Physics";
-import Player from "./demos/Player";
+import Basic from "./demos/basic/Basic";
+import Gltf from "./demos/gltf/Gltf";
+import Physics from "./demos/physics/Physics";
+import Player from "./demos/player/Player";
 
 function closeSidePanel() {
   document.querySelector(".sidepanel")?.classList.remove("open");
