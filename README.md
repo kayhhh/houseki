@@ -26,6 +26,7 @@ The web has a lot of independently awesome libraries for building games, but com
 | [`@lattice-engine/player`](./packages/player/)   | Player controls                                                                         |
 | [`@lattice-engine/render`](./packages/render)    | [Three.js](https://threejs.org/) rendering                                              |
 | [`@lattice-engine/scene`](./packages/scene)      | The 3D scene graph                                                                      |
-| `@lattice-engine/avatar`                         | [VRM](https://vrm.dev/en/) avatars                                                      |
+| `@lattice-engine/vrm`                            | [VRM](https://vrm.dev/en/) avatars                                                      |
 | `@lattice-engine/scripting`                      | [WASM](https://webassembly.org/) scripting                                              |
 | `@lattice-engine/wired-protocol`                 | Multiplayer networking via [The Wired Protocol](https://github.com/wired-protocol/spec) |
+| `@lattice-engine/xr`                             | [WebXR](https://immersive-web.github.io/webxr/) support                                 |
