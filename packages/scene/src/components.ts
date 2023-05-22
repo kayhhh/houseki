@@ -107,6 +107,19 @@ export class TextureInfo {
   @struct.f32 declare rotation: number;
   @struct.array({ length: 2, type: "f32" }) declare offset: Float32Array;
   @struct.array({ length: 2, type: "f32" }) declare scale: Float32Array;
+
+  constructor() {
+    initStruct(this);
+
+    this.magFilter = 9729;
+    this.minFilter = 9987;
+    this.wrapS = 10497;
+    this.wrapT = 10497;
+    this.texCoord = 0;
+    this.rotation = 0;
+    this.offset.set([0, 0]);
+    this.scale.set([1, 1]);
+  }
 }
 
 @struct
@@ -122,25 +135,25 @@ export class Material {
   @struct.bool declare doubleSided: boolean;
 
   @struct.array({ length: 4, type: "f32" }) declare baseColor: Float32Array;
-  @struct.substruct(Texture) declare baseColorTexture: Texture;
+  @struct.u64 declare baseColorTextureId: bigint; // Entity ID
   @struct.substruct(TextureInfo) declare baseColorTextureInfo: TextureInfo;
 
   @struct.array({ length: 3, type: "f32" })
   declare emissiveFactor: Float32Array;
-  @struct.substruct(Texture) declare emissiveTexture: Texture;
+  @struct.u64 declare emissiveTextureId: bigint; // Entity ID
   @struct.substruct(TextureInfo) declare emissiveTextureInfo: TextureInfo;
 
   @struct.f32 declare normalScale: number;
-  @struct.substruct(Texture) declare normalTexture: Texture;
+  @struct.u64 declare normalTextureId: bigint; // Entity ID
   @struct.substruct(TextureInfo) declare normalTextureInfo: TextureInfo;
 
   @struct.f32 declare occlusionStrength: number;
-  @struct.substruct(Texture) declare occlusionTexture: Texture;
+  @struct.u64 declare occlusionTextureId: bigint; // Entity ID
   @struct.substruct(TextureInfo) declare occlusionTextureInfo: TextureInfo;
 
   @struct.f32 declare roughness: number;
   @struct.f32 declare metalness: number;
-  @struct.substruct(Texture) declare metallicRoughnessTexture: Texture;
+  @struct.u64 declare metallicRoughnessTextureId: bigint; // Entity ID
   @struct.substruct(TextureInfo)
   declare metallicRoughnessTextureInfo: TextureInfo;
 

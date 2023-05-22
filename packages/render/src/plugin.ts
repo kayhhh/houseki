@@ -7,6 +7,7 @@ import { materialBuilder } from "./scene/materialBuilder";
 import { meshBuilder } from "./scene/meshBuilder";
 import { nodeBuilder } from "./scene/nodeBuilder";
 import { sceneBuilder } from "./scene/sceneBuilder";
+import { textureBuider } from "./scene/textureBuilder";
 
 /**
  * Registers all render components and systems.
@@ -14,6 +15,7 @@ import { sceneBuilder } from "./scene/sceneBuilder";
 export function renderPlugin(builder: WorldBuilder) {
   builder.addSystems(
     ...run.chain(
+      textureBuider,
       [materialBuilder, geometryBuilder],
       meshBuilder,
       nodeBuilder,

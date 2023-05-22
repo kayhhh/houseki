@@ -32,48 +32,58 @@ export function loadMaterial(
     const baseColor = gltfMaterial.getBaseColorFactor();
     material.baseColor = new Float32Array(baseColor);
 
+    const gltfTexture = gltfMaterial.getBaseColorTexture();
+    const texture = createTexture(gltfTexture, warehouse, commands);
+    if (texture) material.baseColorTextureId = texture.id;
+
     const info = gltfMaterial.getBaseColorTextureInfo();
     applyTextureInfo(material.baseColorTextureInfo, info);
-    const texture = gltfMaterial.getBaseColorTexture();
-    applyTexture(material.baseColorTexture, texture, warehouse);
   }
 
   {
     const emissiveFactor = gltfMaterial.getEmissiveFactor();
     material.emissiveFactor = new Float32Array(emissiveFactor);
 
+    const gltfTexture = gltfMaterial.getEmissiveTexture();
+    const texture = createTexture(gltfTexture, warehouse, commands);
+    if (texture) material.emissiveTextureId = texture.id;
+
     const info = gltfMaterial.getEmissiveTextureInfo();
     applyTextureInfo(material.emissiveTextureInfo, info);
-    const texture = gltfMaterial.getEmissiveTexture();
-    applyTexture(material.emissiveTexture, texture, warehouse);
   }
 
   {
     material.normalScale = gltfMaterial.getNormalScale();
 
+    const gltfTexture = gltfMaterial.getNormalTexture();
+    const texture = createTexture(gltfTexture, warehouse, commands);
+    if (texture) material.normalTextureId = texture.id;
+
     const info = gltfMaterial.getNormalTextureInfo();
     applyTextureInfo(material.normalTextureInfo, info);
-    const texture = gltfMaterial.getNormalTexture();
-    applyTexture(material.normalTexture, texture, warehouse);
   }
 
   {
     material.occlusionStrength = gltfMaterial.getOcclusionStrength();
 
+    const gltfTexture = gltfMaterial.getOcclusionTexture();
+    const texture = createTexture(gltfTexture, warehouse, commands);
+    if (texture) material.occlusionTextureId = texture.id;
+
     const info = gltfMaterial.getOcclusionTextureInfo();
     applyTextureInfo(material.occlusionTextureInfo, info);
-    const texture = gltfMaterial.getOcclusionTexture();
-    applyTexture(material.occlusionTexture, texture, warehouse);
   }
 
   {
     material.roughness = gltfMaterial.getRoughnessFactor();
     material.metalness = gltfMaterial.getMetallicFactor();
 
+    const gltfTexture = gltfMaterial.getMetallicRoughnessTexture();
+    const texture = createTexture(gltfTexture, warehouse, commands);
+    if (texture) material.metallicRoughnessTextureId = texture.id;
+
     const info = gltfMaterial.getMetallicRoughnessTextureInfo();
     applyTextureInfo(material.metallicRoughnessTextureInfo, info);
-    const texture = gltfMaterial.getMetallicRoughnessTexture();
-    applyTexture(material.metallicRoughnessTexture, texture, warehouse);
   }
 
   // Create material entity
@@ -84,39 +94,41 @@ export function loadMaterial(
 }
 
 function applyTextureInfo(info: TextureInfo, gltfInfo: GltfTextureInfo | null) {
-  info.magFilter = gltfInfo?.getMagFilter() ?? 9729;
-  info.minFilter = gltfInfo?.getMinFilter() ?? 9987;
-  info.wrapS = gltfInfo?.getWrapS() ?? 10497;
-  info.wrapT = gltfInfo?.getWrapT() ?? 10497;
-  info.texCoord = gltfInfo?.getTexCoord() ?? 0;
+  if (!gltfInfo) return;
+
+  const magFilter = gltfInfo.getMagFilter();
+  if (magFilter) info.magFilter = magFilter;
+
+  const minFilter = gltfInfo.getMinFilter();
+  if (minFilter) info.minFilter = minFilter;
+
+  info.wrapS = gltfInfo.getWrapS();
+  info.wrapT = gltfInfo.getWrapT();
+  info.texCoord = gltfInfo.getTexCoord();
 
   // KHR_texture_transform
-  const transform = gltfInfo?.getExtension<Transform>(Transform.EXTENSION_NAME);
+  const transform = gltfInfo.getExtension<Transform>(Transform.EXTENSION_NAME);
   if (transform) {
     info.rotation = transform.getRotation();
     info.offset = new Float32Array(transform.getOffset());
     info.scale = new Float32Array(transform.getScale());
-  } else {
-    info.rotation = 0;
-    info.offset = new Float32Array([0, 0]);
-    info.scale = new Float32Array([1, 1]);
   }
 }
 
-function applyTexture(
-  texture: Texture,
+function createTexture(
   gltfTexture: GltfTexture | null,
-  warehouse: Readonly<Warehouse>
+  warehouse: Readonly<Warehouse>,
+  commands: Commands
 ) {
   if (!gltfTexture) return;
 
   const image = gltfTexture.getImage();
   if (!image) return;
 
+  const texture = new Texture();
   texture.image.write(image, warehouse);
 
   const mimeType = gltfTexture.getMimeType();
-
   const mimeNumber = ImageMimeType[mimeType as keyof typeof ImageMimeType] as
     | ImageMimeType
     | undefined;
@@ -126,4 +138,6 @@ function applyTexture(
   }
 
   texture.mimeType = mimeNumber ?? 0;
+
+  return commands.spawn().add(texture);
 }

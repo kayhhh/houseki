@@ -1,7 +1,7 @@
 import { Warehouse } from "@lattice-engine/core";
 import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
 
-import { Geometry, Material } from "./components";
+import { Geometry, Texture } from "./components";
 
 class EntityTracker {
   ids = new Set<bigint>();
@@ -23,18 +23,18 @@ export function geometryCleanup(
 ) {
   const ids: bigint[] = [];
 
-  for (const [{ id }, geometry] of entities) {
-    ids.push(id);
-    tracker.ids.add(id);
+  for (const [entity, geometry] of entities) {
+    ids.push(entity.id);
+    tracker.ids.add(entity.id);
 
-    const resources = tracker.resources.get(id) ?? new Set();
+    const resources = tracker.resources.get(entity.id) ?? new Set();
 
     resources.add(geometry.positions.id);
     resources.add(geometry.normals.id);
     resources.add(geometry.uvs.id);
     resources.add(geometry.indices.id);
 
-    tracker.resources.set(id, resources);
+    tracker.resources.set(entity.id, resources);
   }
 
   // Clean up removed entities
@@ -56,29 +56,24 @@ export function geometryCleanup(
 }
 
 /**
- * Cleans up material resources on removal.
+ * Cleans up texture resources on removal.
  */
-export function materialCleanup(
+export function textureCleanup(
   commands: Commands,
   warehouse: Res<Warehouse>,
   tracker: SystemRes<EntityTracker>,
-  entities: Query<[Entity, Material]>
+  entities: Query<[Entity, Texture]>
 ) {
   const ids: bigint[] = [];
 
-  for (const [{ id }, material] of entities) {
-    ids.push(id);
-    tracker.ids.add(id);
+  for (const [entity, texture] of entities) {
+    ids.push(entity.id);
+    tracker.ids.add(entity.id);
 
-    const resources = tracker.resources.get(id) ?? new Set();
+    const resources = tracker.resources.get(entity.id) ?? new Set();
+    resources.add(texture.image.id);
 
-    resources.add(material.baseColorTexture.image.id);
-    resources.add(material.metallicRoughnessTexture.image.id);
-    resources.add(material.normalTexture.image.id);
-    resources.add(material.occlusionTexture.image.id);
-    resources.add(material.emissiveTexture.image.id);
-
-    tracker.resources.set(id, resources);
+    tracker.resources.set(entity.id, resources);
   }
 
   // Clean up removed entities

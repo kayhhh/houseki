@@ -1,9 +1,6 @@
-import { Warehouse } from "@lattice-engine/core";
 import {
-  ImageMimeType,
   Material,
   MaterialAlphaMode,
-  Texture,
   TextureInfo,
 } from "@lattice-engine/scene";
 import {
@@ -23,27 +20,16 @@ import {
   sRGBEncoding,
   Texture as ThreeTexture,
 } from "three";
-import { Entity, Query, Res, SystemRes } from "thyseus";
+import { Entity, Query, Res } from "thyseus";
 
 import { WEBGL_CONSTANTS } from "../constants";
 import { RenderStore } from "../RenderStore";
-
-class ImageStore {
-  /**
-   * Resource ID -> ImageBitmap
-   */
-  readonly images = new Map<number, ImageBitmap>();
-
-  readonly processed = new Set<number>();
-}
 
 /**
  * Syncs Material components with Three.js Material objects.
  */
 export function materialBuilder(
-  warehouse: Res<Warehouse>,
-  store: Res<RenderStore>,
-  imageStore: SystemRes<ImageStore>,
+  renderStore: Res<RenderStore>,
   entities: Query<[Entity, Material]>
 ) {
   const ids: bigint[] = [];
@@ -51,12 +37,12 @@ export function materialBuilder(
   for (const [{ id }, material] of entities) {
     ids.push(id);
 
-    let object = store.materials.get(id);
+    let object = renderStore.materials.get(id);
 
     // Create new objects
     if (!object) {
       object = new MeshStandardMaterial();
-      store.materials.set(id, object);
+      renderStore.materials.set(id, object);
     }
 
     // Sync object properties
@@ -95,44 +81,39 @@ export function materialBuilder(
 
     object.map = loadTexture(
       object.map,
-      material.baseColorTexture,
+      material.baseColorTextureId,
       material.baseColorTextureInfo,
-      imageStore,
-      warehouse
+      renderStore
     );
     if (object.map) object.map.encoding = sRGBEncoding;
 
     object.normalMap = loadTexture(
       object.normalMap,
-      material.normalTexture,
+      material.normalTextureId,
       material.normalTextureInfo,
-      imageStore,
-      warehouse
+      renderStore
     );
 
     object.aoMap = loadTexture(
       object.aoMap,
-      material.occlusionTexture,
+      material.occlusionTextureId,
       material.occlusionTextureInfo,
-      imageStore,
-      warehouse
+      renderStore
     );
 
     object.emissiveMap = loadTexture(
       object.emissiveMap,
-      material.emissiveTexture,
+      material.emissiveTextureId,
       material.emissiveTextureInfo,
-      imageStore,
-      warehouse
+      renderStore
     );
     if (object.emissiveMap) object.emissiveMap.encoding = sRGBEncoding;
 
     const mrTexture = loadTexture(
       object.metalnessMap,
-      material.metallicRoughnessTexture,
+      material.metallicRoughnessTextureId,
       material.metallicRoughnessTextureInfo,
-      imageStore,
-      warehouse
+      renderStore
     );
     object.metalnessMap = mrTexture;
     object.roughnessMap = mrTexture;
@@ -141,30 +122,32 @@ export function materialBuilder(
   }
 
   // Remove objects that no longer exist
-  for (const [id] of store.materials) {
+  for (const [id] of renderStore.materials) {
     if (!ids.includes(id)) {
-      const object = store.materials.get(id);
-      object?.dispose();
-      object?.map?.dispose();
-      object?.normalMap?.dispose();
-      object?.aoMap?.dispose();
-      object?.emissiveMap?.dispose();
-      object?.metalnessMap?.dispose();
-      object?.roughnessMap?.dispose();
+      const object = renderStore.materials.get(id);
 
-      store.materials.delete(id);
+      if (object) {
+        object.dispose();
+        object.map?.dispose();
+        object.normalMap?.dispose();
+        object.aoMap?.dispose();
+        object.emissiveMap?.dispose();
+        object.metalnessMap?.dispose();
+        object.roughnessMap?.dispose();
+      }
+
+      renderStore.materials.delete(id);
     }
   }
 }
 
 function loadTexture(
   object: ThreeTexture | null,
-  texture: Texture,
+  textureId: bigint,
   info: TextureInfo,
-  imageStore: ImageStore,
-  warehouse: Readonly<Warehouse>
+  renderStore: Readonly<RenderStore>
 ) {
-  const newObject = getTextureObject(object, texture, imageStore, warehouse);
+  const newObject = getTextureObject(object, textureId, renderStore);
   if (!newObject) return null;
 
   applyTextureInfo(newObject, info);
@@ -174,47 +157,27 @@ function loadTexture(
 
 function getTextureObject(
   object: ThreeTexture | null,
-  texture: Texture,
-  imageStore: ImageStore,
-  warehouse: Readonly<Warehouse>
+  textureId: bigint,
+  renderStore: Readonly<RenderStore>
 ) {
-  if (!texture.image.id) return null;
-
   // If the image is already loaded, use it
-  const bitmap = imageStore.images.get(texture.image.id);
-  if (bitmap) {
-    // If the texture is already created, update it
-    if (object) {
-      // If the texture is already using the image, do nothing
-      if (object.image === bitmap) return object;
+  const bitmap = renderStore.images.get(textureId);
+  if (!bitmap) return null;
 
-      object.image = bitmap;
-      object.needsUpdate = true;
-      return object;
-    }
+  // If the texture is already created, update it
+  if (object) {
+    // If the texture is already using the image, do nothing
+    if (object.image === bitmap) return object;
 
-    // Create a new texture
-    const newObject = new CanvasTexture(bitmap);
-    newObject.needsUpdate = true;
-    return newObject;
+    object.image = bitmap;
+    object.needsUpdate = true;
+    return object;
   }
 
-  // If already processing the image, return null
-  if (imageStore.processed.has(texture.image.id)) return null;
-
-  // Mark the image as processed
-  imageStore.processed.add(texture.image.id);
-
-  // Start loading the image
-  const blob = new Blob([texture.image.read(warehouse)], {
-    type: ImageMimeType[texture.mimeType],
-  });
-
-  createImageBitmap(blob, { imageOrientation: "flipY" }).then((bitmap) => {
-    imageStore.images.set(texture.image.id, bitmap);
-  });
-
-  return null;
+  // Create a new texture
+  const newObject = new CanvasTexture(bitmap);
+  newObject.needsUpdate = true;
+  return newObject;
 }
 
 function applyTextureInfo(object: ThreeTexture, info: TextureInfo) {

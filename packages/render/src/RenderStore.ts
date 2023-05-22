@@ -37,6 +37,11 @@ export class RenderStore {
   readonly materials = new Map<bigint, MeshStandardMaterial>();
 
   /**
+   * Entity ID -> ImageBitmap.
+   */
+  readonly images = new Map<bigint, ImageBitmap>();
+
+  /**
    * Entity ID -> Mesh object.
    */
   readonly meshes = new Map<bigint, Mesh>();
