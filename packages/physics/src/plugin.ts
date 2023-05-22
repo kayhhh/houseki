@@ -2,6 +2,7 @@ import { CoreSchedule, run, WorldBuilder } from "thyseus";
 
 import { createCharacters } from "./systems/characters/createCharacters";
 import { moveCharacters } from "./systems/characters/moveCharacters";
+import { saveCharacters } from "./systems/characters/saveCharacters";
 import { createBoxColliders } from "./systems/colliders/createBoxColliders";
 import { createCapsuleColliders } from "./systems/colliders/createCapsuleColliders";
 import { createCylinderColliders } from "./systems/colliders/createCylinderColliders";
@@ -29,7 +30,7 @@ export function physicsPlugin(builder: WorldBuilder) {
       moveCharacters,
       [moveRigidBodies, rotateRigidBodies],
       stepWorld,
-      saveRigidBodies
+      [saveCharacters, saveRigidBodies]
     )
   );
 }

@@ -78,6 +78,7 @@ export enum Key {
   CapsLock = 70,
   Escape = 71,
   Space = 72,
+  " " = 72,
   PageUp = 73,
   PageDown = 74,
   End = 75,

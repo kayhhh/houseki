@@ -123,6 +123,8 @@ export class CharacterController {
 
   @struct.bool declare applyImpulsesToDynamicBodies: boolean;
 
+  @struct.bool declare isGrounded: boolean;
+
   constructor(offset = 0.01) {
     initStruct(this);
 

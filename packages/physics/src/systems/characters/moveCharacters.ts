@@ -19,11 +19,18 @@ export function moveCharacters(
     const rigidbody = physicsStore.getRigidBody(entity.id);
     if (!controller || !collider || !rigidbody) continue;
 
-    // Apply gravity
-    const desiredTranslation = {
+    // Apply gravity to velocity
+    const newVelocity = {
       x: velocity.x + physicsStore.world.gravity.x * delta,
       y: velocity.y + physicsStore.world.gravity.y * delta,
       z: velocity.z + physicsStore.world.gravity.z * delta,
+    };
+
+    // Use velocity to compute desired translation
+    const desiredTranslation = {
+      x: newVelocity.x * delta,
+      y: newVelocity.y * delta,
+      z: newVelocity.z * delta,
     };
 
     // Compute movement

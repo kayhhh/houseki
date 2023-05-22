@@ -47,16 +47,20 @@ export function initScene(
   room.add(new Parent(scene));
 
   // Create camera and player
+  const spawn = [0, 4, 0] as const;
+  const player = new PlayerControls();
+  player.spawnPoint.set(...spawn);
+
   const camera = commands
     .spawn()
-    .add(new Position(0, 4, 0))
+    .add(new Position(...spawn))
     .addType(Rotation)
     .addType(Velocity)
     .addType(PerspectiveCamera)
     .add(new CapsuleCollider(0.4, 1.6))
     .addType(KinematicBody)
     .addType(CharacterController)
-    .add(new PlayerControls([0, 4, 0]));
+    .add(player);
 
   coreStruct.activeCamera = camera.id;
   inputStruct.enablePointerLock = true;
