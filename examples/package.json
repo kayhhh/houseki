@@ -17,6 +17,7 @@
     "@lattice-engine/player": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
+    "@lattice-engine/vrm": "workspace:^",
     "leva": "^0.9.34",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
