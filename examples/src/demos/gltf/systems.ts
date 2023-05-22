@@ -36,7 +36,7 @@ export function initScene(
   // Create camera
   const camera = commands
     .spawn()
-    .add(new Position(0, 0, 5))
+    .add(new Position(0, 2, 4))
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
   coreStruct.activeCamera = camera.id;

@@ -16,7 +16,7 @@ export default function Gltf() {
   const [engine, setEngine] = useState<Engine>();
 
   const { model } = useControls({
-    model: { options: MODELS },
+    model: { options: MODELS, value: MODELS["Damaged Helmet"] },
   });
 
   // Create engine
