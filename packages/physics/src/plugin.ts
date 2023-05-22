@@ -22,11 +22,12 @@ export function physicsPlugin(builder: WorldBuilder) {
       [
         createBoxColliders,
         createCapsuleColliders,
-        createCharacters,
         createCylinderColliders,
         createSphereColliders,
       ],
-      [moveCharacters, moveRigidBodies, rotateRigidBodies],
+      createCharacters,
+      moveCharacters,
+      [moveRigidBodies, rotateRigidBodies],
       stepWorld,
       saveRigidBodies
     )

@@ -6,6 +6,7 @@ import {
   DynamicBody,
   KinematicBody,
   SphereCollider,
+  Velocity,
 } from "@lattice-engine/physics";
 import {
   Mesh,
@@ -50,6 +51,7 @@ export function initScene(
     .spawn()
     .add(new Position(0, 4, 0))
     .addType(Rotation)
+    .addType(Velocity)
     .addType(PerspectiveCamera)
     .add(new CapsuleCollider(0.4, 1.6))
     .addType(KinematicBody)

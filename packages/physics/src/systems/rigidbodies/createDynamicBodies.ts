@@ -13,8 +13,8 @@ export function createDynamicBodies(
   for (const entity of bodies) {
     ids.push(entity.id);
 
+    // Create new bodies
     if (!store.dynamicBodies.has(entity.id)) {
-      // Create new bodies
       const rigidBodyDesc = RigidBodyDesc.dynamic();
       const object = store.world.createRigidBody(rigidBodyDesc);
 

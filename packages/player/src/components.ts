@@ -1,11 +1,30 @@
 import { initStruct, struct } from "thyseus";
 
 @struct
+class Vec3 {
+  @struct.array({ length: 3, type: "f32" }) declare value: Float32Array;
+
+  set(x: number, y: number, z: number) {
+    this.value[0] = x;
+    this.value[1] = y;
+    this.value[2] = z;
+  }
+
+  array() {
+    return [this.value[0], this.value[1], this.value[2]] as [
+      number,
+      number,
+      number
+    ];
+  }
+}
+
+@struct
 export class PlayerControls {
   /**
    * The spawn point of the player.
    */
-  @struct.array({ length: 3, type: "f32" }) declare spawnPoint: Float32Array;
+  @struct.substruct(Vec3) declare spawnPoint: Vec3;
 
   /**
    * Teleport the player to spawn if they fall out of the world.
@@ -24,10 +43,7 @@ export class PlayerControls {
   ) {
     initStruct(this);
 
-    this.spawnPoint[0] = spawnPoint[0];
-    this.spawnPoint[1] = spawnPoint[1];
-    this.spawnPoint[2] = spawnPoint[2];
-
+    this.spawnPoint.set(...spawnPoint);
     this.enableVoidTeleport = enableVoidTeleport;
     this.voidLevel = voidLevel;
   }

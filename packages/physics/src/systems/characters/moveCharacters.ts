@@ -1,7 +1,6 @@
-import { Position } from "@lattice-engine/scene";
-import { Entity, Query, Res, With } from "thyseus";
+import { Entity, Mut, Query, Res, With } from "thyseus";
 
-import { CharacterController } from "../../components";
+import { CharacterController, Velocity } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
 
 /**
@@ -10,42 +9,30 @@ import { PhysicsStore } from "../../PhysicsStore";
  */
 export function moveCharacters(
   physicsStore: Res<PhysicsStore>,
-  bodies: Query<[Entity, Position], With<CharacterController>>
+  bodies: Query<[Entity, Mut<Velocity>], With<CharacterController>>
 ) {
-  for (const [entity, position] of bodies) {
+  const delta = physicsStore.world.timestep;
+
+  for (const [entity, velocity] of bodies) {
     const controller = physicsStore.characterControllers.get(entity.id);
     const collider = physicsStore.getCollider(entity.id);
     const rigidbody = physicsStore.getRigidBody(entity.id);
     if (!controller || !collider || !rigidbody) continue;
 
-    // TODO: Use real delta time
-    const delta = 1 / 60;
-
-    // Compute change in position since last frame
-    const currentPosition = rigidbody.translation();
-    const deltaPosition = {
-      x: position.x - currentPosition.x,
-      y: position.y - currentPosition.y,
-      z: position.z - currentPosition.z,
-    };
-
     // Apply gravity
-    deltaPosition.x += physicsStore.world.gravity.x * delta;
-    deltaPosition.y += physicsStore.world.gravity.y * delta;
-    deltaPosition.z += physicsStore.world.gravity.z * delta;
+    const desiredTranslation = {
+      x: velocity.x + physicsStore.world.gravity.x * delta,
+      y: velocity.y + physicsStore.world.gravity.y * delta,
+      z: velocity.z + physicsStore.world.gravity.z * delta,
+    };
 
     // Compute movement
-    controller.computeColliderMovement(collider, deltaPosition);
-
-    // Apply movement
+    controller.computeColliderMovement(collider, desiredTranslation);
     const movement = controller.computedMovement();
 
-    const newPos = {
-      x: position.x + movement.x,
-      y: position.y + movement.y,
-      z: position.z + movement.z,
-    };
-
-    rigidbody.setNextKinematicTranslation(newPos);
+    // Apply movement
+    velocity.x = movement.x / delta;
+    velocity.y = movement.y / delta;
+    velocity.z = movement.z / delta;
   }
 }

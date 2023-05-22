@@ -1,6 +1,27 @@
 import { Entity, EntityCommands, initStruct, struct } from "thyseus";
 
 @struct
+export class Velocity {
+  @struct.f32 declare x: number;
+  @struct.f32 declare y: number;
+  @struct.f32 declare z: number;
+
+  constructor(x = 0, y = 0, z = 0) {
+    initStruct(this);
+
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+
+  set(x: number, y: number, z: number) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+}
+
+@struct
 export class BoxCollider {
   @struct.array({ length: 3, type: "f32" }) declare size: [
     number,

@@ -13,8 +13,8 @@ export function createStaticBodies(
   for (const entity of bodies) {
     ids.push(entity.id);
 
+    // Create new bodies
     if (!store.staticBodies.has(entity.id)) {
-      // Create new bodies
       const rigidBodyDesc = RigidBodyDesc.fixed();
       const object = store.world.createRigidBody(rigidBodyDesc);
       store.staticBodies.set(entity.id, object);

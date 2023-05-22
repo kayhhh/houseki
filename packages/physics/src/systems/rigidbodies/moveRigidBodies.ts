@@ -1,25 +1,27 @@
 import { Position } from "@lattice-engine/scene";
-import { Entity, Or, Query, Res, With, Without } from "thyseus";
+import { Entity, Or, Query, Res, With } from "thyseus";
 
 import {
-  CharacterController,
   DynamicBody,
   KinematicBody,
   StaticBody,
+  Velocity,
 } from "../../components";
 import { PhysicsStore } from "../../PhysicsStore";
 
 export function moveRigidBodies(
   store: Res<PhysicsStore>,
-  bodies: Query<
+  positions: Query<
     [Entity, Position],
-    [
-      Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>,
-      Without<CharacterController>
-    ]
+    [Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>]
+  >,
+  velocities: Query<
+    [Entity, Velocity],
+    [Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>]
   >
 ) {
-  for (const [entity, position] of bodies) {
+  // Set positions
+  for (const [entity, position] of positions) {
     const body = store.getRigidBody(entity.id);
     if (!body) continue;
 
@@ -28,6 +30,21 @@ export function moveRigidBodies(
         x: position.x,
         y: position.y,
         z: position.z,
+      },
+      true
+    );
+  }
+
+  // Set velocities
+  for (const [entity, velocity] of velocities) {
+    const body = store.getRigidBody(entity.id);
+    if (!body) continue;
+
+    body.setLinvel(
+      {
+        x: velocity.x,
+        y: velocity.y,
+        z: velocity.z,
       },
       true
     );

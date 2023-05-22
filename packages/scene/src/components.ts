@@ -14,6 +14,12 @@ export class Position {
     this.y = y;
     this.z = z;
   }
+
+  set(x: number, y: number, z: number) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
 }
 
 @struct
@@ -26,6 +32,13 @@ export class Rotation {
   constructor(x = 0, y = 0, z = 0, w = 1) {
     initStruct(this);
 
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.w = w;
+  }
+
+  set(x: number, y: number, z: number, w: number) {
     this.x = x;
     this.y = y;
     this.z = z;
