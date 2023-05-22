@@ -1,4 +1,5 @@
 import { RigidBodyDesc } from "@dimforge/rapier3d";
+import { Position } from "@lattice-engine/scene";
 import { Entity, Query, Res, With } from "thyseus";
 
 import { KinematicBody } from "../../components";
@@ -6,7 +7,8 @@ import { PhysicsStore } from "../../PhysicsStore";
 
 export function createKinematicBodies(
   store: Res<PhysicsStore>,
-  bodies: Query<Entity, With<KinematicBody>>
+  bodies: Query<Entity, With<KinematicBody>>,
+  positions: Query<[Entity, Position], With<KinematicBody>>
 ) {
   const ids: bigint[] = [];
 
@@ -18,6 +20,21 @@ export function createKinematicBodies(
       const rigidBodyDesc = RigidBodyDesc.kinematicPositionBased();
       const object = store.world.createRigidBody(rigidBodyDesc);
       store.kinematicBodies.set(entity.id, object);
+
+      // Set initial position
+      for (const [e, position] of positions) {
+        if (e.id === entity.id) {
+          object.setTranslation(
+            {
+              x: position.x,
+              y: position.y,
+              z: position.z,
+            },
+            true
+          );
+          break;
+        }
+      }
     }
   }
 

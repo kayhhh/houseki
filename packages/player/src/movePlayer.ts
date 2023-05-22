@@ -5,7 +5,7 @@ import { Mut, Query, Res, With } from "thyseus";
 
 import { PlayerControls } from "./components";
 
-const SPEED = 0.04;
+const SPEED = 0.02;
 
 const matrix4 = new Matrix4();
 const quaternion = new Quaternion();

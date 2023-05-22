@@ -1,7 +1,7 @@
 import { CoreSchedule, run, WorldBuilder } from "thyseus";
 
 import { createCharacters } from "./systems/characters/createCharacters";
-import { saveCharacterPositions } from "./systems/characters/saveCharacterPositions";
+import { moveCharacters } from "./systems/characters/moveCharacters";
 import { createBoxColliders } from "./systems/colliders/createBoxColliders";
 import { createCapsuleColliders } from "./systems/colliders/createCapsuleColliders";
 import { createCylinderColliders } from "./systems/colliders/createCylinderColliders";
@@ -11,28 +11,24 @@ import { createKinematicBodies } from "./systems/rigidbodies/createKinematicBodi
 import { createStaticBodies } from "./systems/rigidbodies/createStaticBodies";
 import { moveRigidBodies } from "./systems/rigidbodies/moveRigidBodies";
 import { rotateRigidBodies } from "./systems/rigidbodies/rotateRigidBodies";
-import { saveRigidBodyPositions } from "./systems/rigidbodies/saveRigidBodyPositions";
+import { saveRigidBodies } from "./systems/rigidbodies/saveRigidBodies";
 import { stepWorld } from "./systems/stepWorld";
 
 export function physicsPlugin(builder: WorldBuilder) {
   builder.addSystemsToSchedule(
     CoreSchedule.FixedUpdate,
     ...run.chain(
-      [
-        createCharacters,
-        createDynamicBodies,
-        createKinematicBodies,
-        createStaticBodies,
-      ],
+      [createDynamicBodies, createKinematicBodies, createStaticBodies],
       [
         createBoxColliders,
         createCapsuleColliders,
+        createCharacters,
         createCylinderColliders,
         createSphereColliders,
       ],
-      [moveRigidBodies, rotateRigidBodies],
+      [moveCharacters, moveRigidBodies, rotateRigidBodies],
       stepWorld,
-      [saveCharacterPositions, saveRigidBodyPositions]
+      saveRigidBodies
     )
   );
 }

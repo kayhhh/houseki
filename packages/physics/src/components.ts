@@ -21,7 +21,7 @@ export class BoxCollider {
 export class SphereCollider {
   @struct.f32 declare radius: number;
 
-  constructor(radius = 1) {
+  constructor(radius = 0.5) {
     initStruct(this);
 
     this.radius = radius;
@@ -33,7 +33,7 @@ export class CapsuleCollider {
   @struct.f32 declare radius: number;
   @struct.f32 declare height: number;
 
-  constructor(radius = 1, height = 1) {
+  constructor(radius = 0.5, height = 1) {
     initStruct(this);
 
     this.radius = radius;
@@ -46,7 +46,7 @@ export class CylinderCollider {
   @struct.f32 declare radius: number;
   @struct.f32 declare height: number;
 
-  constructor(radius = 1, height = 1) {
+  constructor(radius = 0.5, height = 1) {
     initStruct(this);
 
     this.radius = radius;
@@ -100,6 +100,8 @@ export class CharacterController {
   @struct.bool declare enableSnapToGround: boolean;
   @struct.f32 declare snapToGroundDistance: number;
 
+  @struct.bool declare applyImpulsesToDynamicBodies: boolean;
+
   constructor(offset = 0.01) {
     initStruct(this);
 
@@ -114,6 +116,8 @@ export class CharacterController {
     this.stepOnDynamicBodies = false;
 
     this.enableSnapToGround = true;
-    this.snapToGroundDistance = 0.5;
+    this.snapToGroundDistance = 0.1;
+
+    this.applyImpulsesToDynamicBodies = true;
   }
 }

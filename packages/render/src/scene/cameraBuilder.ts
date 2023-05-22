@@ -9,13 +9,13 @@ import { RenderStore } from "../RenderStore";
  */
 export function cameraBuilder(
   store: Res<RenderStore>,
-  cameras: Query<[PerspectiveCamera, Entity]>,
+  cameras: Query<[Entity, PerspectiveCamera]>,
   withPosition: Query<[Entity, Position], With<PerspectiveCamera>>,
   withRotation: Query<[Entity, Rotation], With<PerspectiveCamera>>
 ) {
   const ids: bigint[] = [];
 
-  for (const [camera, { id }] of cameras) {
+  for (const [{ id }, camera] of cameras) {
     ids.push(id);
 
     let object = store.perspectiveCameras.get(id);
@@ -34,9 +34,6 @@ export function cameraBuilder(
     object.fov = camera.fov;
     object.near = camera.near;
     object.far = camera.far;
-
-    object.position.set(0, 0, 0);
-    object.quaternion.set(0, 0, 0, 1);
   }
 
   // Sync object positions

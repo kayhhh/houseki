@@ -36,13 +36,13 @@ export function initScene(
   // Create camera
   const camera = commands
     .spawn()
-    .add(new Position(0, 6, 10))
+    .add(new Position(0, 6, 8))
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
   coreStruct.activeCamera = camera.id;
 
   // Create room
-  const room = createRoom([15, 2, 15], commands, warehouse);
+  const room = createRoom([8, 1, 8], commands, warehouse);
   room.add(new Parent(scene));
 
   // Add dynamic balls
@@ -62,10 +62,10 @@ export function initScene(
   }
 
   const BALL_COUNT = 50;
-  const BOUNDS = 5;
+  const BOUNDS = 3;
 
   for (let i = 0; i < BALL_COUNT; i++) {
-    const radius = Math.random() * 0.4 + 0.2;
+    const radius = Math.random() * 0.2 + 0.1;
 
     const x = Math.random() * BOUNDS - BOUNDS / 2;
     const y = Math.random() * 20 + 4;

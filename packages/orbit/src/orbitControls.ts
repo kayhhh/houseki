@@ -12,7 +12,7 @@ import {
   wheelEventFromECS,
 } from "@lattice-engine/input";
 import { RenderStore } from "@lattice-engine/render";
-import { PerspectiveCamera, Position } from "@lattice-engine/scene";
+import { PerspectiveCamera, Position, Rotation } from "@lattice-engine/scene";
 import { OrbitControls as ThreeOrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Entity, EventReader, Mut, Query, Res, SystemRes, With } from "thyseus";
 
@@ -48,6 +48,7 @@ export function orbitControls(
   localStore: SystemRes<LocalStore>,
   entities: Query<Entity, With<[OrbitControls, PerspectiveCamera]>>,
   withPositions: Query<[Entity, Mut<Position>], With<PerspectiveCamera>>,
+  withRotations: Query<[Entity, Mut<Rotation>], With<PerspectiveCamera>>,
   pointerDownReader: EventReader<PointerDownEvent>,
   pointerMoveReader: EventReader<PointerMoveEvent>,
   pointerCancelReader: EventReader<PointerCancelEvent>,
@@ -132,7 +133,7 @@ export function orbitControls(
     object.update();
   }
 
-  // Copy positions into ECS
+  // Save positions
   for (const [{ id }, position] of withPositions) {
     const object = localStore.objects.get(id);
     if (!object) continue;
@@ -143,6 +144,20 @@ export function orbitControls(
     position.x = cameraObject.position.x;
     position.y = cameraObject.position.y;
     position.z = cameraObject.position.z;
+  }
+
+  // Save rotations
+  for (const [{ id }, rotation] of withRotations) {
+    const object = localStore.objects.get(id);
+    if (!object) continue;
+
+    const cameraObject = renderStore.perspectiveCameras.get(id);
+    if (!cameraObject) continue;
+
+    rotation.x = cameraObject.quaternion.x;
+    rotation.y = cameraObject.quaternion.y;
+    rotation.z = cameraObject.quaternion.z;
+    rotation.w = cameraObject.quaternion.w;
   }
 
   // Remove objects that no longer exist

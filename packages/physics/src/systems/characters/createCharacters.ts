@@ -41,6 +41,10 @@ export function createCharacters(
     } else {
       object.disableSnapToGround();
     }
+
+    object.setApplyImpulsesToDynamicBodies(
+      character.applyImpulsesToDynamicBodies
+    );
   }
 
   // Remove characters that are no longer in use

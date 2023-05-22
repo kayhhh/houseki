@@ -19,7 +19,7 @@ export class InputStruct {
    */
   @struct.array({ length: 256, type: "u8" }) declare keys: Uint8Array;
 
-  keyPressed(key: number) {
+  keyPressed(key: number): boolean {
     return this.keys[key] === 1;
   }
 }

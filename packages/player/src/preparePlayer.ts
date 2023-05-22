@@ -4,7 +4,7 @@ import { Entity, Query, With, Without } from "thyseus";
 import { PlayerControls } from "./components";
 
 /**
- * Adds position and rotation components to PlayerControl entities that don't have them.
+ * Adds components to PlayerControl entities that are required for the player to work.
  */
 export function preparePlayer(
   withoutPosition: Query<Entity, [With<PlayerControls>, Without<Position>]>,

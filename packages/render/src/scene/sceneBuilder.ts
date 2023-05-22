@@ -2,8 +2,8 @@ import { Scene } from "@lattice-engine/scene";
 import {
   AmbientLight,
   CanvasTexture,
+  DirectionalLight,
   EquirectangularReflectionMapping,
-  PointLight,
   Scene as ThreeScene,
   sRGBEncoding,
   Texture,
@@ -28,12 +28,18 @@ export function sceneBuilder(
       object = new ThreeScene();
 
       // TODO: Move lights into ECS
-      const pointLight = new PointLight(0xffffff, 0.5);
-      pointLight.castShadow = true;
-      pointLight.shadow.mapSize.set(1024, 1024);
+      const directionalLight = new DirectionalLight(0xffffff, 0.75);
+      directionalLight.castShadow = true;
+      directionalLight.shadow.mapSize.set(2048, 2048);
+      directionalLight.shadow.camera.near = 0.1;
+      directionalLight.shadow.camera.far = 100;
+      directionalLight.shadow.camera.left = -12;
+      directionalLight.shadow.camera.right = 12;
+      directionalLight.shadow.camera.top = 12;
+      directionalLight.shadow.camera.bottom = -12;
 
-      object.add(new AmbientLight(0xffffff, 0.5));
-      object.add(pointLight);
+      object.add(new AmbientLight(0xffffff, 0.25));
+      object.add(directionalLight);
 
       // TODO: Move skybox into ECS
       loadSkybox(object, "/Skybox.jpg");

@@ -17,19 +17,11 @@ export function nodeBuilder(
   for (const { id } of entities) {
     ids.push(id);
 
-    let object = store.nodes.get(id);
-
     // Create new objects
-    if (!object) {
-      object = new Object3D();
+    if (!store.nodes.has(id)) {
+      const object = new Object3D();
       store.nodes.set(id, object);
     }
-
-    // Reset object properties
-    object.position.set(0, 0, 0);
-    object.quaternion.set(0, 0, 0, 1);
-    object.scale.set(1, 1, 1);
-    object.removeFromParent();
   }
 
   // Sync object properties
