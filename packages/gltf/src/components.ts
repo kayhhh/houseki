@@ -1,6 +1,6 @@
 import { struct } from "thyseus";
 
 @struct
-export class GltfUri {
+export class Gltf {
   @struct.string declare uri: string;
 }

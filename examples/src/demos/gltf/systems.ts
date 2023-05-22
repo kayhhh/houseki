@@ -1,5 +1,5 @@
 import { CoreStore, CoreStruct } from "@lattice-engine/core";
-import { GltfUri } from "@lattice-engine/gltf";
+import { Gltf } from "@lattice-engine/gltf";
 import { OrbitControls } from "@lattice-engine/orbit";
 import {
   Node,
@@ -42,13 +42,13 @@ export function initScene(
   coreStruct.activeCamera = camera.id;
 
   // Add node to scene with glTF component
-  commands.spawn().addType(Node).add(new Parent(scene)).addType(GltfUri);
+  commands.spawn().addType(Node).add(new Parent(scene)).addType(Gltf);
 }
 
 /**
  * System to update the glTF uri.
  */
-export function loadGltf(entities: Query<Mut<GltfUri>>) {
+export function loadGltf(entities: Query<Mut<Gltf>>) {
   for (const gltf of entities) {
     gltf.uri = selectedModel.uri;
   }

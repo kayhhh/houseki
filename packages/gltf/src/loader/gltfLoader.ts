@@ -2,7 +2,7 @@ import { Document, WebIO } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
 import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
 
-import { GltfUri } from "../components";
+import { Gltf } from "../components";
 import { extensions } from "../extensions";
 import { LoadingContext } from "./context";
 import { loadDoc } from "./loadDoc";
@@ -10,7 +10,7 @@ import { removeGltf } from "./removeGltf";
 
 class GltfStore {
   /**
-   * All entity IDs that have a GltfUri component.
+   * All entity IDs that have a Gltf component.
    */
   ids: bigint[] = [];
 
@@ -37,7 +37,7 @@ export function gltfLoader(
   commands: Commands,
   warehouse: Res<Warehouse>,
   store: SystemRes<GltfStore>,
-  entities: Query<[Entity, GltfUri]>
+  entities: Query<[Entity, Gltf]>
 ) {
   const ids: bigint[] = [];
 
