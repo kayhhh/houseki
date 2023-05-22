@@ -14,12 +14,10 @@ import { sceneBuilder } from "./scene/sceneBuilder";
 export function renderPlugin(builder: WorldBuilder) {
   builder.addSystems(
     ...run.chain(
-      materialBuilder,
-      geometryBuilder,
+      [materialBuilder, geometryBuilder],
       meshBuilder,
       nodeBuilder,
-      sceneBuilder,
-      cameraBuilder,
+      [sceneBuilder, cameraBuilder],
       canvasRenderer
     )
   );

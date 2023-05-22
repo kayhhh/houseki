@@ -1,6 +1,5 @@
 import { CoreStore, CoreStruct, Warehouse } from "@lattice-engine/core";
 import { InputStruct } from "@lattice-engine/input";
-import { PlayerControls } from "@lattice-engine/player";
 import {
   Parent,
   PerspectiveCamera,
@@ -10,6 +9,7 @@ import {
 } from "@lattice-engine/scene";
 import { Commands, Mut, Res } from "thyseus";
 
+import { PlayerControls } from "../../../../packages/player/dist";
 import { createRoom } from "../../utils/createRoom";
 
 /**
@@ -39,7 +39,7 @@ export function initScene(
   const camera = commands
     .spawn()
     .add(new Position(0, 4, 0))
-    .add(new Rotation())
+    .addType(Rotation)
     .addType(PerspectiveCamera)
     .addType(PlayerControls);
   coreStruct.activeCamera = camera.id;

@@ -15,11 +15,12 @@ export default defineConfig({
     minify: false,
     rollupOptions: {
       external: [
-        "thyseus",
         "@lattice-engine/core",
         "@lattice-engine/input",
         "@lattice-engine/physics",
         "@lattice-engine/scene",
+        "thyseus",
+        "three",
       ],
     },
     target: "esnext",

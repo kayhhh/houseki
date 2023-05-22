@@ -9,8 +9,8 @@ export class MouseEvent {
   @struct.u16 declare clientY: number;
   @struct.bool declare ctrlKey: boolean;
   @struct.bool declare metaKey: boolean;
-  @struct.u16 declare movementX: number;
-  @struct.u16 declare movementY: number;
+  @struct.i16 declare movementX: number;
+  @struct.i16 declare movementY: number;
   @struct.u16 declare screenX: number;
   @struct.u16 declare screenY: number;
   @struct.bool declare shiftKey: boolean;
@@ -28,8 +28,8 @@ export class PointerEvent {
   @struct.u16 declare clientY: number;
   @struct.bool declare ctrlKey: boolean;
   @struct.bool declare metaKey: boolean;
-  @struct.u16 declare movementX: number;
-  @struct.u16 declare movementY: number;
+  @struct.i16 declare movementX: number;
+  @struct.i16 declare movementY: number;
   @struct.u16 declare screenX: number;
   @struct.u16 declare screenY: number;
   @struct.bool declare shiftKey: boolean;

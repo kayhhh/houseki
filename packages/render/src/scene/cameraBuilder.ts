@@ -36,6 +36,7 @@ export function cameraBuilder(
     object.far = camera.far;
 
     object.position.set(0, 0, 0);
+    object.quaternion.set(0, 0, 0, 1);
   }
 
   // Sync object positions

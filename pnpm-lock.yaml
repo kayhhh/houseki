@@ -274,6 +274,9 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
+      three:
+        specifier: ^0.149.0
+        version: 0.149.0
       thyseus:
         specifier: 0.12.0-beta.5
         version: 0.12.0-beta.5
@@ -281,6 +284,9 @@ importers:
       '@thyseus/transformer-rollup':
         specifier: 0.12.0-beta.5
         version: 0.12.0-beta.5(thyseus@0.12.0-beta.5)
+      '@types/three':
+        specifier: ^0.149.0
+        version: 0.149.0
       typescript:
         specifier: ~5.0.4
         version: 5.0.4

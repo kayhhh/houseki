@@ -1,5 +1,5 @@
 import { CoreStore } from "@lattice-engine/core";
-import { EventWriter, Res, SystemRes } from "thyseus";
+import { EventWriter, Mut, Res, SystemRes } from "thyseus";
 
 import {
   ContextMenuEvent,
@@ -37,7 +37,7 @@ class LocalStore {
  */
 export function inputWriter(
   store: Res<CoreStore>,
-  inputStruct: Res<InputStruct>,
+  inputStruct: Res<Mut<InputStruct>>,
   localStore: SystemRes<LocalStore>,
   pointerMoveWriter: EventWriter<PointerMoveEvent>,
   pointerDownWriter: EventWriter<PointerDownEvent>,
@@ -144,6 +144,10 @@ export function inputWriter(
     localStore.keyDownEvents.push(keyboardEventToECS(event));
   }
 
+  function onPointerLockChange() {
+    inputStruct.isPointerLocked = document.pointerLockElement === canvas;
+  }
+
   canvas.addEventListener("pointerdown", onPointerDown);
   canvas.addEventListener("pointermove", onPointerMove);
   canvas.addEventListener("pointercancel", onPointerCancel);
@@ -151,6 +155,7 @@ export function inputWriter(
   canvas.addEventListener("contextmenu", onContextMenu);
   canvas.addEventListener("wheel", onWheel);
   canvas.addEventListener("keydown", onKeyDown);
+  document.addEventListener("pointerlockchange", onPointerLockChange);
 
   // Set remove listeners function
   localStore.removeEventListeners = () => {
@@ -161,5 +166,6 @@ export function inputWriter(
     canvas.removeEventListener("contextmenu", onContextMenu);
     canvas.removeEventListener("wheel", onWheel);
     canvas.removeEventListener("keydown", onKeyDown);
+    document.removeEventListener("pointerlockchange", onPointerLockChange);
   };
 }
