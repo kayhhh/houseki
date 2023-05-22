@@ -1,7 +1,7 @@
 import { InputStruct, PointerMoveEvent } from "@lattice-engine/input";
 import { Rotation } from "@lattice-engine/scene";
 import { Euler, Quaternion } from "three";
-import { Entity, EventReader, Mut, Query, Res, With, Without } from "thyseus";
+import { EventReader, Mut, Query, Res, With } from "thyseus";
 
 import { PlayerControls } from "./components";
 
@@ -11,23 +11,20 @@ const maxPolarAngle = Math.PI;
 const euler = new Euler(0, 0, 0, "YXZ");
 const quaternion = new Quaternion();
 
-export function playerControls(
+/**
+ * Rotates the camera based on mouse movement.
+ */
+export function rotatePlayer(
   inputStruct: Res<InputStruct>,
   pointerMoveReader: EventReader<PointerMoveEvent>,
-  withoutRotation: Query<Entity, [With<PlayerControls>, Without<Rotation>]>,
-  withRotation: Query<Mut<Rotation>, With<PlayerControls>>
+  rotations: Query<Mut<Rotation>, With<PlayerControls>>
 ) {
   // TODO: Support non pointer lock controls.
   if (!inputStruct.isPointerLocked) return;
 
-  // Add rotation component to entities that don't have it yet
-  for (const entity of withoutRotation) {
-    entity.addType(Rotation);
-  }
-
-  // Update rotation component for entities that have it
+  // Update rotation on pointer move
   for (const event of pointerMoveReader) {
-    for (const rotation of withRotation) {
+    for (const rotation of rotations) {
       euler.setFromQuaternion(
         quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w)
       );

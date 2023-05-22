@@ -71,3 +71,4 @@ export class PointerCancelEvent extends PointerEvent {}
 export class ContextMenuEvent extends MouseEvent {}
 export class OnWheelEvent extends WheelEvent {}
 export class KeyDownEvent extends KeyboardEvent {}
+export class KeyUpEvent extends KeyboardEvent {}
