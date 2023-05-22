@@ -1,7 +1,7 @@
 import { InputStruct, Key } from "@lattice-engine/input";
 import { Position, Rotation } from "@lattice-engine/scene";
 import { Matrix4, Quaternion, Vector3 } from "three";
-import { Mut, Query, Res, With } from "thyseus";
+import { Mut, Query, Res } from "thyseus";
 
 import { PlayerControls } from "./components";
 
@@ -13,7 +13,7 @@ const vector3 = new Vector3();
 
 export function movePlayer(
   inputStruct: Res<InputStruct>,
-  entities: Query<[Mut<Position>, Rotation], With<PlayerControls>>
+  entities: Query<[PlayerControls, Mut<Position>, Rotation]>
 ) {
   const w =
     inputStruct.keyPressed(Key.w) || inputStruct.keyPressed(Key.ArrowUp);
@@ -24,7 +24,7 @@ export function movePlayer(
   const d =
     inputStruct.keyPressed(Key.d) || inputStruct.keyPressed(Key.ArrowRight);
 
-  for (const [position, rotation] of entities) {
+  for (const [player, position, rotation] of entities) {
     quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
     matrix4.setPosition(position.x, position.y, position.z);
     matrix4.makeRotationFromQuaternion(quaternion);
@@ -38,5 +38,12 @@ export function movePlayer(
 
     position.x += vector3.x * z + vector3.z * x;
     position.z += vector3.z * z - vector3.x * x;
+
+    // Teleport out of void
+    if (player.enableVoidTeleport && position.y < player.voidLevel) {
+      position.x = player.spawnPoint[0] ?? 0;
+      position.y = player.spawnPoint[1] ?? 0;
+      position.z = player.spawnPoint[2] ?? 0;
+    }
   }
 }

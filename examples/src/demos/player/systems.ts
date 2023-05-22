@@ -54,7 +54,8 @@ export function initScene(
     .add(new CapsuleCollider(0.4, 1.6))
     .addType(KinematicBody)
     .addType(CharacterController)
-    .addType(PlayerControls);
+    .add(new PlayerControls([0, 4, 0]));
+
   coreStruct.activeCamera = camera.id;
   inputStruct.enablePointerLock = true;
 
