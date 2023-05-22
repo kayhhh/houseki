@@ -22,9 +22,9 @@ class LocalStore {
 }
 
 /**
- * Loads textures and saves them as ImageBitmaps.
+ * Creates ImageBitmaps.
  */
-export function textureBuider(
+export function createImages(
   warehouse: Res<Warehouse>,
   renderStore: Res<RenderStore>,
   localStore: SystemRes<LocalStore>,

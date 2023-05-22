@@ -6,9 +6,9 @@ import { Entity, Query, Res } from "thyseus";
 import { RenderStore } from "../RenderStore";
 
 /**
- * Syncs Geometry components with Three.js BufferGeomtry objects.
+ * Creates and updates geometry objects.
  */
-export function geometryBuilder(
+export function createGeometries(
   warehouse: Res<Warehouse>,
   store: Res<RenderStore>,
   entities: Query<[Geometry, Entity]>

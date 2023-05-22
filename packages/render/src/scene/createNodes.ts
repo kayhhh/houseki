@@ -4,7 +4,10 @@ import { Entity, Query, Res, With } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
-export function nodeBuilder(
+/**
+ * Creates and updates node objects.
+ */
+export function createNodes(
   store: Res<RenderStore>,
   entities: Query<Entity, With<Node>>,
   withPosition: Query<[Entity, Position], With<Node>>,

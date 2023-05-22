@@ -5,9 +5,9 @@ import { Entity, Query, Res, With } from "thyseus";
 import { RenderStore } from "../RenderStore";
 
 /**
- * Syncs Mesh components with Three.js Mesh objects.
+ * Creates and updates mesh objects.
  */
-export function meshBuilder(
+export function createMeshes(
   store: Res<RenderStore>,
   entities: Query<[Entity, Mesh], With<Geometry>>
 ) {

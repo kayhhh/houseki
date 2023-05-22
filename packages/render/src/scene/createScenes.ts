@@ -12,7 +12,10 @@ import { Entity, Query, Res, With } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
-export function sceneBuilder(
+/**
+ * Creates and updates scene objects.
+ */
+export function createScenes(
   store: Res<RenderStore>,
   entities: Query<Entity, With<Scene>>
 ) {

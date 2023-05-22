@@ -26,9 +26,9 @@ import { WEBGL_CONSTANTS } from "../constants";
 import { RenderStore } from "../RenderStore";
 
 /**
- * Syncs Material components with Three.js Material objects.
+ * Creates and updates material objects.
  */
-export function materialBuilder(
+export function createMaterials(
   renderStore: Res<RenderStore>,
   entities: Query<[Entity, Material]>
 ) {

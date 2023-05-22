@@ -5,9 +5,9 @@ import { Entity, Query, Res, With } from "thyseus";
 import { RenderStore } from "../RenderStore";
 
 /**
- * Syncs PerspectiveCamera components with Three.js PerspectiveCamera objects.
+ * Creates and updates perspective camera objects.
  */
-export function cameraBuilder(
+export function createCameras(
   store: Res<RenderStore>,
   cameras: Query<[Entity, PerspectiveCamera]>,
   withPosition: Query<[Entity, Position], With<PerspectiveCamera>>,
