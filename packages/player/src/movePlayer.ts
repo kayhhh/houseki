@@ -15,10 +15,14 @@ export function movePlayer(
   inputStruct: Res<InputStruct>,
   entities: Query<[Mut<Position>, Rotation], With<PlayerControls>>
 ) {
-  const w = inputStruct.keyPressed(Key.w) || inputStruct.keyPressed(Key.W);
-  const s = inputStruct.keyPressed(Key.s) || inputStruct.keyPressed(Key.S);
-  const a = inputStruct.keyPressed(Key.a) || inputStruct.keyPressed(Key.A);
-  const d = inputStruct.keyPressed(Key.d) || inputStruct.keyPressed(Key.D);
+  const w =
+    inputStruct.keyPressed(Key.w) || inputStruct.keyPressed(Key.ArrowUp);
+  const s =
+    inputStruct.keyPressed(Key.s) || inputStruct.keyPressed(Key.ArrowDown);
+  const a =
+    inputStruct.keyPressed(Key.a) || inputStruct.keyPressed(Key.ArrowLeft);
+  const d =
+    inputStruct.keyPressed(Key.d) || inputStruct.keyPressed(Key.ArrowRight);
 
   for (const [position, rotation] of entities) {
     quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);

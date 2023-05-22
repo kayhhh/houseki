@@ -155,10 +155,12 @@ export function inputWriter(
   }
 
   function onKeyDown(event: KeyboardEvent) {
+    console.log("😢", event.key);
     localStore.keyDownEvents.push(keyboardEventToECS(event));
   }
 
   function onKeyUp(event: KeyboardEvent) {
+    console.log("🕵️‍♀️", event.key);
     localStore.keyUpEvents.push(keyboardEventToECS(event));
   }
 
