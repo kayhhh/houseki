@@ -55,11 +55,9 @@ export function createImages(
 
       localStore.bitmapPromises.set(
         entity.id,
-        createImageBitmap(blob, { imageOrientation: "flipY" }).then(
-          (bitmap) => {
-            localStore.bitmaps.set(entityId, bitmap);
-          }
-        )
+        createImageBitmap(blob).then((bitmap) => {
+          localStore.bitmaps.set(entityId, bitmap);
+        })
       );
     }
   }
