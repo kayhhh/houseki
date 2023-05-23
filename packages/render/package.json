@@ -21,7 +21,7 @@
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
     "three": "^0.149.0",
-    "thyseus": "0.12.0-beta.5"
+    "thyseus": "0.12.0-beta.6"
   },
   "devDependencies": {
     "@thyseus/transformer-rollup": "0.12.0-beta.5",
