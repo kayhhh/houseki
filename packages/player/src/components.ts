@@ -4,16 +4,14 @@ import { PlayerControlsMode, PlayerControlsView } from "./types";
 
 @struct
 class Vec3 {
-  @struct.array({ length: 3, type: "f32" }) declare value: Float32Array;
+  @struct.array({ length: 3, type: "f32" }) declare array: Float32Array;
 
-  set(x: number, y: number, z: number) {
-    this.value[0] = x;
-    this.value[1] = y;
-    this.value[2] = z;
+  set value(newValue: Readonly<[number, number, number]>) {
+    this.array.set(newValue);
   }
 
-  array() {
-    return [this.value[0], this.value[1], this.value[2]] as [
+  get value() {
+    return [this.array[0], this.array[1], this.array[2]] as [
       number,
       number,
       number
@@ -21,21 +19,24 @@ class Vec3 {
   }
 }
 
+/**
+ * The player's body.
+ */
 @struct
-export class PlayerControls {
+export class PlayerBody {
   /**
-   * Whether the controls are for first person, third person, or both.
+   * The base speed of the player.
    */
-  @struct.u8 declare mode: PlayerControlsMode;
-
-  /**
-   * The active view, either first person or third person.
-   * This is only used when mode is set to both.
-   */
-  @struct.u8 declare currentView: PlayerControlsView;
-
   @struct.f32 declare speed: number;
+
+  /**
+   * The strength of the player's jump.
+   */
   @struct.f32 declare jumpStrength: number;
+
+  /**
+   * The spawn point of the player.
+   */
   @struct.substruct(Vec3) declare spawnPoint: Vec3;
 
   /**
@@ -49,8 +50,6 @@ export class PlayerControls {
   @struct.f32 declare voidLevel: number;
 
   constructor(
-    mode = PlayerControlsMode.Both,
-    currentView = PlayerControlsView.FirstPerson,
     speed = 4,
     jumpStrength = 4,
     spawnPoint: [number, number, number] = [0, 0, 0],
@@ -59,12 +58,45 @@ export class PlayerControls {
   ) {
     initStruct(this);
 
-    this.mode = mode;
-    this.currentView = currentView;
     this.speed = speed;
     this.jumpStrength = jumpStrength;
-    this.spawnPoint.set(...spawnPoint);
+    this.spawnPoint.value = spawnPoint;
     this.enableVoidTeleport = enableVoidTeleport;
     this.voidLevel = voidLevel;
+  }
+}
+
+/**
+ * The player's camera.
+ * Is attached to the player's body and follows it around.
+ */
+@struct
+export class PlayerCamera {
+  /**
+   * Whether the controls are for first person, third person, or both.
+   */
+  @struct.u8 declare mode: PlayerControlsMode;
+
+  /**
+   * The active view, either first person or third person.
+   * This is only used when mode is set to both.
+   */
+  @struct.u8 declare currentView: PlayerControlsView;
+
+  /**
+   * The distance of the camera from the player, when in third person mode.
+   */
+  @struct.f32 declare distance: number;
+
+  constructor(
+    mode = PlayerControlsMode.Both,
+    currentView = PlayerControlsView.FirstPerson,
+    cameraDistance = 3
+  ) {
+    initStruct(this);
+
+    this.mode = mode;
+    this.currentView = currentView;
+    this.distance = cameraDistance;
   }
 }

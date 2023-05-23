@@ -8,6 +8,7 @@ import {
   SphereCollider,
   Velocity,
 } from "@lattice-engine/physics";
+import { PlayerBody, PlayerCamera } from "@lattice-engine/player";
 import {
   Mesh,
   Node,
@@ -19,7 +20,6 @@ import {
 } from "@lattice-engine/scene";
 import { Commands, Mut, Res } from "thyseus";
 
-import { PlayerControls } from "../../../../packages/player/dist";
 import { createRoom } from "../../utils/createRoom";
 import { createSphereGeometry } from "../../utils/createSphereGeometry";
 
@@ -46,21 +46,34 @@ export function initScene(
   const room = createRoom([12, 4, 12], commands, warehouse);
   room.add(new Parent(scene));
 
-  // Create camera and player
+  // Create player body
   const spawn = [0, 4, 0] as const;
-  const player = new PlayerControls();
-  player.spawnPoint.set(...spawn);
+  const player = new PlayerBody();
+  player.spawnPoint.value = spawn;
 
-  const camera = commands
+  const body = commands
     .spawn()
     .add(new Position(...spawn))
     .addType(Rotation)
     .addType(Velocity)
-    .addType(PerspectiveCamera)
+    .addType(Node)
+    .add(new Parent(scene))
+    .add(createSphereGeometry(warehouse, 0.2))
+    .addType(Mesh)
     .add(new CapsuleCollider(0.4, 1.6))
     .addType(KinematicBody)
     .addType(CharacterController)
     .add(player);
+
+  // Create camera, attached to the body
+  const camera = commands
+    .spawn()
+    .addType(Node)
+    .addType(Position)
+    .addType(Rotation)
+    .add(new Parent(body))
+    .addType(PerspectiveCamera)
+    .addType(PlayerCamera);
 
   coreStruct.activeCamera = camera.id;
   inputStruct.enablePointerLock = true;

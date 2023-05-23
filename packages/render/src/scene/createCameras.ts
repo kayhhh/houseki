@@ -1,4 +1,9 @@
-import { PerspectiveCamera, Position, Rotation } from "@lattice-engine/scene";
+import {
+  Parent,
+  PerspectiveCamera,
+  Position,
+  Rotation,
+} from "@lattice-engine/scene";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { Entity, Query, Res, With } from "thyseus";
 
@@ -11,7 +16,8 @@ export function createCameras(
   store: Res<RenderStore>,
   cameras: Query<[Entity, PerspectiveCamera]>,
   withPosition: Query<[Entity, Position], With<PerspectiveCamera>>,
-  withRotation: Query<[Entity, Rotation], With<PerspectiveCamera>>
+  withRotation: Query<[Entity, Rotation], With<PerspectiveCamera>>,
+  withParent: Query<[Entity, Parent], With<PerspectiveCamera>>
 ) {
   const ids: bigint[] = [];
 
@@ -49,8 +55,20 @@ export function createCameras(
       object.quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
   }
 
+  // Sync object parents
+  for (const [{ id }, parent] of withParent) {
+    const object = store.perspectiveCameras.get(id);
+    const parentObject = store.nodes.get(parent.id);
+    if (object && parentObject) parentObject.add(object);
+  }
+
   // Remove objects that no longer exist
   for (const [id] of store.perspectiveCameras) {
-    if (!ids.includes(id)) store.perspectiveCameras.delete(id);
+    if (!ids.includes(id)) {
+      const object = store.perspectiveCameras.get(id);
+      if (object) object.removeFromParent();
+
+      store.perspectiveCameras.delete(id);
+    }
   }
 }
