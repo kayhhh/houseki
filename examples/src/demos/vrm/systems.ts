@@ -35,13 +35,11 @@ export function initScene(
     .addType(OrbitControls);
   coreStruct.activeCamera = camera.id;
 
-  // Create avatar
-  const vrm = new Vrm();
-  vrm.uri = "/k-robot.vrm";
+  // Create VRM
   commands
     .spawn()
     .addType(Node)
     .add(new Position(0, -0.5, 0))
     .add(new Parent(scene))
-    .add(vrm);
+    .add(new Vrm("/k-robot.vrm"));
 }
