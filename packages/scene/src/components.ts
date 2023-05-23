@@ -1,6 +1,8 @@
 import { Resource } from "@lattice-engine/core";
 import { Entity, EntityCommands, initStruct, struct } from "thyseus";
 
+import { ImageMimeType, MaterialAlphaMode } from "./types";
+
 @struct
 export class Position {
   @struct.f32 declare x: number;
@@ -125,12 +127,12 @@ export class TextureInfo {
 @struct
 export class Texture {
   @struct.substruct(Resource) declare image: Resource<Uint8Array>;
-  @struct.u8 declare mimeType: number; // ImageMimeType
+  @struct.u8 declare mimeType: ImageMimeType;
 }
 
 @struct
 export class Material {
-  @struct.u8 declare alphaMode: number; // MaterialAlphaMode
+  @struct.u8 declare alphaMode: MaterialAlphaMode;
   @struct.f32 declare alphaCutOff: number;
   @struct.bool declare doubleSided: boolean;
 

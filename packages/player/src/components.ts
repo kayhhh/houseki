@@ -25,16 +25,14 @@ class Vec3 {
 export class PlayerControls {
   /**
    * Whether the controls are for first person, third person, or both.
-   * @type {PlayerControlsMode}
    */
-  @struct.u8 declare mode: number;
+  @struct.u8 declare mode: PlayerControlsMode;
 
   /**
    * The active view, either first person or third person.
    * This is only used when mode is set to both.
-   * @type {PlayerControlsView}
    */
-  @struct.u8 declare currentView: number;
+  @struct.u8 declare currentView: PlayerControlsView;
 
   @struct.f32 declare speed: number;
   @struct.f32 declare jumpStrength: number;
