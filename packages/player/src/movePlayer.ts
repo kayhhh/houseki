@@ -5,6 +5,7 @@ import { Matrix4, Quaternion, Vector2, Vector3 } from "three";
 import { Mut, Query, Res } from "thyseus";
 
 import { PlayerControls } from "./components";
+import { PlayerControlsView } from "./types";
 
 const quaternion = new Quaternion();
 const matrix4 = new Matrix4();
@@ -23,6 +24,27 @@ export function movePlayer(
     ]
   >
 ) {
+  const input = readInput(inputStruct);
+
+  for (const [player, character, position, rotation, velocity] of entities) {
+    if (player.currentView === PlayerControlsView.FirstPerson) {
+      moveFirstPerson(player, character, position, rotation, velocity, input);
+    } else if (player.currentView === PlayerControlsView.ThirdPerson) {
+      moveThirdPerson(player, character, position, rotation, velocity, input);
+    }
+  }
+}
+
+type Input = {
+  jump: boolean;
+  x: number;
+  y: number;
+};
+
+/**
+ * Reads and normalizes input.
+ */
+function readInput(inputStruct: InputStruct): Input {
   const up =
     inputStruct.keyPressed(Key.w) || inputStruct.keyPressed(Key.ArrowUp);
   const down =
@@ -33,34 +55,61 @@ export function movePlayer(
     inputStruct.keyPressed(Key.d) || inputStruct.keyPressed(Key.ArrowRight);
   const jump = inputStruct.keyPressed(Key.Space);
 
-  for (const [player, character, position, rotation, velocity] of entities) {
-    // Get direction vector
-    quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
-    matrix4.setPosition(position.x, position.y, position.z);
-    matrix4.makeRotationFromQuaternion(quaternion);
-    vector3.setFromMatrixColumn(matrix4, 0);
+  const inputForward = Number(up) - Number(down);
+  const inputRight = Number(right) - Number(left);
 
-    // Apply input to velocity
-    const inputForward = Number(up) - Number(down);
-    const inputRight = Number(right) - Number(left);
+  const input = vector2
+    .set(inputRight, inputForward)
+    .multiplyScalar(2)
+    .normalize();
 
-    const input = vector2
-      .set(inputForward, inputRight)
-      .multiplyScalar(2)
-      .normalize()
-      .multiplyScalar(player.speed);
+  return { jump, x: input.x, y: input.y };
+}
 
-    velocity.x = vector3.x * input.y + vector3.z * input.x;
-    velocity.z = vector3.z * input.y - vector3.x * input.x;
+/**
+ * Move the player in first person mode.
+ */
+function moveFirstPerson(
+  player: PlayerControls,
+  character: CharacterController,
+  position: Position,
+  rotation: Rotation,
+  velocity: Velocity,
+  input: Input
+) {
+  // Get direction vector
+  quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
+  matrix4.setPosition(position.x, position.y, position.z);
+  matrix4.makeRotationFromQuaternion(quaternion);
+  vector3.setFromMatrixColumn(matrix4, 0);
 
-    // Teleport out of void
-    if (player.enableVoidTeleport && position.y < player.voidLevel) {
-      velocity.set(0, 0, 0);
-      position.set(...player.spawnPoint.array());
-    }
+  // Apply input to velocity
+  velocity.x = vector3.x * input.x + vector3.z * input.y;
+  velocity.z = vector3.z * input.x - vector3.x * input.y;
 
-    if (jump && character.isGrounded) {
-      velocity.y = player.jumpStrength;
-    }
+  // Apply speed
+  velocity.x *= player.speed;
+  velocity.z *= player.speed;
+
+  // Teleport out of void
+  if (player.enableVoidTeleport && position.y < player.voidLevel) {
+    velocity.set(0, 0, 0);
+    position.set(...player.spawnPoint.array());
+  }
+
+  if (input.jump && character.isGrounded) {
+    velocity.y = player.jumpStrength;
   }
 }
+
+/**
+ * Move the player in third person mode.
+ */
+function moveThirdPerson(
+  player: PlayerControls,
+  character: CharacterController,
+  position: Position,
+  rotation: Rotation,
+  velocity: Velocity,
+  input: Input
+) {}
