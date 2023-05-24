@@ -47,7 +47,7 @@ export function loadNode(
     .add(rotation)
     .add(scale);
 
-  context.nodes.push(entity.id);
+  context.nodes.set(node, entity.id);
 
   const mesh = node.getMesh();
   if (mesh) loadMesh(mesh, entity, commands, warehouse, context);

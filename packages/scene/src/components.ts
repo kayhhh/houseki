@@ -1,7 +1,7 @@
 import { Resource } from "@lattice-engine/core";
 import { Entity, EntityCommands, initStruct, struct } from "thyseus";
 
-import { ImageMimeType, MaterialAlphaMode } from "./types";
+import { AnimationPath, ImageMimeType, MaterialAlphaMode } from "./types";
 
 @struct
 export class Position {
@@ -67,7 +67,7 @@ export class Scale {
 export class Parent {
   @struct.u64 declare id: bigint;
 
-  constructor(entity?: Entity | EntityCommands) {
+  constructor(entity?: Readonly<Entity> | EntityCommands) {
     initStruct(this);
 
     if (entity) this.id = entity.id;
@@ -181,7 +181,51 @@ export class PerspectiveCamera {
   }
 }
 
+/**
+ * The AnimationMixer is used to apply animations to an object.
+ * Should be attached to a Node entity.
+ *
+ * The animation system is heavily based on the Three.js animation system.
+ * @see https://threejs.org/docs/#manual/en/introduction/Animation-system
+ */
 @struct
 export class AnimationMixer {}
 
-export class AnimationClip {}
+/**
+ * Represents a single animation clip. (e.g. "walk", "run", "idle")
+ * Should be parented to an AnimationMixer.
+ */
+@struct
+export class AnimationClip {
+  @struct.string declare name: string;
+
+  @struct.bool declare play: boolean;
+
+  @struct.bool declare loop: boolean;
+
+  @struct.f32 declare speed: number;
+
+  constructor(name = "", play = false, loop = false, speed = 1) {
+    initStruct(this);
+
+    this.name = name;
+    this.play = play;
+    this.loop = loop;
+    this.speed = speed;
+  }
+}
+
+/**
+ * Represents a single animation keyframe track. (e.g. "position", "rotation", "scale")
+ * Should be parented to an AnimationClip.
+ */
+@struct
+export class KeyframeTrack {
+  @struct.u64 declare targetId: bigint; // Entity ID
+
+  @struct.u8 declare path: AnimationPath;
+
+  @struct.substruct(Resource) declare times: Resource<Float32Array>;
+
+  @struct.substruct(Resource) declare values: Resource<Float32Array>;
+}

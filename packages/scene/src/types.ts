@@ -11,3 +11,10 @@ export enum ImageMimeType {
   "image/gif" = 3,
   "image/bmp" = 4,
 }
+
+export enum AnimationPath {
+  POSITION = 0,
+  ROTATION = 1,
+  SCALE = 2,
+  WEIGHTS = 3,
+}

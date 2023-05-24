@@ -30,7 +30,7 @@ export function createMeshes(
     // Sync object properties
     const materialObject =
       store.materials.get(mesh.materialId) ?? store.materials.get(id);
-    object.material = materialObject ?? store.defaultMaterial;
+    object.material = materialObject ?? RenderStore.DEFAULT_MATERIAL;
 
     const geometryObject = store.geometries.get(id);
     object.geometry = geometryObject ?? new BufferGeometry();

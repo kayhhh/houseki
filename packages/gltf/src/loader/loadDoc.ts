@@ -1,8 +1,10 @@
 import { Document } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
+import { AnimationMixer } from "@lattice-engine/scene";
 import { Commands, Entity } from "thyseus";
 
 import { LoadingContext } from "./context";
+import { loadAnimation } from "./loadAnimation";
 import { loadNode } from "./loadNode";
 
 export function loadDoc(
@@ -22,6 +24,16 @@ export function loadDoc(
     .forEach((child) =>
       loadNode(child, entity.id, commands, warehouse, context)
     );
+
+  root
+    .listAnimations()
+    .forEach((animation) =>
+      loadAnimation(animation, entity, commands, warehouse, context)
+    );
+
+  if (root.listAnimations().length > 0) {
+    entity.addType(AnimationMixer);
+  }
 
   return context;
 }
