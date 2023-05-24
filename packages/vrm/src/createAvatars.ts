@@ -5,6 +5,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Entity, Query, Res, SystemRes } from "thyseus";
 
 import { Vrm } from "./components";
+import { FIRSTPERSON_ONLY_LAYER, THIRDPERSON_ONLY_LAYER } from "./constants";
 import { VrmStore } from "./resources";
 
 class LocalStore {
@@ -46,6 +47,14 @@ export function createAvatars(
       // Add to scene
       const node = renderStore.nodes.get(entity.id);
       if (node) node.add(avatar.scene);
+
+      // Setup first person layers
+      if (vrm.firstPerson) {
+        avatar.firstPerson?.setup({
+          firstPersonOnlyLayer: FIRSTPERSON_ONLY_LAYER,
+          thirdPersonOnlyLayer: THIRDPERSON_ONLY_LAYER,
+        });
+      }
     }
 
     // If the VRM uri hasn't changed, skip

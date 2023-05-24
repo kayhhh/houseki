@@ -7,9 +7,15 @@ export class Vrm {
    */
   @struct.string declare uri: string;
 
-  constructor(uri = "") {
+  /**
+   * Whether to setup first person layers.
+   */
+  @struct.bool declare firstPerson: boolean;
+
+  constructor(uri = "", firstPerson = false) {
     initStruct(this);
 
     this.uri = uri;
+    this.firstPerson = firstPerson;
   }
 }

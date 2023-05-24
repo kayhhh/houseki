@@ -103,7 +103,10 @@ export class PlayerCamera {
     initStruct(this);
 
     this.mode = mode;
-    this.currentView = currentView;
+    this.currentView =
+      mode === PlayerCameraMode.ThirdPerson
+        ? PlayerCameraView.ThirdPerson
+        : currentView;
     this.distance = cameraDistance;
   }
 }

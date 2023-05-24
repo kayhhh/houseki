@@ -48,8 +48,11 @@ function zoomThirdPerson(event: OnWheelEvent, camera: PlayerCamera) {
   if (event.deltaY < 0) {
     camera.distance = Math.max(MIN_CAMERA_DISTANCE, camera.distance - 1);
 
-    // Change to first person mode if at minimum distance
-    if (camera.distance === MIN_CAMERA_DISTANCE) {
+    // Change to first person mode if at minimum distance, and first person mode is allowed
+    if (
+      camera.mode === PlayerCameraMode.Both &&
+      camera.distance === MIN_CAMERA_DISTANCE
+    ) {
       camera.currentView = PlayerCameraView.FirstPerson;
     }
   }
