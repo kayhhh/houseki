@@ -180,3 +180,8 @@ export class PerspectiveCamera {
     this.far = 1000;
   }
 }
+
+@struct
+export class AnimationMixer {}
+
+export class AnimationClip {}

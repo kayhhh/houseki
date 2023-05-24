@@ -7,9 +7,9 @@ import { selectedModel } from "./systems";
 import { world } from "./world";
 
 const MODELS = {
-  Cube: "/Cube/Cube.gltf",
-  "Damaged Helmet": "/DamagedHelmet/DamagedHelmet.glb",
-  "Flight Helmet": "/FlightHelmet/FlightHelmet.gltf",
+  Cube: "/gltf/Cube/Cube.gltf",
+  "Damaged Helmet": "/gltf/DamagedHelmet.glb",
+  "Flight Helmet": "/gltf/FlightHelmet/FlightHelmet.gltf",
 };
 
 export default function Gltf() {
