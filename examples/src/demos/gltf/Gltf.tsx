@@ -1,40 +1,24 @@
-import { Engine } from "@lattice-engine/core";
 import { useControls } from "leva";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import Canvas from "../../utils/Canvas";
+import { useEngine } from "../../utils/useEngine";
 import { selectedModel } from "./systems";
 import { world } from "./world";
 
 const MODELS = {
+  BoxAnimated: "/gltf/BoxAnimated.glb",
   Cube: "/gltf/Cube/Cube.gltf",
   "Damaged Helmet": "/gltf/DamagedHelmet.glb",
   "Flight Helmet": "/gltf/FlightHelmet/FlightHelmet.gltf",
 };
 
 export default function Gltf() {
-  const [engine, setEngine] = useState<Engine>();
+  useEngine(world);
 
   const { model } = useControls({
-    model: { options: MODELS, value: MODELS["Damaged Helmet"] },
+    model: { options: MODELS },
   });
-
-  // Create engine
-  useEffect(() => {
-    const newEngine = new Engine(world);
-    setEngine(newEngine);
-  }, []);
-
-  // Run engine
-  useEffect(() => {
-    if (!engine) return;
-
-    engine.start();
-
-    return () => {
-      engine.stop();
-    };
-  }, [engine]);
 
   // Update glTF model
   useEffect(() => {
