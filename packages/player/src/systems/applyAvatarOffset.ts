@@ -5,6 +5,7 @@ import { Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
 import { PlayerAvatar, PlayerCamera } from "../components";
+import { PlayerCameraView } from "../types";
 
 const vector3 = new Vector3();
 const vector3b = new Vector3();
@@ -16,38 +17,43 @@ export function applyAvatarOffset(
   vrmStore: Res<VrmStore>,
   renderStore: Res<RenderStore>,
   avatars: Query<[Entity, Parent], With<PlayerAvatar>>,
-  cameras: Query<[Parent, Mut<Position>], With<PlayerCamera>>
+  cameras: Query<[PlayerCamera, Parent, Mut<Position>]>
 ) {
   for (const [entity, parent] of avatars) {
-    const vrm = vrmStore.avatars.get(entity.id);
-    if (!vrm) continue;
-
-    const leftEye = vrm.humanoid.normalizedHumanBones.leftEye?.node;
-    const rightEye = vrm.humanoid.normalizedHumanBones.rightEye?.node;
-    const head = vrm.humanoid.normalizedHumanBones.head.node;
-
-    // Get world position of eyes or head
-    if (leftEye && rightEye) {
-      leftEye
-        .getWorldPosition(vector3)
-        .add(rightEye.getWorldPosition(vector3b))
-        .divideScalar(2);
-    } else {
-      head.getWorldPosition(vector3);
-
-      // Apply an offset to head position, estimating the eye position
-      head.getWorldDirection(vector3b);
-      vector3.addScaledVector(vector3b, -0.1);
-      vector3.y += 0.1;
-    }
-
-    // Get relative position from body
-    const body = renderStore.nodes.get(parent.id);
-    if (body) vector3.sub(body.getWorldPosition(vector3b));
-
-    // Find camera that is attached to the same player body
-    for (const [cameraParent, cameraPosition] of cameras) {
+    for (const [camera, cameraParent, cameraPosition] of cameras) {
+      // Find camera that is attached to the same player body
       if (cameraParent.id !== parent.id) continue;
+
+      const vrm = vrmStore.avatars.get(entity.id);
+      if (!vrm) continue;
+
+      const leftEye = vrm.humanoid.normalizedHumanBones.leftEye?.node;
+      const rightEye = vrm.humanoid.normalizedHumanBones.rightEye?.node;
+      const head = vrm.humanoid.normalizedHumanBones.head.node;
+
+      if (camera.currentView === PlayerCameraView.FirstPerson) {
+        // Get position of eyes
+        if (leftEye && rightEye) {
+          leftEye
+            .getWorldPosition(vector3)
+            .add(rightEye.getWorldPosition(vector3b))
+            .divideScalar(2);
+        } else {
+          head.getWorldPosition(vector3);
+
+          // Apply an offset to head position, estimating the eye position
+          head.getWorldDirection(vector3b);
+          vector3.addScaledVector(vector3b, -0.1);
+          vector3.y += 0.1;
+        }
+      } else {
+        // Get position of head
+        head.getWorldPosition(vector3);
+      }
+
+      // Get relative position from body
+      const body = renderStore.nodes.get(parent.id);
+      if (body) vector3.sub(body.getWorldPosition(vector3b));
 
       cameraPosition.x += vector3.x;
       cameraPosition.y += vector3.y;
