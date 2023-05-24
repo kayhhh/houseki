@@ -6,8 +6,11 @@ import { EventReader, Mut, Query, Res } from "thyseus";
 import { PlayerCamera } from "../components";
 import { PlayerCameraView } from "../types";
 
-const minPolarAngle = 0;
-const maxPolarAngle = Math.PI;
+const MIN_FIRST_PERSON_ANGLE = Math.PI / 10;
+const MAX_FIRST_PERSON_ANGLE = Math.PI - MIN_FIRST_PERSON_ANGLE;
+
+const MIN_THIRD_PERSON_ANGLE = 0;
+const MAX_THIRD_PERSON_ANGLE = Math.PI;
 
 const euler = new Euler(0, 0, 0, "YXZ");
 const quaternion = new Quaternion();
@@ -26,8 +29,8 @@ export function moveCamera(
     // TODO: Support non pointer lock controls.
     if (!inputStruct.isPointerLocked) continue;
 
-    for (const [, , rotation] of entities) {
-      rotateCamera(event, rotation);
+    for (const [camera, , rotation] of entities) {
+      rotateCamera(event, camera, rotation);
     }
   }
 
@@ -46,7 +49,11 @@ export function moveCamera(
 /**
  * Rotates the camera according to a pointer move event.
  */
-function rotateCamera(event: PointerMoveEvent, rotation: Rotation) {
+function rotateCamera(
+  event: PointerMoveEvent,
+  camera: PlayerCamera,
+  rotation: Rotation
+) {
   euler.setFromQuaternion(
     quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w)
   );
@@ -55,9 +62,18 @@ function rotateCamera(event: PointerMoveEvent, rotation: Rotation) {
   euler.x -= event.movementY * 0.002;
 
   // Clamp vertical rotation
+  const minAngle =
+    camera.currentView === PlayerCameraView.FirstPerson
+      ? MIN_FIRST_PERSON_ANGLE
+      : MIN_THIRD_PERSON_ANGLE;
+  const maxAngle =
+    camera.currentView === PlayerCameraView.FirstPerson
+      ? MAX_FIRST_PERSON_ANGLE
+      : MAX_THIRD_PERSON_ANGLE;
+
   euler.x = Math.max(
-    Math.PI / 2 - maxPolarAngle,
-    Math.min(Math.PI / 2 - minPolarAngle, euler.x)
+    Math.PI / 2 - maxAngle,
+    Math.min(Math.PI / 2 - minAngle, euler.x)
   );
 
   quaternion.setFromEuler(euler);
