@@ -1,15 +1,15 @@
 import { InputStruct, Key } from "@lattice-engine/input";
 import { CharacterController, Velocity } from "@lattice-engine/physics";
 import { Parent, Position, Rotation } from "@lattice-engine/scene";
-import { Matrix4, Quaternion, Vector2, Vector3 } from "three";
+import { Matrix4, Quaternion, Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
-import { PlayerBody, PlayerCamera } from "./components";
+import { PlayerBody, PlayerCamera } from "../components";
+import { readInput } from "../utils/readInput";
 
 const quaternion = new Quaternion();
 const matrix4 = new Matrix4();
 const vector3 = new Vector3();
-const vector2 = new Vector2();
 
 /**
  * System that moves the player body.
@@ -22,6 +22,7 @@ export function moveBody(
   >
 ) {
   const input = readInput(inputStruct);
+  const jump = inputStruct.keyPressed(Key.Space);
 
   for (const [parent, rotation] of cameras) {
     for (const [entity, player, character, position, velocity] of bodies) {
@@ -46,40 +47,9 @@ export function moveBody(
         position.set(...player.spawnPoint.value);
       }
 
-      if (input.jump && character.isGrounded) {
+      if (jump && character.isGrounded) {
         velocity.y = player.jumpStrength;
       }
     }
   }
-}
-
-type Input = {
-  jump: boolean;
-  x: number;
-  y: number;
-};
-
-/**
- * Reads and normalizes input.
- */
-function readInput(inputStruct: InputStruct): Input {
-  const up =
-    inputStruct.keyPressed(Key.w) || inputStruct.keyPressed(Key.ArrowUp);
-  const down =
-    inputStruct.keyPressed(Key.s) || inputStruct.keyPressed(Key.ArrowDown);
-  const left =
-    inputStruct.keyPressed(Key.a) || inputStruct.keyPressed(Key.ArrowLeft);
-  const right =
-    inputStruct.keyPressed(Key.d) || inputStruct.keyPressed(Key.ArrowRight);
-  const jump = inputStruct.keyPressed(Key.Space);
-
-  const inputForward = Number(up) - Number(down);
-  const inputRight = Number(right) - Number(left);
-
-  const input = vector2
-    .set(inputRight, inputForward)
-    .multiplyScalar(2)
-    .normalize();
-
-  return { jump, x: input.x, y: input.y };
 }

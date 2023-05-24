@@ -1,9 +1,9 @@
 import { run, WorldBuilder } from "thyseus";
 
-import { applyAvatarOffset } from "./applyAvatarOffset";
-import { moveBody } from "./moveBody";
-import { moveCamera } from "./moveCamera";
-import { zoomCamera } from "./zoomCamera";
+import { applyAvatarOffset } from "./systems/applyAvatarOffset";
+import { moveBody } from "./systems/moveBody";
+import { moveCamera } from "./systems/moveCamera";
+import { zoomCamera } from "./systems/zoomCamera";
 
 export function playerPlugin(builder: WorldBuilder) {
   builder.addSystems(

@@ -3,8 +3,8 @@ import { Position, Rotation } from "@lattice-engine/scene";
 import { Euler, Quaternion, Vector3 } from "three";
 import { EventReader, Mut, Query, Res } from "thyseus";
 
-import { PlayerCamera } from "./components";
-import { PlayerCameraView } from "./types";
+import { PlayerCamera } from "../components";
+import { PlayerCameraView } from "../types";
 
 const minPolarAngle = 0;
 const maxPolarAngle = Math.PI;

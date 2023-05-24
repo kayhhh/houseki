@@ -1,7 +1,7 @@
 import { Position, Rotation } from "@lattice-engine/scene";
 import { Entity, Query, With, Without } from "thyseus";
 
-import { PlayerBody } from "./components";
+import { PlayerBody } from "../components";
 
 /**
  * Adds components to PlayerControl entities that are required for the player to work.

@@ -1,8 +1,8 @@
 import { OnWheelEvent } from "@lattice-engine/input";
 import { EventReader, Query } from "thyseus";
 
-import { PlayerCamera } from "./components";
-import { PlayerCameraMode, PlayerCameraView } from "./types";
+import { PlayerCamera } from "../components";
+import { PlayerCameraMode, PlayerCameraView } from "../types";
 
 const MIN_CAMERA_DISTANCE = 1;
 const MAX_CAMERA_DISTANCE = 10;

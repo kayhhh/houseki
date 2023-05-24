@@ -4,7 +4,7 @@ import { VrmStore } from "@lattice-engine/vrm";
 import { Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
-import { PlayerAvatar, PlayerCamera } from "./components";
+import { PlayerAvatar, PlayerCamera } from "../components";
 
 const vector3 = new Vector3();
 const vector3b = new Vector3();
