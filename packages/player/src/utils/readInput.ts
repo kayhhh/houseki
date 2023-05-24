@@ -28,5 +28,9 @@ export function readInput(inputStruct: InputStruct): Input {
 
 function normalize(x: number, y: number) {
   const length = Math.sqrt(x * x + y * y);
-  return { x: x / length, y: y / length };
+
+  const normalX = x === 0 ? 0 : x / length;
+  const normalY = y === 0 ? 0 : y / length;
+
+  return { x: normalX, y: normalY };
 }
