@@ -4,7 +4,7 @@ import { Euler, Quaternion, Vector3 } from "three";
 import { EventReader, Mut, Query, Res } from "thyseus";
 
 import { PlayerCamera } from "./components";
-import { PlayerControlsView } from "./types";
+import { PlayerCameraView } from "./types";
 
 const minPolarAngle = 0;
 const maxPolarAngle = Math.PI;
@@ -21,11 +21,11 @@ export function moveCamera(
   pointerMoveReader: EventReader<PointerMoveEvent>,
   entities: Query<[PlayerCamera, Mut<Position>, Mut<Rotation>]>
 ) {
-  // TODO: Support non pointer lock controls.
-  if (!inputStruct.isPointerLocked) return;
-
   // Update rotation on pointer move
   for (const event of pointerMoveReader) {
+    // TODO: Support non pointer lock controls.
+    if (!inputStruct.isPointerLocked) continue;
+
     for (const [, , rotation] of entities) {
       rotateCamera(event, rotation);
     }
@@ -33,19 +33,18 @@ export function moveCamera(
 
   // Move camera
   for (const [camera, position] of entities) {
-    // Reset camera position
     position.x = 0;
     position.y = 0;
     position.z = 0;
 
-    if (camera.currentView === PlayerControlsView.ThirdPerson) {
+    if (camera.currentView === PlayerCameraView.ThirdPerson) {
       moveThirdPerson(position, camera);
     }
   }
 }
 
 /**
- * Rotates the camera according to the pointer move event.
+ * Rotates the camera according to a pointer move event.
  */
 function rotateCamera(event: PointerMoveEvent, rotation: Rotation) {
   euler.setFromQuaternion(

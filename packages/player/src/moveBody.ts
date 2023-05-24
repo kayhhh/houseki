@@ -2,7 +2,7 @@ import { InputStruct, Key } from "@lattice-engine/input";
 import { CharacterController, Velocity } from "@lattice-engine/physics";
 import { Parent, Position, Rotation } from "@lattice-engine/scene";
 import { Matrix4, Quaternion, Vector2, Vector3 } from "three";
-import { Entity, Mut, Query, Res } from "thyseus";
+import { Entity, Mut, Query, Res, With } from "thyseus";
 
 import { PlayerBody, PlayerCamera } from "./components";
 
@@ -16,17 +16,17 @@ const vector2 = new Vector2();
  */
 export function moveBody(
   inputStruct: Res<InputStruct>,
-  cameras: Query<[PlayerCamera, Parent, Rotation]>,
+  cameras: Query<[Parent, Rotation], With<PlayerCamera>>,
   bodies: Query<
     [Entity, PlayerBody, CharacterController, Mut<Position>, Mut<Velocity>]
   >
 ) {
   const input = readInput(inputStruct);
 
-  for (const [camera, parent, rotation] of cameras) {
+  for (const [parent, rotation] of cameras) {
     for (const [entity, player, character, position, velocity] of bodies) {
       // Find the body that matches the camera parent
-      if (parent.id !== entity.id) continue;
+      if (entity.id !== parent.id) continue;
 
       // Get direction vector
       quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
@@ -34,21 +34,18 @@ export function moveBody(
       matrix4.makeRotationFromQuaternion(quaternion);
       vector3.setFromMatrixColumn(matrix4, 0);
 
-      // Apply input to velocity
+      // Apply input to velocity, using the direction
       velocity.x = vector3.x * input.x + vector3.z * input.y;
       velocity.z = vector3.z * input.x - vector3.x * input.y;
 
-      // Apply speed
       velocity.x *= player.speed;
       velocity.z *= player.speed;
 
-      // Teleport out of void
       if (player.enableVoidTeleport && position.y < player.voidLevel) {
         velocity.set(0, 0, 0);
         position.set(...player.spawnPoint.value);
       }
 
-      // Jump
       if (input.jump && character.isGrounded) {
         velocity.y = player.jumpStrength;
       }

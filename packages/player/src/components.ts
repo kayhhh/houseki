@@ -1,6 +1,6 @@
 import { initStruct, struct } from "thyseus";
 
-import { PlayerControlsMode, PlayerControlsView } from "./types";
+import { PlayerCameraMode, PlayerCameraView } from "./types";
 
 @struct
 class Vec3 {
@@ -67,21 +67,28 @@ export class PlayerBody {
 }
 
 /**
+ * The player's avatar.
+ * Should be a child of the player's body.
+ */
+@struct
+export class PlayerAvatar {}
+
+/**
  * The player's camera.
- * Is attached to the player's body and follows it around.
+ * Should be a child of the player's body.
  */
 @struct
 export class PlayerCamera {
   /**
    * Whether the controls are for first person, third person, or both.
    */
-  @struct.u8 declare mode: PlayerControlsMode;
+  @struct.u8 declare mode: PlayerCameraMode;
 
   /**
    * The active view, either first person or third person.
    * This is only used when mode is set to both.
    */
-  @struct.u8 declare currentView: PlayerControlsView;
+  @struct.u8 declare currentView: PlayerCameraView;
 
   /**
    * The distance of the camera from the player, when in third person mode.
@@ -89,8 +96,8 @@ export class PlayerCamera {
   @struct.f32 declare distance: number;
 
   constructor(
-    mode = PlayerControlsMode.Both,
-    currentView = PlayerControlsView.FirstPerson,
+    mode = PlayerCameraMode.Both,
+    currentView = PlayerCameraView.FirstPerson,
     cameraDistance = 3
   ) {
     initStruct(this);

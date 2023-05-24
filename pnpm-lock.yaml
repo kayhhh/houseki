@@ -274,9 +274,15 @@ importers:
       '@lattice-engine/physics':
         specifier: workspace:^
         version: link:../physics
+      '@lattice-engine/render':
+        specifier: workspace:^
+        version: link:../render
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
+      '@lattice-engine/vrm':
+        specifier: workspace:^
+        version: link:../vrm
       three:
         specifier: ^0.149.0
         version: 0.149.0

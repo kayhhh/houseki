@@ -8,7 +8,7 @@ import {
   SphereCollider,
   Velocity,
 } from "@lattice-engine/physics";
-import { PlayerBody, PlayerCamera } from "@lattice-engine/player";
+import { PlayerAvatar, PlayerBody, PlayerCamera } from "@lattice-engine/player";
 import {
   Mesh,
   Node,
@@ -18,6 +18,7 @@ import {
   Rotation,
   Scene,
 } from "@lattice-engine/scene";
+import { Vrm } from "@lattice-engine/vrm";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createRoom } from "../../utils/createRoom";
@@ -48,24 +49,34 @@ export function initScene(
 
   // Create player body
   const spawn = [0, 4, 0] as const;
+  const playerHeight = 1.6;
+  const playerWidth = 0.4;
+
   const player = new PlayerBody();
   player.spawnPoint.value = spawn;
 
   const body = commands
     .spawn()
+    .addType(Node)
+    .add(new Parent(scene))
     .add(new Position(...spawn))
     .addType(Rotation)
     .addType(Velocity)
-    .addType(Node)
-    .add(new Parent(scene))
-    .add(createSphereGeometry(warehouse, 0.2))
-    .addType(Mesh)
-    .add(new CapsuleCollider(0.4, 1.6))
+    .add(new CapsuleCollider(playerWidth, playerHeight - playerWidth * 2))
     .addType(KinematicBody)
     .addType(CharacterController)
     .add(player);
 
-  // Create camera, attached to the body
+  // Create avatar
+  commands
+    .spawn()
+    .addType(Node)
+    .add(new Position(0, -playerHeight / 2, 0))
+    .add(new Parent(body))
+    .add(new Vrm("/k-robot.vrm"))
+    .addType(PlayerAvatar);
+
+  // Create camera
   const camera = commands
     .spawn()
     .addType(Node)

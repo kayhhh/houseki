@@ -32,14 +32,15 @@ export function createScenes(
 
       // TODO: Move lights into ECS
       const directionalLight = new DirectionalLight(0xffffff, 0.75);
+      directionalLight.position.multiplyScalar(30);
       directionalLight.castShadow = true;
       directionalLight.shadow.mapSize.set(2048, 2048);
       directionalLight.shadow.camera.near = 0.1;
       directionalLight.shadow.camera.far = 100;
-      directionalLight.shadow.camera.left = -12;
-      directionalLight.shadow.camera.right = 12;
-      directionalLight.shadow.camera.top = 12;
-      directionalLight.shadow.camera.bottom = -12;
+      directionalLight.shadow.camera.left = -6;
+      directionalLight.shadow.camera.right = 6;
+      directionalLight.shadow.camera.top = 6;
+      directionalLight.shadow.camera.bottom = -6;
 
       object.add(new AmbientLight(0xffffff, 0.25));
       object.add(directionalLight);

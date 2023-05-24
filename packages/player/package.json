@@ -21,7 +21,9 @@
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/input": "workspace:^",
     "@lattice-engine/physics": "workspace:^",
+    "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
+    "@lattice-engine/vrm": "workspace:^",
     "three": "^0.149.0",
     "thyseus": "0.12.0-beta.6"
   },
