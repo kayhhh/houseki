@@ -1,5 +1,6 @@
 import { CoreSchedule, World } from "thyseus";
 
+import { LatticeSchedules } from "./constants";
 import { corePlugin } from "./plugin";
 
 /**
@@ -59,5 +60,13 @@ export class Engine {
   stop() {
     cancelAnimationFrame(this.#animationFrame);
     clearInterval(this.#fixedInterval);
+  }
+
+  /**
+   * Destroys the engine.
+   */
+  destroy() {
+    this.stop();
+    this.world.runSchedule(LatticeSchedules.Destroy);
   }
 }

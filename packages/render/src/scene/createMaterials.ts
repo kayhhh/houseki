@@ -24,6 +24,7 @@ import { Entity, Query, Res } from "thyseus";
 
 import { WEBGL_CONSTANTS } from "../constants";
 import { RenderStore } from "../RenderStore";
+import { disposeMaterial } from "../utils/dispose";
 
 /**
  * Creates and updates material objects.
@@ -125,16 +126,7 @@ export function createMaterials(
   for (const [id] of renderStore.materials) {
     if (!ids.includes(id)) {
       const object = renderStore.materials.get(id);
-
-      if (object) {
-        object.dispose();
-        object.map?.dispose();
-        object.normalMap?.dispose();
-        object.aoMap?.dispose();
-        object.emissiveMap?.dispose();
-        object.metalnessMap?.dispose();
-        object.roughnessMap?.dispose();
-      }
+      if (object) disposeMaterial(object);
 
       renderStore.materials.delete(id);
     }

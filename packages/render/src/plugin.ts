@@ -1,6 +1,8 @@
+import { LatticeSchedules } from "@lattice-engine/core";
 import { run, WorldBuilder } from "thyseus";
 
 import { canvasRenderer } from "./canvasRenderer";
+import { destroy } from "./destroy";
 import { createCameras } from "./scene/createCameras";
 import { createGeometries } from "./scene/createGeometries";
 import { createImages } from "./scene/createImages";
@@ -23,4 +25,6 @@ export function renderPlugin(builder: WorldBuilder) {
       canvasRenderer
     )
   );
+
+  builder.addSystemsToSchedule(LatticeSchedules.Destroy, destroy);
 }
