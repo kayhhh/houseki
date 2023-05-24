@@ -1,4 +1,3 @@
-import { Position, Rotation } from "@lattice-engine/scene";
 import { Matrix4, Quaternion, Vector3 } from "three";
 
 const quaternion = new Quaternion();
@@ -10,9 +9,13 @@ const vector3 = new Vector3();
  * @example
  * const rotation = { x: 0, y: 0, z: 0, w: 1 };
  * const position = { x: 0, y: 0, z: 0 };
- * const direction = getDirection(rotation, position); // Vector3(0, 0, -1)
+ * const direction = getDirection(rotation, position);
+ * // direction { x: 0, y: 0, z: -1 }
  */
-export function getDirection(rotation: Rotation, position: Position) {
+export function getDirection(
+  rotation: { x: number; y: number; z: number; w: number },
+  position: { x: number; y: number; z: number } = { x: 0, y: 0, z: 0 }
+) {
   quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
   matrix4.setPosition(position.x, position.y, position.z);
   matrix4.makeRotationFromQuaternion(quaternion);
