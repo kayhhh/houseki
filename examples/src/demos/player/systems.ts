@@ -72,6 +72,7 @@ export function initScene(
     .spawn()
     .addType(Node)
     .add(new Position(0, -playerHeight / 2, 0))
+    .addType(Rotation)
     .add(new Parent(body))
     .add(new Vrm("/k-robot.vrm"))
     .addType(PlayerAvatar);

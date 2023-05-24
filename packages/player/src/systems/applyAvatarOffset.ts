@@ -33,7 +33,12 @@ export function applyAvatarOffset(
         .add(rightEye.getWorldPosition(vector3b))
         .divideScalar(2);
     } else {
-      head.getWorldPosition(vector3).add(vector3b.set(0, 0.1, -0.1));
+      head.getWorldPosition(vector3);
+
+      // Apply an offset to head position, estimating the eye position
+      head.getWorldDirection(vector3b);
+      vector3.addScaledVector(vector3b, -0.1);
+      vector3.y += 0.1;
     }
 
     // Get relative position from body
