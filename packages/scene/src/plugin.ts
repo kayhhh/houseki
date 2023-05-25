@@ -1,6 +1,10 @@
 import { WorldBuilder } from "thyseus";
 
-import { geometryCleanup, textureCleanup } from "./cleanup";
+import {
+  geometryCleanup,
+  keyframeTrackCleanup,
+  textureCleanup,
+} from "./cleanup";
 import { AnimationClip, AnimationMixer, KeyframeTrack } from "./components";
 
 export function scenePlugin(builder: WorldBuilder) {
@@ -8,5 +12,5 @@ export function scenePlugin(builder: WorldBuilder) {
     .registerComponent(AnimationMixer)
     .registerComponent(AnimationClip)
     .registerComponent(KeyframeTrack)
-    .addSystems(geometryCleanup, textureCleanup);
+    .addSystems(geometryCleanup, textureCleanup, keyframeTrackCleanup);
 }

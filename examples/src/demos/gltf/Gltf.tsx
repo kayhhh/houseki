@@ -7,6 +7,7 @@ import { selectedModel } from "./systems";
 import { world } from "./world";
 
 const MODELS = {
+  AnimatedCube: "/gltf/AnimatedCube/AnimatedCube.gltf",
   BoxAnimated: "/gltf/BoxAnimated.glb",
   Cube: "/gltf/Cube/Cube.gltf",
   "Damaged Helmet": "/gltf/DamagedHelmet.glb",

@@ -1,9 +1,21 @@
 import { Warehouse } from "@lattice-engine/core";
-import { AnimationPath, KeyframeTrack } from "@lattice-engine/scene";
-import { KeyframeTrack as ThreeKeyframeTrack } from "three";
+import {
+  KeyframeInterpolation,
+  KeyframePath,
+  KeyframeTrack,
+} from "@lattice-engine/scene";
+import {
+  InterpolateDiscrete,
+  InterpolateLinear,
+  InterpolationModes,
+  NumberKeyframeTrack,
+  QuaternionKeyframeTrack,
+  VectorKeyframeTrack,
+} from "three";
 import { Entity, Query, Res } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
+import { setCubicSpline } from "./CubicSplineInterpolation";
 
 export function createKeyframeTracks(
   warehouse: Res<Warehouse>,
@@ -13,49 +25,75 @@ export function createKeyframeTracks(
   const ids: bigint[] = [];
 
   for (const [entity, track] of entities) {
-    ids.push(entity.id);
-
     const times = track.times.read(warehouse);
     const values = track.values.read(warehouse);
+
+    // Skip empty tracks
+    if (times.length === 0 || values.length === 0) continue;
+
+    ids.push(entity.id);
 
     const targetObject = renderStore.nodes.get(track.targetId);
     if (!targetObject) continue;
 
     let threePath = "";
+    let TypedKeyframeTrack:
+      | typeof NumberKeyframeTrack
+      | typeof VectorKeyframeTrack
+      | typeof QuaternionKeyframeTrack;
 
     switch (track.path) {
-      case AnimationPath.POSITION: {
+      case KeyframePath.POSITION: {
         threePath = "position";
+        TypedKeyframeTrack = VectorKeyframeTrack;
         break;
       }
 
-      case AnimationPath.ROTATION: {
+      case KeyframePath.ROTATION: {
         threePath = "quaternion";
+        TypedKeyframeTrack = QuaternionKeyframeTrack;
         break;
       }
 
-      case AnimationPath.SCALE: {
+      case KeyframePath.SCALE: {
         threePath = "scale";
+        TypedKeyframeTrack = VectorKeyframeTrack;
         break;
       }
 
-      case AnimationPath.WEIGHTS: {
+      case KeyframePath.WEIGHTS: {
         threePath = "morphTargetInfluences";
+        TypedKeyframeTrack = NumberKeyframeTrack;
         break;
       }
     }
 
     const trackName = `${targetObject.uuid}.${threePath}`;
 
+    let interpolation: InterpolationModes | undefined;
+
+    switch (track.interpolation) {
+      case KeyframeInterpolation.LINEAR: {
+        interpolation = InterpolateLinear;
+        break;
+      }
+
+      case KeyframeInterpolation.STEP: {
+        interpolation = InterpolateDiscrete;
+        break;
+      }
+    }
+
     let object = renderStore.keyframeTracks.get(entity.id);
 
     // Create new objects
     if (!object) {
-      // Skip empty tracks
-      if (times.length === 0 || values.length === 0) continue;
-
-      object = new ThreeKeyframeTrack(trackName, times, values);
+      object = new TypedKeyframeTrack(trackName, times, values, interpolation);
       renderStore.keyframeTracks.set(entity.id, object);
+
+      if (track.interpolation === KeyframeInterpolation.CUBICSPLINE) {
+        setCubicSpline(object);
+      }
     }
 
     // Sync object properties

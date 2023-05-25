@@ -8,5 +8,6 @@ export class LoadingContext {
   readonly meshes: EntityID[] = [];
   readonly materials: EntityID[] = [];
   readonly animationClips: EntityID[] = [];
+  readonly animationMixers: EntityID[] = [];
   readonly keyframeTracks: EntityID[] = [];
 }

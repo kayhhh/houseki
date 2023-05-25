@@ -12,9 +12,15 @@ export enum ImageMimeType {
   "image/bmp" = 4,
 }
 
-export enum AnimationPath {
+export enum KeyframePath {
   POSITION = 0,
   ROTATION = 1,
   SCALE = 2,
   WEIGHTS = 3,
+}
+
+export enum KeyframeInterpolation {
+  LINEAR = 0,
+  STEP = 1,
+  CUBICSPLINE = 2,
 }

@@ -58,7 +58,6 @@ export function createAnimationMixers(
 
       if (!action) {
         action = object.clipAction(clipObject);
-        action.timeScale = 0.1;
         localStore.actions.set(clipEntity.id, action);
       }
 

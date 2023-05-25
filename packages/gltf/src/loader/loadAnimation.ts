@@ -2,7 +2,8 @@ import { Animation } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
 import {
   AnimationClip,
-  AnimationPath,
+  KeyframeInterpolation,
+  KeyframePath,
   KeyframeTrack,
   Parent,
 } from "@lattice-engine/scene";
@@ -26,6 +27,7 @@ export function loadAnimation(
   animation.listChannels().forEach((channel) => {
     const track = new KeyframeTrack();
 
+    const sampler = channel.getSampler();
     const targetNode = channel.getTargetNode();
     const targetPath = channel.getTargetPath();
 
@@ -36,22 +38,22 @@ export function loadAnimation(
 
     switch (targetPath) {
       case "translation": {
-        track.path = AnimationPath.POSITION;
+        track.path = KeyframePath.POSITION;
         break;
       }
 
       case "rotation": {
-        track.path = AnimationPath.ROTATION;
+        track.path = KeyframePath.ROTATION;
         break;
       }
 
       case "scale": {
-        track.path = AnimationPath.SCALE;
+        track.path = KeyframePath.SCALE;
         break;
       }
 
       case "weights": {
-        track.path = AnimationPath.WEIGHTS;
+        track.path = KeyframePath.WEIGHTS;
         break;
       }
     }
@@ -60,7 +62,6 @@ export function loadAnimation(
     track.times.write(new Float32Array(), warehouse);
     track.values.write(new Float32Array(), warehouse);
 
-    const sampler = channel.getSampler();
     if (sampler) {
       const input = sampler.getInput();
       const inputArray = input?.getArray();
@@ -73,6 +74,8 @@ export function loadAnimation(
       if (outputArray instanceof Float32Array) {
         track.values.write(outputArray, warehouse);
       }
+
+      track.interpolation = KeyframeInterpolation[sampler.getInterpolation()];
     }
 
     const trackEntity = commands.spawn().add(track).add(new Parent(entity));

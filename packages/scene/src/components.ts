@@ -1,7 +1,12 @@
 import { Resource } from "@lattice-engine/core";
 import { Entity, EntityCommands, initStruct, struct } from "thyseus";
 
-import { AnimationPath, ImageMimeType, MaterialAlphaMode } from "./types";
+import {
+  ImageMimeType,
+  KeyframeInterpolation,
+  KeyframePath,
+  MaterialAlphaMode,
+} from "./types";
 
 @struct
 export class Position {
@@ -223,7 +228,9 @@ export class AnimationClip {
 export class KeyframeTrack {
   @struct.u64 declare targetId: bigint; // Entity ID
 
-  @struct.u8 declare path: AnimationPath;
+  @struct.u8 declare path: KeyframePath;
+
+  @struct.u8 declare interpolation: KeyframeInterpolation;
 
   @struct.substruct(Resource) declare times: Resource<Float32Array>;
 
