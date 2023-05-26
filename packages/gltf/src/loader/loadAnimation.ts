@@ -5,7 +5,6 @@ import {
   KeyframeInterpolation,
   KeyframePath,
   KeyframeTrack,
-  Parent,
 } from "@lattice-engine/scene";
 import { Commands, Entity } from "thyseus";
 
@@ -20,12 +19,13 @@ export function loadAnimation(
 ) {
   const entity = commands
     .spawn()
-    .add(new Parent(root))
-    .add(new AnimationClip(animation.getName(), true, true));
+    .add(new AnimationClip(root.id, animation.getName(), true, true));
   context.animationClips.push(entity.id);
 
   animation.listChannels().forEach((channel) => {
     const track = new KeyframeTrack();
+
+    track.clipId = entity.id;
 
     const sampler = channel.getSampler();
     const targetNode = channel.getTargetNode();
@@ -83,7 +83,7 @@ export function loadAnimation(
       track.interpolation = KeyframeInterpolation[sampler.getInterpolation()];
     }
 
-    const trackEntity = commands.spawn().add(track).add(new Parent(entity));
+    const trackEntity = commands.spawn().add(track);
     context.keyframeTracks.push(trackEntity.id);
   });
 }

@@ -1,16 +1,16 @@
-import { AnimationClip, KeyframeTrack, Parent } from "@lattice-engine/scene";
+import { AnimationClip, KeyframeTrack } from "@lattice-engine/scene";
 import {
   AnimationClip as ThreeAnimationClip,
   KeyframeTrack as ThreeKeyframeTrack,
 } from "three";
-import { Entity, Query, Res, With } from "thyseus";
+import { Entity, Query, Res } from "thyseus";
 
 import { RenderStore } from "../RenderStore";
 
 export function createAnimationClips(
   renderStore: Res<RenderStore>,
   clips: Query<[Entity, AnimationClip]>,
-  tracks: Query<[Entity, Parent], With<KeyframeTrack>>
+  tracks: Query<[Entity, KeyframeTrack]>
 ) {
   const ids: bigint[] = [];
 
@@ -21,8 +21,8 @@ export function createAnimationClips(
 
     const clipTracks: ThreeKeyframeTrack[] = [];
 
-    for (const [trackEntity, parent] of tracks) {
-      if (parent.id === entity.id) {
+    for (const [trackEntity, track] of tracks) {
+      if (track.clipId === entity.id) {
         const trackObject = renderStore.keyframeTracks.get(trackEntity.id);
         if (trackObject) clipTracks.push(trackObject);
       }

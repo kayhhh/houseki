@@ -198,10 +198,11 @@ export class AnimationMixer {}
 
 /**
  * Represents a single animation clip. (e.g. "walk", "run", "idle")
- * Should be parented to an AnimationMixer.
  */
 @struct
 export class AnimationClip {
+  @struct.u64 declare mixerId: bigint; // Entity ID
+
   @struct.string declare name: string;
 
   @struct.bool declare play: boolean;
@@ -210,9 +211,10 @@ export class AnimationClip {
 
   @struct.f32 declare speed: number;
 
-  constructor(name = "", play = false, loop = false, speed = 1) {
+  constructor(mixerId = 0n, name = "", play = false, loop = false, speed = 1) {
     initStruct(this);
 
+    this.mixerId = mixerId;
     this.name = name;
     this.play = play;
     this.loop = loop;
@@ -221,11 +223,12 @@ export class AnimationClip {
 }
 
 /**
- * Represents a single animation keyframe track. (e.g. "position", "rotation", "scale")
- * Should be parented to an AnimationClip.
+ * Represents an animation keyframe track. (e.g. "position", "rotation", "scale")
  */
 @struct
 export class KeyframeTrack {
+  @struct.u64 declare clipId: bigint; // Entity ID
+
   @struct.u64 declare targetId: bigint; // Entity ID
 
   @struct.u8 declare path: KeyframePath;

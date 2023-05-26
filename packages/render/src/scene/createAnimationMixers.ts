@@ -1,4 +1,4 @@
-import { AnimationClip, AnimationMixer, Parent } from "@lattice-engine/scene";
+import { AnimationClip, AnimationMixer } from "@lattice-engine/scene";
 import {
   AnimationAction,
   AnimationMixer as ThreeAnimationMixer,
@@ -20,7 +20,7 @@ export function createAnimationMixers(
   renderStore: Res<RenderStore>,
   localStore: SystemRes<LocalStore>,
   entities: Query<Entity, With<AnimationMixer>>,
-  clips: Query<[Entity, Parent, AnimationClip]>
+  clips: Query<[Entity, AnimationClip]>
 ) {
   const ids: bigint[] = [];
   const clipIds: bigint[] = [];
@@ -53,8 +53,8 @@ export function createAnimationMixers(
     }
 
     // Sync clip actions
-    for (const [clipEntity, parent, clip] of clips) {
-      if (parent.id !== entity.id) continue;
+    for (const [clipEntity, clip] of clips) {
+      if (clip.mixerId !== entity.id) continue;
 
       clipIds.push(clipEntity.id);
 

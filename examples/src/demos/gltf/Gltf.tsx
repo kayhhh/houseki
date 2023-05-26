@@ -18,7 +18,7 @@ export default function Gltf() {
   useEngine(world);
 
   const { model } = useControls({
-    model: { options: MODELS },
+    model: { options: MODELS, value: MODELS["BoxAnimated"] },
   });
 
   // Update glTF model
