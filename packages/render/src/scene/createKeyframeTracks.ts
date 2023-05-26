@@ -66,6 +66,10 @@ export function createKeyframeTracks(
         TypedKeyframeTrack = NumberKeyframeTrack;
         break;
       }
+
+      default: {
+        throw new Error("Invalid path", track.path);
+      }
     }
 
     const trackName = `${targetObject.uuid}.${threePath}`;
@@ -90,16 +94,17 @@ export function createKeyframeTracks(
     if (!object) {
       object = new TypedKeyframeTrack(trackName, times, values, interpolation);
       renderStore.keyframeTracks.set(entity.id, object);
-
-      if (track.interpolation === KeyframeInterpolation.CUBICSPLINE) {
-        setCubicSpline(object);
-      }
     }
 
     // Sync object properties
     object.name = trackName;
     object.times = times;
     object.values = values;
+
+    if (object.getInterpolation() !== interpolation) {
+      if (!interpolation) setCubicSpline(object);
+      else object.setInterpolation(interpolation);
+    }
   }
 
   // Remove deleted objects from the store

@@ -15,15 +15,15 @@ export function createGeometries(
 ) {
   const ids: bigint[] = [];
 
-  for (const [geometry, { id }] of entities) {
-    ids.push(id);
+  for (const [geometry, entity] of entities) {
+    ids.push(entity.id);
 
-    let object = store.geometries.get(id);
+    let object = store.geometries.get(entity.id);
 
     // Create new objects
     if (!object) {
       object = new BufferGeometry();
-      store.geometries.set(id, object);
+      store.geometries.set(entity.id, object);
     }
 
     // Sync object properties
@@ -52,7 +52,7 @@ export function createGeometries(
   for (const [id] of store.geometries) {
     if (!ids.includes(id)) {
       const object = store.geometries.get(id);
-      object?.dispose();
+      if (object) object.dispose();
 
       store.geometries.delete(id);
     }

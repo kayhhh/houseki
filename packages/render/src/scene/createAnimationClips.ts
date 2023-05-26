@@ -30,7 +30,8 @@ export function createAnimationClips(
 
     // Create new objects
     if (!object) {
-      object = new ThreeAnimationClip(clip.name, undefined, clipTracks);
+      const name = clip.name || `AnimationClip_${entity.id}`;
+      object = new ThreeAnimationClip(name, undefined, clipTracks);
       renderStore.animationClips.set(entity.id, object);
     }
   }

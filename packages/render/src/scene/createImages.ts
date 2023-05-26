@@ -44,7 +44,6 @@ export function createImages(
       // Mark the image as processed
       localStore.processed.add(entity.id);
 
-      // Start loading the image
       const blob = new Blob([texture.image.read(warehouse)], {
         type: ImageMimeType[texture.mimeType],
       });

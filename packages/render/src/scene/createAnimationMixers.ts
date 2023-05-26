@@ -38,6 +38,13 @@ export function createAnimationMixers(
       // Remove old object
       if (object) {
         object.stopAllAction();
+
+        localStore.actions.forEach((action) => {
+          if (action.getMixer() === object) {
+            object.uncacheAction(action.getClip());
+          }
+        });
+
         object.uncacheRoot(nodeObject);
       }
 
@@ -75,7 +82,9 @@ export function createAnimationMixers(
   for (const id of renderStore.animationMixers.keys()) {
     if (!ids.includes(id)) {
       const object = renderStore.animationMixers.get(id);
-      if (object) object.stopAllAction();
+      if (object) {
+        object.stopAllAction();
+      }
       renderStore.animationMixers.delete(id);
     }
   }
@@ -84,7 +93,10 @@ export function createAnimationMixers(
   for (const id of localStore.actions.keys()) {
     if (!clipIds.includes(id)) {
       const action = localStore.actions.get(id);
-      if (action) action.stop();
+      if (action) {
+        action.stop();
+        action.getMixer().uncacheAction(action.getClip());
+      }
       localStore.actions.delete(id);
     }
   }

@@ -56,6 +56,11 @@ export function loadAnimation(
         track.path = KeyframePath.WEIGHTS;
         break;
       }
+
+      default: {
+        console.warn(`Unsupported animation target path: ${targetPath}`);
+        return;
+      }
     }
 
     // Initialize empty tracks to avoid errors
