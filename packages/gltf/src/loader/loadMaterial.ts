@@ -34,7 +34,10 @@ export function loadMaterial(
 
     const gltfTexture = gltfMaterial.getBaseColorTexture();
     const texture = createTexture(gltfTexture, warehouse, commands);
-    if (texture) material.baseColorTextureId = texture.id;
+    if (texture) {
+      material.baseColorTextureId = texture.id;
+      context.textures.push(texture.id);
+    }
 
     const info = gltfMaterial.getBaseColorTextureInfo();
     applyTextureInfo(material.baseColorTextureInfo, info);
@@ -46,7 +49,10 @@ export function loadMaterial(
 
     const gltfTexture = gltfMaterial.getEmissiveTexture();
     const texture = createTexture(gltfTexture, warehouse, commands);
-    if (texture) material.emissiveTextureId = texture.id;
+    if (texture) {
+      material.emissiveTextureId = texture.id;
+      context.textures.push(texture.id);
+    }
 
     const info = gltfMaterial.getEmissiveTextureInfo();
     applyTextureInfo(material.emissiveTextureInfo, info);
@@ -57,7 +63,10 @@ export function loadMaterial(
 
     const gltfTexture = gltfMaterial.getNormalTexture();
     const texture = createTexture(gltfTexture, warehouse, commands);
-    if (texture) material.normalTextureId = texture.id;
+    if (texture) {
+      material.normalTextureId = texture.id;
+      context.textures.push(texture.id);
+    }
 
     const info = gltfMaterial.getNormalTextureInfo();
     applyTextureInfo(material.normalTextureInfo, info);
@@ -68,7 +77,10 @@ export function loadMaterial(
 
     const gltfTexture = gltfMaterial.getOcclusionTexture();
     const texture = createTexture(gltfTexture, warehouse, commands);
-    if (texture) material.occlusionTextureId = texture.id;
+    if (texture) {
+      material.occlusionTextureId = texture.id;
+      context.textures.push(texture.id);
+    }
 
     const info = gltfMaterial.getOcclusionTextureInfo();
     applyTextureInfo(material.occlusionTextureInfo, info);
@@ -80,7 +92,10 @@ export function loadMaterial(
 
     const gltfTexture = gltfMaterial.getMetallicRoughnessTexture();
     const texture = createTexture(gltfTexture, warehouse, commands);
-    if (texture) material.metallicRoughnessTextureId = texture.id;
+    if (texture) {
+      material.metallicRoughnessTextureId = texture.id;
+      context.textures.push(texture.id);
+    }
 
     const info = gltfMaterial.getMetallicRoughnessTextureInfo();
     applyTextureInfo(material.metallicRoughnessTextureInfo, info);

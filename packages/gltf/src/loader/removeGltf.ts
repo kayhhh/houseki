@@ -16,6 +16,10 @@ export function removeGltf(context: LoadingContext, commands: Commands) {
     commands.despawn(id);
   }
 
+  for (const id of context.textures) {
+    commands.despawn(id);
+  }
+
   for (const id of context.animationClips) {
     commands.despawn(id);
   }
