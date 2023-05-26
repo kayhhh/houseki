@@ -10,7 +10,7 @@ export class Engine {
   readonly world: World;
 
   #animationFrame = 0;
-  #fixedInterval = 0;
+  #fixedInterval: number | null = null;
 
   /**
    * Creates a new WorldBuilder, with the core plugin already applied.
@@ -28,26 +28,24 @@ export class Engine {
   /**
    * Starts the engine.
    */
-  async start() {
+  start() {
     this.stop();
-    await this.world.runSchedule(CoreSchedule.Startup);
 
-    this.#startMainLoop();
+    // Startup
+    this.world.runSchedule(CoreSchedule.Startup);
 
-    if (this.world.schedules[CoreSchedule.FixedUpdate]) this.#startFixedLoop();
-  }
-
-  #startMainLoop() {
+    // Main loop
     this.#animationFrame = requestAnimationFrame(this.#mainLoop.bind(this));
+
+    // Fixed loop
+    if (this.world.schedules[CoreSchedule.FixedUpdate]) {
+      this.#fixedInterval = setInterval(this.#fixedLoop.bind(this), 1000 / 60);
+    }
   }
 
   async #mainLoop() {
     await this.world.runSchedule(CoreSchedule.Main);
     this.#animationFrame = requestAnimationFrame(this.#mainLoop.bind(this));
-  }
-
-  #startFixedLoop() {
-    this.#fixedInterval = setInterval(this.#fixedLoop.bind(this), 1000 / 60);
   }
 
   async #fixedLoop() {
@@ -59,7 +57,11 @@ export class Engine {
    */
   stop() {
     cancelAnimationFrame(this.#animationFrame);
-    clearInterval(this.#fixedInterval);
+
+    if (this.#fixedInterval !== null) {
+      clearInterval(this.#fixedInterval);
+      this.#fixedInterval = null;
+    }
   }
 
   /**
