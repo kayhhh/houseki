@@ -3,14 +3,19 @@ import { CoreSchedule, World } from "thyseus";
 import { LatticeSchedules } from "./constants";
 import { corePlugin } from "./plugin";
 
+const FIXED_HZ = 60;
+
 /**
  * Stores the ECS world and manages the game loop.
  */
 export class Engine {
   readonly world: World;
 
-  #animationFrame = 0;
-  #fixedInterval: number | null = null;
+  #lastFixedTime = 0;
+  #leftoverFixedTime = 0;
+
+  #animationFrame: number | null = null;
+  #startPromise: Promise<void> | null = null;
 
   /**
    * Creates a new WorldBuilder, with the core plugin already applied.
@@ -28,47 +33,67 @@ export class Engine {
   /**
    * Starts the engine.
    */
-  start() {
-    this.stop();
+  async start() {
+    const stopPromise = this.stop();
+    if (stopPromise) await stopPromise;
 
     // Startup
-    this.world.runSchedule(CoreSchedule.Startup);
+    this.#startPromise = this.world.runSchedule(CoreSchedule.Startup);
+    await this.#startPromise;
+
+    // Initialize the last fixed time
+    this.#lastFixedTime = performance.now();
 
     // Main loop
     this.#animationFrame = requestAnimationFrame(this.#mainLoop.bind(this));
-
-    // Fixed loop
-    if (this.world.schedules[CoreSchedule.FixedUpdate]) {
-      this.#fixedInterval = setInterval(this.#fixedLoop.bind(this), 1000 / 60);
-    }
   }
 
   async #mainLoop() {
-    await this.world.runSchedule(CoreSchedule.Main);
-    this.#animationFrame = requestAnimationFrame(this.#mainLoop.bind(this));
-  }
+    const time = performance.now();
 
-  async #fixedLoop() {
-    await this.world.runSchedule(CoreSchedule.FixedUpdate);
+    // Run the main update loop
+    await this.world.runSchedule(CoreSchedule.Main);
+
+    // Run the fixed update loop
+    if (this.world.schedules[CoreSchedule.FixedUpdate]) {
+      let fixedDelta = time - this.#lastFixedTime + this.#leftoverFixedTime;
+      const fixedStep = 1000 / FIXED_HZ;
+
+      while (fixedDelta >= fixedStep) {
+        await this.world.runSchedule(CoreSchedule.FixedUpdate);
+        fixedDelta -= fixedStep;
+        this.#lastFixedTime += fixedStep;
+      }
+
+      this.#leftoverFixedTime = fixedDelta;
+    }
+
+    // Schedule the next frame
+    this.#animationFrame = requestAnimationFrame(this.#mainLoop.bind(this));
   }
 
   /**
    * Stops the engine.
    */
   stop() {
-    cancelAnimationFrame(this.#animationFrame);
+    if (this.#startPromise !== null) {
+      return this.#startPromise.then(() => {
+        this.#startPromise = null;
+        this.stop();
+      });
+    }
 
-    if (this.#fixedInterval !== null) {
-      clearInterval(this.#fixedInterval);
-      this.#fixedInterval = null;
+    if (this.#animationFrame !== null) {
+      cancelAnimationFrame(this.#animationFrame);
+      this.#animationFrame = null;
     }
   }
 
   /**
    * Destroys the engine.
    */
-  destroy() {
-    this.stop();
-    this.world.runSchedule(LatticeSchedules.Destroy);
+  async destroy() {
+    await this.stop();
+    await this.world.runSchedule(LatticeSchedules.Destroy);
   }
 }
