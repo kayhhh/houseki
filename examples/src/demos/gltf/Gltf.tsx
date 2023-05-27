@@ -1,10 +1,10 @@
 import { useControls } from "leva";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { World } from "thyseus";
 
 import Canvas from "../../utils/Canvas";
 import { useEngine } from "../../utils/useEngine";
 import { selectedModel } from "./systems";
-import { world } from "./world";
 
 const MODELS = {
   AnimatedCube: "/gltf/AnimatedCube/AnimatedCube.gltf",
@@ -15,6 +15,14 @@ const MODELS = {
 };
 
 export default function Gltf() {
+  const [world, setWorld] = useState<World | null>(null);
+
+  useEffect(() => {
+    import("./world").then((module) => {
+      setWorld(module.world);
+    });
+  }, []);
+
   useEngine(world);
 
   const { model } = useControls({
