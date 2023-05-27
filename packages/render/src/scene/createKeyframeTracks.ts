@@ -31,10 +31,10 @@ export function createKeyframeTracks(
     // Skip empty tracks
     if (times.length === 0 || values.length === 0) continue;
 
-    ids.push(entity.id);
-
     const targetObject = renderStore.nodes.get(track.targetId);
     if (!targetObject) continue;
+
+    ids.push(entity.id);
 
     let threePath = "";
     let TypedKeyframeTrack:

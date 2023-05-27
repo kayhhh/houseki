@@ -14,6 +14,7 @@ import { createMeshes } from "./scene/createMeshes";
 import { createNodes } from "./scene/createNodes";
 import { createScenes } from "./scene/createScenes";
 import { playAnimations } from "./scene/playAnimations";
+import { saveAnimations } from "./scene/saveAnimations";
 
 /**
  * Registers all render components and systems.
@@ -30,7 +31,7 @@ export function renderPlugin(builder: WorldBuilder) {
       createAnimationClips,
       createAnimationMixers,
       playAnimations,
-      canvasRenderer
+      [canvasRenderer, saveAnimations]
     )
   );
 

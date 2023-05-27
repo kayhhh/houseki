@@ -68,14 +68,16 @@ export function loadAnimation(
     track.values.write(new Float32Array(), warehouse);
 
     if (sampler) {
-      const input = sampler.getInput();
-      const inputArray = input?.getArray();
+      const inputAccessor = sampler.getInput();
+      const inputArray = inputAccessor?.getArray();
+
       if (inputArray instanceof Float32Array) {
         track.times.write(inputArray, warehouse);
       }
 
-      const output = sampler.getOutput();
-      const outputArray = output?.getArray();
+      const outputAccessor = sampler.getOutput();
+      const outputArray = outputAccessor?.getArray();
+
       if (outputArray instanceof Float32Array) {
         track.values.write(outputArray, warehouse);
       }

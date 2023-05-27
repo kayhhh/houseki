@@ -28,12 +28,17 @@ export function createAnimationClips(
       }
     }
 
+    const name = clip.name || `AnimationClip_${entity.id}`;
+
     // Create new objects
     if (!object) {
-      const name = clip.name || `AnimationClip_${entity.id}`;
       object = new ThreeAnimationClip(name, undefined, clipTracks);
       renderStore.animationClips.set(entity.id, object);
     }
+
+    // Update existing objects
+    object.name = name;
+    object.tracks;
   }
 
   // Remove deleted objects from the store
