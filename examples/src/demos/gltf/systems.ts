@@ -1,4 +1,4 @@
-import { CoreStore, CoreStruct } from "@lattice-engine/core";
+import { CoreStore } from "@lattice-engine/core";
 import { Gltf } from "@lattice-engine/gltf";
 import { OrbitControls } from "@lattice-engine/orbit";
 import {
@@ -7,6 +7,7 @@ import {
   PerspectiveCamera,
   Position,
   Scene,
+  SceneStruct,
 } from "@lattice-engine/scene";
 import { Commands, Mut, Query, Res } from "thyseus";
 
@@ -22,7 +23,7 @@ export const selectedModel = {
 export function initScene(
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
-  coreStruct: Res<Mut<CoreStruct>>
+  sceneStruct: Res<Mut<SceneStruct>>
 ) {
   // Set canvas
   const canvas = document.querySelector("canvas");
@@ -31,7 +32,7 @@ export function initScene(
 
   // Create scene
   const scene = commands.spawn().addType(Scene);
-  coreStruct.activeScene = scene.id;
+  sceneStruct.activeScene = scene.id;
 
   // Create camera
   const camera = commands
@@ -39,7 +40,7 @@ export function initScene(
     .add(new Position(0, 2, 4))
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
-  coreStruct.activeCamera = camera.id;
+  sceneStruct.activeCamera = camera.id;
 
   // Add node to scene with glTF component
   commands.spawn().addType(Node).add(new Parent(scene)).addType(Gltf);

@@ -1,4 +1,4 @@
-import { CoreStore, CoreStruct, Warehouse } from "@lattice-engine/core";
+import { CoreStore, Warehouse } from "@lattice-engine/core";
 import { InputStruct } from "@lattice-engine/input";
 import {
   CapsuleCollider,
@@ -23,6 +23,7 @@ import {
   Position,
   Rotation,
   Scene,
+  SceneStruct,
 } from "@lattice-engine/scene";
 import { Vrm } from "@lattice-engine/vrm";
 import { Commands, Mut, Res } from "thyseus";
@@ -37,7 +38,7 @@ export function initScene(
   commands: Commands,
   warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
-  coreStruct: Res<Mut<CoreStruct>>,
+  sceneStruct: Res<Mut<SceneStruct>>,
   inputStruct: Res<Mut<InputStruct>>
 ) {
   // Set canvas
@@ -47,7 +48,7 @@ export function initScene(
 
   // Create scene
   const scene = commands.spawn().addType(Scene);
-  coreStruct.activeScene = scene.id;
+  sceneStruct.activeScene = scene.id;
 
   // Create room
   const room = createRoom([12, 4, 12], commands, warehouse);
@@ -101,7 +102,7 @@ export function initScene(
     .addType(PerspectiveCamera)
     .add(new PlayerCamera(PlayerCameraMode.Both, PlayerCameraView.ThirdPerson));
 
-  coreStruct.activeCamera = camera.id;
+  sceneStruct.activeCamera = camera.id;
   inputStruct.enablePointerLock = true;
 
   // Create ball

@@ -1,4 +1,4 @@
-import { CoreStore, CoreStruct } from "@lattice-engine/core";
+import { CoreStore } from "@lattice-engine/core";
 import { OrbitControls } from "@lattice-engine/orbit";
 import {
   Node,
@@ -6,6 +6,7 @@ import {
   PerspectiveCamera,
   Position,
   Scene,
+  SceneStruct,
 } from "@lattice-engine/scene";
 import { Vrm } from "@lattice-engine/vrm";
 import { Commands, Mut, Res } from "thyseus";
@@ -16,7 +17,7 @@ import { Commands, Mut, Res } from "thyseus";
 export function initScene(
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
-  coreStruct: Res<Mut<CoreStruct>>
+  sceneStruct: Res<Mut<SceneStruct>>
 ) {
   // Set canvas
   const canvas = document.querySelector("canvas");
@@ -25,7 +26,7 @@ export function initScene(
 
   // Create scene
   const scene = commands.spawn().addType(Scene);
-  coreStruct.activeScene = scene.id;
+  sceneStruct.activeScene = scene.id;
 
   // Create camera
   const camera = commands
@@ -33,7 +34,7 @@ export function initScene(
     .add(new Position(0, 1, -3))
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
-  coreStruct.activeCamera = camera.id;
+  sceneStruct.activeCamera = camera.id;
 
   // Create VRM
   commands
