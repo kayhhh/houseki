@@ -16,6 +16,8 @@ The web has a lot of independently awesome libraries for building games, but com
 
 ## 📦 Packages
 
+Packages are published individually to NPM under the `@lattice-engine` scope. Alternatively, you can install all packages at once using the combined [`lattice-engine`](./packages/lattice-engine) package.
+
 | Package                                         | Description                                                                             |
 | ----------------------------------------------- | --------------------------------------------------------------------------------------- |
 | [`@lattice-engine/core`](./packages/core)       | Core engine, built with [Thyseus](https://github.com/JaimeGensler/thyseus) ECS          |
@@ -26,6 +28,7 @@ The web has a lot of independently awesome libraries for building games, but com
 | [`@lattice-engine/player`](./packages/player)   | Player controls                                                                         |
 | [`@lattice-engine/render`](./packages/render)   | [Three.js](https://threejs.org) rendering                                               |
 | [`@lattice-engine/scene`](./packages/scene)     | The 3D scene graph                                                                      |
+| [`@lattice-engine/utils`](./packages/vrm)       | Utility functions                                                                       |
 | [`@lattice-engine/vrm`](./packages/vrm)         | [VRM](https://vrm.dev/en) avatars                                                       |
 | `@lattice-engine/scripting`                     | [WASM](https://webassembly.org) scripting                                               |
 | `@lattice-engine/wired-protocol`                | Multiplayer networking via [The Wired Protocol](https://github.com/wired-protocol/spec) |
