@@ -168,6 +168,7 @@ function getTextureObject(
 
   // Create a new texture
   const newObject = new CanvasTexture(bitmap);
+  newObject.anisotropy = renderStore.renderer.capabilities.getMaxAnisotropy();
   newObject.needsUpdate = true;
   return newObject;
 }
