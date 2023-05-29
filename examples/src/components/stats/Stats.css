@@ -78,4 +78,10 @@
     right: 0;
     border-radius: 0;
   }
+
+  #stats.collapsed {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    left: auto;
+  }
 }

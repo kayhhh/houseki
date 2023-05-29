@@ -73,39 +73,63 @@ body {
 .hamburger {
   display: none;
   position: absolute;
-  top: 0;
-  left: 0;
-  padding: 0.4rem;
-  border-radius: 20rem;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 50%;
   aspect-ratio: 1;
-  background-color: #fff;
-  margin: 0.5rem;
+  background-color: transparent;
+  margin: 0;
   border: none;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
-.hamburger:active {
-  background-color: #eee;
+.hamburger:focus {
+  outline: none;
+}
+
+.hamburger:hover .line {
+  background-color: #555;
+}
+
+.hamburger.active .line {
+  background-color: #555;
+}
+
+.hamburger .line {
+  width: 1.5rem;
+  height: 0.2rem;
+  margin: 0.3rem;
+  background-color: #333;
+  border-radius: 0.2rem;
+  transition: background-color 0.25s ease-in-out;
+}
+
+.hamburger.active .line:nth-child(1) {
+  transform: rotate(45deg) translate(0.3rem, 0.3rem);
+}
+
+.hamburger.active .line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .line:nth-child(3) {
+  transform: rotate(-45deg) translate(0.3rem, -0.3rem);
 }
 
 @media screen and (max-width: 768px) {
   .sidepanel {
     position: absolute;
     z-index: 2000;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out;
     transform: translateX(-100%);
+  }
+
+  .sidepanel.open {
+    box-shadow: var(--leva-shadows-level1);
   }
 
   .hamburger {
     display: block;
   }
-}
-
-.line {
-  width: 1.5rem;
-  height: 0.2rem;
-  margin: 0.3rem;
-  background-color: #333;
-  border-radius: 0.2rem;
 }
