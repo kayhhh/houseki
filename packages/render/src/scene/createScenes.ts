@@ -37,10 +37,10 @@ export function createScenes(
       directionalLight.shadow.mapSize.set(2048, 2048);
       directionalLight.shadow.camera.near = 0.1;
       directionalLight.shadow.camera.far = 100;
-      directionalLight.shadow.camera.left = -6;
-      directionalLight.shadow.camera.right = 6;
-      directionalLight.shadow.camera.top = 6;
-      directionalLight.shadow.camera.bottom = -6;
+      directionalLight.shadow.camera.left = -8;
+      directionalLight.shadow.camera.right = 8;
+      directionalLight.shadow.camera.top = 8;
+      directionalLight.shadow.camera.bottom = -8;
 
       object.add(new AmbientLight(0xffffff, 0.25));
       object.add(directionalLight);
