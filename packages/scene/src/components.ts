@@ -118,14 +118,15 @@ export class TextureInfo {
   constructor() {
     initStruct(this);
 
-    this.magFilter = 9729;
-    this.minFilter = 9987;
-    this.wrapS = 10497;
-    this.wrapT = 10497;
-    this.texCoord = 0;
-    this.rotation = 0;
-    this.offset.set([0, 0]);
-    this.scale.set([1, 1]);
+    // TODO: Upgrade thyseus to support this (theres a bug)
+    // this.magFilter = 9729;
+    // this.minFilter = 9987;
+    // this.wrapS = 10497;
+    // this.wrapT = 10497;
+    // this.texCoord = 0;
+    // this.rotation = 0;
+    // this.offset.set([0, 0]);
+    // this.scale.set([1, 1]);
   }
 }
 
@@ -167,7 +168,7 @@ export class Material {
   constructor(color = [1, 1, 1, 1]) {
     initStruct(this);
 
-    this.baseColor = new Float32Array(color);
+    this.baseColor.set(color);
   }
 }
 

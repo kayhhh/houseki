@@ -125,8 +125,12 @@ function applyTextureInfo(info: TextureInfo, gltfInfo: GltfTextureInfo | null) {
   const transform = gltfInfo.getExtension<Transform>(Transform.EXTENSION_NAME);
   if (transform) {
     info.rotation = transform.getRotation();
-    info.offset = new Float32Array(transform.getOffset());
-    info.scale = new Float32Array(transform.getScale());
+    info.offset.set(transform.getOffset());
+    info.scale.set(transform.getScale());
+  } else {
+    info.rotation = 0;
+    info.offset.set([0, 0]);
+    info.scale.set([1, 1]);
   }
 }
 

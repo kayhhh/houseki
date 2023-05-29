@@ -13,6 +13,7 @@ const MODELS = {
   Cube: "/gltf/Cube/Cube.gltf",
   "Damaged Helmet": "/gltf/DamagedHelmet.glb",
   "Flight Helmet": "/gltf/FlightHelmet/FlightHelmet.gltf",
+  "Texture Transform Test": "/gltf/TextureTransformMultiTest.glb",
 };
 
 export default function Gltf() {
@@ -27,7 +28,7 @@ export default function Gltf() {
   useEngine(world);
 
   const { model } = useControls({
-    model: { options: MODELS, value: MODELS["Damaged Helmet"] },
+    model: { options: MODELS, value: MODELS["Texture Transform Test"] },
   });
 
   // Update glTF model

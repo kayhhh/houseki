@@ -177,6 +177,9 @@ function applyTextureInfo(object: ThreeTexture, info: TextureInfo) {
   object.repeat.fromArray(info.scale);
   object.rotation = info.rotation;
 
+  // TODO: Upgrade Three.js to support custom UVs
+  // object.channels = info.texCoord
+
   switch (info.magFilter) {
     case WEBGL_CONSTANTS.NEAREST: {
       object.magFilter = NearestFilter;
