@@ -3,6 +3,10 @@
   <strong>A lightweight, modular, and extendable 3D game engine built for the web.</strong>
 </div>
 
+## 🕹️ Examples
+
+See the engine live at [lattice-engine.vercel.app](https://lattice-engine.vercel.app/), or dive right in to the [demo source code](./examples/src/demos/) and see how it works.
+
 ## 🤔 Motivation
 
 The web has a lot of independently awesome libraries for building games, but combining them all together can be a pain. Lattice aims to be a lightweight framework for combining these libraries together. To achieve this the engine uses an ECS architecture, allowing for independent systems to work together on same data without coupling. The engine is also highly performant, with speed gains from the ECS architecture and multi-threading via WebWorkers that would be difficult to achieve when using these libraries individually.
