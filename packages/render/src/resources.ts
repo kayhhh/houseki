@@ -10,12 +10,10 @@ import {
   Scene,
   WebGLRenderer,
 } from "three";
+import { struct } from "thyseus";
 
 export type EntityID = bigint;
 
-/**
- * Stores Three.js objects and their associated data.
- */
 export class RenderStore {
   static DEFAULT_MATERIAL = new MeshStandardMaterial();
 
@@ -31,4 +29,16 @@ export class RenderStore {
   readonly animationMixers = new Map<EntityID, AnimationMixer>();
   readonly animationClips = new Map<EntityID, AnimationClip>();
   readonly keyframeTracks = new Map<EntityID, KeyframeTrack>();
+}
+
+@struct
+export class RenderStats {
+  @struct.u32 declare frame: number;
+  @struct.u32 declare calls: number;
+  @struct.u32 declare lines: number;
+  @struct.u32 declare points: number;
+  @struct.u32 declare triangles: number;
+  @struct.u32 declare geometries: number;
+  @struct.u32 declare textures: number;
+  @struct.u32 declare shaders: number;
 }

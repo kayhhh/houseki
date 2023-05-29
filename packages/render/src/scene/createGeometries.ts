@@ -3,7 +3,7 @@ import { Geometry } from "@lattice-engine/scene";
 import { BufferAttribute, BufferGeometry } from "three";
 import { Entity, Query, Res } from "thyseus";
 
-import { RenderStore } from "../RenderStore";
+import { RenderStore } from "../resources";
 
 /**
  * Creates and updates geometry objects.

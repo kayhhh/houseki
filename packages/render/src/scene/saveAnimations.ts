@@ -8,7 +8,7 @@ import {
 } from "@lattice-engine/scene";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
-import { RenderStore } from "../RenderStore";
+import { RenderStore } from "../resources";
 
 /**
  * Save data modified by animations into the ECS.

@@ -7,7 +7,7 @@ import {
 } from "three";
 import { Entity, Query, Res, SystemRes, With } from "thyseus";
 
-import { RenderStore } from "../RenderStore";
+import { RenderStore } from "../resources";
 
 class LocalStore {
   /**

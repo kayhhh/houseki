@@ -1,7 +1,7 @@
 import { AnimationMixer } from "@lattice-engine/scene";
 import { Entity, Query, Res, SystemRes, With } from "thyseus";
 
-import { RenderStore } from "../RenderStore";
+import { RenderStore } from "../resources";
 
 class LocalStore {
   lastTime = 0;

@@ -2,7 +2,7 @@ import "./App.css";
 
 import { Link, Route, useRoute } from "wouter";
 
-import About from "./about/About";
+import About from "./components/about/About";
 import Basic from "./demos/basic/Basic";
 import Gltf from "./demos/gltf/Gltf";
 import Physics from "./demos/physics/Physics";

@@ -23,7 +23,7 @@ import {
 import { Entity, Query, Res } from "thyseus";
 
 import { WEBGL_CONSTANTS } from "../constants";
-import { RenderStore } from "../RenderStore";
+import { RenderStore } from "../resources";
 import { disposeMaterial } from "../utils/dispose";
 
 /**

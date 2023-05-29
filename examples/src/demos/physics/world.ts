@@ -6,6 +6,7 @@ import { renderPlugin } from "@lattice-engine/render";
 import { scenePlugin } from "@lattice-engine/scene";
 import { CoreSchedule } from "thyseus";
 
+import { statsSystem } from "../../components/stats/system";
 import { initScene } from "./systems";
 
 export const world = await Engine.createWorld()
@@ -15,4 +16,5 @@ export const world = await Engine.createWorld()
   .addPlugin(orbitPlugin)
   .addPlugin(physicsPlugin)
   .addSystemsToSchedule(CoreSchedule.Startup, initScene)
+  .addSystems(statsSystem)
   .build();

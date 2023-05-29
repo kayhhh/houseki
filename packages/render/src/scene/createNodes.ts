@@ -2,7 +2,7 @@ import { Node, Parent, Position, Rotation, Scale } from "@lattice-engine/scene";
 import { Object3D } from "three";
 import { Entity, Query, Res, With } from "thyseus";
 
-import { RenderStore } from "../RenderStore";
+import { RenderStore } from "../resources";
 
 /**
  * Creates and updates node objects.

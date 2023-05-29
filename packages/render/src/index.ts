@@ -1,2 +1,2 @@
 export * from "./plugin";
-export * from "./RenderStore";
+export * from "./resources";

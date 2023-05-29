@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { World } from "thyseus";
 
-import Canvas from "../../utils/Canvas";
+import Canvas from "../../components/canvas/Canvas";
+import Stats from "../../components/stats/Stats";
 import { useEngine } from "../../utils/useEngine";
 
 export default function VRM() {
@@ -15,5 +16,10 @@ export default function VRM() {
 
   useEngine(world);
 
-  return <Canvas />;
+  return (
+    <>
+      <Stats />
+      <Canvas />
+    </>
+  );
 }

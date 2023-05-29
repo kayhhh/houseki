@@ -2,7 +2,7 @@ import { Warehouse } from "@lattice-engine/core";
 import { ImageMimeType, Texture } from "@lattice-engine/scene";
 import { Entity, Query, Res, SystemRes } from "thyseus";
 
-import { RenderStore } from "../RenderStore";
+import { RenderStore } from "../resources";
 
 class LocalStore {
   /**

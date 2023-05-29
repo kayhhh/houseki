@@ -2,7 +2,7 @@ import { CoreStore, CoreStruct } from "@lattice-engine/core";
 import { PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from "three";
 import { Mut, Res } from "thyseus";
 
-import { RenderStore } from "./RenderStore";
+import { RenderStats, RenderStore } from "./resources";
 
 /**
  * Renders the scene to the canvas.
@@ -10,7 +10,8 @@ import { RenderStore } from "./RenderStore";
 export function canvasRenderer(
   coreStore: Res<CoreStore>,
   coreStruct: Res<CoreStruct>,
-  renderStore: Res<Mut<RenderStore>>
+  renderStore: Res<Mut<RenderStore>>,
+  stats: Res<Mut<RenderStats>>
 ) {
   let renderer = renderStore.renderer;
   const canvas = coreStore.canvas;
@@ -49,4 +50,13 @@ export function canvasRenderer(
 
   renderer.setSize(canvas.width, canvas.height, false);
   renderer.render(scene, camera);
+
+  stats.frame = renderer.info.render.frame;
+  stats.calls = renderer.info.render.calls;
+  stats.lines = renderer.info.render.lines;
+  stats.points = renderer.info.render.points;
+  stats.triangles = renderer.info.render.triangles;
+  stats.geometries = renderer.info.memory.geometries;
+  stats.textures = renderer.info.memory.textures;
+  stats.shaders = renderer.info.programs?.length ?? 0;
 }

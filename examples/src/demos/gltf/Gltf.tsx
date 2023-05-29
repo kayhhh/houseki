@@ -2,7 +2,8 @@ import { useControls } from "leva";
 import { useEffect, useState } from "react";
 import { World } from "thyseus";
 
-import Canvas from "../../utils/Canvas";
+import Canvas from "../../components/canvas/Canvas";
+import Stats from "../../components/stats/Stats";
 import { useEngine } from "../../utils/useEngine";
 import { selectedModel } from "./systems";
 
@@ -26,7 +27,7 @@ export default function Gltf() {
   useEngine(world);
 
   const { model } = useControls({
-    model: { options: MODELS, value: MODELS["BoxAnimated"] },
+    model: { options: MODELS, value: MODELS["Damaged Helmet"] },
   });
 
   // Update glTF model
@@ -34,5 +35,10 @@ export default function Gltf() {
     selectedModel.uri = model;
   }, [model]);
 
-  return <Canvas />;
+  return (
+    <>
+      <Stats />
+      <Canvas />
+    </>
+  );
 }

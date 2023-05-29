@@ -5,7 +5,7 @@ import {
 } from "three";
 import { Entity, Query, Res } from "thyseus";
 
-import { RenderStore } from "../RenderStore";
+import { RenderStore } from "../resources";
 
 export function createAnimationClips(
   renderStore: Res<RenderStore>,

@@ -10,7 +10,7 @@ import {
 } from "three";
 import { Entity, Query, Res, With } from "thyseus";
 
-import { RenderStore } from "../RenderStore";
+import { RenderStore } from "../resources";
 
 /**
  * Creates and updates scene objects.
