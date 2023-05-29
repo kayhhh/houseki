@@ -1,6 +1,6 @@
-import { CoreStore } from "@lattice-engine/core";
-import { Gltf } from "@lattice-engine/gltf";
-import { OrbitControls } from "@lattice-engine/orbit";
+import { CoreStore } from "lattice-engine/core";
+import { Gltf } from "lattice-engine/gltf";
+import { OrbitControls } from "lattice-engine/orbit";
 import {
   Node,
   Parent,
@@ -8,7 +8,7 @@ import {
   Position,
   Scene,
   SceneStruct,
-} from "@lattice-engine/scene";
+} from "lattice-engine/scene";
 import { Commands, Mut, Query, Res } from "thyseus";
 
 // Using a local variable like this will not work with multi-threading

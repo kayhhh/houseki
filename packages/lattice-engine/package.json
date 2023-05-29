@@ -1,0 +1,78 @@
+{
+  "name": "lattice-engine",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lattice-engine/lattice",
+    "directory": "packages/lattice-engine"
+  },
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "exports": {
+    "./core": {
+      "import": "./dist/core.js"
+    },
+    "./gltf": {
+      "import": "./dist/gltf.js"
+    },
+    "./input": {
+      "import": "./dist/input.js"
+    },
+    "./orbit": {
+      "import": "./dist/orbit.js"
+    },
+    "./physics": {
+      "import": "./dist/physics.js"
+    },
+    "./player": {
+      "import": "./dist/player.js"
+    },
+    "./render": {
+      "import": "./dist/render.js"
+    },
+    "./scene": {
+      "import": "./dist/scene.js"
+    },
+    "./vrm": {
+      "import": "./dist/vrm.js"
+    }
+  },
+  "types": "index.d.ts",
+  "files": [
+    "dist",
+    "index.d.ts",
+    "core.d.ts",
+    "gltf.d.ts",
+    "input.d.ts",
+    "orbit.d.ts",
+    "physics.d.ts",
+    "player.d.ts",
+    "render.d.ts",
+    "scene.d.ts",
+    "vrm.d.ts"
+  ],
+  "scripts": {
+    "build": "vite build --emptyOutDir",
+    "dev": "vite build --watch"
+  },
+  "dependencies": {
+    "@lattice-engine/core": "workspace:^",
+    "@lattice-engine/gltf": "workspace:^",
+    "@lattice-engine/input": "workspace:^",
+    "@lattice-engine/orbit": "workspace:^",
+    "@lattice-engine/physics": "workspace:^",
+    "@lattice-engine/player": "workspace:^",
+    "@lattice-engine/render": "workspace:^",
+    "@lattice-engine/scene": "workspace:^",
+    "@lattice-engine/vrm": "workspace:^",
+    "thyseus": "0.12.0-beta.6"
+  },
+  "devDependencies": {
+    "typescript": "~5.0.4",
+    "vite": "^4.3.8",
+    "vite-plugin-dts": "^2.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,5 +1,5 @@
-import { CoreStore, Warehouse } from "@lattice-engine/core";
-import { InputStruct } from "@lattice-engine/input";
+import { CoreStore, Warehouse } from "lattice-engine/core";
+import { InputStruct } from "lattice-engine/input";
 import {
   CapsuleCollider,
   CharacterController,
@@ -7,14 +7,14 @@ import {
   KinematicBody,
   SphereCollider,
   Velocity,
-} from "@lattice-engine/physics";
+} from "lattice-engine/physics";
 import {
   PlayerAvatar,
   PlayerBody,
   PlayerCamera,
   PlayerCameraMode,
   PlayerCameraView,
-} from "@lattice-engine/player";
+} from "lattice-engine/player";
 import {
   Mesh,
   Node,
@@ -24,8 +24,8 @@ import {
   Rotation,
   Scene,
   SceneStruct,
-} from "@lattice-engine/scene";
-import { Vrm } from "@lattice-engine/vrm";
+} from "lattice-engine/scene";
+import { Vrm } from "lattice-engine/vrm";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createRoom } from "../../utils/createRoom";

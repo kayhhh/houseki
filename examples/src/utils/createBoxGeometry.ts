@@ -1,5 +1,5 @@
-import { Warehouse } from "@lattice-engine/core";
-import { Geometry } from "@lattice-engine/scene";
+import { Warehouse } from "lattice-engine/core";
+import { Geometry } from "lattice-engine/scene";
 import { BoxGeometry, BufferAttribute } from "three";
 
 /**

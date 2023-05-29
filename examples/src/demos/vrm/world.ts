@@ -1,9 +1,9 @@
-import { Engine } from "@lattice-engine/core";
-import { inputPlugin } from "@lattice-engine/input";
-import { orbitPlugin } from "@lattice-engine/orbit";
-import { renderPlugin } from "@lattice-engine/render";
-import { scenePlugin } from "@lattice-engine/scene";
-import { vrmPlugin } from "@lattice-engine/vrm";
+import { Engine } from "lattice-engine/core";
+import { inputPlugin } from "lattice-engine/input";
+import { orbitPlugin } from "lattice-engine/orbit";
+import { renderPlugin } from "lattice-engine/render";
+import { scenePlugin } from "lattice-engine/scene";
+import { vrmPlugin } from "lattice-engine/vrm";
 import { CoreSchedule } from "thyseus";
 
 import { statsSystem } from "../../components/stats/system";

@@ -1,10 +1,10 @@
-import { Engine } from "@lattice-engine/core";
-import { inputPlugin } from "@lattice-engine/input";
-import { physicsPlugin } from "@lattice-engine/physics";
-import { playerPlugin } from "@lattice-engine/player";
-import { renderPlugin } from "@lattice-engine/render";
-import { scenePlugin } from "@lattice-engine/scene";
-import { vrmPlugin } from "@lattice-engine/vrm";
+import { Engine } from "lattice-engine/core";
+import { inputPlugin } from "lattice-engine/input";
+import { physicsPlugin } from "lattice-engine/physics";
+import { playerPlugin } from "lattice-engine/player";
+import { renderPlugin } from "lattice-engine/render";
+import { scenePlugin } from "lattice-engine/scene";
+import { vrmPlugin } from "lattice-engine/vrm";
 import { CoreSchedule } from "thyseus";
 
 import { statsSystem } from "../../components/stats/system";

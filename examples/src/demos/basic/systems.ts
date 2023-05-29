@@ -1,5 +1,5 @@
-import { CoreStore, Warehouse } from "@lattice-engine/core";
-import { OrbitControls } from "@lattice-engine/orbit";
+import { CoreStore, Warehouse } from "lattice-engine/core";
+import { OrbitControls } from "lattice-engine/orbit";
 import {
   Mesh,
   Node,
@@ -8,7 +8,7 @@ import {
   Position,
   Scene,
   SceneStruct,
-} from "@lattice-engine/scene";
+} from "lattice-engine/scene";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createBoxGeometry } from "../../utils/createBoxGeometry";

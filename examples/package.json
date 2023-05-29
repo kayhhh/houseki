@@ -9,15 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/gltf": "workspace:^",
-    "@lattice-engine/input": "workspace:^",
-    "@lattice-engine/orbit": "workspace:^",
-    "@lattice-engine/physics": "workspace:^",
-    "@lattice-engine/player": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
-    "@lattice-engine/vrm": "workspace:^",
+    "lattice-engine": "workspace:^",
     "leva": "^0.9.34",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

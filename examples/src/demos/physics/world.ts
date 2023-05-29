@@ -1,9 +1,9 @@
-import { Engine } from "@lattice-engine/core";
-import { inputPlugin } from "@lattice-engine/input";
-import { orbitPlugin } from "@lattice-engine/orbit";
-import { physicsPlugin } from "@lattice-engine/physics";
-import { renderPlugin } from "@lattice-engine/render";
-import { scenePlugin } from "@lattice-engine/scene";
+import { Engine } from "lattice-engine/core";
+import { inputPlugin } from "lattice-engine/input";
+import { orbitPlugin } from "lattice-engine/orbit";
+import { physicsPlugin } from "lattice-engine/physics";
+import { renderPlugin } from "lattice-engine/render";
+import { scenePlugin } from "lattice-engine/scene";
 import { CoreSchedule } from "thyseus";
 
 import { statsSystem } from "../../components/stats/system";

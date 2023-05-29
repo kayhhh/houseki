@@ -1,4 +1,4 @@
-import { RenderStats } from "@lattice-engine/render";
+import { RenderStats } from "lattice-engine/render";
 import { Res } from "thyseus";
 
 export type StatsStore = {

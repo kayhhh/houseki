@@ -52,33 +52,9 @@ importers:
 
   examples:
     dependencies:
-      '@lattice-engine/core':
+      lattice-engine:
         specifier: workspace:^
-        version: link:../packages/core
-      '@lattice-engine/gltf':
-        specifier: workspace:^
-        version: link:../packages/gltf
-      '@lattice-engine/input':
-        specifier: workspace:^
-        version: link:../packages/input
-      '@lattice-engine/orbit':
-        specifier: workspace:^
-        version: link:../packages/orbit
-      '@lattice-engine/physics':
-        specifier: workspace:^
-        version: link:../packages/physics
-      '@lattice-engine/player':
-        specifier: workspace:^
-        version: link:../packages/player
-      '@lattice-engine/render':
-        specifier: workspace:^
-        version: link:../packages/render
-      '@lattice-engine/scene':
-        specifier: workspace:^
-        version: link:../packages/scene
-      '@lattice-engine/vrm':
-        specifier: workspace:^
-        version: link:../packages/vrm
+        version: link:../packages/lattice-engine
       leva:
         specifier: ^0.9.34
         version: 0.9.34(react-dom@18.2.0)(react@18.2.0)
@@ -191,6 +167,49 @@ importers:
       '@thyseus/transformer-rollup':
         specifier: 0.12.0-beta.5
         version: 0.12.0-beta.5(thyseus@0.12.0-beta.6)
+      typescript:
+        specifier: ~5.0.4
+        version: 5.0.4
+      vite:
+        specifier: ^4.3.8
+        version: 4.3.8
+      vite-plugin-dts:
+        specifier: ^2.3.0
+        version: 2.3.0(vite@4.3.8)
+
+  packages/lattice-engine:
+    dependencies:
+      '@lattice-engine/core':
+        specifier: workspace:^
+        version: link:../core
+      '@lattice-engine/gltf':
+        specifier: workspace:^
+        version: link:../gltf
+      '@lattice-engine/input':
+        specifier: workspace:^
+        version: link:../input
+      '@lattice-engine/orbit':
+        specifier: workspace:^
+        version: link:../orbit
+      '@lattice-engine/physics':
+        specifier: workspace:^
+        version: link:../physics
+      '@lattice-engine/player':
+        specifier: workspace:^
+        version: link:../player
+      '@lattice-engine/render':
+        specifier: workspace:^
+        version: link:../render
+      '@lattice-engine/scene':
+        specifier: workspace:^
+        version: link:../scene
+      '@lattice-engine/vrm':
+        specifier: workspace:^
+        version: link:../vrm
+      thyseus:
+        specifier: 0.12.0-beta.6
+        version: 0.12.0-beta.6
+    devDependencies:
       typescript:
         specifier: ~5.0.4
         version: 5.0.4

@@ -1,4 +1,4 @@
-import { Engine } from "@lattice-engine/core";
+import { Engine } from "lattice-engine/core";
 import { useEffect } from "react";
 import { World } from "thyseus";
 

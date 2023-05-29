@@ -1,6 +1,6 @@
-import { Warehouse } from "@lattice-engine/core";
-import { BoxCollider, StaticBody } from "@lattice-engine/physics";
-import { Mesh, Node, Parent, Position } from "@lattice-engine/scene";
+import { Warehouse } from "lattice-engine/core";
+import { BoxCollider, StaticBody } from "lattice-engine/physics";
+import { Mesh, Node, Parent, Position } from "lattice-engine/scene";
 import { Commands } from "thyseus";
 
 import { createBoxGeometry } from "./createBoxGeometry";

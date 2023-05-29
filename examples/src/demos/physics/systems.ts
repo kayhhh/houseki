@@ -1,6 +1,6 @@
-import { CoreStore, Warehouse } from "@lattice-engine/core";
-import { OrbitControls } from "@lattice-engine/orbit";
-import { DynamicBody, SphereCollider } from "@lattice-engine/physics";
+import { CoreStore, Warehouse } from "lattice-engine/core";
+import { OrbitControls } from "lattice-engine/orbit";
+import { DynamicBody, SphereCollider } from "lattice-engine/physics";
 import {
   Material,
   Mesh,
@@ -10,7 +10,7 @@ import {
   Position,
   Scene,
   SceneStruct,
-} from "@lattice-engine/scene";
+} from "lattice-engine/scene";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createRoom } from "../../utils/createRoom";

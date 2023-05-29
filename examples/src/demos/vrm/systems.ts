@@ -1,5 +1,5 @@
-import { CoreStore } from "@lattice-engine/core";
-import { OrbitControls } from "@lattice-engine/orbit";
+import { CoreStore } from "lattice-engine/core";
+import { OrbitControls } from "lattice-engine/orbit";
 import {
   Node,
   Parent,
@@ -7,8 +7,8 @@ import {
   Position,
   Scene,
   SceneStruct,
-} from "@lattice-engine/scene";
-import { Vrm } from "@lattice-engine/vrm";
+} from "lattice-engine/scene";
+import { Vrm } from "lattice-engine/vrm";
 import { Commands, Mut, Res } from "thyseus";
 
 /**
