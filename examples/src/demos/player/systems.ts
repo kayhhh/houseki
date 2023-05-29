@@ -8,7 +8,13 @@ import {
   SphereCollider,
   Velocity,
 } from "@lattice-engine/physics";
-import { PlayerAvatar, PlayerBody, PlayerCamera } from "@lattice-engine/player";
+import {
+  PlayerAvatar,
+  PlayerBody,
+  PlayerCamera,
+  PlayerCameraMode,
+  PlayerCameraView,
+} from "@lattice-engine/player";
 import {
   Mesh,
   Node,
@@ -68,6 +74,14 @@ export function initScene(
     .add(player);
 
   // Create avatar
+  const playerAvatar = new PlayerAvatar();
+  playerAvatar.idleAnimation = "/animation/Idle.fbx";
+  playerAvatar.jumpAnimation = "/animation/Falling.fbx";
+  playerAvatar.leftWalkAnimation = "/animation/LeftWalk.fbx";
+  playerAvatar.rightWalkAnimation = "/animation/RightWalk.fbx";
+  playerAvatar.sprintAnimation = "/animation/Sprint.fbx";
+  playerAvatar.walkAnimation = "/animation/Walk.fbx";
+
   commands
     .spawn()
     .addType(Node)
@@ -75,7 +89,7 @@ export function initScene(
     .addType(Rotation)
     .add(new Parent(body))
     .add(new Vrm("/k-robot.vrm", true))
-    .addType(PlayerAvatar);
+    .add(playerAvatar);
 
   // Create camera
   const camera = commands
@@ -85,7 +99,7 @@ export function initScene(
     .addType(Rotation)
     .add(new Parent(body))
     .addType(PerspectiveCamera)
-    .addType(PlayerCamera);
+    .add(new PlayerCamera(PlayerCameraMode.Both, PlayerCameraView.ThirdPerson));
 
   coreStruct.activeCamera = camera.id;
   inputStruct.enablePointerLock = true;

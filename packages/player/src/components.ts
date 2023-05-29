@@ -71,7 +71,25 @@ export class PlayerBody {
  * Should be a child of the player's body.
  */
 @struct
-export class PlayerAvatar {}
+export class PlayerAvatar {
+  @struct.string declare idleAnimation: string;
+  @struct.u64 declare idleAnimationId: bigint; // Entity ID
+
+  @struct.string declare jumpAnimation: string;
+  @struct.u64 declare jumpAnimationId: bigint; // Entity ID
+
+  @struct.string declare leftWalkAnimation: string;
+  @struct.u64 declare leftWalkAnimationId: bigint; // Entity ID
+
+  @struct.string declare rightWalkAnimation: string;
+  @struct.u64 declare rightWalkAnimationId: bigint; // Entity ID
+
+  @struct.string declare sprintAnimation: string;
+  @struct.u64 declare sprintAnimationId: bigint; // Entity ID
+
+  @struct.string declare walkAnimation: string;
+  @struct.u64 declare walkAnimationId: bigint; // Entity ID
+}
 
 /**
  * The player's camera.

@@ -10,7 +10,7 @@ export default defineConfig({
       entry: resolve("src/index.ts"),
       fileName: "index",
       formats: ["es"],
-      name: "player",
+      name: "vrm",
     },
     minify: false,
     rollupOptions: {

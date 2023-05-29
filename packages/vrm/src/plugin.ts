@@ -1,7 +1,9 @@
 import { WorldBuilder } from "thyseus";
 
-import { createAvatars } from "./createAvatars";
+import { createAnimations } from "./systems/createAnimations";
+import { createAvatars } from "./systems/createAvatars";
+import { playAnimations } from "./systems/playAnimations";
 
 export function vrmPlugin(builder: WorldBuilder) {
-  builder.addSystems(createAvatars);
+  builder.addSystems(createAvatars, createAnimations, playAnimations);
 }

@@ -4,13 +4,12 @@ import { Mesh } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Entity, Query, Res, SystemRes } from "thyseus";
 
-import { Vrm } from "./components";
-import { FIRSTPERSON_ONLY_LAYER, THIRDPERSON_ONLY_LAYER } from "./constants";
-import { VrmStore } from "./resources";
+import { Vrm } from "../components";
+import { FIRSTPERSON_ONLY_LAYER, THIRDPERSON_ONLY_LAYER } from "../constants";
+import { VrmStore } from "../resources";
 
 class LocalStore {
-  delta = 0;
-  last = 0;
+  lastTime = 0;
 
   /**
    * Entity ID -> Vrm URI
@@ -23,6 +22,9 @@ class LocalStore {
   readonly loading = new Map<bigint, Promise<void>>();
 }
 
+/**
+ * Adds VRM models to the scene.
+ */
 export function createAvatars(
   renderStore: Res<RenderStore>,
   vrmStore: Res<VrmStore>,
@@ -30,9 +32,9 @@ export function createAvatars(
   avatars: Query<[Entity, Vrm]>
 ) {
   // Update delta
-  const now = performance.now();
-  localStore.delta = (now - localStore.last) / 1000;
-  localStore.last = now;
+  const time = performance.now();
+  const delta = (time - localStore.lastTime) / 1000;
+  localStore.lastTime = time;
 
   const ids: bigint[] = [];
 
@@ -42,14 +44,14 @@ export function createAvatars(
     const avatar = vrmStore.avatars.get(entity.id);
 
     if (avatar) {
-      avatar.update(localStore.delta);
+      avatar.update(delta);
 
       // Add to scene
       const node = renderStore.nodes.get(entity.id);
       if (node) node.add(avatar.scene);
 
       // Setup first person layers
-      if (vrm.firstPerson) {
+      if (vrm.setupFirstPerson) {
         avatar.firstPerson?.setup({
           firstPersonOnlyLayer: FIRSTPERSON_ONLY_LAYER,
           thirdPersonOnlyLayer: THIRDPERSON_ONLY_LAYER,
@@ -66,10 +68,8 @@ export function createAvatars(
     // Remove the old VRM
     removeVrm(entity.id, localStore, vrmStore);
 
-    // Set the new VRM uri
-    localStore.loaded.set(entity.id, vrm.uri);
-
     // Load the new VRM
+    localStore.loaded.set(entity.id, vrm.uri);
     const promise = loadVrm(entity.id, vrm.uri, vrmStore);
 
     // Add the loading promise to the store, and remove it when it's done
@@ -110,7 +110,7 @@ async function loadVrm(entityId: bigint, uri: string, vrmStore: VrmStore) {
 }
 
 /**
- * Remove a VRM model from the local store, and the scene.
+ * Remove a VRM model from the local store and the scene.
  */
 function removeVrm(
   entityId: bigint,
