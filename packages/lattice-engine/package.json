@@ -8,6 +8,20 @@
   },
   "license": "GPL-3.0-or-later",
   "type": "module",
+  "keywords": [
+    "webgl",
+    "threejs",
+    "typescript",
+    "game-engine",
+    "game-development",
+    "wasm",
+    "ecs",
+    "vrm",
+    "gltf",
+    "3d",
+    "webgpu",
+    "webxr"
+  ],
   "exports": {
     "./core": {
       "import": "./dist/core.js"
