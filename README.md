@@ -28,7 +28,7 @@ Packages are published individually to NPM under the `@lattice-engine` scope. Al
 | [`@lattice-engine/player`](./packages/player)   | Player controls                                                                         |
 | [`@lattice-engine/render`](./packages/render)   | [Three.js](https://threejs.org) rendering                                               |
 | [`@lattice-engine/scene`](./packages/scene)     | The 3D scene graph                                                                      |
-| [`@lattice-engine/utils`](./packages/vrm)       | Utility functions                                                                       |
+| [`@lattice-engine/utils`](./packages/utils)     | Utility functions                                                                       |
 | [`@lattice-engine/vrm`](./packages/vrm)         | [VRM](https://vrm.dev/en) avatars                                                       |
 | `@lattice-engine/scripting`                     | [WASM](https://webassembly.org) scripting                                               |
 | `@lattice-engine/wired-protocol`                | Multiplayer networking via [The Wired Protocol](https://github.com/wired-protocol/spec) |
