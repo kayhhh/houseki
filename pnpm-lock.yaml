@@ -203,6 +203,9 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
+      '@lattice-engine/utils':
+        specifier: workspace:^
+        version: link:../utils
       '@lattice-engine/vrm':
         specifier: workspace:^
         version: link:../vrm
@@ -361,6 +364,37 @@ importers:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
+      thyseus:
+        specifier: 0.12.0-beta.6
+        version: 0.12.0-beta.6
+    devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5(thyseus@0.12.0-beta.6)
+      typescript:
+        specifier: ~5.0.4
+        version: 5.0.4
+      vite:
+        specifier: ^4.3.8
+        version: 4.3.8
+      vite-plugin-dts:
+        specifier: ^2.3.0
+        version: 2.3.0(vite@4.3.8)
+
+  packages/utils:
+    dependencies:
+      '@lattice-engine/core':
+        specifier: workspace:^
+        version: link:../core
+      '@lattice-engine/input':
+        specifier: workspace:^
+        version: link:../input
+      '@lattice-engine/render':
+        specifier: workspace:^
+        version: link:../render
+      '@lattice-engine/scene':
+        specifier: workspace:^
+        version: link:../scene
       thyseus:
         specifier: 0.12.0-beta.6
         version: 0.12.0-beta.6

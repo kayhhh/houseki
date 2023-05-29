@@ -33,6 +33,9 @@
     "./scene": {
       "import": "./dist/scene.js"
     },
+    "./utils": {
+      "import": "./dist/utils.js"
+    },
     "./vrm": {
       "import": "./dist/vrm.js"
     }
@@ -49,6 +52,7 @@
     "player.d.ts",
     "render.d.ts",
     "scene.d.ts",
+    "utils.d.ts",
     "vrm.d.ts"
   ],
   "scripts": {
@@ -64,6 +68,7 @@
     "@lattice-engine/player": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
+    "@lattice-engine/utils": "workspace:^",
     "@lattice-engine/vrm": "workspace:^",
     "thyseus": "0.12.0-beta.6"
   },

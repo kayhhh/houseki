@@ -1,18 +1,14 @@
 import { Engine } from "lattice-engine/core";
-import { inputPlugin } from "lattice-engine/input";
 import { orbitPlugin } from "lattice-engine/orbit";
 import { physicsPlugin } from "lattice-engine/physics";
-import { renderPlugin } from "lattice-engine/render";
-import { scenePlugin } from "lattice-engine/scene";
+import { defaultPlugin } from "lattice-engine/utils";
 import { CoreSchedule } from "thyseus";
 
 import { statsSystem } from "../../components/stats/system";
 import { initScene } from "./systems";
 
 export const world = await Engine.createWorld()
-  .addPlugin(inputPlugin)
-  .addPlugin(scenePlugin)
-  .addPlugin(renderPlugin)
+  .addPlugin(defaultPlugin)
   .addPlugin(orbitPlugin)
   .addPlugin(physicsPlugin)
   .addSystemsToSchedule(CoreSchedule.Startup, initScene)

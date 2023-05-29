@@ -1,7 +1,6 @@
 import { CoreSchedule, World } from "thyseus";
 
 import { LatticeSchedules } from "./constants";
-import { corePlugin } from "./plugin";
 
 const FIXED_HZ = 60;
 
@@ -18,11 +17,10 @@ export class Engine {
   #startPromise: Promise<void> | null = null;
 
   /**
-   * Creates a new WorldBuilder, with the core plugin already applied.
+   * Creates a new WorldBuilder.
    */
   static createWorld() {
     const world = World.new();
-    corePlugin(world);
     return world;
   }
 
