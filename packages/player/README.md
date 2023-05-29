@@ -1,3 +1,3 @@
 # @lattice-engine/player
 
-Player controls.
+First-person and third-person player controls.
