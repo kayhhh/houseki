@@ -2,13 +2,55 @@
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  background: rgba(51, 51, 51, 0.8);
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  color: #f2f2f2;
+  background: var(--leva-colors-elevation1);
+  padding-bottom: var(--leva-space-sm);
+  padding-top: var(--leva-space-sm);
+  padding-left: var(--leva-space-md);
+  padding-right: var(--leva-space-md);
+  border-radius: var(--leva-radii-lg);
+  color: var(--leva-colors-highlight3);
   user-select: none;
   gap: 0.5rem;
   display: grid;
+  box-shadow: var(--leva-shadows-level1);
+}
+
+#stats-collapse {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: transform 0.25s ease, color 0.25s ease;
+  border-radius: 9999px;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  background: rgba(0, 0, 0, 0);
+  color: var(--leva-colors-highlight2);
+  cursor: pointer;
+}
+
+#stats-collapse:hover {
+  color: var(--leva-colors-highlight3);
+}
+
+#stats.collapsed {
+  border-radius: 9999px;
+  padding: 1rem;
+}
+
+#stats.collapsed #stats-collapse {
+  transform: rotate(180deg);
+  top: 0;
+  right: 0;
+}
+
+#stats.collapsed .stat-row {
+  display: none;
 }
 
 .stat-row {
@@ -26,7 +68,7 @@
 
 .stat div:first-child {
   font-size: 0.75rem;
-  color: #8ef;
+  color: var(--leva-colors-highlight2);
 }
 
 @media (max-width: 768px) {

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { statsStore } from "./system";
 
 const STATS_INTERVAL_MS = 500;
+const COLLAPSED_KEY = "stats-collapsed";
 
 export default function Stats() {
   const [fps, setFps] = useState(0);
@@ -15,6 +16,9 @@ export default function Stats() {
   const [geometries, setGeometries] = useState(0);
   const [textures, setTextures] = useState(0);
   const [shaders, setShaders] = useState(0);
+  const [collapsed, setCollapsed] = useState(
+    sessionStorage.getItem(COLLAPSED_KEY) === "true"
+  );
 
   useEffect(() => {
     let lastFrame = statsStore.frame;
@@ -37,8 +41,22 @@ export default function Stats() {
     return () => clearInterval(interval);
   }, []);
 
+  function toggleCollapsed() {
+    const newCollapsed = !collapsed;
+    setCollapsed(newCollapsed);
+    sessionStorage.setItem(COLLAPSED_KEY, newCollapsed ? "true" : "false");
+  }
+
   return (
-    <div id="stats">
+    <div id="stats" className={collapsed ? "collapsed" : ""}>
+      <button
+        id="stats-collapse"
+        onClick={toggleCollapsed}
+        title={collapsed ? "Open Stats" : "Close Stats"}
+      >
+        {`>`}
+      </button>
+
       <div className="stat-row">
         <div className="stat">
           <div>FPS</div>
