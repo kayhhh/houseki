@@ -1,21 +1,34 @@
 import { InputStruct } from "@lattice-engine/input";
 import { Parent, Rotation } from "@lattice-engine/scene";
 import { Quaternion, Vector3 } from "three";
-import { Mut, Query, Res, With } from "thyseus";
+import { Mut, Query, Res, struct, SystemRes, With } from "thyseus";
 
 import { PlayerAvatar, PlayerCamera } from "../components";
 import { PlayerCameraView } from "../types";
 import { getDirection } from "../utils/getDirection";
 import { Input, readInput } from "../utils/readInput";
 
+const THIRD_PERSON_ROTATION_SPEED = 0.1;
+
 const quaternion = new Quaternion();
+const quaternion2 = new Quaternion();
 const vector3 = new Vector3();
 const forwardVector = new Vector3(0, 0, -1);
+
+@struct
+class LocalStore {
+  /**
+   * Stores the target rotation of the avatar.
+   */
+  @struct.array({ length: 4, type: "f32" })
+  declare targetRotation: Float32Array;
+}
 
 /**
  * System that rotates the player avatar, based on user input.
  */
 export function rotateAvatar(
+  localStore: SystemRes<LocalStore>,
   inputStruct: Res<InputStruct>,
   cameras: Query<[PlayerCamera, Parent, Rotation]>,
   avatars: Query<[Parent, Mut<Rotation>], With<PlayerAvatar>>
@@ -28,9 +41,18 @@ export function rotateAvatar(
       if (avatarParent.id !== parent.id) continue;
 
       if (camera.currentView === PlayerCameraView.FirstPerson) {
-        rotateFirstPerson(cameraRotation, avatarRotation);
+        rotateFirstPerson(
+          cameraRotation,
+          avatarRotation,
+          localStore.targetRotation
+        );
       } else if (camera.currentView === PlayerCameraView.ThirdPerson) {
-        rotateThirdPerson(input, cameraRotation, avatarRotation);
+        rotateThirdPerson(
+          input,
+          cameraRotation,
+          avatarRotation,
+          localStore.targetRotation
+        );
       }
     }
   }
@@ -39,7 +61,11 @@ export function rotateAvatar(
 /**
  * Roates the avatar to face the camera direction.
  */
-function rotateFirstPerson(cameraRotation: Rotation, avatarRotation: Rotation) {
+function rotateFirstPerson(
+  cameraRotation: Rotation,
+  avatarRotation: Rotation,
+  targetRotation: Float32Array
+) {
   quaternion.set(
     cameraRotation.x,
     cameraRotation.y,
@@ -51,10 +77,17 @@ function rotateFirstPerson(cameraRotation: Rotation, avatarRotation: Rotation) {
   quaternion.z = 0;
   quaternion.normalize();
 
-  avatarRotation.x = quaternion.x;
-  avatarRotation.y = quaternion.y;
-  avatarRotation.z = quaternion.z;
-  avatarRotation.w = quaternion.w;
+  targetRotation[0] = quaternion.x;
+  targetRotation[1] = quaternion.y;
+  targetRotation[2] = quaternion.z;
+  targetRotation[3] = quaternion.w;
+
+  avatarRotation.set(
+    targetRotation[0],
+    targetRotation[1],
+    targetRotation[2],
+    targetRotation[3]
+  );
 }
 
 /**
@@ -63,26 +96,43 @@ function rotateFirstPerson(cameraRotation: Rotation, avatarRotation: Rotation) {
 function rotateThirdPerson(
   input: Input,
   cameraRotation: Rotation,
-  avatarRotation: Rotation
+  avatarRotation: Rotation,
+  targetRotation: Float32Array
 ) {
-  if (input.x === 0 && input.y === 0) return;
+  // Set new target rotation if there is input
+  if (input.x !== 0 || input.y !== 0) {
+    const direction = getDirection(cameraRotation);
 
-  const direction = getDirection(cameraRotation);
+    vector3.set(
+      input.x * direction.x + input.y * direction.z,
+      0,
+      input.x * direction.z - input.y * direction.x
+    );
 
-  vector3.set(
-    input.x * direction.x + input.y * direction.z,
-    0,
-    input.x * direction.z - input.y * direction.x
+    quaternion.setFromUnitVectors(forwardVector, vector3);
+
+    quaternion.x = 0;
+    quaternion.z = 0;
+    quaternion.normalize();
+
+    targetRotation[0] = quaternion.x;
+    targetRotation[1] = quaternion.y;
+    targetRotation[2] = quaternion.z;
+    targetRotation[3] = quaternion.w;
+  }
+
+  // Slerp the rotation
+  quaternion2.set(
+    avatarRotation.x,
+    avatarRotation.y,
+    avatarRotation.z,
+    avatarRotation.w
   );
-
-  quaternion.setFromUnitVectors(forwardVector, vector3);
-
-  quaternion.x = 0;
-  quaternion.z = 0;
-  quaternion.normalize();
-
-  avatarRotation.x = quaternion.x;
-  avatarRotation.y = quaternion.y;
-  avatarRotation.z = quaternion.z;
-  avatarRotation.w = quaternion.w;
+  quaternion2.slerp(quaternion, THIRD_PERSON_ROTATION_SPEED);
+  avatarRotation.set(
+    quaternion2.x,
+    quaternion2.y,
+    quaternion2.z,
+    quaternion2.w
+  );
 }
