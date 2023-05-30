@@ -7,6 +7,7 @@ import { createBoxColliders } from "./systems/colliders/createBoxColliders";
 import { createCapsuleColliders } from "./systems/colliders/createCapsuleColliders";
 import { createCylinderColliders } from "./systems/colliders/createCylinderColliders";
 import { createSphereColliders } from "./systems/colliders/createSphereColliders";
+import { generateDebug } from "./systems/generateDebug";
 import { createDynamicBodies } from "./systems/rigidbodies/createDynamicBodies";
 import { createKinematicBodies } from "./systems/rigidbodies/createKinematicBodies";
 import { createStaticBodies } from "./systems/rigidbodies/createStaticBodies";
@@ -30,7 +31,7 @@ export function physicsPlugin(builder: WorldBuilder) {
       moveCharacters,
       [moveRigidBodies, rotateRigidBodies],
       stepWorld,
-      [saveCharacters, saveRigidBodies]
+      [saveCharacters, saveRigidBodies, generateDebug]
     )
   );
 }

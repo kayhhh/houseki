@@ -2,7 +2,7 @@ import { Position, Rotation } from "@lattice-engine/scene";
 import { Entity, Mut, Or, Query, Res, With } from "thyseus";
 
 import { DynamicBody, KinematicBody, StaticBody } from "../../components";
-import { PhysicsStore } from "../../PhysicsStore";
+import { PhysicsStore } from "../../resources";
 
 export function saveRigidBodies(
   store: Res<PhysicsStore>,

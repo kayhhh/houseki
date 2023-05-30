@@ -97,11 +97,23 @@ export class Mesh {
 }
 
 @struct
+export class LineSegments {
+  @struct.u64 declare materialId: bigint; // Entity ID
+
+  constructor(material?: Entity | EntityCommands) {
+    initStruct(this);
+
+    if (material) this.materialId = material.id;
+  }
+}
+
+@struct
 export class Geometry {
-  @struct.substruct(Resource) declare positions: Resource<Float32Array>;
-  @struct.substruct(Resource) declare normals: Resource<Float32Array>;
-  @struct.substruct(Resource) declare uvs: Resource<Float32Array>;
+  @struct.substruct(Resource) declare colors: Resource<Float32Array>;
   @struct.substruct(Resource) declare indices: Resource<Uint16Array>;
+  @struct.substruct(Resource) declare normals: Resource<Float32Array>;
+  @struct.substruct(Resource) declare positions: Resource<Float32Array>;
+  @struct.substruct(Resource) declare uvs: Resource<Float32Array>;
 }
 
 @struct
@@ -169,6 +181,18 @@ export class Material {
     initStruct(this);
 
     this.baseColor.set(color);
+  }
+}
+
+@struct
+export class LineMaterial {
+  @struct.array({ length: 4, type: "f32" }) declare color: Float32Array;
+  @struct.bool declare vertexColors: boolean;
+
+  constructor(color = [1, 1, 1, 1]) {
+    initStruct(this);
+
+    this.color.set(color);
   }
 }
 

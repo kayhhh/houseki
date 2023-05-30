@@ -1,7 +1,7 @@
 import { Entity, Mut, Query, Res } from "thyseus";
 
 import { CharacterController } from "../../components";
-import { PhysicsStore } from "../../PhysicsStore";
+import { PhysicsStore } from "../../resources";
 
 export function saveCharacters(
   physicsStore: Res<PhysicsStore>,

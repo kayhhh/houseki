@@ -2,7 +2,7 @@ import { ColliderDesc } from "@dimforge/rapier3d";
 import { Entity, Query, Res } from "thyseus";
 
 import { CylinderCollider } from "../../components";
-import { PhysicsStore } from "../../PhysicsStore";
+import { PhysicsStore } from "../../resources";
 
 export function createCylinderColliders(
   store: Res<PhysicsStore>,

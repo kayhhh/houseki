@@ -1,7 +1,7 @@
 import { Entity, Query, Res } from "thyseus";
 
 import { CharacterController } from "../../components";
-import { PhysicsStore } from "../../PhysicsStore";
+import { PhysicsStore } from "../../resources";
 
 export function createCharacters(
   store: Res<PhysicsStore>,

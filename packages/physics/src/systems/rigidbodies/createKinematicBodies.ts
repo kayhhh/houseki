@@ -2,7 +2,7 @@ import { RigidBodyDesc } from "@dimforge/rapier3d";
 import { Entity, Query, Res, With } from "thyseus";
 
 import { KinematicBody } from "../../components";
-import { PhysicsStore } from "../../PhysicsStore";
+import { PhysicsStore } from "../../resources";
 
 export function createKinematicBodies(
   store: Res<PhysicsStore>,

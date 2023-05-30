@@ -27,6 +27,11 @@ export function createGeometries(
     }
 
     // Sync object properties
+    if (geometry.colors.id) {
+      const colors = geometry.colors.read(warehouse);
+      setAttribute(object, "color", colors, 4);
+    }
+
     if (geometry.positions.id) {
       const positions = geometry.positions.read(warehouse);
       setAttribute(object, "position", positions, 3);
@@ -73,12 +78,17 @@ function setAttribute(
   const attribute =
     name === "index" ? geometry.getIndex() : geometry.getAttribute(name);
 
-  if (attribute instanceof BufferAttribute && attribute.itemSize === itemSize) {
+  if (
+    attribute instanceof BufferAttribute &&
+    attribute.itemSize === itemSize &&
+    attribute.array.length === data.length
+  ) {
     // Ignore if data is already set
     if (attribute.array === data) return;
 
     // Reuse existing attribute
     attribute.set(data);
+    attribute.needsUpdate = true;
   } else {
     // Create new attribute
     const attribute = new BufferAttribute(data, itemSize);

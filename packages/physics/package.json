@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@dimforge/rapier3d": "^0.11.2",
+    "@lattice-engine/core": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
     "thyseus": "0.12.0-beta.6"
   },

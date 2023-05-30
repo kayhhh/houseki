@@ -1,7 +1,7 @@
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
 import { CharacterController, Velocity } from "../../components";
-import { PhysicsStore } from "../../PhysicsStore";
+import { PhysicsStore } from "../../resources";
 
 /**
  * Moves all character controllers according to their position component.

@@ -35,15 +35,15 @@ export function createMaterials(
 ) {
   const ids: bigint[] = [];
 
-  for (const [{ id }, material] of entities) {
-    ids.push(id);
+  for (const [entity, material] of entities) {
+    ids.push(entity.id);
 
-    let object = renderStore.materials.get(id);
+    let object = renderStore.materials.get(entity.id);
 
     // Create new objects
     if (!object) {
       object = new MeshStandardMaterial();
-      renderStore.materials.set(id, object);
+      renderStore.materials.set(entity.id, object);
     }
 
     // Sync object properties

@@ -265,6 +265,9 @@ importers:
       '@dimforge/rapier3d':
         specifier: ^0.11.2
         version: 0.11.2
+      '@lattice-engine/core':
+        specifier: workspace:^
+        version: link:../core
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene

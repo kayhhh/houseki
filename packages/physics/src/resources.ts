@@ -4,6 +4,7 @@ import {
   RigidBody,
   World,
 } from "@dimforge/rapier3d";
+import { struct } from "thyseus";
 
 export class PhysicsStore {
   readonly world = new World({ x: 0, y: -9.81, z: 0 });
@@ -57,4 +58,9 @@ export class PhysicsStore {
       this.meshColliders.get(id)
     );
   }
+}
+
+@struct
+export class PhysicsConfig {
+  @struct.bool declare debug: boolean;
 }

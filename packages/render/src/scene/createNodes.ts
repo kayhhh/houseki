@@ -17,13 +17,13 @@ export function createNodes(
 ) {
   const ids: bigint[] = [];
 
-  for (const { id } of entities) {
-    ids.push(id);
+  for (const entity of entities) {
+    ids.push(entity.id);
 
     // Create new objects
-    if (!store.nodes.has(id)) {
+    if (!store.nodes.has(entity.id)) {
       const object = new Object3D();
-      store.nodes.set(id, object);
+      store.nodes.set(entity.id, object);
     }
   }
 

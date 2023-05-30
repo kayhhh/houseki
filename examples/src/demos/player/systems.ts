@@ -6,6 +6,7 @@ import {
   CharacterController,
   DynamicBody,
   KinematicBody,
+  PhysicsConfig,
   SphereCollider,
   StaticBody,
   Velocity,
@@ -47,8 +48,11 @@ export function initScene(
   warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
-  inputStruct: Res<Mut<InputStruct>>
+  inputStruct: Res<Mut<InputStruct>>,
+  physicsConfig: Res<Mut<PhysicsConfig>>
 ) {
+  physicsConfig.debug = true;
+
   // Set canvas
   const canvas = document.querySelector("canvas");
   if (!canvas) throw new Error("Canvas not found");

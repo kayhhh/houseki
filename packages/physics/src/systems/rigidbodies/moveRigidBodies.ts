@@ -7,7 +7,7 @@ import {
   StaticBody,
   Velocity,
 } from "../../components";
-import { PhysicsStore } from "../../PhysicsStore";
+import { PhysicsStore } from "../../resources";
 
 export function moveRigidBodies(
   store: Res<PhysicsStore>,

@@ -3,6 +3,8 @@ import {
   AnimationMixer,
   BufferGeometry,
   KeyframeTrack,
+  LineBasicMaterial,
+  LineSegments,
   Mesh,
   MeshStandardMaterial,
   Object3D,
@@ -23,8 +25,10 @@ export class RenderStore {
   readonly scenes = new Map<EntityID, Scene>();
   readonly geometries = new Map<EntityID, BufferGeometry>();
   readonly materials = new Map<EntityID, MeshStandardMaterial>();
+  readonly lineMaterials = new Map<EntityID, LineBasicMaterial>();
   readonly images = new Map<EntityID, ImageBitmap>();
   readonly meshes = new Map<EntityID, Mesh>();
+  readonly lineSegments = new Map<EntityID, LineSegments>();
   readonly nodes = new Map<EntityID, Object3D>();
   readonly animationMixers = new Map<EntityID, AnimationMixer>();
   readonly animationClips = new Map<EntityID, AnimationClip>();

@@ -1,6 +1,10 @@
 import { CoreStore, Warehouse } from "lattice-engine/core";
 import { OrbitControls } from "lattice-engine/orbit";
-import { DynamicBody, SphereCollider } from "lattice-engine/physics";
+import {
+  DynamicBody,
+  PhysicsConfig,
+  SphereCollider,
+} from "lattice-engine/physics";
 import {
   Material,
   Mesh,
@@ -23,8 +27,11 @@ export function initScene(
   commands: Commands,
   warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
-  sceneStruct: Res<Mut<SceneStruct>>
+  sceneStruct: Res<Mut<SceneStruct>>,
+  physicsConfig: Res<Mut<PhysicsConfig>>
 ) {
+  physicsConfig.debug = true;
+
   // Set canvas
   const canvas = document.querySelector("canvas");
   if (!canvas) throw new Error("Canvas not found");
