@@ -1,4 +1,4 @@
-import { Warehouse } from "@lattice-engine/core";
+import { Loading, Warehouse } from "@lattice-engine/core";
 import { ImageMimeType, Texture } from "@lattice-engine/scene";
 import { Entity, Query, Res, SystemRes } from "thyseus";
 
@@ -37,12 +37,21 @@ export function createImages(
 
     // If the image is loaded, save it to the render store
     const bitmap = localStore.bitmaps.get(entity.id);
-    if (bitmap) renderStore.images.set(entity.id, bitmap);
+    if (bitmap) {
+      renderStore.images.set(entity.id, bitmap);
+
+      if (localStore.bitmapPromises.has(entity.id)) {
+        localStore.bitmapPromises.delete(entity.id);
+        if (entity.hasComponent(Loading)) entity.remove(Loading);
+      }
+    }
 
     // Load new images
     if (!localStore.processed.has(entity.id)) {
-      // Mark the image as processed
       localStore.processed.add(entity.id);
+
+      // TODO: Add this back in (glitch breaking it?)
+      // entity.add(new Loading(`Loading image ${entity.id}`));
 
       const blob = new Blob([texture.image.read(warehouse)], {
         type: ImageMimeType[texture.mimeType],

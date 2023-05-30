@@ -1,5 +1,5 @@
 import { Document, WebIO } from "@gltf-transform/core";
-import { Warehouse } from "@lattice-engine/core";
+import { Loading, Warehouse } from "@lattice-engine/core";
 import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
 
 import { Gltf } from "../components";
@@ -52,8 +52,8 @@ export function gltfLoader(
 
     // If URI has changed, load new document
     if (store.uris.get(id) !== gltf.uri) {
-      // Mark loaded uri
       store.uris.set(id, gltf.uri);
+      entity.add(new Loading(`Loading ${gltf.uri}`));
 
       // Start loading document
       const io = new WebIO().registerExtensions(extensions);
@@ -74,6 +74,9 @@ export function gltfLoader(
 
       // Remove document from store
       store.docs.delete(id);
+
+      // Remove loading component
+      if (entity.hasComponent(Loading)) entity.remove(Loading);
     }
   }
 

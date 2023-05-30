@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { World } from "thyseus";
 
 import Canvas from "../../components/canvas/Canvas";
+import Loading from "../../components/loading/Loading";
 import Stats from "../../components/stats/Stats";
 import { useEngine } from "../../utils/useEngine";
 
@@ -18,6 +19,7 @@ export default function Basic() {
 
   return (
     <>
+      <Loading />
       <Stats />
       <Canvas />
     </>

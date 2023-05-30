@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { World } from "thyseus";
 
 import Canvas from "../../components/canvas/Canvas";
+import Loading from "../../components/loading/Loading";
+import { useLoadingStore } from "../../components/loading/system";
 import Stats from "../../components/stats/Stats";
 import { useEngine } from "../../utils/useEngine";
 import { selectedModel } from "./systems";
@@ -34,10 +36,15 @@ export default function Gltf() {
   // Update glTF model
   useEffect(() => {
     selectedModel.uri = model;
+
+    return () => {
+      useLoadingStore.getState().reset();
+    };
   }, [model]);
 
   return (
     <>
+      <Loading />
       <Stats />
       <Canvas />
     </>

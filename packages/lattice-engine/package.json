@@ -1,13 +1,6 @@
 {
   "name": "lattice-engine",
   "version": "0.1.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lattice-engine/lattice",
-    "directory": "packages/lattice-engine"
-  },
-  "license": "GPL-3.0-or-later",
-  "type": "module",
   "keywords": [
     "webgl",
     "threejs",
@@ -22,6 +15,13 @@
     "webgpu",
     "webxr"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lattice-engine/lattice",
+    "directory": "packages/lattice-engine"
+  },
+  "license": "GPL-3.0-or-later",
+  "type": "module",
   "exports": {
     "./core": {
       "import": "./dist/core.js"

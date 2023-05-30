@@ -1,3 +1,4 @@
+import { Loading } from "@lattice-engine/core";
 import { RenderStore } from "@lattice-engine/render";
 import { VRM, VRMLoaderPlugin, VRMUtils } from "@pixiv/three-vrm";
 import { Mesh } from "three";
@@ -41,18 +42,24 @@ export function createAvatars(
   for (const [entity, vrm] of avatars) {
     ids.push(entity.id);
 
-    const avatar = vrmStore.avatars.get(entity.id);
+    const object = vrmStore.avatars.get(entity.id);
 
-    if (avatar) {
-      avatar.update(delta);
+    if (object) {
+      if (localStore.loading.has(entity.id)) {
+        // VRM is loaded, remove loading component
+        if (entity.hasComponent(Loading)) entity.remove(Loading);
+        localStore.loading.delete(entity.id);
+      }
+
+      object.update(delta);
 
       // Add to scene
       const node = renderStore.nodes.get(entity.id);
-      if (node) node.add(avatar.scene);
+      if (node) node.add(object.scene);
 
       // Setup first person layers
       if (vrm.setupFirstPerson) {
-        avatar.firstPerson?.setup({
+        object.firstPerson?.setup({
           firstPersonOnlyLayer: FIRSTPERSON_ONLY_LAYER,
           thirdPersonOnlyLayer: THIRDPERSON_ONLY_LAYER,
         });
@@ -65,16 +72,15 @@ export function createAvatars(
     // If the VRM is loading, wait for it to finish
     if (localStore.loading.has(entity.id)) continue;
 
+    entity.add(new Loading(`Loading ${vrm.uri}`));
+
     // Remove the old VRM
     removeVrm(entity.id, localStore, vrmStore);
 
     // Load the new VRM
     localStore.loaded.set(entity.id, vrm.uri);
     const promise = loadVrm(entity.id, vrm.uri, vrmStore);
-
-    // Add the loading promise to the store, and remove it when it's done
     localStore.loading.set(entity.id, promise);
-    promise.then(() => localStore.loading.delete(entity.id));
   }
 
   // Remove old avatars
