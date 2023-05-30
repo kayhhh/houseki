@@ -1,5 +1,6 @@
 import { RenderStats } from "lattice-engine/render";
 import { Res } from "thyseus";
+import { create } from "zustand";
 
 export type StatsStore = {
   frame: number;
@@ -12,7 +13,7 @@ export type StatsStore = {
   shaders: number;
 };
 
-export const statsStore: StatsStore = {
+export const useStatsStore = create<StatsStore>(() => ({
   calls: 0,
   frame: 0,
   geometries: 0,
@@ -21,15 +22,17 @@ export const statsStore: StatsStore = {
   shaders: 0,
   textures: 0,
   triangles: 0,
-};
+}));
 
 export function statsSystem(renderStats: Res<RenderStats>) {
-  statsStore.frame = renderStats.frame;
-  statsStore.calls = renderStats.calls;
-  statsStore.lines = renderStats.lines;
-  statsStore.points = renderStats.points;
-  statsStore.triangles = renderStats.triangles;
-  statsStore.geometries = renderStats.geometries;
-  statsStore.textures = renderStats.textures;
-  statsStore.shaders = renderStats.shaders;
+  useStatsStore.setState({
+    calls: renderStats.calls,
+    frame: renderStats.frame,
+    geometries: renderStats.geometries,
+    lines: renderStats.lines,
+    points: renderStats.points,
+    shaders: renderStats.shaders,
+    textures: renderStats.textures,
+    triangles: renderStats.triangles,
+  });
 }

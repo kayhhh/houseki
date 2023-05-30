@@ -2,40 +2,33 @@ import "./Stats.css";
 
 import { useEffect, useState } from "react";
 
-import { statsStore } from "./system";
+import { useStatsStore } from "./system";
 
 const STATS_INTERVAL_MS = 500;
 const COLLAPSED_KEY = "stats-collapsed";
 
 export default function Stats() {
+  const calls = useStatsStore((state) => state.calls);
+  const triangles = useStatsStore((state) => state.triangles);
+  const geometries = useStatsStore((state) => state.geometries);
+  const textures = useStatsStore((state) => state.textures);
+  const shaders = useStatsStore((state) => state.shaders);
+  const lines = useStatsStore((state) => state.lines);
+  const points = useStatsStore((state) => state.points);
+
   const [fps, setFps] = useState(0);
-  const [calls, setCalls] = useState(0);
-  const [lines, setLines] = useState(0);
-  const [points, setPoints] = useState(0);
-  const [triangles, setTriangles] = useState(0);
-  const [geometries, setGeometries] = useState(0);
-  const [textures, setTextures] = useState(0);
-  const [shaders, setShaders] = useState(0);
   const [collapsed, setCollapsed] = useState(
     sessionStorage.getItem(COLLAPSED_KEY) === "true"
   );
 
   useEffect(() => {
-    let lastFrame = statsStore.frame;
+    let lastFrame = useStatsStore.getState().frame;
 
     const interval = setInterval(() => {
-      const currentFrame = statsStore.frame;
+      const currentFrame = useStatsStore.getState().frame;
       const fps = ((currentFrame - lastFrame) / STATS_INTERVAL_MS) * 1000;
       lastFrame = currentFrame;
-      setFps(Math.max(0, Math.round(fps * 10) / 10));
-
-      setCalls(statsStore.calls);
-      setLines(statsStore.lines);
-      setPoints(statsStore.points);
-      setTriangles(statsStore.triangles);
-      setGeometries(statsStore.geometries);
-      setTextures(statsStore.textures);
-      setShaders(statsStore.shaders);
+      setFps(Math.max(0, fps));
     }, STATS_INTERVAL_MS);
 
     return () => clearInterval(interval);
