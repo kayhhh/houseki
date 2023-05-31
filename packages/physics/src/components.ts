@@ -144,3 +144,50 @@ export class CharacterController {
     this.applyImpulsesToDynamicBodies = true;
   }
 }
+
+/**
+ * @see https://rapier.rs/docs/user_guides/javascript/scene_queries/#ray-casting
+ */
+@struct
+export class Raycast {
+  @struct.array({ length: 3, type: "f32" }) declare origin: [
+    number,
+    number,
+    number
+  ];
+  @struct.array({ length: 3, type: "f32" }) declare direction: [
+    number,
+    number,
+    number
+  ];
+  @struct.f32 declare maxToi: number;
+  @struct.bool declare solid: boolean;
+
+  /**
+   * Entity ID of a rigid body that should be excluded from the ray cast.
+   */
+  @struct.u64 declare excludeRigidBodyId: bigint;
+
+  @struct.bool declare hit: boolean;
+  @struct.f32 declare hitToi: number;
+
+  constructor(
+    origin: Readonly<[number, number, number]> = [0, 0, 0],
+    direction: Readonly<[number, number, number]> = [0, 0, 0],
+    maxToi = 1000,
+    solid = false
+  ) {
+    initStruct(this);
+
+    this.origin[0] = origin[0];
+    this.origin[1] = origin[1];
+    this.origin[2] = origin[2];
+
+    this.direction[0] = direction[0];
+    this.direction[1] = direction[1];
+    this.direction[2] = direction[2];
+
+    this.maxToi = maxToi;
+    this.solid = solid;
+  }
+}

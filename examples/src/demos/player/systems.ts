@@ -7,6 +7,7 @@ import {
   DynamicBody,
   KinematicBody,
   PhysicsConfig,
+  Raycast,
   SphereCollider,
   StaticBody,
   Velocity,
@@ -93,6 +94,18 @@ export function initScene(
     .add(new BoxCollider(groundSize))
     .addType(StaticBody);
 
+  const boxSize = [2, 2, 2] as const;
+  const geometry2 = createBoxGeometry(warehouse, boxSize);
+  commands
+    .spawn()
+    .addType(Node)
+    .add(new Parent(scene))
+    .add(new Position(6, boxSize[1] / 2, 0))
+    .add(new Mesh(materialEntity))
+    .add(geometry2)
+    .add(new BoxCollider(boxSize))
+    .addType(StaticBody);
+
   // Create player body
   const spawn = [0, 4, 0] as const;
   const playerHeight = 1.6;
@@ -139,7 +152,8 @@ export function initScene(
     .addType(Rotation)
     .add(new Parent(body))
     .addType(PerspectiveCamera)
-    .add(new PlayerCamera(PlayerCameraMode.Both, PlayerCameraView.ThirdPerson));
+    .add(new PlayerCamera(PlayerCameraMode.Both, PlayerCameraView.ThirdPerson))
+    .addType(Raycast);
 
   sceneStruct.activeCamera = camera.id;
   inputStruct.enablePointerLock = true;

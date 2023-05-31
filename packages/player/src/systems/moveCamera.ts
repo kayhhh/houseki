@@ -1,9 +1,15 @@
-import { Position, Rotation } from "@lattice-engine/scene";
+import { Raycast } from "@lattice-engine/physics";
+import { Parent, Position, Rotation } from "@lattice-engine/scene";
 import { Quaternion, Vector3 } from "three";
-import { Mut, Query } from "thyseus";
+import { Entity, Mut, Query, With } from "thyseus";
 
-import { PlayerCamera } from "../components";
+import { PlayerBody, PlayerCamera } from "../components";
 import { PlayerCameraView } from "../types";
+
+/**
+ * Offset to prevent camera from clipping into ground.
+ */
+const COLLISION_OFFSET = 0.85;
 
 const quaternion = new Quaternion();
 const vector3 = new Vector3();
@@ -12,34 +18,39 @@ const vector3 = new Vector3();
  * System that moves the player camera.
  */
 export function moveCamera(
-  entities: Query<[PlayerCamera, Rotation, Mut<Position>]>
+  cameras: Query<[PlayerCamera, Parent, Rotation, Mut<Position>, Mut<Raycast>]>,
+  bodies: Query<[Entity, Position], With<PlayerBody>>
 ) {
-  for (const [camera, rotation, position] of entities) {
-    position.x = 0;
-    position.y = 0;
-    position.z = 0;
+  for (const [camera, parent, rotation, cameraPosition, raycast] of cameras) {
+    for (const [entity, bodyPosition] of bodies) {
+      // Get body that matches camera
+      if (entity.id !== parent.id) continue;
 
-    if (camera.currentView === PlayerCameraView.ThirdPerson) {
-      moveThirdPerson(position, rotation, camera);
+      raycast.excludeRigidBodyId = entity.id;
+
+      raycast.origin[0] = bodyPosition.x + cameraPosition.x;
+      raycast.origin[1] = bodyPosition.y + cameraPosition.y;
+      raycast.origin[2] = bodyPosition.z + cameraPosition.z;
+
+      if (camera.currentView === PlayerCameraView.ThirdPerson) {
+        const distance = raycast.hit
+          ? Math.min(raycast.hitToi * COLLISION_OFFSET, camera.distance)
+          : camera.distance;
+
+        quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
+        vector3.set(0, 0, distance);
+        vector3.applyQuaternion(quaternion);
+
+        cameraPosition.x += vector3.x;
+        cameraPosition.y += vector3.y;
+        cameraPosition.z += vector3.z;
+
+        vector3.normalize();
+
+        raycast.direction[0] = vector3.x;
+        raycast.direction[1] = vector3.y;
+        raycast.direction[2] = vector3.z;
+      }
     }
   }
-}
-
-/**
- * Moves the camera in third person mode.
- */
-function moveThirdPerson(
-  position: Position,
-  rotation: Rotation,
-  camera: PlayerCamera
-) {
-  quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
-  vector3.set(0, 0, camera.distance);
-  vector3.applyQuaternion(quaternion);
-
-  // TODO: Use collision detection to prevent camera from clipping through walls.
-
-  position.x = vector3.x;
-  position.y = vector3.y;
-  position.z = vector3.z;
 }

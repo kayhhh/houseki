@@ -1,6 +1,7 @@
 import {
   Collider,
   KinematicCharacterController,
+  Ray,
   RigidBody,
   World,
 } from "@dimforge/rapier3d";
@@ -33,6 +34,11 @@ export class PhysicsStore {
     bigint,
     KinematicCharacterController
   >();
+
+  /**
+   * Raycast Entity ID -> Rapier ray
+   */
+  readonly rays = new Map<bigint, Ray>();
 
   /**
    * Returns the Rapier rigidbody for the given entity ID.

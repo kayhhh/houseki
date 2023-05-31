@@ -16,9 +16,9 @@ export function playerPlugin(builder: WorldBuilder) {
     ...run.chain(
       [zoomCamera, moveBody],
       rotateCamera,
-      moveCamera,
       rotateAvatar,
       applyAvatarOffset,
+      moveCamera,
       createAnimations,
       animatePlayer
     )

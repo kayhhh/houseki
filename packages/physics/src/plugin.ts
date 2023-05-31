@@ -14,6 +14,7 @@ import { createStaticBodies } from "./systems/rigidbodies/createStaticBodies";
 import { moveRigidBodies } from "./systems/rigidbodies/moveRigidBodies";
 import { rotateRigidBodies } from "./systems/rigidbodies/rotateRigidBodies";
 import { saveRigidBodies } from "./systems/rigidbodies/saveRigidBodies";
+import { runRaycasts } from "./systems/runRaycasts";
 import { stepWorld } from "./systems/stepWorld";
 
 export function physicsPlugin(builder: WorldBuilder) {
@@ -31,7 +32,7 @@ export function physicsPlugin(builder: WorldBuilder) {
       moveCharacters,
       [moveRigidBodies, rotateRigidBodies],
       stepWorld,
-      [saveCharacters, saveRigidBodies, generateDebug]
+      [runRaycasts, saveCharacters, saveRigidBodies, generateDebug]
     )
   );
 }
