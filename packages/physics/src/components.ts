@@ -1,40 +1,16 @@
+import { Vec3 } from "@lattice-engine/core";
 import { Entity, EntityCommands, initStruct, struct } from "thyseus";
 
-@struct
-export class Velocity {
-  @struct.f32 declare x: number;
-  @struct.f32 declare y: number;
-  @struct.f32 declare z: number;
-
-  constructor(x = 0, y = 0, z = 0) {
-    initStruct(this);
-
-    this.x = x;
-    this.y = y;
-    this.z = z;
-  }
-
-  set(x: number, y: number, z: number) {
-    this.x = x;
-    this.y = y;
-    this.z = z;
-  }
-}
+export class Velocity extends Vec3 {}
 
 @struct
 export class BoxCollider {
-  @struct.array({ length: 3, type: "f32" }) declare size: [
-    number,
-    number,
-    number
-  ];
+  @struct.substruct(Vec3) declare size: Vec3;
 
   constructor(size: Readonly<[number, number, number]> = [1, 1, 1]) {
     initStruct(this);
 
-    this.size[0] = size[0];
-    this.size[1] = size[1];
-    this.size[2] = size[2];
+    this.size.fromArray(size);
   }
 }
 
@@ -150,16 +126,8 @@ export class CharacterController {
  */
 @struct
 export class Raycast {
-  @struct.array({ length: 3, type: "f32" }) declare origin: [
-    number,
-    number,
-    number
-  ];
-  @struct.array({ length: 3, type: "f32" }) declare direction: [
-    number,
-    number,
-    number
-  ];
+  @struct.substruct(Vec3) declare origin: Vec3;
+  @struct.substruct(Vec3) declare direction: Vec3;
   @struct.f32 declare maxToi: number;
   @struct.bool declare solid: boolean;
 
@@ -179,13 +147,8 @@ export class Raycast {
   ) {
     initStruct(this);
 
-    this.origin[0] = origin[0];
-    this.origin[1] = origin[1];
-    this.origin[2] = origin[2];
-
-    this.direction[0] = direction[0];
-    this.direction[1] = direction[1];
-    this.direction[2] = direction[2];
+    this.origin.fromArray(origin);
+    this.direction.fromArray(direction);
 
     this.maxToi = maxToi;
     this.solid = solid;

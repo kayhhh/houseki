@@ -1,3 +1,4 @@
+import { Vec4 } from "@lattice-engine/core";
 import { Velocity } from "@lattice-engine/physics";
 import { Parent, Rotation } from "@lattice-engine/scene";
 import { Quaternion, Vector3 } from "three";
@@ -27,13 +28,12 @@ class LocalStore {
   /**
    * Stores the target rotation of the avatar.
    */
-  @struct.array({ length: 4, type: "f32" })
-  declare targetRotation: Float32Array;
+  @struct.substruct(Vec4) declare targetRotation: Vec4;
 
   constructor() {
     initStruct(this);
 
-    this.targetRotation.set([0, 0, 0, 1]);
+    this.targetRotation.set(0, 0, 0, 1);
   }
 }
 
@@ -80,7 +80,7 @@ export function rotateAvatar(
 function rotateFirstPerson(
   cameraRotation: Rotation,
   avatarRotation: Rotation,
-  targetRotation: Float32Array
+  targetRotation: Vec4
 ) {
   quaternion.set(
     cameraRotation.x,
@@ -93,17 +93,9 @@ function rotateFirstPerson(
   quaternion.z = 0;
   quaternion.normalize();
 
-  targetRotation[0] = quaternion.x;
-  targetRotation[1] = quaternion.y;
-  targetRotation[2] = quaternion.z;
-  targetRotation[3] = quaternion.w;
+  targetRotation.fromObject(quaternion);
 
-  avatarRotation.set(
-    targetRotation[0],
-    targetRotation[1],
-    targetRotation[2],
-    targetRotation[3]
-  );
+  avatarRotation.copy(targetRotation);
 }
 
 /**
@@ -113,7 +105,7 @@ function rotateThirdPerson(
   velocity: Velocity,
   cameraRotation: Rotation,
   avatarRotation: Rotation,
-  targetRotation: Float32Array
+  targetRotation: Vec4
 ) {
   // Set new target rotation if there is input
   if (velocity.x !== 0 || velocity.z !== 0) {
@@ -131,16 +123,13 @@ function rotateThirdPerson(
     quaternion.z = 0;
     quaternion.normalize();
 
-    targetRotation[0] = quaternion.x;
-    targetRotation[1] = quaternion.y;
-    targetRotation[2] = quaternion.z;
-    targetRotation[3] = quaternion.w;
+    targetRotation.fromObject(quaternion);
   } else {
     quaternion.set(
-      targetRotation[0] ?? 0,
-      targetRotation[1] ?? 0,
-      targetRotation[2] ?? 0,
-      targetRotation[3] ?? 1
+      targetRotation.x,
+      targetRotation.y,
+      targetRotation.z,
+      targetRotation.w
     );
   }
 
@@ -152,10 +141,5 @@ function rotateThirdPerson(
     avatarRotation.w
   );
   quaternion2.slerp(quaternion, THIRD_PERSON_ROTATION_SPEED);
-  avatarRotation.set(
-    quaternion2.x,
-    quaternion2.y,
-    quaternion2.z,
-    quaternion2.w
-  );
+  avatarRotation.fromObject(quaternion2);
 }

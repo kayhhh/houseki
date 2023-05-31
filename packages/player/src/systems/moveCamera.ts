@@ -28,9 +28,9 @@ export function moveCamera(
 
       raycast.excludeRigidBodyId = entity.id;
 
-      raycast.origin[0] = bodyPosition.x + cameraPosition.x;
-      raycast.origin[1] = bodyPosition.y + cameraPosition.y;
-      raycast.origin[2] = bodyPosition.z + cameraPosition.z;
+      raycast.origin.x = bodyPosition.x + cameraPosition.x;
+      raycast.origin.y = bodyPosition.y + cameraPosition.y;
+      raycast.origin.z = bodyPosition.z + cameraPosition.z;
 
       if (camera.currentView === PlayerCameraView.ThirdPerson) {
         const distance = raycast.hit
@@ -47,9 +47,7 @@ export function moveCamera(
 
         vector3.normalize();
 
-        raycast.direction[0] = vector3.x;
-        raycast.direction[1] = vector3.y;
-        raycast.direction[2] = vector3.z;
+        raycast.direction.fromObject(vector3);
       }
     }
   }

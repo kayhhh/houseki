@@ -12,29 +12,20 @@ export function runRaycasts(
     let object = physicsStore.rays.get(entity.id);
 
     if (!object) {
-      const origin = {
-        x: raycast.origin[0],
-        y: raycast.origin[1],
-        z: raycast.origin[2],
-      };
-
-      const direction = {
-        x: raycast.direction[0],
-        y: raycast.direction[1],
-        z: raycast.direction[2],
-      };
+      const origin = raycast.origin.toObject();
+      const direction = raycast.direction.toObject();
 
       object = new Ray(origin, direction);
       physicsStore.rays.set(entity.id, object);
     }
 
-    object.origin.x = raycast.origin[0];
-    object.origin.y = raycast.origin[1];
-    object.origin.z = raycast.origin[2];
+    object.origin.x = raycast.origin.x;
+    object.origin.y = raycast.origin.y;
+    object.origin.z = raycast.origin.z;
 
-    object.dir.x = raycast.direction[0];
-    object.dir.y = raycast.direction[1];
-    object.dir.z = raycast.direction[2];
+    object.dir.x = raycast.direction.x;
+    object.dir.y = raycast.direction.y;
+    object.dir.z = raycast.direction.z;
 
     const rigidBody = physicsStore.getRigidBody(raycast.excludeRigidBodyId);
 

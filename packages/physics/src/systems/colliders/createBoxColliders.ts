@@ -22,9 +22,9 @@ export function createBoxColliders(
       if (object) store.world.removeCollider(object, true);
 
       const colliderDesc = ColliderDesc.cuboid(
-        collider.size[0] / 2,
-        collider.size[1] / 2,
-        collider.size[2] / 2
+        collider.size.x / 2,
+        collider.size.y / 2,
+        collider.size.z / 2
       );
       object = store.world.createCollider(colliderDesc, rigidbody);
       store.boxColliders.set(entity.id, object);
@@ -32,9 +32,9 @@ export function createBoxColliders(
 
     // Sync object properties
     object.setHalfExtents({
-      x: collider.size[0] / 2,
-      y: collider.size[1] / 2,
-      z: collider.size[2] / 2,
+      x: collider.size.x / 2,
+      y: collider.size.y / 2,
+      z: collider.size.z / 2,
     });
   }
 

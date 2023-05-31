@@ -112,7 +112,7 @@ export function initScene(
   const playerWidth = 0.4;
 
   const player = new PlayerBody();
-  player.spawnPoint.value = spawn;
+  player.spawnPoint.fromArray(spawn);
 
   const body = commands
     .spawn()

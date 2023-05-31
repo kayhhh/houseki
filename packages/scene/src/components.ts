@@ -1,4 +1,4 @@
-import { Resource } from "@lattice-engine/core";
+import { Resource, Vec3, Vec4 } from "@lattice-engine/core";
 import { Entity, EntityCommands, initStruct, struct } from "thyseus";
 
 import {
@@ -8,65 +8,11 @@ import {
   MaterialAlphaMode,
 } from "./types";
 
-@struct
-export class Position {
-  @struct.f32 declare x: number;
-  @struct.f32 declare y: number;
-  @struct.f32 declare z: number;
+export class Position extends Vec3 {}
 
-  constructor(x = 0, y = 0, z = 0) {
-    initStruct(this);
+export class Rotation extends Vec4 {}
 
-    this.x = x;
-    this.y = y;
-    this.z = z;
-  }
-
-  set(x: number, y: number, z: number) {
-    this.x = x;
-    this.y = y;
-    this.z = z;
-  }
-}
-
-@struct
-export class Rotation {
-  @struct.f32 declare x: number;
-  @struct.f32 declare y: number;
-  @struct.f32 declare z: number;
-  @struct.f32 declare w: number;
-
-  constructor(x = 0, y = 0, z = 0, w = 1) {
-    initStruct(this);
-
-    this.x = x;
-    this.y = y;
-    this.z = z;
-    this.w = w;
-  }
-
-  set(x: number, y: number, z: number, w: number) {
-    this.x = x;
-    this.y = y;
-    this.z = z;
-    this.w = w;
-  }
-}
-
-@struct
-export class Scale {
-  @struct.f32 declare x: number;
-  @struct.f32 declare y: number;
-  @struct.f32 declare z: number;
-
-  constructor(x = 1, y = 1, z = 1) {
-    initStruct(this);
-
-    this.x = x;
-    this.y = y;
-    this.z = z;
-  }
-}
+export class Scale extends Vec3 {}
 
 @struct
 export class Parent {

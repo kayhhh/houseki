@@ -1,23 +1,7 @@
+import { Vec3 } from "@lattice-engine/core";
 import { initStruct, struct } from "thyseus";
 
 import { PlayerCameraMode, PlayerCameraView } from "./types";
-
-@struct
-class Vec3 {
-  @struct.array({ length: 3, type: "f32" }) declare array: Float32Array;
-
-  set value(newValue: Readonly<[number, number, number]>) {
-    this.array.set(newValue);
-  }
-
-  get value() {
-    return [this.array[0], this.array[1], this.array[2]] as [
-      number,
-      number,
-      number
-    ];
-  }
-}
 
 /**
  * The player's body.
@@ -60,7 +44,7 @@ export class PlayerBody {
 
     this.speed = speed;
     this.jumpStrength = jumpStrength;
-    this.spawnPoint.value = spawnPoint;
+    this.spawnPoint.fromArray(spawnPoint);
     this.enableVoidTeleport = enableVoidTeleport;
     this.voidLevel = voidLevel;
   }

@@ -40,7 +40,11 @@ export function moveBody(
 
       if (player.enableVoidTeleport && position.y < player.voidLevel) {
         velocity.set(0, 0, 0);
-        position.set(...player.spawnPoint.value);
+        position.set(
+          player.spawnPoint.x,
+          player.spawnPoint.y,
+          player.spawnPoint.z
+        );
       }
 
       if (jump && character.isGrounded) {
