@@ -1,18 +1,10 @@
-import { MainLoopTime, Vec4 } from "@lattice-engine/core";
+import { MainLoopTime } from "@lattice-engine/core";
 import { InputStruct, PointerMoveEvent } from "@lattice-engine/input";
 import { Rotation } from "@lattice-engine/scene";
 import { Euler, Quaternion } from "three";
-import {
-  EventReader,
-  initStruct,
-  Mut,
-  Query,
-  Res,
-  struct,
-  SystemRes,
-} from "thyseus";
+import { EventReader, Mut, Query, Res } from "thyseus";
 
-import { PlayerCamera } from "../components";
+import { PlayerCamera, TargetRotation } from "../components";
 import { PlayerCameraView } from "../types";
 
 const SENSITIVITY = 0.002;
@@ -29,42 +21,24 @@ const euler = new Euler(0, 0, 0, "YXZ");
 const quaternion = new Quaternion();
 const quaternion2 = new Quaternion();
 
-@struct
-class LocalStore {
-  /**
-   * Stores the target rotation of the avatar.
-   */
-  @struct.substruct(Vec4) declare targetRotation: Vec4;
-
-  constructor() {
-    initStruct(this);
-
-    this.targetRotation.set(0, 0, 0, 1);
-  }
-}
-
-/**
- * System that rotates the player camera.
- */
 export function rotateCamera(
-  localStore: SystemRes<LocalStore>,
   time: Res<MainLoopTime>,
   inputStruct: Res<InputStruct>,
   pointerMoveReader: EventReader<PointerMoveEvent>,
-  entities: Query<[PlayerCamera, Mut<Rotation>]>
+  entities: Query<[PlayerCamera, Mut<TargetRotation>, Mut<Rotation>]>
 ) {
   // Update target rotation on pointer move
   for (const event of pointerMoveReader) {
     // TODO: Support non pointer lock controls.
     if (!inputStruct.isPointerLocked) continue;
 
-    for (const [camera] of entities) {
+    for (const [camera, targetRotation] of entities) {
       euler.setFromQuaternion(
         quaternion.set(
-          localStore.targetRotation.x,
-          localStore.targetRotation.y,
-          localStore.targetRotation.z,
-          localStore.targetRotation.w
+          targetRotation.x,
+          targetRotation.y,
+          targetRotation.z,
+          targetRotation.w
         )
       );
 
@@ -87,17 +61,17 @@ export function rotateCamera(
 
       quaternion.setFromEuler(euler);
 
-      localStore.targetRotation.fromObject(quaternion);
+      targetRotation.fromObject(quaternion);
     }
   }
 
   // Slerp towards target rotation
-  for (const [camera, rotation] of entities) {
+  for (const [camera, targetRotation, rotation] of entities) {
     quaternion2.set(
-      localStore.targetRotation.x,
-      localStore.targetRotation.y,
-      localStore.targetRotation.z,
-      localStore.targetRotation.w
+      targetRotation.x,
+      targetRotation.y,
+      targetRotation.z,
+      targetRotation.w
     );
 
     const slerpStrength =

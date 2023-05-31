@@ -18,6 +18,7 @@ import {
   PlayerCamera,
   PlayerCameraMode,
   PlayerCameraView,
+  TargetRotation,
 } from "lattice-engine/player";
 import { WEBGL_CONSTANTS } from "lattice-engine/render";
 import {
@@ -140,6 +141,7 @@ export function initScene(
     .addType(Node)
     .add(new Position().set(0, -playerHeight / 2, 0))
     .addType(Rotation)
+    .add(new TargetRotation().set(0, 0, 0, 1))
     .add(new Parent(body))
     .add(new Vrm("/k-robot.vrm", true))
     .add(playerAvatar);
@@ -150,6 +152,7 @@ export function initScene(
     .addType(Node)
     .addType(Position)
     .addType(Rotation)
+    .add(new TargetRotation().set(0, 0, 0, 1))
     .add(new Parent(body))
     .addType(PerspectiveCamera)
     .add(new PlayerCamera(PlayerCameraMode.Both, PlayerCameraView.ThirdPerson))

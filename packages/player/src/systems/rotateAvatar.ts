@@ -2,17 +2,14 @@ import { Vec4 } from "@lattice-engine/core";
 import { Velocity } from "@lattice-engine/physics";
 import { Parent, Rotation } from "@lattice-engine/scene";
 import { Quaternion, Vector3 } from "three";
-import {
-  Entity,
-  initStruct,
-  Mut,
-  Query,
-  struct,
-  SystemRes,
-  With,
-} from "thyseus";
+import { Entity, Mut, Query, With } from "thyseus";
 
-import { PlayerAvatar, PlayerBody, PlayerCamera } from "../components";
+import {
+  PlayerAvatar,
+  PlayerBody,
+  PlayerCamera,
+  TargetRotation,
+} from "../components";
 import { PlayerCameraView } from "../types";
 import { getDirection } from "../utils/getDirection";
 
@@ -23,31 +20,16 @@ const quaternion2 = new Quaternion();
 const vector3 = new Vector3();
 const upVector = new Vector3(0, 1, 0);
 
-@struct
-class LocalStore {
-  /**
-   * Stores the target rotation of the avatar.
-   */
-  @struct.substruct(Vec4) declare targetRotation: Vec4;
-
-  constructor() {
-    initStruct(this);
-
-    this.targetRotation.set(0, 0, 0, 1);
-  }
-}
-
-/**
- * System that rotates the player avatar, based on user input.
- */
 export function rotateAvatar(
-  localStore: SystemRes<LocalStore>,
   cameras: Query<[PlayerCamera, Parent, Rotation]>,
-  avatars: Query<[Parent, Mut<Rotation>], With<PlayerAvatar>>,
+  avatars: Query<
+    [Parent, Mut<Rotation>, Mut<TargetRotation>],
+    With<PlayerAvatar>
+  >,
   bodies: Query<[Entity, Velocity], With<PlayerBody>>
 ) {
   for (const [camera, parent, cameraRotation] of cameras) {
-    for (const [avatarParent, avatarRotation] of avatars) {
+    for (const [avatarParent, avatarRotation, targetRotation] of avatars) {
       // Find the avatar that matches the camera parent
       if (avatarParent.id !== parent.id) continue;
 
@@ -56,17 +38,13 @@ export function rotateAvatar(
         if (entity.id !== avatarParent.id) continue;
 
         if (camera.currentView === PlayerCameraView.FirstPerson) {
-          rotateFirstPerson(
-            cameraRotation,
-            avatarRotation,
-            localStore.targetRotation
-          );
+          rotateFirstPerson(cameraRotation, avatarRotation, targetRotation);
         } else if (camera.currentView === PlayerCameraView.ThirdPerson) {
           rotateThirdPerson(
             velocity,
             cameraRotation,
             avatarRotation,
-            localStore.targetRotation
+            targetRotation
           );
         }
       }
@@ -74,9 +52,6 @@ export function rotateAvatar(
   }
 }
 
-/**
- * Roates the avatar to face the camera direction.
- */
 function rotateFirstPerson(
   cameraRotation: Rotation,
   avatarRotation: Rotation,
@@ -98,9 +73,6 @@ function rotateFirstPerson(
   avatarRotation.copy(targetRotation);
 }
 
-/**
- * Rotates the avatar to face the input direction.
- */
 function rotateThirdPerson(
   velocity: Velocity,
   cameraRotation: Rotation,

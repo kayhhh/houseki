@@ -1,7 +1,11 @@
-import { Vec3 } from "@lattice-engine/core";
+import { Vec3, Vec4 } from "@lattice-engine/core";
 import { initStruct, struct } from "thyseus";
 
 import { PlayerCameraMode, PlayerCameraView } from "./types";
+
+export class TargetPosition extends Vec3 {}
+
+export class TargetRotation extends Vec4 {}
 
 /**
  * The player's body.
