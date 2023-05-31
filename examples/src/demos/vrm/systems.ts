@@ -31,7 +31,7 @@ export function initScene(
   // Create camera
   const camera = commands
     .spawn()
-    .add(new Position(0, 1, -3))
+    .add(new Position().set(0, 1, -3))
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
   sceneStruct.activeCamera = camera.id;
@@ -40,7 +40,7 @@ export function initScene(
   commands
     .spawn()
     .addType(Node)
-    .add(new Position(0, -0.5, 0))
+    .add(new Position().set(0, -0.5, 0))
     .add(new Parent(scene))
     .add(new Vrm("/k-robot.vrm"));
 }

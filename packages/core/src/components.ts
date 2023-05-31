@@ -50,20 +50,28 @@ export class Vec3 {
     this.x = x;
     this.y = y;
     this.z = z;
+
+    return this;
   }
 
   copy(other: Vec3) {
     this.array.set(other.array);
+
+    return this;
   }
 
   fromArray(newValue: Readonly<[number, number, number]>) {
     this.array.set(newValue);
+
+    return this;
   }
 
   fromObject(other: { x: number; y: number; z: number }) {
     this.x = other.x;
     this.y = other.y;
     this.z = other.z;
+
+    return this;
   }
 
   toArray() {
@@ -74,9 +82,10 @@ export class Vec3 {
     return { x: this.x, y: this.y, z: this.z };
   }
 
-  constructor(x = 0, y = 0, z = 0) {
+  constructor() {
     initStruct(this);
-    this.set(x, y, z);
+    // TODO: Add back in
+    // this.set(x, y, z);
   }
 }
 
@@ -121,14 +130,20 @@ export class Vec4 {
     this.y = y;
     this.z = z;
     this.w = w;
+
+    return this;
   }
 
   copy(other: Vec4) {
     this.array.set(other.array);
+
+    return this;
   }
 
   fromArray(newValue: Readonly<[number, number, number, number]>) {
     this.array.set(newValue);
+
+    return this;
   }
 
   fromObject(other: { x: number; y: number; z: number; w: number }) {
@@ -136,6 +151,8 @@ export class Vec4 {
     this.y = other.y;
     this.z = other.z;
     this.w = other.w;
+
+    return this;
   }
 
   toArray() {
@@ -146,8 +163,9 @@ export class Vec4 {
     return { w: this.w, x: this.x, y: this.y, z: this.z };
   }
 
-  constructor(x = 0, y = 0, z = 0, w = 1) {
+  constructor() {
     initStruct(this);
-    this.set(x, y, z, w);
+    // TODO: Add back in
+    // this.set(x, y, z, w);
   }
 }

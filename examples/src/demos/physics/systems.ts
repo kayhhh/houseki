@@ -44,7 +44,7 @@ export function initScene(
   // Create camera
   const camera = commands
     .spawn()
-    .add(new Position(0, 6, 8))
+    .add(new Position().set(0, 6, 8))
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
   sceneStruct.activeCamera = camera.id;
@@ -62,7 +62,7 @@ export function initScene(
       .spawn()
       .addType(Node)
       .add(new Parent(scene))
-      .add(new Position(...position))
+      .add(new Position().fromArray(position))
       .add(new Mesh(material))
       .add(ballGeometry)
       .add(new SphereCollider(radius))

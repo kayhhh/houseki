@@ -79,7 +79,7 @@ function createBox(
   return commands
     .spawn()
     .addType(Node)
-    .add(new Position(...position))
+    .add(new Position().fromArray(position))
     .addType(Mesh)
     .add(geometry)
     .add(new BoxCollider(size))
