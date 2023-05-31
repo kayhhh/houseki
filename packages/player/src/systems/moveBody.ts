@@ -9,6 +9,7 @@ import { lerp } from "../utils/lerp";
 import { readInput } from "../utils/readInput";
 
 const VELOCITY_DAMPEN = 0.15;
+const SPRINT_MULTIPLIER = 1.5;
 
 /**
  * System that moves the player body.
@@ -22,6 +23,7 @@ export function moveBody(
 ) {
   const input = readInput(inputStruct);
   const jump = inputStruct.keyPressed(Key.Space);
+  const sprint = inputStruct.keyPressed(Key.Shift);
 
   for (const [parent, rotation] of cameras) {
     for (const [entity, player, character, position, velocity] of bodies) {
@@ -33,8 +35,10 @@ export function moveBody(
       const movementX = direction.x * input.x + direction.z * input.y;
       const movementZ = direction.z * input.x - direction.x * input.y;
 
-      const targetX = movementX * player.speed;
-      const targetZ = movementZ * player.speed;
+      const speed = sprint ? player.speed * SPRINT_MULTIPLIER : player.speed;
+
+      const targetX = movementX * speed;
+      const targetZ = movementZ * speed;
 
       velocity.x = lerp(velocity.x, targetX, VELOCITY_DAMPEN);
       velocity.z = lerp(velocity.z, targetZ, VELOCITY_DAMPEN);
