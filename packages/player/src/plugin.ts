@@ -6,6 +6,7 @@ import { createAnimations } from "./systems/createAnimations";
 import { moveBody } from "./systems/moveBody";
 import { moveCamera } from "./systems/moveCamera";
 import { rotateAvatar } from "./systems/rotateAvatar";
+import { rotateCamera } from "./systems/rotateCamera";
 import { setCameraLayers } from "./systems/setCameraLayers";
 import { zoomCamera } from "./systems/zoomCamera";
 
@@ -14,6 +15,7 @@ export function playerPlugin(builder: WorldBuilder) {
     setCameraLayers,
     ...run.chain(
       [zoomCamera, moveBody],
+      rotateCamera,
       moveCamera,
       rotateAvatar,
       applyAvatarOffset,
