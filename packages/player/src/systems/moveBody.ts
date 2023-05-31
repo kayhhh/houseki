@@ -7,6 +7,8 @@ import { PlayerBody, PlayerCamera } from "../components";
 import { getDirection } from "../utils/getDirection";
 import { readInput } from "../utils/readInput";
 
+const VELOCITY_DAMPEN = 0.15;
+
 /**
  * System that moves the player body.
  */
@@ -27,11 +29,14 @@ export function moveBody(
 
       const direction = getDirection(rotation, position);
 
-      velocity.x = direction.x * input.x + direction.z * input.y;
-      velocity.z = direction.z * input.x - direction.x * input.y;
+      const movementX = direction.x * input.x + direction.z * input.y;
+      const movementZ = direction.z * input.x - direction.x * input.y;
 
-      velocity.x *= player.speed;
-      velocity.z *= player.speed;
+      const targetX = movementX * player.speed;
+      const targetZ = movementZ * player.speed;
+
+      velocity.x = lerp(velocity.x, targetX, VELOCITY_DAMPEN);
+      velocity.z = lerp(velocity.z, targetZ, VELOCITY_DAMPEN);
 
       if (player.enableVoidTeleport && position.y < player.voidLevel) {
         velocity.set(0, 0, 0);
@@ -43,4 +48,8 @@ export function moveBody(
       }
     }
   }
+}
+
+function lerp(a: number, b: number, t: number) {
+  return a + (b - a) * t;
 }

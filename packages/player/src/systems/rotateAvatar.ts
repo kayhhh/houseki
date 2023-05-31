@@ -1,19 +1,26 @@
-import { InputStruct } from "@lattice-engine/input";
+import { Velocity } from "@lattice-engine/physics";
 import { Parent, Rotation } from "@lattice-engine/scene";
 import { Quaternion, Vector3 } from "three";
-import { Mut, Query, Res, struct, SystemRes, With } from "thyseus";
+import {
+  Entity,
+  initStruct,
+  Mut,
+  Query,
+  struct,
+  SystemRes,
+  With,
+} from "thyseus";
 
-import { PlayerAvatar, PlayerCamera } from "../components";
+import { PlayerAvatar, PlayerBody, PlayerCamera } from "../components";
 import { PlayerCameraView } from "../types";
 import { getDirection } from "../utils/getDirection";
-import { Input, readInput } from "../utils/readInput";
 
 const THIRD_PERSON_ROTATION_SPEED = 0.1;
 
 const quaternion = new Quaternion();
 const quaternion2 = new Quaternion();
 const vector3 = new Vector3();
-const forwardVector = new Vector3(0, 0, -1);
+const upVector = new Vector3(0, 1, 0);
 
 @struct
 class LocalStore {
@@ -22,6 +29,12 @@ class LocalStore {
    */
   @struct.array({ length: 4, type: "f32" })
   declare targetRotation: Float32Array;
+
+  constructor() {
+    initStruct(this);
+
+    this.targetRotation.set([0, 0, 0, 1]);
+  }
 }
 
 /**
@@ -29,30 +42,33 @@ class LocalStore {
  */
 export function rotateAvatar(
   localStore: SystemRes<LocalStore>,
-  inputStruct: Res<InputStruct>,
   cameras: Query<[PlayerCamera, Parent, Rotation]>,
-  avatars: Query<[Parent, Mut<Rotation>], With<PlayerAvatar>>
+  avatars: Query<[Parent, Mut<Rotation>], With<PlayerAvatar>>,
+  bodies: Query<[Entity, Velocity], With<PlayerBody>>
 ) {
-  const input = readInput(inputStruct);
-
   for (const [camera, parent, cameraRotation] of cameras) {
     for (const [avatarParent, avatarRotation] of avatars) {
       // Find the avatar that matches the camera parent
       if (avatarParent.id !== parent.id) continue;
 
-      if (camera.currentView === PlayerCameraView.FirstPerson) {
-        rotateFirstPerson(
-          cameraRotation,
-          avatarRotation,
-          localStore.targetRotation
-        );
-      } else if (camera.currentView === PlayerCameraView.ThirdPerson) {
-        rotateThirdPerson(
-          input,
-          cameraRotation,
-          avatarRotation,
-          localStore.targetRotation
-        );
+      for (const [entity, velocity] of bodies) {
+        // Find the body that matches the avatar
+        if (entity.id !== avatarParent.id) continue;
+
+        if (camera.currentView === PlayerCameraView.FirstPerson) {
+          rotateFirstPerson(
+            cameraRotation,
+            avatarRotation,
+            localStore.targetRotation
+          );
+        } else if (camera.currentView === PlayerCameraView.ThirdPerson) {
+          rotateThirdPerson(
+            velocity,
+            cameraRotation,
+            avatarRotation,
+            localStore.targetRotation
+          );
+        }
       }
     }
   }
@@ -94,22 +110,22 @@ function rotateFirstPerson(
  * Rotates the avatar to face the input direction.
  */
 function rotateThirdPerson(
-  input: Input,
+  velocity: Velocity,
   cameraRotation: Rotation,
   avatarRotation: Rotation,
   targetRotation: Float32Array
 ) {
   // Set new target rotation if there is input
-  if (input.x !== 0 || input.y !== 0) {
+  if (velocity.x !== 0 || velocity.z !== 0) {
     const direction = getDirection(cameraRotation);
 
     vector3.set(
-      input.x * direction.x + input.y * direction.z,
+      velocity.x * direction.x + velocity.z * direction.z,
       0,
-      input.x * direction.z - input.y * direction.x
+      velocity.x * direction.z - velocity.z * direction.x
     );
 
-    quaternion.setFromUnitVectors(forwardVector, vector3);
+    quaternion.setFromAxisAngle(upVector, Math.atan2(-velocity.x, -velocity.z));
 
     quaternion.x = 0;
     quaternion.z = 0;
@@ -119,6 +135,13 @@ function rotateThirdPerson(
     targetRotation[1] = quaternion.y;
     targetRotation[2] = quaternion.z;
     targetRotation[3] = quaternion.w;
+  } else {
+    quaternion.set(
+      targetRotation[0] ?? 0,
+      targetRotation[1] ?? 0,
+      targetRotation[2] ?? 0,
+      targetRotation[3] ?? 1
+    );
   }
 
   // Slerp the rotation
