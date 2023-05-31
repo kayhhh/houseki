@@ -26,7 +26,6 @@ export function createStaticBodies(
     if (!ids.includes(id)) {
       const object = store.staticBodies.get(id);
       if (object) store.world.removeRigidBody(object);
-
       store.staticBodies.delete(id);
     }
   }

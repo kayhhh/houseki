@@ -21,9 +21,7 @@ export function saveRigidBodies(
     if (!body) continue;
 
     const translation = body.translation();
-    position.x = translation.x;
-    position.y = translation.y;
-    position.z = translation.z;
+    position.fromObject(translation);
   }
 
   // Save rotations
@@ -32,9 +30,6 @@ export function saveRigidBodies(
     if (!body) continue;
 
     const quaternion = body.rotation();
-    rotation.x = quaternion.x;
-    rotation.y = quaternion.y;
-    rotation.z = quaternion.z;
-    rotation.w = quaternion.w;
+    rotation.fromObject(quaternion);
   }
 }

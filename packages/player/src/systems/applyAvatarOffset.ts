@@ -55,9 +55,7 @@ export function applyAvatarOffset(
       const body = renderStore.nodes.get(parent.id);
       if (body) vector3.sub(body.getWorldPosition(vector3b));
 
-      cameraPosition.x = vector3.x;
-      cameraPosition.y = vector3.y;
-      cameraPosition.z = vector3.z;
+      cameraPosition.fromObject(vector3);
     }
   }
 }

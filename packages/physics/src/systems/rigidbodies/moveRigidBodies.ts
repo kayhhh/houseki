@@ -25,14 +25,7 @@ export function moveRigidBodies(
     const body = store.getRigidBody(entity.id);
     if (!body) continue;
 
-    body.setTranslation(
-      {
-        x: position.x,
-        y: position.y,
-        z: position.z,
-      },
-      true
-    );
+    body.setTranslation(position.toObject(), true);
   }
 
   // Set velocities
@@ -40,13 +33,6 @@ export function moveRigidBodies(
     const body = store.getRigidBody(entity.id);
     if (!body) continue;
 
-    body.setLinvel(
-      {
-        x: velocity.x,
-        y: velocity.y,
-        z: velocity.z,
-      },
-      true
-    );
+    body.setLinvel(velocity.toObject(), true);
   }
 }

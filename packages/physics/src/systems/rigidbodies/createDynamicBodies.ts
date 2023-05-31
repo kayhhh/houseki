@@ -17,7 +17,6 @@ export function createDynamicBodies(
     if (!store.dynamicBodies.has(entity.id)) {
       const rigidBodyDesc = RigidBodyDesc.dynamic();
       const object = store.world.createRigidBody(rigidBodyDesc);
-
       store.dynamicBodies.set(entity.id, object);
     }
   }
@@ -27,7 +26,6 @@ export function createDynamicBodies(
     if (!ids.includes(id)) {
       const object = store.dynamicBodies.get(id);
       if (object) store.world.removeRigidBody(object);
-
       store.dynamicBodies.delete(id);
     }
   }

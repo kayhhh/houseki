@@ -1,4 +1,4 @@
-import { MainLoopTime } from "@lattice-engine/core";
+import { MainLoopTime, Vec4 } from "@lattice-engine/core";
 import { InputStruct, PointerMoveEvent } from "@lattice-engine/input";
 import { Rotation } from "@lattice-engine/scene";
 import { Euler, Quaternion } from "three";
@@ -34,13 +34,12 @@ class LocalStore {
   /**
    * Stores the target rotation of the avatar.
    */
-  @struct.array({ length: 4, type: "f32" })
-  declare targetRotation: Float32Array;
+  @struct.substruct(Vec4) declare targetRotation: Vec4;
 
   constructor() {
     initStruct(this);
 
-    this.targetRotation.set([0, 0, 0, 1]);
+    this.targetRotation.set(0, 0, 0, 1);
   }
 }
 
@@ -62,10 +61,10 @@ export function rotateCamera(
     for (const [camera] of entities) {
       euler.setFromQuaternion(
         quaternion.set(
-          localStore.targetRotation[0] ?? 0,
-          localStore.targetRotation[1] ?? 0,
-          localStore.targetRotation[2] ?? 0,
-          localStore.targetRotation[3] ?? 1
+          localStore.targetRotation.x,
+          localStore.targetRotation.y,
+          localStore.targetRotation.z,
+          localStore.targetRotation.w
         )
       );
 
@@ -88,20 +87,17 @@ export function rotateCamera(
 
       quaternion.setFromEuler(euler);
 
-      localStore.targetRotation[0] = quaternion.x;
-      localStore.targetRotation[1] = quaternion.y;
-      localStore.targetRotation[2] = quaternion.z;
-      localStore.targetRotation[3] = quaternion.w;
+      localStore.targetRotation.fromObject(quaternion);
     }
   }
 
   // Slerp towards target rotation
   for (const [camera, rotation] of entities) {
     quaternion2.set(
-      localStore.targetRotation[0] ?? 0,
-      localStore.targetRotation[1] ?? 0,
-      localStore.targetRotation[2] ?? 0,
-      localStore.targetRotation[3] ?? 1
+      localStore.targetRotation.x,
+      localStore.targetRotation.y,
+      localStore.targetRotation.z,
+      localStore.targetRotation.w
     );
 
     const slerpStrength =
@@ -114,9 +110,6 @@ export function rotateCamera(
       .set(rotation.x, rotation.y, rotation.z, rotation.w)
       .slerp(quaternion2, K);
 
-    rotation.x = quaternion.x;
-    rotation.y = quaternion.y;
-    rotation.z = quaternion.z;
-    rotation.w = quaternion.w;
+    rotation.fromObject(quaternion);
   }
 }

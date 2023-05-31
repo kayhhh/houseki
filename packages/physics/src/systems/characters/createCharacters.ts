@@ -22,7 +22,6 @@ export function createCharacters(
 
     // Sync properties
     object.setOffset(character.offset);
-
     object.setMaxSlopeClimbAngle(character.maxSlopeClimbAngle);
     object.setMinSlopeSlideAngle(character.minSlopeSlideAngle);
 
