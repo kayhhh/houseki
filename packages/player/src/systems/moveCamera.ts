@@ -12,7 +12,7 @@ import { lerp } from "../utils/lerp";
  * Offset to prevent camera from clipping into ground.
  */
 const COLLISION_OFFSET = 0.85;
-const LERP_STRENGTH = 0.08;
+const LERP_STRENGTH = 0.05;
 
 const quaternion = new Quaternion();
 const vector3 = new Vector3();

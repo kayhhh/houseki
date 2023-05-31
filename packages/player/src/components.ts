@@ -100,6 +100,7 @@ export class PlayerCamera {
    * The distance of the camera from the player, when in third person mode.
    */
   @struct.f32 declare distance: number;
+  @struct.f32 declare targetDistance: number;
 
   constructor(
     mode = PlayerCameraMode.Both,
@@ -114,5 +115,6 @@ export class PlayerCamera {
         ? PlayerCameraView.ThirdPerson
         : currentView;
     this.distance = cameraDistance;
+    this.targetDistance = cameraDistance;
   }
 }

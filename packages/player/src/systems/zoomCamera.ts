@@ -1,64 +1,76 @@
+import { MainLoopTime } from "@lattice-engine/core";
 import { OnWheelEvent } from "@lattice-engine/input";
-import { EventReader, Query } from "thyseus";
+import { EventReader, Mut, Query, Res } from "thyseus";
 
 import { PlayerCamera } from "../components";
 import { PlayerCameraMode, PlayerCameraView } from "../types";
+import { lerp } from "../utils/lerp";
 
 const MIN_CAMERA_DISTANCE = 1;
 const MAX_CAMERA_DISTANCE = 10;
+
+const LERP_STRENGTH = 1e-8;
 
 /**
  * Zooms the camera in and out when in third person,
  * optionally switching into or out of first person mode.
  */
 export function zoomCamera(
+  time: Res<MainLoopTime>,
   wheelEventReader: EventReader<OnWheelEvent>,
-  entities: Query<PlayerCamera>
+  entities: Query<Mut<PlayerCamera>>
 ) {
-  for (const event of wheelEventReader) {
-    for (const camera of entities) {
+  for (const camera of entities) {
+    for (const event of wheelEventReader) {
       if (camera.currentView === PlayerCameraView.FirstPerson) {
-        zoomFirstPerson(event, camera);
+        // Only zoom out if we're in both mode
+        if (camera.mode === PlayerCameraMode.Both && event.deltaY > 0) {
+          zoomOut(camera);
+        }
       } else if (camera.currentView === PlayerCameraView.ThirdPerson) {
-        zoomThirdPerson(event, camera);
+        if (event.deltaY < 0) zoomIn(camera);
+        if (event.deltaY > 0) zoomOut(camera);
       }
     }
-  }
-}
 
-/**
- * Zooms the camera out of first person mode.
- */
-function zoomFirstPerson(event: OnWheelEvent, camera: PlayerCamera) {
-  // Only zoom out if third person mode is allowed
-  if (camera.mode !== PlayerCameraMode.Both) return;
-
-  // Change to third person mode if zooming out
-  if (event.deltaY > 0) {
-    camera.currentView = PlayerCameraView.ThirdPerson;
-    camera.distance = MIN_CAMERA_DISTANCE;
-  }
-}
-
-/**
- * Zooms the camera when in third person mode.
- */
-function zoomThirdPerson(event: OnWheelEvent, camera: PlayerCamera) {
-  // Zoom in
-  if (event.deltaY < 0) {
-    camera.distance = Math.max(MIN_CAMERA_DISTANCE, camera.distance - 1);
-
-    // Change to first person mode if at minimum distance, and first person mode is allowed
-    if (
-      camera.mode === PlayerCameraMode.Both &&
-      camera.distance === MIN_CAMERA_DISTANCE
-    ) {
-      camera.currentView = PlayerCameraView.FirstPerson;
+    // Handle view switching
+    if (camera.mode === PlayerCameraMode.Both) {
+      if (camera.currentView === PlayerCameraView.FirstPerson) {
+        if (camera.targetDistance >= MIN_CAMERA_DISTANCE) {
+          camera.currentView = PlayerCameraView.ThirdPerson;
+          camera.targetDistance = MIN_CAMERA_DISTANCE;
+          camera.distance = MIN_CAMERA_DISTANCE;
+        }
+      } else if (camera.currentView === PlayerCameraView.ThirdPerson) {
+        if (camera.distance < MIN_CAMERA_DISTANCE) {
+          camera.currentView = PlayerCameraView.FirstPerson;
+        }
+      }
     }
-  }
 
-  // Zoom out
-  if (event.deltaY > 0) {
-    camera.distance = Math.min(MAX_CAMERA_DISTANCE, camera.distance + 1);
+    // Lerp camera distance
+    const K = 1 - LERP_STRENGTH ** time.delta;
+    camera.distance = lerp(camera.distance, camera.targetDistance, K);
   }
+}
+
+function zoomIn(camera: PlayerCamera) {
+  camera.targetDistance -= 1;
+
+  // Only clamp distance if we're in third person only mode
+  if (camera.mode === PlayerCameraMode.ThirdPerson) {
+    clampTargetDistance(camera);
+  }
+}
+
+function zoomOut(camera: PlayerCamera) {
+  camera.targetDistance += 1;
+  clampTargetDistance(camera);
+}
+
+function clampTargetDistance(camera: PlayerCamera) {
+  camera.targetDistance = Math.min(
+    MAX_CAMERA_DISTANCE,
+    Math.max(MIN_CAMERA_DISTANCE, camera.targetDistance)
+  );
 }
