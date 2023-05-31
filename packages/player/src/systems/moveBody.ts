@@ -5,6 +5,7 @@ import { Entity, Mut, Query, Res, With } from "thyseus";
 
 import { PlayerBody, PlayerCamera } from "../components";
 import { getDirection } from "../utils/getDirection";
+import { lerp } from "../utils/lerp";
 import { readInput } from "../utils/readInput";
 
 const VELOCITY_DAMPEN = 0.15;
@@ -48,8 +49,4 @@ export function moveBody(
       }
     }
   }
-}
-
-function lerp(a: number, b: number, t: number) {
-  return a + (b - a) * t;
 }

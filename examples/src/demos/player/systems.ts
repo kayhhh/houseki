@@ -18,6 +18,7 @@ import {
   PlayerCamera,
   PlayerCameraMode,
   PlayerCameraView,
+  TargetPosition,
   TargetRotation,
 } from "lattice-engine/player";
 import { WEBGL_CONSTANTS } from "lattice-engine/render";
@@ -152,6 +153,7 @@ export function initScene(
     .addType(Node)
     .addType(Position)
     .addType(Rotation)
+    .addType(TargetPosition)
     .add(new TargetRotation().set(0, 0, 0, 1))
     .add(new Parent(body))
     .addType(PerspectiveCamera)

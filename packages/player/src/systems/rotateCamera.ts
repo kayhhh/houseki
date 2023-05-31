@@ -9,11 +9,11 @@ import { PlayerCameraView } from "../types";
 
 const SENSITIVITY = 0.002;
 
-const FIRST_PERSON_SLERP = 10e-18;
+const FIRST_PERSON_SLERP = 1e-17;
 const MIN_FIRST_PERSON_ANGLE = Math.PI / 10;
 const MAX_FIRST_PERSON_ANGLE = Math.PI - MIN_FIRST_PERSON_ANGLE;
 
-const THIRD_PERSON_SLERP = 10e-14;
+const THIRD_PERSON_SLERP = 1e-13;
 const MIN_THIRD_PERSON_ANGLE = 0;
 const MAX_THIRD_PERSON_ANGLE = Math.PI;
 

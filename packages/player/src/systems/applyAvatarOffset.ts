@@ -1,10 +1,10 @@
 import { RenderStore } from "@lattice-engine/render";
-import { Parent, Position } from "@lattice-engine/scene";
+import { Parent } from "@lattice-engine/scene";
 import { VrmStore } from "@lattice-engine/vrm";
 import { Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
-import { PlayerAvatar, PlayerCamera } from "../components";
+import { PlayerAvatar, PlayerCamera, TargetPosition } from "../components";
 import { PlayerCameraView } from "../types";
 
 const vector3 = new Vector3();
@@ -17,10 +17,10 @@ export function applyAvatarOffset(
   vrmStore: Res<VrmStore>,
   renderStore: Res<RenderStore>,
   avatars: Query<[Entity, Parent], With<PlayerAvatar>>,
-  cameras: Query<[PlayerCamera, Parent, Mut<Position>]>
+  cameras: Query<[PlayerCamera, Parent, Mut<TargetPosition>]>
 ) {
   for (const [entity, parent] of avatars) {
-    for (const [camera, cameraParent, cameraPosition] of cameras) {
+    for (const [camera, cameraParent, targetPosition] of cameras) {
       // Find camera that is attached to the same player body
       if (cameraParent.id !== parent.id) continue;
 
@@ -55,7 +55,7 @@ export function applyAvatarOffset(
       const body = renderStore.nodes.get(parent.id);
       if (body) vector3.sub(body.getWorldPosition(vector3b));
 
-      cameraPosition.fromObject(vector3);
+      targetPosition.fromObject(vector3);
     }
   }
 }
