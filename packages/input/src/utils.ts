@@ -180,7 +180,7 @@ export function keyToECS(key: string): Key {
   if (keyEnum !== undefined) return keyEnum;
 
   // Unsupported key
-  return Key.Undefined;
+  return Key.Unknown;
 }
 
 export function keyFromECS(key: number): string | undefined {

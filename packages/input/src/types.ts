@@ -89,6 +89,9 @@ export enum Key {
   ArrowDown = 54,
   Insert = 55,
   Delete = 56,
+
+  // Unsupported key
+  Unknown = 57,
 }
 
-export const NUM_KEYS = 57;
+export const NUM_KEYS = 58;
