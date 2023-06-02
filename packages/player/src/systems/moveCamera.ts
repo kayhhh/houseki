@@ -1,6 +1,6 @@
 import { MainLoopTime } from "@lattice-engine/core";
 import { Raycast } from "@lattice-engine/physics";
-import { Parent, Position, Rotation } from "@lattice-engine/scene";
+import { Parent, Transform } from "@lattice-engine/scene";
 import { Quaternion, Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
@@ -23,41 +23,38 @@ const vector3 = new Vector3();
 export function moveCamera(
   time: Res<MainLoopTime>,
   cameras: Query<
-    [
-      PlayerCamera,
-      Parent,
-      Rotation,
-      Mut<Position>,
-      Mut<TargetPosition>,
-      Mut<Raycast>
-    ]
+    [PlayerCamera, Parent, Mut<Transform>, Mut<TargetPosition>, Mut<Raycast>]
   >,
-  bodies: Query<[Entity, Position], With<PlayerBody>>
+  bodies: Query<[Entity, Transform], With<PlayerBody>>
 ) {
   for (const [
     camera,
     parent,
-    rotation,
-    cameraPosition,
+    cameraTransform,
     targetPosition,
     raycast,
   ] of cameras) {
-    for (const [entity, bodyPosition] of bodies) {
+    for (const [entity, bodyTransform] of bodies) {
       // Get body that matches camera
       if (entity.id !== parent.id) continue;
 
       raycast.excludeRigidBodyId = entity.id;
 
-      raycast.origin.x = bodyPosition.x + targetPosition.x;
-      raycast.origin.y = bodyPosition.y + targetPosition.y;
-      raycast.origin.z = bodyPosition.z + targetPosition.z;
+      raycast.origin.x = bodyTransform.translation.x + targetPosition.x;
+      raycast.origin.y = bodyTransform.translation.y + targetPosition.y;
+      raycast.origin.z = bodyTransform.translation.z + targetPosition.z;
 
       if (camera.currentView === PlayerCameraView.ThirdPerson) {
         const distance = raycast.hit
           ? Math.min(raycast.hitToi * COLLISION_OFFSET, camera.distance)
           : camera.distance;
 
-        quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
+        quaternion.set(
+          cameraTransform.rotation.x,
+          cameraTransform.rotation.y,
+          cameraTransform.rotation.z,
+          cameraTransform.rotation.w
+        );
         vector3.set(0, 0, distance);
         vector3.applyQuaternion(quaternion);
 
@@ -72,9 +69,21 @@ export function moveCamera(
 
       // Lerp camera position
       const K = 1 - LERP_STRENGTH ** (time.delta * 100);
-      cameraPosition.x = lerp(cameraPosition.x, targetPosition.x, K);
-      cameraPosition.y = lerp(cameraPosition.y, targetPosition.y, K);
-      cameraPosition.z = lerp(cameraPosition.z, targetPosition.z, K);
+      cameraTransform.translation.x = lerp(
+        cameraTransform.translation.x,
+        targetPosition.x,
+        K
+      );
+      cameraTransform.translation.y = lerp(
+        cameraTransform.translation.y,
+        targetPosition.y,
+        K
+      );
+      cameraTransform.translation.z = lerp(
+        cameraTransform.translation.z,
+        targetPosition.z,
+        K
+      );
     }
   }
 }

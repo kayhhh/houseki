@@ -1,9 +1,4 @@
-import {
-  Parent,
-  PerspectiveCamera,
-  Position,
-  Rotation,
-} from "@lattice-engine/scene";
+import { Parent, PerspectiveCamera, Transform } from "@lattice-engine/scene";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { Entity, Query, Res, With } from "thyseus";
 
@@ -14,22 +9,20 @@ import { RenderStore } from "../resources";
  */
 export function createCameras(
   store: Res<RenderStore>,
-  cameras: Query<[Entity, PerspectiveCamera]>,
-  withPosition: Query<[Entity, Position], With<PerspectiveCamera>>,
-  withRotation: Query<[Entity, Rotation], With<PerspectiveCamera>>,
+  cameras: Query<[Entity, PerspectiveCamera, Transform]>,
   withParent: Query<[Entity, Parent], With<PerspectiveCamera>>
 ) {
   const ids: bigint[] = [];
 
-  for (const [{ id }, camera] of cameras) {
-    ids.push(id);
+  for (const [entity, camera, transform] of cameras) {
+    ids.push(entity.id);
 
-    let object = store.perspectiveCameras.get(id);
+    let object = store.perspectiveCameras.get(entity.id);
 
     // Create new objects
     if (!object) {
       object = new ThreePerspectiveCamera();
-      store.perspectiveCameras.set(id, object);
+      store.perspectiveCameras.set(entity.id, object);
     }
 
     // Sync object properties
@@ -40,19 +33,18 @@ export function createCameras(
     object.fov = camera.fov;
     object.near = camera.near;
     object.far = camera.far;
-  }
 
-  // Sync object positions
-  for (const [{ id }, position] of withPosition) {
-    const object = store.perspectiveCameras.get(id);
-    if (object) object.position.set(position.x, position.y, position.z);
-  }
-
-  // Sync object rotations
-  for (const [{ id }, rotation] of withRotation) {
-    const object = store.perspectiveCameras.get(id);
-    if (object)
-      object.quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
+    object.position.set(
+      transform.translation.x,
+      transform.translation.y,
+      transform.translation.z
+    );
+    object.quaternion.set(
+      transform.rotation.x,
+      transform.rotation.y,
+      transform.rotation.z,
+      transform.rotation.w
+    );
   }
 
   // Sync object parents

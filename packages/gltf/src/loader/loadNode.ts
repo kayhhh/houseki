@@ -1,6 +1,6 @@
 import { Node as GltfNode } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
-import { Node, Parent, Position, Rotation, Scale } from "@lattice-engine/scene";
+import { Node, Parent, Transform } from "@lattice-engine/scene";
 import { Commands } from "thyseus";
 
 import { LoadingContext } from "./context";
@@ -20,21 +20,7 @@ export function loadNode(
   const nodeRotation = node.getRotation();
   const nodeScale = node.getScale();
 
-  const position = new Position();
-  position.x = nodePosition[0];
-  position.y = nodePosition[1];
-  position.z = nodePosition[2];
-
-  const rotation = new Rotation();
-  rotation.x = nodeRotation[0];
-  rotation.y = nodeRotation[1];
-  rotation.z = nodeRotation[2];
-  rotation.w = nodeRotation[3];
-
-  const scale = new Scale();
-  scale.x = nodeScale[0];
-  scale.y = nodeScale[1];
-  scale.z = nodeScale[2];
+  const transform = new Transform(nodePosition, nodeRotation, nodeScale);
 
   const parentComponent = new Parent();
   parentComponent.id = parentId;
@@ -42,10 +28,9 @@ export function loadNode(
   const entity = commands
     .spawn()
     .addType(Node)
+    .addType(Transform)
     .add(parentComponent)
-    .add(position)
-    .add(rotation)
-    .add(scale);
+    .add(transform);
 
   context.nodes.set(node, entity.id);
 

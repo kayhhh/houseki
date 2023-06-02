@@ -1,6 +1,6 @@
 import { Warehouse } from "lattice-engine/core";
 import { BoxCollider, StaticBody } from "lattice-engine/physics";
-import { Mesh, Node, Parent, Position } from "lattice-engine/scene";
+import { Mesh, Node, Parent, Transform } from "lattice-engine/scene";
 import { Commands } from "thyseus";
 
 import { createBoxGeometry } from "./createBoxGeometry";
@@ -79,7 +79,7 @@ function createBox(
   return commands
     .spawn()
     .addType(Node)
-    .add(new Position().fromArray(position))
+    .add(new Transform(position))
     .addType(Mesh)
     .add(geometry)
     .add(new BoxCollider(size))

@@ -11,9 +11,9 @@ import {
   Node,
   Parent,
   PerspectiveCamera,
-  Position,
   Scene,
   SceneStruct,
+  Transform,
 } from "lattice-engine/scene";
 import { Commands, Mut, Res } from "thyseus";
 
@@ -44,7 +44,7 @@ export function initScene(
   // Create camera
   const camera = commands
     .spawn()
-    .add(new Position().set(0, 6, 8))
+    .add(new Transform([0, 6, 8]))
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
   sceneStruct.activeCamera = camera.id;
@@ -62,7 +62,7 @@ export function initScene(
       .spawn()
       .addType(Node)
       .add(new Parent(scene))
-      .add(new Position().fromArray(position))
+      .add(new Transform(position))
       .add(new Mesh(material))
       .add(ballGeometry)
       .add(new SphereCollider(radius))

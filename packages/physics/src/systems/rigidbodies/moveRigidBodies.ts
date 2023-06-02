@@ -1,4 +1,4 @@
-import { Position } from "@lattice-engine/scene";
+import { Transform } from "@lattice-engine/scene";
 import { Entity, Or, Query, Res, With } from "thyseus";
 
 import {
@@ -11,8 +11,8 @@ import { PhysicsStore } from "../../resources";
 
 export function moveRigidBodies(
   store: Res<PhysicsStore>,
-  positions: Query<
-    [Entity, Position],
+  transforms: Query<
+    [Entity, Transform],
     [Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>]
   >,
   velocities: Query<
@@ -21,11 +21,11 @@ export function moveRigidBodies(
   >
 ) {
   // Set positions
-  for (const [entity, position] of positions) {
+  for (const [entity, transform] of transforms) {
     const body = store.getRigidBody(entity.id);
     if (!body) continue;
 
-    body.setTranslation(position.toObject(), true);
+    body.setTranslation(transform.translation.toObject(), true);
   }
 
   // Set velocities

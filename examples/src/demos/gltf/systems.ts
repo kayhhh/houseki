@@ -5,9 +5,9 @@ import {
   Node,
   Parent,
   PerspectiveCamera,
-  Position,
   Scene,
   SceneStruct,
+  Transform,
 } from "lattice-engine/scene";
 import { Commands, Mut, Query, Res } from "thyseus";
 
@@ -37,13 +37,18 @@ export function initScene(
   // Create camera
   const camera = commands
     .spawn()
-    .add(new Position().set(0, 2, 4))
+    .add(new Transform([0, 2, 4]))
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
   sceneStruct.activeCamera = camera.id;
 
   // Add node to scene with glTF component
-  commands.spawn().addType(Node).add(new Parent(scene)).addType(Gltf);
+  commands
+    .spawn()
+    .addType(Node)
+    .addType(Transform)
+    .add(new Parent(scene))
+    .addType(Gltf);
 }
 
 /**

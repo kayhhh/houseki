@@ -28,11 +28,10 @@ import {
   Node,
   Parent,
   PerspectiveCamera,
-  Position,
-  Rotation,
   Scene,
   SceneStruct,
   Texture,
+  Transform,
 } from "lattice-engine/scene";
 import { Vrm } from "lattice-engine/vrm";
 import { Commands, Mut, Res } from "thyseus";
@@ -90,7 +89,7 @@ export function initScene(
     .spawn()
     .addType(Node)
     .add(new Parent(scene))
-    .add(new Position().set(0, -groundSize[1] / 2, 0))
+    .add(new Transform([0, -groundSize[1] / 2, 0]))
     .add(new Mesh(materialEntity))
     .add(geometry)
     .add(new BoxCollider(groundSize))
@@ -102,7 +101,7 @@ export function initScene(
     .spawn()
     .addType(Node)
     .add(new Parent(scene))
-    .add(new Position().set(6, boxSize[1] / 2, 0))
+    .add(new Transform([6, boxSize[1] / 2, 0]))
     .add(new Mesh(materialEntity))
     .add(geometry2)
     .add(new BoxCollider(boxSize))
@@ -120,8 +119,7 @@ export function initScene(
     .spawn()
     .addType(Node)
     .add(new Parent(scene))
-    .add(new Position().fromArray(spawn))
-    .addType(Rotation)
+    .add(new Transform(spawn))
     .addType(Velocity)
     .add(new CapsuleCollider(playerWidth, playerHeight - playerWidth * 2))
     .addType(KinematicBody)
@@ -140,8 +138,7 @@ export function initScene(
   commands
     .spawn()
     .addType(Node)
-    .add(new Position().set(0, -playerHeight / 2, 0))
-    .addType(Rotation)
+    .add(new Transform([0, -playerHeight / 2, 0]))
     .add(new TargetRotation().set(0, 0, 0, 1))
     .add(new Parent(body))
     .add(new Vrm("/k-robot.vrm", true))
@@ -151,8 +148,7 @@ export function initScene(
   const camera = commands
     .spawn()
     .addType(Node)
-    .addType(Position)
-    .addType(Rotation)
+    .addType(Transform)
     .addType(TargetPosition)
     .add(new TargetRotation().set(0, 0, 0, 1))
     .add(new Parent(body))
@@ -170,7 +166,7 @@ export function initScene(
     .spawn()
     .addType(Node)
     .add(new Parent(scene))
-    .add(new Position().set(0, 3, -4))
+    .add(new Transform([0, 3, -4]))
     .add(ballGeometry)
     .addType(Mesh)
     .add(new SphereCollider(ballRadius))

@@ -1,6 +1,6 @@
 import { MainLoopTime } from "@lattice-engine/core";
 import { InputStruct, PointerMoveEvent } from "@lattice-engine/input";
-import { Rotation } from "@lattice-engine/scene";
+import { Transform } from "@lattice-engine/scene";
 import { Euler, Quaternion } from "three";
 import { EventReader, Mut, Query, Res } from "thyseus";
 
@@ -25,7 +25,7 @@ export function rotateCamera(
   time: Res<MainLoopTime>,
   inputStruct: Res<InputStruct>,
   pointerMoveReader: EventReader<PointerMoveEvent>,
-  entities: Query<[PlayerCamera, Mut<TargetRotation>, Mut<Rotation>]>
+  entities: Query<[PlayerCamera, Mut<TargetRotation>, Mut<Transform>]>
 ) {
   // Update target rotation on pointer move
   for (const event of pointerMoveReader) {
@@ -66,7 +66,7 @@ export function rotateCamera(
   }
 
   // Slerp towards target rotation
-  for (const [camera, targetRotation, rotation] of entities) {
+  for (const [camera, targetRotation, transform] of entities) {
     quaternion2.set(
       targetRotation.x,
       targetRotation.y,
@@ -81,9 +81,14 @@ export function rotateCamera(
     const K = 1 - Math.pow(slerpStrength, time.delta);
 
     quaternion
-      .set(rotation.x, rotation.y, rotation.z, rotation.w)
+      .set(
+        transform.rotation.x,
+        transform.rotation.y,
+        transform.rotation.z,
+        transform.rotation.w
+      )
       .slerp(quaternion2, K);
 
-    rotation.fromObject(quaternion);
+    transform.rotation.fromObject(quaternion);
   }
 }

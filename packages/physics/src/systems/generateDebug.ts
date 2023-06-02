@@ -6,6 +6,7 @@ import {
   Node,
   Parent,
   SceneStruct,
+  Transform,
 } from "@lattice-engine/scene";
 import { Commands, Entity, Query, Res, struct, SystemRes, With } from "thyseus";
 
@@ -53,6 +54,7 @@ export function generateDebug(
       .addType(Geometry)
       .addType(LineSegments)
       .addType(Node)
+      .addType(Transform)
       .add(parent);
     localStore.linesId = lines.id;
   }

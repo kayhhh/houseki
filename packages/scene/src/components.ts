@@ -8,11 +8,37 @@ import {
   MaterialAlphaMode,
 } from "./types";
 
-export class Position extends Vec3 {}
+class Quat extends Vec4 {}
 
-export class Rotation extends Vec4 {}
+@struct
+export class Transform {
+  @struct.substruct(Vec3) declare translation: Vec3;
+  @struct.substruct(Quat) declare rotation: Quat;
+  @struct.substruct(Vec3) declare scale: Vec3;
 
-export class Scale extends Vec3 {}
+  constructor(
+    translation: Readonly<[number, number, number]> = [0, 0, 0],
+    rotation: Readonly<[number, number, number, number]> = [0, 0, 0, 1],
+    scale: Readonly<[number, number, number]> = [1, 1, 1]
+  ) {
+    initStruct(this);
+
+    this.translation = new Vec3();
+    this.rotation = new Quat();
+    this.scale = new Vec3();
+
+    this.translation.fromArray(translation);
+    this.rotation.fromArray(rotation);
+    this.scale.fromArray(scale);
+  }
+}
+
+/**
+ * GlobalTransform is managed by the engine and should not be modified.
+ * To modify the transform of an entity, use the {@link Transform} component.
+ */
+@struct
+export class GlobalTransform {}
 
 @struct
 export class Parent {

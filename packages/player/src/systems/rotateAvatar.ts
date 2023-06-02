@@ -1,6 +1,6 @@
 import { Vec4 } from "@lattice-engine/core";
 import { Velocity } from "@lattice-engine/physics";
-import { Parent, Rotation } from "@lattice-engine/scene";
+import { Parent, Transform } from "@lattice-engine/scene";
 import { Quaternion, Vector3 } from "three";
 import { Entity, Mut, Query, With } from "thyseus";
 
@@ -21,15 +21,15 @@ const vector3 = new Vector3();
 const upVector = new Vector3(0, 1, 0);
 
 export function rotateAvatar(
-  cameras: Query<[PlayerCamera, Parent, Rotation]>,
+  cameras: Query<[PlayerCamera, Parent, Transform]>,
   avatars: Query<
-    [Parent, Mut<Rotation>, Mut<TargetRotation>],
+    [Parent, Mut<Transform>, Mut<TargetRotation>],
     With<PlayerAvatar>
   >,
   bodies: Query<[Entity, Velocity], With<PlayerBody>>
 ) {
-  for (const [camera, parent, cameraRotation] of cameras) {
-    for (const [avatarParent, avatarRotation, targetRotation] of avatars) {
+  for (const [camera, parent, cameraTransform] of cameras) {
+    for (const [avatarParent, avatarTransform, targetRotation] of avatars) {
       // Find the avatar that matches the camera parent
       if (avatarParent.id !== parent.id) continue;
 
@@ -38,12 +38,16 @@ export function rotateAvatar(
         if (entity.id !== avatarParent.id) continue;
 
         if (camera.currentView === PlayerCameraView.FirstPerson) {
-          rotateFirstPerson(cameraRotation, avatarRotation, targetRotation);
+          rotateFirstPerson(
+            cameraTransform.rotation,
+            avatarTransform.rotation,
+            targetRotation
+          );
         } else if (camera.currentView === PlayerCameraView.ThirdPerson) {
           rotateThirdPerson(
             velocity,
-            cameraRotation,
-            avatarRotation,
+            cameraTransform.rotation,
+            avatarTransform.rotation,
             targetRotation
           );
         }
@@ -53,8 +57,8 @@ export function rotateAvatar(
 }
 
 function rotateFirstPerson(
-  cameraRotation: Rotation,
-  avatarRotation: Rotation,
+  cameraRotation: Vec4,
+  avatarRotation: Vec4,
   targetRotation: Vec4
 ) {
   quaternion.set(
@@ -75,8 +79,8 @@ function rotateFirstPerson(
 
 function rotateThirdPerson(
   velocity: Velocity,
-  cameraRotation: Rotation,
-  avatarRotation: Rotation,
+  cameraRotation: Vec4,
+  avatarRotation: Vec4,
   targetRotation: Vec4
 ) {
   // Set new target rotation if there is input

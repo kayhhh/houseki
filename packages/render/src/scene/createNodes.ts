@@ -1,4 +1,4 @@
-import { Node, Parent, Position, Rotation, Scale } from "@lattice-engine/scene";
+import { Node, Parent, Transform } from "@lattice-engine/scene";
 import { Object3D } from "three";
 import { Entity, Query, Res, With } from "thyseus";
 
@@ -9,39 +9,35 @@ import { RenderStore } from "../resources";
  */
 export function createNodes(
   store: Res<RenderStore>,
-  entities: Query<Entity, With<Node>>,
-  withPosition: Query<[Entity, Position], With<Node>>,
-  withRotation: Query<[Entity, Rotation], With<Node>>,
-  withScale: Query<[Entity, Scale], With<Node>>,
+  entities: Query<[Entity, Transform], With<Node>>,
   withParent: Query<[Entity, Parent], With<Node>>
 ) {
   const ids: bigint[] = [];
 
-  for (const entity of entities) {
+  for (const [entity, transform] of entities) {
     ids.push(entity.id);
 
+    let object = store.nodes.get(entity.id);
+
     // Create new objects
-    if (!store.nodes.has(entity.id)) {
-      const object = new Object3D();
+    if (!object) {
+      object = new Object3D();
       store.nodes.set(entity.id, object);
     }
-  }
 
-  // Sync object properties
-  for (const [{ id }, position] of withPosition) {
-    const object = store.nodes.get(id);
-    if (object) object.position.set(position.x, position.y, position.z);
-  }
-
-  for (const [{ id }, rotation] of withRotation) {
-    const object = store.nodes.get(id);
-    if (object)
-      object.quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
-  }
-
-  for (const [{ id }, scale] of withScale) {
-    const object = store.nodes.get(id);
-    if (object) object.scale.set(scale.x, scale.y, scale.z);
+    // Sync object properties
+    object.position.set(
+      transform.translation.x,
+      transform.translation.y,
+      transform.translation.z
+    );
+    object.quaternion.set(
+      transform.rotation.x,
+      transform.rotation.y,
+      transform.rotation.z,
+      transform.rotation.w
+    );
+    object.scale.set(transform.scale.x, transform.scale.y, transform.scale.z);
   }
 
   for (const [{ id }, parent] of withParent) {

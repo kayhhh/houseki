@@ -1,6 +1,6 @@
 import { Mesh as GltfMesh } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
-import { Geometry, Mesh, Node, Parent } from "@lattice-engine/scene";
+import { Geometry, Mesh, Node, Parent, Transform } from "@lattice-engine/scene";
 import { Commands, EntityCommands } from "thyseus";
 
 import { LoadingContext } from "./context";
@@ -55,6 +55,7 @@ export function loadMesh(
     const meshEnity = commands
       .spawn()
       .addType(Node)
+      .addType(Transform)
       .add(parent)
       .add(mesh)
       .add(geometry);

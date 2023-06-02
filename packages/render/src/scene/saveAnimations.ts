@@ -2,9 +2,7 @@ import {
   KeyframePath,
   KeyframeTrack,
   Node,
-  Position,
-  Rotation,
-  Scale,
+  Transform,
 } from "@lattice-engine/scene";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
@@ -16,9 +14,7 @@ import { RenderStore } from "../resources";
 export function saveAnimations(
   renderStore: Res<RenderStore>,
   tracks: Query<KeyframeTrack>,
-  nodePositions: Query<[Entity, Mut<Position>], With<Node>>,
-  nodeRotations: Query<[Entity, Mut<Rotation>], With<Node>>,
-  nodeScales: Query<[Entity, Mut<Scale>], With<Node>>
+  nodes: Query<[Entity, Mut<Transform>], With<Node>>
 ) {
   for (const track of tracks) {
     const targetObject = renderStore.nodes.get(track.targetId);
@@ -26,35 +22,28 @@ export function saveAnimations(
 
     switch (track.path) {
       case KeyframePath.POSITION: {
-        for (const [nodeEntity, nodePosition] of nodePositions) {
-          if (nodeEntity.id !== track.targetId) continue;
+        for (const [entity, transform] of nodes) {
+          if (entity.id !== track.targetId) continue;
 
-          nodePosition.x = targetObject.position.x;
-          nodePosition.y = targetObject.position.y;
-          nodePosition.z = targetObject.position.z;
+          transform.translation.fromObject(targetObject.position);
         }
         break;
       }
 
       case KeyframePath.ROTATION: {
-        for (const [nodeEntity, nodeRotation] of nodeRotations) {
-          if (nodeEntity.id !== track.targetId) continue;
+        for (const [entity, transform] of nodes) {
+          if (entity.id !== track.targetId) continue;
 
-          nodeRotation.x = targetObject.quaternion.x;
-          nodeRotation.y = targetObject.quaternion.y;
-          nodeRotation.z = targetObject.quaternion.z;
-          nodeRotation.w = targetObject.quaternion.w;
+          transform.rotation.fromObject(targetObject.quaternion);
         }
         break;
       }
 
       case KeyframePath.SCALE: {
-        for (const [nodeEntity, nodeScale] of nodeScales) {
-          if (nodeEntity.id !== track.targetId) continue;
+        for (const [entity, transform] of nodes) {
+          if (entity.id !== track.targetId) continue;
 
-          nodeScale.x = targetObject.scale.x;
-          nodeScale.y = targetObject.scale.y;
-          nodeScale.z = targetObject.scale.z;
+          transform.scale.fromObject(targetObject.scale);
         }
         break;
       }

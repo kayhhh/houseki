@@ -12,7 +12,7 @@ import {
   wheelEventFromECS,
 } from "@lattice-engine/input";
 import { RenderStore } from "@lattice-engine/render";
-import { PerspectiveCamera, Position, Rotation } from "@lattice-engine/scene";
+import { PerspectiveCamera, Transform } from "@lattice-engine/scene";
 import { OrbitControls as ThreeOrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Entity, EventReader, Mut, Query, Res, SystemRes, With } from "thyseus";
 
@@ -46,9 +46,10 @@ class LocalStore {
 export function orbitControls(
   renderStore: Res<RenderStore>,
   localStore: SystemRes<LocalStore>,
-  entities: Query<Entity, With<[OrbitControls, PerspectiveCamera]>>,
-  withPositions: Query<[Entity, Mut<Position>], With<PerspectiveCamera>>,
-  withRotations: Query<[Entity, Mut<Rotation>], With<PerspectiveCamera>>,
+  entities: Query<
+    [Entity, Mut<Transform>],
+    With<[OrbitControls, PerspectiveCamera]>
+  >,
   pointerDownReader: EventReader<PointerDownEvent>,
   pointerMoveReader: EventReader<PointerMoveEvent>,
   pointerCancelReader: EventReader<PointerCancelEvent>,
@@ -66,12 +67,12 @@ export function orbitControls(
     renderStore.renderer.domElement.clientHeight;
 
   // Create new objects
-  for (const { id } of entities) {
-    ids.push(id);
+  for (const [entity] of entities) {
+    ids.push(entity.id);
 
-    if (localStore.objects.has(id)) continue;
+    if (localStore.objects.has(entity.id)) continue;
 
-    const cameraObject = renderStore.perspectiveCameras.get(id);
+    const cameraObject = renderStore.perspectiveCameras.get(entity.id);
     if (!cameraObject) continue;
 
     const object = new ThreeOrbitControls(
@@ -80,7 +81,7 @@ export function orbitControls(
     );
     object.enableDamping = true;
 
-    localStore.objects.set(id, object);
+    localStore.objects.set(entity.id, object);
   }
 
   // Send events to mock element
@@ -134,30 +135,15 @@ export function orbitControls(
   }
 
   // Save positions
-  for (const [{ id }, position] of withPositions) {
-    const object = localStore.objects.get(id);
+  for (const [entity, transform] of entities) {
+    const object = localStore.objects.get(entity.id);
     if (!object) continue;
 
-    const cameraObject = renderStore.perspectiveCameras.get(id);
+    const cameraObject = renderStore.perspectiveCameras.get(entity.id);
     if (!cameraObject) continue;
 
-    position.x = cameraObject.position.x;
-    position.y = cameraObject.position.y;
-    position.z = cameraObject.position.z;
-  }
-
-  // Save rotations
-  for (const [{ id }, rotation] of withRotations) {
-    const object = localStore.objects.get(id);
-    if (!object) continue;
-
-    const cameraObject = renderStore.perspectiveCameras.get(id);
-    if (!cameraObject) continue;
-
-    rotation.x = cameraObject.quaternion.x;
-    rotation.y = cameraObject.quaternion.y;
-    rotation.z = cameraObject.quaternion.z;
-    rotation.w = cameraObject.quaternion.w;
+    transform.translation.fromObject(cameraObject.position);
+    transform.rotation.fromObject(cameraObject.quaternion);
   }
 
   // Remove objects that no longer exist
