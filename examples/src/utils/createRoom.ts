@@ -70,7 +70,7 @@ export function createRoom(
  */
 function createBox(
   size: Vec3,
-  position: Vec3,
+  translation: Vec3,
   commands: Commands,
   warehouse: Readonly<Warehouse>
 ) {
@@ -79,7 +79,7 @@ function createBox(
   return commands
     .spawn()
     .addType(Node)
-    .add(new Transform(position))
+    .add(new Transform(translation))
     .addType(Mesh)
     .add(geometry)
     .add(new BoxCollider(size))

@@ -3,10 +3,6 @@ import { Entity, Mut, Query, Res, With } from "thyseus";
 import { CharacterController, Velocity } from "../../components";
 import { PhysicsStore } from "../../resources";
 
-/**
- * Moves all character controllers according to their position component.
- * Entity must have a collider, rigidbody is optional.
- */
 export function moveCharacters(
   physicsStore: Res<PhysicsStore>,
   bodies: Query<[Entity, Mut<Velocity>], With<CharacterController>>

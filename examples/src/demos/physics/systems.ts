@@ -56,13 +56,13 @@ export function initScene(
   // Add dynamic balls
   const material = commands.spawn().add(new Material([1, 0.2, 0.5, 1]));
 
-  function createBall(radius: number, position: [number, number, number]) {
+  function createBall(radius: number, translation: [number, number, number]) {
     const ballGeometry = createSphereGeometry(warehouse, radius);
     commands
       .spawn()
       .addType(Node)
       .add(new Parent(scene))
-      .add(new Transform(position))
+      .add(new Transform(translation))
       .add(new Mesh(material))
       .add(ballGeometry)
       .add(new SphereCollider(radius))
