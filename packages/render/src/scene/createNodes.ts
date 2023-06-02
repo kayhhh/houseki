@@ -40,8 +40,8 @@ export function createNodes(
     object.scale.set(transform.scale.x, transform.scale.y, transform.scale.z);
   }
 
-  for (const [{ id }, parent] of withParent) {
-    const object = store.nodes.get(id);
+  for (const [entity, parent] of withParent) {
+    const object = store.nodes.get(entity.id);
     if (object) {
       const parentObject =
         store.nodes.get(parent.id) ?? store.scenes.get(parent.id);

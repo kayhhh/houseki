@@ -21,10 +21,10 @@ export function createScenes(
 ) {
   const ids: bigint[] = [];
 
-  for (const { id } of entities) {
-    ids.push(id);
+  for (const entity of entities) {
+    ids.push(entity.id);
 
-    let object = store.scenes.get(id);
+    let object = store.scenes.get(entity.id);
 
     // Create new objects
     if (!object) {
@@ -48,7 +48,7 @@ export function createScenes(
       // TODO: Move skybox into ECS
       loadSkybox(object, "/Skybox.jpg");
 
-      store.scenes.set(id, object);
+      store.scenes.set(entity.id, object);
     }
   }
 

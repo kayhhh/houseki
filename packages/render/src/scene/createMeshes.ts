@@ -13,10 +13,10 @@ export function createMeshes(
 ) {
   const ids: bigint[] = [];
 
-  for (const [{ id }, mesh] of entities) {
-    ids.push(id);
+  for (const [entity, mesh] of entities) {
+    ids.push(entity.id);
 
-    let object = store.meshes.get(id);
+    let object = store.meshes.get(entity.id);
 
     // Create new objects
     if (!object) {
@@ -24,19 +24,19 @@ export function createMeshes(
       object.castShadow = true;
       object.receiveShadow = true;
 
-      store.meshes.set(id, object);
+      store.meshes.set(entity.id, object);
     }
 
     // Sync object properties
     const materialObject =
-      store.materials.get(mesh.materialId) ?? store.materials.get(id);
+      store.materials.get(mesh.materialId) ?? store.materials.get(entity.id);
     object.material = materialObject ?? RenderStore.DEFAULT_MATERIAL;
 
-    const geometryObject = store.geometries.get(id);
+    const geometryObject = store.geometries.get(entity.id);
     object.geometry = geometryObject ?? new BufferGeometry();
 
     // If this entity is a node, add the mesh to the node object
-    const nodeObject = store.nodes.get(id);
+    const nodeObject = store.nodes.get(entity.id);
     if (nodeObject) nodeObject.add(object);
     else object.removeFromParent();
   }

@@ -48,8 +48,8 @@ export function createCameras(
   }
 
   // Sync object parents
-  for (const [{ id }, parent] of withParent) {
-    const object = store.perspectiveCameras.get(id);
+  for (const [entity, parent] of withParent) {
+    const object = store.perspectiveCameras.get(entity.id);
     const parentObject = store.nodes.get(parent.id);
     if (object && parentObject) parentObject.add(object);
   }
