@@ -33,8 +33,9 @@ export function renderPlugin(builder: WorldBuilder) {
       createAnimationClips,
       createAnimationMixers,
       playAnimations,
-      [canvasRenderer, saveAnimations]
-    )
+      saveAnimations
+    ),
+    run(canvasRenderer).last()
   );
 
   builder.addSystemsToSchedule(LatticeSchedules.Destroy, destroy);

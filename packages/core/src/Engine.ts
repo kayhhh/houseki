@@ -1,6 +1,6 @@
-import { CoreSchedule, World } from "thyseus";
+import { World } from "thyseus";
 
-import { LatticeSchedules } from "./constants";
+import { LatticeSchedules } from "./schedules";
 
 const FIXED_HZ = 60;
 
@@ -36,38 +36,36 @@ export class Engine {
     if (stopPromise) await stopPromise;
 
     // Startup
-    this.#startPromise = this.world.runSchedule(CoreSchedule.Startup);
+    this.#startPromise = this.world.runSchedule(LatticeSchedules.Startup);
     await this.#startPromise;
 
     // Initialize the last fixed time
     this.#lastFixedTime = performance.now();
 
     // Main loop
-    this.#animationFrame = requestAnimationFrame(this.#mainLoop.bind(this));
+    this.#animationFrame = requestAnimationFrame(this.#loop.bind(this));
   }
 
-  async #mainLoop() {
+  async #loop() {
     const time = performance.now();
 
     // Run the main update loop
-    await this.world.runSchedule(CoreSchedule.Main);
+    await this.#runSchedule(LatticeSchedules.Update);
 
     // Run the fixed update loop
-    if (this.world.schedules[CoreSchedule.FixedUpdate]) {
-      let fixedDelta = time - this.#lastFixedTime + this.#leftoverFixedTime;
-      const fixedStep = 1000 / FIXED_HZ;
+    let fixedDelta = time - this.#lastFixedTime + this.#leftoverFixedTime;
+    const fixedStep = 1000 / FIXED_HZ;
 
-      while (fixedDelta >= fixedStep) {
-        await this.world.runSchedule(CoreSchedule.FixedUpdate);
-        fixedDelta -= fixedStep;
-        this.#lastFixedTime += fixedStep;
-      }
-
-      this.#leftoverFixedTime = fixedDelta;
+    while (fixedDelta >= fixedStep) {
+      await this.#runSchedule(LatticeSchedules.FixedUpdate);
+      fixedDelta -= fixedStep;
+      this.#lastFixedTime += fixedStep;
     }
 
+    this.#leftoverFixedTime = fixedDelta;
+
     // Schedule the next frame
-    this.#animationFrame = requestAnimationFrame(this.#mainLoop.bind(this));
+    this.#animationFrame = requestAnimationFrame(this.#loop.bind(this));
   }
 
   /**
@@ -92,6 +90,13 @@ export class Engine {
    */
   async destroy() {
     await this.stop();
-    await this.world.runSchedule(LatticeSchedules.Destroy);
+    await this.#runSchedule(LatticeSchedules.Destroy);
+  }
+
+  /**
+   * Runs a schedule, if it exists.
+   */
+  async #runSchedule(schedule: symbol) {
+    if (this.world.schedules[schedule]) await this.world.runSchedule(schedule);
   }
 }

@@ -1,4 +1,5 @@
-import { CoreSchedule, run, WorldBuilder } from "thyseus";
+import { LatticeSchedules } from "@lattice-engine/core";
+import { run, WorldBuilder } from "thyseus";
 
 import { createCharacters } from "./systems/characters/createCharacters";
 import { moveCharacters } from "./systems/characters/moveCharacters";
@@ -19,7 +20,7 @@ import { stepWorld } from "./systems/stepWorld";
 
 export function physicsPlugin(builder: WorldBuilder) {
   builder.addSystemsToSchedule(
-    CoreSchedule.FixedUpdate,
+    LatticeSchedules.FixedUpdate,
     ...run.chain(
       [createDynamicBodies, createKinematicBodies, createStaticBodies],
       [
