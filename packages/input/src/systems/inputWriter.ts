@@ -10,14 +10,14 @@ import {
   PointerDownEvent,
   PointerMoveEvent,
   PointerUpEvent,
-} from "./events";
-import { InputStruct } from "./resources";
+} from "../events";
+import { InputStruct } from "../resources";
 import {
   keyboardEventToECS,
   mouseEventToECS,
   pointerEventToECS,
   wheelEventToECS,
-} from "./utils";
+} from "../utils";
 
 class LocalStore {
   canvas: HTMLCanvasElement | null = null;

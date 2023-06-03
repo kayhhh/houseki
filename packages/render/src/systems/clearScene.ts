@@ -1,9 +1,9 @@
 import { Mut, Res } from "thyseus";
 
-import { RenderStore } from "./resources";
-import { disposeMaterial } from "./utils/dispose";
+import { RenderStore } from "../resources";
+import { disposeMaterial } from "../utils/dispose";
 
-export function destroy(renderStore: Res<Mut<RenderStore>>) {
+export function clearScene(renderStore: Res<Mut<RenderStore>>) {
   renderStore.renderer.dispose();
 
   renderStore.materials.forEach(disposeMaterial);

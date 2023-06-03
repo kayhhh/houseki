@@ -3,12 +3,12 @@ import { SceneStruct } from "@lattice-engine/scene";
 import { PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from "three";
 import { Mut, Res } from "thyseus";
 
-import { RenderStats, RenderStore } from "./resources";
+import { RenderStats, RenderStore } from "../resources";
 
 /**
  * Renders the scene to the canvas.
  */
-export function canvasRenderer(
+export function renderCanvas(
   coreStore: Res<CoreStore>,
   sceneStruct: Res<SceneStruct>,
   renderStore: Res<Mut<RenderStore>>,

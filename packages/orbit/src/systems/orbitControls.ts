@@ -16,7 +16,7 @@ import { PerspectiveCamera, Transform } from "@lattice-engine/scene";
 import { OrbitControls as ThreeOrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Entity, EventReader, Mut, Query, Res, SystemRes, With } from "thyseus";
 
-import { OrbitControls } from "./components";
+import { OrbitControls } from "../components";
 
 /**
  * A mock element we can pass into Three.js OrbitControls.

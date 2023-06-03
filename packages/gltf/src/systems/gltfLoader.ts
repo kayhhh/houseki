@@ -4,9 +4,9 @@ import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
 
 import { Gltf } from "../components";
 import { extensions } from "../extensions";
-import { LoadingContext } from "./context";
-import { loadDoc } from "./loadDoc";
-import { removeGltf } from "./removeGltf";
+import { LoadingContext } from "../loader/context";
+import { loadDoc } from "../loader/loadDoc";
+import { removeGltf } from "../loader/removeGltf";
 
 class GltfStore {
   /**

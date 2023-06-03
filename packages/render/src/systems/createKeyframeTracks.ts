@@ -15,7 +15,7 @@ import {
 import { Entity, Query, Res } from "thyseus";
 
 import { RenderStore } from "../resources";
-import { setCubicSpline } from "./CubicSplineInterpolation";
+import { setCubicSpline } from "../utils/CubicSplineInterpolation";
 
 export function createKeyframeTracks(
   warehouse: Res<Warehouse>,

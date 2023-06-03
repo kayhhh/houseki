@@ -1,22 +1,22 @@
 import { LatticeSchedules } from "@lattice-engine/core";
 import { run, WorldBuilder } from "thyseus";
 
-import { canvasRenderer } from "./canvasRenderer";
-import { destroy } from "./destroy";
-import { createAnimationClips } from "./scene/createAnimationClips";
-import { createAnimationMixers } from "./scene/createAnimationMixers";
-import { createCameras } from "./scene/createCameras";
-import { createGeometries } from "./scene/createGeometries";
-import { createImages } from "./scene/createImages";
-import { createKeyframeTracks } from "./scene/createKeyframeTracks";
-import { createLineMaterials } from "./scene/createLineMaterials";
-import { createLineSegments } from "./scene/createLineSegments";
-import { createMaterials } from "./scene/createMaterials";
-import { createMeshes } from "./scene/createMeshes";
-import { createNodes } from "./scene/createNodes";
-import { createScenes } from "./scene/createScenes";
-import { playAnimations } from "./scene/playAnimations";
-import { saveAnimations } from "./scene/saveAnimations";
+import { clearScene } from "./systems/clearScene";
+import { createAnimationClips } from "./systems/createAnimationClips";
+import { createAnimationMixers } from "./systems/createAnimationMixers";
+import { createCameras } from "./systems/createCameras";
+import { createGeometries } from "./systems/createGeometries";
+import { createImages } from "./systems/createImages";
+import { createKeyframeTracks } from "./systems/createKeyframeTracks";
+import { createLineMaterials } from "./systems/createLineMaterials";
+import { createLineSegments } from "./systems/createLineSegments";
+import { createMaterials } from "./systems/createMaterials";
+import { createMeshes } from "./systems/createMeshes";
+import { createNodes } from "./systems/createNodes";
+import { createScenes } from "./systems/createScenes";
+import { playAnimations } from "./systems/playAnimations";
+import { renderCanvas } from "./systems/renderCanvas";
+import { saveAnimations } from "./systems/saveAnimations";
 
 /**
  * Registers all render components and systems.
@@ -35,8 +35,8 @@ export function renderPlugin(builder: WorldBuilder) {
       playAnimations,
       saveAnimations
     ),
-    run(canvasRenderer).last()
+    run(renderCanvas).last()
   );
 
-  builder.addSystemsToSchedule(LatticeSchedules.Destroy, destroy);
+  builder.addSystemsToSchedule(LatticeSchedules.Destroy, clearScene);
 }
