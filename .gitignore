@@ -5,3 +5,4 @@ coverage
 .turbo
 *.tsbuildinfo
 vite.config.*.timestamp*
+*.local.*
