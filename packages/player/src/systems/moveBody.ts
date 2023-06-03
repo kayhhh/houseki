@@ -1,5 +1,9 @@
 import { InputStruct, Key } from "@lattice-engine/input";
-import { CharacterController, Velocity } from "@lattice-engine/physics";
+import {
+  CharacterController,
+  PhysicsStore,
+  Velocity,
+} from "@lattice-engine/physics";
 import { Parent, Transform } from "@lattice-engine/scene";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
@@ -10,15 +14,20 @@ import { readInput } from "../utils/readInput";
 
 const VELOCITY_DAMPEN = 0.15;
 const SPRINT_MULTIPLIER = 1.5;
+const JUMP_TIME = 1.25;
 
-/**
- * System that moves the player body.
- */
 export function moveBody(
+  physicsStore: Res<PhysicsStore>,
   inputStruct: Res<InputStruct>,
   cameras: Query<[Parent, Transform], With<PlayerCamera>>,
   bodies: Query<
-    [Entity, PlayerBody, CharacterController, Mut<Transform>, Mut<Velocity>]
+    [
+      Entity,
+      Mut<PlayerBody>,
+      CharacterController,
+      Mut<Transform>,
+      Mut<Velocity>
+    ]
   >
 ) {
   const input = readInput(inputStruct);
@@ -55,7 +64,12 @@ export function moveBody(
       }
 
       if (jump && character.isGrounded) {
-        velocity.y = player.jumpStrength;
+        player.jumpTime = JUMP_TIME;
+      }
+
+      if (player.jumpTime > 0) {
+        velocity.y = player.jumpStrength * (player.jumpTime / JUMP_TIME);
+        player.jumpTime -= physicsStore.world.timestep;
       }
     }
   }

@@ -12,19 +12,11 @@ export class TargetRotation extends Vec4 {}
  */
 @struct
 export class PlayerBody {
-  /**
-   * The base speed of the player.
-   */
   @struct.f32 declare speed: number;
 
-  /**
-   * The strength of the player's jump.
-   */
   @struct.f32 declare jumpStrength: number;
+  @struct.f32 declare jumpTime: number;
 
-  /**
-   * The spawn point of the player.
-   */
   @struct.substruct(Vec3) declare spawnPoint: Vec3;
 
   /**

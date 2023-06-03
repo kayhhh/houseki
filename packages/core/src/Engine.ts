@@ -53,16 +53,14 @@ export class Engine {
     await this.#runSchedule(LatticeSchedules.Update);
 
     // Run the fixed update loop
-    let fixedDelta = time - this.#lastFixedTime + this.#leftoverFixedTime;
     const fixedStep = 1000 / FIXED_HZ;
+    this.#leftoverFixedTime += time - this.#lastFixedTime;
 
-    while (fixedDelta >= fixedStep) {
+    if (this.#leftoverFixedTime >= fixedStep) {
       await this.#runSchedule(LatticeSchedules.FixedUpdate);
-      fixedDelta -= fixedStep;
-      this.#lastFixedTime += fixedStep;
+      this.#leftoverFixedTime -= fixedStep;
+      this.#lastFixedTime = time;
     }
-
-    this.#leftoverFixedTime = fixedDelta;
 
     // Schedule the next frame
     this.#animationFrame = requestAnimationFrame(this.#loop.bind(this));
