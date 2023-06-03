@@ -2,6 +2,7 @@ import { InputStruct, Key } from "@lattice-engine/input";
 import {
   CharacterController,
   PhysicsStore,
+  TargetTransform,
   Velocity,
 } from "@lattice-engine/physics";
 import { Parent, Transform } from "@lattice-engine/scene";
@@ -25,7 +26,7 @@ export function moveBody(
       Entity,
       Mut<PlayerBody>,
       CharacterController,
-      Mut<Transform>,
+      Mut<TargetTransform>,
       Mut<Velocity>
     ]
   >
@@ -35,13 +36,13 @@ export function moveBody(
   const sprint = inputStruct.keyPressed(Key.Shift);
 
   for (const [parent, cameraTransform] of cameras) {
-    for (const [entity, player, character, transform, velocity] of bodies) {
+    for (const [entity, player, character, target, velocity] of bodies) {
       // Find the body that matches the camera parent
       if (entity.id !== parent.id) continue;
 
       const direction = getDirection(
         cameraTransform.rotation,
-        transform.translation
+        target.translation
       );
 
       const movementX = direction.x * input.x + direction.z * input.y;
@@ -57,10 +58,10 @@ export function moveBody(
 
       if (
         player.enableVoidTeleport &&
-        transform.translation.y < player.voidLevel
+        target.translation.y < player.voidLevel
       ) {
         velocity.set(0, 0, 0);
-        transform.translation.copy(player.spawnPoint);
+        target.translation.copy(player.spawnPoint);
       }
 
       if (jump && character.isGrounded) {

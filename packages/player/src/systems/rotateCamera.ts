@@ -1,4 +1,4 @@
-import { MainLoopTime } from "@lattice-engine/core";
+import { Time } from "@lattice-engine/core";
 import { InputStruct, PointerMoveEvent } from "@lattice-engine/input";
 import { Transform } from "@lattice-engine/scene";
 import { Euler, Quaternion } from "three";
@@ -22,7 +22,7 @@ const quaternion = new Quaternion();
 const quaternion2 = new Quaternion();
 
 export function rotateCamera(
-  time: Res<MainLoopTime>,
+  time: Res<Time>,
   inputStruct: Res<InputStruct>,
   pointerMoveReader: EventReader<PointerMoveEvent>,
   entities: Query<[PlayerCamera, Mut<TargetRotation>, Mut<Transform>]>
@@ -78,7 +78,7 @@ export function rotateCamera(
       camera.currentView === PlayerCameraView.FirstPerson
         ? FIRST_PERSON_SLERP
         : THIRD_PERSON_SLERP;
-    const K = 1 - Math.pow(slerpStrength, time.delta);
+    const K = 1 - Math.pow(slerpStrength, time.mainDelta);
 
     quaternion
       .set(

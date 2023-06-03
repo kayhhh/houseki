@@ -1,4 +1,4 @@
-import { MainLoopTime } from "@lattice-engine/core";
+import { Time } from "@lattice-engine/core";
 import { Raycast } from "@lattice-engine/physics";
 import { Parent, Transform } from "@lattice-engine/scene";
 import { Quaternion, Vector3 } from "three";
@@ -25,7 +25,7 @@ const vector3 = new Vector3();
  * System that moves the player camera.
  */
 export function moveCamera(
-  time: Res<MainLoopTime>,
+  time: Res<Time>,
   cameras: Query<
     [PlayerCamera, Parent, Mut<Transform>, Mut<TargetTranslation>, Mut<Raycast>]
   >,
@@ -72,7 +72,7 @@ export function moveCamera(
       }
 
       // Lerp camera translation
-      const K = 1 - LERP_STRENGTH ** (time.delta * 100);
+      const K = 1 - LERP_STRENGTH ** (time.mainDelta * 100);
       cameraTransform.translation.x = lerp(
         cameraTransform.translation.x,
         targetTranslation.x,

@@ -1,4 +1,4 @@
-import { MainLoopTime } from "@lattice-engine/core";
+import { Time } from "@lattice-engine/core";
 import { OnWheelEvent } from "@lattice-engine/input";
 import { EventReader, Mut, Query, Res } from "thyseus";
 
@@ -16,7 +16,7 @@ const LERP_STRENGTH = 1e-8;
  * optionally switching into or out of first person mode.
  */
 export function zoomCamera(
-  time: Res<MainLoopTime>,
+  time: Res<Time>,
   wheelEventReader: EventReader<OnWheelEvent>,
   entities: Query<Mut<PlayerCamera>>
 ) {
@@ -49,7 +49,7 @@ export function zoomCamera(
     }
 
     // Lerp camera distance
-    const K = 1 - LERP_STRENGTH ** time.delta;
+    const K = 1 - LERP_STRENGTH ** time.mainDelta;
     camera.distance = lerp(camera.distance, camera.targetDistance, K);
   }
 }

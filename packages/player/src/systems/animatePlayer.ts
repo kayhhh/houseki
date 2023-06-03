@@ -1,4 +1,4 @@
-import { MainLoopTime } from "@lattice-engine/core";
+import { Time } from "@lattice-engine/core";
 import { CharacterController, Velocity } from "@lattice-engine/physics";
 import { Parent } from "@lattice-engine/scene";
 import { VrmAnimation } from "@lattice-engine/vrm";
@@ -11,7 +11,7 @@ const SPRINT_SPEED = 5;
 const JUMP_SPEED = 5;
 
 export function animatePlayer(
-  time: Res<MainLoopTime>,
+  time: Res<Time>,
   avatars: Query<[Entity, Parent, PlayerAvatar]>,
   animations: Query<[Entity, Mut<VrmAnimation>]>,
   bodies: Query<[Entity, PlayerBody, CharacterController, Velocity]>
@@ -36,7 +36,7 @@ export function animatePlayer(
           case avatar.walkAnimationId: {
             const change =
               isWalking && character.isGrounded ? WALK_SPEED : -WALK_SPEED;
-            animation.weight += time.delta * change;
+            animation.weight += time.mainDelta * change;
             break;
           }
 
@@ -45,13 +45,15 @@ export function animatePlayer(
               isSprinting && character.isGrounded
                 ? SPRINT_SPEED
                 : -SPRINT_SPEED;
-            animation.weight = clamp(animation.weight + time.delta * change);
+            animation.weight = clamp(
+              animation.weight + time.mainDelta * change
+            );
             break;
           }
 
           case avatar.jumpAnimationId: {
             const change = character.isGrounded ? -JUMP_SPEED : JUMP_SPEED;
-            animation.weight += time.delta * change;
+            animation.weight += time.mainDelta * change;
             break;
           }
 

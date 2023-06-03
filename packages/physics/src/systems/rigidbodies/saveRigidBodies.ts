@@ -1,8 +1,13 @@
 import { GlobalTransform, Parent, Transform } from "@lattice-engine/scene";
 import { Mat4, Quat, Vec3 } from "gl-matrix/dist/esm";
-import { Entity, Mut, Or, Query, Res, With } from "thyseus";
+import { Entity, Mut, Or, Query, Res, With, Without } from "thyseus";
 
-import { DynamicBody, KinematicBody, StaticBody } from "../../components";
+import {
+  DynamicBody,
+  KinematicBody,
+  StaticBody,
+  TargetTransform,
+} from "../../components";
 import { PhysicsStore } from "../../resources";
 
 const vec3 = new Vec3();
@@ -14,6 +19,17 @@ export function saveRigidBodies(
   bodies: Query<
     [Entity, Parent, Mut<Transform>, GlobalTransform],
     Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>
+  >,
+  withTarget: Query<
+    [Entity, Parent, Mut<TargetTransform>],
+    [Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>]
+  >,
+  withoutTarget: Query<
+    [Entity, Parent, Mut<Transform>],
+    [
+      Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>,
+      Without<TargetTransform>
+    ]
   >,
   transforms: Query<[Entity, GlobalTransform]>
 ) {
@@ -41,7 +57,7 @@ export function saveRigidBodies(
     globalMat.invert();
   }
 
-  for (const [entity, parent, transform] of bodies) {
+  for (const [entity, parent, transform] of withoutTarget) {
     const body = store.getRigidBody(entity.id);
     if (!body) continue;
 
@@ -63,5 +79,29 @@ export function saveRigidBodies(
 
     transform.translation.fromObject(vec3);
     transform.rotation.fromObject(quat);
+  }
+
+  for (const [entity, parent, target] of withTarget) {
+    const body = store.getRigidBody(entity.id);
+    if (!body) continue;
+
+    const parentGlobal = globalTransforms.get(parent.id) ?? new Mat4();
+
+    const translation = body.translation();
+    const rotation = body.rotation();
+
+    // Convert to local space
+    Vec3.set(vec3, translation.x, translation.y, translation.z);
+    Quat.set(quat, rotation.x, rotation.y, rotation.z, rotation.w);
+
+    Mat4.fromRotationTranslation(mat4, quat, vec3);
+
+    Mat4.multiply(mat4, parentGlobal, mat4);
+
+    Mat4.getTranslation(vec3, mat4);
+    Mat4.getRotation(quat, mat4);
+
+    target.translation.fromObject(vec3);
+    target.rotation.fromObject(quat);
   }
 }

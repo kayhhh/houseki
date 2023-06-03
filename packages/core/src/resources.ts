@@ -8,6 +8,10 @@ export class CoreStore {
 }
 
 @struct
-export class MainLoopTime {
-  @struct.f32 declare delta: number;
+export class Time {
+  @struct.f32 declare mainTime: number;
+  @struct.f32 declare mainDelta: number;
+
+  @struct.f32 declare fixedTime: number;
+  @struct.f32 declare fixedDelta: number;
 }

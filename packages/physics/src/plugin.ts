@@ -1,6 +1,7 @@
 import { LatticeSchedules } from "@lattice-engine/core";
 import { run, WorldBuilder } from "thyseus";
 
+import { applyTargetTransforms } from "./systems/applyTargetTransforms";
 import { createCharacters } from "./systems/characters/createCharacters";
 import { moveCharacters } from "./systems/characters/moveCharacters";
 import { saveCharacters } from "./systems/characters/saveCharacters";
@@ -36,4 +37,6 @@ export function physicsPlugin(builder: WorldBuilder) {
       [runRaycasts, saveCharacters, saveRigidBodies, generateDebug]
     )
   );
+
+  builder.addSystems(run(applyTargetTransforms).last());
 }

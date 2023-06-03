@@ -1,5 +1,8 @@
 import { Vec3 } from "@lattice-engine/core";
+import { Transform } from "@lattice-engine/scene";
 import { Entity, EntityCommands, initStruct, struct } from "thyseus";
+
+export class TargetTransform extends Transform {}
 
 export class Velocity extends Vec3 {}
 

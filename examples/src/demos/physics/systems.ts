@@ -4,6 +4,7 @@ import {
   DynamicBody,
   PhysicsConfig,
   SphereCollider,
+  TargetTransform,
 } from "lattice-engine/physics";
 import {
   GlobalTransform,
@@ -64,6 +65,7 @@ export function initScene(
       .add(new Parent(scene))
       .add(new Transform(translation))
       .addType(GlobalTransform)
+      .add(new TargetTransform(translation))
       .add(new Mesh(material))
       .add(ballGeometry)
       .add(new SphereCollider(radius))

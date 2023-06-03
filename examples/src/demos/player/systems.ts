@@ -10,6 +10,7 @@ import {
   Raycast,
   SphereCollider,
   StaticBody,
+  TargetTransform,
   Velocity,
 } from "lattice-engine/physics";
 import {
@@ -119,6 +120,7 @@ export function initScene(
     .spawn()
     .add(new Parent(scene))
     .add(new Transform(spawn))
+    .add(new TargetTransform(spawn))
     .addType(GlobalTransform)
     .addType(Velocity)
     .add(new CapsuleCollider(playerWidth, playerHeight - playerWidth * 2))
@@ -166,6 +168,7 @@ export function initScene(
     .spawn()
     .add(new Parent(scene))
     .add(new Transform([0, 3, -4]))
+    .add(new TargetTransform([0, 3, -4]))
     .addType(GlobalTransform)
     .add(ballGeometry)
     .addType(Mesh)
