@@ -271,6 +271,9 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
+      gl-matrix:
+        specifier: ^4.0.0-beta.1
+        version: 4.0.0-beta.1
       thyseus:
         specifier: 0.12.0-beta.6
         version: 0.12.0-beta.6
@@ -370,6 +373,9 @@ importers:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
+      gl-matrix:
+        specifier: ^4.0.0-beta.1
+        version: 4.0.0-beta.1
       thyseus:
         specifier: 0.12.0-beta.6
         version: 0.12.0-beta.6
@@ -2767,6 +2773,10 @@ packages:
   /git-hooks-list@3.1.0:
     resolution: {integrity: sha512-LF8VeHeR7v+wAbXqfgRlTSX/1BJR9Q1vEMR8JAz1cEg6GX07+zyj3sAdDvYjj/xnlIfVuGgj4qBei1K3hKH+PA==}
     dev: true
+
+  /gl-matrix@4.0.0-beta.1:
+    resolution: {integrity: sha512-T46Kej6rIIASFFRtUj6CmsWutu8XHHccdPwAfwkJrr4MkOsKKaQprSTjMhUGuVVmqN3iJO9CwYX1DjACr2Wn6g==}
+    dev: false
 
   /glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}

@@ -6,6 +6,7 @@ import {
   SphereCollider,
 } from "lattice-engine/physics";
 import {
+  GlobalTransform,
   Material,
   Mesh,
   Node,
@@ -45,6 +46,7 @@ export function initScene(
   const camera = commands
     .spawn()
     .add(new Transform([0, 6, 8]))
+    .addType(GlobalTransform)
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
   sceneStruct.activeCamera = camera.id;
@@ -63,6 +65,7 @@ export function initScene(
       .addType(Node)
       .add(new Parent(scene))
       .add(new Transform(translation))
+      .addType(GlobalTransform)
       .add(new Mesh(material))
       .add(ballGeometry)
       .add(new SphereCollider(radius))

@@ -1,4 +1,4 @@
-import { Transform } from "@lattice-engine/scene";
+import { GlobalTransform } from "@lattice-engine/scene";
 import { Entity, Or, Query, Res, With } from "thyseus";
 
 import {
@@ -12,7 +12,7 @@ import { PhysicsStore } from "../../resources";
 export function moveRigidBodies(
   store: Res<PhysicsStore>,
   transforms: Query<
-    [Entity, Transform],
+    [Entity, GlobalTransform],
     [Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>]
   >,
   velocities: Query<

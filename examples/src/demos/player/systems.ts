@@ -23,6 +23,7 @@ import {
 } from "lattice-engine/player";
 import { WEBGL_CONSTANTS } from "lattice-engine/render";
 import {
+  GlobalTransform,
   Material,
   Mesh,
   Node,
@@ -90,6 +91,7 @@ export function initScene(
     .addType(Node)
     .add(new Parent(scene))
     .add(new Transform([0, -groundSize[1] / 2, 0]))
+    .addType(GlobalTransform)
     .add(new Mesh(materialEntity))
     .add(geometry)
     .add(new BoxCollider(groundSize))
@@ -102,6 +104,7 @@ export function initScene(
     .addType(Node)
     .add(new Parent(scene))
     .add(new Transform([6, boxSize[1] / 2, 0]))
+    .addType(GlobalTransform)
     .add(new Mesh(materialEntity))
     .add(geometry2)
     .add(new BoxCollider(boxSize))
@@ -120,6 +123,7 @@ export function initScene(
     .addType(Node)
     .add(new Parent(scene))
     .add(new Transform(spawn))
+    .addType(GlobalTransform)
     .addType(Velocity)
     .add(new CapsuleCollider(playerWidth, playerHeight - playerWidth * 2))
     .addType(KinematicBody)
@@ -139,6 +143,7 @@ export function initScene(
     .spawn()
     .addType(Node)
     .add(new Transform([0, -playerHeight / 2, 0]))
+    .addType(GlobalTransform)
     .add(new TargetRotation().set(0, 0, 0, 1))
     .add(new Parent(body))
     .add(new Vrm("/k-robot.vrm", true))
@@ -149,6 +154,7 @@ export function initScene(
     .spawn()
     .addType(Node)
     .addType(Transform)
+    .addType(GlobalTransform)
     .addType(TargetPosition)
     .add(new TargetRotation().set(0, 0, 0, 1))
     .add(new Parent(body))
@@ -167,6 +173,7 @@ export function initScene(
     .addType(Node)
     .add(new Parent(scene))
     .add(new Transform([0, 3, -4]))
+    .addType(GlobalTransform)
     .add(ballGeometry)
     .addType(Mesh)
     .add(new SphereCollider(ballRadius))

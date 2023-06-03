@@ -1,6 +1,7 @@
 import { CoreStore, Warehouse } from "lattice-engine/core";
 import { OrbitControls } from "lattice-engine/orbit";
 import {
+  GlobalTransform,
   Mesh,
   Node,
   Parent,
@@ -35,6 +36,7 @@ export function initScene(
   const camera = commands
     .spawn()
     .add(new Transform([0, 0, 5]))
+    .addType(GlobalTransform)
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
   sceneStruct.activeCamera = camera.id;

@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@lattice-engine/core": "workspace:^",
+    "gl-matrix": "^4.0.0-beta.1",
     "thyseus": "0.12.0-beta.6"
   },
   "devDependencies": {

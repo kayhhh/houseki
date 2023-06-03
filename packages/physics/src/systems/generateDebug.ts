@@ -1,6 +1,7 @@
 import { Warehouse } from "@lattice-engine/core";
 import {
   Geometry,
+  GlobalTransform,
   LineMaterial,
   LineSegments,
   Node,
@@ -55,6 +56,7 @@ export function generateDebug(
       .addType(LineSegments)
       .addType(Node)
       .addType(Transform)
+      .addType(GlobalTransform)
       .add(parent);
     localStore.linesId = lines.id;
   }

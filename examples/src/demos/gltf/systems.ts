@@ -2,6 +2,7 @@ import { CoreStore } from "lattice-engine/core";
 import { Gltf } from "lattice-engine/gltf";
 import { OrbitControls } from "lattice-engine/orbit";
 import {
+  GlobalTransform,
   Node,
   Parent,
   PerspectiveCamera,
@@ -38,6 +39,7 @@ export function initScene(
   const camera = commands
     .spawn()
     .add(new Transform([0, 2, 4]))
+    .addType(GlobalTransform)
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
   sceneStruct.activeCamera = camera.id;
@@ -47,6 +49,7 @@ export function initScene(
     .spawn()
     .addType(Node)
     .addType(Transform)
+    .addType(GlobalTransform)
     .add(new Parent(scene))
     .addType(Gltf);
 }

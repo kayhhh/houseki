@@ -1,6 +1,7 @@
 import { CoreStore } from "lattice-engine/core";
 import { OrbitControls } from "lattice-engine/orbit";
 import {
+  GlobalTransform,
   Node,
   Parent,
   PerspectiveCamera,
@@ -32,6 +33,7 @@ export function initScene(
   const camera = commands
     .spawn()
     .add(new Transform([0, 1, -3]))
+    .addType(GlobalTransform)
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
   sceneStruct.activeCamera = camera.id;
@@ -41,6 +43,7 @@ export function initScene(
     .spawn()
     .addType(Node)
     .add(new Transform([0, -0.5, 0]))
+    .addType(GlobalTransform)
     .add(new Parent(scene))
     .add(new Vrm("/k-robot.vrm"));
 }
