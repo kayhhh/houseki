@@ -43,17 +43,8 @@ export function loadMesh(
       geometry.uvs.write(uvs, warehouse);
     }
 
-    if (indices instanceof Uint32Array) {
+    if (indices instanceof Uint16Array || indices instanceof Uint32Array) {
       geometry.indices.write(indices, warehouse);
-    }
-
-    if (indices instanceof Uint16Array) {
-      // Convert to Uint32Array
-      const convertedIndices = new Uint32Array(indices.length);
-      for (let i = 0; i < indices.length; i++) {
-        convertedIndices.set([indices[i] ?? 0], i);
-      }
-      geometry.indices.write(convertedIndices, warehouse);
     }
 
     const material = primitive.getMaterial();

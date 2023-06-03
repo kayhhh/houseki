@@ -80,7 +80,9 @@ export class LineSegments {
 @struct
 export class Geometry {
   @struct.substruct(Resource) declare colors: Resource<Float32Array>;
-  @struct.substruct(Resource) declare indices: Resource<Uint32Array>;
+  @struct.substruct(Resource) declare indices: Resource<
+    Uint16Array | Uint32Array
+  >;
   @struct.substruct(Resource) declare normals: Resource<Float32Array>;
   @struct.substruct(Resource) declare positions: Resource<Float32Array>;
   @struct.substruct(Resource) declare uvs: Resource<Float32Array>;
