@@ -56,9 +56,6 @@ export class Parent {
 export class Scene {}
 
 @struct
-export class Node {}
-
-@struct
 export class Mesh {
   @struct.u64 declare materialId: bigint; // Entity ID
 
@@ -186,7 +183,7 @@ export class PerspectiveCamera {
 
 /**
  * The AnimationMixer is used to apply animations to an object.
- * Should be attached to a Node entity.
+ * Should be attached to an entity in the scene graph.
  *
  * The animation system is heavily based on the Three.js animation system.
  * @see https://threejs.org/docs/#manual/en/introduction/Animation-system

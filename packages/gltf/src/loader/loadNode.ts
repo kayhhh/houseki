@@ -1,11 +1,6 @@
-import { Node as GltfNode } from "@gltf-transform/core";
+import { Node } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
-import {
-  GlobalTransform,
-  Node,
-  Parent,
-  Transform,
-} from "@lattice-engine/scene";
+import { GlobalTransform, Parent, Transform } from "@lattice-engine/scene";
 import { Commands } from "thyseus";
 
 import { LoadingContext } from "./context";
@@ -15,7 +10,7 @@ import { loadMesh } from "./loadMesh";
  * Recursively loads a GLTF node and its children.
  */
 export function loadNode(
-  node: GltfNode,
+  node: Node,
   parentId: bigint,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
@@ -32,7 +27,6 @@ export function loadNode(
 
   const entity = commands
     .spawn()
-    .addType(Node)
     .addType(GlobalTransform)
     .add(parentComponent)
     .add(transform);

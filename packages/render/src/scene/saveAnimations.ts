@@ -1,10 +1,5 @@
-import {
-  KeyframePath,
-  KeyframeTrack,
-  Node,
-  Transform,
-} from "@lattice-engine/scene";
-import { Entity, Mut, Query, Res, With } from "thyseus";
+import { KeyframePath, KeyframeTrack, Transform } from "@lattice-engine/scene";
+import { Entity, Mut, Query, Res } from "thyseus";
 
 import { RenderStore } from "../resources";
 
@@ -14,7 +9,7 @@ import { RenderStore } from "../resources";
 export function saveAnimations(
   renderStore: Res<RenderStore>,
   tracks: Query<KeyframeTrack>,
-  nodes: Query<[Entity, Mut<Transform>], With<Node>>
+  nodes: Query<[Entity, Mut<Transform>]>
 ) {
   for (const track of tracks) {
     const targetObject = renderStore.nodes.get(track.targetId);

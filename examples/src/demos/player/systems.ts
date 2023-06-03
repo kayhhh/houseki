@@ -26,7 +26,6 @@ import {
   GlobalTransform,
   Material,
   Mesh,
-  Node,
   Parent,
   PerspectiveCamera,
   Scene,
@@ -88,7 +87,6 @@ export function initScene(
   const geometry = createBoxGeometry(warehouse, groundSize);
   commands
     .spawn()
-    .addType(Node)
     .add(new Parent(scene))
     .add(new Transform([0, -groundSize[1] / 2, 0]))
     .addType(GlobalTransform)
@@ -101,7 +99,6 @@ export function initScene(
   const geometry2 = createBoxGeometry(warehouse, boxSize);
   commands
     .spawn()
-    .addType(Node)
     .add(new Parent(scene))
     .add(new Transform([6, boxSize[1] / 2, 0]))
     .addType(GlobalTransform)
@@ -120,7 +117,6 @@ export function initScene(
 
   const body = commands
     .spawn()
-    .addType(Node)
     .add(new Parent(scene))
     .add(new Transform(spawn))
     .addType(GlobalTransform)
@@ -141,7 +137,6 @@ export function initScene(
 
   commands
     .spawn()
-    .addType(Node)
     .add(new Transform([0, -playerHeight / 2, 0]))
     .addType(GlobalTransform)
     .add(new TargetRotation().set(0, 0, 0, 1))
@@ -152,7 +147,6 @@ export function initScene(
   // Create camera
   const camera = commands
     .spawn()
-    .addType(Node)
     .addType(Transform)
     .addType(GlobalTransform)
     .addType(TargetPosition)
@@ -170,7 +164,6 @@ export function initScene(
   const ballGeometry = createSphereGeometry(warehouse, ballRadius);
   commands
     .spawn()
-    .addType(Node)
     .add(new Parent(scene))
     .add(new Transform([0, 3, -4]))
     .addType(GlobalTransform)

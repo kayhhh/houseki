@@ -3,7 +3,6 @@ import { Gltf } from "lattice-engine/gltf";
 import { OrbitControls } from "lattice-engine/orbit";
 import {
   GlobalTransform,
-  Node,
   Parent,
   PerspectiveCamera,
   Scene,
@@ -47,7 +46,6 @@ export function initScene(
   // Add node to scene with glTF component
   commands
     .spawn()
-    .addType(Node)
     .addType(Transform)
     .addType(GlobalTransform)
     .add(new Parent(scene))

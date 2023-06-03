@@ -4,7 +4,6 @@ import {
   GlobalTransform,
   LineMaterial,
   LineSegments,
-  Node,
   Parent,
   SceneStruct,
   Transform,
@@ -54,7 +53,6 @@ export function generateDebug(
       .add(material)
       .addType(Geometry)
       .addType(LineSegments)
-      .addType(Node)
       .addType(Transform)
       .addType(GlobalTransform)
       .add(parent);

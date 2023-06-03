@@ -3,7 +3,6 @@ import { OrbitControls } from "lattice-engine/orbit";
 import {
   GlobalTransform,
   Mesh,
-  Node,
   Parent,
   PerspectiveCamera,
   Scene,
@@ -45,7 +44,6 @@ export function initScene(
   const geometry = createBoxGeometry(warehouse);
   commands
     .spawn()
-    .addType(Node)
     .addType(Transform)
     .add(new Parent(scene))
     .addType(Mesh)

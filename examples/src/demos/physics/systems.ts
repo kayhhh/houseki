@@ -9,7 +9,6 @@ import {
   GlobalTransform,
   Material,
   Mesh,
-  Node,
   Parent,
   PerspectiveCamera,
   Scene,
@@ -62,7 +61,6 @@ export function initScene(
     const ballGeometry = createSphereGeometry(warehouse, radius);
     commands
       .spawn()
-      .addType(Node)
       .add(new Parent(scene))
       .add(new Transform(translation))
       .addType(GlobalTransform)

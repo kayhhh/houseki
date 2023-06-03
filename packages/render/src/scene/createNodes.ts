@@ -1,6 +1,6 @@
-import { Node, Parent, Transform } from "@lattice-engine/scene";
+import { Parent, Transform } from "@lattice-engine/scene";
 import { Object3D } from "three";
-import { Entity, Query, Res, With } from "thyseus";
+import { Entity, Query, Res } from "thyseus";
 
 import { RenderStore } from "../resources";
 
@@ -9,8 +9,8 @@ import { RenderStore } from "../resources";
  */
 export function createNodes(
   store: Res<RenderStore>,
-  entities: Query<[Entity, Transform], With<Node>>,
-  withParent: Query<[Entity, Parent], With<Node>>
+  entities: Query<[Entity, Transform]>,
+  withParent: Query<[Entity, Parent]>
 ) {
   const ids: bigint[] = [];
 

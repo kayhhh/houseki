@@ -4,7 +4,6 @@ import {
   Geometry,
   GlobalTransform,
   Mesh,
-  Node,
   Parent,
   Transform,
 } from "@lattice-engine/scene";
@@ -61,7 +60,6 @@ export function loadMesh(
 
     const meshEnity = commands
       .spawn()
-      .addType(Node)
       .addType(Transform)
       .addType(GlobalTransform)
       .add(parent)

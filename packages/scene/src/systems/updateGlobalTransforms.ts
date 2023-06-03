@@ -1,11 +1,11 @@
 import { Mat4 } from "gl-matrix/dist/esm";
 import { Entity, Mut, Query, With } from "thyseus";
 
-import { GlobalTransform, Node, Parent, Scene, Transform } from "../components";
+import { GlobalTransform, Parent, Scene, Transform } from "../components";
 
 export function updateGlobalTransforms(
   scenes: Query<Entity, With<Scene>>,
-  nodes: Query<[Entity, Parent, Transform, Mut<GlobalTransform>], With<Node>>
+  nodes: Query<[Entity, Parent, Transform, Mut<GlobalTransform>]>
 ) {
   const childrenMap = new Map<bigint, bigint[]>();
   const transforms = new Map<bigint, Mat4>();

@@ -2,7 +2,6 @@ import { CoreStore } from "lattice-engine/core";
 import { OrbitControls } from "lattice-engine/orbit";
 import {
   GlobalTransform,
-  Node,
   Parent,
   PerspectiveCamera,
   Scene,
@@ -41,7 +40,6 @@ export function initScene(
   // Create VRM
   commands
     .spawn()
-    .addType(Node)
     .add(new Transform([0, -0.5, 0]))
     .addType(GlobalTransform)
     .add(new Parent(scene))
