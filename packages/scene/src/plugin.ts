@@ -1,5 +1,6 @@
 import { run, WorldBuilder } from "thyseus";
 
+import { cleanTransforms } from "./systems/cleanTransforms";
 import { geometryCleanup } from "./systems/geometryCleanup";
 import { keyframeTrackCleanup } from "./systems/keyframeTrackCleanup";
 import { textureCleanup } from "./systems/textureCleanup";
@@ -10,6 +11,7 @@ export function scenePlugin(builder: WorldBuilder) {
     geometryCleanup,
     textureCleanup,
     keyframeTrackCleanup,
-    run(updateGlobalTransforms).first()
+    run(updateGlobalTransforms).first(),
+    run(cleanTransforms).after(updateGlobalTransforms)
   );
 }

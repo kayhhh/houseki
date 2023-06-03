@@ -9,12 +9,11 @@ import { RenderStore } from "../resources";
  */
 export function createNodes(
   store: Res<RenderStore>,
-  entities: Query<[Entity, Transform]>,
-  withParent: Query<[Entity, Parent]>
+  entities: Query<[Entity, Transform, Parent]>
 ) {
   const ids: bigint[] = [];
 
-  for (const [entity, transform] of entities) {
+  for (const [entity, transform, parent] of entities) {
     ids.push(entity.id);
 
     let object = store.nodes.get(entity.id);
@@ -26,27 +25,32 @@ export function createNodes(
     }
 
     // Sync object properties
-    object.position.set(
-      transform.translation.x,
-      transform.translation.y,
-      transform.translation.z
-    );
-    object.quaternion.set(
-      transform.rotation.x,
-      transform.rotation.y,
-      transform.rotation.z,
-      transform.rotation.w
-    );
-    object.scale.set(transform.scale.x, transform.scale.y, transform.scale.z);
-  }
+    if (transform.translation.hasChanged) {
+      object.position.set(
+        transform.translation.x,
+        transform.translation.y,
+        transform.translation.z
+      );
+    }
 
-  for (const [entity, parent] of withParent) {
-    const object = store.nodes.get(entity.id);
-    if (object) {
-      const parentObject =
-        store.nodes.get(parent.id) ?? store.scenes.get(parent.id);
+    if (transform.rotation.hasChanged) {
+      object.quaternion.set(
+        transform.rotation.x,
+        transform.rotation.y,
+        transform.rotation.z,
+        transform.rotation.w
+      );
+    }
 
-      if (parentObject) parentObject.add(object);
+    if (transform.scale.hasChanged) {
+      object.scale.set(transform.scale.x, transform.scale.y, transform.scale.z);
+    }
+
+    const parentObject =
+      store.nodes.get(parent.id) ?? store.scenes.get(parent.id);
+
+    if (parentObject && object.parent !== parentObject) {
+      parentObject.add(object);
     }
   }
 

@@ -21,6 +21,7 @@ export class Loading {
 @struct
 export class Vec3 {
   @struct.array({ length: 3, type: "f32" }) declare array: Float32Array;
+  @struct.bool declare hasChanged: boolean;
 
   get x() {
     return this.array[0] as number;
@@ -28,6 +29,7 @@ export class Vec3 {
 
   set x(value: number) {
     this.array[0] = value;
+    this.hasChanged = true;
   }
 
   get y() {
@@ -36,6 +38,7 @@ export class Vec3 {
 
   set y(value: number) {
     this.array[1] = value;
+    this.hasChanged = true;
   }
 
   get z() {
@@ -44,24 +47,28 @@ export class Vec3 {
 
   set z(value: number) {
     this.array[2] = value;
+    this.hasChanged = true;
   }
 
   set(x: number, y: number, z: number) {
     this.x = x;
     this.y = y;
     this.z = z;
+    this.hasChanged = true;
 
     return this;
   }
 
   copy(other: Vec3) {
     this.array.set(other.array);
+    this.hasChanged = true;
 
     return this;
   }
 
   fromArray(newValue: Readonly<[number, number, number]>) {
     this.array.set(newValue);
+    this.hasChanged = true;
 
     return this;
   }
@@ -70,6 +77,7 @@ export class Vec3 {
     this.x = other.x;
     this.y = other.y;
     this.z = other.z;
+    this.hasChanged = true;
 
     return this;
   }
@@ -92,6 +100,7 @@ export class Vec3 {
 @struct
 export class Vec4 {
   @struct.array({ length: 4, type: "f32" }) declare array: Float32Array;
+  @struct.bool declare hasChanged: boolean;
 
   get x() {
     return this.array[0] as number;
@@ -99,6 +108,7 @@ export class Vec4 {
 
   set x(value: number) {
     this.array[0] = value;
+    this.hasChanged = true;
   }
 
   get y() {
@@ -107,6 +117,7 @@ export class Vec4 {
 
   set y(value: number) {
     this.array[1] = value;
+    this.hasChanged = true;
   }
 
   get z() {
@@ -115,6 +126,7 @@ export class Vec4 {
 
   set z(value: number) {
     this.array[2] = value;
+    this.hasChanged = true;
   }
 
   get w() {
@@ -123,6 +135,7 @@ export class Vec4 {
 
   set w(value: number) {
     this.array[3] = value;
+    this.hasChanged = true;
   }
 
   set(x: number, y: number, z: number, w: number) {
@@ -131,17 +144,21 @@ export class Vec4 {
     this.z = z;
     this.w = w;
 
+    this.hasChanged = true;
+
     return this;
   }
 
   copy(other: Vec4) {
     this.array.set(other.array);
+    this.hasChanged = true;
 
     return this;
   }
 
   fromArray(newValue: Readonly<[number, number, number, number]>) {
     this.array.set(newValue);
+    this.hasChanged = true;
 
     return this;
   }
@@ -151,6 +168,7 @@ export class Vec4 {
     this.y = other.y;
     this.z = other.z;
     this.w = other.w;
+    this.hasChanged = true;
 
     return this;
   }
