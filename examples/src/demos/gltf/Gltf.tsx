@@ -15,7 +15,9 @@ const MODELS = {
   Cube: "/gltf/Cube/Cube.gltf",
   "Damaged Helmet": "/gltf/DamagedHelmet.glb",
   "Flight Helmet": "/gltf/FlightHelmet/FlightHelmet.gltf",
+  MinecraftVillage: "/gltf/Minecraft-Village.glb",
   "Texture Transform Test": "/gltf/TextureTransformMultiTest.glb",
+  Tokyo: "/gltf/tokyo.glb",
 };
 
 export default function Gltf() {
@@ -30,7 +32,7 @@ export default function Gltf() {
   useEngine(world);
 
   const { model } = useControls({
-    model: { options: MODELS, value: MODELS["Texture Transform Test"] },
+    model: { options: MODELS, value: MODELS["Damaged Helmet"] },
   });
 
   // Update glTF model
