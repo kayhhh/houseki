@@ -41,6 +41,7 @@ export function createScenes(
       directionalLight.shadow.camera.right = 8;
       directionalLight.shadow.camera.top = 8;
       directionalLight.shadow.camera.bottom = -8;
+      directionalLight.shadow.bias = -0.0001;
 
       object.add(new AmbientLight(0xffffff, 0.25));
       object.add(directionalLight);
