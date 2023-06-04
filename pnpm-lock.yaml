@@ -206,6 +206,9 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
+      '@lattice-engine/text':
+        specifier: workspace:^
+        version: link:../text
       '@lattice-engine/utils':
         specifier: workspace:^
         version: link:../utils
@@ -383,6 +386,43 @@ importers:
       '@thyseus/transformer-rollup':
         specifier: 0.12.0-beta.5
         version: 0.12.0-beta.5(thyseus@0.12.0-beta.6)
+      typescript:
+        specifier: ~5.0.4
+        version: 5.0.4
+      vite:
+        specifier: ^4.3.8
+        version: 4.3.8
+      vite-plugin-dts:
+        specifier: ^2.3.0
+        version: 2.3.0(vite@4.3.8)
+
+  packages/text:
+    dependencies:
+      '@lattice-engine/core':
+        specifier: workspace:^
+        version: link:../core
+      '@lattice-engine/render':
+        specifier: workspace:^
+        version: link:../render
+      '@lattice-engine/scene':
+        specifier: workspace:^
+        version: link:../scene
+      three:
+        specifier: ^0.151.3
+        version: 0.151.3
+      thyseus:
+        specifier: 0.12.0-beta.6
+        version: 0.12.0-beta.6
+      troika-three-text:
+        specifier: ^0.47.2
+        version: 0.47.2(three@0.151.3)
+    devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: 0.12.0-beta.5
+        version: 0.12.0-beta.5(thyseus@0.12.0-beta.6)
+      '@types/three':
+        specifier: ^0.151.0
+        version: 0.151.0
       typescript:
         specifier: ~5.0.4
         version: 5.0.4
@@ -1853,6 +1893,12 @@ packages:
   /balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
     dev: true
+
+  /bidi-js@1.0.2:
+    resolution: {integrity: sha512-rzSy/k7WdX5zOyeHHCOixGXbCHkyogkxPKL2r8QtzHmVQDiWCXUWa18bLdMWT9CYMLOYTjWpTHawuev2ouYJVw==}
+    dependencies:
+      require-from-string: 2.0.2
+    dev: false
 
   /big-integer@1.6.51:
     resolution: {integrity: sha512-GPEid2Y9QU1Exl1rpO9B2IPJGHPSupF5GnVIP0blYvNOMer2bTvSWs1jGOUg04hTmu67nmLsQ9TBo1puaotBHg==}
@@ -3683,6 +3729,11 @@ packages:
       functions-have-names: 1.2.3
     dev: true
 
+  /require-from-string@2.0.2:
+    resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /requireindex@1.2.0:
     resolution: {integrity: sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww==}
     engines: {node: '>=0.10.5'}
@@ -3977,6 +4028,30 @@ packages:
       is-number: 7.0.0
     dev: true
 
+  /troika-three-text@0.47.2(three@0.151.3):
+    resolution: {integrity: sha512-qylT0F+U7xGs+/PEf3ujBdJMYWbn0Qci0kLqI5BJG2kW1wdg4T1XSxneypnF05DxFqJhEzuaOR9S2SjiyknMng==}
+    peerDependencies:
+      three: '>=0.125.0'
+    dependencies:
+      bidi-js: 1.0.2
+      three: 0.151.3
+      troika-three-utils: 0.47.2(three@0.151.3)
+      troika-worker-utils: 0.47.2
+      webgl-sdf-generator: 1.1.1
+    dev: false
+
+  /troika-three-utils@0.47.2(three@0.151.3):
+    resolution: {integrity: sha512-/28plhCxfKtH7MSxEGx8e3b/OXU5A0xlwl+Sbdp0H8FXUHKZDoksduEKmjQayXYtxAyuUiCRunYIv/8Vi7aiyg==}
+    peerDependencies:
+      three: '>=0.125.0'
+    dependencies:
+      three: 0.151.3
+    dev: false
+
+  /troika-worker-utils@0.47.2:
+    resolution: {integrity: sha512-mzss4MeyzUkYBppn4x5cdAqrhBHFEuVmMMgLMTyFV23x6GvQMyo+/R5E5Lsbrt7WSt5RfvewjcwD1DChRTA9lA==}
+    dev: false
+
   /ts-morph@18.0.0:
     resolution: {integrity: sha512-Kg5u0mk19PIIe4islUI/HWRvm9bC1lHejK4S0oh1zaZ77TMZAEmQC0sHQYiu2RgCQFZKXz1fMVi/7nOOeirznA==}
     dependencies:
@@ -4223,6 +4298,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /webgl-sdf-generator@1.1.1:
+    resolution: {integrity: sha512-9Z0JcMTFxeE+b2x1LJTdnaT8rT8aEp7MVxkNwoycNmJWwPdzoXzMh0BjJSh/AEFP+KPYZUli814h8bJZFIZ2jA==}
+    dev: false
 
   /which-boxed-primitive@1.0.2:
     resolution: {integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==}

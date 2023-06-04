@@ -48,7 +48,8 @@ export function moveBody(
       const movementX = direction.x * input.x + direction.z * input.y;
       const movementZ = direction.z * input.x - direction.x * input.y;
 
-      const speed = sprint ? player.speed * SPRINT_MULTIPLIER : player.speed;
+      let speed = player.speed;
+      if (sprint) speed *= SPRINT_MULTIPLIER;
 
       const targetX = movementX * speed;
       const targetZ = movementZ * speed;
