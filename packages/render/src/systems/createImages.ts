@@ -1,4 +1,4 @@
-import { Loading, Warehouse } from "@lattice-engine/core";
+import { Warehouse } from "@lattice-engine/core";
 import { Image, ImageMimeType } from "@lattice-engine/scene";
 import { Entity, Query, Res, SystemRes } from "thyseus";
 
@@ -52,15 +52,11 @@ export function createImages(
 
       if (localStore.bitmapPromises.has(entity.id)) {
         localStore.bitmapPromises.delete(entity.id);
-        if (entity.hasComponent(Loading)) entity.remove(Loading);
       }
     }
 
     // Load new images
     if (!localStore.processed.has(entity.id)) {
-      // TODO: Add this back in (glitch breaking it?)
-      // entity.add(new Loading(`Loading image ${entity.id}`));
-
       // Get the entity ID now
       // It cannot be accessed in the promise
       const entityId = entity.id;

@@ -1,4 +1,3 @@
-import { Loading } from "@lattice-engine/core";
 import { AnimationMixer } from "three";
 import { Entity, Query, Res, SystemRes, With } from "thyseus";
 
@@ -48,10 +47,6 @@ export function createAnimations(
     for (const [animationEntity, animation] of animations) {
       if (localStore.doneLoading.has(animationEntity.id)) {
         localStore.doneLoading.delete(animationEntity.id);
-
-        if (animationEntity.hasComponent(Loading)) {
-          animationEntity.remove(Loading);
-        }
       }
 
       if (animation.vrmId !== entity.id) continue;
@@ -65,9 +60,6 @@ export function createAnimations(
 
       const uri = animation.uri;
       const animationId = animationEntity.id;
-
-      // TODO: Add back in
-      // animationEntity.add(new Loading(`Loading ${uri}`));
 
       const promise = loadMixamoAnimation(uri, object).then((clips) => {
         localStore.loaded.set(animationId, uri);

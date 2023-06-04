@@ -1,6 +1,5 @@
-import { Vec4 } from "@lattice-engine/core";
 import { Velocity } from "@lattice-engine/physics";
-import { Parent, Transform } from "@lattice-engine/scene";
+import { Parent, Quat, Transform } from "@lattice-engine/scene";
 import { Quaternion, Vector3 } from "three";
 import { Entity, Mut, Query, With } from "thyseus";
 
@@ -57,9 +56,9 @@ export function rotateAvatar(
 }
 
 function rotateFirstPerson(
-  cameraRotation: Vec4,
-  avatarRotation: Vec4,
-  targetRotation: Vec4
+  cameraRotation: Quat,
+  avatarRotation: Quat,
+  targetRotation: Quat
 ) {
   quaternion.set(
     cameraRotation.x,
@@ -79,9 +78,9 @@ function rotateFirstPerson(
 
 function rotateThirdPerson(
   velocity: Velocity,
-  cameraRotation: Vec4,
-  avatarRotation: Vec4,
-  targetRotation: Vec4
+  cameraRotation: Quat,
+  avatarRotation: Quat,
+  targetRotation: Quat
 ) {
   // Set new target rotation if there is input
   if (velocity.x !== 0 || velocity.z !== 0) {

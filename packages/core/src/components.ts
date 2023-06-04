@@ -90,10 +90,10 @@ export class Vec3 {
     return { x: this.x, y: this.y, z: this.z };
   }
 
-  constructor() {
+  constructor(x = 0, y = 0, z = 0) {
     initStruct(this);
-    // TODO: Add back in
-    // this.set(x, y, z);
+
+    this.set(x, y, z);
   }
 }
 
@@ -181,9 +181,9 @@ export class Vec4 {
     return { w: this.w, x: this.x, y: this.y, z: this.z };
   }
 
-  constructor() {
+  constructor(x = 0, y = 0, z = 0, w = 0) {
     initStruct(this);
-    // TODO: Add back in
-    // this.set(x, y, z, w);
+
+    this.set(x, y, z, w);
   }
 }

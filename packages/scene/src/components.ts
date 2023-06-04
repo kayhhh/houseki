@@ -8,6 +8,12 @@ import {
   MaterialAlphaMode,
 } from "./types";
 
+export class Quat extends Vec4 {
+  constructor(x = 0, y = 0, z = 0, w = 1) {
+    super(x, y, z, w);
+  }
+}
+
 /**
  * An entity must have both a {@link Transform} and a {@link GlobalTransform} component
  * for transforms to work correctly.
@@ -15,7 +21,7 @@ import {
 @struct
 export class Transform {
   @struct.substruct(Vec3) declare translation: Vec3;
-  @struct.substruct(Vec4) declare rotation: Vec4;
+  @struct.substruct(Quat) declare rotation: Quat;
   @struct.substruct(Vec3) declare scale: Vec3;
 
   constructor(
@@ -26,7 +32,7 @@ export class Transform {
     initStruct(this);
 
     this.translation = new Vec3();
-    this.rotation = new Vec4();
+    this.rotation = new Quat();
     this.scale = new Vec3();
 
     this.translation.fromArray(translation);
@@ -110,15 +116,14 @@ export class TextureInfo {
   constructor() {
     initStruct(this);
 
-    // TODO: Upgrade thyseus to support this (theres a bug)
-    // this.magFilter = 9729;
-    // this.minFilter = 9987;
-    // this.wrapS = 10497;
-    // this.wrapT = 10497;
-    // this.texCoord = 0;
-    // this.rotation = 0;
-    // this.offset.set([0, 0]);
-    // this.scale.set([1, 1]);
+    this.magFilter = 9729;
+    this.minFilter = 9987;
+    this.wrapS = 10497;
+    this.wrapT = 10497;
+    this.texCoord = 0;
+    this.rotation = 0;
+    this.offset.set([0, 0]);
+    this.scale.set([1, 1]);
   }
 }
 
