@@ -9,7 +9,7 @@ import { PlayerAvatar, PlayerBody } from "../components";
 const WALK_SPEED = 5;
 const SPRINT_SPEED = 5;
 const JUMP_SPEED = 5;
-const FALL_THRESHOLD_SECONDS = 0.2;
+const FALL_THRESHOLD_SECONDS = 0.35;
 
 export function animatePlayer(
   time: Res<Time>,
@@ -21,7 +21,9 @@ export function animatePlayer(
     for (const [bodyEntity, player, velocity] of bodies) {
       if (bodyEntity.id !== parent.id) continue;
 
-      const showFallAnimation = player.airTime > FALL_THRESHOLD_SECONDS;
+      const isFalling = player.airTime > FALL_THRESHOLD_SECONDS;
+      const isJumping = player.jumpTime > 0 && player.airTime !== 0;
+      const showFallAnimation = isFalling || isJumping;
 
       const moveLength = Math.sqrt(
         Math.abs(velocity.x) ** 2 + Math.abs(velocity.z) ** 2
