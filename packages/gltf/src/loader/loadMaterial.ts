@@ -4,10 +4,9 @@ import {
   TextureInfo as GltfTextureInfo,
 } from "@gltf-transform/core";
 import { Transform } from "@gltf-transform/extensions";
-import { Warehouse } from "@lattice-engine/core";
+import { Asset, Warehouse } from "@lattice-engine/core";
 import {
   Image,
-  ImageMimeType,
   Material,
   MaterialAlphaMode,
   TextureInfo,
@@ -144,19 +143,10 @@ function createTexture(
   const imageData = gltfTexture.getImage();
   if (!imageData) return;
 
-  const image = new Image();
-  image.data.write(imageData, warehouse);
+  const asset = new Asset();
+  asset.data.write(imageData, warehouse);
 
-  const mimeType = gltfTexture.getMimeType();
-  const mimeNumber = ImageMimeType[mimeType as keyof typeof ImageMimeType] as
-    | ImageMimeType
-    | undefined;
+  asset.mimeType = gltfTexture.getMimeType();
 
-  if (mimeNumber === undefined) {
-    console.warn(`Unsupported mime type: ${mimeType}`);
-  }
-
-  image.mimeType = mimeNumber ?? 0;
-
-  return commands.spawn().add(image);
+  return commands.spawn().add(asset).addType(Image);
 }

@@ -1,4 +1,4 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
+import { Asset, CoreStore, Warehouse } from "lattice-engine/core";
 import { InputStruct } from "lattice-engine/input";
 import {
   BoxCollider,
@@ -41,9 +41,6 @@ import { createBoxGeometry } from "../../utils/createBoxGeometry";
 import { createScene } from "../../utils/createScene";
 import { createSphereGeometry } from "../../utils/createSphereGeometry";
 
-const devTextureFetch = await fetch("/DevGrid.png");
-const devTextureArray = new Uint8Array(await devTextureFetch.arrayBuffer());
-
 /**
  * System to initialize the scene.
  */
@@ -59,11 +56,12 @@ export function initScene(
 
   const scene = createScene(commands, coreStore, sceneStruct, 4096, 16);
 
-  const devTexture = new Image();
-  devTexture.data.write(devTextureArray, warehouse);
-  const devTextureEntity = commands.spawn().add(devTexture);
+  const devTexture = commands
+    .spawn()
+    .add(new Asset("/DevGrid.png"))
+    .addType(Image);
 
-  createBox([32, 1, 32], devTextureEntity.id, commands, warehouse).add(
+  createBox([32, 1, 32], devTexture.id, commands, warehouse).add(
     new Parent(scene)
   );
 
@@ -73,17 +71,17 @@ export function initScene(
     .add(new Transform([-2, 0, -6]))
     .addType(GlobalTransform);
 
-  createStairs(2, 0.125, 1, 10, commands, warehouse, devTextureEntity.id)
+  createStairs(2, 0.125, 1, 10, commands, warehouse, devTexture.id)
     .add(new Parent(stairs))
     .add(new Transform([0, 0, 0]))
     .addType(GlobalTransform);
 
-  createStairs(2, 0.125, 0.5, 20, commands, warehouse, devTextureEntity.id)
+  createStairs(2, 0.125, 0.5, 20, commands, warehouse, devTexture.id)
     .add(new Parent(stairs))
     .add(new Transform([-3, 0, 0]))
     .addType(GlobalTransform);
 
-  createStairs(2, 0.25, 0.5, 20, commands, warehouse, devTextureEntity.id)
+  createStairs(2, 0.25, 0.5, 20, commands, warehouse, devTexture.id)
     .add(new Parent(stairs))
     .add(new Transform([-6, 0, 0]))
     .addType(GlobalTransform);
@@ -94,22 +92,22 @@ export function initScene(
     .add(new Transform([2, 0, -6]))
     .addType(GlobalTransform);
 
-  createRamp(2, 10, 1, 15, commands, warehouse, devTextureEntity.id)
+  createRamp(2, 10, 1, 15, commands, warehouse, devTexture.id)
     .add(new Parent(ramps))
     .add(new Transform([0, 0, 0]))
     .addType(GlobalTransform);
 
-  createRamp(2, 10, 1, 30, commands, warehouse, devTextureEntity.id)
+  createRamp(2, 10, 1, 30, commands, warehouse, devTexture.id)
     .add(new Parent(ramps))
     .add(new Transform([3, 0, 0]))
     .addType(GlobalTransform);
 
-  createRamp(2, 10, 1, 45, commands, warehouse, devTextureEntity.id)
+  createRamp(2, 10, 1, 45, commands, warehouse, devTexture.id)
     .add(new Parent(ramps))
     .add(new Transform([6, 0, 0]))
     .addType(GlobalTransform);
 
-  createRamp(2, 10, 1, 60, commands, warehouse, devTextureEntity.id)
+  createRamp(2, 10, 1, 60, commands, warehouse, devTexture.id)
     .add(new Parent(ramps))
     .add(new Transform([9, 0, 0]))
     .addType(GlobalTransform);

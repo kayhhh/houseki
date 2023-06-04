@@ -1,4 +1,4 @@
-import { CoreStore } from "lattice-engine/core";
+import { Asset, CoreStore } from "lattice-engine/core";
 import {
   AmbientLight,
   DirectionalLight,
@@ -22,7 +22,10 @@ export function createScene(
   const canvas = document.querySelector("canvas");
   coreStore.canvas = canvas;
 
-  const skybox = commands.spawn().add(new Image("/Skybox.jpg"));
+  const skybox = commands
+    .spawn()
+    .add(new Asset("/Skybox.jpg", "image/jpeg"))
+    .add(new Image(true));
   const scene = commands.spawn().add(new Scene(skybox));
   sceneStruct.activeScene = scene.id;
 

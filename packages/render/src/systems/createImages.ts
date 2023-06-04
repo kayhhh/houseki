@@ -1,5 +1,5 @@
-import { Warehouse } from "@lattice-engine/core";
-import { Image, ImageMimeType } from "@lattice-engine/scene";
+import { Asset, Warehouse } from "@lattice-engine/core";
+import { Image } from "@lattice-engine/scene";
 import { Entity, Query, Res, SystemRes } from "thyseus";
 
 import { RenderStore } from "../resources";
@@ -11,24 +11,9 @@ class LocalStore {
   readonly bitmaps = new Map<bigint, ImageBitmap>();
 
   /**
-   * Entity ID -> createImageBitmap promise
+   * Entity ID -> data used to create the ImageBitmap
    */
-  readonly bitmapPromises = new Map<bigint, Promise<void>>();
-
-  /**
-   * Entity ID -> Fetched blob
-   */
-  readonly blobs = new Map<bigint, Blob>();
-
-  /**
-   * Entity ID -> fetch promise
-   */
-  readonly fetchPromises = new Map<bigint, Promise<void>>();
-
-  /**
-   * Entity IDs that have been processed.
-   */
-  readonly processed = new Set<bigint>();
+  readonly loadedData = new Map<bigint, ArrayBuffer>();
 }
 
 /**
@@ -38,95 +23,48 @@ export function createImages(
   warehouse: Res<Warehouse>,
   renderStore: Res<RenderStore>,
   localStore: SystemRes<LocalStore>,
-  entities: Query<[Entity, Image]>
+  entities: Query<[Entity, Asset, Image]>
 ) {
   const ids: bigint[] = [];
 
-  for (const [entity, image] of entities) {
+  for (const [entity, asset, image] of entities) {
     ids.push(entity.id);
 
-    // If the image is loaded, save it to the render store
-    const bitmap = localStore.bitmaps.get(entity.id);
-    if (bitmap) {
-      renderStore.images.set(entity.id, bitmap);
+    // If already created, skip
+    if (localStore.bitmaps.has(entity.id)) continue;
 
-      if (localStore.bitmapPromises.has(entity.id)) {
-        localStore.bitmapPromises.delete(entity.id);
-      }
+    const data = asset.data.read(warehouse);
+
+    // If data is empty, remove the bitmap
+    if (!data || data.byteLength === 0) {
+      localStore.bitmaps.delete(entity.id);
+      localStore.loadedData.delete(entity.id);
+      renderStore.images.delete(entity.id);
+      continue;
     }
 
-    // Load new images
-    if (!localStore.processed.has(entity.id)) {
-      // Get the entity ID now
-      // It cannot be accessed in the promise
-      const entityId = entity.id;
+    // If data hasn't changed, skip
+    const loaded = localStore.loadedData.get(entity.id);
+    if (loaded && loaded.byteLength === data.byteLength) continue;
 
-      let blob: Blob;
+    // Create the bitmap
+    localStore.loadedData.set(entity.id, data);
 
-      if (image.uri) {
-        const promise = localStore.fetchPromises.get(entityId);
+    const blob = new Blob([data], { type: asset.mimeType });
+    const entityId = entity.id;
+    const imageOrientation = image.flipY ? "flipY" : "none";
 
-        if (!promise) {
-          localStore.fetchPromises.set(
-            entityId,
-            fetch(image.uri)
-              .then((response) => response.blob())
-              .then((blob) => {
-                localStore.blobs.set(entityId, blob);
-              })
-          );
-          continue;
-        } else {
-          const fetchedBlob = localStore.blobs.get(entityId);
-          if (!fetchedBlob) continue;
-
-          localStore.fetchPromises.delete(entityId);
-          localStore.blobs.delete(entityId);
-
-          blob = fetchedBlob;
-        }
-      } else {
-        const data = image.data.read(warehouse);
-        if (!data?.length) continue;
-
-        blob = new Blob([data], {
-          type: ImageMimeType[image.mimeType],
-        });
-      }
-
-      localStore.processed.add(entityId);
-
-      localStore.bitmapPromises.set(
-        entityId,
-        createImageBitmap(blob).then((bitmap) => {
-          localStore.bitmaps.set(entityId, bitmap);
-        })
-      );
-    }
+    createImageBitmap(blob, { imageOrientation }).then((bitmap) => {
+      localStore.bitmaps.set(entityId, bitmap);
+      renderStore.images.set(entityId, bitmap);
+    });
   }
 
-  // Remove images that no longer exist
-  for (const id of renderStore.images.keys()) {
+  // Remove bitmaps that are no longer needed
+  for (const id of localStore.bitmaps.keys()) {
     if (!ids.includes(id)) {
-      // If the image is still loading, delete when it's done
-      const bitmapPromise = localStore.bitmapPromises.get(id);
-      const fetchPromise = localStore.fetchPromises.get(id);
-
-      if (bitmapPromise) {
-        bitmapPromise.then(() => {
-          localStore.bitmaps.delete(id);
-        });
-      }
-
-      if (fetchPromise) {
-        fetchPromise.then(() => {
-          localStore.blobs.delete(id);
-        });
-      }
-
       localStore.bitmaps.delete(id);
-      localStore.bitmapPromises.delete(id);
-      localStore.processed.delete(id);
+      localStore.loadedData.delete(id);
       renderStore.images.delete(id);
     }
   }

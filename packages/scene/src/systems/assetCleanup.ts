@@ -1,7 +1,5 @@
-import { Warehouse } from "@lattice-engine/core";
+import { Asset, Warehouse } from "@lattice-engine/core";
 import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
-
-import { Image } from "../components";
 
 class EntityTracker {
   ids = new Set<bigint>();
@@ -12,23 +10,20 @@ class EntityTracker {
   resources = new Map<bigint, Set<number>>();
 }
 
-/**
- * Cleans up texture resources on removal.
- */
-export function imageCleanup(
+export function assetCleanup(
   commands: Commands,
   warehouse: Res<Warehouse>,
   tracker: SystemRes<EntityTracker>,
-  entities: Query<[Entity, Image]>
+  entities: Query<[Entity, Asset]>
 ) {
   const ids: bigint[] = [];
 
-  for (const [entity, image] of entities) {
+  for (const [entity, asset] of entities) {
     ids.push(entity.id);
     tracker.ids.add(entity.id);
 
     const resources = tracker.resources.get(entity.id) ?? new Set();
-    resources.add(image.data.id);
+    resources.add(asset.data.id);
 
     tracker.resources.set(entity.id, resources);
   }

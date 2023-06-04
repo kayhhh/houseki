@@ -1,5 +1,7 @@
 import { initStruct, struct } from "thyseus";
 
+import { Resource } from "./warehouse";
+
 /**
  * Marks an entity as loading.
  * Useful for displaying a loading screen while the scene is loading.
@@ -15,6 +17,24 @@ export class Loading {
     initStruct(this);
 
     this.message = message;
+  }
+}
+
+/**
+ * Assets will be fetched by the engine if a URI is provided.
+ */
+@struct
+export class Asset {
+  @struct.string declare uri: string;
+  @struct.string declare mimeType: string;
+
+  @struct.substruct(Resource) declare data: Resource<ArrayBuffer>;
+
+  constructor(uri = "", mimeType = "") {
+    initStruct(this);
+
+    this.uri = uri;
+    this.mimeType = mimeType;
   }
 }
 

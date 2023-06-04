@@ -2,7 +2,6 @@ import { Resource, Vec3, Vec4 } from "@lattice-engine/core";
 import { Entity, EntityCommands, initStruct, struct } from "thyseus";
 
 import {
-  ImageMimeType,
   KeyframeInterpolation,
   KeyframePath,
   MaterialAlphaMode,
@@ -128,18 +127,16 @@ export class TextureInfo {
 }
 
 /**
- * An Image can either be a URI or a binary blob.
+ * Marks an `Asset` as an image, which will be loaded as a bitmap.
  */
 @struct
 export class Image {
-  @struct.substruct(Resource) declare data: Resource<Uint8Array>;
-  @struct.string declare uri: string;
-  @struct.u8 declare mimeType: ImageMimeType;
+  @struct.bool declare flipY: boolean;
 
-  constructor(uri = "") {
+  constructor(flipY = false) {
     initStruct(this);
 
-    this.uri = uri;
+    this.flipY = flipY;
   }
 }
 
