@@ -210,14 +210,14 @@ export class PerspectiveCamera {
  * The AnimationMixer is used to apply animations to an object.
  * Should be attached to an entity in the scene graph.
  *
- * The animation system is heavily based on the Three.js animation system.
+ * The animation system is based on the Three.js animation system.
  * @see https://threejs.org/docs/#manual/en/introduction/Animation-system
  */
 @struct
 export class AnimationMixer {}
 
 /**
- * Represents a single animation clip. (e.g. "walk", "run", "idle")
+ * Represents an animation clip. (e.g. "walk", "run", "idle")
  */
 @struct
 export class AnimationClip {

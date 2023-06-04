@@ -193,14 +193,14 @@ function createRamp(
   const ramp = commands.spawn();
 
   // Angle -> quaternion
-  const angle = -((90 - rampAngle) * Math.PI) / 180;
+  const angle = (rampAngle * Math.PI) / 180;
   const x = Math.sin(angle / 2);
   const y = 0;
   const z = 0;
   const w = Math.cos(angle / 2);
 
   createBox(
-    [rampWidth, rampHeight, rampDepth],
+    [rampWidth, rampDepth, rampHeight],
     textureId,
     commands,
     warehouse,
@@ -253,7 +253,7 @@ function createBox(
   material.baseColorTextureInfo.wrapT = WEBGL_CONSTANTS.REPEAT;
   material.baseColorTextureInfo.minFilter =
     WEBGL_CONSTANTS.LINEAR_MIPMAP_LINEAR;
-  material.baseColorTextureInfo.scale.set([size[2] / 2, size[0] / 2]);
+  material.baseColorTextureInfo.scale.set([size[0] / 2, size[2] / 2]);
 
   const materialEntity = commands.spawn().add(material);
 
