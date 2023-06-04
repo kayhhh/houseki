@@ -3,6 +3,7 @@ import { Gltf } from "lattice-engine/gltf";
 import { OrbitControls } from "lattice-engine/orbit";
 import {
   GlobalTransform,
+  Image,
   Parent,
   PerspectiveCamera,
   Scene,
@@ -31,7 +32,8 @@ export function initScene(
   coreStore.canvas = canvas;
 
   // Create scene
-  const scene = commands.spawn().addType(Scene);
+  const skybox = commands.spawn().add(new Image("/Skybox.jpg"));
+  const scene = commands.spawn().add(new Scene(skybox));
   sceneStruct.activeScene = scene.id;
 
   // Create camera

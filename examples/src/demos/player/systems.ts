@@ -25,13 +25,13 @@ import {
 import { WEBGL_CONSTANTS } from "lattice-engine/render";
 import {
   GlobalTransform,
+  Image,
   Material,
   Mesh,
   Parent,
   PerspectiveCamera,
   Scene,
   SceneStruct,
-  Texture,
   Transform,
 } from "lattice-engine/scene";
 import { Vrm } from "lattice-engine/vrm";
@@ -62,11 +62,12 @@ export function initScene(
   coreStore.canvas = canvas;
 
   // Create scene
-  const scene = commands.spawn().addType(Scene);
+  const skybox = commands.spawn().add(new Image("/Skybox.jpg"));
+  const scene = commands.spawn().add(new Scene(skybox));
   sceneStruct.activeScene = scene.id;
 
-  const devTexture = new Texture();
-  devTexture.image.write(devTextureArray, warehouse);
+  const devTexture = new Image();
+  devTexture.data.write(devTextureArray, warehouse);
   const devTextureEntity = commands.spawn().add(devTexture);
 
   createBox([32, 1, 32], devTextureEntity.id, commands, warehouse).add(

@@ -1,5 +1,5 @@
 import { Loading, Warehouse } from "@lattice-engine/core";
-import { ImageMimeType, Texture } from "@lattice-engine/scene";
+import { Image, ImageMimeType } from "@lattice-engine/scene";
 import { Entity, Query, Res, SystemRes } from "thyseus";
 
 import { RenderStore } from "../resources";
@@ -16,6 +16,16 @@ class LocalStore {
   readonly bitmapPromises = new Map<bigint, Promise<void>>();
 
   /**
+   * Entity ID -> Fetched blob
+   */
+  readonly blobs = new Map<bigint, Blob>();
+
+  /**
+   * Entity ID -> fetch promise
+   */
+  readonly fetchPromises = new Map<bigint, Promise<void>>();
+
+  /**
    * Entity IDs that have been processed.
    */
   readonly processed = new Set<bigint>();
@@ -28,11 +38,11 @@ export function createImages(
   warehouse: Res<Warehouse>,
   renderStore: Res<RenderStore>,
   localStore: SystemRes<LocalStore>,
-  entities: Query<[Entity, Texture]>
+  entities: Query<[Entity, Image]>
 ) {
   const ids: bigint[] = [];
 
-  for (const [entity, texture] of entities) {
+  for (const [entity, image] of entities) {
     ids.push(entity.id);
 
     // If the image is loaded, save it to the render store
@@ -48,21 +58,50 @@ export function createImages(
 
     // Load new images
     if (!localStore.processed.has(entity.id)) {
-      localStore.processed.add(entity.id);
-
       // TODO: Add this back in (glitch breaking it?)
       // entity.add(new Loading(`Loading image ${entity.id}`));
-
-      const blob = new Blob([texture.image.read(warehouse)], {
-        type: ImageMimeType[texture.mimeType],
-      });
 
       // Get the entity ID now
       // It cannot be accessed in the promise
       const entityId = entity.id;
 
+      let blob: Blob;
+
+      if (image.uri) {
+        const promise = localStore.fetchPromises.get(entityId);
+
+        if (!promise) {
+          localStore.fetchPromises.set(
+            entityId,
+            fetch(image.uri)
+              .then((response) => response.blob())
+              .then((blob) => {
+                localStore.blobs.set(entityId, blob);
+              })
+          );
+          continue;
+        } else {
+          const fetchedBlob = localStore.blobs.get(entityId);
+          if (!fetchedBlob) continue;
+
+          localStore.fetchPromises.delete(entityId);
+          localStore.blobs.delete(entityId);
+
+          blob = fetchedBlob;
+        }
+      } else {
+        const data = image.data.read(warehouse);
+        if (!data?.length) continue;
+
+        blob = new Blob([data], {
+          type: ImageMimeType[image.mimeType],
+        });
+      }
+
+      localStore.processed.add(entityId);
+
       localStore.bitmapPromises.set(
-        entity.id,
+        entityId,
         createImageBitmap(blob).then((bitmap) => {
           localStore.bitmaps.set(entityId, bitmap);
         })
@@ -74,10 +113,18 @@ export function createImages(
   for (const id of renderStore.images.keys()) {
     if (!ids.includes(id)) {
       // If the image is still loading, delete when it's done
-      const promise = localStore.bitmapPromises.get(id);
-      if (promise) {
-        promise.then(() => {
+      const bitmapPromise = localStore.bitmapPromises.get(id);
+      const fetchPromise = localStore.fetchPromises.get(id);
+
+      if (bitmapPromise) {
+        bitmapPromise.then(() => {
           localStore.bitmaps.delete(id);
+        });
+      }
+
+      if (fetchPromise) {
+        fetchPromise.then(() => {
+          localStore.blobs.delete(id);
         });
       }
 

@@ -53,7 +53,15 @@ export class Parent {
 }
 
 @struct
-export class Scene {}
+export class Scene {
+  @struct.u64 declare skyboxId: bigint;
+
+  constructor(skybox?: Entity | EntityCommands) {
+    initStruct(this);
+
+    if (skybox) this.skyboxId = skybox.id;
+  }
+}
 
 @struct
 export class Mesh {
@@ -114,10 +122,20 @@ export class TextureInfo {
   }
 }
 
+/**
+ * An Image can either be a URI or a binary blob.
+ */
 @struct
-export class Texture {
-  @struct.substruct(Resource) declare image: Resource<Uint8Array>;
+export class Image {
+  @struct.substruct(Resource) declare data: Resource<Uint8Array>;
+  @struct.string declare uri: string;
   @struct.u8 declare mimeType: ImageMimeType;
+
+  constructor(uri = "") {
+    initStruct(this);
+
+    this.uri = uri;
+  }
 }
 
 @struct
@@ -149,10 +167,15 @@ export class Material {
   @struct.substruct(TextureInfo)
   declare metallicRoughnessTextureInfo: TextureInfo;
 
-  constructor(color = [1, 1, 1, 1]) {
+  constructor(color = [1, 1, 1, 1], metalness = 1, roughness = 1) {
     initStruct(this);
 
     this.baseColor.set(color);
+    this.emissiveFactor.set([0, 0, 0]);
+    this.normalScale = 1;
+    this.occlusionStrength = 1;
+    this.roughness = roughness;
+    this.metalness = metalness;
   }
 }
 

@@ -8,7 +8,7 @@ import {
   sRGBEncoding,
   Texture,
 } from "three";
-import { Entity, Query, Res, With } from "thyseus";
+import { Entity, Query, Res } from "thyseus";
 
 import { RenderStore } from "../resources";
 
@@ -16,15 +16,15 @@ import { RenderStore } from "../resources";
  * Creates and updates scene objects.
  */
 export function createScenes(
-  store: Res<RenderStore>,
-  entities: Query<Entity, With<Scene>>
+  renderStore: Res<RenderStore>,
+  entities: Query<[Entity, Scene]>
 ) {
   const ids: bigint[] = [];
 
-  for (const entity of entities) {
+  for (const [entity, scene] of entities) {
     ids.push(entity.id);
 
-    let object = store.scenes.get(entity.id);
+    let object = renderStore.scenes.get(entity.id);
 
     // Create new objects
     if (!object) {
@@ -46,48 +46,50 @@ export function createScenes(
       object.add(new AmbientLight(0xffffff, 0.25));
       object.add(directionalLight);
 
-      // TODO: Move skybox into ECS
-      loadSkybox(object, "/Skybox.jpg");
-
-      store.scenes.set(entity.id, object);
+      renderStore.scenes.set(entity.id, object);
     }
+
+    loadSkybox(object, scene.skyboxId, renderStore);
   }
 
   // Remove objects that no longer exist
-  for (const [id] of store.scenes) {
+  for (const [id] of renderStore.scenes) {
     if (!ids.includes(id)) {
-      const object = store.scenes.get(id);
+      const object = renderStore.scenes.get(id);
       object?.environment?.dispose();
 
       if (object?.background instanceof Texture) {
         object?.background?.dispose();
       }
 
-      store.scenes.delete(id);
+      renderStore.scenes.delete(id);
     }
   }
 }
 
-async function loadSkybox(scene: ThreeScene, uri: string | null) {
-  // Clean up old skybox
-  if (scene.background instanceof Texture) scene.background.dispose();
+function loadSkybox(
+  scene: ThreeScene,
+  imageId: bigint,
+  renderStore: RenderStore
+) {
+  const bitmap = renderStore.images.get(imageId);
+
+  if (scene.background instanceof Texture) {
+    if (scene.background.image === bitmap) return;
+    scene.background.dispose();
+  }
+
   if (scene.environment) scene.environment.dispose();
 
-  if (!uri) {
+  if (!bitmap) {
     scene.environment = null;
     scene.background = null;
     return;
   }
 
-  // Load skybox
-  const res = await fetch(uri);
-  const blob = await res.blob();
-  const bitmap = await createImageBitmap(blob, { imageOrientation: "flipY" });
-
   const texture = new CanvasTexture(bitmap);
   texture.mapping = EquirectangularReflectionMapping;
   texture.encoding = sRGBEncoding;
-  texture.needsUpdate = true;
 
   // Set skybox
   scene.environment = texture;

@@ -8,6 +8,7 @@ import {
 } from "lattice-engine/physics";
 import {
   GlobalTransform,
+  Image,
   Material,
   Mesh,
   Parent,
@@ -39,7 +40,8 @@ export function initScene(
   coreStore.canvas = canvas;
 
   // Create scene
-  const scene = commands.spawn().addType(Scene);
+  const skybox = commands.spawn().add(new Image("/Skybox.jpg"));
+  const scene = commands.spawn().add(new Scene(skybox));
   sceneStruct.activeScene = scene.id;
 
   // Create camera
@@ -56,7 +58,7 @@ export function initScene(
   room.add(new Parent(scene));
 
   // Add dynamic balls
-  const material = commands.spawn().add(new Material([1, 0.2, 0.5, 1]));
+  const material = commands.spawn().add(new Material([1, 0.2, 0.5, 1], 0, 0));
 
   function createBall(radius: number, translation: [number, number, number]) {
     const ballGeometry = createSphereGeometry(warehouse, radius);

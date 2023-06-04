@@ -6,10 +6,10 @@ import {
 import { Transform } from "@gltf-transform/extensions";
 import { Warehouse } from "@lattice-engine/core";
 import {
+  Image,
   ImageMimeType,
   Material,
   MaterialAlphaMode,
-  Texture,
   TextureInfo,
 } from "@lattice-engine/scene";
 import { Commands } from "thyseus";
@@ -141,11 +141,11 @@ function createTexture(
 ) {
   if (!gltfTexture) return;
 
-  const image = gltfTexture.getImage();
-  if (!image) return;
+  const imageData = gltfTexture.getImage();
+  if (!imageData) return;
 
-  const texture = new Texture();
-  texture.image.write(image, warehouse);
+  const image = new Image();
+  image.data.write(imageData, warehouse);
 
   const mimeType = gltfTexture.getMimeType();
   const mimeNumber = ImageMimeType[mimeType as keyof typeof ImageMimeType] as
@@ -156,7 +156,7 @@ function createTexture(
     console.warn(`Unsupported mime type: ${mimeType}`);
   }
 
-  texture.mimeType = mimeNumber ?? 0;
+  image.mimeType = mimeNumber ?? 0;
 
-  return commands.spawn().add(texture);
+  return commands.spawn().add(image);
 }

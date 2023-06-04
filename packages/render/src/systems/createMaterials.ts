@@ -149,11 +149,11 @@ function loadTexture(
 
 function getTextureObject(
   object: ThreeTexture | null,
-  textureId: bigint,
+  imageId: bigint,
   renderStore: Readonly<RenderStore>
 ) {
   // If the image is already loaded, use it
-  const bitmap = renderStore.images.get(textureId);
+  const bitmap = renderStore.images.get(imageId);
   if (!bitmap) return null;
 
   // If the texture is already created, update it
