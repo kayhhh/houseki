@@ -36,5 +36,5 @@ export function initScene(
     .add(new Transform([0, 0, 0]))
     .addType(GlobalTransform)
     .add(new Parent(scene))
-    .add(new Text("Hello world!"));
+    .add(new Text("Hello world!", undefined, 1, [0, 0, 0]));
 }
