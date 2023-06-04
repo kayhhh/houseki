@@ -104,7 +104,7 @@ export class CharacterController {
 
   @struct.bool declare isGrounded: boolean;
 
-  constructor(offset = 0.01) {
+  constructor(offset = 0.02) {
     initStruct(this);
 
     this.offset = offset;
@@ -113,12 +113,12 @@ export class CharacterController {
     this.minSlopeSlideAngle = (30 * Math.PI) / 180;
 
     this.enableAutostep = true;
-    this.maxStepHeight = 0.5;
+    this.maxStepHeight = 0.3;
     this.minStepWidth = 0.2;
     this.stepOnDynamicBodies = false;
 
     this.enableSnapToGround = true;
-    this.snapToGroundDistance = 0.1;
+    this.snapToGroundDistance = 0.2;
 
     this.applyImpulsesToDynamicBodies = true;
   }

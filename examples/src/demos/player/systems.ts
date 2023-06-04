@@ -65,48 +65,60 @@ export function initScene(
   const scene = commands.spawn().addType(Scene);
   sceneStruct.activeScene = scene.id;
 
-  const groundSize = [16, 1, 16] as const;
-
   const devTexture = new Texture();
   devTexture.image.write(devTextureArray, warehouse);
   const devTextureEntity = commands.spawn().add(devTexture);
 
-  const material = new Material();
-  material.roughness = 1;
-  material.metalness = 0;
-  material.baseColorTextureId = devTextureEntity.id;
-  material.baseColorTextureInfo.wrapS = WEBGL_CONSTANTS.REPEAT;
-  material.baseColorTextureInfo.wrapT = WEBGL_CONSTANTS.REPEAT;
-  material.baseColorTextureInfo.minFilter =
-    WEBGL_CONSTANTS.LINEAR_MIPMAP_LINEAR;
-  material.baseColorTextureInfo.scale.set([
-    groundSize[0] / 2,
-    groundSize[2] / 2,
-  ]);
-  const materialEntity = commands.spawn().add(material);
+  createBox([32, 1, 32], devTextureEntity.id, commands, warehouse).add(
+    new Parent(scene)
+  );
 
-  const geometry = createBoxGeometry(warehouse, groundSize);
-  commands
+  const stairs = commands
     .spawn()
     .add(new Parent(scene))
-    .add(new Transform([0, -groundSize[1] / 2, 0]))
-    .addType(GlobalTransform)
-    .add(new Mesh(materialEntity))
-    .add(geometry)
-    .add(new BoxCollider(groundSize))
-    .addType(StaticBody);
+    .add(new Transform([-2, 0, -6]))
+    .addType(GlobalTransform);
 
-  const boxSize = [2, 2, 2] as const;
-  const geometry2 = createBoxGeometry(warehouse, boxSize);
-  commands
+  createStairs(2, 0.0625, 1, 10, commands, warehouse, devTextureEntity.id)
+    .add(new Parent(stairs))
+    .add(new Transform([0, 0, 0]))
+    .addType(GlobalTransform);
+
+  createStairs(2, 0.125, 0.5, 20, commands, warehouse, devTextureEntity.id)
+    .add(new Parent(stairs))
+    .add(new Transform([-3, 0, 0]))
+    .addType(GlobalTransform);
+
+  createStairs(2, 0.25, 0.5, 20, commands, warehouse, devTextureEntity.id)
+    .add(new Parent(stairs))
+    .add(new Transform([-6, 0, 0]))
+    .addType(GlobalTransform);
+
+  const ramps = commands
     .spawn()
     .add(new Parent(scene))
-    .add(new Transform([6, boxSize[1] / 2, 0]))
-    .addType(GlobalTransform)
-    .add(new Mesh(materialEntity))
-    .add(geometry2)
-    .add(new BoxCollider(boxSize))
-    .addType(StaticBody);
+    .add(new Transform([2, 0, -6]))
+    .addType(GlobalTransform);
+
+  createRamp(2, 10, 1, 15, commands, warehouse, devTextureEntity.id)
+    .add(new Parent(ramps))
+    .add(new Transform([0, 0, 0]))
+    .addType(GlobalTransform);
+
+  createRamp(2, 10, 1, 30, commands, warehouse, devTextureEntity.id)
+    .add(new Parent(ramps))
+    .add(new Transform([3, 0, 0]))
+    .addType(GlobalTransform);
+
+  createRamp(2, 10, 1, 45, commands, warehouse, devTextureEntity.id)
+    .add(new Parent(ramps))
+    .add(new Transform([6, 0, 0]))
+    .addType(GlobalTransform);
+
+  createRamp(2, 10, 1, 60, commands, warehouse, devTextureEntity.id)
+    .add(new Parent(ramps))
+    .add(new Transform([9, 0, 0]))
+    .addType(GlobalTransform);
 
   // Create player body
   const spawn = [0, 4, 0] as const;
@@ -167,11 +179,97 @@ export function initScene(
   commands
     .spawn()
     .add(new Parent(scene))
-    .add(new Transform([0, 3, -4]))
-    .add(new TargetTransform([0, 3, -4]))
+    .add(new Transform([0, 3, 8]))
+    .add(new TargetTransform([0, 3, 8]))
     .addType(GlobalTransform)
     .add(ballGeometry)
     .addType(Mesh)
     .add(new SphereCollider(ballRadius))
     .addType(DynamicBody);
+}
+
+function createRamp(
+  rampWidth: number,
+  rampHeight: number,
+  rampDepth: number,
+  rampAngle: number,
+  commands: Commands,
+  warehouse: Readonly<Warehouse>,
+  textureId: bigint
+) {
+  const ramp = commands.spawn();
+
+  // Angle -> quaternion
+  const angle = -((90 - rampAngle) * Math.PI) / 180;
+  const x = Math.sin(angle / 2);
+  const y = 0;
+  const z = 0;
+  const w = Math.cos(angle / 2);
+
+  createBox(
+    [rampWidth, rampHeight, rampDepth],
+    textureId,
+    commands,
+    warehouse,
+    new Transform([0, 0, 0], [x, y, z, w])
+  ).add(new Parent(ramp));
+
+  return ramp;
+}
+
+function createStairs(
+  stairWidth: number,
+  stairHeight: number,
+  stairDepth: number,
+  steps: number,
+  commands: Commands,
+  warehouse: Readonly<Warehouse>,
+  textureId: bigint
+) {
+  const stairs = commands.spawn();
+
+  for (let i = 0; i < steps; i++) {
+    createBox(
+      [stairWidth, stairHeight, stairDepth],
+      textureId,
+      commands,
+      warehouse,
+      new Transform([
+        0,
+        stairHeight * i + stairHeight / 2,
+        -stairDepth * i + stairDepth / 2,
+      ])
+    ).add(new Parent(stairs));
+  }
+
+  return stairs;
+}
+
+function createBox(
+  size: [number, number, number],
+  textureId: bigint,
+  commands: Commands,
+  warehouse: Readonly<Warehouse>,
+  transform?: Transform
+) {
+  const material = new Material();
+  material.roughness = 1;
+  material.metalness = 0;
+  material.baseColorTextureId = textureId;
+  material.baseColorTextureInfo.wrapS = WEBGL_CONSTANTS.REPEAT;
+  material.baseColorTextureInfo.wrapT = WEBGL_CONSTANTS.REPEAT;
+  material.baseColorTextureInfo.minFilter =
+    WEBGL_CONSTANTS.LINEAR_MIPMAP_LINEAR;
+  material.baseColorTextureInfo.scale.set([size[2] / 2, size[0] / 2]);
+
+  const materialEntity = commands.spawn().add(material);
+
+  return commands
+    .spawn()
+    .add(transform ?? new Transform([0, -size[1] / 2, 0]))
+    .addType(GlobalTransform)
+    .add(new Mesh(materialEntity))
+    .add(createBoxGeometry(warehouse, size))
+    .add(new BoxCollider(size))
+    .addType(StaticBody);
 }
