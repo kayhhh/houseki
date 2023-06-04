@@ -1,12 +1,16 @@
 /// <reference types="../../troika.d.ts" />
 
 import { RenderStore } from "@lattice-engine/render";
+import { OverrideMaterialManager } from "postprocessing";
 import { Entity, Query, Res } from "thyseus";
 import { Text as TroikaText } from "troika-three-text";
 
 import { Text } from "../components";
 import { TextStore } from "../resources";
 import { AnchorX, AnchorY } from "../types";
+
+// https://github.com/protectwise/troika/tree/main/packages/troika-three-text#postprocessing
+OverrideMaterialManager.workaroundEnabled = true;
 
 export function createText(
   renderStore: Res<RenderStore>,

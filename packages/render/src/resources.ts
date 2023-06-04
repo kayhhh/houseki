@@ -1,3 +1,4 @@
+import { EffectComposer } from "postprocessing";
 import {
   AmbientLight,
   AnimationClip,
@@ -22,6 +23,7 @@ export class RenderStore {
   static DEFAULT_MATERIAL = new MeshStandardMaterial();
 
   renderer = new WebGLRenderer();
+  composer = new EffectComposer(this.renderer);
 
   readonly perspectiveCameras = new Map<EntityID, PerspectiveCamera>();
   readonly scenes = new Map<EntityID, Scene>();

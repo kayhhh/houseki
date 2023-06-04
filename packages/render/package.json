@@ -20,6 +20,7 @@
   "dependencies": {
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
+    "postprocessing": "^6.31.0",
     "three": "^0.151.3",
     "thyseus": "0.12.0-beta.6"
   },
