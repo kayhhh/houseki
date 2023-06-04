@@ -42,10 +42,12 @@ export function createScene(
         -shadowArea,
         shadowArea,
         shadowArea,
-        -shadowArea
+        -shadowArea,
+        0.1,
+        50
       )
     )
-    .add(new Transform([0, 40, 0]))
+    .add(new Transform([0, 30, 0]))
     .addType(GlobalTransform)
     .add(new Parent(scene));
 
