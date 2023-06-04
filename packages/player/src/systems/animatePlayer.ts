@@ -1,5 +1,5 @@
 import { Time } from "@lattice-engine/core";
-import { CharacterController, Velocity } from "@lattice-engine/physics";
+import { Velocity } from "@lattice-engine/physics";
 import { Parent } from "@lattice-engine/scene";
 import { VrmAnimation } from "@lattice-engine/vrm";
 import { Entity, Mut, Query, Res } from "thyseus";
@@ -9,16 +9,19 @@ import { PlayerAvatar, PlayerBody } from "../components";
 const WALK_SPEED = 5;
 const SPRINT_SPEED = 5;
 const JUMP_SPEED = 5;
+const FALL_THRESHOLD_SECONDS = 0.2;
 
 export function animatePlayer(
   time: Res<Time>,
   avatars: Query<[Entity, Parent, PlayerAvatar]>,
   animations: Query<[Entity, Mut<VrmAnimation>]>,
-  bodies: Query<[Entity, PlayerBody, CharacterController, Velocity]>
+  bodies: Query<[Entity, PlayerBody, Velocity]>
 ) {
   for (const [entity, parent, avatar] of avatars) {
-    for (const [bodyEntity, player, character, velocity] of bodies) {
+    for (const [bodyEntity, player, velocity] of bodies) {
       if (bodyEntity.id !== parent.id) continue;
+
+      const showFallAnimation = player.airTime > FALL_THRESHOLD_SECONDS;
 
       const moveLength = Math.sqrt(
         Math.abs(velocity.x) ** 2 + Math.abs(velocity.z) ** 2
@@ -35,16 +38,14 @@ export function animatePlayer(
         switch (animationEntity.id) {
           case avatar.walkAnimationId: {
             const change =
-              isWalking && character.isGrounded ? WALK_SPEED : -WALK_SPEED;
+              isWalking && !showFallAnimation ? WALK_SPEED : -WALK_SPEED;
             animation.weight += time.mainDelta * change;
             break;
           }
 
           case avatar.sprintAnimationId: {
             const change =
-              isSprinting && character.isGrounded
-                ? SPRINT_SPEED
-                : -SPRINT_SPEED;
+              isSprinting && !showFallAnimation ? SPRINT_SPEED : -SPRINT_SPEED;
             animation.weight = clamp(
               animation.weight + time.mainDelta * change
             );
@@ -52,7 +53,7 @@ export function animatePlayer(
           }
 
           case avatar.jumpAnimationId: {
-            const change = character.isGrounded ? -JUMP_SPEED : JUMP_SPEED;
+            const change = showFallAnimation ? JUMP_SPEED : -JUMP_SPEED;
             animation.weight += time.mainDelta * change;
             break;
           }

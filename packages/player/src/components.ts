@@ -20,6 +20,11 @@ export class PlayerBody {
   @struct.substruct(Vec3) declare spawnPoint: Vec3;
 
   /**
+   * Stores how long the player has been in the air.
+   */
+  @struct.f32 declare airTime: number;
+
+  /**
    * Teleport the player to spawn if they fall out of the world.
    */
   @struct.bool declare enableVoidTeleport: boolean;
