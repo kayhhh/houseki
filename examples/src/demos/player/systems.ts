@@ -30,7 +30,6 @@ import {
   Mesh,
   Parent,
   PerspectiveCamera,
-  Scene,
   SceneStruct,
   Transform,
 } from "lattice-engine/scene";
@@ -38,6 +37,7 @@ import { Vrm } from "lattice-engine/vrm";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createBoxGeometry } from "../../utils/createBoxGeometry";
+import { createScene } from "../../utils/createScene";
 import { createSphereGeometry } from "../../utils/createSphereGeometry";
 
 const devTextureFetch = await fetch("/DevGrid.png");
@@ -56,15 +56,7 @@ export function initScene(
 ) {
   physicsConfig.debug = true;
 
-  // Set canvas
-  const canvas = document.querySelector("canvas");
-  if (!canvas) throw new Error("Canvas not found");
-  coreStore.canvas = canvas;
-
-  // Create scene
-  const skybox = commands.spawn().add(new Image("/Skybox.jpg"));
-  const scene = commands.spawn().add(new Scene(skybox));
-  sceneStruct.activeScene = scene.id;
+  const scene = createScene(commands, coreStore, sceneStruct, 4096, 16);
 
   const devTexture = new Image();
   devTexture.data.write(devTextureArray, warehouse);
@@ -80,7 +72,7 @@ export function initScene(
     .add(new Transform([-2, 0, -6]))
     .addType(GlobalTransform);
 
-  createStairs(2, 0.0625, 1, 10, commands, warehouse, devTextureEntity.id)
+  createStairs(2, 0.125, 1, 10, commands, warehouse, devTextureEntity.id)
     .add(new Parent(stairs))
     .add(new Transform([0, 0, 0]))
     .addType(GlobalTransform);

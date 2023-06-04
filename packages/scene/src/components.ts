@@ -259,3 +259,64 @@ export class KeyframeTrack {
 
   @struct.substruct(Resource) declare values: Resource<Float32Array>;
 }
+
+@struct
+export class AmbientLight {
+  @struct.array({ length: 3, type: "f32" }) declare color: Float32Array;
+  @struct.f32 declare intensity: number;
+
+  constructor(color = [1, 1, 1], intensity = 1) {
+    initStruct(this);
+
+    this.color.set(color);
+    this.intensity = intensity;
+  }
+}
+
+@struct
+export class DirectionalLight {
+  @struct.array({ length: 3, type: "f32" }) declare color: Float32Array;
+  @struct.f32 declare intensity: number;
+
+  constructor(color = [1, 1, 1], intensity = 1) {
+    initStruct(this);
+
+    this.color.set(color);
+    this.intensity = intensity;
+  }
+}
+
+@struct
+export class ShadowMap {
+  @struct.u16 declare mapSize: number;
+  @struct.f32 declare bias: number;
+
+  @struct.f32 declare left: number;
+  @struct.f32 declare right: number;
+  @struct.f32 declare top: number;
+  @struct.f32 declare bottom: number;
+  @struct.f32 declare near: number;
+  @struct.f32 declare far: number;
+
+  constructor(
+    mapSize = 2048,
+    left = -5,
+    right = 5,
+    top = 5,
+    bottom = -5,
+    near = 0.1,
+    far = 1000,
+    bias = -0.0001
+  ) {
+    initStruct(this);
+
+    this.mapSize = mapSize;
+    this.left = left;
+    this.right = right;
+    this.top = top;
+    this.bottom = bottom;
+    this.near = near;
+    this.far = far;
+    this.bias = bias;
+  }
+}

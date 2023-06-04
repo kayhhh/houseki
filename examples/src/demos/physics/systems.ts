@@ -8,18 +8,17 @@ import {
 } from "lattice-engine/physics";
 import {
   GlobalTransform,
-  Image,
   Material,
   Mesh,
   Parent,
   PerspectiveCamera,
-  Scene,
   SceneStruct,
   Transform,
 } from "lattice-engine/scene";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createRoom } from "../../utils/createRoom";
+import { createScene } from "../../utils/createScene";
 import { createSphereGeometry } from "../../utils/createSphereGeometry";
 
 /**
@@ -34,15 +33,7 @@ export function initScene(
 ) {
   physicsConfig.debug = true;
 
-  // Set canvas
-  const canvas = document.querySelector("canvas");
-  if (!canvas) throw new Error("Canvas not found");
-  coreStore.canvas = canvas;
-
-  // Create scene
-  const skybox = commands.spawn().add(new Image("/Skybox.jpg"));
-  const scene = commands.spawn().add(new Scene(skybox));
-  sceneStruct.activeScene = scene.id;
+  const scene = createScene(commands, coreStore, sceneStruct);
 
   // Create camera
   const camera = commands

@@ -1,7 +1,9 @@
 import {
+  AmbientLight,
   AnimationClip,
   AnimationMixer,
   BufferGeometry,
+  DirectionalLight,
   KeyframeTrack,
   LineBasicMaterial,
   LineSegments,
@@ -33,6 +35,8 @@ export class RenderStore {
   readonly animationMixers = new Map<EntityID, AnimationMixer>();
   readonly animationClips = new Map<EntityID, AnimationClip>();
   readonly keyframeTracks = new Map<EntityID, KeyframeTrack>();
+  readonly ambientLights = new Map<EntityID, AmbientLight>();
+  readonly directionalLights = new Map<EntityID, DirectionalLight>();
 }
 
 @struct

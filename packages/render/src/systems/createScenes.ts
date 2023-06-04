@@ -1,8 +1,6 @@
 import { Scene } from "@lattice-engine/scene";
 import {
-  AmbientLight,
   CanvasTexture,
-  DirectionalLight,
   EquirectangularReflectionMapping,
   Scene as ThreeScene,
   sRGBEncoding,
@@ -29,23 +27,6 @@ export function createScenes(
     // Create new objects
     if (!object) {
       object = new ThreeScene();
-
-      // TODO: Move lights into ECS
-      const directionalLight = new DirectionalLight(0xffffff, 0.75);
-      directionalLight.position.multiplyScalar(30);
-      directionalLight.castShadow = true;
-      directionalLight.shadow.mapSize.set(2048, 2048);
-      directionalLight.shadow.camera.near = 0.1;
-      directionalLight.shadow.camera.far = 100;
-      directionalLight.shadow.camera.left = -8;
-      directionalLight.shadow.camera.right = 8;
-      directionalLight.shadow.camera.top = 8;
-      directionalLight.shadow.camera.bottom = -8;
-      directionalLight.shadow.bias = -0.0001;
-
-      object.add(new AmbientLight(0xffffff, 0.25));
-      object.add(directionalLight);
-
       renderStore.scenes.set(entity.id, object);
     }
 
