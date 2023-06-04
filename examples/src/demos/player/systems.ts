@@ -33,6 +33,7 @@ import {
   SceneStruct,
   Transform,
 } from "lattice-engine/scene";
+import { Text } from "lattice-engine/text";
 import { Vrm } from "lattice-engine/vrm";
 import { Commands, Mut, Res } from "thyseus";
 
@@ -207,13 +208,20 @@ function createRamp(
     new Transform([0, 0, 0], [x, y, z, w])
   ).add(new Parent(ramp));
 
+  commands
+    .spawn()
+    .add(new Parent(ramp))
+    .add(new Transform([0, 3, 0]))
+    .addType(GlobalTransform)
+    .add(new Text(`Angle: ${rampAngle}°`, undefined, 0.25));
+
   return ramp;
 }
 
 function createStairs(
   stairWidth: number,
-  stairHeight: number,
-  stairDepth: number,
+  stepHeight: number,
+  stepWidth: number,
   steps: number,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
@@ -223,17 +231,30 @@ function createStairs(
 
   for (let i = 0; i < steps; i++) {
     createBox(
-      [stairWidth, stairHeight, stairDepth],
+      [stairWidth, stepHeight, stepWidth],
       textureId,
       commands,
       warehouse,
       new Transform([
         0,
-        stairHeight * i + stairHeight / 2,
-        -stairDepth * i + stairDepth / 2,
+        stepHeight * i + stepHeight / 2,
+        -stepWidth * i + stepWidth / 2,
       ])
     ).add(new Parent(stairs));
   }
+
+  commands
+    .spawn()
+    .add(new Parent(stairs))
+    .add(new Transform([0, 3, 0]))
+    .addType(GlobalTransform)
+    .add(
+      new Text(
+        `Step height: ${stepHeight}\nStep width: ${stepWidth}`,
+        undefined,
+        0.25
+      )
+    );
 
   return stairs;
 }

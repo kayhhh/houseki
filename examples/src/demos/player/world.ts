@@ -1,6 +1,7 @@
 import { Engine, LatticeSchedules } from "lattice-engine/core";
 import { physicsPlugin } from "lattice-engine/physics";
 import { playerPlugin } from "lattice-engine/player";
+import { textPlugin } from "lattice-engine/text";
 import { defaultPlugin } from "lattice-engine/utils";
 import { vrmPlugin } from "lattice-engine/vrm";
 
@@ -13,6 +14,7 @@ export const world = await Engine.createWorld()
   .addPlugin(physicsPlugin)
   .addPlugin(playerPlugin)
   .addPlugin(vrmPlugin)
+  .addPlugin(textPlugin)
   .addSystemsToSchedule(LatticeSchedules.Startup, initScene)
   .addSystems(statsSystem)
   .addSystems(loadingSystem)
