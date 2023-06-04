@@ -5,6 +5,7 @@ import {
   EffectPass,
   RenderPass,
   SMAAEffect,
+  SMAAPreset,
 } from "postprocessing";
 import { PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from "three";
 import { Mut, Res, SystemRes } from "thyseus";
@@ -13,7 +14,10 @@ import { RenderStats, RenderStore } from "../resources";
 
 class LocalStore {
   readonly renderPass = new RenderPass();
-  readonly effectPass = new EffectPass(undefined, new SMAAEffect());
+  readonly effectPass = new EffectPass(
+    undefined,
+    new SMAAEffect({ preset: SMAAPreset.HIGH })
+  );
 }
 
 /**
