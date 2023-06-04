@@ -1,5 +1,6 @@
 import { CoreStore } from "lattice-engine/core";
 import { Gltf } from "lattice-engine/gltf";
+import { N8AOPass } from "lattice-engine/n8ao";
 import { OrbitControls } from "lattice-engine/orbit";
 import {
   GlobalTransform,
@@ -26,7 +27,9 @@ export function initScene(
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
-  const scene = createScene(commands, coreStore, sceneStruct);
+  const scene = createScene(commands, coreStore, sceneStruct, 0);
+
+  commands.spawn().add(new N8AOPass());
 
   // Create camera
   const camera = commands

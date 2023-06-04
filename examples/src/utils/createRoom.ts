@@ -6,7 +6,7 @@ import { Commands } from "thyseus";
 import { createBoxGeometry } from "./createBoxGeometry";
 import { Vec3 } from "./types";
 
-const THICKNESS = 0.4;
+const THICKNESS = 0.5;
 
 /**
  * Creates a ground and four walls

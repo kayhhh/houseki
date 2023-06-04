@@ -33,10 +33,15 @@ export function createScene(
     .addType(GlobalTransform)
     .add(new Parent(scene));
 
-  commands
+  const directional = commands
     .spawn()
     .add(new DirectionalLight([1, 1, 1], 0.75))
-    .add(
+    .add(new Transform([0, 30, 0]))
+    .addType(GlobalTransform)
+    .add(new Parent(scene));
+
+  if (shadowResolution > 0) {
+    directional.add(
       new ShadowMap(
         shadowResolution,
         -shadowArea,
@@ -46,10 +51,8 @@ export function createScene(
         0.1,
         50
       )
-    )
-    .add(new Transform([0, 30, 0]))
-    .addType(GlobalTransform)
-    .add(new Parent(scene));
+    );
+  }
 
   return scene;
 }

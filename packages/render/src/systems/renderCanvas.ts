@@ -73,9 +73,10 @@ export function renderCanvas(
   const scene = renderStore.scenes.get(sceneId);
   if (!scene) return;
 
-  localStore.renderPass.mainScene = scene;
   localStore.renderPass.mainCamera = camera;
+  localStore.renderPass.mainScene = scene;
   localStore.effectPass.mainCamera = camera;
+  localStore.effectPass.mainScene = scene;
 
   renderStore.composer.setSize(canvas.width, canvas.height);
   renderStore.composer.render();
