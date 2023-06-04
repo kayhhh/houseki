@@ -15,7 +15,16 @@ export class Text {
   @struct.u8 declare anchorX: AnchorX;
   @struct.u8 declare anchorY: AnchorY;
 
-  constructor(text = "", font = "", fontSize = 1) {
+  @struct.u8 declare colorR: number;
+  @struct.u8 declare colorG: number;
+  @struct.u8 declare colorB: number;
+
+  constructor(
+    text = "",
+    font = "",
+    fontSize = 1,
+    color: [number, number, number] = [255, 255, 255]
+  ) {
     initStruct(this);
 
     this.text = text;
@@ -23,5 +32,8 @@ export class Text {
     this.fontSize = fontSize;
     this.anchorX = AnchorX.Center;
     this.anchorY = AnchorY.Middle;
+    this.colorR = color[0];
+    this.colorG = color[1];
+    this.colorB = color[2];
   }
 }

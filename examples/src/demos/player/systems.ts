@@ -213,7 +213,7 @@ function createRamp(
     .add(new Parent(ramp))
     .add(new Transform([0, 3, 0]))
     .addType(GlobalTransform)
-    .add(new Text(`Angle: ${rampAngle}°`, undefined, 0.25));
+    .add(new Text(`Angle: ${rampAngle}°`, undefined, 0.3));
 
   return ramp;
 }
@@ -250,9 +250,9 @@ function createStairs(
     .addType(GlobalTransform)
     .add(
       new Text(
-        `Step height: ${stepHeight}\nStep width: ${stepWidth}`,
+        `Step height: ${stepHeight}m\nStep width: ${stepWidth}m`,
         undefined,
-        0.25
+        0.3
       )
     );
 

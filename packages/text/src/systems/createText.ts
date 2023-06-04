@@ -72,6 +72,8 @@ export function createText(
       }
     }
 
+    object.color = `rgb(${text.colorR}, ${text.colorG}, ${text.colorB})`;
+
     const node = renderStore.nodes.get(entity.id);
     if (node) node.add(object as any);
   }
