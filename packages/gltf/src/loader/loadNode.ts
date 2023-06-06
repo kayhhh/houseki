@@ -1,7 +1,7 @@
 import { Node } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
 import { GlobalTransform, Parent, Transform } from "@lattice-engine/scene";
-import { Commands } from "thyseus";
+import { Commands, dropStruct } from "thyseus";
 
 import { LoadingContext } from "./context";
 import { loadMesh } from "./loadMesh";
@@ -27,9 +27,12 @@ export function loadNode(
 
   const entity = commands
     .spawn()
+    .add(transform)
     .addType(GlobalTransform)
-    .add(parentComponent)
-    .add(transform);
+    .add(parentComponent);
+
+  dropStruct(transform);
+  dropStruct(parentComponent);
 
   context.nodes.set(node, entity.id);
 

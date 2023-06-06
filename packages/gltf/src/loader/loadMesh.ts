@@ -7,7 +7,7 @@ import {
   Parent,
   Transform,
 } from "@lattice-engine/scene";
-import { Commands, EntityCommands } from "thyseus";
+import { Commands, dropStruct, EntityCommands } from "thyseus";
 
 import { LoadingContext } from "./context";
 import { loadMaterial } from "./loadMaterial";
@@ -65,6 +65,10 @@ export function loadMesh(
       .add(parent)
       .add(mesh)
       .add(geometry);
+
+    dropStruct(parent);
+    dropStruct(mesh);
+    dropStruct(geometry);
 
     context.meshes.push(meshEnity.id);
   });

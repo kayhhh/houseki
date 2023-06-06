@@ -6,7 +6,7 @@ import {
   KeyframePath,
   KeyframeTrack,
 } from "@lattice-engine/scene";
-import { Commands, Entity } from "thyseus";
+import { Commands, dropStruct, Entity } from "thyseus";
 
 import { LoadingContext } from "./context";
 
@@ -17,14 +17,16 @@ export function loadAnimation(
   warehouse: Readonly<Warehouse>,
   context: LoadingContext
 ) {
-  const entity = commands
-    .spawn()
-    .add(new AnimationClip(root.id, animation.getName(), true, true));
+  const clip = new AnimationClip(root.id, animation.getName(), true, true);
+
+  const entity = commands.spawn().add(clip);
   context.animationClips.push(entity.id);
 
-  animation.listChannels().forEach((channel) => {
-    const track = new KeyframeTrack();
+  dropStruct(clip);
 
+  const track = new KeyframeTrack();
+
+  animation.listChannels().forEach((channel) => {
     track.clipId = entity.id;
 
     const sampler = channel.getSampler();
@@ -88,4 +90,6 @@ export function loadAnimation(
     const trackEntity = commands.spawn().add(track);
     context.keyframeTracks.push(trackEntity.id);
   });
+
+  dropStruct(track);
 }

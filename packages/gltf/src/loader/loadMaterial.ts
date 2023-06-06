@@ -11,7 +11,7 @@ import {
   MaterialAlphaMode,
   TextureInfo,
 } from "@lattice-engine/scene";
-import { Commands } from "thyseus";
+import { Commands, dropStruct } from "thyseus";
 
 import { LoadingContext } from "./context";
 
@@ -104,6 +104,8 @@ export function loadMaterial(
   const entity = commands.spawn().add(material);
   context.materials.push(entity.id);
 
+  dropStruct(material);
+
   return entity;
 }
 
@@ -148,5 +150,9 @@ function createTexture(
 
   asset.mimeType = gltfTexture.getMimeType();
 
-  return commands.spawn().add(asset).addType(Image);
+  const image = commands.spawn().add(asset).addType(Image);
+
+  dropStruct(asset);
+
+  return image;
 }
