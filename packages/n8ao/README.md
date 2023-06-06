@@ -10,6 +10,6 @@ To add a N8AO pass to your render, just spawn in an entity with the `N8AOPass` c
 import { N8AOPass } from "@lattice-engine/n8ao";
 
 function mySystem(commands: Commands) {
-  commands.spawn().add(new N8AOPass());
+  commands.spawn().addType(N8AOPass);
 }
 ```
