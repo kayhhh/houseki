@@ -14,12 +14,14 @@ export function createSphereColliders(
     ids.push(entity.id);
 
     let object = store.sphereColliders.get(entity.id);
-    const rigidbody = store.getRigidBody(entity.id);
+    const rigidbody = store.getRigidBody(entity.id) ?? null;
 
     // Create new colliders
     if (!object || object.parent() !== rigidbody) {
       // Remove old collider
       if (object) store.world.removeCollider(object, true);
+
+      if (!rigidbody) continue;
 
       const colliderDesc = ColliderDesc.ball(collider.radius);
       object = store.world.createCollider(colliderDesc, rigidbody);

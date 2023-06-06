@@ -14,12 +14,14 @@ export function createCapsuleColliders(
     ids.push(entity.id);
 
     let object = store.capsuleColliders.get(entity.id);
-    const rigidbody = store.getRigidBody(entity.id);
+    const rigidbody = store.getRigidBody(entity.id) ?? null;
 
     // Create new colliders
     if (!object || object.parent() !== rigidbody) {
       // Remove old collider
       if (object) store.world.removeCollider(object, true);
+
+      if (!rigidbody) continue;
 
       const colliderDesc = ColliderDesc.capsule(
         collider.height / 2,

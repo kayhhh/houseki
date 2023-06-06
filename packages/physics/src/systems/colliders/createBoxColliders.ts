@@ -14,12 +14,14 @@ export function createBoxColliders(
     ids.push(entity.id);
 
     let object = store.boxColliders.get(entity.id);
-    const rigidbody = store.getRigidBody(entity.id);
+    const rigidbody = store.getRigidBody(entity.id) ?? null;
 
     // Create new colliders
     if (!object || object.parent() !== rigidbody) {
       // Remove old collider
       if (object) store.world.removeCollider(object, true);
+
+      if (!rigidbody) continue;
 
       const colliderDesc = ColliderDesc.cuboid(
         collider.size.x / 2,
