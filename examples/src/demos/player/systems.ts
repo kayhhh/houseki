@@ -2,26 +2,12 @@ import { Asset, CoreStore, Warehouse } from "lattice-engine/core";
 import { InputStruct } from "lattice-engine/input";
 import {
   BoxCollider,
-  CapsuleCollider,
-  CharacterController,
   DynamicBody,
-  KinematicBody,
   PhysicsConfig,
-  Raycast,
   SphereCollider,
   StaticBody,
   TargetTransform,
-  Velocity,
 } from "lattice-engine/physics";
-import {
-  PlayerAvatar,
-  PlayerBody,
-  PlayerCamera,
-  PlayerCameraMode,
-  PlayerCameraView,
-  TargetPosition,
-  TargetRotation,
-} from "lattice-engine/player";
 import { WEBGL_CONSTANTS } from "lattice-engine/render";
 import {
   GlobalTransform,
@@ -29,20 +15,16 @@ import {
   Material,
   Mesh,
   Parent,
-  PerspectiveCamera,
   SceneStruct,
   Transform,
 } from "lattice-engine/scene";
 import { Text } from "lattice-engine/text";
-import { Vrm } from "lattice-engine/vrm";
 import { Commands, dropStruct, Mut, Res } from "thyseus";
 
+import { createPlayer } from "../../utils/createPlayer";
 import { createScene } from "../../utils/createScene";
 import { createBoxGeometry, createSphereGeometry } from "../../utils/geometry";
 
-/**
- * System to initialize the scene.
- */
 export function initScene(
   commands: Commands,
   warehouse: Res<Warehouse>,
@@ -119,78 +101,10 @@ export function initScene(
     .add(builder.transform.set([9, 0, 0]))
     .addType(GlobalTransform);
 
-  const spawn = [0, 4, 0] as const;
-  const playerHeight = 1.6;
-  const playerWidth = 0.4;
-
-  const player = new PlayerBody();
-  player.spawnPoint.fromArray(spawn);
-
-  const targetTransform = new TargetTransform();
-
-  const body = commands
-    .spawn()
-    .add(builder.parent.setEntity(scene))
-    .add(builder.transform.set(spawn))
-    .add(targetTransform.set(spawn))
-    .addType(GlobalTransform)
-    .addType(Velocity)
-    .add(new CapsuleCollider(playerWidth, playerHeight - playerWidth * 2))
-    .addType(KinematicBody)
-    .addType(CharacterController)
-    .add(player);
-
-  dropStruct(player);
-
-  const playerAvatar = new PlayerAvatar();
-  playerAvatar.idleAnimation = "/animation/Idle.fbx";
-  playerAvatar.jumpAnimation = "/animation/Falling.fbx";
-  playerAvatar.leftWalkAnimation = "/animation/LeftWalk.fbx";
-  playerAvatar.rightWalkAnimation = "/animation/RightWalk.fbx";
-  playerAvatar.sprintAnimation = "/animation/Sprint.fbx";
-  playerAvatar.walkAnimation = "/animation/Walk.fbx";
-
-  const targetRotation = new TargetRotation();
-
-  const vrm = new Vrm("/k-robot.vrm", true);
-
-  commands
-    .spawn()
-    .add(builder.transform.set([0, -playerHeight / 2, 0]))
-    .addType(GlobalTransform)
-    .add(targetRotation.set(0, 0, 0, 1))
-    .add(builder.parent.setEntity(body))
-    .add(vrm)
-    .add(playerAvatar);
-
-  dropStruct(playerAvatar);
-  dropStruct(vrm);
-
-  const playerCamera = new PlayerCamera(
-    PlayerCameraMode.Both,
-    PlayerCameraView.ThirdPerson
-  );
-
-  const camera = commands
-    .spawn()
-    .addType(Transform)
-    .addType(GlobalTransform)
-    .addType(TargetPosition)
-    .add(targetRotation.set(0, 0, 0, 1))
-    .add(builder.parent.setEntity(body))
-    .addType(PerspectiveCamera)
-    .add(playerCamera)
-    .addType(Raycast);
-
-  dropStruct(playerCamera);
-  dropStruct(targetRotation);
-
-  sceneStruct.activeCamera = camera.id;
-  inputStruct.enablePointerLock = true;
-
   const ballRadius = 1;
   const ballGeometry = createSphereGeometry(warehouse, ballRadius);
   const sphereCollider = new SphereCollider(ballRadius);
+  const targetTransform = new TargetTransform();
 
   commands
     .spawn()
@@ -206,6 +120,8 @@ export function initScene(
   dropStruct(ballGeometry);
   dropStruct(sphereCollider);
   dropStruct(targetTransform);
+
+  createPlayer([0, 4, 0], scene, commands, sceneStruct, inputStruct);
 
   builder.destroy();
 }
