@@ -101,10 +101,14 @@ export class Mesh {
 export class LineSegments {
   @struct.u64 declare materialId: bigint; // Entity ID
 
+  @struct.bool declare frustumCulled: boolean;
+
   constructor(material?: Entity | EntityCommands) {
     initStruct(this);
 
     if (material) this.materialId = material.id;
+
+    this.frustumCulled = true;
   }
 }
 

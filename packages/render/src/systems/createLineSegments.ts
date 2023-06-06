@@ -22,6 +22,8 @@ export function createLineSegments(
     }
 
     // Sync object properties
+    object.frustumCulled = lineSegments.frustumCulled;
+
     const geometry = renderStore.geometries.get(entity.id);
     if (geometry) object.geometry = geometry;
 

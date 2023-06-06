@@ -8,7 +8,16 @@ import {
   SceneStruct,
   Transform,
 } from "@lattice-engine/scene";
-import { Commands, Entity, Query, Res, struct, SystemRes, With } from "thyseus";
+import {
+  Commands,
+  dropStruct,
+  Entity,
+  Query,
+  Res,
+  struct,
+  SystemRes,
+  With,
+} from "thyseus";
 
 import { PhysicsConfig, PhysicsStore } from "../resources";
 
@@ -48,15 +57,23 @@ export function generateDebug(
     const parent = new Parent();
     parent.id = sceneStruct.activeScene;
 
+    const lineSegments = new LineSegments();
+    lineSegments.frustumCulled = false;
+
     const lines = commands
       .spawn()
       .add(material)
       .addType(Geometry)
-      .addType(LineSegments)
+      .add(lineSegments)
       .addType(Transform)
       .addType(GlobalTransform)
       .add(parent);
+
     localStore.linesId = lines.id;
+
+    dropStruct(material);
+    dropStruct(parent);
+    dropStruct(lineSegments);
   }
 
   for (const [entity, geometry] of lines) {
