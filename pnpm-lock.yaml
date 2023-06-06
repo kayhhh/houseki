@@ -218,6 +218,13 @@ importers:
       '@lattice-engine/vrm':
         specifier: workspace:^
         version: link:../vrm
+      thyseus:
+        specifier: ^0.12.1
+        version: 0.12.1
+    optionalDependencies:
+      three:
+        specifier: ^0.151.3
+        version: 0.151.3
     devDependencies:
       typescript:
         specifier: ~5.0.4
