@@ -13,6 +13,9 @@ importers:
       eslint:
         specifier: ^8.40.0
         version: 8.40.0
+      eslint-config-prettier:
+        specifier: ^8.8.0
+        version: 8.8.0(eslint@8.40.0)
       eslint-config-turbo:
         specifier: ^1.9.8
         version: 1.9.8(eslint@8.40.0)
@@ -2309,6 +2312,15 @@ packages:
   /escape-string-regexp@4.0.0:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
+    dev: true
+
+  /eslint-config-prettier@8.8.0(eslint@8.40.0):
+    resolution: {integrity: sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA==}
+    hasBin: true
+    peerDependencies:
+      eslint: '>=7.0.0'
+    dependencies:
+      eslint: 8.40.0
     dev: true
 
   /eslint-config-turbo@1.9.8(eslint@8.40.0):

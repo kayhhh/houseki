@@ -2,17 +2,18 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:jsonc/recommended-with-jsonc",
-    "turbo",
     "plugin:import/recommended",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+    "plugin:jsonc/recommended-with-jsonc",
+    "prettier",
+    "turbo"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "@typescript-eslint",
     "simple-import-sort",
-    "unused-imports",
-    "sort-keys-fix"
+    "sort-keys-fix",
+    "unused-imports"
   ],
   "root": true,
   "rules": {
