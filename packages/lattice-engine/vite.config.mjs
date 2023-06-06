@@ -36,7 +36,6 @@ export default defineConfig({
         "@lattice-engine/text",
         "@lattice-engine/utils",
         "@lattice-engine/vrm",
-        "thyseus",
       ],
     },
     target: "esnext",

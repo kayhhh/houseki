@@ -17,19 +17,19 @@
     "build": "vite build --emptyOutDir",
     "dev": "vite build --watch"
   },
-  "dependencies": {
-    "@lattice-engine/input": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
-    "three": "^0.151.3",
-    "thyseus": "^0.12.1"
-  },
   "devDependencies": {
     "@thyseus/transformer-rollup": "^0.12.0",
     "@types/three": "^0.151.0",
     "typescript": "~5.0.4",
     "vite": "^4.3.8",
     "vite-plugin-dts": "^2.3.0"
+  },
+  "peerDependencies": {
+    "@lattice-engine/input": "workspace:^",
+    "@lattice-engine/render": "workspace:^",
+    "@lattice-engine/scene": "workspace:^",
+    "three": "^0.151.3",
+    "thyseus": "^0.12.1"
   },
   "publishConfig": {
     "access": "public"

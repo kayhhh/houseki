@@ -93,8 +93,7 @@
     "@lattice-engine/scene": "workspace:^",
     "@lattice-engine/text": "workspace:^",
     "@lattice-engine/utils": "workspace:^",
-    "@lattice-engine/vrm": "workspace:^",
-    "thyseus": "^0.12.1"
+    "@lattice-engine/vrm": "workspace:^"
   },
   "devDependencies": {
     "typescript": "~5.0.4",
