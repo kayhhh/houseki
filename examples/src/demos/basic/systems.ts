@@ -10,8 +10,8 @@ import {
 } from "lattice-engine/scene";
 import { Commands, dropStruct, Mut, Res } from "thyseus";
 
-import { createBoxGeometry } from "../../utils/createBoxGeometry";
 import { createScene } from "../../utils/createScene";
+import { createBoxGeometry } from "../../utils/geometry";
 
 /**
  * System to initialize the scene.

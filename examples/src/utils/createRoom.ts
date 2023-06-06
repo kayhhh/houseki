@@ -3,7 +3,7 @@ import { BoxCollider, StaticBody } from "lattice-engine/physics";
 import { GlobalTransform, Mesh, Parent, Transform } from "lattice-engine/scene";
 import { Commands } from "thyseus";
 
-import { createBoxGeometry } from "./createBoxGeometry";
+import { createBoxGeometry } from "./geometry";
 import { Vec3 } from "./types";
 
 const THICKNESS = 0.5;

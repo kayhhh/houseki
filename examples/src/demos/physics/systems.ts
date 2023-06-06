@@ -19,7 +19,7 @@ import { Commands, dropStruct, Mut, Res } from "thyseus";
 
 import { createRoom } from "../../utils/createRoom";
 import { createScene } from "../../utils/createScene";
-import { createSphereGeometry } from "../../utils/createSphereGeometry";
+import { createSphereGeometry } from "../../utils/geometry";
 
 /**
  * System to initialize the scene.

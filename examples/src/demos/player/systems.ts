@@ -37,9 +37,8 @@ import { Text } from "lattice-engine/text";
 import { Vrm } from "lattice-engine/vrm";
 import { Commands, dropStruct, Mut, Res } from "thyseus";
 
-import { createBoxGeometry } from "../../utils/createBoxGeometry";
 import { createScene } from "../../utils/createScene";
-import { createSphereGeometry } from "../../utils/createSphereGeometry";
+import { createBoxGeometry, createSphereGeometry } from "../../utils/geometry";
 
 /**
  * System to initialize the scene.
