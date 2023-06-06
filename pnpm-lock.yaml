@@ -28,9 +28,6 @@ importers:
       eslint-plugin-jsonc:
         specifier: ^2.8.0
         version: 2.8.0(eslint@8.40.0)
-      eslint-plugin-log-filenames:
-        specifier: ^1.0.6
-        version: 1.0.6(eslint@8.40.0)
       eslint-plugin-package-json:
         specifier: ^0.1.4
         version: 0.1.4(eslint@8.40.0)
@@ -2439,14 +2436,6 @@ packages:
       eslint: 8.40.0
       jsonc-eslint-parser: 2.3.0
       natural-compare: 1.4.0
-    dev: true
-
-  /eslint-plugin-log-filenames@1.0.6(eslint@8.40.0):
-    resolution: {integrity: sha512-6a2NMpYn+dWJBL7ZSAbhjdnExCOn1ECMAgXjIsiozuCjZwQ1jq1+geGAvorjPzWLHwM6yAGR2mMpTCFxlVN0TQ==}
-    peerDependencies:
-      eslint: '>=3'
-    dependencies:
-      eslint: 8.40.0
     dev: true
 
   /eslint-plugin-package-json@0.1.4(eslint@8.40.0):
