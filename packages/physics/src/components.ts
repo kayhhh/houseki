@@ -109,8 +109,8 @@ export class CharacterController {
 
     this.offset = offset;
 
-    this.maxSlopeClimbAngle = (45 * Math.PI) / 180;
-    this.minSlopeSlideAngle = (30 * Math.PI) / 180;
+    this.maxSlopeClimbAngle = (60 * Math.PI) / 180;
+    this.minSlopeSlideAngle = (50 * Math.PI) / 180;
 
     this.enableAutostep = true;
     this.maxStepHeight = 0.3;

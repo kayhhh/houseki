@@ -7,7 +7,6 @@ import {
   StaticBody,
 } from "lattice-engine/physics";
 import {
-  Geometry,
   GlobalTransform,
   Mesh,
   Parent,
@@ -58,10 +57,7 @@ export function initScene(
 }
 
 export function addPhysics(
-  meshes: Query<
-    Entity,
-    [With<[Mesh, Geometry]>, Without<[MeshCollider, StaticBody]>]
-  >
+  meshes: Query<Entity, [With<Mesh>, Without<[MeshCollider, StaticBody]>]>
 ) {
   for (const entity of meshes) {
     entity.addType(MeshCollider).addType(StaticBody);
