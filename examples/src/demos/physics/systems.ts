@@ -21,9 +21,6 @@ import { createRoom } from "../../utils/createRoom";
 import { createScene } from "../../utils/createScene";
 import { createSphereGeometry } from "../../utils/geometry";
 
-/**
- * System to initialize the scene.
- */
 export function initScene(
   commands: Commands,
   warehouse: Res<Warehouse>,

@@ -13,9 +13,6 @@ import { Commands, dropStruct, Mut, Res } from "thyseus";
 import { createScene } from "../../utils/createScene";
 import { createBoxGeometry } from "../../utils/geometry";
 
-/**
- * System to initialize the scene.
- */
 export function initScene(
   commands: Commands,
   warehouse: Res<Warehouse>,

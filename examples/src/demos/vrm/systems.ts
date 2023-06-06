@@ -12,9 +12,6 @@ import { Commands, dropStruct, Mut, Res } from "thyseus";
 
 import { createScene } from "../../utils/createScene";
 
-/**
- * System to initialize the scene.
- */
 export function initScene(
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,

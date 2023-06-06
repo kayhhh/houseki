@@ -19,9 +19,6 @@ export const selectedModel = {
   uri: "",
 };
 
-/**
- * System to initialize the scene.
- */
 export function initScene(
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
