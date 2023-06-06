@@ -15,7 +15,7 @@ import {
   SceneStruct,
   Transform,
 } from "lattice-engine/scene";
-import { Commands, Mut, Res } from "thyseus";
+import { Commands, dropStruct, Mut, Res } from "thyseus";
 
 import { createRoom } from "../../utils/createRoom";
 import { createScene } from "../../utils/createScene";
@@ -35,33 +35,46 @@ export function initScene(
 
   const scene = createScene(commands, coreStore, sceneStruct);
 
-  // Create camera
+  const transform = new Transform([0, 6, 8]);
+
   const camera = commands
     .spawn()
-    .add(new Transform([0, 6, 8]))
+    .add(transform)
     .addType(GlobalTransform)
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
+
   sceneStruct.activeCamera = camera.id;
 
-  // Create room
-  const room = createRoom([8, 1, 8], commands, warehouse);
-  room.add(new Parent(scene));
+  const parent = new Parent(scene);
+
+  createRoom([8, 1, 8], commands, warehouse).add(parent);
 
   // Add dynamic balls
-  const material = commands.spawn().add(new Material([1, 0.2, 0.5, 1], 0, 0));
+  const materialComponent = new Material([1, 0.2, 0.5, 1], 0, 0);
+  const material = commands.spawn().add(materialComponent);
+  dropStruct(materialComponent);
+
+  const targetTransform = new TargetTransform();
+  const mesh = new Mesh(material);
+  const sphereCollider = new SphereCollider();
 
   function createBall(radius: number, translation: [number, number, number]) {
     const ballGeometry = createSphereGeometry(warehouse, radius);
+
+    transform.translation.fromArray(translation);
+    targetTransform.translation.fromArray(translation);
+    sphereCollider.radius = radius;
+
     commands
       .spawn()
-      .add(new Parent(scene))
-      .add(new Transform(translation))
+      .add(parent)
+      .add(transform)
+      .add(targetTransform)
       .addType(GlobalTransform)
-      .add(new TargetTransform(translation))
-      .add(new Mesh(material))
+      .add(mesh)
       .add(ballGeometry)
-      .add(new SphereCollider(radius))
+      .add(sphereCollider)
       .addType(DynamicBody);
   }
 
@@ -77,4 +90,10 @@ export function initScene(
 
     createBall(radius, [x, y, z]);
   }
+
+  dropStruct(transform);
+  dropStruct(parent);
+  dropStruct(mesh);
+  dropStruct(targetTransform);
+  dropStruct(sphereCollider);
 }

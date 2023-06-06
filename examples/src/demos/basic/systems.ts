@@ -8,7 +8,7 @@ import {
   SceneStruct,
   Transform,
 } from "lattice-engine/scene";
-import { Commands, Mut, Res } from "thyseus";
+import { Commands, dropStruct, Mut, Res } from "thyseus";
 
 import { createBoxGeometry } from "../../utils/createBoxGeometry";
 import { createScene } from "../../utils/createScene";
@@ -25,20 +25,31 @@ export function initScene(
   const scene = createScene(commands, coreStore, sceneStruct);
 
   // Create camera
+  const cameraTransform = new Transform([0, 0, 5]);
+
   const camera = commands
     .spawn()
-    .add(new Transform([0, 0, 5]))
+    .add(cameraTransform)
     .addType(GlobalTransform)
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
+
+  dropStruct(cameraTransform);
+
   sceneStruct.activeCamera = camera.id;
 
   // Create cube
   const geometry = createBoxGeometry(warehouse);
+  const parent = new Parent(scene);
+
   commands
     .spawn()
     .addType(Transform)
-    .add(new Parent(scene))
+    .addType(GlobalTransform)
+    .add(parent)
     .addType(Mesh)
     .add(geometry);
+
+  dropStruct(geometry);
+  dropStruct(parent);
 }

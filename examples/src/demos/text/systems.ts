@@ -8,7 +8,7 @@ import {
   Transform,
 } from "lattice-engine/scene";
 import { Text } from "lattice-engine/text";
-import { Commands, Mut, Res } from "thyseus";
+import { Commands, dropStruct, Mut, Res } from "thyseus";
 
 import { createScene } from "../../utils/createScene";
 
@@ -22,19 +22,28 @@ export function initScene(
 ) {
   const scene = createScene(commands, coreStore, sceneStruct);
 
+  const transform = new Transform([0, 0, 5]);
+
   const camera = commands
     .spawn()
-    .add(new Transform([0, 0, 5]))
+    .add(transform)
     .addType(GlobalTransform)
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
+
   sceneStruct.activeCamera = camera.id;
 
-  // Create text
+  const parent = new Parent(scene);
+  const text = new Text("Hello world!", undefined, 1, [0, 0, 0]);
+
   commands
     .spawn()
-    .add(new Transform([0, 0, 0]))
+    .add(transform.set([0, 0, 0]))
     .addType(GlobalTransform)
-    .add(new Parent(scene))
-    .add(new Text("Hello world!", undefined, 1, [0, 0, 0]));
+    .add(parent)
+    .add(text);
+
+  dropStruct(transform);
+  dropStruct(parent);
+  dropStruct(text);
 }

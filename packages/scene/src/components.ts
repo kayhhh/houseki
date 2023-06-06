@@ -38,6 +38,18 @@ export class Transform {
     this.rotation.fromArray(rotation);
     this.scale.fromArray(scale);
   }
+
+  set(
+    translation?: Readonly<[number, number, number]>,
+    rotation?: Readonly<[number, number, number, number]>,
+    scale?: Readonly<[number, number, number]>
+  ): this {
+    if (translation) this.translation.fromArray(translation);
+    if (rotation) this.rotation.fromArray(rotation);
+    if (scale) this.scale.fromArray(scale);
+
+    return this;
+  }
 }
 
 /**
@@ -54,6 +66,12 @@ export class Parent {
     initStruct(this);
 
     if (entity) this.id = entity.id;
+  }
+
+  setEntity(entity: Readonly<Entity> | EntityCommands): this {
+    this.id = entity.id;
+
+    return this;
   }
 }
 

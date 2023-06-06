@@ -8,7 +8,7 @@ import {
   Transform,
 } from "lattice-engine/scene";
 import { Vrm } from "lattice-engine/vrm";
-import { Commands, Mut, Res } from "thyseus";
+import { Commands, dropStruct, Mut, Res } from "thyseus";
 
 import { createScene } from "../../utils/createScene";
 
@@ -22,20 +22,28 @@ export function initScene(
 ) {
   const scene = createScene(commands, coreStore, sceneStruct);
 
-  // Create camera
+  const transform = new Transform([0, 1, -3]);
+
   const camera = commands
     .spawn()
-    .add(new Transform([0, 1, -3]))
+    .add(transform)
     .addType(GlobalTransform)
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
+
   sceneStruct.activeCamera = camera.id;
 
-  // Create VRM
+  const parent = new Parent(scene);
+  const vrm = new Vrm("/k-robot.vrm");
+
   commands
     .spawn()
-    .add(new Transform([0, -0.5, 0]))
+    .add(transform.set([0, -0.5, 0]))
     .addType(GlobalTransform)
-    .add(new Parent(scene))
-    .add(new Vrm("/k-robot.vrm"));
+    .add(parent)
+    .add(vrm);
+
+  dropStruct(transform);
+  dropStruct(parent);
+  dropStruct(vrm);
 }

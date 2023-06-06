@@ -10,7 +10,7 @@ import {
   ShadowMap,
   Transform,
 } from "lattice-engine/scene";
-import { Commands } from "thyseus";
+import { Commands, dropStruct } from "thyseus";
 
 export function createScene(
   commands: Commands,
@@ -22,40 +22,67 @@ export function createScene(
   const canvas = document.querySelector("canvas");
   coreStore.canvas = canvas;
 
-  const skybox = commands
-    .spawn()
-    .add(new Asset("/Skybox.jpg", "image/jpeg"))
-    .add(new Image(true));
-  const scene = commands.spawn().add(new Scene(skybox));
+  const skybox = createSkybox(commands);
+
+  const sceneComponent = new Scene(skybox);
+  const scene = commands.spawn().add(sceneComponent);
+  dropStruct(sceneComponent);
+
   sceneStruct.activeScene = scene.id;
+
+  const parent = new Parent(scene);
+  const ambient = new AmbientLight([1, 1, 1], 0.25);
 
   commands
     .spawn()
-    .add(new AmbientLight([1, 1, 1], 0.25))
+    .add(ambient)
     .addType(Transform)
     .addType(GlobalTransform)
-    .add(new Parent(scene));
+    .add(parent);
+
+  dropStruct(ambient);
+
+  const directionalComponent = new DirectionalLight([1, 1, 1], 0.75);
+  const transform = new Transform([0, 30, 0]);
 
   const directional = commands
     .spawn()
-    .add(new DirectionalLight([1, 1, 1], 0.75))
-    .add(new Transform([0, 30, 0]))
+    .add(directionalComponent)
+    .add(transform)
     .addType(GlobalTransform)
-    .add(new Parent(scene));
+    .add(parent);
+
+  dropStruct(transform);
+  dropStruct(directionalComponent);
+  dropStruct(parent);
 
   if (shadowResolution > 0) {
-    directional.add(
-      new ShadowMap(
-        shadowResolution,
-        -shadowArea,
-        shadowArea,
-        shadowArea,
-        -shadowArea,
-        0.1,
-        50
-      )
+    const shadowMap = new ShadowMap(
+      shadowResolution,
+      -shadowArea,
+      shadowArea,
+      shadowArea,
+      -shadowArea,
+      0.1,
+      50
     );
+
+    directional.add(shadowMap);
+
+    dropStruct(shadowMap);
   }
 
   return scene;
+}
+
+function createSkybox(commands: Commands) {
+  const asset = new Asset("/Skybox.jpg", "image/jpeg");
+  const image = new Image(true);
+
+  const skybox = commands.spawn().add(asset).add(image);
+
+  dropStruct(asset);
+  dropStruct(image);
+
+  return skybox;
 }

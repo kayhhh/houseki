@@ -9,7 +9,7 @@ import {
   SceneStruct,
   Transform,
 } from "lattice-engine/scene";
-import { Commands, Mut, Query, Res } from "thyseus";
+import { Commands, dropStruct, Mut, Query, Res } from "thyseus";
 
 import { createScene } from "../../utils/createScene";
 
@@ -29,24 +29,33 @@ export function initScene(
 ) {
   const scene = createScene(commands, coreStore, sceneStruct, 0);
 
-  commands.spawn().add(new N8AOPass());
+  commands.spawn().addType(N8AOPass);
 
   // Create camera
+  const transform = new Transform([0, 2, 4]);
+
   const camera = commands
     .spawn()
-    .add(new Transform([0, 2, 4]))
+    .add(transform)
     .addType(GlobalTransform)
     .addType(PerspectiveCamera)
     .addType(OrbitControls);
+
+  dropStruct(transform);
+
   sceneStruct.activeCamera = camera.id;
 
   // Add node to scene with glTF component
+  const parent = new Parent(scene);
+
   commands
     .spawn()
     .addType(Transform)
     .addType(GlobalTransform)
-    .add(new Parent(scene))
+    .add(parent)
     .addType(Gltf);
+
+  dropStruct(parent);
 }
 
 /**
