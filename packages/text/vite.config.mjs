@@ -17,6 +17,7 @@ export default defineConfig({
         "@lattice-engine/core",
         "@lattice-engine/render",
         "@lattice-engine/scene",
+        "three",
         "thyseus",
       ],
     },
