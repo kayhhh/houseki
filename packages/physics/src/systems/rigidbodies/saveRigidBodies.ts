@@ -11,14 +11,18 @@ import {
 import { PhysicsStore } from "../../resources";
 
 const vec3 = new Vec3();
+const vec3b = new Vec3();
 const quat = new Quat();
 const mat4 = new Mat4();
 
 export function saveRigidBodies(
   store: Res<PhysicsStore>,
   bodies: Query<
-    [Entity, Parent, Mut<Transform>, GlobalTransform],
-    Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>
+    Parent,
+    [
+      With<[Transform, GlobalTransform]>,
+      Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>
+    ]
   >,
   withTarget: Query<
     [Entity, Parent, Mut<TargetTransform>],
@@ -35,7 +39,7 @@ export function saveRigidBodies(
 ) {
   const parentIds = new Set<bigint>();
 
-  for (const [, parent] of bodies) {
+  for (const parent of bodies) {
     parentIds.add(parent.id);
   }
 
@@ -69,8 +73,9 @@ export function saveRigidBodies(
     // Convert to local space
     Vec3.set(vec3, translation.x, translation.y, translation.z);
     Quat.set(quat, rotation.x, rotation.y, rotation.z, rotation.w);
+    Vec3.set(vec3b, transform.scale.x, transform.scale.y, transform.scale.z);
 
-    Mat4.fromRotationTranslation(mat4, quat, vec3);
+    Mat4.fromRotationTranslationScale(mat4, quat, vec3, vec3b);
 
     Mat4.multiply(mat4, parentGlobal, mat4);
 
@@ -93,8 +98,9 @@ export function saveRigidBodies(
     // Convert to local space
     Vec3.set(vec3, translation.x, translation.y, translation.z);
     Quat.set(quat, rotation.x, rotation.y, rotation.z, rotation.w);
+    Vec3.set(vec3b, target.scale.x, target.scale.y, target.scale.z);
 
-    Mat4.fromRotationTranslation(mat4, quat, vec3);
+    Mat4.fromRotationTranslationScale(mat4, quat, vec3, vec3b);
 
     Mat4.multiply(mat4, parentGlobal, mat4);
 

@@ -1,7 +1,7 @@
 import { Time } from "@lattice-engine/core";
 import { Transform } from "@lattice-engine/scene";
 import { Quat, Vec3 } from "gl-matrix/dist/esm";
-import { Entity, Mut, Query, Res } from "thyseus";
+import { Mut, Query, Res } from "thyseus";
 
 import { TargetTransform } from "../components";
 
@@ -10,7 +10,7 @@ const quat = new Quat();
 
 export function applyTargetTransforms(
   time: Res<Time>,
-  entities: Query<[Entity, Mut<Transform>, TargetTransform]>
+  entities: Query<[Mut<Transform>, TargetTransform]>
 ) {
   const timeSinceLastFixedUpdate = time.mainTime - time.fixedTime;
   const percentThroughDelta =
@@ -18,7 +18,7 @@ export function applyTargetTransforms(
 
   const K = Math.min(1, percentThroughDelta);
 
-  for (const [, transform, target] of entities) {
+  for (const [transform, target] of entities) {
     Vec3.lerp(vec3, transform.translation.array, target.translation.array, K);
     transform.translation.set(vec3.x, vec3.y, vec3.z);
 

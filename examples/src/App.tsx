@@ -5,6 +5,7 @@ import { Link, Route, useRoute } from "wouter";
 import About from "./components/about/About";
 import Basic from "./demos/basic/Basic";
 import Gltf from "./demos/gltf/Gltf";
+import Mesh from "./demos/mesh/Mesh";
 import Physics from "./demos/physics/Physics";
 import Player from "./demos/player/Player";
 import Text from "./demos/text/Text";
@@ -39,6 +40,7 @@ export default function App() {
 
         <RouteLink href="/basic">Basic</RouteLink>
         <RouteLink href="/gltf">glTF</RouteLink>
+        <RouteLink href="/mesh">Mesh</RouteLink>
         <RouteLink href="/physics">Physics</RouteLink>
         <RouteLink href="/player">Player</RouteLink>
         <RouteLink href="/text">Text</RouteLink>
@@ -54,6 +56,7 @@ export default function App() {
       <Route path="/" component={About} />
       <Route path="/basic" component={Basic} />
       <Route path="/gltf" component={Gltf} />
+      <Route path="/mesh" component={Mesh} />
       <Route path="/physics" component={Physics} />
       <Route path="/player" component={Player} />
       <Route path="/text" component={Text} />
