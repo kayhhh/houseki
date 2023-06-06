@@ -37,7 +37,7 @@ export function initScene(
 ) {
   physicsConfig.debug = true;
 
-  const scene = createScene(commands, coreStore, sceneStruct, 0);
+  const scene = createScene(commands, coreStore, sceneStruct, 4096, 20);
 
   createPlayer([0, 5, 0], scene, commands, sceneStruct, inputStruct);
 
