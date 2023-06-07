@@ -186,6 +186,12 @@ class SceneBuilder {
   ) {
     const stairs = this.commands.spawn();
 
+    const materialId = this.createMaterial(
+      textureId,
+      stepWidth / 2,
+      stepWidth / 2
+    );
+
     for (let i = 0; i < steps; i++) {
       const box = this.createBox(
         [stairWidth, stepHeight, stepWidth],
@@ -194,7 +200,8 @@ class SceneBuilder {
           0,
           stepHeight * i + stepHeight / 2,
           -stepWidth * i + stepWidth / 2,
-        ])
+        ]),
+        materialId
       );
       box.add(this.parent.setEntity(stairs));
     }
@@ -215,23 +222,15 @@ class SceneBuilder {
   createBox(
     size: [number, number, number],
     textureId: bigint,
-    transform: Transform
+    transform: Transform,
+    materialId?: bigint
   ) {
     const geometry = createBoxGeometry(this.warehouse, size);
 
     this.boxCollider.size.fromArray(size);
 
-    this.material.roughness = 1;
-    this.material.metalness = 0;
-    this.material.baseColorTextureId = textureId;
-    this.material.baseColorTextureInfo.wrapS = WEBGL_CONSTANTS.REPEAT;
-    this.material.baseColorTextureInfo.wrapT = WEBGL_CONSTANTS.REPEAT;
-    this.material.baseColorTextureInfo.minFilter =
-      WEBGL_CONSTANTS.LINEAR_MIPMAP_LINEAR;
-    this.material.baseColorTextureInfo.scale.set([size[0] / 2, size[2] / 2]);
-
-    const materialEntity = this.commands.spawn().add(this.material);
-    this.mesh.materialId = materialEntity.id;
+    this.mesh.materialId =
+      materialId ?? this.createMaterial(textureId, size[0] / 2, size[2] / 2);
 
     const entity = this.commands
       .spawn()
@@ -245,6 +244,20 @@ class SceneBuilder {
     dropStruct(geometry);
 
     return entity;
+  }
+
+  createMaterial(textureId: bigint, scaleX = 1, scaleY = 1) {
+    this.material.roughness = 1;
+    this.material.metalness = 0;
+    this.material.baseColorTextureId = textureId;
+    this.material.baseColorTextureInfo.wrapS = WEBGL_CONSTANTS.REPEAT;
+    this.material.baseColorTextureInfo.wrapT = WEBGL_CONSTANTS.REPEAT;
+    this.material.baseColorTextureInfo.minFilter =
+      WEBGL_CONSTANTS.LINEAR_MIPMAP_LINEAR;
+    this.material.baseColorTextureInfo.scale.set([scaleX, scaleY]);
+
+    const materialEntity = this.commands.spawn().add(this.material);
+    return materialEntity.id;
   }
 
   destroy() {
