@@ -4,6 +4,8 @@ import { buttonGroup, useControls } from "leva";
 import { useCallback, useEffect, useState } from "react";
 import { World } from "thyseus";
 
+import { exportConfig } from "./handleExport";
+
 export function useEngine(world: World | null) {
   const [engine, setEngine] = useState<Engine | null>(null);
 
@@ -23,6 +25,13 @@ export function useEngine(world: World | null) {
 
   const exportScene = useCallback(() => {
     if (!engine) return;
+    exportConfig.mode = "download";
+    engine.queueSchedule(GltfSchedules.Export);
+  }, [engine]);
+
+  const testExport = useCallback(() => {
+    if (!engine) return;
+    exportConfig.mode = "test";
     engine.queueSchedule(GltfSchedules.Export);
   }, [engine]);
 
@@ -30,6 +39,7 @@ export function useEngine(world: World | null) {
     {
       export: buttonGroup({
         glb: exportScene,
+        test: testExport,
       }),
     },
     [exportScene]

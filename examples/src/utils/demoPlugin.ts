@@ -4,7 +4,7 @@ import { WorldBuilder } from "thyseus";
 
 import { loadingSystem } from "../components/loading/system";
 import { statsSystem } from "../components/stats/system";
-import { downloadExports } from "./downloadExports";
+import { handleExport } from "./handleExport";
 
 export function demoPlugin(builder: WorldBuilder) {
   builder
@@ -12,5 +12,5 @@ export function demoPlugin(builder: WorldBuilder) {
     .addPlugin(gltfPlugin)
     .addSystems(statsSystem)
     .addSystems(loadingSystem)
-    .addSystems(downloadExports);
+    .addSystems(handleExport);
 }
