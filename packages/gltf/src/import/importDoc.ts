@@ -3,11 +3,11 @@ import { Warehouse } from "@lattice-engine/core";
 import { AnimationMixer } from "@lattice-engine/scene";
 import { Commands, Entity } from "thyseus";
 
-import { LoadingContext } from "./context";
-import { loadAnimation } from "./loadAnimation";
-import { loadNode } from "./loadNode";
+import { ImportContext } from "./context";
+import { importAnimation } from "./importAnimation";
+import { importNode } from "./importNode";
 
-export function loadDoc(
+export function importDoc(
   doc: Document,
   entity: Readonly<Entity>,
   commands: Commands,
@@ -17,18 +17,18 @@ export function loadDoc(
   const scene = root.getDefaultScene() ?? root.listScenes()[0];
   if (!scene) return;
 
-  const context = new LoadingContext();
+  const context = new ImportContext();
 
   scene
     .listChildren()
     .forEach((child) =>
-      loadNode(child, entity.id, commands, warehouse, context)
+      importNode(child, entity.id, commands, warehouse, context)
     );
 
   root
     .listAnimations()
     .forEach((animation) =>
-      loadAnimation(animation, entity, commands, warehouse, context)
+      importAnimation(animation, entity, commands, warehouse, context)
     );
 
   if (root.listAnimations().length > 0) {

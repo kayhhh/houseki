@@ -3,18 +3,15 @@ import { Warehouse } from "@lattice-engine/core";
 import { GlobalTransform, Parent, Transform } from "@lattice-engine/scene";
 import { Commands, dropStruct } from "thyseus";
 
-import { LoadingContext } from "./context";
-import { loadMesh } from "./loadMesh";
+import { ImportContext } from "./context";
+import { importMesh } from "./importMesh";
 
-/**
- * Recursively loads a GLTF node and its children.
- */
-export function loadNode(
+export function importNode(
   node: Node,
   parentId: bigint,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
-  context: LoadingContext
+  context: ImportContext
 ) {
   const nodePosition = node.getTranslation();
   const nodeRotation = node.getRotation();
@@ -37,11 +34,11 @@ export function loadNode(
   context.nodes.set(node, entity.id);
 
   const mesh = node.getMesh();
-  if (mesh) loadMesh(mesh, entity, commands, warehouse, context);
+  if (mesh) importMesh(mesh, entity, commands, warehouse, context);
 
   node
     .listChildren()
     .forEach((child) =>
-      loadNode(child, entity.id, commands, warehouse, context)
+      importNode(child, entity.id, commands, warehouse, context)
     );
 }

@@ -13,23 +13,23 @@ import {
 } from "@lattice-engine/scene";
 import { Commands, dropStruct } from "thyseus";
 
-import { LoadingContext } from "./context";
+import { ImportContext } from "./context";
 
-export function loadMaterial(
+export function importMaterial(
   gltfMaterial: GltfMaterial,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
-  context: LoadingContext
+  context: ImportContext
 ) {
   const material = new Material();
 
   material.doubleSided = gltfMaterial.getDoubleSided();
-  material.alphaCutOff = gltfMaterial.getAlphaCutoff();
+  material.alphaCutoff = gltfMaterial.getAlphaCutoff();
   material.alphaMode = MaterialAlphaMode[gltfMaterial.getAlphaMode()];
 
   {
     const baseColor = gltfMaterial.getBaseColorFactor();
-    material.baseColor = new Float32Array(baseColor);
+    material.baseColor.fromArray(baseColor);
 
     const gltfTexture = gltfMaterial.getBaseColorTexture();
     const texture = createTexture(gltfTexture, warehouse, commands);
@@ -44,7 +44,7 @@ export function loadMaterial(
 
   {
     const emissiveFactor = gltfMaterial.getEmissiveFactor();
-    material.emissiveFactor = new Float32Array(emissiveFactor);
+    material.emissiveFactor.fromArray(emissiveFactor);
 
     const gltfTexture = gltfMaterial.getEmissiveTexture();
     const texture = createTexture(gltfTexture, warehouse, commands);
@@ -126,12 +126,12 @@ function applyTextureInfo(info: TextureInfo, gltfInfo: GltfTextureInfo | null) {
   const transform = gltfInfo.getExtension<Transform>(Transform.EXTENSION_NAME);
   if (transform) {
     info.rotation = transform.getRotation();
-    info.offset.set(transform.getOffset());
-    info.scale.set(transform.getScale());
+    info.offset.fromArray(transform.getOffset());
+    info.scale.fromArray(transform.getScale());
   } else {
     info.rotation = 0;
-    info.offset.set([0, 0]);
-    info.scale.set([1, 1]);
+    info.offset.fromArray([0, 0]);
+    info.scale.fromArray([1, 1]);
   }
 }
 

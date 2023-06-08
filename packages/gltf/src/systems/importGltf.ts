@@ -4,9 +4,9 @@ import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
 
 import { Gltf } from "../components";
 import { extensions } from "../extensions";
-import { LoadingContext } from "../loader/context";
-import { loadDoc } from "../loader/loadDoc";
-import { removeGltf } from "../loader/removeGltf";
+import { ImportContext } from "../import/context";
+import { importDoc } from "../import/importDoc";
+import { removeGltf } from "../import/removeGltf";
 
 class GltfStore {
   /**
@@ -27,13 +27,10 @@ class GltfStore {
   /**
    * Entity ID -> glTF Context
    */
-  readonly contexts = new Map<bigint, LoadingContext>();
+  readonly contexts = new Map<bigint, ImportContext>();
 }
 
-/**
- * Loads glTF documents into the DocStore.
- */
-export function gltfLoader(
+export function importGltf(
   commands: Commands,
   warehouse: Res<Warehouse>,
   store: SystemRes<GltfStore>,
@@ -67,7 +64,7 @@ export function gltfLoader(
       }
 
       // Load document into the ECS
-      const context = loadDoc(doc, entity, commands, warehouse);
+      const context = importDoc(doc, entity, commands, warehouse);
 
       // Add context to store, for cleanup
       if (context) store.contexts.set(id, context);

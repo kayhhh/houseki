@@ -39,6 +39,73 @@ export class Asset {
 }
 
 @struct
+export class Vec2 {
+  @struct.array({ length: 2, type: "f32" }) declare array: Float32Array;
+  @struct.bool declare hasChanged: boolean;
+
+  get x() {
+    return this.array[0] as number;
+  }
+
+  set x(value: number) {
+    this.array[0] = value;
+    this.hasChanged = true;
+  }
+
+  get y() {
+    return this.array[1] as number;
+  }
+
+  set y(value: number) {
+    this.array[1] = value;
+    this.hasChanged = true;
+  }
+
+  set(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+    this.hasChanged = true;
+
+    return this;
+  }
+
+  copy(other: Vec2) {
+    this.array.set(other.array);
+    this.hasChanged = true;
+
+    return this;
+  }
+
+  fromArray(array: Readonly<[number, number]>) {
+    this.array.set(array);
+    this.hasChanged = true;
+
+    return this;
+  }
+
+  fromObject(object: { x: number; y: number }) {
+    this.x = object.x;
+    this.y = object.y;
+    this.hasChanged = true;
+  }
+
+  toArray() {
+    return [this.x, this.y] as [number, number];
+  }
+
+  toObject() {
+    return { x: this.x, y: this.y };
+  }
+
+  constructor(x = 0, y = 0) {
+    initStruct(this);
+
+    this.x = x;
+    this.y = y;
+  }
+}
+
+@struct
 export class Vec3 {
   @struct.array({ length: 3, type: "f32" }) declare array: Float32Array;
   @struct.bool declare hasChanged: boolean;

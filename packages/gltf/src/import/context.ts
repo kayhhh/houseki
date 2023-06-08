@@ -2,7 +2,7 @@ import { Node } from "@gltf-transform/core";
 
 type EntityID = bigint;
 
-export class LoadingContext {
+export class ImportContext {
   readonly nodes = new Map<Node, EntityID>();
 
   readonly meshes: EntityID[] = [];

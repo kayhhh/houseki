@@ -22,14 +22,13 @@ const MODELS = {
 
 export default function Gltf() {
   const [world, setWorld] = useState<World | null>(null);
+  useEngine(world);
 
   useEffect(() => {
     import("./world").then((module) => {
       setWorld(module.world);
     });
   }, []);
-
-  useEngine(world);
 
   const { model } = useControls({
     model: { options: MODELS, value: MODELS["Damaged Helmet"] },

@@ -19,7 +19,8 @@
   },
   "dependencies": {
     "@gltf-transform/core": "^3.3.1",
-    "@gltf-transform/extensions": "^3.3.1"
+    "@gltf-transform/extensions": "^3.3.1",
+    "@gltf-transform/functions": "^3.3.1"
   },
   "devDependencies": {
     "@thyseus/transformer-rollup": "^0.12.0",

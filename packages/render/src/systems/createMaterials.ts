@@ -48,7 +48,7 @@ export function createMaterials(
 
     // Sync object properties
     object.side = material.doubleSided ? DoubleSide : FrontSide;
-    object.opacity = material.baseColor[3] ?? 1;
+    object.opacity = material.baseColor.w;
 
     switch (material.alphaMode) {
       case MaterialAlphaMode.OPAQUE: {
@@ -61,7 +61,7 @@ export function createMaterials(
       case MaterialAlphaMode.MASK: {
         object.transparent = false;
         object.depthWrite = true;
-        object.alphaTest = material.alphaCutOff;
+        object.alphaTest = material.alphaCutoff;
         break;
       }
 
@@ -73,8 +73,8 @@ export function createMaterials(
       }
     }
 
-    object.color.fromArray(material.baseColor);
-    object.emissive.fromArray(material.emissiveFactor);
+    object.color.fromArray(material.baseColor.toArray());
+    object.emissive.fromArray(material.emissiveFactor.toArray());
     object.normalScale.set(material.normalScale, material.normalScale);
     object.aoMapIntensity = material.occlusionStrength;
     object.metalness = material.metalness;
@@ -174,8 +174,8 @@ function getTextureObject(
 }
 
 function applyTextureInfo(object: ThreeTexture, info: TextureInfo) {
-  object.offset.fromArray(info.offset);
-  object.repeat.fromArray(info.scale);
+  object.offset.fromArray(info.offset.toArray());
+  object.repeat.fromArray(info.scale.toArray());
   object.rotation = info.rotation;
 
   // TODO: Upgrade Three.js to support custom UVs

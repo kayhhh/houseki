@@ -1,9 +1,9 @@
 import { AnimationMixer } from "@lattice-engine/scene";
 import { Commands } from "thyseus";
 
-import { LoadingContext } from "./context";
+import { ImportContext } from "./context";
 
-export function removeGltf(context: LoadingContext, commands: Commands) {
+export function removeGltf(context: ImportContext, commands: Commands) {
   for (const [, id] of context.nodes) {
     commands.despawn(id);
   }

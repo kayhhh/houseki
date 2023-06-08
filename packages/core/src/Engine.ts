@@ -16,6 +16,8 @@ export class Engine {
   #animationFrame: number | null = null;
   #startPromise: Promise<void> | null = null;
 
+  #scheduleQueue: symbol[] = [];
+
   /**
    * Creates a new WorldBuilder.
    */
@@ -62,6 +64,12 @@ export class Engine {
       this.#lastFixedTime = time;
     }
 
+    // Run queued schedules
+    while (this.#scheduleQueue.length > 0) {
+      const schedule = this.#scheduleQueue.shift();
+      if (schedule) await this.#runSchedule(schedule);
+    }
+
     // Schedule the next frame
     this.#animationFrame = requestAnimationFrame(this.#loop.bind(this));
   }
@@ -96,5 +104,9 @@ export class Engine {
    */
   async #runSchedule(schedule: symbol) {
     if (this.world.schedules[schedule]) await this.world.runSchedule(schedule);
+  }
+
+  queueSchedule(schedule: symbol) {
+    this.#scheduleQueue.push(schedule);
   }
 }

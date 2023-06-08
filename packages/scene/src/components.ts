@@ -1,4 +1,4 @@
-import { Resource, Vec3, Vec4 } from "@lattice-engine/core";
+import { Resource, Vec2, Vec3, Vec4 } from "@lattice-engine/core";
 import { Entity, EntityCommands, initStruct, struct } from "thyseus";
 
 import {
@@ -131,8 +131,8 @@ export class TextureInfo {
   @struct.u16 declare wrapT: number;
   @struct.f32 declare texCoord: number;
   @struct.f32 declare rotation: number;
-  @struct.array({ length: 2, type: "f32" }) declare offset: Float32Array;
-  @struct.array({ length: 2, type: "f32" }) declare scale: Float32Array;
+  @struct.substruct(Vec2) declare offset: Vec2;
+  @struct.substruct(Vec2) declare scale: Vec2;
 
   constructor() {
     initStruct(this);
@@ -143,8 +143,8 @@ export class TextureInfo {
     this.wrapT = 10497;
     this.texCoord = 0;
     this.rotation = 0;
-    this.offset.set([0, 0]);
-    this.scale.set([1, 1]);
+    this.offset.set(0, 0);
+    this.scale.set(1, 1);
   }
 }
 
@@ -165,15 +165,14 @@ export class Image {
 @struct
 export class Material {
   @struct.u8 declare alphaMode: MaterialAlphaMode;
-  @struct.f32 declare alphaCutOff: number;
+  @struct.f32 declare alphaCutoff: number;
   @struct.bool declare doubleSided: boolean;
 
-  @struct.array({ length: 4, type: "f32" }) declare baseColor: Float32Array;
+  @struct.substruct(Vec4) declare baseColor: Vec4;
   @struct.u64 declare baseColorTextureId: bigint; // Entity ID
   @struct.substruct(TextureInfo) declare baseColorTextureInfo: TextureInfo;
 
-  @struct.array({ length: 3, type: "f32" })
-  declare emissiveFactor: Float32Array;
+  @struct.substruct(Vec3) declare emissiveFactor: Vec3;
   @struct.u64 declare emissiveTextureId: bigint; // Entity ID
   @struct.substruct(TextureInfo) declare emissiveTextureInfo: TextureInfo;
 
@@ -191,11 +190,14 @@ export class Material {
   @struct.substruct(TextureInfo)
   declare metallicRoughnessTextureInfo: TextureInfo;
 
-  constructor(color = [1, 1, 1, 1], metalness = 1, roughness = 1) {
+  constructor(
+    color: [number, number, number, number] = [1, 1, 1, 1],
+    metalness = 1,
+    roughness = 1
+  ) {
     initStruct(this);
 
-    this.baseColor.set(color);
-    this.emissiveFactor.set([0, 0, 0]);
+    this.baseColor.fromArray(color);
     this.normalScale = 1;
     this.occlusionStrength = 1;
     this.roughness = roughness;

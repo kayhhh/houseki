@@ -8,14 +8,14 @@ import {
 } from "@lattice-engine/scene";
 import { Commands, dropStruct, Entity } from "thyseus";
 
-import { LoadingContext } from "./context";
+import { ImportContext } from "./context";
 
-export function loadAnimation(
+export function importAnimation(
   animation: Animation,
   root: Readonly<Entity>,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
-  context: LoadingContext
+  context: ImportContext
 ) {
   const clip = new AnimationClip(root.id, animation.getName(), true, true);
 

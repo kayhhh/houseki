@@ -254,7 +254,7 @@ class SceneBuilder {
     this.material.baseColorTextureInfo.wrapT = WEBGL_CONSTANTS.REPEAT;
     this.material.baseColorTextureInfo.minFilter =
       WEBGL_CONSTANTS.LINEAR_MIPMAP_LINEAR;
-    this.material.baseColorTextureInfo.scale.set([scaleX, scaleY]);
+    this.material.baseColorTextureInfo.scale.set(scaleX, scaleY);
 
     const materialEntity = this.commands.spawn().add(this.material);
     return materialEntity.id;

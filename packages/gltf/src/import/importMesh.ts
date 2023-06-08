@@ -9,15 +9,15 @@ import {
 } from "@lattice-engine/scene";
 import { Commands, dropStruct, EntityCommands } from "thyseus";
 
-import { LoadingContext } from "./context";
-import { loadMaterial } from "./loadMaterial";
+import { ImportContext } from "./context";
+import { importMaterial } from "./importMaterial";
 
-export function loadMesh(
+export function importMesh(
   gltfMesh: GltfMesh,
   entity: EntityCommands,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
-  context: LoadingContext
+  context: ImportContext
 ) {
   gltfMesh.listPrimitives().forEach((primitive) => {
     const parent = new Parent();
@@ -49,7 +49,7 @@ export function loadMesh(
 
     const material = primitive.getMaterial();
     if (material) {
-      const materialEntity = loadMaterial(
+      const materialEntity = importMaterial(
         material,
         commands,
         warehouse,
