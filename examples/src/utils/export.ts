@@ -1,5 +1,5 @@
 import { CoreStore } from "lattice-engine/core";
-import { ExportedGltf, Gltf } from "lattice-engine/gltf";
+import { ExportedGltf, ExportGltf, Gltf } from "lattice-engine/gltf";
 import {
   GlobalTransform,
   Parent,
@@ -12,14 +12,16 @@ import {
   dropStruct,
   Entity,
   EventReader,
+  EventWriter,
   Query,
   Res,
   With,
 } from "thyseus";
 
 import { createScene } from "./createScene";
+import { exportConfig } from "./useEngine";
 
-export const exportConfig: { mode: "download" | "test" } = { mode: "download" };
+export const ExportSchedule = Symbol("Export");
 
 export function handleExport(
   commands: Commands,
@@ -79,4 +81,15 @@ function download(event: ExportedGltf) {
 
       URL.revokeObjectURL(url);
     });
+}
+
+export function sendExportEvent(
+  writer: EventWriter<ExportGltf>,
+  scenes: Query<[Entity], With<Scene>>
+) {
+  for (const [entity] of scenes) {
+    const event = writer.create();
+    event.scene = entity.id;
+    event.binary = exportConfig.format === "binary";
+  }
 }

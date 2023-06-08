@@ -1,10 +1,17 @@
 import { Engine } from "lattice-engine/core";
-import { GltfSchedules } from "lattice-engine/gltf";
 import { buttonGroup, useControls } from "leva";
 import { useCallback, useEffect, useState } from "react";
 import { World } from "thyseus";
 
-import { exportConfig } from "./handleExport";
+import { ExportSchedule } from "./export";
+
+export const exportConfig: {
+  mode: "download" | "test";
+  format: "binary" | "json";
+} = {
+  format: "binary",
+  mode: "download",
+};
 
 export function useEngine(world: World | null) {
   const [engine, setEngine] = useState<Engine | null>(null);
@@ -26,19 +33,27 @@ export function useEngine(world: World | null) {
   const exportScene = useCallback(() => {
     if (!engine) return;
     exportConfig.mode = "download";
-    engine.queueSchedule(GltfSchedules.Export);
+    engine.queueSchedule(ExportSchedule);
   }, [engine]);
 
   const testExport = useCallback(() => {
     if (!engine) return;
     exportConfig.mode = "test";
-    engine.queueSchedule(GltfSchedules.Export);
+    exportConfig.format = "binary";
+    engine.queueSchedule(ExportSchedule);
   }, [engine]);
 
   useControls(
     {
       export: buttonGroup({
-        glb: exportScene,
+        glb: () => {
+          exportConfig.format = "binary";
+          exportScene();
+        },
+        gltf: () => {
+          exportConfig.format = "json";
+          exportScene();
+        },
         test: testExport,
       }),
     },
