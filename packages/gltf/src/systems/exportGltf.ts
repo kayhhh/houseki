@@ -47,6 +47,8 @@ export function exportGlb(
   images: Query<[Entity, Asset], With<Image>>
 ) {
   for (const binary of localStore.outBinary) {
+    console.info(`📦 Exported glTF binary (${bytesToDisplay(binary.length)})`);
+
     const event = outWriter.create();
     event.binary = true;
 
@@ -57,6 +59,8 @@ export function exportGlb(
   }
 
   for (const json of localStore.outJson) {
+    console.info("📦 Exported glTF JSON", json);
+
     const event = outWriter.create();
 
     const blob = new Blob([JSON.stringify(json.json)], {
@@ -109,4 +113,12 @@ export function exportGlb(
   }
 
   reader.clear();
+}
+
+function bytesToDisplay(bytes: number) {
+  if (bytes < 1024) return `${bytes} bytes`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  if (bytes < 1024 * 1024 * 1024)
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  return `${(bytes / (1024 * 1024 * 1024)).toFixed(1)} GB`;
 }
