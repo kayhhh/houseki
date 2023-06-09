@@ -5,13 +5,7 @@ import {
   ExportGltf,
   Gltf,
 } from "lattice-engine/gltf";
-import {
-  Image,
-  Parent,
-  Scene,
-  SceneStruct,
-  Transform,
-} from "lattice-engine/scene";
+import { Scene, SceneStruct } from "lattice-engine/scene";
 import {
   Commands,
   dropStruct,
@@ -44,9 +38,7 @@ export function handleExport(
   coreStore: Res<CoreStore>,
   sceneStruct: Res<SceneStruct>,
   reader: EventReader<ExportedGltf>,
-  scenes: Query<Entity, With<Scene>>,
-  images: Query<Entity, With<Image>>,
-  nodes: Query<Entity, With<[Transform, Parent]>>
+  scenes: Query<[Entity, Scene]>
 ) {
   if (reader.length === 0) return;
 
@@ -79,15 +71,8 @@ export function handleExport(
       }
     } else {
       // Clear the scene
-      for (const entity of scenes) {
-        entity.despawn();
-      }
-
-      for (const entity of images) {
-        entity.despawn();
-      }
-
-      for (const entity of nodes) {
+      for (const [entity, scene] of scenes) {
+        commands.despawn(scene.rootId);
         entity.despawn();
       }
 

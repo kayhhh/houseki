@@ -118,8 +118,6 @@ export function exportGlb(
     const isBinary = event.binary;
 
     context.doc.transform(dedup(), prune({ keepLeaves: true })).then((doc) => {
-      io.writeJSON(doc).then((json) => console.log(json.json.nodes));
-
       if (isBinary) {
         io.writeBinary(doc).then((binary) => localStore.outBinary.push(binary));
       } else {

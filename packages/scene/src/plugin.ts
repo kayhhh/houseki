@@ -1,17 +1,19 @@
-import { run, WorldBuilder } from "thyseus";
+import { applyCommands, run, WorldBuilder } from "thyseus";
 
 import { assetCleanup } from "./systems/assetCleanup";
 import { cleanTransforms } from "./systems/cleanTransforms";
+import { deepRemove } from "./systems/deepRemove";
 import { geometryCleanup } from "./systems/geometryCleanup";
 import { keyframeTrackCleanup } from "./systems/keyframeTrackCleanup";
 import { updateGlobalTransforms } from "./systems/updateGlobalTransforms";
 
 export function scenePlugin(builder: WorldBuilder) {
   builder.addSystems(
-    geometryCleanup,
     assetCleanup,
+    geometryCleanup,
     keyframeTrackCleanup,
     run(updateGlobalTransforms).first(),
-    run(cleanTransforms).after(updateGlobalTransforms)
+    run(cleanTransforms).after(updateGlobalTransforms),
+    run(deepRemove).before(applyCommands)
   );
 }

@@ -6,34 +6,30 @@ import { ImportContext } from "./context";
 export function removeGltf(context: ImportContext, commands: Commands) {
   const despawned = new Set<bigint>();
 
-  for (const [, id] of context.nodes) {
-    if (despawned.has(id)) continue;
-    commands.despawn(id);
+  const despawn = (id: bigint) => {
+    if (despawned.has(id)) return;
     despawned.add(id);
+    commands.despawn(id);
+  };
+
+  for (const [, id] of context.nodes) {
+    despawn(id);
   }
 
   for (const id of context.meshes) {
-    if (despawned.has(id)) continue;
-    commands.despawn(id);
-    despawned.add(id);
+    despawn(id);
   }
 
   for (const id of context.materials) {
-    if (despawned.has(id)) continue;
-    commands.despawn(id);
-    despawned.add(id);
+    despawn(id);
   }
 
   for (const id of context.textures) {
-    if (despawned.has(id)) continue;
-    commands.despawn(id);
-    despawned.add(id);
+    despawn(id);
   }
 
   for (const id of context.animationClips) {
-    if (despawned.has(id)) continue;
-    commands.despawn(id);
-    despawned.add(id);
+    despawn(id);
   }
 
   for (const id of context.animationMixers) {
@@ -41,8 +37,6 @@ export function removeGltf(context: ImportContext, commands: Commands) {
   }
 
   for (const id of context.keyframeTracks) {
-    if (despawned.has(id)) continue;
-    commands.despawn(id);
-    despawned.add(id);
+    despawn(id);
   }
 }

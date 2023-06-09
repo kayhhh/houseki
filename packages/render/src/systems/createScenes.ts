@@ -37,10 +37,17 @@ export function createScenes(
   for (const [id] of renderStore.scenes) {
     if (!ids.includes(id)) {
       const object = renderStore.scenes.get(id);
-      object?.environment?.dispose();
 
-      if (object?.background instanceof Texture) {
-        object?.background?.dispose();
+      if (object) {
+        if (object.environment) {
+          object.environment.dispose();
+          object.environment = null;
+        }
+
+        if (object.background instanceof Texture) {
+          object.background.dispose();
+          object.background = null;
+        }
       }
 
       renderStore.scenes.delete(id);
