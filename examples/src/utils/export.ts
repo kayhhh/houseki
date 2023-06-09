@@ -6,7 +6,7 @@ import {
   Gltf,
 } from "lattice-engine/gltf";
 import {
-  GlobalTransform,
+  Image,
   Parent,
   Scene,
   SceneStruct,
@@ -44,7 +44,9 @@ export function handleExport(
   coreStore: Res<CoreStore>,
   sceneStruct: Res<SceneStruct>,
   reader: EventReader<ExportedGltf>,
-  scenes: Query<Entity, With<Scene>>
+  scenes: Query<Entity, With<Scene>>,
+  images: Query<Entity, With<Image>>,
+  nodes: Query<Entity, With<[Transform, Parent]>>
 ) {
   if (reader.length === 0) return;
 
@@ -81,21 +83,20 @@ export function handleExport(
         entity.despawn();
       }
 
+      for (const entity of images) {
+        entity.despawn();
+      }
+
+      for (const entity of nodes) {
+        entity.despawn();
+      }
+
       // Load the exported scene
-      const scene = createScene(commands, coreStore, sceneStruct);
+      const { root } = createScene(commands, coreStore, sceneStruct);
 
       const gltf = new Gltf(event.uri);
-      const parent = new Parent(scene);
-
-      commands
-        .spawn()
-        .add(gltf)
-        .add(parent)
-        .addType(Transform)
-        .addType(GlobalTransform);
-
+      root.add(gltf);
       dropStruct(gltf);
-      dropStruct(parent);
     }
   }
 

@@ -34,7 +34,7 @@ export function importNode(
   context.nodes.set(node, entity.id);
 
   const mesh = node.getMesh();
-  if (mesh) importMesh(mesh, entity, commands, warehouse, context);
+  if (mesh) importMesh(mesh, entity.id, commands, warehouse, context);
 
   node
     .listChildren()

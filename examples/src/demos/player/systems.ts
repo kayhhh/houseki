@@ -35,7 +35,15 @@ export function initScene(
 ) {
   physicsConfig.debug = true;
 
-  const scene = createScene(commands, coreStore, sceneStruct, 4096, 16);
+  const { scene, root } = createScene(
+    commands,
+    coreStore,
+    sceneStruct,
+    4096,
+    16
+  );
+
+  createPlayer([0, 4, 0], scene, commands, sceneStruct, inputStruct);
 
   const asset = new Asset("/DevGrid.png");
   const devTexture = commands.spawn().add(asset).addType(Image);
@@ -45,11 +53,11 @@ export function initScene(
 
   builder
     .createBox([32, 1, 32], devTexture.id, builder.transform.set([0, -0.5, 0]))
-    .add(builder.parent.setEntity(scene));
+    .add(builder.parent.setEntity(root));
 
   const stairs = commands
     .spawn()
-    .add(builder.parent.setEntity(scene))
+    .add(builder.parent.setEntity(root))
     .add(builder.transform.set([-2, 0, -6]))
     .addType(GlobalTransform);
 
@@ -73,7 +81,7 @@ export function initScene(
 
   const ramps = commands
     .spawn()
-    .add(builder.parent.setEntity(scene))
+    .add(builder.parent.setEntity(root))
     .add(builder.transform.set([2, 0, -6]))
     .addType(GlobalTransform);
 
@@ -108,7 +116,7 @@ export function initScene(
 
   commands
     .spawn()
-    .add(builder.parent.setEntity(scene))
+    .add(builder.parent.setEntity(root))
     .add(builder.transform.set([0, 3, 8]))
     .add(targetTransform.set([0, 3, 8]))
     .addType(GlobalTransform)
@@ -120,8 +128,6 @@ export function initScene(
   dropStruct(ballGeometry);
   dropStruct(sphereCollider);
   dropStruct(targetTransform);
-
-  createPlayer([0, 4, 0], scene, commands, sceneStruct, inputStruct);
 
   builder.destroy();
 }

@@ -77,17 +77,32 @@ export class Parent {
 
 @struct
 export class Scene {
+  /**
+   * Entity ID of the root node of the scene.
+   * Used for scene content (ie. meshes) not temporary runtime things (player, camera, etc).
+   * Useful for saving/loading scenes.
+   */
+  @struct.u64 declare rootId: bigint;
+
+  /**
+   * Entity ID of the skybox {@link Image} entity.
+   */
   @struct.u64 declare skyboxId: bigint;
 
-  constructor(skybox?: Entity | EntityCommands) {
+  constructor(
+    root?: Entity | EntityCommands,
+    skybox?: Entity | EntityCommands
+  ) {
     initStruct(this);
 
+    if (root) this.rootId = root.id;
     if (skybox) this.skyboxId = skybox.id;
   }
 }
 
 @struct
 export class Mesh {
+  @struct.u64 declare parentId: bigint; // Entity ID
   @struct.u64 declare materialId: bigint; // Entity ID
 
   constructor(material?: Entity | EntityCommands) {

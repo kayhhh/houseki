@@ -36,12 +36,18 @@ export function initScene(
 ) {
   physicsConfig.debug = true;
 
-  const scene = createScene(commands, coreStore, sceneStruct, 4096, 20);
+  const { scene, root } = createScene(
+    commands,
+    coreStore,
+    sceneStruct,
+    4096,
+    20
+  );
 
   createPlayer([0, 5, 0], scene, commands, sceneStruct, inputStruct);
 
   const transform = new Transform(undefined, undefined, [4, 4, 4]);
-  const parent = new Parent(scene);
+  const parent = new Parent(root);
   const gltf = new Gltf("/gltf/Accumula-Town.glb");
 
   commands

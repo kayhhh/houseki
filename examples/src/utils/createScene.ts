@@ -24,22 +24,24 @@ export function createScene(
 
   const skybox = createSkybox(commands);
 
-  const sceneComponent = new Scene(skybox);
+  const root = commands.spawn().addType(Transform).addType(GlobalTransform);
+
+  const sceneComponent = new Scene(root, skybox);
   const scene = commands.spawn().add(sceneComponent);
   dropStruct(sceneComponent);
 
   sceneStruct.activeScene = scene.id;
 
   const parent = new Parent(scene);
-  const ambient = new AmbientLight([1, 1, 1], 0.25);
+  root.add(parent);
 
+  const ambient = new AmbientLight([1, 1, 1], 0.25);
   commands
     .spawn()
     .add(ambient)
     .addType(Transform)
     .addType(GlobalTransform)
     .add(parent);
-
   dropStruct(ambient);
 
   const directionalComponent = new DirectionalLight([1, 1, 1], 0.75);
@@ -66,13 +68,11 @@ export function createScene(
       0.1,
       50
     );
-
     directional.add(shadowMap);
-
     dropStruct(shadowMap);
   }
 
-  return scene;
+  return { root, scene };
 }
 
 function createSkybox(commands: Commands) {

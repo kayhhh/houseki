@@ -17,7 +17,7 @@ export function initScene(
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
-  const scene = createScene(commands, coreStore, sceneStruct);
+  const { root } = createScene(commands, coreStore, sceneStruct);
 
   const transform = new Transform([0, 0, 5]);
 
@@ -30,7 +30,7 @@ export function initScene(
 
   sceneStruct.activeCamera = camera.id;
 
-  const parent = new Parent(scene);
+  const parent = new Parent(root);
   const text = new Text("Hello world!", undefined, 1, [0, 0, 0]);
 
   commands

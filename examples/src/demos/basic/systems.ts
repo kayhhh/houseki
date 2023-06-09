@@ -19,7 +19,7 @@ export function initScene(
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
-  const scene = createScene(commands, coreStore, sceneStruct);
+  const { root } = createScene(commands, coreStore, sceneStruct);
 
   // Create camera
   const cameraTransform = new Transform([0, 0, 5]);
@@ -37,7 +37,7 @@ export function initScene(
 
   // Create cube
   const geometry = createBoxGeometry(warehouse);
-  const parent = new Parent(scene);
+  const parent = new Parent(root);
 
   commands
     .spawn()

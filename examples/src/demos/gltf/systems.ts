@@ -4,7 +4,6 @@ import { N8AOPass } from "lattice-engine/n8ao";
 import { OrbitControls } from "lattice-engine/orbit";
 import {
   GlobalTransform,
-  Parent,
   PerspectiveCamera,
   SceneStruct,
   Transform,
@@ -22,7 +21,7 @@ export function initScene(
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
-  const scene = createScene(commands, coreStore, sceneStruct, 0);
+  const { root } = createScene(commands, coreStore, sceneStruct, 0);
 
   commands.spawn().addType(N8AOPass);
 
@@ -40,17 +39,7 @@ export function initScene(
 
   sceneStruct.activeCamera = camera.id;
 
-  // Add node to scene with glTF component
-  const parent = new Parent(scene);
-
-  commands
-    .spawn()
-    .addType(Transform)
-    .addType(GlobalTransform)
-    .add(parent)
-    .addType(Gltf);
-
-  dropStruct(parent);
+  root.addType(Gltf);
 }
 
 /**

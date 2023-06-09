@@ -52,5 +52,6 @@ export function exportMesh(
     primitive.setIndices(accessor);
   }
 
-  context.meshes.set(entityId, gltfMesh);
+  const parentId = mesh.parentId || entityId;
+  context.meshes.set(parentId, gltfMesh);
 }

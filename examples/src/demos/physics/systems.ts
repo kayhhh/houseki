@@ -30,7 +30,7 @@ export function initScene(
 ) {
   physicsConfig.debug = true;
 
-  const scene = createScene(commands, coreStore, sceneStruct);
+  const { root } = createScene(commands, coreStore, sceneStruct);
 
   const transform = new Transform([0, 6, 8]);
 
@@ -43,7 +43,7 @@ export function initScene(
 
   sceneStruct.activeCamera = camera.id;
 
-  const parent = new Parent(scene);
+  const parent = new Parent(root);
 
   createRoom([8, 1, 8], commands, warehouse).add(parent);
 

@@ -1,29 +1,22 @@
 import { Mesh as GltfMesh } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
-import {
-  Geometry,
-  GlobalTransform,
-  Mesh,
-  Parent,
-  Transform,
-} from "@lattice-engine/scene";
-import { Commands, dropStruct, EntityCommands } from "thyseus";
+import { Geometry, Mesh } from "@lattice-engine/scene";
+import { Commands, dropStruct } from "thyseus";
 
 import { ImportContext } from "./context";
 import { importMaterial } from "./importMaterial";
 
 export function importMesh(
   gltfMesh: GltfMesh,
-  entity: EntityCommands,
+  nodeId: bigint,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
   context: ImportContext
 ) {
   gltfMesh.listPrimitives().forEach((primitive) => {
-    const parent = new Parent();
-    parent.id = entity.id;
-
     const mesh = new Mesh();
+    mesh.parentId = nodeId;
+
     const geometry = new Geometry();
 
     const positions = primitive.getAttribute("POSITION")?.getArray();
@@ -58,18 +51,11 @@ export function importMesh(
       mesh.materialId = materialEntity.id;
     }
 
-    const meshEnity = commands
-      .spawn()
-      .addType(Transform)
-      .addType(GlobalTransform)
-      .add(parent)
-      .add(mesh)
-      .add(geometry);
+    const meshEntity = commands.spawn().add(mesh).add(geometry);
 
-    dropStruct(parent);
     dropStruct(mesh);
     dropStruct(geometry);
 
-    context.meshes.push(meshEnity.id);
+    context.meshes.push(meshEntity.id);
   });
 }

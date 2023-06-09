@@ -1,4 +1,4 @@
-import { LineSegments } from "@lattice-engine/scene";
+import { LineSegments, Parent } from "@lattice-engine/scene";
 import { LineSegments as ThreeLineSegments } from "three";
 import { Entity, Query, Res } from "thyseus";
 
@@ -6,11 +6,11 @@ import { RenderStore } from "../resources";
 
 export function createLineSegments(
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, LineSegments]>
+  entities: Query<[Entity, LineSegments, Parent]>
 ) {
   const ids: bigint[] = [];
 
-  for (const [entity, lineSegments] of entities) {
+  for (const [entity, lineSegments, parent] of entities) {
     ids.push(entity.id);
 
     let object = renderStore.lineSegments.get(entity.id);
@@ -33,8 +33,8 @@ export function createLineSegments(
     if (material) object.material = material;
 
     // If this entity is a node, add the mesh to the node object
-    const nodeObject = renderStore.nodes.get(entity.id);
-    if (nodeObject) nodeObject.add(object);
+    const parentObject = renderStore.nodes.get(parent.id);
+    if (parentObject) parentObject.add(object);
     else object.removeFromParent();
   }
 

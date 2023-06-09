@@ -35,9 +35,9 @@ export function createMeshes(
     const geometryObject = store.geometries.get(entity.id);
     object.geometry = geometryObject ?? new BufferGeometry();
 
-    // If this entity is a node, add the mesh to the node object
-    const nodeObject = store.nodes.get(entity.id);
-    if (nodeObject) nodeObject.add(object);
+    const parentId = mesh.parentId || entity.id;
+    const parentObject = store.nodes.get(parentId);
+    if (parentObject) parentObject.add(object);
     else object.removeFromParent();
   }
 

@@ -83,9 +83,17 @@ export function exportGlb(
   for (const event of reader) {
     const context = new ExportContext();
 
+    let rootId: bigint | undefined;
+
     for (const [entity, scene] of scenes) {
       if (entity.id !== event.scene) continue;
+      rootId = scene.rootId;
       exportScene(context, scene);
+    }
+
+    if (rootId === undefined) {
+      console.warn("No scene found to export");
+      continue;
     }
 
     for (const [entity, asset] of images) {
@@ -104,12 +112,14 @@ export function exportGlb(
       exportNode(context, entity.id, parent.id, transform);
     }
 
-    parentNodes(context, event.scene);
+    parentNodes(context, rootId);
 
     const io = new WebIO().registerExtensions(extensions);
     const isBinary = event.binary;
 
     context.doc.transform(dedup(), prune({ keepLeaves: true })).then((doc) => {
+      io.writeJSON(doc).then((json) => console.log(json.json.nodes));
+
       if (isBinary) {
         io.writeBinary(doc).then((binary) => localStore.outBinary.push(binary));
       } else {
