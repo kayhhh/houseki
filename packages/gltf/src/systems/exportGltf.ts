@@ -29,6 +29,7 @@ import { exportNode } from "../export/exportNode";
 import { exportScene } from "../export/exportScene";
 import { parentNodes } from "../export/parentNodes";
 import { extensions } from "../extensions";
+import { ExportedJSON } from "../types";
 
 class LocalStore {
   readonly outBinary: Uint8Array[] = [];
@@ -61,23 +62,17 @@ export function exportGlb(
   for (const json of localStore.outJson) {
     console.info("📦 Exported glTF JSON", json);
 
-    const event = outWriter.create();
-
-    const jsonSimplified: {
-      json: JSONDocument["json"];
-      resources: Record<string, number[]>;
-    } = {
-      json: json.json,
-      resources: {},
-    };
+    const exportedJson: ExportedJSON = { json: json.json, resources: {} };
 
     for (const [name, data] of Object.entries(json.resources)) {
-      jsonSimplified.resources[name] = Array.from(data);
+      exportedJson.resources[name] = Array.from(data);
     }
 
-    const blob = new Blob([JSON.stringify(jsonSimplified)], {
+    const blob = new Blob([JSON.stringify(exportedJson)], {
       type: "application/json",
     });
+
+    const event = outWriter.create();
     event.uri = URL.createObjectURL(blob);
 
     localStore.outJson.shift();
@@ -112,7 +107,6 @@ export function exportGlb(
     parentNodes(context, event.scene);
 
     const io = new WebIO().registerExtensions(extensions);
-
     const isBinary = event.binary;
 
     context.doc.transform(dedup(), prune({ keepLeaves: true })).then((doc) => {

@@ -1,6 +1,10 @@
-import { JSONDocument } from "@gltf-transform/core";
 import { CoreStore } from "lattice-engine/core";
-import { ExportedGltf, ExportGltf, Gltf } from "lattice-engine/gltf";
+import {
+  ExportedGltf,
+  ExportedJSON,
+  ExportGltf,
+  Gltf,
+} from "lattice-engine/gltf";
 import {
   GlobalTransform,
   Parent,
@@ -54,10 +58,7 @@ export function handleExport(
         fetch(event.uri)
           .then((response) => response.text())
           .then((text) => {
-            const json: {
-              json: JSONDocument["json"];
-              resources: Record<string, number[]>;
-            } = JSON.parse(text);
+            const json = JSON.parse(text) as ExportedJSON;
 
             const gltfBlob = new Blob([JSON.stringify(json.json)], {
               type: "model/gltf+json",

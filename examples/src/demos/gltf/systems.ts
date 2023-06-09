@@ -13,8 +13,6 @@ import { Commands, dropStruct, Mut, Query, Res } from "thyseus";
 
 import { createScene } from "../../utils/createScene";
 
-// Using a local variable like this will not work with multi-threading
-// TODO: Find a better solution
 export const selectedModel = {
   uri: "",
 };
