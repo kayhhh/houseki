@@ -6,18 +6,23 @@ import {
   BufferGeometry,
   DirectionalLight,
   KeyframeTrack,
+  Line,
   LineBasicMaterial,
+  LineLoop,
   LineSegments,
   Mesh,
   MeshStandardMaterial,
   Object3D,
   PerspectiveCamera,
+  Points,
   Scene,
   WebGLRenderer,
 } from "three";
 import { struct } from "thyseus";
 
 export type EntityID = bigint;
+
+export type MeshLike = Mesh | LineSegments | Line | LineLoop | Points;
 
 export class RenderStore {
   static DEFAULT_MATERIAL = new MeshStandardMaterial();
@@ -31,14 +36,17 @@ export class RenderStore {
   readonly materials = new Map<EntityID, MeshStandardMaterial>();
   readonly lineMaterials = new Map<EntityID, LineBasicMaterial>();
   readonly images = new Map<EntityID, ImageBitmap>();
-  readonly meshes = new Map<EntityID, Mesh>();
-  readonly lineSegments = new Map<EntityID, LineSegments>();
+  readonly meshes = new Map<EntityID, MeshLike>();
   readonly nodes = new Map<EntityID, Object3D>();
   readonly animationMixers = new Map<EntityID, AnimationMixer>();
   readonly animationClips = new Map<EntityID, AnimationClip>();
   readonly keyframeTracks = new Map<EntityID, KeyframeTrack>();
   readonly ambientLights = new Map<EntityID, AmbientLight>();
   readonly directionalLights = new Map<EntityID, DirectionalLight>();
+
+  getMaterial(id: EntityID) {
+    return this.materials.get(id) ?? this.lineMaterials.get(id);
+  }
 }
 
 @struct

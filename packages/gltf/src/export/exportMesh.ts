@@ -15,6 +15,8 @@ export function exportMesh(
   const primitive = context.doc.createPrimitive();
   gltfMesh.addPrimitive(primitive);
 
+  primitive.setMode(mesh.mode);
+
   const materialId = mesh.materialId || entityId;
   const material = context.materials.get(materialId);
 

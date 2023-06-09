@@ -73,6 +73,8 @@ export function createMaterials(
       }
     }
 
+    object.vertexColors = material.vertexColors;
+
     object.color.fromArray(material.baseColor.toArray());
     object.emissive.fromArray(material.emissiveFactor.toArray());
     object.normalScale.set(material.normalScale, material.normalScale);

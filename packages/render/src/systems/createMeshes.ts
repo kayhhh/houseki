@@ -1,5 +1,12 @@
-import { Geometry, Mesh } from "@lattice-engine/scene";
-import { BufferGeometry, Mesh as ThreeMesh } from "three";
+import { Geometry, Mesh, MeshMode } from "@lattice-engine/scene";
+import {
+  BufferGeometry,
+  Line,
+  LineLoop,
+  LineSegments,
+  Mesh as ThreeMesh,
+  Points,
+} from "three";
 import { Entity, Query, Res, With } from "thyseus";
 
 import { RenderStore } from "../resources";
@@ -20,16 +27,51 @@ export function createMeshes(
 
     // Create new objects
     if (!object) {
-      object = new ThreeMesh();
-      object.castShadow = true;
-      object.receiveShadow = true;
+      switch (mesh.mode) {
+        case MeshMode.TRIANGLES ||
+          MeshMode.TRIANGLE_STRIP ||
+          MeshMode.TRIANGLE_FAN: {
+          object = new ThreeMesh();
+          object.castShadow = true;
+          object.receiveShadow = true;
+          break;
+        }
+
+        case MeshMode.LINES: {
+          object = new LineSegments();
+          break;
+        }
+
+        case MeshMode.LINE_STRIP: {
+          object = new Line();
+          break;
+        }
+
+        case MeshMode.LINE_LOOP: {
+          object = new LineLoop();
+          break;
+        }
+
+        case MeshMode.POINTS: {
+          object = new Points();
+          break;
+        }
+
+        default: {
+          console.warn(`Unknown mesh mode: ${mesh.mode}`);
+        }
+      }
+
+      if (!object) continue;
 
       store.meshes.set(entity.id, object);
     }
 
     // Sync object properties
+    object.frustumCulled = mesh.frustumCulled;
+
     const materialObject =
-      store.materials.get(mesh.materialId) ?? store.materials.get(entity.id);
+      store.getMaterial(mesh.materialId) ?? store.getMaterial(entity.id);
     object.material = materialObject ?? RenderStore.DEFAULT_MATERIAL;
 
     const geometryObject = store.geometries.get(entity.id);

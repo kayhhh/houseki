@@ -11,7 +11,6 @@ import { createGeometries } from "./systems/createGeometries";
 import { createImages } from "./systems/createImages";
 import { createKeyframeTracks } from "./systems/createKeyframeTracks";
 import { createLineMaterials } from "./systems/createLineMaterials";
-import { createLineSegments } from "./systems/createLineSegments";
 import { createMaterials } from "./systems/createMaterials";
 import { createMeshes } from "./systems/createMeshes";
 import { createNodes } from "./systems/createNodes";
@@ -29,7 +28,7 @@ export function renderPlugin(builder: WorldBuilder) {
     ...run.chain(
       createImages,
       [createMaterials, createLineMaterials, createGeometries],
-      [createMeshes, createLineSegments],
+      createMeshes,
       createNodes,
       [createAmbientLights, createDirectionalLights],
       createShadowMaps,

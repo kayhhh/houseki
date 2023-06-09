@@ -3,7 +3,8 @@ import {
   Geometry,
   GlobalTransform,
   LineMaterial,
-  LineSegments,
+  Mesh,
+  MeshMode,
   Parent,
   SceneStruct,
   Transform,
@@ -36,7 +37,7 @@ export function generateDebug(
   physicsStore: Res<PhysicsStore>,
   physicsConfig: Res<PhysicsConfig>,
   sceneStruct: Res<SceneStruct>,
-  lines: Query<[Entity, Geometry], With<[LineMaterial, LineSegments]>>
+  meshes: Query<[Entity, Geometry], With<Mesh>>
 ) {
   if (!physicsConfig.debug) {
     // Remove the debug lines if they exist
@@ -57,14 +58,15 @@ export function generateDebug(
     const parent = new Parent();
     parent.id = sceneStruct.activeScene;
 
-    const lineSegments = new LineSegments();
-    lineSegments.frustumCulled = false;
+    const mesh = new Mesh();
+    mesh.mode = MeshMode.LINES;
+    mesh.frustumCulled = false;
 
     const lines = commands
       .spawn()
       .add(material)
       .addType(Geometry)
-      .add(lineSegments)
+      .add(mesh)
       .addType(Transform)
       .addType(GlobalTransform)
       .add(parent);
@@ -73,10 +75,10 @@ export function generateDebug(
 
     dropStruct(material);
     dropStruct(parent);
-    dropStruct(lineSegments);
+    dropStruct(mesh);
   }
 
-  for (const [entity, geometry] of lines) {
+  for (const [entity, geometry] of meshes) {
     if (entity.id !== localStore.linesId) continue;
 
     geometry.positions.write(buffers.vertices, warehouse);

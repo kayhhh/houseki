@@ -17,6 +17,8 @@ export function importMesh(
     const mesh = new Mesh();
     mesh.parentId = nodeId;
 
+    mesh.mode = primitive.getMode();
+
     const geometry = new Geometry();
 
     const positions = primitive.getAttribute("POSITION")?.getArray();

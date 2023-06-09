@@ -5,6 +5,7 @@ import {
   KeyframeInterpolation,
   KeyframePath,
   MaterialAlphaMode,
+  MeshMode,
 } from "./types";
 
 export class Quat extends Vec4 {
@@ -105,17 +106,7 @@ export class Mesh {
   @struct.u64 declare parentId: bigint; // Entity ID
   @struct.u64 declare materialId: bigint; // Entity ID
 
-  constructor(material?: Entity | EntityCommands) {
-    initStruct(this);
-
-    if (material) this.materialId = material.id;
-  }
-}
-
-@struct
-export class LineSegments {
-  @struct.u64 declare materialId: bigint; // Entity ID
-
+  @struct.u8 declare mode: MeshMode;
   @struct.bool declare frustumCulled: boolean;
 
   constructor(material?: Entity | EntityCommands) {
@@ -123,6 +114,7 @@ export class LineSegments {
 
     if (material) this.materialId = material.id;
 
+    this.mode = MeshMode.TRIANGLES;
     this.frustumCulled = true;
   }
 }
@@ -179,6 +171,8 @@ export class Image {
 
 @struct
 export class Material {
+  @struct.bool declare vertexColors: boolean;
+
   @struct.u8 declare alphaMode: MaterialAlphaMode;
   @struct.f32 declare alphaCutoff: number;
   @struct.bool declare doubleSided: boolean;
