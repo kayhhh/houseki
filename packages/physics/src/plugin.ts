@@ -22,25 +22,25 @@ import { runRaycasts } from "./systems/runRaycasts";
 import { stepWorld } from "./systems/stepWorld";
 
 export function physicsPlugin(builder: WorldBuilder) {
-  builder.addSystemsToSchedule(
-    LatticeSchedules.FixedUpdate,
-    ...run.chain(
-      [createDynamicBodies, createKinematicBodies, createStaticBodies],
-      [
-        createBoxColliders,
-        createCapsuleColliders,
-        createCylinderColliders,
-        createSphereColliders,
-        createMeshColliders,
-        createHullColliders,
-      ],
-      createCharacters,
-      moveCharacters,
-      [moveRigidBodies, rotateRigidBodies],
-      stepWorld,
-      [runRaycasts, saveCharacters, saveRigidBodies, generateDebug]
+  builder
+    .addSystemsToSchedule(
+      LatticeSchedules.FixedUpdate,
+      ...run.chain(
+        [createDynamicBodies, createKinematicBodies, createStaticBodies],
+        [
+          createBoxColliders,
+          createCapsuleColliders,
+          createCylinderColliders,
+          createSphereColliders,
+          createMeshColliders,
+          createHullColliders,
+        ],
+        createCharacters,
+        moveCharacters,
+        [moveRigidBodies, rotateRigidBodies],
+        stepWorld,
+        [runRaycasts, saveCharacters, saveRigidBodies, generateDebug]
+      )
     )
-  );
-
-  builder.addSystems(run(applyTargetTransforms).last());
+    .addSystems(run(applyTargetTransforms).last());
 }

@@ -1,4 +1,4 @@
-import { applyCommands, run, World } from "thyseus";
+import { World } from "thyseus";
 
 import { LatticeSchedules } from "./schedules";
 
@@ -22,7 +22,7 @@ export class Engine {
    * Creates a new WorldBuilder.
    */
   static createWorld() {
-    const world = World.new().addSystems(run(applyCommands).last());
+    const world = World.new();
     return world;
   }
 
@@ -97,6 +97,8 @@ export class Engine {
   async destroy() {
     await this.stop();
     await this.#runSchedule(LatticeSchedules.Destroy);
+    await this.#runSchedule(LatticeSchedules.Update);
+    await this.#runSchedule(LatticeSchedules.FixedUpdate);
   }
 
   /**

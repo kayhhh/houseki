@@ -10,7 +10,8 @@ export default function Basic() {
   const [world, setWorld] = useState<World | null>(null);
 
   useEffect(() => {
-    import("./world").then((module) => {
+    import("./world").then(async (module) => {
+      await module.createWorld();
       setWorld(module.world);
     });
   }, []);

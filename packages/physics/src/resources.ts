@@ -70,3 +70,11 @@ export class PhysicsStore {
 export class PhysicsConfig {
   @struct.bool declare debug: boolean;
 }
+
+@struct
+export class DebugResource {
+  /**
+   * The entity id of the debug lines.
+   */
+  @struct.u64 declare linesId: bigint;
+}

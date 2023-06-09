@@ -34,6 +34,7 @@ export function createMeshColliders(
 
         const vertices = geometry.positions.read(warehouse);
         const indices = geometry.indices.read(warehouse);
+        if (!vertices || !indices) continue;
 
         // Scale vertices
         for (let i = 0; i < vertices.length; i += 3) {

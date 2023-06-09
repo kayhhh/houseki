@@ -28,18 +28,26 @@ export function importMesh(
 
     if (positions instanceof Float32Array) {
       geometry.positions.write(positions, warehouse);
+    } else {
+      geometry.positions.write(new Float32Array(), warehouse);
     }
 
     if (normals instanceof Float32Array) {
       geometry.normals.write(normals, warehouse);
+    } else {
+      geometry.normals.write(new Float32Array(), warehouse);
     }
 
     if (uvs instanceof Float32Array) {
       geometry.uvs.write(uvs, warehouse);
+    } else {
+      geometry.uvs.write(new Float32Array(), warehouse);
     }
 
     if (indices instanceof Uint16Array || indices instanceof Uint32Array) {
       geometry.indices.write(indices, warehouse);
+    } else {
+      geometry.indices.write(new Uint32Array(), warehouse);
     }
 
     const material = primitive.getMaterial();

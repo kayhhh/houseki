@@ -9,31 +9,14 @@ import {
   SceneStruct,
   Transform,
 } from "@lattice-engine/scene";
-import {
-  Commands,
-  dropStruct,
-  Entity,
-  Query,
-  Res,
-  struct,
-  SystemRes,
-  With,
-} from "thyseus";
+import { Commands, dropStruct, Entity, Mut, Query, Res, With } from "thyseus";
 
-import { PhysicsConfig, PhysicsStore } from "../resources";
-
-@struct
-class LocalStore {
-  /**
-   * The entity id of the debug lines.
-   */
-  @struct.u64 declare linesId: bigint;
-}
+import { DebugResource, PhysicsConfig, PhysicsStore } from "../resources";
 
 export function generateDebug(
   commands: Commands,
   warehouse: Res<Warehouse>,
-  localStore: SystemRes<LocalStore>,
+  debug: Res<Mut<DebugResource>>,
   physicsStore: Res<PhysicsStore>,
   physicsConfig: Res<PhysicsConfig>,
   sceneStruct: Res<SceneStruct>,
@@ -41,9 +24,9 @@ export function generateDebug(
 ) {
   if (!physicsConfig.debug) {
     // Remove the debug lines if they exist
-    if (localStore.linesId) {
-      commands.despawn(localStore.linesId);
-      localStore.linesId = 0n;
+    if (debug.linesId) {
+      commands.despawn(debug.linesId);
+      debug.linesId = 0n;
     }
 
     return;
@@ -51,7 +34,7 @@ export function generateDebug(
 
   const buffers = physicsStore.world.debugRender();
 
-  if (!localStore.linesId) {
+  if (!debug.linesId) {
     const material = new LineMaterial();
     material.vertexColors = true;
 
@@ -71,7 +54,7 @@ export function generateDebug(
       .addType(GlobalTransform)
       .add(parent);
 
-    localStore.linesId = lines.id;
+    debug.linesId = lines.id;
 
     dropStruct(material);
     dropStruct(parent);
@@ -79,7 +62,7 @@ export function generateDebug(
   }
 
   for (const [entity, geometry] of meshes) {
-    if (entity.id !== localStore.linesId) continue;
+    if (entity.id !== debug.linesId) continue;
 
     geometry.positions.write(buffers.vertices, warehouse);
     geometry.colors.write(buffers.colors, warehouse);

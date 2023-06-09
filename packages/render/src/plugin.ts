@@ -1,7 +1,5 @@
-import { LatticeSchedules } from "@lattice-engine/core";
 import { run, WorldBuilder } from "thyseus";
 
-import { clearScene } from "./systems/clearScene";
 import { createAmbientLights } from "./systems/createAmbientLights";
 import { createAnimationClips } from "./systems/createAnimationClips";
 import { createAnimationMixers } from "./systems/createAnimationMixers";
@@ -41,6 +39,4 @@ export function renderPlugin(builder: WorldBuilder) {
     ),
     run(renderCanvas).last()
   );
-
-  builder.addSystemsToSchedule(LatticeSchedules.Destroy, clearScene);
 }

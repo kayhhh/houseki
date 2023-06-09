@@ -25,7 +25,8 @@ export default function Gltf() {
   useEngine(world);
 
   useEffect(() => {
-    import("./world").then((module) => {
+    import("./world").then(async (module) => {
+      await module.createWorld();
       setWorld(module.world);
     });
   }, []);
