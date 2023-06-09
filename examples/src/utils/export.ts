@@ -1,3 +1,4 @@
+import { JSONDocument } from "@gltf-transform/core";
 import { CoreStore } from "lattice-engine/core";
 import { ExportedGltf, ExportGltf, Gltf } from "lattice-engine/gltf";
 import {
@@ -23,6 +24,17 @@ import { exportConfig } from "./useEngine";
 
 export const ExportSchedule = Symbol("Export");
 
+export function sendExportEvent(
+  writer: EventWriter<ExportGltf>,
+  scenes: Query<[Entity], With<Scene>>
+) {
+  for (const [entity] of scenes) {
+    const event = writer.create();
+    event.scene = entity.id;
+    event.binary = exportConfig.format === "binary";
+  }
+}
+
 export function handleExport(
   commands: Commands,
   coreStore: Res<CoreStore>,
@@ -34,7 +46,34 @@ export function handleExport(
 
   for (const event of reader) {
     if (exportConfig.mode === "download") {
-      download(event);
+      if (event.binary) {
+        fetch(event.uri)
+          .then((response) => response.blob())
+          .then((blob) => downloadFile(blob, "scene.glb"));
+      } else {
+        fetch(event.uri)
+          .then((response) => response.text())
+          .then((text) => {
+            const json: {
+              json: JSONDocument["json"];
+              resources: Record<string, number[]>;
+            } = JSON.parse(text);
+
+            const gltfBlob = new Blob([JSON.stringify(json.json)], {
+              type: "model/gltf+json",
+            });
+
+            downloadFile(gltfBlob, "scene.gltf");
+
+            Object.entries(json.resources).forEach(([name, data]) => {
+              const array = new Uint8Array(data);
+              const blob = new Blob([array], {
+                type: "application/octet-stream",
+              });
+              downloadFile(blob, name);
+            });
+          });
+      }
     } else {
       // Clear the scene
       for (const entity of scenes) {
@@ -62,34 +101,15 @@ export function handleExport(
   reader.clear();
 }
 
-function download(event: ExportedGltf) {
-  const isBinary = event.binary;
+function downloadFile(blob: Blob, name: string) {
+  const url = URL.createObjectURL(blob);
 
-  fetch(event.uri)
-    .then((response) => response.blob())
-    .then((blob) => {
-      const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.download = name;
+  link.href = url;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 
-      const fileExtension = isBinary ? "glb" : "gltf";
-
-      const link = document.createElement("a");
-      link.download = `exported.${fileExtension}`;
-      link.href = url;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      URL.revokeObjectURL(url);
-    });
-}
-
-export function sendExportEvent(
-  writer: EventWriter<ExportGltf>,
-  scenes: Query<[Entity], With<Scene>>
-) {
-  for (const [entity] of scenes) {
-    const event = writer.create();
-    event.scene = entity.id;
-    event.binary = exportConfig.format === "binary";
-  }
+  URL.revokeObjectURL(url);
 }

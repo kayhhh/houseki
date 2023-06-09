@@ -77,6 +77,9 @@ importers:
         specifier: ^4.3.8
         version: 4.3.8(react@18.2.0)
     devDependencies:
+      '@gltf-transform/core':
+        specifier: ^3.3.1
+        version: 3.3.1
       '@thyseus/transformer-rollup':
         specifier: ^0.12.0
         version: 0.12.0(thyseus@0.12.1)
@@ -1022,7 +1025,6 @@ packages:
     resolution: {integrity: sha512-XSH2OJ+bs4p016xljV0CcS5L4f7xQQY8NuUiqG7fys6I15alF9sgzXD2rOm55NFiPhUWCxvgMm1vI5DI5td81w==}
     dependencies:
       property-graph: 1.2.0
-    dev: false
 
   /@gltf-transform/extensions@3.3.1:
     resolution: {integrity: sha512-9VjZny4QitzQvt6Ek0JIly3Q16JHX1gJ7K9ddQU5vod/pBz3r623wq2U1SLUapkVDdpLFiru3GsgIQBeLWmxbg==}
@@ -4014,7 +4016,6 @@ packages:
 
   /property-graph@1.2.0:
     resolution: {integrity: sha512-dbJCp1F/uG0G9ZhkJ0GKDoz9MOAtJHvtWVK+9UNOJewkXZVebuaPAAxh27ROJDHGLdLw+DkCGNBk9Le5DRTFJQ==}
-    dev: false
 
   /psl@1.9.0:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}

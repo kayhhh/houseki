@@ -63,7 +63,19 @@ export function exportGlb(
 
     const event = outWriter.create();
 
-    const blob = new Blob([JSON.stringify(json.json)], {
+    const jsonSimplified: {
+      json: JSONDocument["json"];
+      resources: Record<string, number[]>;
+    } = {
+      json: json.json,
+      resources: {},
+    };
+
+    for (const [name, data] of Object.entries(json.resources)) {
+      jsonSimplified.resources[name] = Array.from(data);
+    }
+
+    const blob = new Blob([JSON.stringify(jsonSimplified)], {
       type: "application/json",
     });
     event.uri = URL.createObjectURL(blob);
