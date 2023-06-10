@@ -21,6 +21,9 @@ export function importMaterial(
   warehouse: Readonly<Warehouse>,
   context: ImportContext
 ) {
+  const cached = context.materials.get(gltfMaterial);
+  if (cached) return cached;
+
   const material = new Material();
 
   material.doubleSided = gltfMaterial.getDoubleSided();
@@ -35,7 +38,7 @@ export function importMaterial(
     const texture = createTexture(gltfTexture, warehouse, commands);
     if (texture) {
       material.baseColorTextureId = texture.id;
-      context.textures.push(texture.id);
+      context.textureIds.push(texture.id);
     }
 
     const info = gltfMaterial.getBaseColorTextureInfo();
@@ -50,7 +53,7 @@ export function importMaterial(
     const texture = createTexture(gltfTexture, warehouse, commands);
     if (texture) {
       material.emissiveTextureId = texture.id;
-      context.textures.push(texture.id);
+      context.textureIds.push(texture.id);
     }
 
     const info = gltfMaterial.getEmissiveTextureInfo();
@@ -64,7 +67,7 @@ export function importMaterial(
     const texture = createTexture(gltfTexture, warehouse, commands);
     if (texture) {
       material.normalTextureId = texture.id;
-      context.textures.push(texture.id);
+      context.textureIds.push(texture.id);
     }
 
     const info = gltfMaterial.getNormalTextureInfo();
@@ -78,7 +81,7 @@ export function importMaterial(
     const texture = createTexture(gltfTexture, warehouse, commands);
     if (texture) {
       material.occlusionTextureId = texture.id;
-      context.textures.push(texture.id);
+      context.textureIds.push(texture.id);
     }
 
     const info = gltfMaterial.getOcclusionTextureInfo();
@@ -93,7 +96,7 @@ export function importMaterial(
     const texture = createTexture(gltfTexture, warehouse, commands);
     if (texture) {
       material.metallicRoughnessTextureId = texture.id;
-      context.textures.push(texture.id);
+      context.textureIds.push(texture.id);
     }
 
     const info = gltfMaterial.getMetallicRoughnessTextureInfo();
@@ -102,11 +105,12 @@ export function importMaterial(
 
   // Create material entity
   const entity = commands.spawn().add(material);
-  context.materials.push(entity.id);
+  context.materials.set(gltfMaterial, entity.id);
+  context.materialIds.push(entity.id);
 
   dropStruct(material);
 
-  return entity;
+  return entity.id;
 }
 
 function applyTextureInfo(info: TextureInfo, gltfInfo: GltfTextureInfo | null) {

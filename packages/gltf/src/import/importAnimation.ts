@@ -20,7 +20,7 @@ export function importAnimation(
   const clip = new AnimationClip(root.id, animation.getName(), true, true);
 
   const entity = commands.spawn().add(clip);
-  context.animationClips.push(entity.id);
+  context.animationClipIds.push(entity.id);
 
   dropStruct(clip);
 
@@ -88,7 +88,7 @@ export function importAnimation(
     }
 
     const trackEntity = commands.spawn().add(track);
-    context.keyframeTracks.push(trackEntity.id);
+    context.keyframeTrackIds.push(trackEntity.id);
   });
 
   dropStruct(track);

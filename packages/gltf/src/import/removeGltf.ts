@@ -16,27 +16,27 @@ export function removeGltf(context: ImportContext, commands: Commands) {
     despawn(id);
   }
 
-  for (const id of context.meshes) {
+  for (const id of context.meshIds) {
     despawn(id);
   }
 
-  for (const id of context.materials) {
+  for (const id of context.materialIds) {
     despawn(id);
   }
 
-  for (const id of context.textures) {
+  for (const id of context.textureIds) {
     despawn(id);
   }
 
-  for (const id of context.animationClips) {
+  for (const id of context.animationClipIds) {
     despawn(id);
   }
 
-  for (const id of context.animationMixers) {
+  for (const id of context.animationMixerIds) {
     commands.removeFrom(id, AnimationMixer);
   }
 
-  for (const id of context.keyframeTracks) {
+  for (const id of context.keyframeTrackIds) {
     despawn(id);
   }
 }

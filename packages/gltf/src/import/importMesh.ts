@@ -52,13 +52,7 @@ export function importMesh(
 
     const material = primitive.getMaterial();
     if (material) {
-      const materialEntity = importMaterial(
-        material,
-        commands,
-        warehouse,
-        context
-      );
-      mesh.materialId = materialEntity.id;
+      mesh.materialId = importMaterial(material, commands, warehouse, context);
     }
 
     const meshEntity = commands.spawn().add(mesh).add(geometry);
@@ -66,6 +60,6 @@ export function importMesh(
     dropStruct(mesh);
     dropStruct(geometry);
 
-    context.meshes.push(meshEntity.id);
+    context.meshIds.push(meshEntity.id);
   });
 }
