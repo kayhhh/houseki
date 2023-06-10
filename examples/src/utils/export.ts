@@ -18,7 +18,14 @@ import {
 } from "thyseus";
 
 import { createScene } from "./createScene";
-import { exportConfig } from "./useEngine";
+
+export const exportConfig: {
+  mode: "download" | "test" | "log";
+  format: "binary" | "json";
+} = {
+  format: "binary",
+  mode: "download",
+};
 
 export const ExportSchedule = Symbol("Export");
 
@@ -69,7 +76,7 @@ export function handleExport(
             });
           });
       }
-    } else {
+    } else if (exportConfig.mode === "test") {
       // Clear the scene
       for (const [entity, scene] of scenes) {
         commands.despawn(scene.rootId);

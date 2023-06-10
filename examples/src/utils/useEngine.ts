@@ -3,15 +3,7 @@ import { buttonGroup, useControls } from "leva";
 import { useCallback, useEffect, useState } from "react";
 import { World } from "thyseus";
 
-import { ExportSchedule } from "./export";
-
-export const exportConfig: {
-  mode: "download" | "test";
-  format: "binary" | "json";
-} = {
-  format: "binary",
-  mode: "download",
-};
+import { exportConfig, ExportSchedule } from "./export";
 
 export function useEngine(world: World | null) {
   const [engine, setEngine] = useState<Engine | null>(null);
@@ -32,14 +24,6 @@ export function useEngine(world: World | null) {
 
   const exportScene = useCallback(() => {
     if (!engine) return;
-    exportConfig.mode = "download";
-    engine.queueSchedule(ExportSchedule);
-  }, [engine]);
-
-  const testExport = useCallback(() => {
-    if (!engine) return;
-    exportConfig.mode = "test";
-    exportConfig.format = "binary";
     engine.queueSchedule(ExportSchedule);
   }, [engine]);
 
@@ -48,13 +32,24 @@ export function useEngine(world: World | null) {
       export: buttonGroup({
         glb: () => {
           exportConfig.format = "binary";
+          exportConfig.mode = "download";
           exportScene();
         },
         gltf: () => {
           exportConfig.format = "json";
+          exportConfig.mode = "download";
           exportScene();
         },
-        test: testExport,
+        log: () => {
+          exportConfig.format = "json";
+          exportConfig.mode = "log";
+          exportScene();
+        },
+        test: () => {
+          exportConfig.mode = "test";
+          exportConfig.format = "binary";
+          exportScene();
+        },
       }),
     },
     [exportScene]
