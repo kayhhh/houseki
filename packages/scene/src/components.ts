@@ -31,10 +31,6 @@ export class Transform {
   ) {
     initStruct(this);
 
-    this.translation = new Vec3();
-    this.rotation = new Quat();
-    this.scale = new Vec3();
-
     this.translation.fromArray(translation);
     this.rotation.fromArray(rotation);
     this.scale.fromArray(scale);
@@ -48,6 +44,14 @@ export class Transform {
     if (translation) this.translation.fromArray(translation);
     if (rotation) this.rotation.fromArray(rotation);
     if (scale) this.scale.fromArray(scale);
+
+    return this;
+  }
+
+  copy(transform: Readonly<Transform>): this {
+    this.translation.copy(transform.translation);
+    this.rotation.copy(transform.rotation);
+    this.scale.copy(transform.scale);
 
     return this;
   }

@@ -1,7 +1,7 @@
 import { ColliderDesc } from "@dimforge/rapier3d";
 import { Warehouse } from "@lattice-engine/core";
-import { Geometry, GlobalTransform } from "@lattice-engine/scene";
-import { Entity, Query, Res } from "thyseus";
+import { Geometry, GlobalTransform, Parent } from "@lattice-engine/scene";
+import { Entity, Query, Res, With } from "thyseus";
 
 import { MeshCollider } from "../../components";
 import { PhysicsStore } from "../../resources";
@@ -10,18 +10,33 @@ export function createMeshColliders(
   warehouse: Res<Warehouse>,
   store: Res<PhysicsStore>,
   colliders: Query<[Entity, MeshCollider]>,
+  withParent: Query<[Entity, Parent], With<MeshCollider>>,
   nodes: Query<[Entity, GlobalTransform]>,
   geometries: Query<[Entity, Geometry]>
 ) {
   const ids: bigint[] = [];
+
+  const parentIds = new Map<bigint, bigint>();
+
+  for (const [entity, parent] of withParent) {
+    parentIds.set(entity.id, parent.id);
+  }
 
   for (const [entity, collider] of colliders) {
     ids.push(entity.id);
 
     let object = store.meshColliders.get(entity.id);
 
-    const rigidbodyId = collider.rigidbodyId || entity.id;
-    const rigidbody = store.getRigidBody(rigidbodyId) ?? null;
+    let rigidbodyId = entity.id;
+    let rigidbody = store.getRigidBody(rigidbodyId);
+    if (!rigidbody) {
+      const parentId = parentIds.get(entity.id);
+      if (parentId) {
+        rigidbodyId = parentId;
+        rigidbody = store.getRigidBody(parentId);
+      }
+    }
+    if (!rigidbody) continue;
 
     // Create new colliders
     if (!object || object.parent() !== rigidbody) {

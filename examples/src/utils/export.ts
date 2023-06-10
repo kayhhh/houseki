@@ -5,7 +5,7 @@ import {
   ExportGltf,
   Gltf,
 } from "lattice-engine/gltf";
-import { Scene, SceneStruct } from "lattice-engine/scene";
+import { DeepRemove, Scene, SceneStruct } from "lattice-engine/scene";
 import {
   Commands,
   dropStruct,
@@ -45,7 +45,8 @@ export function handleExport(
   coreStore: Res<CoreStore>,
   sceneStruct: Res<SceneStruct>,
   reader: EventReader<ExportedGltf>,
-  scenes: Query<[Entity, Scene]>
+  scenes: Query<Entity, With<Scene>>,
+  deepRemove: EventWriter<DeepRemove>
 ) {
   if (reader.length === 0) return;
 
@@ -78,8 +79,11 @@ export function handleExport(
       }
     } else if (exportConfig.mode === "test") {
       // Clear the scene
-      for (const [entity, scene] of scenes) {
-        commands.despawn(scene.rootId);
+      for (const entity of scenes) {
+        // TODO: Fix deepRemove freezing the browser
+        // const remove = deepRemove.create();
+        // remove.rootId = entity.id;
+
         entity.despawn();
       }
 

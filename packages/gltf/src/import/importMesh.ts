@@ -62,4 +62,6 @@ export function importMesh(
 
     context.meshIds.push(meshEntity.id);
   });
+
+  context.meshes.set(gltfMesh, nodeId);
 }

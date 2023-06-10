@@ -16,7 +16,7 @@ Optionally, a `TargetTransform` component can be attached to a rigidbody. This w
 
 ## Collider
 
-One or more colliders can be attached to a rigidbody. For a single collider, the collider component can be attached directly to the rigidbody entity. For multiple colliders, the collider components should be attached to a separate entity, and the `rigidbodyId` property should be set to the rigidbody's entity ID.
+One or more colliders can be attached to a rigidbody. For a single collider, the collider component can be attached directly to the rigidbody entity. For multiple colliders, each collider should be attached to a separate entity, and use the `Parent` component to attach to the rigidbody entity.
 
 - `BoxCollider` - a box collider
 - `CapsuleCollider` - a capsule collider

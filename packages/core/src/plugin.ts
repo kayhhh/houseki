@@ -30,5 +30,6 @@ export function corePlugin(builder: WorldBuilder) {
       LatticeSchedules.Destroy,
       despawnEntities,
       run(applyCommands).last()
-    );
+    )
+    .addSystemsToSchedule(LatticeSchedules.ApplyCommands, applyCommands);
 }

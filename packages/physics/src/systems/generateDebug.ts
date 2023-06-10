@@ -20,7 +20,7 @@ export function generateDebug(
   physicsStore: Res<PhysicsStore>,
   physicsConfig: Res<PhysicsConfig>,
   sceneStruct: Res<SceneStruct>,
-  meshes: Query<[Entity, Geometry], With<Mesh>>
+  meshes: Query<[Entity, Mut<Geometry>, Mut<Parent>], With<LineMaterial>>
 ) {
   if (!physicsConfig.debug) {
     // Remove the debug lines if they exist
@@ -34,7 +34,11 @@ export function generateDebug(
 
   const buffers = physicsStore.world.debugRender();
 
+  let linesFound = false;
+
   if (!debug.linesId) {
+    linesFound = true;
+
     const material = new LineMaterial();
     material.vertexColors = true;
 
@@ -61,10 +65,24 @@ export function generateDebug(
     dropStruct(mesh);
   }
 
-  for (const [entity, geometry] of meshes) {
+  for (const [entity, geometry, parent] of meshes) {
     if (entity.id !== debug.linesId) continue;
+
+    linesFound = true;
+
+    parent.id = sceneStruct.activeScene;
 
     geometry.positions.write(buffers.vertices, warehouse);
     geometry.colors.write(buffers.colors, warehouse);
+  }
+
+  if (!linesFound) {
+    // Remove the debug lines if they exist
+    if (debug.linesId) {
+      commands.despawn(debug.linesId);
+      debug.linesId = 0n;
+    }
+
+    return;
   }
 }

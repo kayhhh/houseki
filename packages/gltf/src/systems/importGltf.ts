@@ -3,7 +3,7 @@ import { Loading, Warehouse } from "@lattice-engine/core";
 import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
 
 import { Gltf } from "../components";
-import { extensions } from "../extensions";
+import { extensions } from "../extensions/extensions";
 import { ImportContext } from "../import/context";
 import { importDoc } from "../import/importDoc";
 import { removeGltf } from "../import/removeGltf";

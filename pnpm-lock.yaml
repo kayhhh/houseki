@@ -144,12 +144,18 @@ importers:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
+      '@lattice-engine/physics':
+        specifier: workspace:^
+        version: link:../physics
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
       thyseus:
         specifier: ^0.12.1
         version: 0.12.1
+      zod:
+        specifier: ^3.21.4
+        version: 3.21.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.12.0
@@ -4871,6 +4877,10 @@ packages:
     optionalDependencies:
       commander: 9.5.0
     dev: true
+
+  /zod@3.21.4:
+    resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+    dev: false
 
   /zustand@3.7.2(react@18.2.0):
     resolution: {integrity: sha512-PIJDIZKtokhof+9+60cpockVOq05sJzHCriyvaLBmEJixseQ1a5Kdov6fWZfWOu5SK9c+FhH1jU0tntLxRJYMA==}

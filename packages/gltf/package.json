@@ -20,7 +20,8 @@
   "dependencies": {
     "@gltf-transform/core": "^3.3.1",
     "@gltf-transform/extensions": "^3.3.1",
-    "@gltf-transform/functions": "^3.3.1"
+    "@gltf-transform/functions": "^3.3.1",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@thyseus/transformer-rollup": "^0.12.0",
@@ -30,6 +31,7 @@
   },
   "peerDependencies": {
     "@lattice-engine/core": "workspace:^",
+    "@lattice-engine/physics": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
     "thyseus": "^0.12.1"
   },

@@ -11,7 +11,7 @@ import { PhysicsStore } from "../../resources";
 
 export function moveRigidBodies(
   store: Res<PhysicsStore>,
-  transforms: Query<
+  globalTransforms: Query<
     [Entity, GlobalTransform],
     [Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>]
   >,
@@ -21,11 +21,11 @@ export function moveRigidBodies(
   >
 ) {
   // Set positions
-  for (const [entity, transform] of transforms) {
+  for (const [entity, globalTransform] of globalTransforms) {
     const body = store.getRigidBody(entity.id);
     if (!body) continue;
 
-    body.setTranslation(transform.translation.toObject(), true);
+    body.setTranslation(globalTransform.translation.toObject(), true);
   }
 
   // Set velocities

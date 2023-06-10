@@ -75,7 +75,7 @@ export function initScene(
       .addType(DynamicBody);
   }
 
-  const BALL_COUNT = 50;
+  const BALL_COUNT = 20;
   const BOUNDS = 3;
 
   for (let i = 0; i < BALL_COUNT; i++) {

@@ -2,6 +2,17 @@ import { JSONDocument, WebIO } from "@gltf-transform/core";
 import { dedup, prune } from "@gltf-transform/functions";
 import { Asset, Warehouse } from "@lattice-engine/core";
 import {
+  BoxCollider,
+  CapsuleCollider,
+  CylinderCollider,
+  DynamicBody,
+  HullCollider,
+  KinematicBody,
+  MeshCollider,
+  SphereCollider,
+  StaticBody,
+} from "@lattice-engine/physics";
+import {
   Geometry,
   Image,
   Material,
@@ -22,13 +33,26 @@ import {
 
 import { ExportedGltf, ExportGltf } from "../events";
 import { ExportContext } from "../export/context";
+import {
+  exportBoxCollider,
+  exportCapsuleCollider,
+  exportCylinderCollider,
+  exportHullCollider,
+  exportMeshCollider,
+  exportSphereCollider,
+} from "../export/exportCollider";
 import { exportImage } from "../export/exportImage";
 import { exportMaterial } from "../export/exportMaterial";
 import { exportMesh } from "../export/exportMesh";
 import { exportNode } from "../export/exportNode";
+import {
+  exportDynamicBody,
+  exportKinematicBody,
+  exportStaticBody,
+} from "../export/exportPhysicsBody";
 import { exportScene } from "../export/exportScene";
 import { parentNodes } from "../export/parentNodes";
-import { extensions } from "../extensions";
+import { extensions } from "../extensions/extensions";
 import { ExportedJSON } from "../types";
 
 class LocalStore {
@@ -45,7 +69,16 @@ export function exportGlb(
   nodes: Query<[Entity, Parent, Transform]>,
   meshes: Query<[Entity, Mesh, Geometry]>,
   materials: Query<[Entity, Material]>,
-  images: Query<[Entity, Asset], With<Image>>
+  images: Query<[Entity, Asset], With<Image>>,
+  staticBodies: Query<Entity, With<StaticBody>>,
+  dynamicBodies: Query<[Entity, DynamicBody]>,
+  kinematicBodies: Query<[Entity, KinematicBody]>,
+  boxColliders: Query<[Entity, BoxCollider]>,
+  sphereColliders: Query<[Entity, SphereCollider]>,
+  capsuleColliders: Query<[Entity, CapsuleCollider]>,
+  cylinderColliders: Query<[Entity, CylinderCollider]>,
+  meshColliders: Query<[Entity, MeshCollider]>,
+  hullColliders: Query<[Entity, HullCollider]>
 ) {
   for (const binary of localStore.outBinary) {
     console.info(`📦 Exported glTF binary (${bytesToDisplay(binary.length)})`);
@@ -110,6 +143,42 @@ export function exportGlb(
 
     for (const [entity, parent, transform] of nodes) {
       exportNode(context, entity.id, parent.id, transform);
+    }
+
+    for (const entity of staticBodies) {
+      exportStaticBody(context, entity.id);
+    }
+
+    for (const [entity, dynamicBody] of dynamicBodies) {
+      exportDynamicBody(context, entity.id, dynamicBody);
+    }
+
+    for (const [entity, kinematicBody] of kinematicBodies) {
+      exportKinematicBody(context, entity.id, kinematicBody);
+    }
+
+    for (const [entity, boxCollider] of boxColliders) {
+      exportBoxCollider(context, entity.id, boxCollider);
+    }
+
+    for (const [entity, sphereCollider] of sphereColliders) {
+      exportSphereCollider(context, entity.id, sphereCollider);
+    }
+
+    for (const [entity, capsuleCollider] of capsuleColliders) {
+      exportCapsuleCollider(context, entity.id, capsuleCollider);
+    }
+
+    for (const [entity, cylinderCollider] of cylinderColliders) {
+      exportCylinderCollider(context, entity.id, cylinderCollider);
+    }
+
+    for (const [entity, meshCollider] of meshColliders) {
+      exportMeshCollider(context, entity.id, meshCollider);
+    }
+
+    for (const [entity, hullCollider] of hullColliders) {
+      exportHullCollider(context, entity.id, hullCollider);
     }
 
     parentNodes(context, rootId);
