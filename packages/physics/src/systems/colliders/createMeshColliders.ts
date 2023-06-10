@@ -9,16 +9,19 @@ import { PhysicsStore } from "../../resources";
 export function createMeshColliders(
   warehouse: Res<Warehouse>,
   store: Res<PhysicsStore>,
-  colliders: Query<[Entity, MeshCollider, GlobalTransform]>,
+  colliders: Query<[Entity, MeshCollider]>,
+  nodes: Query<[Entity, GlobalTransform]>,
   geometries: Query<[Entity, Geometry]>
 ) {
   const ids: bigint[] = [];
 
-  for (const [entity, collider, globalTransform] of colliders) {
+  for (const [entity, collider] of colliders) {
     ids.push(entity.id);
 
     let object = store.meshColliders.get(entity.id);
-    const rigidbody = store.getRigidBody(entity.id) ?? null;
+
+    const rigidbodyId = collider.rigidbodyId || entity.id;
+    const rigidbody = store.getRigidBody(rigidbodyId) ?? null;
 
     // Create new colliders
     if (!object || object.parent() !== rigidbody) {
@@ -36,11 +39,21 @@ export function createMeshColliders(
         const indices = geometry.indices.read(warehouse);
         if (!vertices || !indices) continue;
 
-        // Scale vertices
-        for (let i = 0; i < vertices.length; i += 3) {
-          vertices[i] *= globalTransform.scale.x;
-          vertices[i + 1] *= globalTransform.scale.y;
-          vertices[i + 2] *= globalTransform.scale.z;
+        const scaledVertices = new Float32Array(vertices.length);
+
+        // Scale vertices using parent transform
+        for (const [nodeEntity, globalTransform] of nodes) {
+          if (nodeEntity.id !== rigidbodyId) continue;
+
+          for (let i = 0; i < vertices.length; i += 3) {
+            const x = vertices[i] ?? 0;
+            const y = vertices[i + 1] ?? 0;
+            const z = vertices[i + 2] ?? 0;
+
+            scaledVertices[i] = x * globalTransform.scale.x;
+            scaledVertices[i + 1] = y * globalTransform.scale.y;
+            scaledVertices[i + 2] = z * globalTransform.scale.z;
+          }
         }
 
         let indices32: Uint32Array;
@@ -54,7 +67,7 @@ export function createMeshColliders(
           indices32 = indices;
         }
 
-        const colliderDesc = ColliderDesc.trimesh(vertices, indices32);
+        const colliderDesc = ColliderDesc.trimesh(scaledVertices, indices32);
 
         object = store.world.createCollider(colliderDesc, rigidbody);
         store.meshColliders.set(entity.id, object);

@@ -14,7 +14,9 @@ export function createCylinderColliders(
     ids.push(entity.id);
 
     let object = store.cylinderColliders.get(entity.id);
-    const rigidbody = store.getRigidBody(entity.id) ?? null;
+
+    const rigidbodyId = collider.rigidbodyId || entity.id;
+    const rigidbody = store.getRigidBody(rigidbodyId) ?? null;
 
     // Create new colliders
     if (!object || object.parent() !== rigidbody) {

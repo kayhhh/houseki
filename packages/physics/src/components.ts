@@ -8,6 +8,7 @@ export class Velocity extends Vec3 {}
 
 @struct
 export class BoxCollider {
+  @struct.u64 declare rigidbodyId: bigint; // Entity ID
   @struct.substruct(Vec3) declare size: Vec3;
 
   constructor(size: Readonly<[number, number, number]> = [1, 1, 1]) {
@@ -19,6 +20,7 @@ export class BoxCollider {
 
 @struct
 export class SphereCollider {
+  @struct.u64 declare rigidbodyId: bigint; // Entity ID
   @struct.f32 declare radius: number;
 
   constructor(radius = 0.5) {
@@ -30,6 +32,7 @@ export class SphereCollider {
 
 @struct
 export class CapsuleCollider {
+  @struct.u64 declare rigidbodyId: bigint; // Entity ID
   @struct.f32 declare radius: number;
   @struct.f32 declare height: number;
 
@@ -43,6 +46,7 @@ export class CapsuleCollider {
 
 @struct
 export class CylinderCollider {
+  @struct.u64 declare rigidbodyId: bigint; // Entity ID
   @struct.f32 declare radius: number;
   @struct.f32 declare height: number;
 
@@ -56,6 +60,7 @@ export class CylinderCollider {
 
 @struct
 export class HullCollider {
+  @struct.u64 declare rigidbodyId: bigint; // Entity ID
   @struct.u64 declare meshId: bigint;
 
   constructor(mesh?: Entity | EntityCommands) {
@@ -67,6 +72,7 @@ export class HullCollider {
 
 @struct
 export class MeshCollider {
+  @struct.u64 declare rigidbodyId: bigint; // Entity ID
   @struct.u64 declare meshId: bigint;
 
   constructor(mesh?: Entity | EntityCommands) {

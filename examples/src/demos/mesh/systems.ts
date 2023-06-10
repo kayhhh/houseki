@@ -63,9 +63,21 @@ export function initScene(
 }
 
 export function addPhysics(
-  meshes: Query<Entity, [With<Mesh>, Without<[MeshCollider, StaticBody]>]>
+  meshes: Query<[Entity, Mesh], Without<[MeshCollider, StaticBody]>>,
+  nodes: Query<Entity, [With<Transform>, Without<StaticBody>]>
 ) {
-  for (const entity of meshes) {
-    entity.addType(MeshCollider).addType(StaticBody);
+  for (const [entity, mesh] of meshes) {
+    const meshCollider = new MeshCollider();
+    meshCollider.rigidbodyId = mesh.parentId;
+
+    entity.add(meshCollider);
+
+    dropStruct(meshCollider);
+
+    for (const nodeEntity of nodes) {
+      if (nodeEntity.id !== mesh.parentId) continue;
+
+      nodeEntity.addType(StaticBody);
+    }
   }
 }
