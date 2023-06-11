@@ -36,6 +36,6 @@ Packages are published individually to NPM under the `@lattice-engine` scope. Al
 | [`@lattice-engine/text`](./packages/text)       | Text rendering using [troika-three-text](https://github.com/protectwise/troika/tree/main/packages/troika-three-text) |
 | [`@lattice-engine/utils`](./packages/utils)     | Utility functions                                                                                                    |
 | [`@lattice-engine/vrm`](./packages/vrm)         | [VRM](https://vrm.dev/en) avatars                                                                                    |
+| [`@lattice-engine/wired`](./packages/wired)     | Multiplayer networking via [The Wired](https://github.com/wired-protocol/spec)                                       |
 | `@lattice-engine/scripting`                     | [WASM](https://webassembly.org) scripting                                                                            |
-| `@lattice-engine/wired-protocol`                | Multiplayer networking via [The Wired Protocol](https://github.com/wired-protocol/spec)                              |
 | `@lattice-engine/xr`                            | [WebXR](https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API) support                                   |

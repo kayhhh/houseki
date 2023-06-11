@@ -58,6 +58,9 @@
     },
     "./vrm": {
       "import": "./dist/vrm.js"
+    },
+    "./wired": {
+      "import": "./dist/wired.js"
     }
   },
   "types": "index.d.ts",
@@ -75,7 +78,8 @@
     "scene.d.ts",
     "text.d.ts",
     "utils.d.ts",
-    "vrm.d.ts"
+    "vrm.d.ts",
+    "wired.d.ts"
   ],
   "scripts": {
     "build": "vite build --emptyOutDir",
@@ -93,7 +97,8 @@
     "@lattice-engine/scene": "workspace:^",
     "@lattice-engine/text": "workspace:^",
     "@lattice-engine/utils": "workspace:^",
-    "@lattice-engine/vrm": "workspace:^"
+    "@lattice-engine/vrm": "workspace:^",
+    "@lattice-engine/wired": "workspace:^"
   },
   "devDependencies": {
     "typescript": "~5.0.4",

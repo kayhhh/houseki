@@ -1,5 +1,4 @@
 import { CoreStore, Warehouse } from "lattice-engine/core";
-import { OrbitControls } from "lattice-engine/orbit";
 import {
   DynamicBody,
   PhysicsConfig,
@@ -11,12 +10,12 @@ import {
   Material,
   Mesh,
   Parent,
-  PerspectiveCamera,
   SceneStruct,
   Transform,
 } from "lattice-engine/scene";
 import { Commands, dropStruct, Mut, Res } from "thyseus";
 
+import { createOrbitControls } from "../../utils/createOrbitControls";
 import { createRoom } from "../../utils/createRoom";
 import { createScene } from "../../utils/createScene";
 import { createSphereGeometry } from "../../utils/geometry";
@@ -30,18 +29,8 @@ export function initScene(
 ) {
   physicsConfig.debug = true;
 
+  createOrbitControls(commands, sceneStruct, [0, 5, 7]);
   const { root } = createScene(commands, coreStore, sceneStruct);
-
-  const transform = new Transform([0, 6, 8]);
-
-  const camera = commands
-    .spawn()
-    .add(transform)
-    .addType(GlobalTransform)
-    .addType(PerspectiveCamera)
-    .addType(OrbitControls);
-
-  sceneStruct.activeCamera = camera.id;
 
   const parent = new Parent(root);
 
@@ -52,6 +41,7 @@ export function initScene(
   const material = commands.spawn().add(materialComponent);
   dropStruct(materialComponent);
 
+  const transform = new Transform();
   const targetTransform = new TargetTransform();
   const mesh = new Mesh(material);
   const sphereCollider = new SphereCollider();

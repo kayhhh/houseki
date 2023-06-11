@@ -10,6 +10,7 @@ import Physics from "./demos/physics/Physics";
 import Player from "./demos/player/Player";
 import Text from "./demos/text/Text";
 import VRM from "./demos/vrm/VRM";
+import Wired from "./demos/wired/Wired";
 
 function closeSidePanel() {
   document.querySelector(".sidepanel")?.classList.remove("open");
@@ -45,6 +46,7 @@ export default function App() {
         <RouteLink href="/player">Player</RouteLink>
         <RouteLink href="/text">Text</RouteLink>
         <RouteLink href="/vrm">VRM</RouteLink>
+        <RouteLink href="/wired">The Wired</RouteLink>
 
         <h3>Links</h3>
 
@@ -61,6 +63,7 @@ export default function App() {
       <Route path="/player" component={Player} />
       <Route path="/text" component={Text} />
       <Route path="/vrm" component={VRM} />
+      <Route path="/wired" component={Wired} />
     </div>
   );
 }

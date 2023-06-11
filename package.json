@@ -5,7 +5,7 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev --concurrency 15",
+    "dev": "turbo dev --concurrency 16",
     "format": "prettier --write .",
     "lint": "eslint --fix . --ext .ts,.tsx,.mjs,.json --ignore-path .gitignore --ignore-pattern package.json",
     "test": "turbo test",
