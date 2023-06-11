@@ -10,7 +10,13 @@ export function exportMesh(
   mesh: Mesh,
   geometry: Geometry
 ) {
-  const gltfMesh = context.doc.createMesh();
+  const parentId = mesh.parentId || entityId;
+  let gltfMesh = context.meshes.get(parentId);
+
+  if (!gltfMesh) {
+    gltfMesh = context.doc.createMesh();
+    context.meshes.set(parentId, gltfMesh);
+  }
 
   const primitive = context.doc.createPrimitive();
   gltfMesh.addPrimitive(primitive);
@@ -53,7 +59,4 @@ export function exportMesh(
     accessor.setType("SCALAR");
     primitive.setIndices(accessor);
   }
-
-  const parentId = mesh.parentId || entityId;
-  context.meshes.set(parentId, gltfMesh);
 }
