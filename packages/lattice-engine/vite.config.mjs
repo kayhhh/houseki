@@ -18,7 +18,6 @@ export default defineConfig({
         text: "./src/text.ts",
         utils: "./src/utils.ts",
         vrm: "./src/vrm.ts",
-        wired: "./src/wired.ts",
       },
       formats: ["es"],
     },

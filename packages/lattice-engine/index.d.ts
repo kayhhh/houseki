@@ -11,4 +11,3 @@
 /// <reference path="./text.d.ts" />
 /// <reference path="./utils.d.ts" />
 /// <reference path="./vrm.d.ts" />
-/// <reference path="./wired.d.ts" />
