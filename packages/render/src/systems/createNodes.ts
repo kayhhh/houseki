@@ -25,26 +25,18 @@ export function createNodes(
     }
 
     // Sync object properties
-    if (transform.translation.hasChanged) {
-      object.position.set(
-        transform.translation.x,
-        transform.translation.y,
-        transform.translation.z
-      );
-    }
-
-    if (transform.rotation.hasChanged) {
-      object.quaternion.set(
-        transform.rotation.x,
-        transform.rotation.y,
-        transform.rotation.z,
-        transform.rotation.w
-      );
-    }
-
-    if (transform.scale.hasChanged) {
-      object.scale.set(transform.scale.x, transform.scale.y, transform.scale.z);
-    }
+    object.position.set(
+      transform.translation.x,
+      transform.translation.y,
+      transform.translation.z
+    );
+    object.quaternion.set(
+      transform.rotation.x,
+      transform.rotation.y,
+      transform.rotation.z,
+      transform.rotation.w
+    );
+    object.scale.set(transform.scale.x, transform.scale.y, transform.scale.z);
 
     const parentObject =
       store.nodes.get(parent.id) ?? store.scenes.get(parent.id);
