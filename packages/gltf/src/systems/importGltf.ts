@@ -8,24 +8,15 @@ import { ImportContext } from "../import/context";
 import { importDoc } from "../import/importDoc";
 import { removeGltf } from "../import/removeGltf";
 
-// Draco decoder/encoder modules must be loaded by the consumer of this package.
-// see https://github.com/google/draco/tree/master/javascript/example
-declare const DracoDecoderModule: any;
-declare const DracoEncoderModule: any;
-
 const io = new WebIO().registerExtensions(extensions);
 
-if (typeof DracoDecoderModule !== "undefined") {
-  io.registerDependencies({
-    "draco3d.decoder": await new DracoDecoderModule(),
-  });
-}
+const dracoDecoder = await import("../draco/draco_wasm_wrapper_gltf").then(
+  (m) => m.default()
+);
 
-if (typeof DracoEncoderModule !== "undefined") {
-  io.registerDependencies({
-    "draco3d.encoder": await new DracoEncoderModule(),
-  });
-}
+io.registerDependencies({
+  "draco3d.decoder": dracoDecoder,
+});
 
 class GltfStore {
   /**

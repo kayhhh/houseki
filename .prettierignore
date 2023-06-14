@@ -5,3 +5,8 @@ dist
 coverage
 .turbo
 *.tsbuildinfo
+vite.config.*.timestamp*
+*.local.*
+
+draco_encoder_wrapper.ts
+draco_wasm_wrapper_gltf.ts

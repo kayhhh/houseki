@@ -55,6 +55,16 @@ import { parentNodes } from "../export/parentNodes";
 import { extensions } from "../extensions/extensions";
 import { ExportedJSON } from "../types";
 
+const io = new WebIO().registerExtensions(extensions);
+
+const dracoEncoder = await import("../draco/draco_encoder_wrapper").then((m) =>
+  m.default()
+);
+
+io.registerDependencies({
+  "draco3d.encoder": dracoEncoder,
+});
+
 class LocalStore {
   readonly outBinary: Uint8Array[] = [];
   readonly outJson: JSONDocument[] = [];
@@ -183,7 +193,6 @@ export function exportGlb(
 
     parentNodes(context, rootId);
 
-    const io = new WebIO().registerExtensions(extensions);
     const isBinary = event.binary;
 
     context.doc.transform(dedup(), prune({ keepLeaves: true })).then((doc) => {
