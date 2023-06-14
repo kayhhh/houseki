@@ -1,5 +1,7 @@
 // @ts-nocheck
 
+let wasmPath = ""
+
 var $jscomp = $jscomp || {};
 $jscomp.scope = {};
 $jscomp.arrayIteratorImpl = function (h) {
@@ -584,7 +586,7 @@ const DracoDecoderModule = (function () {
     }
     function f(e) {
       try {
-        if (e == P && ea) return new Uint8Array(ea);
+        if (e == wasmPath && ea) return new Uint8Array(ea);
         if (ma) return ma(e);
         throw "both async and sync fetching of the wasm failed";
       } catch (b) {
@@ -593,19 +595,19 @@ const DracoDecoderModule = (function () {
     }
     function q() {
       if (!ea && (ta || fa)) {
-        if ("function" == typeof fetch && !P.startsWith("file://"))
-          return fetch(P, { credentials: "same-origin" })
+        if ("function" == typeof fetch && !wasmPath.startsWith("file://"))
+          return fetch(wasmPath, { credentials: "same-origin" })
             .then(function (e) {
-              if (!e.ok) throw "failed to load wasm binary file at '" + P + "'";
+              if (!e.ok) throw "failed to load wasm binary file at '" + wasmPath + "'";
               return e.arrayBuffer();
             })
             .catch(function () {
-              return f(P);
+              return f(wasmPath);
             });
         if (na)
           return new Promise(function (e, b) {
             na(
-              P,
+              wasmPath,
               function (c) {
                 e(new Uint8Array(c));
               },
@@ -614,7 +616,7 @@ const DracoDecoderModule = (function () {
           });
       }
       return Promise.resolve().then(function () {
-        return f(P);
+        return f(wasmPath);
       });
     }
     function u(e) {
@@ -985,8 +987,8 @@ const DracoDecoderModule = (function () {
       ba = 0,
       qa = null,
       ha = null;
-    var P = new URL("draco_decoder_gltf.wasm", import.meta.url).href;
-    P.startsWith("data:application/octet-stream;base64,") || (P = k(P));
+
+    wasmPath.startsWith("data:application/octet-stream;base64,") || (wasmPath = k(wasmPath));
     let pd = 0,
       qd = {
         a: function () {
@@ -1042,8 +1044,8 @@ const DracoDecoderModule = (function () {
       }
       function c(g) {
         return q()
-          .then(function (t) {
-            return WebAssembly.instantiate(t, d);
+          .then(function (wasmBytes) {
+            return WebAssembly.instantiate(wasmBytes, d);
           })
           .then(function (t) {
             return t;
@@ -1065,13 +1067,13 @@ const DracoDecoderModule = (function () {
       (function () {
         return ea ||
           "function" != typeof WebAssembly.instantiateStreaming ||
-          P.startsWith("data:application/octet-stream;base64,") ||
-          P.startsWith("file://") ||
+          wasmPath.startsWith("data:application/octet-stream;base64,") ||
+          wasmPath.startsWith("file://") ||
           Ua ||
           "function" != typeof fetch
           ? c(b)
-          : fetch(P, { credentials: "same-origin" }).then(function (g) {
-              return WebAssembly.instantiateStreaming(g, d).then(
+          : fetch(wasmPath, { credentials: "same-origin" }).then(function (wasmUrl) {
+              return WebAssembly.instantiateStreaming(wasmUrl, d).then(
                 b,
                 function (t) {
                   da("wasm streaming compile failed: " + t);
@@ -2513,13 +2515,10 @@ const DracoDecoderModule = (function () {
   };
 })();
 
-// "object" === typeof exports && "object" === typeof module
-//   ? (module.exports = DracoDecoderModule)
-//   : "function" === typeof define && define.amd
-//   ? define([], function () {
-//       return DracoDecoderModule;
-//     })
-//   : "object" === typeof exports &&
-//     (exports.DracoDecoderModule = DracoDecoderModule);
-
-export default DracoDecoderModule as () => Promise<any>;
+/**
+ * @param {string} path - pass in import.meta.url
+ */
+export default function createDecoder(path: string) {
+  wasmPath = new URL("draco_decoder_gltf.wasm", path).href;
+  return DracoDecoderModule as () => Promise<any>;
+}

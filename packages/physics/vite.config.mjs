@@ -18,5 +18,5 @@ export default defineConfig({
     },
     target: "esnext",
   },
-  plugins: [dts(), wasm(), thyseusPlugin()],
+  plugins: [dts(), thyseusPlugin(), wasm()],
 });
