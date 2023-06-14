@@ -12,6 +12,7 @@
     "test:watch": "turbo test:watch"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.1",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
     "eslint": "^8.40.0",
