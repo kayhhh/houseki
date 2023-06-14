@@ -6,7 +6,7 @@ import {
   PropertyType,
 } from "@gltf-transform/core";
 
-import { EXTENSION_NAME } from "../constants";
+import { EXTENSION_NAME } from "./constants";
 import { ColliderType } from "./schemas";
 
 interface ICollider extends IProperty {
@@ -19,8 +19,8 @@ interface ICollider extends IProperty {
 }
 
 export class Collider extends ExtensionProperty<ICollider> {
-  static override readonly EXTENSION_NAME = EXTENSION_NAME.OMI_collider;
-  declare extensionName: typeof EXTENSION_NAME.OMI_collider;
+  static override readonly EXTENSION_NAME = EXTENSION_NAME;
+  declare extensionName: typeof EXTENSION_NAME;
   declare propertyType: "Collider";
   declare parentTypes: [PropertyType.NODE];
 
@@ -34,7 +34,7 @@ export class Collider extends ExtensionProperty<ICollider> {
   };
 
   protected init() {
-    this.extensionName = EXTENSION_NAME.OMI_collider;
+    this.extensionName = EXTENSION_NAME;
     this.propertyType = "Collider";
     this.parentTypes = [PropertyType.NODE];
   }

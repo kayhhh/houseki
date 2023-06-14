@@ -5,7 +5,7 @@ import {
   PropertyType,
 } from "@gltf-transform/core";
 
-import { EXTENSION_NAME } from "../constants";
+import { EXTENSION_NAME } from "./constants";
 import { PhysicsBodyType } from "./schemas";
 
 type Vec9 = [
@@ -29,13 +29,13 @@ export interface IPhysicsBody extends IProperty {
 }
 
 export class PhysicsBody extends ExtensionProperty<IPhysicsBody> {
-  static override readonly EXTENSION_NAME = EXTENSION_NAME.OMI_physics_body;
-  declare extensionName: typeof EXTENSION_NAME.OMI_physics_body;
+  static override readonly EXTENSION_NAME = EXTENSION_NAME;
+  declare extensionName: typeof EXTENSION_NAME;
   declare propertyType: "PhysicsBody";
   declare parentTypes: [PropertyType.NODE];
 
   protected init() {
-    this.extensionName = EXTENSION_NAME.OMI_physics_body;
+    this.extensionName = EXTENSION_NAME;
     this.propertyType = "PhysicsBody";
     this.parentTypes = [PropertyType.NODE];
   }

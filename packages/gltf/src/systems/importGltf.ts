@@ -8,6 +8,25 @@ import { ImportContext } from "../import/context";
 import { importDoc } from "../import/importDoc";
 import { removeGltf } from "../import/removeGltf";
 
+// Draco decoder/encoder modules must be loaded by the consumer of this package.
+// see https://github.com/google/draco/tree/master/javascript/example
+declare const DracoDecoderModule: any;
+declare const DracoEncoderModule: any;
+
+const io = new WebIO().registerExtensions(extensions);
+
+if (typeof DracoDecoderModule !== "undefined") {
+  io.registerDependencies({
+    "draco3d.decoder": await new DracoDecoderModule(),
+  });
+}
+
+if (typeof DracoEncoderModule !== "undefined") {
+  io.registerDependencies({
+    "draco3d.encoder": await new DracoEncoderModule(),
+  });
+}
+
 class GltfStore {
   /**
    * All entity IDs that have a Gltf component.
@@ -53,7 +72,6 @@ export function importGltf(
       entity.add(new Loading(`Loading ${gltf.uri}`));
 
       // Start loading document
-      const io = new WebIO().registerExtensions(extensions);
       io.read(gltf.uri).then((doc) => store.docs.set(id, doc));
     } else if (doc) {
       // Remove old glTF entities
@@ -73,7 +91,7 @@ export function importGltf(
       store.docs.delete(id);
 
       // Remove loading component
-      if (entity.hasComponent(Loading)) entity.remove(Loading);
+      entity.remove(Loading);
     }
   }
 

@@ -1,6 +1,6 @@
 import { Extension, ReaderContext, WriterContext } from "@gltf-transform/core";
 
-import { EXTENSION_NAME } from "../constants";
+import { EXTENSION_NAME } from "./constants";
 import { PhysicsBody } from "./PhysicsBody";
 import { NodePhysicsBody, nodePhysicsBodySchema } from "./schemas";
 
@@ -8,8 +8,8 @@ import { NodePhysicsBody, nodePhysicsBodySchema } from "./schemas";
  * Implementation of the {@link https://github.com/omigroup/gltf-extensions/tree/main/extensions/2.0/OMI_physics_body OMI_physics_body} extension.
  */
 export class OMIPhysicsBody extends Extension {
-  static override readonly EXTENSION_NAME = EXTENSION_NAME.OMI_physics_body;
-  override readonly extensionName = EXTENSION_NAME.OMI_physics_body;
+  static override readonly EXTENSION_NAME = EXTENSION_NAME;
+  override readonly extensionName = EXTENSION_NAME;
 
   createPhysicsBody(): PhysicsBody {
     return new PhysicsBody(this.document.getGraph());

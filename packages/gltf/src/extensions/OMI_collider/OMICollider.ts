@@ -1,7 +1,7 @@
 import { Extension, ReaderContext, WriterContext } from "@gltf-transform/core";
 
-import { EXTENSION_NAME } from "../constants";
 import { Collider } from "./Collider";
+import { EXTENSION_NAME } from "./constants";
 import {
   ColliderDef,
   ColliderExtensionDef,
@@ -14,8 +14,8 @@ import {
  * Implementation of the {@link https://github.com/omigroup/gltf-extensions/tree/main/extensions/2.0/OMI_collider OMI_collider} extension.
  */
 export class OMICollider extends Extension {
-  static override readonly EXTENSION_NAME = EXTENSION_NAME.OMI_collider;
-  override readonly extensionName = EXTENSION_NAME.OMI_collider;
+  static override readonly EXTENSION_NAME = EXTENSION_NAME;
+  override readonly extensionName = EXTENSION_NAME;
 
   createCollider(): Collider {
     return new Collider(this.document.getGraph());
