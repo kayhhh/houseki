@@ -48,7 +48,26 @@ export default function Gltf() {
     <>
       <Loading />
       <Stats />
-      <Canvas />
+
+      <div
+        onDrop={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const file = e.dataTransfer.files[0];
+          if (!file) return;
+
+          const url = URL.createObjectURL(file);
+
+          selectedModel.uri = url;
+        }}
+        onDragOver={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+      >
+        <Canvas />
+      </div>
     </>
   );
 }
