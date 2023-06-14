@@ -59,4 +59,4 @@ jobs:
         with:
           publish: pnpm release
         env:
-          GITHUB_TOKEN: ${{ secrets.CHANGESETS_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
