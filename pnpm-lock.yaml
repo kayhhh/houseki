@@ -139,8 +139,8 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       '@gltf-transform/extensions':
-        specifier: ^3.3.1
-        version: 3.3.1
+        specifier: ^3.4.2
+        version: 3.4.2
       '@gltf-transform/functions':
         specifier: ^3.3.1
         version: 3.3.1
@@ -1218,10 +1218,16 @@ packages:
     dependencies:
       property-graph: 1.2.0
 
-  /@gltf-transform/extensions@3.3.1:
-    resolution: {integrity: sha512-9VjZny4QitzQvt6Ek0JIly3Q16JHX1gJ7K9ddQU5vod/pBz3r623wq2U1SLUapkVDdpLFiru3GsgIQBeLWmxbg==}
+  /@gltf-transform/core@3.4.2:
+    resolution: {integrity: sha512-9YvltytbpVbL9kp6i/b5T2bY4nwsWtlYUf9raNLny1cjvPyCukYxO/3e+nweAMgLofQcvPnBrzRxLC/RPjQ+Wg==}
     dependencies:
-      '@gltf-transform/core': 3.3.1
+      property-graph: 1.2.0
+    dev: false
+
+  /@gltf-transform/extensions@3.4.2:
+    resolution: {integrity: sha512-cJ6wPKokCA/JPFvRmylu33cY68XwTPKiIGDxckgH1t5LAYJygAuEGEWE6oSo4ojy50G1KduKxHsxT+Cp6zgBcA==}
+    dependencies:
+      '@gltf-transform/core': 3.4.2
       ktx-parse: 0.5.0
     dev: false
 
@@ -1229,7 +1235,7 @@ packages:
     resolution: {integrity: sha512-Sa+/JXuvOKYq3MxH76hH7Us6M0U0y7sO6mXoKsG71JcV3msE+Nm+U5+uGYD6bj8YY4cUY9d84vOBa4N3Oz6dOA==}
     dependencies:
       '@gltf-transform/core': 3.3.1
-      '@gltf-transform/extensions': 3.3.1
+      '@gltf-transform/extensions': 3.4.2
       ktx-parse: 0.5.0
       ndarray: 1.0.19
       ndarray-lanczos: 0.3.0
