@@ -58,3 +58,5 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: pnpm ci:publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
