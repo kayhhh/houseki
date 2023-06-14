@@ -57,13 +57,11 @@ import { ExportedJSON } from "../types";
 
 const io = new WebIO().registerExtensions(extensions);
 
-const createEncoder = await import("../draco/draco_encoder_wrapper").then((m) =>
-  m.default(import.meta.url)
-);
+declare const DracoEncoderModule: undefined | (() => Promise<any>);
 
-io.registerDependencies({
-  "draco3d.encoder": await createEncoder,
-});
+if (typeof DracoEncoderModule !== "undefined") {
+  io.registerDependencies({ "draco3d.encoder": await DracoEncoderModule() });
+}
 
 class LocalStore {
   readonly outBinary: Uint8Array[] = [];

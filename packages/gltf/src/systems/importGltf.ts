@@ -10,13 +10,11 @@ import { removeGltf } from "../import/removeGltf";
 
 const io = new WebIO().registerExtensions(extensions);
 
-const createDecoder = await import("../draco/draco_wasm_wrapper_gltf").then(
-  (m) => m.default(import.meta.url)
-);
+declare const DracoDecoderModule: undefined | (() => Promise<any>);
 
-io.registerDependencies({
-  "draco3d.decoder": await createDecoder(),
-});
+if (typeof DracoDecoderModule !== "undefined") {
+  io.registerDependencies({ "draco3d.decoder": await DracoDecoderModule() });
+}
 
 class GltfStore {
   /**

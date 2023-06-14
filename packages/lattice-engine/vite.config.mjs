@@ -1,6 +1,5 @@
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
-import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig({
   build: {
@@ -28,15 +27,5 @@ export default defineConfig({
     },
     target: "esnext",
   },
-  plugins: [
-    dts(),
-    viteStaticCopy({
-      targets: [
-        {
-          dest: ".",
-          src: "node_modules/@lattice-engine/gltf/dist/*.wasm",
-        },
-      ],
-    }),
-  ],
+  plugins: [dts()],
 });

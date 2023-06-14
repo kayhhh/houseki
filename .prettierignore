@@ -8,5 +8,5 @@ node_modules
 pnpm-lock.yaml
 vite.config.*.timestamp*
 
-draco_encoder_wrapper.ts
-draco_wasm_wrapper_gltf.ts
+draco_encoder_wrapper.js
+draco_wasm_wrapper_gltf.js
