@@ -1,5 +1,11 @@
 # @lattice-engine/gltf
 
+## 0.3.2
+
+### Patch Changes
+
+- 3a1173d: No longer include draco scripts with package, just leave it up to the user to figure out.
+
 ## 0.3.1
 
 ### Patch Changes
