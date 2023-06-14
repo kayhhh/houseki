@@ -13,9 +13,9 @@ jobs:
     permissions:
       contents: write
     env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
       PNPM_CACHE_FOLDER: .pnpm-store
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
