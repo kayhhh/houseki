@@ -42,5 +42,5 @@ export function physicsPlugin(builder: WorldBuilder) {
         [runRaycasts, saveCharacters, saveRigidBodies, generateDebug]
       )
     )
-    .addSystems(run(applyTargetTransforms).last());
+    .addSystemsToSchedule(LatticeSchedules.PostUpdate, applyTargetTransforms);
 }

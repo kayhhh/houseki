@@ -51,24 +51,35 @@ export class Engine {
   async #loop() {
     const time = performance.now();
 
-    // Run the main update loop
+    // Update
+    await this.#runSchedule(LatticeSchedules.PreUpdate);
     await this.#runSchedule(LatticeSchedules.Update);
+    await this.#runSchedule(LatticeSchedules.PostUpdate);
 
-    // Run the fixed update loop
+    // FixedUpdate
     const fixedStep = 1000 / FIXED_HZ;
     this.#leftoverFixedTime += time - this.#lastFixedTime;
 
     if (this.#leftoverFixedTime >= fixedStep) {
+      await this.#runSchedule(LatticeSchedules.PreFixedUpdate);
       await this.#runSchedule(LatticeSchedules.FixedUpdate);
+      await this.#runSchedule(LatticeSchedules.PostFixedUpdate);
+
       this.#leftoverFixedTime -= fixedStep;
       this.#lastFixedTime = time;
     }
 
-    // Run queued schedules
+    // Queued schedules
     while (this.#scheduleQueue.length > 0) {
       const schedule = this.#scheduleQueue.shift();
       if (schedule) await this.#runSchedule(schedule);
     }
+
+    // Render
+    await this.#runSchedule(LatticeSchedules.Render);
+
+    // ApplyCommands
+    await this.#runSchedule(LatticeSchedules.ApplyCommands);
 
     // Schedule the next frame
     this.#animationFrame = requestAnimationFrame(this.#loop.bind(this));

@@ -1,7 +1,8 @@
-import { run, WorldBuilder } from "thyseus";
+import { LatticeSchedules } from "@lattice-engine/core";
+import { WorldBuilder } from "thyseus";
 
 import { inputWriter } from "./systems/inputWriter";
 
 export function inputPlugin(builder: WorldBuilder) {
-  builder.addSystems(run(inputWriter).first());
+  builder.addSystemsToSchedule(LatticeSchedules.PreUpdate, inputWriter);
 }

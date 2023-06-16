@@ -1,4 +1,5 @@
-import { applyCommands, run, WorldBuilder } from "thyseus";
+import { LatticeSchedules } from "@lattice-engine/core";
+import { WorldBuilder } from "thyseus";
 
 import { assetCleanup } from "./systems/assetCleanup";
 import { deepRemove } from "./systems/deepRemove";
@@ -7,11 +8,7 @@ import { keyframeTrackCleanup } from "./systems/keyframeTrackCleanup";
 import { updateGlobalTransforms } from "./systems/updateGlobalTransforms";
 
 export function scenePlugin(builder: WorldBuilder) {
-  builder.addSystems(
-    assetCleanup,
-    geometryCleanup,
-    keyframeTrackCleanup,
-    run(updateGlobalTransforms).first(),
-    run(deepRemove).before(applyCommands)
-  );
+  builder
+    .addSystems(assetCleanup, geometryCleanup, keyframeTrackCleanup, deepRemove)
+    .addSystemsToSchedule(LatticeSchedules.PostUpdate, updateGlobalTransforms);
 }

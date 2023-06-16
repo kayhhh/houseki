@@ -1,3 +1,4 @@
+import { LatticeSchedules } from "@lattice-engine/core";
 import { run, WorldBuilder } from "thyseus";
 
 import { createAmbientLights } from "./systems/createAmbientLights";
@@ -22,21 +23,22 @@ import { saveAnimations } from "./systems/saveAnimations";
  * Registers all render components and systems.
  */
 export function renderPlugin(builder: WorldBuilder) {
-  builder.addSystems(
-    ...run.chain(
-      createImages,
-      [createMaterials, createLineMaterials, createGeometries],
-      createMeshes,
-      createNodes,
-      [createAmbientLights, createDirectionalLights],
-      createShadowMaps,
-      [createScenes, createCameras],
-      createKeyframeTracks,
-      createAnimationClips,
-      createAnimationMixers,
-      playAnimations,
-      saveAnimations
-    ),
-    run(renderCanvas).last()
-  );
+  builder
+    .addSystems(
+      ...run.chain(
+        createImages,
+        [createMaterials, createLineMaterials, createGeometries],
+        createMeshes,
+        createNodes,
+        [createAmbientLights, createDirectionalLights],
+        createShadowMaps,
+        [createScenes, createCameras],
+        createKeyframeTracks,
+        createAnimationClips,
+        createAnimationMixers,
+        playAnimations,
+        saveAnimations
+      )
+    )
+    .addSystemsToSchedule(LatticeSchedules.Render, renderCanvas);
 }
