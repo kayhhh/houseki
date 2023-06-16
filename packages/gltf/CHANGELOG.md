@@ -1,5 +1,15 @@
 # @lattice-engine/gltf
 
+## 0.3.3
+
+### Patch Changes
+
+- fddc570: Add pre and post update schedules. This removes all `first()` and `last()` scheduling calls, which was causing some weird bugs.
+- Updated dependencies [fddc570]
+  - @lattice-engine/core@0.1.1
+  - @lattice-engine/physics@0.1.1
+  - @lattice-engine/scene@0.1.1
+
 ## 0.3.2
 
 ### Patch Changes
