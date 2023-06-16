@@ -1,4 +1,4 @@
-import { applyCommands, run, WorldBuilder } from "thyseus";
+import { applyCommands, WorldBuilder } from "thyseus";
 
 import { LatticeSchedules } from "./schedules";
 import { despawnEntities } from "./systems/despawnEntities";
@@ -12,9 +12,9 @@ export function corePlugin(builder: WorldBuilder) {
   builder
     .registerComponent(Resource)
     .addSystems(fetchAssets)
+    .addSystemsToSchedule(LatticeSchedules.Startup, initWorld)
     .addSystemsToSchedule(LatticeSchedules.PreUpdate, setMainTime)
     .addSystemsToSchedule(LatticeSchedules.PreFixedUpdate, setFixedTime)
-    .addSystemsToSchedule(LatticeSchedules.Startup, run(initWorld).first())
-    .addSystemsToSchedule(LatticeSchedules.Destroy, despawnEntities)
-    .addSystemsToSchedule(LatticeSchedules.ApplyCommands, applyCommands);
+    .addSystemsToSchedule(LatticeSchedules.ApplyCommands, applyCommands)
+    .addSystemsToSchedule(LatticeSchedules.Destroy, despawnEntities);
 }
