@@ -121,10 +121,10 @@ export function orbitControls(
   }
 
   // Clear event queues
-  pointerMoveReader.clear();
   pointerDownReader.clear();
-  pointerUpReader.clear();
+  pointerMoveReader.clear();
   pointerCancelReader.clear();
+  pointerUpReader.clear();
   contextMenuReader.clear();
   onWheelReader.clear();
   keyDownReader.clear();

@@ -1,5 +1,9 @@
 import { struct } from "thyseus";
 
+import { Key, PointerType } from "./types";
+
+// TODO: change i32s back to i16
+
 @struct
 export class MouseEvent {
   @struct.bool declare altKey: boolean;
@@ -9,8 +13,8 @@ export class MouseEvent {
   @struct.u16 declare clientY: number;
   @struct.bool declare ctrlKey: boolean;
   @struct.bool declare metaKey: boolean;
-  @struct.i16 declare movementX: number;
-  @struct.i16 declare movementY: number;
+  @struct.i32 declare movementX: number;
+  @struct.i32 declare movementY: number;
   @struct.u16 declare screenX: number;
   @struct.u16 declare screenY: number;
   @struct.bool declare shiftKey: boolean;
@@ -28,8 +32,8 @@ export class PointerEvent {
   @struct.u16 declare clientY: number;
   @struct.bool declare ctrlKey: boolean;
   @struct.bool declare metaKey: boolean;
-  @struct.i16 declare movementX: number;
-  @struct.i16 declare movementY: number;
+  @struct.i32 declare movementX: number;
+  @struct.i32 declare movementY: number;
   @struct.u16 declare screenX: number;
   @struct.u16 declare screenY: number;
   @struct.bool declare shiftKey: boolean;
@@ -42,7 +46,7 @@ export class PointerEvent {
   @struct.f32 declare tiltX: number;
   @struct.f32 declare tiltY: number;
   @struct.u16 declare twist: number;
-  @struct.u8 declare pointerType: number; // PointerType
+  @struct.u8 declare pointerType: PointerType;
   @struct.bool declare isPrimary: boolean;
 }
 
@@ -58,7 +62,7 @@ export class WheelEvent {
 export class KeyboardEvent {
   @struct.bool declare altKey: boolean;
   @struct.bool declare ctrlKey: boolean;
-  @struct.u8 declare key: number; // Key
+  @struct.u8 declare key: Key;
   @struct.bool declare metaKey: boolean;
   @struct.bool declare repeat: boolean;
   @struct.bool declare shiftKey: boolean;
