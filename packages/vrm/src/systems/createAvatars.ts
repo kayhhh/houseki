@@ -2,7 +2,15 @@ import { Loading } from "@lattice-engine/core";
 import { VRM, VRMLoaderPlugin, VRMUtils } from "@pixiv/three-vrm";
 import { Mesh } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Entity, Query, Res, SystemRes, With, Without } from "thyseus";
+import {
+  dropStruct,
+  Entity,
+  Query,
+  Res,
+  SystemRes,
+  With,
+  Without,
+} from "thyseus";
 
 import { Vrm } from "../components";
 import { VrmStore } from "../resources";
@@ -44,7 +52,11 @@ export function createAvatars(
 
     // Load the new VRM
     localStore.loadingURI.set(entityId, uri);
-    entity.add(new Loading(`Loading ${uri}`));
+
+    const loadMessage = new Loading(`Loading ${uri}`);
+    entity.add(loadMessage);
+    dropStruct(loadMessage);
+
     loadVrm(entityId, uri, localStore);
   }
 

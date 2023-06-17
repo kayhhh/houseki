@@ -1,4 +1,12 @@
-import { Entity, Query, Res, SystemRes, With, Without } from "thyseus";
+import {
+  dropStruct,
+  Entity,
+  Query,
+  Res,
+  SystemRes,
+  With,
+  Without,
+} from "thyseus";
 
 import { Asset, Loading } from "../components";
 import { Warehouse } from "../warehouse";
@@ -26,7 +34,9 @@ export function fetchAssets(
       continue;
     }
 
-    entity.add(new Loading(`Fetching ${uri}`));
+    const loadMessage = new Loading(`Fetching ${uri}`);
+    entity.add(loadMessage);
+    dropStruct(loadMessage);
 
     fetch(uri)
       .then((response) => response.arrayBuffer())

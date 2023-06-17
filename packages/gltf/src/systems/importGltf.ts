@@ -1,6 +1,6 @@
 import { Document, WebIO } from "@gltf-transform/core";
 import { Loading, Warehouse } from "@lattice-engine/core";
-import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
+import { Commands, dropStruct, Entity, Query, Res, SystemRes } from "thyseus";
 
 import { Gltf } from "../components";
 import { extensions } from "../extensions/extensions";
@@ -58,7 +58,10 @@ export function importGltf(
     // If URI has changed, load new document
     if (store.uris.get(id) !== gltf.uri) {
       store.uris.set(id, gltf.uri);
-      entity.add(new Loading(`Loading ${gltf.uri}`));
+
+      const loading = new Loading(`Loading ${gltf.uri}`);
+      entity.add(loading);
+      dropStruct(loading);
 
       // Start loading document
       io.read(gltf.uri).then((doc) => store.docs.set(id, doc));
