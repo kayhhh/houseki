@@ -142,8 +142,8 @@ importers:
         specifier: ^3.4.2
         version: 3.4.2
       '@gltf-transform/functions':
-        specifier: ^3.3.1
-        version: 3.3.1
+        specifier: ^3.4.2
+        version: 3.4.2
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
@@ -1246,8 +1246,8 @@ packages:
       ktx-parse: 0.5.0
     dev: false
 
-  /@gltf-transform/functions@3.3.1:
-    resolution: {integrity: sha512-Sa+/JXuvOKYq3MxH76hH7Us6M0U0y7sO6mXoKsG71JcV3msE+Nm+U5+uGYD6bj8YY4cUY9d84vOBa4N3Oz6dOA==}
+  /@gltf-transform/functions@3.4.2:
+    resolution: {integrity: sha512-Emc9nm9k553T1DE4n7vIyYASvZtEVtdQm7bW99r3vRksMeKZ6jPJXBTv6Zl65huPYmWKZ8sP2cu2LNbkwslm7g==}
     dependencies:
       '@gltf-transform/core': 3.4.2
       '@gltf-transform/extensions': 3.4.2
