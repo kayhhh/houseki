@@ -260,8 +260,8 @@ importers:
         specifier: workspace:^
         version: link:../scene
       n8ao:
-        specifier: ^1.5.1
-        version: 1.5.1(postprocessing@6.31.0)(three@0.151.3)
+        specifier: ^1.6.5
+        version: 1.6.5(postprocessing@6.31.0)(three@0.151.3)
       postprocessing:
         specifier: ^6.31.0
         version: 6.31.0(three@0.151.3)
@@ -4407,8 +4407,8 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /n8ao@1.5.1(postprocessing@6.31.0)(three@0.151.3):
-    resolution: {integrity: sha512-Dn5o6ecmLC1xZm2mby2qdGYgwKcNsC9oKv85TQBKFbDJVzUHGXV2oys14rDl6nhwjH+zZU3YcLJkMcY7qe+jTg==}
+  /n8ao@1.6.5(postprocessing@6.31.0)(three@0.151.3):
+    resolution: {integrity: sha512-CDDxPFVuiot6amVNxIYrwXPLENT4SGfXBLkjOfsnz2h6HL6bO8wOQnkDndUc2HQeLR9s5vLEF4kJBl3uBufE9Q==}
     peerDependencies:
       postprocessing: '>=6.30.0'
       three: '>=0.137'
