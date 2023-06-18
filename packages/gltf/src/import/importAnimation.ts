@@ -6,18 +6,18 @@ import {
   KeyframePath,
   KeyframeTrack,
 } from "@lattice-engine/scene";
-import { Commands, dropStruct, Entity } from "thyseus";
+import { Commands, dropStruct } from "thyseus";
 
 import { ImportContext } from "./context";
 
 export function importAnimation(
   animation: Animation,
-  root: Readonly<Entity>,
+  rootId: bigint,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
   context: ImportContext
 ) {
-  const clip = new AnimationClip(root.id, animation.getName(), true, true);
+  const clip = new AnimationClip(rootId, animation.getName(), true, true);
 
   const entity = commands.spawn().add(clip);
   context.animationClipIds.push(entity.id);

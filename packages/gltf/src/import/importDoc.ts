@@ -28,7 +28,7 @@ export function importDoc(
   root
     .listAnimations()
     .forEach((animation) =>
-      importAnimation(animation, entity, commands, warehouse, context)
+      importAnimation(animation, entity.id, commands, warehouse, context)
     );
 
   if (root.listAnimations().length > 0) {
