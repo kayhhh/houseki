@@ -84,8 +84,8 @@ importers:
         specifier: ^3.4.2
         version: 3.4.2
       '@thyseus/transformer-rollup':
-        specifier: ^0.12.0
-        version: 0.12.0(thyseus@0.12.1)
+        specifier: ^0.12.1
+        version: 0.12.1(thyseus@0.12.1)
       '@types/react':
         specifier: ^18.2.6
         version: 18.2.6
@@ -121,8 +121,8 @@ importers:
         version: 0.12.1
     devDependencies:
       '@thyseus/transformer-rollup':
-        specifier: ^0.12.0
-        version: 0.12.0(thyseus@0.12.1)
+        specifier: ^0.12.1
+        version: 0.12.1(thyseus@0.12.1)
       typescript:
         specifier: ~5.1.3
         version: 5.1.3
@@ -161,8 +161,8 @@ importers:
         version: 3.21.4
     devDependencies:
       '@thyseus/transformer-rollup':
-        specifier: ^0.12.0
-        version: 0.12.0(thyseus@0.12.1)
+        specifier: ^0.12.1
+        version: 0.12.1(thyseus@0.12.1)
       typescript:
         specifier: ~5.1.3
         version: 5.1.3
@@ -183,8 +183,8 @@ importers:
         version: 0.12.1
     devDependencies:
       '@thyseus/transformer-rollup':
-        specifier: ^0.12.0
-        version: 0.12.0(thyseus@0.12.1)
+        specifier: ^0.12.1
+        version: 0.12.1(thyseus@0.12.1)
       typescript:
         specifier: ~5.1.3
         version: 5.1.3
@@ -270,8 +270,8 @@ importers:
         version: 0.12.1
     devDependencies:
       '@thyseus/transformer-rollup':
-        specifier: ^0.12.0
-        version: 0.12.0(thyseus@0.12.1)
+        specifier: ^0.12.1
+        version: 0.12.1(thyseus@0.12.1)
       typescript:
         specifier: ~5.1.3
         version: 5.1.3
@@ -301,8 +301,8 @@ importers:
         version: 0.12.1
     devDependencies:
       '@thyseus/transformer-rollup':
-        specifier: ^0.12.0
-        version: 0.12.0(thyseus@0.12.1)
+        specifier: ^0.12.1
+        version: 0.12.1(thyseus@0.12.1)
       '@types/three':
         specifier: ^0.151.0
         version: 0.151.0
@@ -335,8 +335,8 @@ importers:
         version: 0.12.1
     devDependencies:
       '@thyseus/transformer-rollup':
-        specifier: ^0.12.0
-        version: 0.12.0(thyseus@0.12.1)
+        specifier: ^0.12.1
+        version: 0.12.1(thyseus@0.12.1)
       typescript:
         specifier: ~5.1.3
         version: 5.1.3
@@ -378,8 +378,8 @@ importers:
         version: 0.12.1
     devDependencies:
       '@thyseus/transformer-rollup':
-        specifier: ^0.12.0
-        version: 0.12.0(thyseus@0.12.1)
+        specifier: ^0.12.1
+        version: 0.12.1(thyseus@0.12.1)
       '@types/three':
         specifier: ^0.151.0
         version: 0.151.0
@@ -412,8 +412,8 @@ importers:
         version: 0.12.1
     devDependencies:
       '@thyseus/transformer-rollup':
-        specifier: ^0.12.0
-        version: 0.12.0(thyseus@0.12.1)
+        specifier: ^0.12.1
+        version: 0.12.1(thyseus@0.12.1)
       '@types/three':
         specifier: ^0.151.0
         version: 0.151.0
@@ -440,8 +440,8 @@ importers:
         version: 0.12.1
     devDependencies:
       '@thyseus/transformer-rollup':
-        specifier: ^0.12.0
-        version: 0.12.0(thyseus@0.12.1)
+        specifier: ^0.12.1
+        version: 0.12.1(thyseus@0.12.1)
       typescript:
         specifier: ~5.1.3
         version: 5.1.3
@@ -474,8 +474,8 @@ importers:
         version: 0.47.2(three@0.151.3)
     devDependencies:
       '@thyseus/transformer-rollup':
-        specifier: ^0.12.0
-        version: 0.12.0(thyseus@0.12.1)
+        specifier: ^0.12.1
+        version: 0.12.1(thyseus@0.12.1)
       typescript:
         specifier: ~5.1.3
         version: 5.1.3
@@ -505,8 +505,8 @@ importers:
         version: 0.12.1
     devDependencies:
       '@thyseus/transformer-rollup':
-        specifier: ^0.12.0
-        version: 0.12.0(thyseus@0.12.1)
+        specifier: ^0.12.1
+        version: 0.12.1(thyseus@0.12.1)
       typescript:
         specifier: ~5.1.3
         version: 5.1.3
@@ -539,8 +539,8 @@ importers:
         version: 0.12.1
     devDependencies:
       '@thyseus/transformer-rollup':
-        specifier: ^0.12.0
-        version: 0.12.0(thyseus@0.12.1)
+        specifier: ^0.12.1
+        version: 0.12.1(thyseus@0.12.1)
       '@types/three':
         specifier: ^0.151.0
         version: 0.151.0
@@ -1921,10 +1921,10 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@thyseus/transformer-rollup@0.12.0(thyseus@0.12.1):
-    resolution: {integrity: sha512-qda3EE+2U9a9kQBmxsE4r6XYYjTe/xA+Cwj83ECBxxF2eXAV6JtAZW8S1xe7J38rQLOG6isUBU+YVnBU1QizIg==}
+  /@thyseus/transformer-rollup@0.12.1(thyseus@0.12.1):
+    resolution: {integrity: sha512-itXRKleTeyYuicjJDCZDYUFHnC8j/vW41oRnLUFEPhtjkw7vJAz94uKYQebHrtgs0BgWV4TNABk2nKLz1Urf8w==}
     peerDependencies:
-      thyseus: 0.12.0-beta.7
+      thyseus: 0.12.1
     dependencies:
       '@rollup/pluginutils': 5.0.2
       '@thyseus/typescript-transformer': 0.12.0-beta.7
