@@ -58,6 +58,8 @@ export function createAnimations(
 
       vrmStore.actions.delete(animationEntity.id);
 
+      if (!animation.uri) continue;
+
       const uri = animation.uri;
       const animationId = animationEntity.id;
 
