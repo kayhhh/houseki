@@ -18,7 +18,7 @@
     "dev": "vite build --watch"
   },
   "dependencies": {
-    "postprocessing": "^6.31.0",
+    "postprocessing": "^6.32.1",
     "troika-three-text": "^0.47.2"
   },
   "devDependencies": {

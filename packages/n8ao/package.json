@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "n8ao": "^1.6.7",
-    "postprocessing": "^6.31.0"
+    "postprocessing": "^6.32.1"
   },
   "devDependencies": {
     "@thyseus/transformer-rollup": "^0.12.1",
