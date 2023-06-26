@@ -18,7 +18,7 @@
     "dev": "vite build --watch"
   },
   "devDependencies": {
-    "@thyseus/transformer-rollup": "^0.12.1",
+    "@thyseus/transformer-rollup": "^0.13.0",
     "typescript": "~5.1.3",
     "vite": "^4.3.9",
     "vite-plugin-dts": "^2.3.0"
@@ -28,7 +28,7 @@
     "@lattice-engine/input": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
-    "thyseus": "^0.12.1"
+    "thyseus": "^0.13"
   },
   "publishConfig": {
     "access": "public"

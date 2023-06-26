@@ -101,7 +101,7 @@
     "vite-plugin-dts": "^2.3.0"
   },
   "peerDependencies": {
-    "thyseus": "^0.12.1"
+    "thyseus": "^0.13"
   },
   "optionalDependencies": {
     "three": "^0.151.3"

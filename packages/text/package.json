@@ -22,7 +22,7 @@
     "troika-three-text": "^0.47.2"
   },
   "devDependencies": {
-    "@thyseus/transformer-rollup": "^0.12.1",
+    "@thyseus/transformer-rollup": "^0.13.0",
     "typescript": "~5.1.3",
     "vite": "^4.3.9",
     "vite-plugin-dts": "^2.3.0"
@@ -31,7 +31,7 @@
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
-    "thyseus": "^0.12.1"
+    "thyseus": "^0.13"
   },
   "publishConfig": {
     "access": "public"
