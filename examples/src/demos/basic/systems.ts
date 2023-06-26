@@ -19,10 +19,10 @@ export function initScene(
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   createOrbitControls(commands, sceneStruct);
-  const { root } = createScene(commands, coreStore, sceneStruct);
+  const { rootId } = createScene(commands, coreStore, sceneStruct);
 
   const geometry = createBoxGeometry(warehouse);
-  const parent = new Parent(root);
+  const parent = new Parent(rootId);
 
   commands
     .spawn()

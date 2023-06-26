@@ -28,16 +28,16 @@ export function importNode(
 
   context.parent.id = parentId;
 
-  const entity = commands
+  const entityId = commands
     .spawn()
     .add(context.transform)
     .add(context.globalTransform)
-    .add(context.parent);
+    .add(context.parent).id;
 
-  context.nodes.set(node, entity.id);
+  context.nodes.set(node, entityId);
 
   const mesh = node.getMesh();
-  if (mesh) importMesh(mesh, entity.id, commands, warehouse, context);
+  if (mesh) importMesh(mesh, entityId, commands, warehouse, context);
 
   const physicsBody = node.getExtension<PhysicsBody>(
     PhysicsBody.EXTENSION_NAME
@@ -45,7 +45,7 @@ export function importNode(
   if (physicsBody) {
     switch (physicsBody.getType()) {
       case "Static": {
-        entity.addType(StaticBody);
+        commands.getById(entityId).addType(StaticBody);
         break;
       }
 
@@ -58,7 +58,7 @@ export function importNode(
           physicsBody.getAngularVelocity()
         );
 
-        entity.add(context.kinematicBody);
+        commands.getById(entityId).add(context.kinematicBody);
         break;
       }
 
@@ -73,7 +73,10 @@ export function importNode(
 
         context.targetTransform.set(nodePosition, nodeRotation, nodeScale);
 
-        entity.add(context.dynamicBody).add(context.targetTransform);
+        commands
+          .getById(entityId)
+          .add(context.dynamicBody)
+          .add(context.targetTransform);
         break;
       }
 
@@ -89,27 +92,27 @@ export function importNode(
     switch (collider.getType()) {
       case "box": {
         context.boxCollider.size.fromArray(collider.getSize());
-        entity.add(context.boxCollider);
+        commands.getById(entityId).add(context.boxCollider);
         break;
       }
 
       case "sphere": {
         context.sphereCollider.radius = collider.getRadius();
-        entity.add(context.sphereCollider);
+        commands.getById(entityId).add(context.sphereCollider);
         break;
       }
 
       case "capsule": {
         context.capsuleCollider.radius = collider.getRadius();
         context.capsuleCollider.height = collider.getHeight();
-        entity.add(context.capsuleCollider);
+        commands.getById(entityId).add(context.capsuleCollider);
         break;
       }
 
       case "cylinder": {
         context.cylinderCollider.radius = collider.getRadius();
         context.cylinderCollider.height = collider.getHeight();
-        entity.add(context.cylinderCollider);
+        commands.getById(entityId).add(context.cylinderCollider);
         dropStruct(context.cylinderCollider);
         break;
       }
@@ -120,7 +123,7 @@ export function importNode(
         for (const [m, id] of context.meshes) {
           if (m !== mesh) continue;
           context.hullCollider.meshId = id;
-          entity.add(context.hullCollider);
+          commands.getById(entityId).add(context.hullCollider);
           break;
         }
         break;
@@ -132,7 +135,7 @@ export function importNode(
         for (const [m, id] of context.meshes) {
           if (m !== mesh) continue;
           context.meshCollider.meshId = id;
-          entity.add(context.meshCollider);
+          commands.getById(entityId).add(context.meshCollider);
           break;
         }
         break;
@@ -143,6 +146,6 @@ export function importNode(
   node
     .listChildren()
     .forEach((child) =>
-      importNode(child, entity.id, commands, warehouse, context)
+      importNode(child, entityId, commands, warehouse, context)
     );
 }

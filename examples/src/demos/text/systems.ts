@@ -17,10 +17,10 @@ export function initScene(
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   createOrbitControls(commands, sceneStruct);
-  const { root } = createScene(commands, coreStore, sceneStruct);
+  const { rootId } = createScene(commands, coreStore, sceneStruct);
 
   const transform = new Transform();
-  const parent = new Parent(root);
+  const parent = new Parent(rootId);
   const text = new Text("Hello world!", undefined, 1, [0, 0, 0]);
 
   commands

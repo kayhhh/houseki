@@ -1,7 +1,7 @@
 import { Warehouse } from "lattice-engine/core";
 import { BoxCollider, StaticBody } from "lattice-engine/physics";
 import { GlobalTransform, Mesh, Parent, Transform } from "lattice-engine/scene";
-import { Commands } from "thyseus";
+import { Commands, dropStruct } from "thyseus";
 
 import { createBoxGeometry } from "./geometry";
 import { Vec3 } from "./types";
@@ -20,7 +20,7 @@ export function createRoom(
   warehouse: Readonly<Warehouse>
 ) {
   // Create ground
-  const ground = createBox(
+  const groundId = createBox(
     [size[0], THICKNESS, size[2]],
     [0, -THICKNESS / 2, 0],
     commands,
@@ -32,37 +32,39 @@ export function createRoom(
   const y = size[1] / 2 - THICKNESS / 2;
   const z = size[2] / 2 - THICKNESS / 2;
 
-  const wall1 = createBox(
+  createBox(
     [THICKNESS, size[1], size[2]],
     [-x, y, 0],
     commands,
-    warehouse
+    warehouse,
+    groundId
   );
-  const wall2 = createBox(
+
+  createBox(
     [THICKNESS, size[1], size[2]],
     [x, y, 0],
     commands,
-    warehouse
+    warehouse,
+    groundId
   );
-  const wall3 = createBox(
+
+  createBox(
     [size[0], size[1], THICKNESS],
     [0, y, -z],
     commands,
-    warehouse
+    warehouse,
+    groundId
   );
-  const wall4 = createBox(
+
+  createBox(
     [size[0], size[1], THICKNESS],
     [0, y, z],
     commands,
-    warehouse
+    warehouse,
+    groundId
   );
 
-  wall1.add(new Parent(ground));
-  wall2.add(new Parent(ground));
-  wall3.add(new Parent(ground));
-  wall4.add(new Parent(ground));
-
-  return ground;
+  return groundId;
 }
 
 /**
@@ -72,16 +74,31 @@ function createBox(
   size: Vec3,
   translation: Vec3,
   commands: Commands,
-  warehouse: Readonly<Warehouse>
+  warehouse: Readonly<Warehouse>,
+  parentId?: bigint
 ) {
   const geometry = createBoxGeometry(warehouse, size);
 
-  return commands
+  const transform = new Transform(translation);
+  const collider = new BoxCollider(size);
+
+  const entity = commands
     .spawn()
-    .add(new Transform(translation))
+    .add(transform)
     .addType(GlobalTransform)
     .addType(Mesh)
     .add(geometry)
-    .add(new BoxCollider(size))
+    .add(collider)
     .addType(StaticBody);
+
+  dropStruct(transform);
+  dropStruct(collider);
+
+  if (parentId) {
+    const parent = new Parent(parentId);
+    entity.add(parent);
+    dropStruct(parent);
+  }
+
+  return entity.id;
 }

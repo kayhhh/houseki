@@ -83,7 +83,6 @@ export function createMeshColliders(
         }
 
         const colliderDesc = ColliderDesc.trimesh(scaledVertices, indices32);
-
         object = store.world.createCollider(colliderDesc, rigidbody);
         store.meshColliders.set(entity.id, object);
       }

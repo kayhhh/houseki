@@ -84,14 +84,14 @@ export function handleExport(
         // const remove = deepRemove.create();
         // remove.rootId = entity.id;
 
-        entity.despawn();
+        commands.despawnById(entity.id);
       }
 
       // Load the exported scene
-      const { root } = createScene(commands, coreStore, sceneStruct);
+      const { rootId } = createScene(commands, coreStore, sceneStruct);
 
       const gltf = new Gltf(event.uri);
-      root.add(gltf);
+      commands.getById(rootId).add(gltf);
       dropStruct(gltf);
     }
   }

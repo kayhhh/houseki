@@ -55,12 +55,12 @@ export function importMesh(
       mesh.materialId = importMaterial(material, commands, warehouse, context);
     }
 
-    const meshEntity = commands.spawn().add(mesh).add(geometry);
+    const meshId = commands.spawn().add(mesh).add(geometry).id;
 
     dropStruct(mesh);
     dropStruct(geometry);
 
-    context.meshIds.push(meshEntity.id);
+    context.meshIds.push(meshId);
   });
 
   context.meshes.set(gltfMesh, nodeId);

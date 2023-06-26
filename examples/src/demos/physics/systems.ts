@@ -30,11 +30,12 @@ export function initScene(
   physicsConfig.debug = true;
 
   createOrbitControls(commands, sceneStruct, [0, 5, 7]);
-  const { root } = createScene(commands, coreStore, sceneStruct);
+  const { rootId } = createScene(commands, coreStore, sceneStruct);
 
-  const parent = new Parent(root);
+  const parent = new Parent(rootId);
 
-  createRoom([8, 1, 8], commands, warehouse).add(parent);
+  const roomId = createRoom([8, 1, 8], commands, warehouse);
+  commands.getById(roomId).add(parent);
 
   // Add dynamic balls
   const materialComponent = new Material([1, 0.2, 0.5, 1], 0, 0);

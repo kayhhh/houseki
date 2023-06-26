@@ -17,10 +17,10 @@ export function initScene(
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   createOrbitControls(commands, sceneStruct, [0, 1, -3]);
-  const { root } = createScene(commands, coreStore, sceneStruct);
+  const { rootId } = createScene(commands, coreStore, sceneStruct);
 
   const transform = new Transform([0, -0.5, 0]);
-  const parent = new Parent(root);
+  const parent = new Parent(rootId);
   const vrm = new Vrm("/k-robot.vrm");
 
   commands.spawn().add(transform).addType(GlobalTransform).add(parent).add(vrm);

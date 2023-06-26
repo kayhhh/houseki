@@ -32,7 +32,7 @@ export function importDoc(
     );
 
   if (root.listAnimations().length > 0) {
-    const mixer = entity.addType(AnimationMixer);
+    const mixer = commands.getById(entity.id).addType(AnimationMixer);
     context.animationMixerIds.push(mixer.id);
   }
 

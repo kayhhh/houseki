@@ -1,9 +1,10 @@
-import { Entity, EventReader, Query, With } from "thyseus";
+import { Commands, Entity, EventReader, Query, With } from "thyseus";
 
 import { Image, Material, Mesh, Parent, Transform } from "../components";
 import { DeepRemove } from "../events";
 
 export function deepRemove(
+  commands: Commands,
   events: EventReader<DeepRemove>,
   nodes: Query<[Entity, Parent], With<Transform>>,
   meshes: Query<[Entity, Mesh]>,
@@ -12,14 +13,6 @@ export function deepRemove(
 ) {
   if (events.length === 0) return;
 
-  const despawned = new Set<bigint>();
-
-  const despawn = (entity: Readonly<Entity>) => {
-    if (despawned.has(entity.id)) return;
-    despawned.add(entity.id);
-    entity.despawn();
-  };
-
   for (const event of events) {
     const parentIds = new Set<bigint>();
     parentIds.add(event.rootId);
@@ -27,7 +20,7 @@ export function deepRemove(
     for (const [entity, parent] of nodes) {
       if (!parentIds.has(parent.id)) continue;
       parentIds.add(entity.id);
-      despawn(entity);
+      commands.despawnById(entity.id);
     }
 
     const materialIds = new Set<bigint>();
@@ -35,7 +28,7 @@ export function deepRemove(
     for (const [entity, mesh] of meshes) {
       if (!parentIds.has(mesh.parentId)) continue;
       materialIds.add(mesh.materialId);
-      despawn(entity);
+      commands.despawnById(entity.id);
     }
 
     const imageIds = new Set<bigint>();
@@ -47,12 +40,12 @@ export function deepRemove(
       imageIds.add(material.normalTextureId);
       imageIds.add(material.occlusionTextureId);
       imageIds.add(material.emissiveTextureId);
-      despawn(entity);
+      commands.despawnById(entity.id);
     }
 
     for (const entity of images) {
       if (!imageIds.has(entity.id)) continue;
-      despawn(entity);
+      commands.despawnById(entity.id);
     }
   }
 

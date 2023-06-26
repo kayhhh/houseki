@@ -17,11 +17,11 @@ export function initScene(
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   createOrbitControls(commands, sceneStruct);
-  const { root } = createScene(commands, coreStore, sceneStruct, 0);
+  const { rootId } = createScene(commands, coreStore, sceneStruct, 0);
 
   commands.spawn().addType(N8AOPass);
 
-  root.addType(Gltf);
+  commands.getById(rootId).addType(Gltf);
 }
 
 /**

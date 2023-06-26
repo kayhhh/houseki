@@ -14,14 +14,14 @@ export function createOrbitControls(
 ) {
   const transform = new Transform(translation);
 
-  const camera = commands
+  const cameraId = commands
     .spawn()
     .add(transform)
     .addType(GlobalTransform)
     .addType(PerspectiveCamera)
-    .addType(OrbitControls);
+    .addType(OrbitControls).id;
 
   dropStruct(transform);
 
-  sceneStruct.activeCamera = camera.id;
+  sceneStruct.activeCamera = cameraId;
 }

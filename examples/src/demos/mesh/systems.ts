@@ -36,7 +36,7 @@ export function initScene(
 ) {
   physicsConfig.debug = true;
 
-  const { scene, root } = createScene(
+  const { sceneId, rootId } = createScene(
     commands,
     coreStore,
     sceneStruct,
@@ -44,10 +44,10 @@ export function initScene(
     20
   );
 
-  createPlayer([0, 5, 0], scene, commands, sceneStruct, inputStruct);
+  createPlayer([0, 5, 0], sceneId, commands, sceneStruct, inputStruct);
 
   const transform = new Transform(undefined, undefined, [4, 4, 4]);
-  const parent = new Parent(root);
+  const parent = new Parent(rootId);
   const gltf = new Gltf("/gltf/Accumula-Town.glb");
 
   commands
@@ -63,23 +63,21 @@ export function initScene(
 }
 
 export function addPhysics(
+  commands: Commands,
   meshes: Query<[Entity, Mesh], Without<[MeshCollider, Parent]>>,
   nodes: Query<Entity, [With<Transform>, Without<StaticBody>]>
 ) {
   for (const [entity, mesh] of meshes) {
     // Add mesh collider
-    const parent = new Parent();
-    parent.id = mesh.parentId;
-
-    entity.add(parent).addType(MeshCollider);
-
+    const parent = new Parent(mesh.parentId);
+    commands.getById(entity.id).add(parent).addType(MeshCollider);
     dropStruct(parent);
 
     // Add static body to parent
     for (const nodeEntity of nodes) {
       if (nodeEntity.id !== mesh.parentId) continue;
 
-      nodeEntity.addType(StaticBody);
+      commands.getById(entity.id).addType(StaticBody);
     }
   }
 }

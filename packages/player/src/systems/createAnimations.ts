@@ -109,7 +109,7 @@ export function createAnimations(
   // Remove VrmAnimations on player removal
   for (const [entity, animation] of animations) {
     if (!ids.includes(animation.vrmId)) {
-      commands.despawn(entity.id);
+      commands.despawnById(entity.id);
     }
   }
 }
@@ -127,9 +127,9 @@ function createAnimation(
 
     return animationId;
   } else {
-    const entity = commands
+    const entityId = commands
       .spawn()
-      .add(new VrmAnimation(vrmId, uri, false, true));
-    return entity.id;
+      .add(new VrmAnimation(vrmId, uri, false, true)).id;
+    return entityId;
   }
 }

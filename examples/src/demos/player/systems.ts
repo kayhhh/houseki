@@ -35,7 +35,7 @@ export function initScene(
 ) {
   physicsConfig.debug = true;
 
-  const { scene, root } = createScene(
+  const { sceneId, rootId } = createScene(
     commands,
     coreStore,
     sceneStruct,
@@ -43,69 +43,69 @@ export function initScene(
     16
   );
 
-  createPlayer([0, 4, 0], scene, commands, sceneStruct, inputStruct);
+  createPlayer([0, 4, 0], sceneId, commands, sceneStruct, inputStruct);
 
   const asset = new Asset("/DevGrid.png");
-  const devTexture = commands.spawn().add(asset).addType(Image);
+  const devTextureId = commands.spawn().add(asset).addType(Image).id;
   dropStruct(asset);
 
   const builder = new SceneBuilder(commands, warehouse);
 
   builder
-    .createBox([32, 1, 32], devTexture.id, builder.transform.set([0, -0.5, 0]))
-    .add(builder.parent.setEntity(root));
+    .createBox([32, 1, 32], devTextureId, builder.transform.set([0, -0.5, 0]))
+    .add(builder.parent.setId(rootId));
 
-  const stairs = commands
+  const stairsId = commands
     .spawn()
-    .add(builder.parent.setEntity(root))
+    .add(builder.parent.setId(rootId))
     .add(builder.transform.set([-2, 0, -6]))
-    .addType(GlobalTransform);
+    .addType(GlobalTransform).id;
 
   builder
-    .createStairs(2, 0.125, 1, 10, devTexture.id)
-    .add(builder.parent.setEntity(stairs))
+    .createStairs(2, 0.125, 1, 10, devTextureId)
+    .add(builder.parent.setId(stairsId))
     .add(builder.transform.set([0, 0, 0]))
     .addType(GlobalTransform);
 
   builder
-    .createStairs(2, 0.125, 0.5, 20, devTexture.id)
-    .add(builder.parent.setEntity(stairs))
+    .createStairs(2, 0.125, 0.5, 20, devTextureId)
+    .add(builder.parent.setId(stairsId))
     .add(builder.transform.set([-3, 0, 0]))
     .addType(GlobalTransform);
 
   builder
-    .createStairs(2, 0.25, 0.5, 20, devTexture.id)
-    .add(builder.parent.setEntity(stairs))
+    .createStairs(2, 0.25, 0.5, 20, devTextureId)
+    .add(builder.parent.setId(stairsId))
     .add(builder.transform.set([-6, 0, 0]))
     .addType(GlobalTransform);
 
-  const ramps = commands
+  const rampsId = commands
     .spawn()
-    .add(builder.parent.setEntity(root))
+    .add(builder.parent.setId(rootId))
     .add(builder.transform.set([2, 0, -6]))
-    .addType(GlobalTransform);
+    .addType(GlobalTransform).id;
 
   builder
-    .createRamp(2, 10, 1, 15, devTexture.id)
-    .add(builder.parent.setEntity(ramps))
+    .createRamp(2, 10, 1, 15, devTextureId)
+    .add(builder.parent.setId(rampsId))
     .add(builder.transform.set([0, 0, 0]))
     .addType(GlobalTransform);
 
   builder
-    .createRamp(2, 10, 1, 30, devTexture.id)
-    .add(builder.parent.setEntity(ramps))
+    .createRamp(2, 10, 1, 30, devTextureId)
+    .add(builder.parent.setId(rampsId))
     .add(builder.transform.set([3, 0, 0]))
     .addType(GlobalTransform);
 
   builder
-    .createRamp(2, 10, 1, 45, devTexture.id)
-    .add(builder.parent.setEntity(ramps))
+    .createRamp(2, 10, 1, 45, devTextureId)
+    .add(builder.parent.setId(rampsId))
     .add(builder.transform.set([6, 0, 0]))
     .addType(GlobalTransform);
 
   builder
-    .createRamp(2, 10, 1, 60, devTexture.id)
-    .add(builder.parent.setEntity(ramps))
+    .createRamp(2, 10, 1, 60, devTextureId)
+    .add(builder.parent.setId(rampsId))
     .add(builder.transform.set([9, 0, 0]))
     .addType(GlobalTransform);
 
@@ -116,7 +116,7 @@ export function initScene(
 
   commands
     .spawn()
-    .add(builder.parent.setEntity(root))
+    .add(builder.parent.setId(rootId))
     .add(builder.transform.set([0, 3, 8]))
     .add(targetTransform.set([0, 3, 8]))
     .addType(GlobalTransform)
@@ -155,7 +155,7 @@ class SceneBuilder {
     rampAngle: number,
     textureId: bigint
   ) {
-    const ramp = this.commands.spawn();
+    const rampId = this.commands.spawn().id;
 
     // Angle -> quaternion
     const angle = (rampAngle * Math.PI) / 180;
@@ -168,19 +168,19 @@ class SceneBuilder {
       [rampWidth, rampDepth, rampHeight],
       textureId,
       this.transform.set([0, 0, 0], [x, y, z, w])
-    ).add(this.parent.setEntity(ramp));
+    ).add(this.parent.setId(rampId));
 
     this.text.text = `Angle: ${rampAngle}°`;
     this.text.fontSize = 0.3;
 
     this.commands
       .spawn()
-      .add(this.parent.setEntity(ramp))
+      .add(this.parent.setId(rampId))
       .add(this.transform.set([0, 3, 0], [0, 0, 0, 1]))
       .addType(GlobalTransform)
       .add(this.text);
 
-    return ramp;
+    return this.commands.getById(rampId);
   }
 
   createStairs(
@@ -190,7 +190,7 @@ class SceneBuilder {
     steps: number,
     textureId: bigint
   ) {
-    const stairs = this.commands.spawn();
+    const stairsId = this.commands.spawn().id;
 
     const materialId = this.createMaterial(
       textureId,
@@ -199,7 +199,7 @@ class SceneBuilder {
     );
 
     for (let i = 0; i < steps; i++) {
-      const box = this.createBox(
+      this.createBox(
         [stairWidth, stepHeight, stepWidth],
         textureId,
         this.transform.set([
@@ -208,8 +208,7 @@ class SceneBuilder {
           -stepWidth * i + stepWidth / 2,
         ]),
         materialId
-      );
-      box.add(this.parent.setEntity(stairs));
+      ).add(this.parent.setId(stairsId));
     }
 
     this.text.text = `Step height: ${stepHeight}m\nStep width: ${stepWidth}m`;
@@ -217,12 +216,12 @@ class SceneBuilder {
 
     this.commands
       .spawn()
-      .add(this.parent.setEntity(stairs))
+      .add(this.parent.setId(stairsId))
       .add(this.transform.set([0, 3, 0]))
       .addType(GlobalTransform)
       .add(this.text);
 
-    return stairs;
+    return this.commands.getById(stairsId);
   }
 
   createBox(

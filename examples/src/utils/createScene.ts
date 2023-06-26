@@ -22,18 +22,31 @@ export function createScene(
   const canvas = document.querySelector("canvas");
   coreStore.canvas = canvas;
 
-  const skybox = createSkybox(commands);
+  const asset = new Asset("/Skybox.jpg", "image/jpeg");
+  const image = new Image(true);
 
-  const root = commands.spawn().addType(Transform).addType(GlobalTransform);
+  const skyboxId = commands.spawn().add(asset).add(image).id;
 
-  const sceneComponent = new Scene(root, skybox);
-  const scene = commands.spawn().add(sceneComponent);
+  dropStruct(asset);
+  dropStruct(image);
+
+  const rootId = commands
+    .spawn()
+    .addType(Transform)
+    .addType(GlobalTransform).id;
+
+  const sceneComponent = new Scene();
+  sceneComponent.skyboxId = skyboxId;
+  sceneComponent.rootId = rootId;
+
+  const sceneId = commands.spawn().add(sceneComponent).id;
+
   dropStruct(sceneComponent);
 
-  sceneStruct.activeScene = scene.id;
+  sceneStruct.activeScene = sceneId;
 
-  const parent = new Parent(scene);
-  root.add(parent);
+  const parent = new Parent(sceneId);
+  commands.getById(rootId).add(parent);
 
   const ambient = new AmbientLight([1, 1, 1], 0.25);
   commands
@@ -72,17 +85,5 @@ export function createScene(
     dropStruct(shadowMap);
   }
 
-  return { root, scene };
-}
-
-function createSkybox(commands: Commands) {
-  const asset = new Asset("/Skybox.jpg", "image/jpeg");
-  const image = new Image(true);
-
-  const skybox = commands.spawn().add(asset).add(image);
-
-  dropStruct(asset);
-  dropStruct(image);
-
-  return skybox;
+  return { rootId, sceneId };
 }
