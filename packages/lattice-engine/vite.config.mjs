@@ -13,6 +13,7 @@ export default defineConfig({
         orbit: "./src/orbit.ts",
         physics: "./src/physics.ts",
         player: "./src/player.ts",
+        portal: "./src/portal.ts",
         render: "./src/render.ts",
         scene: "./src/scene.ts",
         text: "./src/text.ts",

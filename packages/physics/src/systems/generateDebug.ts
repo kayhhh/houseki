@@ -25,7 +25,7 @@ export function generateDebug(
   if (!physicsConfig.debug) {
     // Remove the debug lines if they exist
     if (debug.linesId) {
-      commands.despawn(debug.linesId);
+      commands.despawnById(debug.linesId);
       debug.linesId = 0n;
     }
 
@@ -42,27 +42,26 @@ export function generateDebug(
     const material = new LineMaterial();
     material.vertexColors = true;
 
-    const parent = new Parent();
-    parent.id = sceneStruct.activeScene;
-
     const mesh = new Mesh();
     mesh.mode = MeshMode.LINES;
     mesh.frustumCulled = false;
 
-    const lines = commands
+    const parent = new Parent(sceneStruct.activeScene);
+
+    const linesId = commands
       .spawn()
       .add(material)
       .addType(Geometry)
       .add(mesh)
       .addType(Transform)
       .addType(GlobalTransform)
-      .add(parent);
+      .add(parent).id;
 
-    debug.linesId = lines.id;
+    debug.linesId = linesId;
 
     dropStruct(material);
-    dropStruct(parent);
     dropStruct(mesh);
+    dropStruct(parent);
   }
 
   for (const [entity, geometry, parent] of meshes) {
@@ -79,7 +78,7 @@ export function generateDebug(
   if (!linesFound) {
     // Remove the debug lines if they exist
     if (debug.linesId) {
-      commands.despawn(debug.linesId);
+      commands.despawnById(debug.linesId);
       debug.linesId = 0n;
     }
 

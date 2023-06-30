@@ -9,7 +9,7 @@ export function removeGltf(context: ImportContext, commands: Commands) {
   const despawn = (id: bigint) => {
     if (despawned.has(id)) return;
     despawned.add(id);
-    commands.despawn(id);
+    commands.despawnById(id);
   };
 
   for (const [, id] of context.nodes) {
@@ -33,7 +33,7 @@ export function removeGltf(context: ImportContext, commands: Commands) {
   }
 
   for (const id of context.animationMixerIds) {
-    commands.removeFrom(id, AnimationMixer);
+    commands.getById(id).remove(AnimationMixer);
   }
 
   for (const id of context.keyframeTrackIds) {

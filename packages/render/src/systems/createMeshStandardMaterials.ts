@@ -1,6 +1,6 @@
 import {
-  Material,
   MaterialAlphaMode,
+  MeshStandardMaterial,
   TextureInfo,
 } from "@lattice-engine/scene";
 import {
@@ -11,7 +11,7 @@ import {
   LinearFilter,
   LinearMipMapLinearFilter,
   LinearMipMapNearestFilter,
-  MeshStandardMaterial,
+  MeshStandardMaterial as ThreeMaterial,
   MirroredRepeatWrapping,
   NearestFilter,
   NearestMipMapLinearFilter,
@@ -26,24 +26,21 @@ import { WEBGL_CONSTANTS } from "../constants";
 import { RenderStore } from "../resources";
 import { disposeMaterial } from "../utils/dispose";
 
-/**
- * Creates and updates material objects.
- */
-export function createMaterials(
+export function createMeshStandardMaterials(
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, Material]>
+  entities: Query<[Entity, MeshStandardMaterial]>
 ) {
   const ids: bigint[] = [];
 
   for (const [entity, material] of entities) {
     ids.push(entity.id);
 
-    let object = renderStore.materials.get(entity.id);
+    let object = renderStore.standardMaterials.get(entity.id);
 
     // Create new objects
     if (!object) {
-      object = new MeshStandardMaterial();
-      renderStore.materials.set(entity.id, object);
+      object = new ThreeMaterial();
+      renderStore.standardMaterials.set(entity.id, object);
     }
 
     // Sync object properties
@@ -125,12 +122,12 @@ export function createMaterials(
   }
 
   // Remove objects that no longer exist
-  for (const [id] of renderStore.materials) {
+  for (const [id] of renderStore.standardMaterials) {
     if (!ids.includes(id)) {
-      const object = renderStore.materials.get(id);
+      const object = renderStore.standardMaterials.get(id);
       if (object) disposeMaterial(object);
 
-      renderStore.materials.delete(id);
+      renderStore.standardMaterials.delete(id);
     }
   }
 }

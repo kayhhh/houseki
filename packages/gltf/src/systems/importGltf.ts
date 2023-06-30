@@ -60,7 +60,7 @@ export function importGltf(
       store.uris.set(id, gltf.uri);
 
       const loading = new Loading(`Loading ${gltf.uri}`);
-      entity.add(loading);
+      commands.getById(entity.id).add(loading);
       dropStruct(loading);
 
       // Start loading document
@@ -83,7 +83,7 @@ export function importGltf(
       store.docs.delete(id);
 
       // Remove loading component
-      entity.remove(Loading);
+      commands.getById(entity.id).remove(Loading);
     }
   }
 

@@ -3,6 +3,7 @@ import { VRM, VRMLoaderPlugin, VRMUtils } from "@pixiv/three-vrm";
 import { Mesh } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import {
+  Commands,
   dropStruct,
   Entity,
   Query,
@@ -31,6 +32,7 @@ class LocalStore {
  * Adds VRM models to the scene.
  */
 export function createAvatars(
+  commands: Commands,
   vrmStore: Res<VrmStore>,
   localStore: SystemRes<LocalStore>,
   toLoad: Query<[Entity, Vrm], Without<Loading>>,
@@ -54,7 +56,7 @@ export function createAvatars(
     localStore.loadingURI.set(entityId, uri);
 
     const loadMessage = new Loading(`Loading ${uri}`);
-    entity.add(loadMessage);
+    commands.getById(entity.id).add(loadMessage);
     dropStruct(loadMessage);
 
     loadVrm(entityId, uri, localStore);
@@ -67,7 +69,7 @@ export function createAvatars(
 
     if (loaded) {
       // VRM is loaded, remove loading component
-      entity.remove(Loading);
+      commands.getById(entity.id).remove(Loading);
       vrmStore.avatars.set(entity.id, loaded);
     }
   }

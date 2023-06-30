@@ -19,15 +19,15 @@ export function importAnimation(
 ) {
   const clip = new AnimationClip(rootId, animation.getName(), true, true);
 
-  const entity = commands.spawn().add(clip);
-  context.animationClipIds.push(entity.id);
+  const entityId = commands.spawn().add(clip).id;
+  context.animationClipIds.push(entityId);
 
   dropStruct(clip);
 
   const track = new KeyframeTrack();
 
   animation.listChannels().forEach((channel) => {
-    track.clipId = entity.id;
+    track.clipId = entityId;
 
     const sampler = channel.getSampler();
     const targetNode = channel.getTargetNode();
@@ -87,8 +87,8 @@ export function importAnimation(
       track.interpolation = KeyframeInterpolation[sampler.getInterpolation()];
     }
 
-    const trackEntity = commands.spawn().add(track);
-    context.keyframeTrackIds.push(trackEntity.id);
+    const trackEntityId = commands.spawn().add(track).id;
+    context.keyframeTrackIds.push(trackEntityId);
   });
 
   dropStruct(track);

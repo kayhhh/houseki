@@ -41,7 +41,7 @@ export function assetCleanup(
         tracker.resources.delete(id);
       }
 
-      commands.despawn(id);
+      commands.despawnById(id);
     }
   }
 }

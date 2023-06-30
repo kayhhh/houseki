@@ -11,6 +11,7 @@ import {
   LineLoop,
   LineSegments,
   Mesh,
+  MeshBasicMaterial,
   MeshStandardMaterial,
   Object3D,
   PerspectiveCamera,
@@ -33,7 +34,8 @@ export class RenderStore {
   readonly perspectiveCameras = new Map<EntityID, PerspectiveCamera>();
   readonly scenes = new Map<EntityID, Scene>();
   readonly geometries = new Map<EntityID, BufferGeometry>();
-  readonly materials = new Map<EntityID, MeshStandardMaterial>();
+  readonly basicMaterials = new Map<EntityID, MeshBasicMaterial>();
+  readonly standardMaterials = new Map<EntityID, MeshStandardMaterial>();
   readonly lineMaterials = new Map<EntityID, LineBasicMaterial>();
   readonly images = new Map<EntityID, ImageBitmap>();
   readonly meshes = new Map<EntityID, MeshLike>();
@@ -45,7 +47,11 @@ export class RenderStore {
   readonly directionalLights = new Map<EntityID, DirectionalLight>();
 
   getMaterial(id: EntityID) {
-    return this.materials.get(id) ?? this.lineMaterials.get(id);
+    return (
+      this.standardMaterials.get(id) ??
+      this.basicMaterials.get(id) ??
+      this.lineMaterials.get(id)
+    );
   }
 }
 

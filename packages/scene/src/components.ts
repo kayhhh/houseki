@@ -67,14 +67,20 @@ export class GlobalTransform extends Transform {}
 export class Parent {
   @struct.u64 declare id: bigint;
 
-  constructor(entity?: Readonly<Entity> | EntityCommands) {
+  constructor(id?: bigint) {
     initStruct(this);
 
-    if (entity) this.id = entity.id;
+    if (id) this.id = id;
   }
 
   setEntity(entity: Readonly<Entity> | EntityCommands): this {
     this.id = entity.id;
+
+    return this;
+  }
+
+  setId(id: bigint): this {
+    this.id = id;
 
     return this;
   }
@@ -93,16 +99,6 @@ export class Scene {
    * Entity ID of the skybox {@link Image} entity.
    */
   @struct.u64 declare skyboxId: bigint;
-
-  constructor(
-    root?: Entity | EntityCommands,
-    skybox?: Entity | EntityCommands
-  ) {
-    initStruct(this);
-
-    if (root) this.rootId = root.id;
-    if (skybox) this.skyboxId = skybox.id;
-  }
 }
 
 @struct
@@ -174,7 +170,7 @@ export class Image {
 }
 
 @struct
-export class Material {
+export class MeshStandardMaterial {
   @struct.bool declare vertexColors: boolean;
 
   @struct.u8 declare alphaMode: MaterialAlphaMode;
@@ -217,6 +213,9 @@ export class Material {
     this.metalness = metalness;
   }
 }
+
+@struct
+export class MeshBasicMaterial {}
 
 @struct
 export class LineMaterial {
