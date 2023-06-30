@@ -46,6 +46,8 @@ export function initScene(
     .addType(MeshBasicMaterial)
     .add(geometry);
 
+  dropStruct(geometry);
+
   const portal = new PortalMaterial();
 
   portal.targetId = portalB.id;
@@ -53,6 +55,8 @@ export function initScene(
 
   portal.targetId = portalA.id;
   portalB.add(portal);
+
+  dropStruct(portal);
 
   const boxGeometry = createBoxGeometry(warehouse);
   const boxMaterial = new MeshStandardMaterial([1, 0.3, 0.3, 1]);
@@ -79,7 +83,5 @@ export function initScene(
 
   dropStruct(boxGeometry);
   dropStruct(boxMaterial);
-  dropStruct(portal);
-  dropStruct(geometry);
   dropStruct(parent);
 }

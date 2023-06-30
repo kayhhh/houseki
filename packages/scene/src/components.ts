@@ -215,7 +215,9 @@ export class MeshStandardMaterial {
 }
 
 @struct
-export class MeshBasicMaterial {}
+export class MeshBasicMaterial {
+  @struct.bool declare doubleSided: boolean;
+}
 
 @struct
 export class LineMaterial {

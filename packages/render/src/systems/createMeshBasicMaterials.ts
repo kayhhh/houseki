@@ -1,17 +1,21 @@
 import { MeshBasicMaterial } from "@lattice-engine/scene";
-import { MeshBasicMaterial as ThreeMaterial } from "three";
-import { Entity, Query, Res, With } from "thyseus";
+import {
+  DoubleSide,
+  FrontSide,
+  MeshBasicMaterial as ThreeMaterial,
+} from "three";
+import { Entity, Query, Res } from "thyseus";
 
 import { RenderStore } from "../resources";
 import { disposeMaterial } from "../utils/dispose";
 
 export function createMeshBasicMaterials(
   renderStore: Res<RenderStore>,
-  entities: Query<Entity, With<MeshBasicMaterial>>
+  entities: Query<[Entity, MeshBasicMaterial]>
 ) {
   const ids: bigint[] = [];
 
-  for (const entity of entities) {
+  for (const [entity, material] of entities) {
     ids.push(entity.id);
 
     let object = renderStore.basicMaterials.get(entity.id);
@@ -21,6 +25,8 @@ export function createMeshBasicMaterials(
       object = new ThreeMaterial();
       renderStore.basicMaterials.set(entity.id, object);
     }
+
+    object.side = material.doubleSided ? DoubleSide : FrontSide;
   }
 
   // Dispose unused objects
