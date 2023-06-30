@@ -59,7 +59,7 @@ export function initScene(
 
   commands
     .spawn()
-    .add(transform.set([-1, 0, 4]))
+    .add(transform.set([-1, 0, 2]))
     .addType(GlobalTransform)
     .add(parent)
     .addType(Mesh)
@@ -70,7 +70,7 @@ export function initScene(
 
   commands
     .spawn()
-    .add(transform.set([1, 0, 4]))
+    .add(transform.set([1, 0, 2]))
     .addType(GlobalTransform)
     .add(parent)
     .addType(Mesh)

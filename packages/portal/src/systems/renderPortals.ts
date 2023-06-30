@@ -44,20 +44,44 @@ export function renderPortals(
     const target = renderStore.nodes.get(portal.targetId);
     if (!target) continue;
 
+    const targetMesh = renderStore.meshes.get(portal.targetId);
+    if (!targetMesh) continue;
+
     portalCamera.aspect = portal.renderWidth / portal.renderHeight;
+    portalCamera.updateProjectionMatrix();
 
     // Set the portal camera position to be reflected across the portal
     object.worldToLocal(reflected.copy(camera.position));
     reflected.x *= -1;
     reflected.z *= -1;
-    object.localToWorld(reflected);
+    target.localToWorld(reflected);
     portalCamera.position.copy(reflected);
 
     // Grab the corners of the target portal
-    const SIZE = 1;
-    target.localToWorld(bottomLeft.set(SIZE, -SIZE, 0));
-    target.localToWorld(bottomRight.set(-SIZE, -SIZE, 0));
-    target.localToWorld(topLeft.set(SIZE, SIZE, 0));
+    targetMesh.geometry.computeBoundingBox();
+    if (!targetMesh.geometry.boundingBox) continue;
+
+    bottomLeft.copy(targetMesh.geometry.boundingBox.min);
+
+    bottomRight.set(
+      targetMesh.geometry.boundingBox.max.x,
+      targetMesh.geometry.boundingBox.min.y,
+      targetMesh.geometry.boundingBox.min.z
+    );
+
+    topLeft.set(
+      targetMesh.geometry.boundingBox.min.x,
+      targetMesh.geometry.boundingBox.max.y,
+      targetMesh.geometry.boundingBox.min.z
+    );
+
+    bottomLeft.x *= -1;
+    bottomRight.x *= -1;
+    topLeft.x *= -1;
+
+    target.localToWorld(bottomLeft);
+    target.localToWorld(bottomRight);
+    target.localToWorld(topLeft);
 
     // Set the projection matrix to encompass the corners of the target portal
     frameCorners(portalCamera, bottomLeft, bottomRight, topLeft, false);
