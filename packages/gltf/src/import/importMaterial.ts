@@ -1,5 +1,5 @@
 import {
-  Material as GltfMaterial,
+  Material,
   Texture as GltfTexture,
   TextureInfo as GltfTextureInfo,
 } from "@gltf-transform/core";
@@ -7,8 +7,8 @@ import { Transform } from "@gltf-transform/extensions";
 import { Asset, Warehouse } from "@lattice-engine/core";
 import {
   Image,
-  Material,
   MaterialAlphaMode,
+  MeshStandardMaterial,
   TextureInfo,
 } from "@lattice-engine/scene";
 import { Commands, dropStruct } from "thyseus";
@@ -16,7 +16,7 @@ import { Commands, dropStruct } from "thyseus";
 import { ImportContext } from "./context";
 
 export function importMaterial(
-  gltfMaterial: GltfMaterial,
+  gltfMaterial: Material,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
   context: ImportContext
@@ -24,7 +24,7 @@ export function importMaterial(
   const cached = context.materials.get(gltfMaterial);
   if (cached) return cached;
 
-  const material = new Material();
+  const material = new MeshStandardMaterial();
 
   material.doubleSided = gltfMaterial.getDoubleSided();
   material.alphaCutoff = gltfMaterial.getAlphaCutoff();

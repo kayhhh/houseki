@@ -28,7 +28,7 @@
   },
   "peerDependencies": {
     "@lattice-engine/core": "workspace:^",
-    "thyseus": "^0.13"
+    "thyseus": "^0.13.0"
   },
   "publishConfig": {
     "access": "public"

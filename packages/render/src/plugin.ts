@@ -10,8 +10,9 @@ import { createGeometries } from "./systems/createGeometries";
 import { createImages } from "./systems/createImages";
 import { createKeyframeTracks } from "./systems/createKeyframeTracks";
 import { createLineMaterials } from "./systems/createLineMaterials";
-import { createMaterials } from "./systems/createMaterials";
+import { createMeshBasicMaterials } from "./systems/createMeshBasicMaterials";
 import { createMeshes } from "./systems/createMeshes";
+import { createMeshStandardMaterials } from "./systems/createMeshStandardMaterials";
 import { createNodes } from "./systems/createNodes";
 import { createScenes } from "./systems/createScenes";
 import { createShadowMaps } from "./systems/createShadowMaps";
@@ -27,7 +28,12 @@ export function renderPlugin(builder: WorldBuilder) {
     .addSystems(
       ...run.chain(
         createImages,
-        [createMaterials, createLineMaterials, createGeometries],
+        [
+          createMeshBasicMaterials,
+          createMeshStandardMaterials,
+          createLineMaterials,
+          createGeometries,
+        ],
         createMeshes,
         createNodes,
         [createAmbientLights, createDirectionalLights],

@@ -15,8 +15,8 @@ import {
 import {
   Geometry,
   Image,
-  Material,
   Mesh,
+  MeshStandardMaterial,
   Parent,
   Scene,
   Transform,
@@ -76,7 +76,7 @@ export function exportGlb(
   scenes: Query<[Entity, Scene]>,
   nodes: Query<[Entity, Parent, Transform]>,
   meshes: Query<[Entity, Mesh, Geometry]>,
-  materials: Query<[Entity, Material]>,
+  materials: Query<[Entity, MeshStandardMaterial]>,
   images: Query<[Entity, Asset], With<Image>>,
   staticBodies: Query<Entity, With<StaticBody>>,
   dynamicBodies: Query<[Entity, DynamicBody]>,

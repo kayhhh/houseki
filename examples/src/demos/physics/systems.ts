@@ -7,8 +7,8 @@ import {
 } from "lattice-engine/physics";
 import {
   GlobalTransform,
-  Material,
   Mesh,
+  MeshStandardMaterial,
   Parent,
   SceneStruct,
   Transform,
@@ -38,7 +38,7 @@ export function initScene(
   commands.getById(roomId).add(parent);
 
   // Add dynamic balls
-  const materialComponent = new Material([1, 0.2, 0.5, 1], 0, 0);
+  const materialComponent = new MeshStandardMaterial([1, 0.2, 0.5, 1], 0, 0);
   const material = commands.spawn().add(materialComponent);
   dropStruct(materialComponent);
 

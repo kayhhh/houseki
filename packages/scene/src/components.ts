@@ -170,7 +170,7 @@ export class Image {
 }
 
 @struct
-export class Material {
+export class MeshStandardMaterial {
   @struct.bool declare vertexColors: boolean;
 
   @struct.u8 declare alphaMode: MaterialAlphaMode;
@@ -213,6 +213,9 @@ export class Material {
     this.metalness = metalness;
   }
 }
+
+@struct
+export class MeshBasicMaterial {}
 
 @struct
 export class LineMaterial {

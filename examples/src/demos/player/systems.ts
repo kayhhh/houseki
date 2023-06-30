@@ -12,8 +12,8 @@ import { WEBGL_CONSTANTS } from "lattice-engine/render";
 import {
   GlobalTransform,
   Image,
-  Material,
   Mesh,
+  MeshStandardMaterial,
   Parent,
   SceneStruct,
   Transform,
@@ -137,7 +137,7 @@ class SceneBuilder {
   parent = new Parent();
   boxCollider = new BoxCollider();
   mesh = new Mesh();
-  material = new Material();
+  material = new MeshStandardMaterial();
   text = new Text();
 
   commands: Commands;

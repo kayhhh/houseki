@@ -33,7 +33,7 @@
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/physics": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
-    "thyseus": "^0.13"
+    "thyseus": "^0.13.0"
   },
   "publishConfig": {
     "access": "public"

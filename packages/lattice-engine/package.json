@@ -41,6 +41,9 @@
     "./physics": {
       "import": "./dist/physics.js"
     },
+    "./portal": {
+      "import": "./dist/portal.js"
+    },
     "./player": {
       "import": "./dist/player.js"
     },
@@ -70,6 +73,7 @@
     "n8ao.d.ts",
     "orbit.d.ts",
     "physics.d.ts",
+    "portal.d.ts",
     "player.d.ts",
     "render.d.ts",
     "scene.d.ts",
@@ -89,6 +93,7 @@
     "@lattice-engine/orbit": "workspace:^",
     "@lattice-engine/physics": "workspace:^",
     "@lattice-engine/player": "workspace:^",
+    "@lattice-engine/portal": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
     "@lattice-engine/text": "workspace:^",
@@ -101,7 +106,7 @@
     "vite-plugin-dts": "^2.3.0"
   },
   "peerDependencies": {
-    "thyseus": "^0.13"
+    "thyseus": "^0.13.0"
   },
   "optionalDependencies": {
     "three": "^0.151.3"

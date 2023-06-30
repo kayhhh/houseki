@@ -117,7 +117,7 @@ importers:
   packages/core:
     dependencies:
       thyseus:
-        specifier: ^0.13
+        specifier: ^0.13.0
         version: 0.13.0
     devDependencies:
       '@thyseus/transformer-rollup':
@@ -154,7 +154,7 @@ importers:
         specifier: workspace:^
         version: link:../scene
       thyseus:
-        specifier: ^0.13
+        specifier: ^0.13.0
         version: 0.13.0
       zod:
         specifier: ^3.21.4
@@ -179,7 +179,7 @@ importers:
         specifier: workspace:^
         version: link:../core
       thyseus:
-        specifier: ^0.13
+        specifier: ^0.13.0
         version: 0.13.0
     devDependencies:
       '@thyseus/transformer-rollup':
@@ -218,6 +218,9 @@ importers:
       '@lattice-engine/player':
         specifier: workspace:^
         version: link:../player
+      '@lattice-engine/portal':
+        specifier: workspace:^
+        version: link:../portal
       '@lattice-engine/render':
         specifier: workspace:^
         version: link:../render
@@ -234,7 +237,7 @@ importers:
         specifier: workspace:^
         version: link:../vrm
       thyseus:
-        specifier: ^0.13
+        specifier: ^0.13.0
         version: 0.13.0
     optionalDependencies:
       three:
@@ -266,7 +269,7 @@ importers:
         specifier: ^6.32.1
         version: 6.32.1(three@0.151.3)
       thyseus:
-        specifier: ^0.13
+        specifier: ^0.13.0
         version: 0.13.0
     devDependencies:
       '@thyseus/transformer-rollup':
@@ -297,7 +300,7 @@ importers:
         specifier: ^0.151.3
         version: 0.151.3
       thyseus:
-        specifier: ^0.13
+        specifier: ^0.13.0
         version: 0.13.0
     devDependencies:
       '@thyseus/transformer-rollup':
@@ -331,7 +334,7 @@ importers:
         specifier: ^4.0.0-beta.1
         version: 4.0.0-beta.1
       thyseus:
-        specifier: ^0.13
+        specifier: ^0.13.0
         version: 0.13.0
     devDependencies:
       '@thyseus/transformer-rollup':
@@ -374,7 +377,41 @@ importers:
         specifier: ^0.151.3
         version: 0.151.3
       thyseus:
-        specifier: ^0.13
+        specifier: ^0.13.0
+        version: 0.13.0
+    devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: ^0.13.0
+        version: 0.13.0(thyseus@0.13.0)
+      '@types/three':
+        specifier: ^0.151.0
+        version: 0.151.0
+      typescript:
+        specifier: ~5.1.3
+        version: 5.1.3
+      vite:
+        specifier: ^4.3.9
+        version: 4.3.9
+      vite-plugin-dts:
+        specifier: ^2.3.0
+        version: 2.3.0(vite@4.3.9)
+
+  packages/portal:
+    dependencies:
+      '@lattice-engine/core':
+        specifier: workspace:^
+        version: link:../core
+      '@lattice-engine/render':
+        specifier: workspace:^
+        version: link:../render
+      '@lattice-engine/scene':
+        specifier: workspace:^
+        version: link:../scene
+      three:
+        specifier: ^0.151.3
+        version: 0.151.3
+      thyseus:
+        specifier: ^0.13.0
         version: 0.13.0
     devDependencies:
       '@thyseus/transformer-rollup':
@@ -408,7 +445,7 @@ importers:
         specifier: ^0.151.3
         version: 0.151.3
       thyseus:
-        specifier: ^0.13
+        specifier: ^0.13.0
         version: 0.13.0
     devDependencies:
       '@thyseus/transformer-rollup':
@@ -436,7 +473,7 @@ importers:
         specifier: ^4.0.0-beta.1
         version: 4.0.0-beta.1
       thyseus:
-        specifier: ^0.13
+        specifier: ^0.13.0
         version: 0.13.0
     devDependencies:
       '@thyseus/transformer-rollup':
@@ -466,8 +503,11 @@ importers:
       postprocessing:
         specifier: ^6.32.1
         version: 6.32.1(three@0.151.3)
+      three:
+        specifier: ^0.151.3
+        version: 0.151.3
       thyseus:
-        specifier: ^0.13
+        specifier: ^0.13.0
         version: 0.13.0
       troika-three-text:
         specifier: ^0.47.2
@@ -476,6 +516,9 @@ importers:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(thyseus@0.13.0)
+      '@types/three':
+        specifier: ^0.151.0
+        version: 0.151.0
       typescript:
         specifier: ~5.1.3
         version: 5.1.3
@@ -501,7 +544,7 @@ importers:
         specifier: workspace:^
         version: link:../scene
       thyseus:
-        specifier: ^0.13
+        specifier: ^0.13.0
         version: 0.13.0
     devDependencies:
       '@thyseus/transformer-rollup':
@@ -535,7 +578,7 @@ importers:
         specifier: ^0.151.3
         version: 0.151.3
       thyseus:
-        specifier: ^0.13
+        specifier: ^0.13.0
         version: 0.13.0
     devDependencies:
       '@thyseus/transformer-rollup':

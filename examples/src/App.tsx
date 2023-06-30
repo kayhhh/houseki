@@ -8,6 +8,7 @@ import Gltf from "./demos/gltf/Gltf";
 import Mesh from "./demos/mesh/Mesh";
 import Physics from "./demos/physics/Physics";
 import Player from "./demos/player/Player";
+import Portal from "./demos/portal/Portal";
 import Text from "./demos/text/Text";
 import VRM from "./demos/vrm/VRM";
 
@@ -43,6 +44,7 @@ export default function App() {
         <RouteLink href="/mesh">Mesh</RouteLink>
         <RouteLink href="/physics">Physics</RouteLink>
         <RouteLink href="/player">Player</RouteLink>
+        <RouteLink href="/portal">Portal</RouteLink>
         <RouteLink href="/text">Text</RouteLink>
         <RouteLink href="/vrm">VRM</RouteLink>
 
@@ -59,6 +61,7 @@ export default function App() {
       <Route path="/mesh" component={Mesh} />
       <Route path="/physics" component={Physics} />
       <Route path="/player" component={Player} />
+      <Route path="/portal" component={Portal} />
       <Route path="/text" component={Text} />
       <Route path="/vrm" component={VRM} />
     </div>
