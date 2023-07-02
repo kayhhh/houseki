@@ -31,6 +31,7 @@ Packages are published individually to NPM under the `@lattice-engine` scope. Al
 | [`@lattice-engine/orbit`](./packages/orbit)     | Orbit controls                                                                                                       |
 | [`@lattice-engine/physics`](./packages/physics) | [Rapier](https://rapier.rs) physics                                                                                  |
 | [`@lattice-engine/player`](./packages/player)   | Player controls                                                                                                      |
+| [`@lattice-engine/portal`](./packages/portal)   | Portals                                                                                                              |
 | [`@lattice-engine/render`](./packages/render)   | [Three.js](https://threejs.org) rendering                                                                            |
 | [`@lattice-engine/scene`](./packages/scene)     | The 3D scene graph                                                                                                   |
 | [`@lattice-engine/text`](./packages/text)       | Text rendering using [troika-three-text](https://github.com/protectwise/troika/tree/main/packages/troika-three-text) |
