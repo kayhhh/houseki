@@ -23,7 +23,12 @@ export function initScene(
   const parent = new Parent(rootId);
   const vrm = new Vrm("/k-robot.vrm");
 
-  commands.spawn().add(transform).addType(GlobalTransform).add(parent).add(vrm);
+  commands
+    .spawn(true)
+    .add(transform)
+    .addType(GlobalTransform)
+    .add(parent)
+    .add(vrm);
 
   dropStruct(transform);
   dropStruct(parent);

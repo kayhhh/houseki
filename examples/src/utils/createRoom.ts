@@ -83,7 +83,7 @@ function createBox(
   const collider = new BoxCollider(size);
 
   const entity = commands
-    .spawn()
+    .spawn(true)
     .add(transform)
     .addType(GlobalTransform)
     .addType(Mesh)

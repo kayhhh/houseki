@@ -25,7 +25,7 @@ export function initScene(
   const parent = new Parent(rootId);
 
   commands
-    .spawn()
+    .spawn(true)
     .addType(Transform)
     .addType(GlobalTransform)
     .add(parent)

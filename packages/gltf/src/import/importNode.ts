@@ -29,7 +29,7 @@ export function importNode(
   context.parent.id = parentId;
 
   const entityId = commands
-    .spawn()
+    .spawn(true)
     .add(context.transform)
     .add(context.globalTransform)
     .add(context.parent).id;

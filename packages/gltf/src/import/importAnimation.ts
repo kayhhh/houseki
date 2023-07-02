@@ -19,7 +19,7 @@ export function importAnimation(
 ) {
   const clip = new AnimationClip(rootId, animation.getName(), true, true);
 
-  const entityId = commands.spawn().add(clip).id;
+  const entityId = commands.spawn(true).add(clip).id;
   context.animationClipIds.push(entityId);
 
   dropStruct(clip);
@@ -87,7 +87,7 @@ export function importAnimation(
       track.interpolation = KeyframeInterpolation[sampler.getInterpolation()];
     }
 
-    const trackEntityId = commands.spawn().add(track).id;
+    const trackEntityId = commands.spawn(true).add(track).id;
     context.keyframeTrackIds.push(trackEntityId);
   });
 

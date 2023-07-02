@@ -62,7 +62,7 @@ export function initScene(
   const boxMaterial = new MeshStandardMaterial([1, 0.3, 0.3, 1]);
 
   commands
-    .spawn()
+    .spawn(true)
     .add(transform.set([-1, 0, 2]))
     .addType(GlobalTransform)
     .add(parent)
@@ -73,7 +73,7 @@ export function initScene(
   boxMaterial.baseColor.set(0.6, 1, 0.4, 1);
 
   commands
-    .spawn()
+    .spawn(true)
     .add(transform.set([1, 0, 2]))
     .addType(GlobalTransform)
     .add(parent)

@@ -46,7 +46,7 @@ export function initScene(
   createPlayer([0, 4, 0], sceneId, commands, sceneStruct, inputStruct);
 
   const asset = new Asset("/DevGrid.png");
-  const devTextureId = commands.spawn().add(asset).addType(Image).id;
+  const devTextureId = commands.spawn(true).add(asset).addType(Image).id;
   dropStruct(asset);
 
   const builder = new SceneBuilder(commands, warehouse);
@@ -56,7 +56,7 @@ export function initScene(
     .add(builder.parent.setId(rootId));
 
   const stairsId = commands
-    .spawn()
+    .spawn(true)
     .add(builder.parent.setId(rootId))
     .add(builder.transform.set([-2, 0, -6]))
     .addType(GlobalTransform).id;
@@ -80,7 +80,7 @@ export function initScene(
     .addType(GlobalTransform);
 
   const rampsId = commands
-    .spawn()
+    .spawn(true)
     .add(builder.parent.setId(rootId))
     .add(builder.transform.set([2, 0, -6]))
     .addType(GlobalTransform).id;
@@ -115,7 +115,7 @@ export function initScene(
   const targetTransform = new TargetTransform();
 
   commands
-    .spawn()
+    .spawn(true)
     .add(builder.parent.setId(rootId))
     .add(builder.transform.set([0, 3, 8]))
     .add(targetTransform.set([0, 3, 8]))
@@ -155,7 +155,7 @@ class SceneBuilder {
     rampAngle: number,
     textureId: bigint
   ) {
-    const rampId = this.commands.spawn().id;
+    const rampId = this.commands.spawn(true).id;
 
     // Angle -> quaternion
     const angle = (rampAngle * Math.PI) / 180;
@@ -174,7 +174,7 @@ class SceneBuilder {
     this.text.fontSize = 0.3;
 
     this.commands
-      .spawn()
+      .spawn(true)
       .add(this.parent.setId(rampId))
       .add(this.transform.set([0, 3, 0], [0, 0, 0, 1]))
       .addType(GlobalTransform)
@@ -190,7 +190,7 @@ class SceneBuilder {
     steps: number,
     textureId: bigint
   ) {
-    const stairsId = this.commands.spawn().id;
+    const stairsId = this.commands.spawn(true).id;
 
     const materialId = this.createMaterial(
       textureId,
@@ -215,7 +215,7 @@ class SceneBuilder {
     this.text.fontSize = 0.3;
 
     this.commands
-      .spawn()
+      .spawn(true)
       .add(this.parent.setId(stairsId))
       .add(this.transform.set([0, 3, 0]))
       .addType(GlobalTransform)
@@ -238,7 +238,7 @@ class SceneBuilder {
       materialId ?? this.createMaterial(textureId, size[0] / 2, size[2] / 2);
 
     const entity = this.commands
-      .spawn()
+      .spawn(true)
       .add(transform)
       .addType(GlobalTransform)
       .add(geometry)
@@ -261,8 +261,8 @@ class SceneBuilder {
       WEBGL_CONSTANTS.LINEAR_MIPMAP_LINEAR;
     this.material.baseColorTextureInfo.scale.set(scaleX, scaleY);
 
-    const materialEntity = this.commands.spawn().add(this.material);
-    return materialEntity.id;
+    const materialEntityId = this.commands.spawn(true).add(this.material).id;
+    return materialEntityId;
   }
 
   destroy() {

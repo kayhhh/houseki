@@ -31,7 +31,7 @@ export function createScene(
   dropStruct(image);
 
   const rootId = commands
-    .spawn()
+    .spawn(true)
     .addType(Transform)
     .addType(GlobalTransform).id;
 
@@ -39,7 +39,7 @@ export function createScene(
   sceneComponent.skyboxId = skyboxId;
   sceneComponent.rootId = rootId;
 
-  const sceneId = commands.spawn().add(sceneComponent).id;
+  const sceneId = commands.spawn(true).add(sceneComponent).id;
 
   dropStruct(sceneComponent);
 
@@ -50,7 +50,7 @@ export function createScene(
 
   const ambient = new AmbientLight([1, 1, 1], 0.25);
   commands
-    .spawn()
+    .spawn(true)
     .add(ambient)
     .addType(Transform)
     .addType(GlobalTransform)
@@ -61,7 +61,7 @@ export function createScene(
   const transform = new Transform([0, 30, 0]);
 
   const directional = commands
-    .spawn()
+    .spawn(true)
     .add(directionalComponent)
     .add(transform)
     .addType(GlobalTransform)

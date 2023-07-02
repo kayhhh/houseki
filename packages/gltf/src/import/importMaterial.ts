@@ -104,7 +104,7 @@ export function importMaterial(
   }
 
   // Create material entity
-  const entityId = commands.spawn().add(material).id;
+  const entityId = commands.spawn(true).add(material).id;
   context.materials.set(gltfMaterial, entityId);
   context.materialIds.push(entityId);
 
@@ -154,7 +154,7 @@ function createTexture(
 
   asset.mimeType = gltfTexture.getMimeType();
 
-  const imageId = commands.spawn().add(asset).addType(Image).id;
+  const imageId = commands.spawn(true).add(asset).addType(Image).id;
 
   dropStruct(asset);
 

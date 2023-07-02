@@ -51,7 +51,7 @@ export function initScene(
   const gltf = new Gltf("/gltf/Accumula-Town.glb");
 
   commands
-    .spawn()
+    .spawn(true)
     .add(transform)
     .addType(GlobalTransform)
     .add(parent)

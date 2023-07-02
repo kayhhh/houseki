@@ -24,7 +24,7 @@ export function initScene(
   const text = new Text("Hello world!", undefined, 1, [0, 0, 0]);
 
   commands
-    .spawn()
+    .spawn(true)
     .add(transform.set([0, 0, 0]))
     .addType(GlobalTransform)
     .add(parent)

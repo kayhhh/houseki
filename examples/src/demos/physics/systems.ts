@@ -39,12 +39,13 @@ export function initScene(
 
   // Add dynamic balls
   const materialComponent = new MeshStandardMaterial([1, 0.2, 0.5, 1], 0, 0);
-  const material = commands.spawn().add(materialComponent);
+  const materialId = commands.spawn(true).add(materialComponent).id;
   dropStruct(materialComponent);
 
   const transform = new Transform();
   const targetTransform = new TargetTransform();
-  const mesh = new Mesh(material);
+  const mesh = new Mesh();
+  mesh.materialId = materialId;
   const sphereCollider = new SphereCollider();
 
   function createBall(radius: number, translation: [number, number, number]) {
@@ -55,7 +56,7 @@ export function initScene(
     sphereCollider.radius = radius;
 
     commands
-      .spawn()
+      .spawn(true)
       .add(parent)
       .add(transform)
       .add(targetTransform)

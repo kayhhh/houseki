@@ -49,7 +49,7 @@ export function generateDebug(
     const parent = new Parent(sceneStruct.activeScene);
 
     const linesId = commands
-      .spawn()
+      .spawn(true)
       .add(material)
       .addType(Geometry)
       .add(mesh)

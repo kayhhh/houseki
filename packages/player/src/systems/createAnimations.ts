@@ -1,5 +1,5 @@
 import { VrmAnimation } from "@lattice-engine/vrm";
-import { Commands, Entity, Mut, Query } from "thyseus";
+import { Commands, dropStruct, Entity, Mut, Query } from "thyseus";
 
 import { PlayerAvatar } from "../components";
 
@@ -127,9 +127,10 @@ function createAnimation(
 
     return animationId;
   } else {
-    const entityId = commands
-      .spawn()
-      .add(new VrmAnimation(vrmId, uri, false, true)).id;
+    const vrmAnimation = new VrmAnimation(vrmId, uri, false, true);
+    const entityId = commands.spawn(true).add(vrmAnimation).id;
+    dropStruct(vrmAnimation);
+
     return entityId;
   }
 }

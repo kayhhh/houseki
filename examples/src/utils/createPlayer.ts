@@ -49,7 +49,7 @@ export function createPlayer(
   );
 
   const bodyId = commands
-    .spawn()
+    .spawn(true)
     .add(parent.setId(rootId))
     .add(transform.set(spawn))
     .add(targetTransform.set(spawn))
@@ -76,7 +76,7 @@ export function createPlayer(
   const vrm = new Vrm("/k-robot.vrm", true);
 
   commands
-    .spawn()
+    .spawn(true)
     .add(transform.set([0, -PLAYER_HEIGHT / 2, 0]))
     .addType(GlobalTransform)
     .add(targetRotation.set(0, 0, 0, 1))
@@ -93,7 +93,7 @@ export function createPlayer(
   );
 
   const cameraId = commands
-    .spawn()
+    .spawn(true)
     .addType(Transform)
     .addType(GlobalTransform)
     .addType(TargetPosition)
