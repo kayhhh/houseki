@@ -70,7 +70,12 @@ export function addPhysics(
   for (const [entity, mesh] of meshes) {
     // Add mesh collider
     const parent = new Parent(mesh.parentId);
-    commands.getById(entity.id).add(parent).addType(MeshCollider);
+    commands
+      .getById(entity.id)
+      .addType(Transform)
+      .addType(GlobalTransform)
+      .add(parent)
+      .addType(MeshCollider);
     dropStruct(parent);
 
     // Add static body to parent

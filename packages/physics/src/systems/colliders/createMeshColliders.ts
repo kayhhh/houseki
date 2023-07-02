@@ -29,6 +29,7 @@ export function createMeshColliders(
 
     let rigidbodyId = entity.id;
     let rigidbody = store.getRigidBody(rigidbodyId);
+
     if (!rigidbody) {
       const parentId = parentIds.get(entity.id);
       if (parentId) {
@@ -36,14 +37,13 @@ export function createMeshColliders(
         rigidbody = store.getRigidBody(parentId);
       }
     }
+
     if (!rigidbody) continue;
 
     // Create new colliders
     if (!object || object.parent() !== rigidbody) {
       // Remove old collider
       if (object) store.world.removeCollider(object, true);
-
-      if (!rigidbody) continue;
 
       const meshId = collider.meshId || entity.id;
 
@@ -56,7 +56,7 @@ export function createMeshColliders(
 
         const scaledVertices = new Float32Array(vertices.length);
 
-        // Scale vertices using parent transform
+        // Scale vertices using global transform
         for (const [nodeEntity, globalTransform] of nodes) {
           if (nodeEntity.id !== rigidbodyId) continue;
 
