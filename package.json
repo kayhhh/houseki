@@ -18,7 +18,7 @@
     "@typescript-eslint/parser": "^5.59.11",
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-config-turbo": "^1.10.3",
+    "eslint-config-turbo": "^1.10.7",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsonc": "^2.9.0",
