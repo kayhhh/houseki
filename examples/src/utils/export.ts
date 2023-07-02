@@ -17,6 +17,7 @@ import {
   With,
 } from "thyseus";
 
+import { selectedModel } from "../demos/gltf/systems";
 import { createScene } from "./createScene";
 
 export const exportConfig: {
@@ -88,6 +89,9 @@ export function handleExport(
 
       // Load the exported scene
       const { rootId } = createScene(commands, coreStore, sceneStruct);
+
+      // Prevent gltf demo from resetting the uri
+      selectedModel.uri = event.uri;
 
       const gltf = new Gltf(event.uri);
       commands.getById(rootId).add(gltf);
