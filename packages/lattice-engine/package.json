@@ -109,7 +109,7 @@
     "thyseus": "^0.13.0"
   },
   "optionalDependencies": {
-    "three": "^0.154.0"
+    "three": "~0.153.0"
   },
   "publishConfig": {
     "access": "public"

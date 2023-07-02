@@ -13,7 +13,7 @@
     "leva": "^0.9.35",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "three": "^0.154.0",
+    "three": "~0.153.0",
     "thyseus": "^0.13.0",
     "wouter": "^2.11.0",
     "zustand": "^4.3.8"
@@ -23,7 +23,7 @@
     "@thyseus/transformer-rollup": "^0.13.0",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
-    "@types/three": "^0.151.0",
+    "@types/three": "~0.152.1",
     "@vitejs/plugin-react": "^4.0.1",
     "eslint": "^8.44.0",
     "eslint-plugin-react-hooks": "^4.6.0",

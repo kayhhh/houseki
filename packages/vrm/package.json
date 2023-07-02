@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@thyseus/transformer-rollup": "^0.13.0",
-    "@types/three": "^0.151.0",
+    "@types/three": "~0.152.1",
     "typescript": "~5.1.6",
     "vite": "^4.3.9",
     "vite-plugin-dts": "^3.0.2"
@@ -31,7 +31,7 @@
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
-    "three": "^0.151.3",
+    "three": "~0.153.0",
     "thyseus": "^0.13.0"
   },
   "publishConfig": {
