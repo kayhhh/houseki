@@ -18,7 +18,7 @@
     "dev": "vite build --watch"
   },
   "dependencies": {
-    "@pixiv/three-vrm": "^1.0.10"
+    "@pixiv/three-vrm": "^2.0.0"
   },
   "devDependencies": {
     "@thyseus/transformer-rollup": "^0.13.0",
