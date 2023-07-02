@@ -3,7 +3,7 @@ import {
   CanvasTexture,
   EquirectangularReflectionMapping,
   Scene as ThreeScene,
-  sRGBEncoding,
+  SRGBColorSpace,
   Texture,
 } from "three";
 import { Entity, Query, Res } from "thyseus";
@@ -77,7 +77,7 @@ function loadSkybox(
 
   const texture = new CanvasTexture(bitmap);
   texture.mapping = EquirectangularReflectionMapping;
-  texture.encoding = sRGBEncoding;
+  texture.colorSpace = SRGBColorSpace;
 
   // Set skybox
   scene.environment = texture;

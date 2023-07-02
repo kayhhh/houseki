@@ -17,7 +17,7 @@ import {
   NearestMipMapLinearFilter,
   NearestMipMapNearestFilter,
   RepeatWrapping,
-  sRGBEncoding,
+  SRGBColorSpace,
   Texture as ThreeTexture,
 } from "three";
 import { Entity, Query, Res } from "thyseus";
@@ -85,7 +85,7 @@ export function createMeshStandardMaterials(
       material.baseColorTextureInfo,
       renderStore
     );
-    if (object.map) object.map.encoding = sRGBEncoding;
+    if (object.map) object.map.colorSpace = SRGBColorSpace;
 
     object.normalMap = loadTexture(
       object.normalMap,
@@ -107,7 +107,7 @@ export function createMeshStandardMaterials(
       material.emissiveTextureInfo,
       renderStore
     );
-    if (object.emissiveMap) object.emissiveMap.encoding = sRGBEncoding;
+    if (object.emissiveMap) object.emissiveMap.colorSpace = SRGBColorSpace;
 
     const mrTexture = loadTexture(
       object.metalnessMap,
@@ -177,8 +177,8 @@ function applyTextureInfo(object: ThreeTexture, info: TextureInfo) {
   object.repeat.fromArray(info.scale.toArray());
   object.rotation = info.rotation;
 
-  // TODO: Upgrade Three.js to support custom UVs
-  // object.channels = info.texCoord
+  // TODO: Support custom UVs
+  // object.channel = info.texCoord
 
   switch (info.magFilter) {
     case WEBGL_CONSTANTS.NEAREST: {

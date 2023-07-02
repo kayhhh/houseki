@@ -87,7 +87,7 @@ export function renderPortals(
     frameCorners(portalCamera, bottomLeft, bottomRight, topLeft, false);
 
     // Render the scene to the portal render target
-    renderTarget.texture.encoding = renderStore.renderer.outputEncoding;
+    renderTarget.texture.colorSpace = renderStore.renderer.outputColorSpace;
     renderStore.renderer.setRenderTarget(renderTarget);
     renderStore.renderer.state.buffers.depth.setMask(true);
     if (renderStore.renderer.autoClear === false) renderStore.renderer.clear();
