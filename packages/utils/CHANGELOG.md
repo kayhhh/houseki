@@ -1,5 +1,15 @@
 # @lattice-engine/utils
 
+## 0.3.0
+
+### Patch Changes
+
+- Updated dependencies [589fac4]
+  - @lattice-engine/core@0.2.0
+  - @lattice-engine/input@0.2.0
+  - @lattice-engine/render@0.3.0
+  - @lattice-engine/scene@0.3.0
+
 ## 0.2.0
 
 ### Minor Changes

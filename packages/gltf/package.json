@@ -1,6 +1,6 @@
 {
   "name": "@lattice-engine/gltf",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/lattice-engine/lattice",
