@@ -1,5 +1,17 @@
 # @lattice-engine/player
 
+## 1.0.0
+
+### Patch Changes
+
+- Updated dependencies [589fac4]
+  - @lattice-engine/core@0.2.0
+  - @lattice-engine/input@1.0.0
+  - @lattice-engine/physics@1.0.0
+  - @lattice-engine/render@1.0.0
+  - @lattice-engine/scene@1.0.0
+  - @lattice-engine/vrm@1.0.0
+
 ## 0.2.0
 
 ### Minor Changes
