@@ -42,9 +42,34 @@ export function createGeometries(
       setAttribute(object, "normal", normals, 3);
     }
 
-    if (geometry.uvs.id) {
-      const uvs = geometry.uvs.read(warehouse);
+    if (geometry.uv.id) {
+      const uvs = geometry.uv.read(warehouse);
       setAttribute(object, "uv", uvs, 2);
+    }
+
+    if (geometry.uv1.id) {
+      const uvs = geometry.uv1.read(warehouse);
+      setAttribute(object, "uv1", uvs, 2);
+    }
+
+    if (geometry.uv2.id) {
+      const uvs = geometry.uv2.read(warehouse);
+      setAttribute(object, "uv2", uvs, 2);
+    }
+
+    if (geometry.uv3.id) {
+      const uvs = geometry.uv3.read(warehouse);
+      setAttribute(object, "uv3", uvs, 2);
+    }
+
+    if (geometry.joints.id) {
+      const joints = geometry.joints.read(warehouse);
+      setAttribute(object, "skinIndex", joints, 4);
+    }
+
+    if (geometry.weights.id) {
+      const weights = geometry.weights.read(warehouse);
+      setAttribute(object, "skinWeight", weights, 4);
     }
 
     if (geometry.indices.id) {

@@ -1,7 +1,21 @@
 import { Warehouse } from "@lattice-engine/core";
 import { Geometry, Mesh } from "@lattice-engine/scene";
 
+import { GLTF_TO_ECS_ATTRIBUTES } from "../constants";
 import { ExportContext } from "./context";
+
+const ATTRIBUTE_TYPES = {
+  colors: "VEC4",
+  indices: "SCALAR",
+  joints: "VEC4",
+  normals: "VEC3",
+  positions: "VEC3",
+  uv: "VEC2",
+  uv1: "VEC2",
+  uv2: "VEC2",
+  uv3: "VEC2",
+  weights: "VEC4",
+} as const;
 
 export function exportMesh(
   context: ExportContext,
@@ -28,32 +42,18 @@ export function exportMesh(
 
   if (material) primitive.setMaterial(material);
 
-  const positions = geometry.positions.read(warehouse);
-  if (positions) {
-    const accessor = context.doc.createAccessor();
-    accessor.setArray(positions);
-    accessor.setType("VEC3");
-    primitive.setAttribute("POSITION", accessor);
-  }
-
-  const normals = geometry.normals.read(warehouse);
-  if (normals) {
-    const accessor = context.doc.createAccessor();
-    accessor.setArray(normals);
-    accessor.setType("VEC3");
-    primitive.setAttribute("NORMAL", accessor);
-  }
-
-  const uvs = geometry.uvs.read(warehouse);
-  if (uvs) {
-    const accessor = context.doc.createAccessor();
-    accessor.setArray(uvs);
-    accessor.setType("VEC2");
-    primitive.setAttribute("TEXCOORD_0", accessor);
+  for (const [gltf, ecs] of Object.entries(GLTF_TO_ECS_ATTRIBUTES)) {
+    const array = geometry[ecs].read(warehouse);
+    if (array?.length) {
+      const accessor = context.doc.createAccessor();
+      accessor.setArray(array);
+      accessor.setType(ATTRIBUTE_TYPES[ecs]);
+      primitive.setAttribute(gltf, accessor);
+    }
   }
 
   const indices = geometry.indices.read(warehouse);
-  if (indices) {
+  if (indices?.length) {
     const accessor = context.doc.createAccessor();
     accessor.setArray(indices);
     accessor.setType("SCALAR");

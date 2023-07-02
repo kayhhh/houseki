@@ -71,18 +71,7 @@ export function createMeshColliders(
           }
         }
 
-        let indices32: Uint32Array;
-
-        if (indices instanceof Uint16Array) {
-          indices32 = new Uint32Array(indices.length);
-          for (let i = 0; i < indices.length; i++) {
-            indices32[i] = indices[i] ?? 0;
-          }
-        } else {
-          indices32 = indices;
-        }
-
-        const colliderDesc = ColliderDesc.trimesh(scaledVertices, indices32);
+        const colliderDesc = ColliderDesc.trimesh(scaledVertices, indices);
         object = store.world.createCollider(colliderDesc, rigidbody);
         store.meshColliders.set(entity.id, object);
       }

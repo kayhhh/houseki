@@ -54,8 +54,15 @@ function writeGeometry(
   const geometry = new Geometry();
   geometry.positions.write(positions, warehouse);
   geometry.normals.write(normals, warehouse);
-  geometry.uvs.write(uvs, warehouse);
-  geometry.indices.write(indices, warehouse);
+  geometry.uv.write(uvs, warehouse);
+
+  const indices32 = new Uint32Array(indices.length);
+
+  for (let i = 0; i < indices.length; i++) {
+    indices32[i] = indices[i] ?? 0;
+  }
+
+  geometry.indices.write(indices32, warehouse);
 
   return geometry;
 }

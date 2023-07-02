@@ -29,9 +29,15 @@ export function geometryCleanup(
 
     const resources = tracker.resources.get(entity.id) ?? new Set();
 
+    resources.add(geometry.colors.id);
     resources.add(geometry.positions.id);
     resources.add(geometry.normals.id);
-    resources.add(geometry.uvs.id);
+    resources.add(geometry.uv.id);
+    resources.add(geometry.uv1.id);
+    resources.add(geometry.uv2.id);
+    resources.add(geometry.uv3.id);
+    resources.add(geometry.joints.id);
+    resources.add(geometry.weights.id);
     resources.add(geometry.indices.id);
 
     tracker.resources.set(entity.id, resources);
