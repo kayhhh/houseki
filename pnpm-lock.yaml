@@ -81,8 +81,8 @@ importers:
         version: 4.3.8(react@18.2.0)
     devDependencies:
       '@gltf-transform/core':
-        specifier: ^3.4.2
-        version: 3.4.2
+        specifier: ^3.4.5
+        version: 3.4.5
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(thyseus@0.13.0)
@@ -136,8 +136,8 @@ importers:
   packages/gltf:
     dependencies:
       '@gltf-transform/core':
-        specifier: ^3.4.3
-        version: 3.4.3
+        specifier: ^3.4.5
+        version: 3.4.5
       '@gltf-transform/extensions':
         specifier: ^3.4.5
         version: 3.4.5
@@ -1285,23 +1285,10 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@gltf-transform/core@3.4.2:
-    resolution: {integrity: sha512-9YvltytbpVbL9kp6i/b5T2bY4nwsWtlYUf9raNLny1cjvPyCukYxO/3e+nweAMgLofQcvPnBrzRxLC/RPjQ+Wg==}
-    dependencies:
-      property-graph: 1.2.0
-    dev: true
-
-  /@gltf-transform/core@3.4.3:
-    resolution: {integrity: sha512-Ek7ME1xH8BQoHRAfn+OGCijQu47MqChESIVfe3OkXBe2mx277HvkKsT9lyFLg9oO+3uYerzw9Ou5t7x36NMDIA==}
-    dependencies:
-      property-graph: 1.3.1
-    dev: false
-
   /@gltf-transform/core@3.4.5:
     resolution: {integrity: sha512-GRmzCINatEnmSjZgEL3FV63efHuHaNKh5W2fihDXnmQ3xknBRn8fcCWzojpe3xNyvWBAw6ebfv4H9L/bcsTQEA==}
     dependencies:
       property-graph: 1.3.1
-    dev: false
 
   /@gltf-transform/extensions@3.4.5:
     resolution: {integrity: sha512-RL6jCtgevmK8obTnwytakakX81y/MfbI/mFZd0jppoVAdNQ9vls/w1LqLKEpDbiQXwEhdCIw1zQYkfCI0r4T0A==}
@@ -1313,7 +1300,7 @@ packages:
   /@gltf-transform/functions@3.4.3:
     resolution: {integrity: sha512-uvUaxsxe9hjIqmuMQVhXy0W6KRDVk98MWtwt0Kz9+aCPz5VpnwQgj6qFKnwuaLK2Mo8KWSbPAj0pdhqW93dOug==}
     dependencies:
-      '@gltf-transform/core': 3.4.3
+      '@gltf-transform/core': 3.4.5
       '@gltf-transform/extensions': 3.4.5
       ktx-parse: 0.5.0
       ndarray: 1.0.19
@@ -4838,13 +4825,8 @@ packages:
       react-is: 16.13.1
     dev: false
 
-  /property-graph@1.2.0:
-    resolution: {integrity: sha512-dbJCp1F/uG0G9ZhkJ0GKDoz9MOAtJHvtWVK+9UNOJewkXZVebuaPAAxh27ROJDHGLdLw+DkCGNBk9Le5DRTFJQ==}
-    dev: true
-
   /property-graph@1.3.1:
     resolution: {integrity: sha512-gei3N/bHWJdCItJ4blnlGWd9iauEZI+JZYj/A0D177XSI01+QhiJGAVscYBhe3Yywow3A2QJzVtsO2P+UgrRRQ==}
-    dev: false
 
   /pseudomap@1.0.2:
     resolution: {integrity: sha512-b/YwNhb8lk1Zz2+bXXpS/LK9OisiZZ1SNsSLxN1x2OXVEhW2Ckr/7mWE5vrC1ZTiJlD9g19jWszTmJsB+oEpFQ==}
