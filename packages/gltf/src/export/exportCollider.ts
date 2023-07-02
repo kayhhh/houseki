@@ -91,8 +91,8 @@ export function exportHullCollider(
   const mesh = context.meshes.get(collider.meshId);
   if (!mesh) return;
 
-  const extension = context.doc.createExtension(OMICollider);
-  const physicsBody = extension.createCollider();
+  const physicsBodyExt = context.doc.createExtension(OMICollider);
+  const physicsBody = physicsBodyExt.createCollider();
 
   physicsBody.setType("hull");
   physicsBody.setMesh(mesh);
@@ -111,8 +111,8 @@ export function exportMeshCollider(
   const mesh = context.meshes.get(collider.meshId);
   if (!mesh) return;
 
-  const extension = context.doc.createExtension(OMICollider);
-  const physicsBody = extension.createCollider();
+  const physicsBodyExt = context.doc.createExtension(OMICollider);
+  const physicsBody = physicsBodyExt.createCollider();
 
   physicsBody.setType("trimesh");
   physicsBody.setMesh(mesh);

@@ -1,5 +1,5 @@
 import { GLTF, TextureInfo as GltfTextureInfo } from "@gltf-transform/core";
-import { Transform } from "@gltf-transform/extensions";
+import { KHRTextureTransform } from "@gltf-transform/extensions";
 import {
   MaterialAlphaMode,
   MeshStandardMaterial,
@@ -34,7 +34,7 @@ export function exportMaterial(
     if (texture) gltfMaterial.setBaseColorTexture(texture);
 
     const info = gltfMaterial.getBaseColorTextureInfo();
-    if (info) setTextureInfo(info, material.baseColorTextureInfo);
+    if (info) setTextureInfo(info, material.baseColorTextureInfo, context);
   }
 
   if (material.emissiveTextureId) {
@@ -42,7 +42,7 @@ export function exportMaterial(
     if (texture) gltfMaterial.setEmissiveTexture(texture);
 
     const info = gltfMaterial.getEmissiveTextureInfo();
-    if (info) setTextureInfo(info, material.emissiveTextureInfo);
+    if (info) setTextureInfo(info, material.emissiveTextureInfo, context);
   }
 
   if (material.normalTextureId) {
@@ -50,7 +50,7 @@ export function exportMaterial(
     if (texture) gltfMaterial.setNormalTexture(texture);
 
     const info = gltfMaterial.getNormalTextureInfo();
-    if (info) setTextureInfo(info, material.normalTextureInfo);
+    if (info) setTextureInfo(info, material.normalTextureInfo, context);
   }
 
   if (material.occlusionTextureId) {
@@ -58,7 +58,7 @@ export function exportMaterial(
     if (texture) gltfMaterial.setOcclusionTexture(texture);
 
     const info = gltfMaterial.getOcclusionTextureInfo();
-    if (info) setTextureInfo(info, material.occlusionTextureInfo);
+    if (info) setTextureInfo(info, material.occlusionTextureInfo, context);
   }
 
   if (material.metallicRoughnessTextureId) {
@@ -66,13 +66,18 @@ export function exportMaterial(
     if (texture) gltfMaterial.setMetallicRoughnessTexture(texture);
 
     const info = gltfMaterial.getMetallicRoughnessTextureInfo();
-    if (info) setTextureInfo(info, material.metallicRoughnessTextureInfo);
+    if (info)
+      setTextureInfo(info, material.metallicRoughnessTextureInfo, context);
   }
 
   context.materials.set(entityId, gltfMaterial);
 }
 
-function setTextureInfo(gltfInfo: GltfTextureInfo, info: TextureInfo) {
+function setTextureInfo(
+  gltfInfo: GltfTextureInfo,
+  info: TextureInfo,
+  context: ExportContext
+) {
   gltfInfo.setMagFilter(info.magFilter as GLTF.TextureMagFilter);
   gltfInfo.setMinFilter(info.minFilter as GLTF.TextureMinFilter);
   gltfInfo.setWrapS(info.wrapS as GLTF.TextureWrapMode);
@@ -87,12 +92,9 @@ function setTextureInfo(gltfInfo: GltfTextureInfo, info: TextureInfo) {
     info.offset.y === 0;
 
   if (!isDefaultTransform) {
-    let transform = gltfInfo.getExtension<Transform>("KHR_texture_transform");
-
-    if (!transform) {
-      transform = new Transform(gltfInfo.getGraph());
-      gltfInfo.setExtension("KHR_texture_transform", transform);
-    }
+    const transformExt = context.doc.createExtension(KHRTextureTransform);
+    const transform = transformExt.createTransform();
+    gltfInfo.setExtension(transform.extensionName, transform);
 
     transform.setRotation(info.rotation);
     transform.setScale(info.scale.toArray());

@@ -25,7 +25,7 @@ export function createScene(
   const asset = new Asset("/Skybox.jpg", "image/jpeg");
   const image = new Image(true);
 
-  const skyboxId = commands.spawn().add(asset).add(image).id;
+  const skyboxId = commands.spawn(true).add(asset).add(image).id;
 
   dropStruct(asset);
   dropStruct(image);
