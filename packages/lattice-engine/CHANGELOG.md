@@ -6,19 +6,19 @@
 
 - Updated dependencies [d188f58]
 - Updated dependencies [589fac4]
-  - @lattice-engine/gltf@1.0.0
+  - @lattice-engine/gltf@0.5.0
   - @lattice-engine/core@0.2.0
-  - @lattice-engine/input@1.0.0
-  - @lattice-engine/physics@1.0.0
-  - @lattice-engine/player@1.0.0
-  - @lattice-engine/portal@1.0.0
-  - @lattice-engine/render@1.0.0
-  - @lattice-engine/scene@1.0.0
-  - @lattice-engine/text@1.0.0
-  - @lattice-engine/utils@1.0.0
-  - @lattice-engine/vrm@1.0.0
-  - @lattice-engine/orbit@1.0.0
-  - @lattice-engine/n8ao@1.0.0
+  - @lattice-engine/input@0.2.0
+  - @lattice-engine/physics@0.3.0
+  - @lattice-engine/player@0.3.0
+  - @lattice-engine/portal@0.3.0
+  - @lattice-engine/render@0.3.0
+  - @lattice-engine/scene@0.3.0
+  - @lattice-engine/text@0.3.0
+  - @lattice-engine/utils@0.3.0
+  - @lattice-engine/vrm@0.3.0
+  - @lattice-engine/orbit@0.3.0
+  - @lattice-engine/n8ao@0.3.0
 
 ## 0.3.0
 
