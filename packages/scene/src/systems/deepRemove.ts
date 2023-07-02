@@ -3,6 +3,7 @@ import { Commands, Entity, EventReader, Query, With } from "thyseus";
 import {
   Image,
   Mesh,
+  MeshBasicMaterial,
   MeshStandardMaterial,
   Parent,
   Transform,
@@ -14,7 +15,8 @@ export function deepRemove(
   events: EventReader<DeepRemove>,
   nodes: Query<[Entity, Parent], With<Transform>>,
   meshes: Query<[Entity, Mesh]>,
-  materials: Query<[Entity, MeshStandardMaterial]>,
+  basicMaterials: Query<Entity, With<MeshBasicMaterial>>,
+  standardMaterials: Query<[Entity, MeshStandardMaterial]>,
   images: Query<Entity, With<Image>>
 ) {
   if (events.length === 0) return;
@@ -37,9 +39,14 @@ export function deepRemove(
       commands.despawnById(entity.id);
     }
 
+    for (const entity of basicMaterials) {
+      if (!materialIds.has(entity.id)) continue;
+      commands.despawnById(entity.id);
+    }
+
     const imageIds = new Set<bigint>();
 
-    for (const [entity, material] of materials) {
+    for (const [entity, material] of standardMaterials) {
       if (!materialIds.has(entity.id)) continue;
       imageIds.add(material.baseColorTextureId);
       imageIds.add(material.metallicRoughnessTextureId);

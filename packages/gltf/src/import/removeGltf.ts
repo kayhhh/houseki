@@ -4,32 +4,24 @@ import { Commands } from "thyseus";
 import { ImportContext } from "./context";
 
 export function removeGltf(context: ImportContext, commands: Commands) {
-  const despawned = new Set<bigint>();
-
-  const despawn = (id: bigint) => {
-    if (despawned.has(id)) return;
-    despawned.add(id);
-    commands.despawnById(id);
-  };
-
   for (const [, id] of context.nodes) {
-    despawn(id);
+    commands.despawnById(id);
   }
 
   for (const id of context.meshIds) {
-    despawn(id);
+    commands.despawnById(id);
   }
 
   for (const id of context.materialIds) {
-    despawn(id);
+    commands.despawnById(id);
   }
 
   for (const id of context.textureIds) {
-    despawn(id);
+    commands.despawnById(id);
   }
 
   for (const id of context.animationClipIds) {
-    despawn(id);
+    commands.despawnById(id);
   }
 
   for (const id of context.animationMixerIds) {
@@ -37,6 +29,6 @@ export function removeGltf(context: ImportContext, commands: Commands) {
   }
 
   for (const id of context.keyframeTrackIds) {
-    despawn(id);
+    commands.despawnById(id);
   }
 }

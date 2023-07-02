@@ -80,9 +80,8 @@ export function handleExport(
     } else if (exportConfig.mode === "test") {
       // Clear the scene
       for (const entity of scenes) {
-        // TODO: Fix deepRemove freezing the browser
-        // const remove = deepRemove.create();
-        // remove.rootId = entity.id;
+        const remove = deepRemove.create();
+        remove.rootId = entity.id;
 
         commands.despawnById(entity.id);
       }
