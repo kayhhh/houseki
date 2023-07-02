@@ -57,9 +57,6 @@ export function importGltf(
 
     // If URI has changed, load new document
     if (store.uris.get(id) !== gltf.uri) {
-      // Wait for previous document to load
-      if (store.uris.get(id) && !doc) continue;
-
       store.uris.set(id, gltf.uri);
 
       const loading = new Loading(`Loading ${gltf.uri}`);
