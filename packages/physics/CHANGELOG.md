@@ -1,5 +1,12 @@
 # @lattice-engine/physics
 
+## 0.2.0
+
+### Minor Changes
+
+- Updated dependencies [93c1536]
+  - @lattice-engine/scene@0.2.0
+
 ## 0.1.1
 
 ### Patch Changes
