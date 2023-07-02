@@ -7,7 +7,7 @@ import {
   SMAAEffect,
   SMAAPreset,
 } from "postprocessing";
-import { PCFSoftShadowMap, SRGBColorSpace, WebGLRenderer } from "three";
+import { PCFSoftShadowMap, WebGLRenderer } from "three";
 import { Mut, Res, SystemRes } from "thyseus";
 
 import { RenderStats, RenderStore } from "../resources";
@@ -46,7 +46,6 @@ export function renderCanvas(
       powerPreference: "high-performance",
       stencil: false,
     });
-    renderer.outputColorSpace = SRGBColorSpace;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = PCFSoftShadowMap;
     renderer.info.autoReset = false;
@@ -81,7 +80,7 @@ export function renderCanvas(
   renderStore.composer.setSize(canvas.width, canvas.height);
   renderStore.composer.render();
 
-  stats.frame = renderer.info.render.frame;
+  stats.frame += 1;
   stats.calls = renderer.info.render.calls;
   stats.lines = renderer.info.render.lines;
   stats.points = renderer.info.render.points;
