@@ -1,11 +1,10 @@
-import { CoreStore } from "lattice-engine/core";
 import {
   ExportedGltf,
   ExportedJSON,
   ExportGltf,
   Gltf,
 } from "lattice-engine/gltf";
-import { DeepRemove, Scene, SceneStruct } from "lattice-engine/scene";
+import { DeepRemove, Scene } from "lattice-engine/scene";
 import {
   Commands,
   dropStruct,
@@ -13,12 +12,10 @@ import {
   EventReader,
   EventWriter,
   Query,
-  Res,
   With,
 } from "thyseus";
 
 import { selectedModel } from "../demos/gltf/systems";
-import { createScene } from "./createScene";
 
 export const exportConfig: {
   mode: "download" | "test" | "log";
@@ -43,10 +40,8 @@ export function sendExportEvent(
 
 export function handleExport(
   commands: Commands,
-  coreStore: Res<CoreStore>,
-  sceneStruct: Res<SceneStruct>,
   reader: EventReader<ExportedGltf>,
-  scenes: Query<Entity, With<Scene>>,
+  scenes: Query<Scene>,
   deepRemove: EventWriter<DeepRemove>
 ) {
   if (reader.length === 0) return;
@@ -79,16 +74,15 @@ export function handleExport(
           });
       }
     } else if (exportConfig.mode === "test") {
-      // Clear the scene
-      for (const entity of scenes) {
+      let rootId = 0n;
+
+      // Clear scene
+      for (const scene of scenes) {
         const remove = deepRemove.create();
-        remove.rootId = entity.id;
+        remove.rootId = scene.rootId;
 
-        commands.despawnById(entity.id);
+        rootId = scene.rootId;
       }
-
-      // Load the exported scene
-      const { rootId } = createScene(commands, coreStore, sceneStruct);
 
       // Prevent gltf demo from resetting the uri
       selectedModel.uri = event.uri;
