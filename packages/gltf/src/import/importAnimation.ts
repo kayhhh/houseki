@@ -24,9 +24,8 @@ export function importAnimation(
 
   dropStruct(clip);
 
-  const track = new KeyframeTrack();
-
   animation.listChannels().forEach((channel) => {
+    const track = new KeyframeTrack();
     track.clipId = entityId;
 
     const sampler = channel.getSampler();
@@ -89,7 +88,7 @@ export function importAnimation(
 
     const trackEntityId = commands.spawn(true).add(track).id;
     context.keyframeTrackIds.push(trackEntityId);
-  });
 
-  dropStruct(track);
+    dropStruct(track);
+  });
 }
