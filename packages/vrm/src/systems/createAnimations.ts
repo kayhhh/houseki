@@ -39,7 +39,9 @@ export function createAnimations(
 
     let mixer = vrmStore.mixers.get(entity.id);
 
-    if (!mixer) {
+    if (!mixer || mixer.getRoot() !== object.scene) {
+      if (mixer) mixer.stopAllAction();
+
       mixer = new AnimationMixer(object.scene);
       vrmStore.mixers.set(entity.id, mixer);
     }

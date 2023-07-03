@@ -8,9 +8,6 @@ export class TargetPosition extends Vec3 {}
 
 export class TargetRotation extends Quat {}
 
-/**
- * The player's body.
- */
 @struct
 export class PlayerBody {
   @struct.f32 declare speed: number;
