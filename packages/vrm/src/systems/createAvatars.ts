@@ -52,6 +52,8 @@ export function createAvatars(
     // Remove the old VRM
     removeVrm(entityId, localStore, vrmStore);
 
+    if (!uri) continue;
+
     // Load the new VRM
     localStore.loadingURI.set(entityId, uri);
 
