@@ -1,30 +1,48 @@
 import "./Loading.css";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useLoadingStore } from "./system";
 
+const LOADING_DELAY = 1000;
+
 export default function Loading() {
   const loaded = useLoadingStore((state) => state.loaded);
+  const loading = useLoadingStore((state) => state.loading);
   const message = useLoadingStore((state) => state.message);
-  const count = useLoadingStore((state) => state.count);
-  const maxCount = useLoadingStore((state) => state.maxCount);
+  const total = useLoadingStore((state) => state.total);
+  const startedLoading = useLoadingStore((state) => state.startedLoading);
 
-  const text = message || "Loading...";
+  const [doneLoading, setDoneLoading] = useState(false);
 
-  // Clean up on unmount
+  // Reset loading state when we unmount
   useEffect(() => {
     return () => {
       useLoadingStore.getState().reset();
     };
   }, []);
 
+  // If nothing is loading after a delay, we're done loading
+  useEffect(() => {
+    if (!startedLoading) return;
+
+    const timeout = setTimeout(() => {
+      if (loading === 0) {
+        setDoneLoading(true);
+      }
+    }, LOADING_DELAY);
+
+    return () => clearTimeout(timeout);
+  }, [startedLoading, loading, setDoneLoading]);
+
+  const text = message || "Loading...";
+
   return (
-    <div id="loading" className={loaded ? "hidden" : ""}>
-      <div id="loading-text">{text}</div>
-      {maxCount > 0 && (
-        <div id="loading-bar">
-          {count}/{maxCount}
+    <div id="loading" className={doneLoading ? "hidden" : ""}>
+      <div>{text}</div>
+      {total === 0 ? null : (
+        <div>
+          ({loaded}/{total})
         </div>
       )}
     </div>

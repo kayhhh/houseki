@@ -3,62 +3,85 @@ import { Entity, Query, SystemRes } from "thyseus";
 import { create } from "zustand";
 
 type LoadingStore = {
-  count: number;
-  loaded: boolean;
-  maxCount: number;
+  entityIds: Set<bigint>;
+  loaded: number;
+  loading: number;
   message: string;
+  startedLoading: boolean;
+  total: number;
   reset: () => void;
 };
 
 export const useLoadingStore = create<LoadingStore>((set) => ({
-  count: 0,
-  loaded: false,
-  maxCount: 0,
+  entityIds: new Set(),
+  loaded: 0,
+  loading: 0,
   message: "",
   reset: () => {
-    set({ count: 0, loaded: false, maxCount: 0, message: "" });
+    set({
+      loaded: 0,
+      loading: 0,
+      message: "",
+      startedLoading: false,
+      total: 0,
+    });
   },
+  startedLoading: false,
+  total: 0,
 }));
 
-class LocalStore {
+class LocalRes {
   messageId = 0n;
   message = "";
 }
 
-export function loadingSystem(
-  localStore: SystemRes<LocalStore>,
+/**
+ * Counts the number of entities with a Loading component and updates the loading store.
+ */
+export function exportLoadingInfo(
+  localRes: SystemRes<LocalRes>,
   loading: Query<[Entity, Loading]>
 ) {
+  const entityIds = useLoadingStore.getState().entityIds;
+
   const ids: bigint[] = [];
 
   let count = 0;
-  let newMessageId = 0n;
-  let newMessage = "";
+  let displayedId = 0n;
+  let displayedMessage = "";
 
   for (const [entity, load] of loading) {
     ids.push(entity.id);
 
+    entityIds.add(entity.id);
+
     count++;
 
-    if (!newMessage && load.message) {
-      newMessageId = entity.id;
-      newMessage = load.message;
+    if (!displayedMessage && load.message) {
+      displayedId = entity.id;
+      displayedMessage = load.message;
     }
   }
 
-  if (!ids.includes(localStore.messageId)) {
-    localStore.messageId = newMessageId;
-    localStore.message = newMessage;
+  for (const id of entityIds) {
+    if (!ids.includes(id)) {
+      entityIds.delete(id);
+      useLoadingStore.setState((prev) => ({
+        loaded: prev.loaded + 1,
+      }));
+    }
   }
 
-  if (count > 0) {
-    useLoadingStore.setState((prev) => ({
-      count,
-      loaded: false,
-      maxCount: Math.max(prev.maxCount, count),
-      message: localStore.message,
-    }));
-  } else {
-    useLoadingStore.setState({ loaded: true, message: "" });
+  // Only update the message once the current message is done loading
+  if (!ids.includes(localRes.messageId)) {
+    localRes.messageId = displayedId;
+    localRes.message = displayedMessage;
   }
+
+  useLoadingStore.setState((prev) => ({
+    loading: count,
+    message: localRes.message,
+    startedLoading: true,
+    total: prev.loaded + count,
+  }));
 }
