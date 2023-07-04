@@ -1,5 +1,17 @@
 # @lattice-engine/vrm
 
+## 0.3.1
+
+### Patch Changes
+
+- cc0fc73: fix vrm throwing error when uri empty
+- cc0fc73: upgrade thyseus
+- cc0fc73: fix animations breaking when vrm uri changes
+- Updated dependencies [cc0fc73]
+  - @lattice-engine/core@0.2.1
+  - @lattice-engine/render@0.3.1
+  - @lattice-engine/scene@0.3.1
+
 ## 0.3.0
 
 ### Patch Changes

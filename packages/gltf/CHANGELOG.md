@@ -1,5 +1,15 @@
 # @lattice-engine/gltf
 
+## 0.5.1
+
+### Patch Changes
+
+- cc0fc73: upgrade thyseus
+- Updated dependencies [cc0fc73]
+  - @lattice-engine/core@0.2.1
+  - @lattice-engine/physics@0.3.1
+  - @lattice-engine/scene@0.3.1
+
 ## 0.5.0
 
 ### Patch Changes
