@@ -5,6 +5,7 @@ import { Entity, Query, Res } from "thyseus";
 
 import { TransformControls } from "../components";
 import { CanvasRect, TransformControlsStore } from "../resources";
+import { TransformMode } from "../types";
 
 export function createControls(
   renderStore: Res<RenderStore>,
@@ -50,7 +51,23 @@ export function createControls(
       store.objects.set(entity.id, object);
     }
 
-    // Set target
+    switch (controls.mode) {
+      case TransformMode.Translate: {
+        object.setMode("translate");
+        break;
+      }
+
+      case TransformMode.Rotate: {
+        object.setMode("rotate");
+        break;
+      }
+
+      case TransformMode.Scale: {
+        object.setMode("scale");
+        break;
+      }
+    }
+
     const targetObject = renderStore.nodes.get(controls.targetId);
 
     if (targetObject) {

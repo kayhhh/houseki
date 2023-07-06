@@ -6,8 +6,8 @@ import {
   SceneStruct,
   Transform,
 } from "lattice-engine/scene";
-import { TransformControls } from "lattice-engine/transform";
-import { Commands, dropStruct, Mut, Res } from "thyseus";
+import { TransformControls, TransformMode } from "lattice-engine/transform";
+import { Commands, dropStruct, Mut, Query, Res } from "thyseus";
 
 import { createOrbitControls } from "../../utils/createOrbitControls";
 import { createScene } from "../../utils/createScene";
@@ -40,4 +40,16 @@ export function initScene(
 
   dropStruct(geometry);
   dropStruct(parent);
+}
+
+export const transformConfig = {
+  mode: TransformMode.Translate,
+};
+
+export function setTransformMode(
+  transformControls: Query<Mut<TransformControls>>
+) {
+  for (const controls of transformControls) {
+    controls.mode = transformConfig.mode;
+  }
 }

@@ -4,7 +4,7 @@ import { transformPlugin } from "lattice-engine/transform";
 import { World } from "thyseus";
 
 import { demoPlugin } from "../../utils/demoPlugin";
-import { initScene } from "./systems";
+import { initScene, setTransformMode } from "./systems";
 
 export let world: World;
 
@@ -14,5 +14,6 @@ export async function createWorld() {
     .addPlugin(orbitPlugin)
     .addPlugin(transformPlugin)
     .addSystemsToSchedule(LatticeSchedules.Startup, initScene)
+    .addSystems(setTransformMode)
     .build();
 }
