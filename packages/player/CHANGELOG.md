@@ -1,5 +1,16 @@
 # @lattice-engine/player
 
+## 1.0.0
+
+### Patch Changes
+
+- 17bba7e: improve first person avatar clipping
+- Updated dependencies [e2015e3]
+  - @lattice-engine/scene@0.4.0
+  - @lattice-engine/physics@1.0.0
+  - @lattice-engine/render@1.0.0
+  - @lattice-engine/vrm@1.0.0
+
 ## 0.3.1
 
 ### Patch Changes

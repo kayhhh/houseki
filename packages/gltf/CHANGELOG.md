@@ -1,5 +1,17 @@
 # @lattice-engine/gltf
 
+## 1.0.0
+
+### Minor Changes
+
+- e2015e3: add Name component
+
+### Patch Changes
+
+- Updated dependencies [e2015e3]
+  - @lattice-engine/scene@0.4.0
+  - @lattice-engine/physics@1.0.0
+
 ## 0.5.1
 
 ### Patch Changes
