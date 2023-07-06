@@ -66,7 +66,9 @@ export class OMIPhysicsBody extends Extension {
       .getRoot()
       .listNodes()
       .forEach((node) => {
-        const physicsBody = node.getExtension<PhysicsBody>(this.extensionName);
+        const physicsBody = node.getExtension<PhysicsBody>(
+          PhysicsBody.EXTENSION_NAME
+        );
         if (!physicsBody) return;
 
         const nodeIndex = context.nodeIndexMap.get(node);

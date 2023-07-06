@@ -6,8 +6,6 @@ export enum AnchorX {
 
 export enum AnchorY {
   Top = 0,
-  TopBaseline = 1,
-  Middle = 2,
-  Bottom = 3,
-  BottomBaseline = 4,
+  Middle = 1,
+  Bottom = 2,
 }

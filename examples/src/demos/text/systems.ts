@@ -21,7 +21,9 @@ export function initScene(
 
   const transform = new Transform();
   const parent = new Parent(rootId);
-  const text = new Text("Hello world!", undefined, 1, [0, 0, 0]);
+
+  const text = new Text("Hello world!");
+  text.color.set([255, 200, 255]);
 
   commands
     .spawn(true)

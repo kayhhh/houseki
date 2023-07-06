@@ -161,27 +161,26 @@ export class OMICollider extends Extension {
       .getRoot()
       .listNodes()
       .forEach((node) => {
-        const collider = node.getExtension<Collider>(this.extensionName);
+        const collider = node.getExtension<Collider>(Collider.EXTENSION_NAME);
+        if (!collider) return;
 
-        if (collider) {
-          const nodeIndex = context.nodeIndexMap.get(node);
-          if (nodeIndex === undefined) throw new Error("Node index not found");
+        const nodeIndex = context.nodeIndexMap.get(node);
+        if (nodeIndex === undefined) throw new Error("Node index not found");
 
-          const nodes = jsonDoc.json.nodes;
-          if (!nodes) throw new Error("Nodes not found");
+        const nodes = jsonDoc.json.nodes;
+        if (!nodes) throw new Error("Nodes not found");
 
-          const nodeDef = nodes[nodeIndex];
-          if (!nodeDef) throw new Error("Node def not found");
+        const nodeDef = nodes[nodeIndex];
+        if (!nodeDef) throw new Error("Node def not found");
 
-          const colliderIndex = colliderIndexMap.get(collider);
-          if (colliderIndex === undefined)
-            throw new Error("Collider index not found");
+        const colliderIndex = colliderIndexMap.get(collider);
+        if (colliderIndex === undefined)
+          throw new Error("Collider index not found");
 
-          nodeDef.extensions ??= {};
+        nodeDef.extensions ??= {};
 
-          const colliderDef: NodeColliderDef = { collider: colliderIndex };
-          nodeDef.extensions[this.extensionName] = colliderDef;
-        }
+        const colliderDef: NodeColliderDef = { collider: colliderIndex };
+        nodeDef.extensions[this.extensionName] = colliderDef;
       });
 
     // Add extension definition to root

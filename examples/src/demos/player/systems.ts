@@ -170,7 +170,7 @@ class SceneBuilder {
       this.transform.set([0, 0, 0], [x, y, z, w])
     ).add(this.parent.setId(rampId));
 
-    this.text.text = `Angle: ${rampAngle}°`;
+    this.text.value = `Angle: ${rampAngle}°`;
     this.text.fontSize = 0.3;
 
     this.commands
@@ -211,7 +211,7 @@ class SceneBuilder {
       ).add(this.parent.setId(stairsId));
     }
 
-    this.text.text = `Step height: ${stepHeight}m\nStep width: ${stepWidth}m`;
+    this.text.value = `Step height: ${stepHeight}m\nStep width: ${stepWidth}m`;
     this.text.fontSize = 0.3;
 
     this.commands

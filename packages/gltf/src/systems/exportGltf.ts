@@ -22,6 +22,7 @@ import {
   Scene,
   Transform,
 } from "@lattice-engine/scene";
+import { Text } from "@lattice-engine/text";
 import {
   Entity,
   EventReader,
@@ -52,6 +53,7 @@ import {
   exportStaticBody,
 } from "../export/exportPhysicsBody";
 import { exportScene } from "../export/exportScene";
+import { exportText } from "../export/exportText";
 import { parentNodes } from "../export/parentNodes";
 import { extensions } from "../extensions/extensions";
 import { ExportedJSON } from "../types";
@@ -69,7 +71,7 @@ class LocalStore {
   readonly outJson: JSONDocument[] = [];
 }
 
-export function exportGlb(
+export function exportGltf(
   localStore: SystemRes<LocalStore>,
   warehouse: Res<Warehouse>,
   reader: EventReader<ExportGltf>,
@@ -88,7 +90,8 @@ export function exportGlb(
   capsuleColliders: Query<[Entity, CapsuleCollider]>,
   cylinderColliders: Query<[Entity, CylinderCollider]>,
   meshColliders: Query<[Entity, MeshCollider]>,
-  hullColliders: Query<[Entity, HullCollider]>
+  hullColliders: Query<[Entity, HullCollider]>,
+  text: Query<[Entity, Text]>
 ) {
   for (const binary of localStore.outBinary) {
     console.info(`📦 Exported glTF binary (${bytesToDisplay(binary.length)})`);
@@ -157,6 +160,10 @@ export function exportGlb(
 
     for (const [entity, parent, transform] of nodes) {
       exportNode(context, entity.id, parent.id, transform);
+    }
+
+    for (const [entity, t] of text) {
+      exportText(context, entity.id, t);
     }
 
     for (const entity of staticBodies) {

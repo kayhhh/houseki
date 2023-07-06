@@ -153,6 +153,9 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
+      '@lattice-engine/text':
+        specifier: workspace:^
+        version: link:../text
       thyseus:
         specifier: ^0.13.1
         version: 0.13.1

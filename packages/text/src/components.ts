@@ -4,7 +4,7 @@ import { AnchorX, AnchorY } from "./types";
 
 @struct
 export class Text {
-  @struct.string declare text: string;
+  @struct.string declare value: string;
 
   /**
    * URI to a font file (.ttf, .otf, .woff)
@@ -15,25 +15,21 @@ export class Text {
   @struct.u8 declare anchorX: AnchorX;
   @struct.u8 declare anchorY: AnchorY;
 
-  @struct.u8 declare colorR: number;
-  @struct.u8 declare colorG: number;
-  @struct.u8 declare colorB: number;
+  @struct.array({ length: 3, type: "u8" }) declare color: Uint8Array;
 
   constructor(
-    text = "",
+    value = "",
     font = "",
     fontSize = 1,
     color: [number, number, number] = [255, 255, 255]
   ) {
     initStruct(this);
 
-    this.text = text;
+    this.value = value;
     this.font = font;
     this.fontSize = fontSize;
     this.anchorX = AnchorX.Center;
     this.anchorY = AnchorY.Middle;
-    this.colorR = color[0];
-    this.colorG = color[1];
-    this.colorB = color[2];
+    this.color.set(color);
   }
 }

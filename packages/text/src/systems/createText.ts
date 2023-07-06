@@ -29,7 +29,7 @@ export function createText(
       textStore.textObjects.set(entity.id, object);
     }
 
-    object.text = text.text;
+    object.text = text.value;
     object.fontSize = text.fontSize;
 
     switch (text.anchorX) {
@@ -55,11 +55,6 @@ export function createText(
         break;
       }
 
-      case AnchorY.TopBaseline: {
-        object.anchorY = "top-baseline";
-        break;
-      }
-
       case AnchorY.Middle: {
         object.anchorY = "middle";
         break;
@@ -69,14 +64,12 @@ export function createText(
         object.anchorY = "bottom";
         break;
       }
-
-      case AnchorY.BottomBaseline: {
-        object.anchorY = "bottom-baseline";
-        break;
-      }
     }
 
-    object.color = `rgb(${text.colorR}, ${text.colorG}, ${text.colorB})`;
+    const colorR = text.color.at(0);
+    const colorG = text.color.at(1);
+    const colorB = text.color.at(2);
+    object.color = `rgb(${colorR}, ${colorG}, ${colorB})`;
 
     const node = renderStore.nodes.get(entity.id);
     if (node) node.add(object as any);
