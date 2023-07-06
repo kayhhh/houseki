@@ -140,7 +140,7 @@ export function orbitControls(
   // Remove objects that no longer exist
   for (const id of localStore.objects.keys()) {
     if (!ids.includes(id)) {
-      const object = localStore.objects.get(id) as ThreeOrbitControls;
+      const object = localStore.objects.get(id);
       if (object) object.dispose();
 
       localStore.objects.delete(id);

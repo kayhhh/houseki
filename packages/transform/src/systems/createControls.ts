@@ -63,7 +63,7 @@ export function createControls(
   // Remove objects that no longer exist
   for (const id of store.objects.keys()) {
     if (!ids.includes(id)) {
-      const object = store.objects.get(id) as ThreeTransformControls;
+      const object = store.objects.get(id);
       if (object) {
         object.detach();
         object.removeFromParent();

@@ -5,7 +5,7 @@ import { Key, PointerType } from "./types";
 @struct
 export class MouseEvent {
   @struct.bool declare altKey: boolean;
-  @struct.u8 declare button: number;
+  @struct.i8 declare button: number;
   @struct.u16 declare buttons: number;
   @struct.u16 declare clientX: number;
   @struct.u16 declare clientY: number;
@@ -24,7 +24,7 @@ export class MouseEvent {
 @struct
 export class PointerEvent {
   @struct.bool declare altKey: boolean;
-  @struct.u8 declare button: number;
+  @struct.i8 declare button: number;
   @struct.u16 declare buttons: number;
   @struct.u16 declare clientX: number;
   @struct.u16 declare clientY: number;
