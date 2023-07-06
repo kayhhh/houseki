@@ -15,6 +15,11 @@ export class InputStruct {
   @struct.bool declare isPointerLocked: boolean;
 
   /**
+   * Whether the pointer is currently down.
+   */
+  @struct.bool declare isPointerDown: boolean;
+
+  /**
    * The currently pressed keys.
    * Each index is a `Key` enum value.
    * The value is `1` if the key is pressed, `0` otherwise.

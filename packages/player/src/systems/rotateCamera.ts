@@ -8,6 +8,7 @@ import { PlayerCamera, TargetRotation } from "../components";
 import { PlayerCameraView } from "../types";
 
 const SENSITIVITY = 0.002;
+const SENSITIVITY_NO_POINTER_LOCK = SENSITIVITY * 2;
 
 const FIRST_PERSON_SLERP = 1e-17;
 const MIN_FIRST_PERSON_ANGLE = Math.PI / 10;
@@ -27,10 +28,17 @@ export function rotateCamera(
   pointerMoveReader: EventReader<PointerMoveEvent>,
   entities: Query<[PlayerCamera, Mut<TargetRotation>, Mut<Transform>]>
 ) {
+  const rotate = inputStruct.enablePointerLock
+    ? inputStruct.isPointerLocked
+    : inputStruct.isPointerDown;
+
+  const sensitivity = inputStruct.enablePointerLock
+    ? SENSITIVITY
+    : SENSITIVITY_NO_POINTER_LOCK;
+
   // Update target rotation on pointer move
   for (const event of pointerMoveReader) {
-    // TODO: Support non pointer lock controls.
-    if (!inputStruct.isPointerLocked) continue;
+    if (!rotate) continue;
 
     for (const [camera, targetRotation] of entities) {
       euler.setFromQuaternion(
@@ -42,8 +50,8 @@ export function rotateCamera(
         )
       );
 
-      euler.y -= event.movementX * SENSITIVITY;
-      euler.x -= event.movementY * SENSITIVITY;
+      euler.y -= event.movementX * sensitivity;
+      euler.x -= event.movementY * sensitivity;
 
       const minAngle =
         camera.currentView === PlayerCameraView.FirstPerson

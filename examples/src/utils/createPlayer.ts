@@ -109,5 +109,4 @@ export function createPlayer(
   dropStruct(targetRotation);
 
   sceneStruct.activeCamera = cameraId;
-  inputStruct.enablePointerLock = true;
 }

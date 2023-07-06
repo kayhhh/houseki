@@ -65,14 +65,17 @@ export function inputWriter(
   }
 
   for (const event of localStore.pointerDownEvents) {
+    inputStruct.isPointerDown = true;
     pointerDownWriter.createFrom(event);
   }
 
   for (const event of localStore.pointerUpEvents) {
+    inputStruct.isPointerDown = false;
     pointerUpWriter.createFrom(event);
   }
 
   for (const event of localStore.pointerCancelEvents) {
+    inputStruct.isPointerDown = false;
     pointerCancelWriter.createFrom(event);
   }
 
