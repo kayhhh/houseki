@@ -5,6 +5,7 @@ import Canvas from "../../components/canvas/Canvas";
 import Loading from "../../components/loading/Loading";
 import Stats from "../../components/stats/Stats";
 import { useEngine } from "../../utils/useEngine";
+import { usePointerLockToggle } from "../../utils/usePointerLockToggle";
 
 export default function Player() {
   const [world, setWorld] = useState<World | null>(null);
@@ -17,6 +18,7 @@ export default function Player() {
   }, []);
 
   useEngine(world);
+  usePointerLockToggle();
 
   return (
     <>
