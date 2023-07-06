@@ -17,6 +17,7 @@ export default defineConfig({
         render: "./src/render.ts",
         scene: "./src/scene.ts",
         text: "./src/text.ts",
+        transform: "./src/transform.ts",
         utils: "./src/utils.ts",
         vrm: "./src/vrm.ts",
       },

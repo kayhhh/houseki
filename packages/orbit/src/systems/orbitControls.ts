@@ -120,15 +120,6 @@ export function orbitControls(
     localStore.mockElement.dispatchEvent(event);
   }
 
-  // Clear event queues
-  pointerDownReader.clear();
-  pointerMoveReader.clear();
-  pointerCancelReader.clear();
-  pointerUpReader.clear();
-  contextMenuReader.clear();
-  onWheelReader.clear();
-  keyDownReader.clear();
-
   // Update objects
   for (const object of localStore.objects.values()) {
     object.update();

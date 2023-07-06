@@ -1,0 +1,38 @@
+{
+  "name": "@lattice-engine/transform",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lattice-engine/lattice",
+    "directory": "packages/transform"
+  },
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build --emptyOutDir",
+    "dev": "vite build --watch"
+  },
+  "devDependencies": {
+    "@thyseus/transformer-rollup": "^0.13.0",
+    "@types/three": "~0.152.1",
+    "typescript": "~5.1.6",
+    "vite": "^4.3.9",
+    "vite-plugin-dts": "^3.0.2"
+  },
+  "peerDependencies": {
+    "@lattice-engine/core": "workspace:^",
+    "@lattice-engine/input": "workspace:^",
+    "@lattice-engine/render": "workspace:^",
+    "@lattice-engine/scene": "workspace:^",
+    "three": "~0.153.0",
+    "thyseus": "^0.13.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -233,6 +233,9 @@ importers:
       '@lattice-engine/text':
         specifier: workspace:^
         version: link:../text
+      '@lattice-engine/transform':
+        specifier: workspace:^
+        version: link:../transform
       '@lattice-engine/utils':
         specifier: workspace:^
         version: link:../utils
@@ -532,6 +535,43 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2(typescript@5.1.6)
 
+  packages/transform:
+    dependencies:
+      '@lattice-engine/core':
+        specifier: workspace:^
+        version: link:../core
+      '@lattice-engine/input':
+        specifier: workspace:^
+        version: link:../input
+      '@lattice-engine/render':
+        specifier: workspace:^
+        version: link:../render
+      '@lattice-engine/scene':
+        specifier: workspace:^
+        version: link:../scene
+      three:
+        specifier: ~0.153.0
+        version: 0.153.0
+      thyseus:
+        specifier: ^0.13.1
+        version: 0.13.1
+    devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: ^0.13.0
+        version: 0.13.0(thyseus@0.13.1)
+      '@types/three':
+        specifier: ~0.152.1
+        version: 0.152.1
+      typescript:
+        specifier: ~5.1.6
+        version: 5.1.6
+      vite:
+        specifier: ^4.3.9
+        version: 4.3.9
+      vite-plugin-dts:
+        specifier: ^3.0.2
+        version: 3.0.2(typescript@5.1.6)
+
   packages/utils:
     dependencies:
       '@lattice-engine/core':
@@ -769,14 +809,6 @@ packages:
       '@babel/helper-validator-identifier': 7.22.5
       chalk: 2.4.2
       js-tokens: 4.0.0
-    dev: true
-
-  /@babel/parser@7.21.8:
-    resolution: {integrity: sha512-6zavDGdzG3gUqAdWvlLFfk+36RilI+Pwyuuh7HItyeScCWP3k6i8vKclAQ0bM/0y/Kz/xiwvxhMv9MgTJP5gmA==}
-    engines: {node: '>=6.0.0'}
-    hasBin: true
-    dependencies:
-      '@babel/types': 7.22.5
     dev: true
 
   /@babel/parser@7.22.5:
@@ -2256,7 +2288,7 @@ packages:
   /@vue/compiler-core@3.3.4:
     resolution: {integrity: sha512-cquyDNvZ6jTbf/+x+AgM2Arrp6G4Dzbb0R64jiG804HRMfRiFXWI6kqUVqZ6ZR0bQhIoQjB4+2bhNtVwndW15g==}
     dependencies:
-      '@babel/parser': 7.21.8
+      '@babel/parser': 7.22.5
       '@vue/shared': 3.3.4
       estree-walker: 2.0.2
       source-map-js: 1.0.2

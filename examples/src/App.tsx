@@ -10,6 +10,7 @@ import Physics from "./demos/physics/Physics";
 import Player from "./demos/player/Player";
 import Portal from "./demos/portal/Portal";
 import Text from "./demos/text/Text";
+import Transform from "./demos/transform/Transform";
 import VRM from "./demos/vrm/VRM";
 
 function closeSidePanel() {
@@ -46,6 +47,7 @@ export default function App() {
         <RouteLink href="/player">Player</RouteLink>
         <RouteLink href="/portal">Portal</RouteLink>
         <RouteLink href="/text">Text</RouteLink>
+        <RouteLink href="/transform">Transform</RouteLink>
         <RouteLink href="/vrm">VRM</RouteLink>
 
         <h3>Links</h3>
@@ -63,6 +65,7 @@ export default function App() {
       <Route path="/player" component={Player} />
       <Route path="/portal" component={Portal} />
       <Route path="/text" component={Text} />
+      <Route path="/transform" component={Transform} />
       <Route path="/vrm" component={VRM} />
     </div>
   );
