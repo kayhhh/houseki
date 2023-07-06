@@ -36,6 +36,11 @@ export class ExportContext {
    */
   parents = new Map<bigint, bigint>();
 
+  /**
+   * Entity ID -> Name
+   */
+  names = new Map<bigint, string>();
+
   constructor() {
     this.scene = this.doc.createScene();
     this.doc.getRoot().setDefaultScene(this.scene);

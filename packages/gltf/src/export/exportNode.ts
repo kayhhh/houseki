@@ -8,7 +8,9 @@ export function exportNode(
   parentId: bigint,
   transform: Transform
 ) {
-  const node = context.doc.createNode();
+  const name = context.names.get(entityId);
+
+  const node = context.doc.createNode(name);
 
   node.setTranslation(transform.translation.toArray());
   node.setRotation(transform.rotation.toArray());

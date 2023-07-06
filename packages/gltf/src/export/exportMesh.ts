@@ -28,7 +28,8 @@ export function exportMesh(
   let gltfMesh = context.meshes.get(parentId);
 
   if (!gltfMesh) {
-    gltfMesh = context.doc.createMesh();
+    const name = context.names.get(entityId);
+    gltfMesh = context.doc.createMesh(name);
     context.meshes.set(parentId, gltfMesh);
   }
 

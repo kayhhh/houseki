@@ -64,6 +64,17 @@ export class Transform {
 export class GlobalTransform extends Transform {}
 
 @struct
+export class Name {
+  @struct.string declare value: string;
+
+  constructor(value = "") {
+    initStruct(this);
+
+    this.value = value;
+  }
+}
+
+@struct
 export class Parent {
   @struct.u64 declare id: bigint;
 

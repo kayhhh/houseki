@@ -64,7 +64,13 @@ export function importMesh(
       mesh.materialId = importMaterial(material, commands, warehouse, context);
     }
 
-    const meshId = commands.spawn(true).add(mesh).add(geometry).id;
+    context.name.value = gltfMesh.getName() || `Mesh_${context.meshIds.length}`;
+
+    const meshId = commands
+      .spawn(true)
+      .add(mesh)
+      .add(geometry)
+      .add(context.name).id;
 
     dropStruct(mesh);
     dropStruct(geometry);

@@ -10,7 +10,12 @@ import {
   SphereCollider,
   TargetTransform,
 } from "@lattice-engine/physics";
-import { GlobalTransform, Parent, Transform } from "@lattice-engine/scene";
+import {
+  GlobalTransform,
+  Name,
+  Parent,
+  Transform,
+} from "@lattice-engine/scene";
 import { dropStruct } from "thyseus";
 
 type EntityID = bigint;
@@ -31,6 +36,7 @@ export class ImportContext {
   readonly transform = new Transform();
   readonly globalTransform = new GlobalTransform();
   readonly targetTransform = new TargetTransform();
+  readonly name = new Name();
 
   readonly kinematicBody = new KinematicBody();
   readonly dynamicBody = new DynamicBody();
@@ -47,6 +53,7 @@ export class ImportContext {
     dropStruct(this.transform);
     dropStruct(this.globalTransform);
     dropStruct(this.targetTransform);
+    dropStruct(this.name);
 
     dropStruct(this.kinematicBody);
     dropStruct(this.dynamicBody);

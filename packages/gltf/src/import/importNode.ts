@@ -28,11 +28,14 @@ export function importNode(
 
   context.parent.id = parentId;
 
+  context.name.value = node.getName() || `Node_${context.nodes.size}`;
+
   const entityId = commands
     .spawn(true)
     .add(context.transform)
     .add(context.globalTransform)
-    .add(context.parent).id;
+    .add(context.parent)
+    .add(context.name).id;
 
   context.nodes.set(node, entityId);
 

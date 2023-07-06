@@ -17,6 +17,7 @@ import {
   Image,
   Mesh,
   MeshStandardMaterial,
+  Name,
   Parent,
   Scene,
   Transform,
@@ -73,6 +74,7 @@ export function exportGlb(
   warehouse: Res<Warehouse>,
   reader: EventReader<ExportGltf>,
   outWriter: EventWriter<ExportedGltf>,
+  names: Query<[Entity, Name]>,
   scenes: Query<[Entity, Scene]>,
   nodes: Query<[Entity, Parent, Transform]>,
   meshes: Query<[Entity, Mesh, Geometry]>,
@@ -123,6 +125,10 @@ export function exportGlb(
 
   for (const event of reader) {
     const context = new ExportContext();
+
+    for (const [entity, name] of names) {
+      context.names.set(entity.id, name.value);
+    }
 
     let rootId: bigint | undefined;
 
