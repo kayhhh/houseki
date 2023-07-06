@@ -1,5 +1,11 @@
 # @lattice-engine/scene
 
+## 0.4.0
+
+### Minor Changes
+
+- e2015e3: add Name component
+
 ## 0.3.1
 
 ### Patch Changes
