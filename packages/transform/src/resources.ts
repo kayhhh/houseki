@@ -37,4 +37,6 @@ export class CanvasRect {
   @struct.u32 y = 0;
   @struct.u32 width = 0;
   @struct.u32 height = 0;
+  @struct.u32 left = 0;
+  @struct.u32 top = 0;
 }

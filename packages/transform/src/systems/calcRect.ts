@@ -19,4 +19,6 @@ export function calcRect(
   canvasRect.y = rect.y;
   canvasRect.width = rect.width;
   canvasRect.height = rect.height;
+  canvasRect.left = rect.left;
+  canvasRect.top = rect.top;
 }
