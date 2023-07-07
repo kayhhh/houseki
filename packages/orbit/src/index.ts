@@ -1,3 +1,3 @@
 export * from "./components";
 export * from "./plugin";
-export * from "./systems/orbitControls";
+export * from "./systems/sendEvents";

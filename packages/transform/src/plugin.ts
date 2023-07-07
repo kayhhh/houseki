@@ -1,4 +1,4 @@
-import { orbitControls } from "@lattice-engine/orbit";
+import { sendEvents as orbitSendEvents } from "@lattice-engine/orbit";
 import { run, WorldBuilder } from "thyseus";
 
 import { calcRect } from "./systems/calcRect";
@@ -12,6 +12,6 @@ export function transformPlugin(builder: WorldBuilder) {
   builder.addSystems(
     calcRect,
     ...run.chain(createControls, sendEvents, saveTransforms, selectTarget),
-    run(clearEvents).before(orbitControls)
+    run(clearEvents).before(orbitSendEvents)
   );
 }
