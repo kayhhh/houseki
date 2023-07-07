@@ -543,6 +543,9 @@ importers:
       '@lattice-engine/input':
         specifier: workspace:^
         version: link:../input
+      '@lattice-engine/orbit':
+        specifier: workspace:^
+        version: link:../orbit
       '@lattice-engine/render':
         specifier: workspace:^
         version: link:../render

@@ -16,6 +16,7 @@ export default defineConfig({
       external: [
         "@lattice-engine/core",
         "@lattice-engine/input",
+        "@lattice-engine/orbit",
         "@lattice-engine/render",
         "@lattice-engine/scene",
         "three",

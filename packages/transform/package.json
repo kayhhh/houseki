@@ -27,6 +27,7 @@
   "peerDependencies": {
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/input": "workspace:^",
+    "@lattice-engine/orbit": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
     "three": "~0.153.0",

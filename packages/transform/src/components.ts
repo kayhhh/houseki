@@ -1,4 +1,4 @@
-import { struct } from "thyseus";
+import { initStruct, struct } from "thyseus";
 
 import { TransformMode } from "./types";
 
@@ -6,4 +6,16 @@ import { TransformMode } from "./types";
 export class TransformControls {
   @struct.u64 declare targetId: bigint;
   @struct.u8 declare mode: TransformMode;
+
+  /**
+   * Whether to clear events when dragging starts.
+   * Useful when combining with other controls.
+   */
+  @struct.bool declare clearEvents: boolean;
+
+  constructor() {
+    initStruct(this);
+
+    this.clearEvents = true;
+  }
 }
