@@ -48,7 +48,6 @@ export function zoomCamera(
       }
     }
 
-    // Lerp camera distance
     const K = 1 - LERP_STRENGTH ** time.mainDelta;
     camera.distance = lerp(camera.distance, camera.targetDistance, K);
   }

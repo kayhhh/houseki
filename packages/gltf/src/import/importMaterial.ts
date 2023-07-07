@@ -129,7 +129,6 @@ function applyTextureInfo(info: TextureInfo, gltfInfo: GltfTextureInfo | null) {
   info.wrapT = gltfInfo.getWrapT();
   info.texCoord = gltfInfo.getTexCoord();
 
-  // KHR_texture_transform
   const transform = gltfInfo.getExtension<Transform>(Transform.EXTENSION_NAME);
   if (transform) {
     info.rotation = transform.getRotation();

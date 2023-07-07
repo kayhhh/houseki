@@ -31,25 +31,20 @@ export function applyAvatarOffset(
       const rightEye = vrm.humanoid.normalizedHumanBones.rightEye?.node;
       const head = vrm.humanoid.normalizedHumanBones.head.node;
 
+      // Get position of head or eyes
       if (camera.currentView === PlayerCameraView.FirstPerson) {
-        // Get position of eyes
         if (leftEye && rightEye) {
           leftEye
             .getWorldPosition(vector3)
             .add(rightEye.getWorldPosition(vector3b))
             .divideScalar(2);
         } else {
-          // Get position of head
           head.getWorldPosition(vector3);
-
-          // Estimate eye position
           vector3.y += 0.1;
         }
 
-        // Apply an offset
         vector3.addScaledVector(head.getWorldDirection(vector3b), -0.15);
       } else {
-        // Get position of head
         head.getWorldPosition(vector3);
       }
 

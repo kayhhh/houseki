@@ -16,7 +16,6 @@ export class MOZText extends Extension {
   }
 
   read(context: ReaderContext): this {
-    // Add text to nodes
     const nodeDefs = context.jsonDoc.json.nodes ?? [];
 
     nodeDefs.forEach((nodeDef, nodeIndex) => {
@@ -67,7 +66,6 @@ export class MOZText extends Extension {
   write(context: WriterContext): this {
     if (this.properties.size === 0) return this;
 
-    // Add text to nodes
     this.document
       .getRoot()
       .listNodes()

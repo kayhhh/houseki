@@ -11,7 +11,6 @@ export enum PointerType {
 export enum Key {
   // 0-9 are the numbers 0-9
 
-  // 10-35 are the letters a-z (lowercase and uppercase)
   a = 10,
   b = 11,
   c = 12,
@@ -66,7 +65,6 @@ export enum Key {
   Y = 34,
   Z = 35,
 
-  // 36-56 are special keys
   Backspace = 36,
   Tab = 37,
   Enter = 38,

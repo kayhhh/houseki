@@ -37,26 +37,21 @@ export class Engine {
     const stopPromise = this.stop();
     if (stopPromise) await stopPromise;
 
-    // Startup
     this.#startPromise = this.world.runSchedule(LatticeSchedules.Startup);
     await this.#startPromise;
 
-    // Initialize the last fixed time
     this.#lastFixedTime = performance.now();
 
-    // Main loop
     this.#animationFrame = requestAnimationFrame(this.#loop.bind(this));
   }
 
   async #loop() {
     const time = performance.now();
 
-    // Update
     await this.#runSchedule(LatticeSchedules.PreUpdate);
     await this.#runSchedule(LatticeSchedules.Update);
     await this.#runSchedule(LatticeSchedules.PostUpdate);
 
-    // FixedUpdate
     const fixedStep = 1000 / FIXED_HZ;
     this.#leftoverFixedTime += time - this.#lastFixedTime;
 
@@ -69,19 +64,15 @@ export class Engine {
       this.#lastFixedTime = time;
     }
 
-    // Queued schedules
     while (this.#scheduleQueue.length > 0) {
       const schedule = this.#scheduleQueue.shift();
       if (schedule) await this.#runSchedule(schedule);
     }
 
-    // Render
     await this.#runSchedule(LatticeSchedules.Render);
 
-    // ApplyCommands
     await this.#runSchedule(LatticeSchedules.ApplyCommands);
 
-    // Schedule the next frame
     this.#animationFrame = requestAnimationFrame(this.#loop.bind(this));
   }
 

@@ -16,7 +16,6 @@ export function sendEvents(
   pointerCancelReader: EventReader<PointerCancelEvent>,
   pointerUpReader: EventReader<PointerUpEvent>
 ) {
-  // Send events to mock element
   for (const data of pointerDownReader) {
     const event = pointerEventFromECS("pointerdown", data);
     store.mockElement.dispatchEvent(event);

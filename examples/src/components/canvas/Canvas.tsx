@@ -8,7 +8,6 @@ import { useEffect, useRef } from "react";
 export default function Canvas() {
   const canvas = useRef<HTMLCanvasElement>(null);
 
-  // Resize canvas
   useEffect(() => {
     function resize() {
       if (!canvas.current) return;
