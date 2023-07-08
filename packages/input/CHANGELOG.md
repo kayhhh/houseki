@@ -1,5 +1,15 @@
 # @lattice-engine/input
 
+## 0.3.0
+
+### Minor Changes
+
+- aab6de7: add isPointerDown to input struct
+
+### Patch Changes
+
+- c983ea1: fix mouse event button type
+
 ## 0.2.1
 
 ### Patch Changes

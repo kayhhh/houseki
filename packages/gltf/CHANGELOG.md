@@ -1,5 +1,18 @@
 # @lattice-engine/gltf
 
+## 2.0.0
+
+### Minor Changes
+
+- 7e3acd2: Migrate OMI_collider to OMI_physics_shape
+- f2bae57: add support for MOZ_text
+
+### Patch Changes
+
+- Updated dependencies [f2bae57]
+- Updated dependencies [f2bae57]
+  - @lattice-engine/text@1.1.0
+
 ## 1.0.0
 
 ### Minor Changes
