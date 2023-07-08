@@ -110,11 +110,9 @@
     "vite-plugin-dts": "^3.0.2"
   },
   "peerDependencies": {
-    "thyseus": "^0.13.1"
-  },
-  "optionalDependencies": {
     "postprocessing": "^6.32.2",
-    "three": "~0.153.0"
+    "three": "~0.153.0",
+    "thyseus": "^0.13.1"
   },
   "publishConfig": {
     "access": "public"

@@ -61,9 +61,6 @@ importers:
       leva:
         specifier: ^0.9.35
         version: 0.9.35(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
-      postprocessing:
-        specifier: ^6.32.2
-        version: 6.32.2(three@0.153.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -245,16 +242,15 @@ importers:
       '@lattice-engine/vrm':
         specifier: workspace:^
         version: link:../vrm
-      thyseus:
-        specifier: ^0.13.1
-        version: 0.13.1
-    optionalDependencies:
       postprocessing:
         specifier: ^6.32.2
         version: 6.32.2(three@0.153.0)
       three:
         specifier: ~0.153.0
         version: 0.153.0
+      thyseus:
+        specifier: ^0.13.1
+        version: 0.13.1
     devDependencies:
       typescript:
         specifier: ~5.1.6
