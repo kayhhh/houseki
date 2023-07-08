@@ -1,5 +1,12 @@
 # @lattice-engine/vrm
 
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies [ec1792a]
+  - @lattice-engine/render@1.0.1
+
 ## 1.0.0
 
 ### Patch Changes
