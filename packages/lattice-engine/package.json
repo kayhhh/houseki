@@ -44,6 +44,9 @@
     "./portal": {
       "import": "./dist/portal.js"
     },
+    "./postprocessing": {
+      "import": "./dist/postprocessing.js"
+    },
     "./player": {
       "import": "./dist/player.js"
     },
@@ -77,6 +80,7 @@
     "orbit.d.ts",
     "physics.d.ts",
     "portal.d.ts",
+    "postprocessing.d.ts",
     "player.d.ts",
     "render.d.ts",
     "scene.d.ts",
@@ -98,6 +102,7 @@
     "@lattice-engine/physics": "workspace:^",
     "@lattice-engine/player": "workspace:^",
     "@lattice-engine/portal": "workspace:^",
+    "@lattice-engine/postprocessing": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
     "@lattice-engine/text": "workspace:^",

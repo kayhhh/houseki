@@ -5,7 +5,7 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev --concurrency 17",
+    "dev": "turbo dev --concurrency 18",
     "format": "prettier --write .",
     "lint": "eslint --fix . --ext .ts,.tsx,.mjs,.json --ignore-path .prettierignore --ignore-pattern package.json",
     "release": "pnpm build && pnpm publish -r && changeset tag && git push --follow-tags",

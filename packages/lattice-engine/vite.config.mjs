@@ -14,6 +14,7 @@ export default defineConfig({
         physics: "./src/physics.ts",
         player: "./src/player.ts",
         portal: "./src/portal.ts",
+        postprocessing: "./src/postprocessing.ts",
         render: "./src/render.ts",
         scene: "./src/scene.ts",
         text: "./src/text.ts",

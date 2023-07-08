@@ -224,6 +224,9 @@ importers:
       '@lattice-engine/portal':
         specifier: workspace:^
         version: link:../portal
+      '@lattice-engine/postprocessing':
+        specifier: workspace:^
+        version: link:../postprocessing
       '@lattice-engine/render':
         specifier: workspace:^
         version: link:../render
@@ -413,6 +416,43 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
+      three:
+        specifier: ~0.153.0
+        version: 0.153.0
+      thyseus:
+        specifier: ^0.13.1
+        version: 0.13.1
+    devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: ^0.13.0
+        version: 0.13.0(thyseus@0.13.1)
+      '@types/three':
+        specifier: ~0.152.1
+        version: 0.152.1
+      typescript:
+        specifier: ~5.1.6
+        version: 5.1.6
+      vite:
+        specifier: ^4.3.9
+        version: 4.3.9
+      vite-plugin-dts:
+        specifier: ^3.0.2
+        version: 3.0.2(typescript@5.1.6)
+
+  packages/postprocessing:
+    dependencies:
+      '@lattice-engine/core':
+        specifier: workspace:^
+        version: link:../core
+      '@lattice-engine/render':
+        specifier: workspace:^
+        version: link:../render
+      '@lattice-engine/scene':
+        specifier: workspace:^
+        version: link:../scene
+      postprocessing:
+        specifier: ^6.32.2
+        version: 6.32.2(three@0.153.0)
       three:
         specifier: ~0.153.0
         version: 0.153.0
