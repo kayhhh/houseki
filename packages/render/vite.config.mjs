@@ -16,6 +16,7 @@ export default defineConfig({
       external: [
         "@lattice-engine/core",
         "@lattice-engine/scene",
+        "postprocessing",
         "three",
         "thyseus",
       ],

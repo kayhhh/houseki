@@ -17,9 +17,6 @@
     "build": "vite build --emptyOutDir",
     "dev": "vite build --watch"
   },
-  "dependencies": {
-    "postprocessing": "^6.32.2"
-  },
   "devDependencies": {
     "@thyseus/transformer-rollup": "^0.13.0",
     "@types/three": "~0.152.1",
@@ -30,6 +27,7 @@
   "peerDependencies": {
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
+    "postprocessing": "^6.32.2",
     "three": "~0.153.0",
     "thyseus": "^0.13.1"
   },
