@@ -1,4 +1,5 @@
 import { thyseusPlugin } from "@thyseus/transformer-rollup";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 
@@ -11,19 +12,7 @@ export default defineConfig({
       formats: ["es"],
     },
     minify: false,
-    rollupOptions: {
-      external: [
-        "@lattice-engine/core",
-        "@lattice-engine/input",
-        "@lattice-engine/physics",
-        "@lattice-engine/render",
-        "@lattice-engine/scene",
-        "@lattice-engine/vrm",
-        "three",
-        "thyseus",
-      ],
-    },
     target: "esnext",
   },
-  plugins: [dts(), thyseusPlugin()],
+  plugins: [dts(), peerDepsExternal(), thyseusPlugin()],
 });

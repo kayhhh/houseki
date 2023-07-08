@@ -1,3 +1,4 @@
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 
@@ -24,10 +25,7 @@ export default defineConfig({
       formats: ["es"],
     },
     minify: false,
-    rollupOptions: {
-      external: ["postprocessing", "three", "thyseus"],
-    },
     target: "esnext",
   },
-  plugins: [dts()],
+  plugins: [dts(), peerDepsExternal()],
 });
