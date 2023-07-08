@@ -246,6 +246,9 @@ importers:
         specifier: ^0.13.1
         version: 0.13.1
     optionalDependencies:
+      postprocessing:
+        specifier: ^6.32.2
+        version: 6.32.2(three@0.153.0)
       three:
         specifier: ~0.153.0
         version: 0.153.0

@@ -25,7 +25,7 @@ export default defineConfig({
     },
     minify: false,
     rollupOptions: {
-      external: ["three", "thyseus"],
+      external: ["postprocessing", "three", "thyseus"],
     },
     target: "esnext",
   },

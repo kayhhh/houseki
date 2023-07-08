@@ -113,6 +113,7 @@
     "thyseus": "^0.13.1"
   },
   "optionalDependencies": {
+    "postprocessing": "^6.32.2",
     "three": "~0.153.0"
   },
   "publishConfig": {

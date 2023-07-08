@@ -18,7 +18,8 @@
     "dev": "vite build --watch"
   },
   "dependencies": {
-    "@dimforge/rapier3d": "^0.11.2"
+    "@dimforge/rapier3d": "^0.11.2",
+    "gl-matrix": "^4.0.0-beta.1"
   },
   "devDependencies": {
     "@thyseus/transformer-rollup": "^0.13.0",
@@ -30,7 +31,6 @@
   "peerDependencies": {
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
-    "gl-matrix": "^4.0.0-beta.1",
     "thyseus": "^0.13.1"
   },
   "publishConfig": {
