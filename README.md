@@ -22,21 +22,22 @@ The web has a lot of independently awesome libraries for building games, but com
 
 Packages are published individually to NPM under the `@lattice-engine` scope. Alternatively, you can install all packages at once using the combined [`lattice-engine`](./packages/lattice-engine) package.
 
-| Package                                             | Description                                                                                                          |
-| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| [`@lattice-engine/core`](./packages/core)           | Core engine, built with [Thyseus](https://github.com/JaimeGensler/thyseus) ECS                                       |
-| [`@lattice-engine/gltf`](./packages/gltf)           | [glTF](https://github.com/KhronosGroup/glTF) import and export                                                       |
-| [`@lattice-engine/input`](./packages/input)         | Components for handling user input                                                                                   |
-| [`@lattice-engine/n8ao`](./packages/n8ao)           | [SSAO](https://en.wikipedia.org/wiki/Screen_space_ambient_occlusion) using [N8AO](https://github.com/N8python/n8ao)  |
-| [`@lattice-engine/orbit`](./packages/orbit)         | Orbit controls                                                                                                       |
-| [`@lattice-engine/physics`](./packages/physics)     | [Rapier](https://rapier.rs) physics                                                                                  |
-| [`@lattice-engine/player`](./packages/player)       | Player controls                                                                                                      |
-| [`@lattice-engine/portal`](./packages/portal)       | Portals                                                                                                              |
-| [`@lattice-engine/render`](./packages/render)       | [Three.js](https://threejs.org) rendering                                                                            |
-| [`@lattice-engine/scene`](./packages/scene)         | The 3D scene graph                                                                                                   |
-| [`@lattice-engine/text`](./packages/text)           | Text rendering using [troika-three-text](https://github.com/protectwise/troika/tree/main/packages/troika-three-text) |
-| [`@lattice-engine/transform`](./packages/transform) | Transform controls                                                                                                   |
-| [`@lattice-engine/utils`](./packages/utils)         | Utility functions                                                                                                    |
-| [`@lattice-engine/vrm`](./packages/vrm)             | [VRM](https://vrm.dev/en) avatars                                                                                    |
-| `@lattice-engine/scripting`                         | [WASM](https://webassembly.org) scripting                                                                            |
-| `@lattice-engine/xr`                                | [WebXR](https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API) support                                   |
+| Package                                                       | Description                                                                                                          |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| [`@lattice-engine/core`](./packages/core)                     | Core engine, built with [Thyseus](https://github.com/JaimeGensler/thyseus) ECS                                       |
+| [`@lattice-engine/gltf`](./packages/gltf)                     | [glTF](https://github.com/KhronosGroup/glTF) import and export                                                       |
+| [`@lattice-engine/input`](./packages/input)                   | Components for handling user input                                                                                   |
+| [`@lattice-engine/n8ao`](./packages/n8ao)                     | [SSAO](https://en.wikipedia.org/wiki/Screen_space_ambient_occlusion) using [N8AO](https://github.com/N8python/n8ao)  |
+| [`@lattice-engine/orbit`](./packages/orbit)                   | Orbit controls                                                                                                       |
+| [`@lattice-engine/physics`](./packages/physics)               | [Rapier](https://rapier.rs) physics                                                                                  |
+| [`@lattice-engine/player`](./packages/player)                 | Player controls                                                                                                      |
+| [`@lattice-engine/portal`](./packages/portal)                 | Portals                                                                                                              |
+| [`@lattice-engine/postprocessing`](./packages/postprocessing) | [Postprocessing](https://github.com/pmndrs/postprocessing) effects                                                   |
+| [`@lattice-engine/render`](./packages/render)                 | [Three.js](https://threejs.org) rendering                                                                            |
+| [`@lattice-engine/scene`](./packages/scene)                   | The 3D scene graph                                                                                                   |
+| [`@lattice-engine/text`](./packages/text)                     | Text rendering using [troika-three-text](https://github.com/protectwise/troika/tree/main/packages/troika-three-text) |
+| [`@lattice-engine/transform`](./packages/transform)           | Transform controls                                                                                                   |
+| [`@lattice-engine/utils`](./packages/utils)                   | Utility functions                                                                                                    |
+| [`@lattice-engine/vrm`](./packages/vrm)                       | [VRM](https://vrm.dev/en) avatars                                                                                    |
+| `@lattice-engine/scripting`                                   | [WASM](https://webassembly.org) scripting                                                                            |
+| `@lattice-engine/xr`                                          | [WebXR](https://developer.mozilla.org/en-US/docs/Web/API/WebXR_Device_API) support                                   |
