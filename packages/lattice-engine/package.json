@@ -38,14 +38,14 @@
     "./physics": {
       "import": "./dist/physics.js"
     },
+    "./player": {
+      "import": "./dist/player.js"
+    },
     "./portal": {
       "import": "./dist/portal.js"
     },
     "./postprocessing": {
       "import": "./dist/postprocessing.js"
-    },
-    "./player": {
-      "import": "./dist/player.js"
     },
     "./render": {
       "import": "./dist/render.js"
@@ -71,12 +71,13 @@
     "dist",
     "core.d.ts",
     "gltf.d.ts",
+    "index.d.ts",
     "input.d.ts",
     "orbit.d.ts",
     "physics.d.ts",
+    "player.d.ts",
     "portal.d.ts",
     "postprocessing.d.ts",
-    "player.d.ts",
     "render.d.ts",
     "scene.d.ts",
     "text.d.ts",
