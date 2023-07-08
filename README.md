@@ -3,7 +3,7 @@
   <strong>A lightweight, modular, and extendable 3D game engine built for the web.</strong>
 </div>
 
-## 🕹️ Demo
+## 🕹️ Examples
 
 See the engine live at [lattice-engine.vercel.app](https://lattice-engine.vercel.app/), or dive right in to the [source code](./examples/src/demos/) and see how it works.
 
