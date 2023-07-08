@@ -1,7 +1,7 @@
 import { Node } from "@gltf-transform/core";
 import { Commands, dropStruct } from "thyseus";
 
-import { Collider } from "../extensions/OMI_collider/Collider";
+import { Shape } from "../extensions/OMI_physics_shape/Shape";
 import { ImportContext } from "./context";
 
 export function importCollider(
@@ -10,7 +10,7 @@ export function importCollider(
   node: Node,
   entityId: bigint
 ) {
-  const collider = node.getExtension<Collider>(Collider.EXTENSION_NAME);
+  const collider = node.getExtension<Shape>(Shape.EXTENSION_NAME);
 
   if (!collider) return;
 
@@ -42,7 +42,7 @@ export function importCollider(
       break;
     }
 
-    case "hull": {
+    case "convex": {
       const mesh = collider.getMesh();
 
       for (const [m, id] of context.meshes) {

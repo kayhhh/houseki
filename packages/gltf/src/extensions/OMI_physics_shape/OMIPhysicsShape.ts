@@ -1,6 +1,5 @@
 import { Extension, ReaderContext, WriterContext } from "@gltf-transform/core";
 
-import { Collider } from "./Collider";
 import { EXTENSION_NAME } from "./constants";
 import {
   ColliderDef,
@@ -9,16 +8,17 @@ import {
   NodeColliderDef,
   nodeColliderSchema,
 } from "./schemas";
+import { Shape } from "./Shape";
 
 /**
- * Implementation of the {@link https://github.com/omigroup/gltf-extensions/tree/main/extensions/2.0/OMI_collider OMI_collider} extension.
+ * Implementation of the {@link https://github.com/omigroup/gltf-extensions/tree/main/extensions/2.0/OMI_physics_shape OMI_physics_shape} extension.
  */
-export class OMICollider extends Extension {
+export class OMIPhysicsShape extends Extension {
   static override readonly EXTENSION_NAME = EXTENSION_NAME;
   override readonly extensionName = EXTENSION_NAME;
 
-  createCollider(): Collider {
-    return new Collider(this.document.getGraph());
+  createShape(): Shape {
+    return new Shape(this.document.getGraph());
   }
 
   read(context: ReaderContext) {
@@ -40,10 +40,9 @@ export class OMICollider extends Extension {
     const rootDef = parsedRootDef.data;
 
     // Create colliders
-    const colliders = rootDef.colliders.map((colliderDef) => {
-      const collider = this.createCollider();
+    const colliders = rootDef.shapes.map((colliderDef) => {
+      const collider = this.createShape();
       collider.setType(colliderDef.type);
-      collider.setIsTrigger(colliderDef.isTrigger);
 
       if (colliderDef.size !== undefined)
         collider.setSize([
@@ -84,7 +83,7 @@ export class OMICollider extends Extension {
       const node = context.nodes[nodeIndex];
       if (!node) return;
 
-      const collider = colliders[colliderNodeDef.collider];
+      const collider = colliders[colliderNodeDef.shape];
       if (!collider) return;
 
       node.setExtension(this.extensionName, collider);
@@ -100,12 +99,11 @@ export class OMICollider extends Extension {
 
     // Create collider definitions
     const colliderDefs = [];
-    const colliderIndexMap = new Map<Collider, number>();
+    const colliderIndexMap = new Map<Shape, number>();
 
     for (const property of this.properties) {
-      if (property instanceof Collider) {
+      if (property instanceof Shape) {
         const colliderDef: ColliderDef = {
-          isTrigger: property.getIsTrigger(),
           type: property.getType(),
         };
 
@@ -139,6 +137,7 @@ export class OMICollider extends Extension {
             break;
           }
 
+          case "convex":
           case "trimesh": {
             const mesh = property.getMesh();
             if (!mesh) break;
@@ -161,7 +160,7 @@ export class OMICollider extends Extension {
       .getRoot()
       .listNodes()
       .forEach((node) => {
-        const collider = node.getExtension<Collider>(Collider.EXTENSION_NAME);
+        const collider = node.getExtension<Shape>(Shape.EXTENSION_NAME);
         if (!collider) return;
 
         const nodeIndex = context.nodeIndexMap.get(node);
@@ -179,13 +178,13 @@ export class OMICollider extends Extension {
 
         nodeDef.extensions ??= {};
 
-        const colliderDef: NodeColliderDef = { collider: colliderIndex };
+        const colliderDef: NodeColliderDef = { shape: colliderIndex };
         nodeDef.extensions[this.extensionName] = colliderDef;
       });
 
     // Add extension definition to root
     if (colliderDefs.length > 0) {
-      const rootDef: ColliderExtensionDef = { colliders: colliderDefs };
+      const rootDef: ColliderExtensionDef = { shapes: colliderDefs };
 
       if (!jsonDoc.json.extensions) jsonDoc.json.extensions = {};
       jsonDoc.json.extensions[this.extensionName] = rootDef;

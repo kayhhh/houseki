@@ -11,14 +11,13 @@ import { ColliderType } from "./schemas";
 
 interface ICollider extends IProperty {
   type: ColliderType;
-  isTrigger: boolean;
   size: [number, number, number];
   radius: number;
   height: number;
   mesh: Mesh;
 }
 
-export class Collider extends ExtensionProperty<ICollider> {
+export class Shape extends ExtensionProperty<ICollider> {
   static override readonly EXTENSION_NAME = EXTENSION_NAME;
   declare extensionName: typeof EXTENSION_NAME;
   declare propertyType: "Collider";
@@ -27,8 +26,8 @@ export class Collider extends ExtensionProperty<ICollider> {
   static Type: Record<string, ColliderType> = {
     BOX: "box",
     CAPSULE: "capsule",
+    CONVEX: "convex",
     CYLINDER: "cylinder",
-    HULL: "hull",
     SPHERE: "sphere",
     TRIMESH: "trimesh",
   };
@@ -56,14 +55,6 @@ export class Collider extends ExtensionProperty<ICollider> {
 
   setType(type: ColliderType) {
     this.set("type", type);
-  }
-
-  getIsTrigger() {
-    return this.get("isTrigger");
-  }
-
-  setIsTrigger(isTrigger: boolean) {
-    this.set("isTrigger", isTrigger);
   }
 
   getSize() {

@@ -5,7 +5,7 @@ const colliderTypeSchema = z.enum([
   "sphere",
   "capsule",
   "cylinder",
-  "hull",
+  "convex",
   "trimesh",
 ]);
 
@@ -13,10 +13,9 @@ export type ColliderType = z.infer<typeof colliderTypeSchema>;
 
 const gltfId = z.number().min(0);
 
-export const colliderSchema = z
+export const shapeSchema = z
   .object({
     height: z.number().optional(),
-    isTrigger: z.boolean().default(false),
     mesh: gltfId.optional(),
     radius: z.number().optional(),
     size: z.array(z.number()).length(3).optional(),
@@ -59,10 +58,10 @@ export const colliderSchema = z
           break;
         }
 
-        case "hull": {
+        case "convex": {
           z.object({
             mesh: gltfId,
-            type: z.literal("hull"),
+            type: z.literal("convex"),
           }).parse(obj);
           break;
         }
@@ -86,20 +85,20 @@ export const colliderSchema = z
     }
   });
 
-export type ColliderDef = z.infer<typeof colliderSchema>;
+export type ColliderDef = z.infer<typeof shapeSchema>;
 
 export const colliderExtensionSchema = z.object({
-  colliders: z.array(colliderSchema).min(1),
   extensions: z.unknown().optional(),
   extras: z.unknown().optional(),
+  shapes: z.array(shapeSchema).min(1),
 });
 
 export type ColliderExtensionDef = z.infer<typeof colliderExtensionSchema>;
 
 export const nodeColliderSchema = z.object({
-  collider: gltfId,
   extensions: z.unknown().optional(),
   extras: z.unknown().optional(),
+  shape: gltfId,
 });
 
 export type NodeColliderDef = z.infer<typeof nodeColliderSchema>;

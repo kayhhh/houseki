@@ -5,14 +5,14 @@ import {
 } from "@gltf-transform/extensions";
 
 import { MOZText } from "./MOZ_text/MOZText";
-import { OMICollider } from "./OMI_collider/OMICollider";
 import { OMIPhysicsBody } from "./OMI_physics_body/OMIPhysicsBody";
+import { OMIPhysicsShape } from "./OMI_physics_shape/OMIPhysicsShape";
 
 export const extensions = [
   KHRDracoMeshCompression,
   KHRTextureTransform,
   KHRXMP,
   MOZText,
-  OMICollider,
+  OMIPhysicsShape,
   OMIPhysicsBody,
 ];
