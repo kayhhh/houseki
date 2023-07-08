@@ -1,5 +1,13 @@
 # lattice-engine
 
+## 0.3.5
+
+### Patch Changes
+
+- Updated dependencies [5c66fc9]
+  - @lattice-engine/postprocessing@0.1.0
+  - @lattice-engine/transform@2.0.0
+
 ## 0.3.4
 
 ### Patch Changes
