@@ -1,5 +1,6 @@
 import { Engine, LatticeSchedules } from "lattice-engine/core";
 import { orbitPlugin } from "lattice-engine/orbit";
+import { postprocessingPlugin } from "lattice-engine/postprocessing";
 import { transformPlugin } from "lattice-engine/transform";
 import { World } from "thyseus";
 
@@ -13,6 +14,7 @@ export async function createWorld() {
     .addPlugin(demoPlugin)
     .addPlugin(orbitPlugin)
     .addPlugin(transformPlugin)
+    .addPlugin(postprocessingPlugin)
     .addSystemsToSchedule(LatticeSchedules.Startup, initScene)
     .addSystems(setTransformMode)
     .build();

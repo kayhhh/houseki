@@ -17,6 +17,7 @@ export default defineConfig({
         "@lattice-engine/core",
         "@lattice-engine/input",
         "@lattice-engine/orbit",
+        "@lattice-engine/postprocessing",
         "@lattice-engine/render",
         "@lattice-engine/scene",
         "three",

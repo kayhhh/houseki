@@ -7,6 +7,8 @@ export class TransformControls {
   @struct.u64 declare targetId: bigint;
   @struct.u8 declare mode: TransformMode;
 
+  @struct.bool declare outline: boolean;
+
   /**
    * Whether to clear events when dragging starts.
    * Useful when combining with other controls.
@@ -16,6 +18,7 @@ export class TransformControls {
   constructor() {
     initStruct(this);
 
+    this.outline = true;
     this.clearEvents = true;
   }
 }

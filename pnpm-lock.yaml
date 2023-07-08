@@ -586,6 +586,9 @@ importers:
       '@lattice-engine/orbit':
         specifier: workspace:^
         version: link:../orbit
+      '@lattice-engine/postprocessing':
+        specifier: workspace:^
+        version: link:../postprocessing
       '@lattice-engine/render':
         specifier: workspace:^
         version: link:../render

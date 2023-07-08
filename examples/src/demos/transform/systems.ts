@@ -1,4 +1,5 @@
 import { CoreStore, Warehouse } from "lattice-engine/core";
+import { OutlinePass } from "lattice-engine/postprocessing";
 import {
   GlobalTransform,
   Mesh,
@@ -20,14 +21,33 @@ export function initScene(
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   createOrbitControls(commands, sceneStruct);
-  const { rootId } = createScene(commands, coreStore, sceneStruct);
+  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+
+  const outlinePass = new OutlinePass();
+  outlinePass.visibleEdgeColor.set([1, 0, 0]);
+  outlinePass.hiddenEdgeColor.set([0, 1, 1]);
+
+  commands.getById(sceneId).add(outlinePass);
+
+  dropStruct(outlinePass);
 
   const geometry = createBoxGeometry(warehouse);
   const parent = new Parent(rootId);
+  const transform = new Transform([2, 0, 0]);
+
+  commands
+    .spawn(true)
+    .add(transform)
+    .addType(GlobalTransform)
+    .add(parent)
+    .addType(Mesh)
+    .add(geometry).id;
+
+  transform.translation.set(0, 0, 0);
 
   const boxId = commands
     .spawn(true)
-    .addType(Transform)
+    .add(transform)
     .addType(GlobalTransform)
     .add(parent)
     .addType(Mesh)
@@ -38,6 +58,7 @@ export function initScene(
 
   commands.spawn(true).add(transformControls);
 
+  dropStruct(transform);
   dropStruct(geometry);
   dropStruct(parent);
 }
