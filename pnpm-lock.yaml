@@ -209,9 +209,6 @@ importers:
       '@lattice-engine/input':
         specifier: workspace:^
         version: link:../input
-      '@lattice-engine/n8ao':
-        specifier: workspace:^
-        version: link:../n8ao
       '@lattice-engine/orbit':
         specifier: workspace:^
         version: link:../orbit
@@ -253,37 +250,6 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
     devDependencies:
-      typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
-      vite:
-        specifier: ^4.3.9
-        version: 4.3.9
-      vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
-
-  packages/n8ao:
-    dependencies:
-      '@lattice-engine/render':
-        specifier: workspace:^
-        version: link:../render
-      '@lattice-engine/scene':
-        specifier: workspace:^
-        version: link:../scene
-      n8ao:
-        specifier: ^1.6.7
-        version: 1.6.7(postprocessing@6.32.2)(three@0.153.0)
-      postprocessing:
-        specifier: ^6.32.2
-        version: 6.32.2(three@0.153.0)
-      thyseus:
-        specifier: ^0.13.1
-        version: 0.13.1
-    devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(thyseus@0.13.1)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -450,6 +416,9 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
+      n8ao:
+        specifier: ^1.6.7
+        version: 1.6.7(postprocessing@6.32.2)(three@0.153.0)
       postprocessing:
         specifier: ^6.32.2
         version: 6.32.2(three@0.153.0)

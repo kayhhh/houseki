@@ -9,7 +9,6 @@ export default defineConfig({
         core: "./src/core.ts",
         gltf: "./src/gltf.ts",
         input: "./src/input.ts",
-        n8ao: "./src/n8ao.ts",
         orbit: "./src/orbit.ts",
         physics: "./src/physics.ts",
         player: "./src/player.ts",

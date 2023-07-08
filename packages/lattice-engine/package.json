@@ -32,9 +32,6 @@
     "./input": {
       "import": "./dist/input.js"
     },
-    "./n8ao": {
-      "import": "./dist/n8ao.js"
-    },
     "./orbit": {
       "import": "./dist/orbit.js"
     },
@@ -76,7 +73,6 @@
     "core.d.ts",
     "gltf.d.ts",
     "input.d.ts",
-    "n8ao.d.ts",
     "orbit.d.ts",
     "physics.d.ts",
     "portal.d.ts",
@@ -97,7 +93,6 @@
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/gltf": "workspace:^",
     "@lattice-engine/input": "workspace:^",
-    "@lattice-engine/n8ao": "workspace:^",
     "@lattice-engine/orbit": "workspace:^",
     "@lattice-engine/physics": "workspace:^",
     "@lattice-engine/player": "workspace:^",

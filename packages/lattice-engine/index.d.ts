@@ -2,7 +2,6 @@
 /// <reference path="./core.d.ts" />
 /// <reference path="./gltf.d.ts" />
 /// <reference path="./input.d.ts" />
-/// <reference path="./n8ao.d.ts" />
 /// <reference path="./orbit.d.ts" />
 /// <reference path="./physics.d.ts" />
 /// <reference path="./player.d.ts" />

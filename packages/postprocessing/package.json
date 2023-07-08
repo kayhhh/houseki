@@ -18,6 +18,7 @@
     "dev": "vite build --watch"
   },
   "dependencies": {
+    "n8ao": "^1.6.7",
     "postprocessing": "^6.32.2"
   },
   "devDependencies": {

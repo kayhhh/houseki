@@ -1,4 +1,4 @@
-export enum QualityMode {
+export enum N8QualityMode {
   Performance = 0,
   Low = 1,
   Medium = 2,

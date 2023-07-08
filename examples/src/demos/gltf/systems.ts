@@ -1,6 +1,6 @@
 import { CoreStore } from "lattice-engine/core";
 import { Gltf } from "lattice-engine/gltf";
-import { N8AOPass } from "lattice-engine/n8ao";
+import { N8AOPass } from "lattice-engine/postprocessing";
 import { SceneStruct } from "lattice-engine/scene";
 import { Commands, Mut, Query, Res } from "thyseus";
 
@@ -17,9 +17,9 @@ export function initScene(
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   createOrbitControls(commands, sceneStruct);
-  const { rootId } = createScene(commands, coreStore, sceneStruct, 0);
+  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct, 0);
 
-  commands.spawn(true).addType(N8AOPass);
+  commands.getById(sceneId).addType(N8AOPass);
 
   commands.getById(rootId).addType(Gltf);
 }

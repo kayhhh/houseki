@@ -27,7 +27,6 @@ Packages are published individually to NPM under the `@lattice-engine` scope. Al
 | [`@lattice-engine/core`](./packages/core)                     | Core engine, built with [Thyseus](https://github.com/JaimeGensler/thyseus) ECS                                       |
 | [`@lattice-engine/gltf`](./packages/gltf)                     | [glTF](https://github.com/KhronosGroup/glTF) import and export                                                       |
 | [`@lattice-engine/input`](./packages/input)                   | Components for handling user input                                                                                   |
-| [`@lattice-engine/n8ao`](./packages/n8ao)                     | [SSAO](https://en.wikipedia.org/wiki/Screen_space_ambient_occlusion) using [N8AO](https://github.com/N8python/n8ao)  |
 | [`@lattice-engine/orbit`](./packages/orbit)                   | Orbit controls                                                                                                       |
 | [`@lattice-engine/physics`](./packages/physics)               | [Rapier](https://rapier.rs) physics                                                                                  |
 | [`@lattice-engine/player`](./packages/player)                 | Player controls                                                                                                      |
