@@ -550,9 +550,6 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      postprocessing:
-        specifier: ^6.32.2
-        version: 6.32.2(three@0.153.0)
       three:
         specifier: ~0.153.0
         version: 0.153.0

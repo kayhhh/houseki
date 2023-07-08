@@ -32,7 +32,6 @@
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
-    "postprocessing": "^6.32.2",
     "three": "~0.153.0",
     "thyseus": "^0.13.1"
   },
