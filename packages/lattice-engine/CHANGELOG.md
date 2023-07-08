@@ -1,5 +1,24 @@
 # lattice-engine
 
+## 0.3.4
+
+### Patch Changes
+
+- Updated dependencies [f2bae57]
+- Updated dependencies [7e3acd2]
+- Updated dependencies [aab6de7]
+- Updated dependencies [c983ea1]
+- Updated dependencies [f2bae57]
+- Updated dependencies [aab6de7]
+- Updated dependencies [f2bae57]
+  - @lattice-engine/text@1.1.0
+  - @lattice-engine/gltf@2.0.0
+  - @lattice-engine/input@0.3.0
+  - @lattice-engine/player@2.0.0
+  - @lattice-engine/orbit@2.0.0
+  - @lattice-engine/transform@1.0.0
+  - @lattice-engine/utils@2.0.0
+
 ## 0.3.3
 
 ### Patch Changes

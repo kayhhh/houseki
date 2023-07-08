@@ -1,5 +1,12 @@
 # @lattice-engine/text
 
+## 1.1.0
+
+### Minor Changes
+
+- f2bae57: rename text field to value
+- f2bae57: change color properties to an array
+
 ## 1.0.0
 
 ### Patch Changes
