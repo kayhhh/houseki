@@ -38,6 +38,11 @@ export function createNodes(
     );
     object.scale.set(transform.scale.x, transform.scale.y, transform.scale.z);
 
+    if (parent.id === entity.id) {
+      console.error("Node cannot be its own parent");
+      continue;
+    }
+
     const parentObject =
       store.nodes.get(parent.id) ?? store.scenes.get(parent.id);
 
