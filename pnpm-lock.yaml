@@ -61,6 +61,9 @@ importers:
       leva:
         specifier: ^0.9.35
         version: 0.9.35(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
+      postprocessing:
+        specifier: ^6.32.2
+        version: 6.32.2(three@0.153.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -93,8 +96,8 @@ importers:
         specifier: ^18.2.6
         version: 18.2.6
       '@types/three':
-        specifier: ~0.152.1
-        version: 0.152.1
+        specifier: ~0.153.0
+        version: 0.153.0
       '@vitejs/plugin-react':
         specifier: ^4.0.1
         version: 4.0.1(vite@4.3.9)
@@ -285,8 +288,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(thyseus@0.13.1)
       '@types/three':
-        specifier: ~0.152.1
-        version: 0.152.1
+        specifier: ~0.153.0
+        version: 0.153.0
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -362,8 +365,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(thyseus@0.13.1)
       '@types/three':
-        specifier: ~0.152.1
-        version: 0.152.1
+        specifier: ~0.153.0
+        version: 0.153.0
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -396,8 +399,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(thyseus@0.13.1)
       '@types/three':
-        specifier: ~0.152.1
-        version: 0.152.1
+        specifier: ~0.153.0
+        version: 0.153.0
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -436,8 +439,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(thyseus@0.13.1)
       '@types/three':
-        specifier: ~0.152.1
-        version: 0.152.1
+        specifier: ~0.153.0
+        version: 0.153.0
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -470,8 +473,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(thyseus@0.13.1)
       '@types/three':
-        specifier: ~0.152.1
-        version: 0.152.1
+        specifier: ~0.153.0
+        version: 0.153.0
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -535,8 +538,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(thyseus@0.13.1)
       '@types/three':
-        specifier: ~0.152.1
-        version: 0.152.1
+        specifier: ~0.153.0
+        version: 0.153.0
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -578,8 +581,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(thyseus@0.13.1)
       '@types/three':
-        specifier: ~0.152.1
-        version: 0.152.1
+        specifier: ~0.153.0
+        version: 0.153.0
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -634,7 +637,7 @@ importers:
         version: link:../scene
       '@pixiv/three-vrm':
         specifier: ^2.0.0
-        version: 2.0.0(@types/three@0.152.1)(three@0.153.0)
+        version: 2.0.0(@types/three@0.153.0)(three@0.153.0)
       three:
         specifier: ~0.153.0
         version: 0.153.0
@@ -646,8 +649,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(thyseus@0.13.1)
       '@types/three':
-        specifier: ~0.152.1
-        version: 0.152.1
+        specifier: ~0.153.0
+        version: 0.153.0
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -1504,7 +1507,7 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@pixiv/three-vrm-core@2.0.0(@types/three@0.152.1)(three@0.153.0):
+  /@pixiv/three-vrm-core@2.0.0(@types/three@0.153.0)(three@0.153.0):
     resolution: {integrity: sha512-par/2g7Y3LlUe75GYQ7LTCJkdAbrs7diM+7Jji950XnM3MzpQU5Z1194a7KiYt+5IWzKy/YR0QF0uK4lpLYeOA==}
     peerDependencies:
       '@types/three': ^0.152.1
@@ -1512,22 +1515,22 @@ packages:
     dependencies:
       '@pixiv/types-vrm-0.0': 2.0.0
       '@pixiv/types-vrmc-vrm-1.0': 2.0.0
-      '@types/three': 0.152.1
+      '@types/three': 0.153.0
       three: 0.153.0
     dev: false
 
-  /@pixiv/three-vrm-materials-hdr-emissive-multiplier@2.0.0(@types/three@0.152.1)(three@0.153.0):
+  /@pixiv/three-vrm-materials-hdr-emissive-multiplier@2.0.0(@types/three@0.153.0)(three@0.153.0):
     resolution: {integrity: sha512-pHwDSszXAd4GMc8aqSnp/Ez6YE5xXVFTqz9lHNq5VTKD3Btem3srRmN1nX4iXQ87MfjP6gK6p2CcVKnDR5xwxQ==}
     peerDependencies:
       '@types/three': ^0.152.1
       three: ^0.153.0
     dependencies:
       '@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0': 2.0.0
-      '@types/three': 0.152.1
+      '@types/three': 0.153.0
       three: 0.153.0
     dev: false
 
-  /@pixiv/three-vrm-materials-mtoon@2.0.0(@types/three@0.152.1)(three@0.153.0):
+  /@pixiv/three-vrm-materials-mtoon@2.0.0(@types/three@0.153.0)(three@0.153.0):
     resolution: {integrity: sha512-POwnDVcMnS9xOSfC9o1tjQqElgDlcGN9fikiikMU+papKiD3bHYk2umyd2xm88RaW6Sk0LsdyFsuF+t7eYQnUQ==}
     peerDependencies:
       '@types/three': ^0.152.1
@@ -1535,11 +1538,11 @@ packages:
     dependencies:
       '@pixiv/types-vrm-0.0': 2.0.0
       '@pixiv/types-vrmc-materials-mtoon-1.0': 2.0.0
-      '@types/three': 0.152.1
+      '@types/three': 0.153.0
       three: 0.153.0
     dev: false
 
-  /@pixiv/three-vrm-materials-v0compat@2.0.0(@types/three@0.152.1)(three@0.153.0):
+  /@pixiv/three-vrm-materials-v0compat@2.0.0(@types/three@0.153.0)(three@0.153.0):
     resolution: {integrity: sha512-XcWD/W7gRrFEYB+bNsxhLa8yXmzTxQC911K6T5KEOmf8JIjb+VswrAoKrq7JoEfO6aFKIrGB35i+VPWt8oWzQQ==}
     peerDependencies:
       '@types/three': ^0.152.1
@@ -1547,18 +1550,18 @@ packages:
     dependencies:
       '@pixiv/types-vrm-0.0': 2.0.0
       '@pixiv/types-vrmc-materials-mtoon-1.0': 2.0.0
-      '@types/three': 0.152.1
+      '@types/three': 0.153.0
       three: 0.153.0
     dev: false
 
-  /@pixiv/three-vrm-node-constraint@2.0.0(@types/three@0.152.1)(three@0.153.0):
+  /@pixiv/three-vrm-node-constraint@2.0.0(@types/three@0.153.0)(three@0.153.0):
     resolution: {integrity: sha512-t5po7R90VcrKlzdZ3PLYhFXSY1nXLRFuP3709sVneH+89VkSIZ2jjKqcUlDHW2DOqR6sEXjDMc8WKy1VYnLs0Q==}
     peerDependencies:
       '@types/three': ^0.152.1
       three: ^0.153.0
     dependencies:
       '@pixiv/types-vrmc-node-constraint-1.0': 2.0.0
-      '@types/three': 0.152.1
+      '@types/three': 0.153.0
       three: 0.153.0
     dev: false
 
@@ -1572,19 +1575,19 @@ packages:
       three: 0.153.0
     dev: false
 
-  /@pixiv/three-vrm@2.0.0(@types/three@0.152.1)(three@0.153.0):
+  /@pixiv/three-vrm@2.0.0(@types/three@0.153.0)(three@0.153.0):
     resolution: {integrity: sha512-CcImfWnMHz7kS/dHbfeWmwHECztL7wsU2LL18m7vBNzVIj8ncNrZMzCOB783nDae66ERqa73ik+B8juGS045rg==}
     peerDependencies:
       '@types/three': ^0.152.1
       three: ^0.153.0
     dependencies:
-      '@pixiv/three-vrm-core': 2.0.0(@types/three@0.152.1)(three@0.153.0)
-      '@pixiv/three-vrm-materials-hdr-emissive-multiplier': 2.0.0(@types/three@0.152.1)(three@0.153.0)
-      '@pixiv/three-vrm-materials-mtoon': 2.0.0(@types/three@0.152.1)(three@0.153.0)
-      '@pixiv/three-vrm-materials-v0compat': 2.0.0(@types/three@0.152.1)(three@0.153.0)
-      '@pixiv/three-vrm-node-constraint': 2.0.0(@types/three@0.152.1)(three@0.153.0)
+      '@pixiv/three-vrm-core': 2.0.0(@types/three@0.153.0)(three@0.153.0)
+      '@pixiv/three-vrm-materials-hdr-emissive-multiplier': 2.0.0(@types/three@0.153.0)(three@0.153.0)
+      '@pixiv/three-vrm-materials-mtoon': 2.0.0(@types/three@0.153.0)(three@0.153.0)
+      '@pixiv/three-vrm-materials-v0compat': 2.0.0(@types/three@0.153.0)(three@0.153.0)
+      '@pixiv/three-vrm-node-constraint': 2.0.0(@types/three@0.153.0)(three@0.153.0)
       '@pixiv/three-vrm-springbone': 2.0.0(three@0.153.0)
-      '@types/three': 0.152.1
+      '@types/three': 0.153.0
       three: 0.153.0
     dev: false
 
@@ -2115,8 +2118,8 @@ packages:
   /@types/stats.js@0.17.0:
     resolution: {integrity: sha512-9w+a7bR8PeB0dCT/HBULU2fMqf6BAzvKbxFboYhmDtDkKPiyXYbjoe2auwsXlEFI7CFNMF1dCv3dFH5Poy9R1w==}
 
-  /@types/three@0.152.1:
-    resolution: {integrity: sha512-PMOCQnx9JRmq+2OUGTPoY9h1hTWD2L7/nmuW/SyNq1Vbq3Lwt3MNdl3wYSa4DvLTGv62NmIXD9jYdAOwohwJyw==}
+  /@types/three@0.153.0:
+    resolution: {integrity: sha512-L9quzIP4lsl6asDCw5zqN5opewCVOKRuB09apw5Acf2AIkoj5gLnUOY5AMB/ntFUt/QfFey0uKZaAd5t+HXSUw==}
     dependencies:
       '@tweenjs/tween.js': 18.6.4
       '@types/stats.js': 0.17.0
