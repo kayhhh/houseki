@@ -1,5 +1,24 @@
 # lattice-engine
 
+## 0.3.6
+
+### Patch Changes
+
+- ec1792a: make three a peer dependency
+- ec1792a: make postprocessing a peer dependency
+- Updated dependencies [ec1792a]
+- Updated dependencies [ec1792a]
+  - @lattice-engine/postprocessing@0.1.1
+  - @lattice-engine/render@1.0.1
+  - @lattice-engine/text@1.1.1
+  - @lattice-engine/transform@2.0.1
+  - @lattice-engine/orbit@2.0.1
+  - @lattice-engine/player@2.0.1
+  - @lattice-engine/portal@1.0.1
+  - @lattice-engine/utils@2.0.1
+  - @lattice-engine/vrm@1.0.1
+  - @lattice-engine/gltf@2.0.1
+
 ## 0.3.5
 
 ### Patch Changes

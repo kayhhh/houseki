@@ -1,5 +1,13 @@
 # @lattice-engine/gltf
 
+## 2.0.1
+
+### Patch Changes
+
+- Updated dependencies [ec1792a]
+- Updated dependencies [ec1792a]
+  - @lattice-engine/text@1.1.1
+
 ## 2.0.0
 
 ### Minor Changes
