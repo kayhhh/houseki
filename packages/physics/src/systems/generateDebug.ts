@@ -75,13 +75,8 @@ export function generateDebug(
     geometry.colors.write(buffers.colors, warehouse);
   }
 
-  if (!linesFound) {
-    // Remove the debug lines if they exist
-    if (debug.linesId) {
-      commands.despawnById(debug.linesId);
-      debug.linesId = 0n;
-    }
-
-    return;
+  if (!linesFound && debug.linesId) {
+    commands.despawnById(debug.linesId);
+    debug.linesId = 0n;
   }
 }
