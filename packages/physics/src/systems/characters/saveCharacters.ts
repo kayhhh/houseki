@@ -5,7 +5,7 @@ import { PhysicsStore } from "../../resources";
 
 export function saveCharacters(
   physicsStore: Res<PhysicsStore>,
-  characters: Query<[Entity, Mut<CharacterController>]>
+  characters: Query<[Entity, Mut<CharacterController>]>,
 ) {
   for (const [entity, character] of characters) {
     const object = physicsStore.characterControllers.get(entity.id);

@@ -16,7 +16,7 @@ class LocalStore {
   readonly renderPass = new RenderPass();
   readonly effectPass = new EffectPass(
     undefined,
-    new SMAAEffect({ preset: SMAAPreset.HIGH })
+    new SMAAEffect({ preset: SMAAPreset.HIGH }),
   );
 }
 
@@ -28,7 +28,7 @@ export function renderCanvas(
   sceneStruct: Res<SceneStruct>,
   renderStore: Res<Mut<RenderStore>>,
   stats: Res<Mut<RenderStats>>,
-  localStore: SystemRes<LocalStore>
+  localStore: SystemRes<LocalStore>,
 ) {
   let renderer = renderStore.renderer;
   const canvas = coreStore.canvas;

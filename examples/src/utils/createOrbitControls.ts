@@ -10,7 +10,7 @@ import { Commands, dropStruct } from "thyseus";
 export function createOrbitControls(
   commands: Commands,
   sceneStruct: SceneStruct,
-  translation: [number, number, number] = [0, 2, 4]
+  translation: [number, number, number] = [0, 2, 4],
 ) {
   const transform = new Transform(translation);
 

@@ -12,7 +12,7 @@ export function createControls(
   entities: Query<
     [Entity, Mut<Transform>],
     With<[OrbitControls, PerspectiveCamera]>
-  >
+  >,
 ) {
   const ids: bigint[] = [];
 
@@ -31,7 +31,7 @@ export function createControls(
 
     const object = new ThreeOrbitControls(
       cameraObject,
-      store.mockElement as any
+      store.mockElement as any,
     );
     object.enableDamping = true;
 

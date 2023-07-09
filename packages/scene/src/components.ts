@@ -27,7 +27,7 @@ export class Transform {
   constructor(
     translation: Readonly<[number, number, number]> = [0, 0, 0],
     rotation: Readonly<[number, number, number, number]> = [0, 0, 0, 1],
-    scale: Readonly<[number, number, number]> = [1, 1, 1]
+    scale: Readonly<[number, number, number]> = [1, 1, 1],
   ) {
     initStruct(this);
 
@@ -39,7 +39,7 @@ export class Transform {
   set(
     translation?: Readonly<[number, number, number]>,
     rotation?: Readonly<[number, number, number, number]>,
-    scale?: Readonly<[number, number, number]>
+    scale?: Readonly<[number, number, number]>,
   ): this {
     if (translation) this.translation.fromArray(translation);
     if (rotation) this.rotation.fromArray(rotation);
@@ -217,7 +217,7 @@ export class MeshStandardMaterial {
   constructor(
     color: [number, number, number, number] = [1, 1, 1, 1],
     metalness = 1,
-    roughness = 1
+    roughness = 1,
   ) {
     initStruct(this);
 
@@ -361,7 +361,7 @@ export class ShadowMap {
     bottom = -5,
     near = 0.1,
     far = 1000,
-    bias = -0.0001
+    bias = -0.0001,
   ) {
     initStruct(this);
 

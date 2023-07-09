@@ -5,7 +5,7 @@ import { PhysicsStore } from "../../resources";
 
 export function createCharacters(
   store: Res<PhysicsStore>,
-  characters: Query<[Entity, CharacterController]>
+  characters: Query<[Entity, CharacterController]>,
 ) {
   const ids: bigint[] = [];
 
@@ -29,7 +29,7 @@ export function createCharacters(
       object.enableAutostep(
         character.maxStepHeight,
         character.minStepWidth,
-        character.stepOnDynamicBodies
+        character.stepOnDynamicBodies,
       );
     } else {
       object.disableAutostep();
@@ -42,7 +42,7 @@ export function createCharacters(
     }
 
     object.setApplyImpulsesToDynamicBodies(
-      character.applyImpulsesToDynamicBodies
+      character.applyImpulsesToDynamicBodies,
     );
   }
 

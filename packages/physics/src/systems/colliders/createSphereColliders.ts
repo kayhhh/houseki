@@ -8,7 +8,7 @@ import { PhysicsStore } from "../../resources";
 export function createSphereColliders(
   store: Res<PhysicsStore>,
   colliders: Query<[Entity, SphereCollider]>,
-  withParent: Query<[Entity, Parent], With<SphereCollider>>
+  withParent: Query<[Entity, Parent], With<SphereCollider>>,
 ) {
   const ids: bigint[] = [];
 

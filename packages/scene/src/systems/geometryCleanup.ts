@@ -19,7 +19,7 @@ export function geometryCleanup(
   commands: Commands,
   warehouse: Res<Warehouse>,
   tracker: SystemRes<EntityTracker>,
-  entities: Query<[Entity, Geometry]>
+  entities: Query<[Entity, Geometry]>,
 ) {
   const ids: bigint[] = [];
 

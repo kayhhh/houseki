@@ -34,7 +34,7 @@ export function createPlayer(
   rootId: bigint,
   commands: Commands,
   sceneStruct: SceneStruct,
-  inputStruct: InputStruct
+  inputStruct: InputStruct,
 ) {
   const parent = new Parent();
   const transform = new Transform();
@@ -45,7 +45,7 @@ export function createPlayer(
   const targetTransform = new TargetTransform();
   const capsuleCollider = new CapsuleCollider(
     PLAYER_WIDTH,
-    PLAYER_HEIGHT - PLAYER_WIDTH * 2
+    PLAYER_HEIGHT - PLAYER_WIDTH * 2,
   );
 
   const bodyId = commands
@@ -89,7 +89,7 @@ export function createPlayer(
 
   const playerCamera = new PlayerCamera(
     PlayerCameraMode.Both,
-    PlayerCameraView.ThirdPerson
+    PlayerCameraView.ThirdPerson,
   );
 
   const cameraId = commands

@@ -29,7 +29,7 @@ export const ExportSchedule = Symbol("Export");
 
 export function sendExportEvent(
   writer: EventWriter<ExportGltf>,
-  scenes: Query<[Entity], With<Scene>>
+  scenes: Query<[Entity], With<Scene>>,
 ) {
   for (const [entity] of scenes) {
     const event = writer.create();
@@ -42,7 +42,7 @@ export function handleExport(
   commands: Commands,
   reader: EventReader<ExportedGltf>,
   scenes: Query<Scene>,
-  deepRemove: EventWriter<DeepRemove>
+  deepRemove: EventWriter<DeepRemove>,
 ) {
   if (reader.length === 0) return;
 

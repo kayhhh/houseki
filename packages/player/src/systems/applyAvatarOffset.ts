@@ -17,7 +17,7 @@ export function applyAvatarOffset(
   vrmStore: Res<VrmStore>,
   renderStore: Res<RenderStore>,
   avatars: Query<[Entity, Parent], With<PlayerAvatar>>,
-  cameras: Query<[PlayerCamera, Parent, Mut<TargetPosition>]>
+  cameras: Query<[PlayerCamera, Parent, Mut<TargetPosition>]>,
 ) {
   for (const [entity, parent] of avatars) {
     for (const [camera, cameraParent, targetPosition] of cameras) {

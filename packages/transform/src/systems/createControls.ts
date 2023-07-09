@@ -12,7 +12,7 @@ export function createControls(
   sceneStruct: Res<SceneStruct>,
   canvasRect: Res<CanvasRect>,
   store: Res<TransformControlsStore>,
-  transformControls: Query<[Entity, TransformControls]>
+  transformControls: Query<[Entity, TransformControls]>,
 ) {
   const ids: bigint[] = [];
 
@@ -34,7 +34,7 @@ export function createControls(
 
     if (!object) {
       const cameraObject = renderStore.perspectiveCameras.get(
-        sceneStruct.activeCamera
+        sceneStruct.activeCamera,
       );
       if (!cameraObject) continue;
 
@@ -43,7 +43,7 @@ export function createControls(
 
       object = new ThreeTransformControls(
         cameraObject,
-        store.mockElement as any
+        store.mockElement as any,
       );
 
       sceneObject.add(object);

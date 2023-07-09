@@ -10,7 +10,7 @@ const quat = new Quat();
 
 export function applyTargetTransforms(
   time: Res<Time>,
-  entities: Query<[Mut<Transform>, TargetTransform]>
+  entities: Query<[Mut<Transform>, TargetTransform]>,
 ) {
   const timeSinceLastFixedUpdate = time.mainTime - time.fixedTime;
   const percentThroughDelta =

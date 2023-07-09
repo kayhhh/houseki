@@ -14,7 +14,7 @@ const vector3 = new Vector3();
  */
 export function getDirection(
   rotation: { x: number; y: number; z: number; w: number },
-  position: { x: number; y: number; z: number } = { x: 0, y: 0, z: 0 }
+  position: { x: number; y: number; z: number } = { x: 0, y: 0, z: 0 },
 ) {
   quaternion.set(rotation.x, rotation.y, rotation.z, rotation.w);
   matrix4.setPosition(position.x, position.y, position.z);

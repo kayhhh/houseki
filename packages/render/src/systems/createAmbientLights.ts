@@ -6,7 +6,7 @@ import { RenderStore } from "../resources";
 
 export function createAmbientLights(
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, AmbientLight]>
+  entities: Query<[Entity, AmbientLight]>,
 ) {
   const ids: bigint[] = [];
 

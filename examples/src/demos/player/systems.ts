@@ -31,7 +31,7 @@ export function initScene(
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
   inputStruct: Res<Mut<InputStruct>>,
-  physicsConfig: Res<Mut<PhysicsConfig>>
+  physicsConfig: Res<Mut<PhysicsConfig>>,
 ) {
   physicsConfig.debug = true;
 
@@ -40,7 +40,7 @@ export function initScene(
     coreStore,
     sceneStruct,
     4096,
-    16
+    16,
   );
 
   createPlayer([0, 4, 0], sceneId, commands, sceneStruct, inputStruct);
@@ -153,7 +153,7 @@ class SceneBuilder {
     rampHeight: number,
     rampDepth: number,
     rampAngle: number,
-    textureId: bigint
+    textureId: bigint,
   ) {
     const rampId = this.commands.spawn(true).id;
 
@@ -167,7 +167,7 @@ class SceneBuilder {
     this.createBox(
       [rampWidth, rampDepth, rampHeight],
       textureId,
-      this.transform.set([0, 0, 0], [x, y, z, w])
+      this.transform.set([0, 0, 0], [x, y, z, w]),
     ).add(this.parent.setId(rampId));
 
     this.text.value = `Angle: ${rampAngle}°`;
@@ -188,14 +188,14 @@ class SceneBuilder {
     stepHeight: number,
     stepWidth: number,
     steps: number,
-    textureId: bigint
+    textureId: bigint,
   ) {
     const stairsId = this.commands.spawn(true).id;
 
     const materialId = this.createMaterial(
       textureId,
       stepWidth / 2,
-      stepWidth / 2
+      stepWidth / 2,
     );
 
     for (let i = 0; i < steps; i++) {
@@ -207,7 +207,7 @@ class SceneBuilder {
           stepHeight * i + stepHeight / 2,
           -stepWidth * i + stepWidth / 2,
         ]),
-        materialId
+        materialId,
       ).add(this.parent.setId(stairsId));
     }
 
@@ -228,7 +228,7 @@ class SceneBuilder {
     size: [number, number, number],
     textureId: bigint,
     transform: Transform,
-    materialId?: bigint
+    materialId?: bigint,
   ) {
     const geometry = createBoxGeometry(this.warehouse, size);
 

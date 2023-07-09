@@ -14,7 +14,7 @@ export function sendEvents(
   pointerDownReader: EventReader<PointerDownEvent>,
   pointerMoveReader: EventReader<PointerMoveEvent>,
   pointerCancelReader: EventReader<PointerCancelEvent>,
-  pointerUpReader: EventReader<PointerUpEvent>
+  pointerUpReader: EventReader<PointerUpEvent>,
 ) {
   for (const data of pointerDownReader) {
     const event = pointerEventFromECS("pointerdown", data);

@@ -11,7 +11,7 @@ export function createOutlineEffects(
   renderStore: Res<RenderStore>,
   res: Res<Mut<OutlineRes>>,
   outlines: Query<[Entity, OutlinePass]>,
-  targets: Query<Entity, With<OutlineTarget>>
+  targets: Query<Entity, With<OutlineTarget>>,
 ) {
   for (const [entity, outline] of outlines) {
     const cameraId = sceneStruct.activeCamera;

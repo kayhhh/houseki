@@ -25,7 +25,7 @@ export function rotateAvatar(
     [Parent, Mut<Transform>, Mut<TargetRotation>],
     With<PlayerAvatar>
   >,
-  bodies: Query<[Entity, Velocity], With<PlayerBody>>
+  bodies: Query<[Entity, Velocity], With<PlayerBody>>,
 ) {
   for (const [camera, parent, cameraTransform] of cameras) {
     for (const [avatarParent, avatarTransform, targetRotation] of avatars) {
@@ -40,14 +40,14 @@ export function rotateAvatar(
           rotateFirstPerson(
             cameraTransform.rotation,
             avatarTransform.rotation,
-            targetRotation
+            targetRotation,
           );
         } else if (camera.currentView === PlayerCameraView.ThirdPerson) {
           rotateThirdPerson(
             velocity,
             cameraTransform.rotation,
             avatarTransform.rotation,
-            targetRotation
+            targetRotation,
           );
         }
       }
@@ -58,13 +58,13 @@ export function rotateAvatar(
 function rotateFirstPerson(
   cameraRotation: Quat,
   avatarRotation: Quat,
-  targetRotation: Quat
+  targetRotation: Quat,
 ) {
   quaternion.set(
     cameraRotation.x,
     cameraRotation.y,
     cameraRotation.z,
-    cameraRotation.w
+    cameraRotation.w,
   );
 
   quaternion.x = 0;
@@ -80,7 +80,7 @@ function rotateThirdPerson(
   velocity: Velocity,
   cameraRotation: Quat,
   avatarRotation: Quat,
-  targetRotation: Quat
+  targetRotation: Quat,
 ) {
   // Set new target rotation if there is input
   if (velocity.x !== 0 || velocity.z !== 0) {
@@ -89,7 +89,7 @@ function rotateThirdPerson(
     vector3.set(
       velocity.x * direction.x + velocity.z * direction.z,
       0,
-      velocity.x * direction.z - velocity.z * direction.x
+      velocity.x * direction.z - velocity.z * direction.x,
     );
 
     quaternion.setFromAxisAngle(upVector, Math.atan2(-velocity.x, -velocity.z));
@@ -104,7 +104,7 @@ function rotateThirdPerson(
       targetRotation.x,
       targetRotation.y,
       targetRotation.z,
-      targetRotation.w
+      targetRotation.w,
     );
   }
 
@@ -113,7 +113,7 @@ function rotateThirdPerson(
     avatarRotation.x,
     avatarRotation.y,
     avatarRotation.z,
-    avatarRotation.w
+    avatarRotation.w,
   );
   quaternion2.slerp(quaternion, THIRD_PERSON_ROTATION_SPEED);
   avatarRotation.fromObject(quaternion2);

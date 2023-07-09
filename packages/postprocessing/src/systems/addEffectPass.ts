@@ -16,7 +16,7 @@ export function addEffectPass(
   renderStore: Res<RenderStore>,
   sceneStruct: Res<SceneStruct>,
   outlineRes: Res<OutlineRes>,
-  localRes: SystemRes<LocalRes>
+  localRes: SystemRes<LocalRes>,
 ) {
   const composerChanged = renderStore.composer !== localRes.composer;
   const effectsChanged = outlineRes.hasChanged;
@@ -28,7 +28,7 @@ export function addEffectPass(
     }
 
     const validEffects = [outlineRes.effect].filter(
-      (effect): effect is NotNull<typeof effect> => effect !== null
+      (effect): effect is NotNull<typeof effect> => effect !== null,
     );
     if (validEffects.length === 0) return;
 
@@ -41,7 +41,7 @@ export function addEffectPass(
     // We want to add the pass immediately after the render pass
     // before other post-processing effects, like anti-aliasing.
     const renderIndex = renderStore.composer.passes.findIndex(
-      (pass) => pass.name === "RenderPass"
+      (pass) => pass.name === "RenderPass",
     );
     if (renderIndex === -1) return;
 

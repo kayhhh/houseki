@@ -8,7 +8,7 @@ import { PortalStore } from "../resources";
 export function createPortalMaterials(
   renderStore: Res<Mut<RenderStore>>,
   portalStore: Res<Mut<PortalStore>>,
-  portals: Query<[Entity, PortalMaterial]>
+  portals: Query<[Entity, PortalMaterial]>,
 ) {
   const ids: bigint[] = [];
 
@@ -21,7 +21,7 @@ export function createPortalMaterials(
     if (!renderTarget) {
       renderTarget = new WebGLRenderTarget(
         portal.renderWidth,
-        portal.renderHeight
+        portal.renderHeight,
       );
       portalStore.renderTargets.set(entity.id, renderTarget);
     }

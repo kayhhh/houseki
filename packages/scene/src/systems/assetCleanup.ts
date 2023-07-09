@@ -14,7 +14,7 @@ export function assetCleanup(
   commands: Commands,
   warehouse: Res<Warehouse>,
   tracker: SystemRes<EntityTracker>,
-  entities: Query<[Entity, Asset]>
+  entities: Query<[Entity, Asset]>,
 ) {
   const ids: bigint[] = [];
 

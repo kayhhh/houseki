@@ -6,7 +6,7 @@ import { PhysicsStore } from "../../resources";
 
 export function createDynamicBodies(
   store: Res<PhysicsStore>,
-  bodies: Query<Entity, With<DynamicBody>>
+  bodies: Query<Entity, With<DynamicBody>>,
 ) {
   const ids: bigint[] = [];
 

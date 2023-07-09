@@ -43,8 +43,8 @@ export function renderPlugin(builder: WorldBuilder) {
         createAnimationClips,
         createAnimationMixers,
         playAnimations,
-        saveAnimations
-      )
+        saveAnimations,
+      ),
     )
     .addSystemsToSchedule(LatticeSchedules.Render, renderCanvas);
 }

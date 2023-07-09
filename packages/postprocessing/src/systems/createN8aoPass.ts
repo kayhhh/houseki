@@ -11,7 +11,7 @@ export function createN8aoPass(
   sceneStruct: Res<SceneStruct>,
   renderStore: Res<RenderStore>,
   res: Res<Mut<N8aoRes>>,
-  passes: Query<N8AOPass>
+  passes: Query<N8AOPass>,
 ) {
   for (const pass of passes) {
     const cameraId = sceneStruct.activeCamera;

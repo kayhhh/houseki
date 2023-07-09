@@ -23,7 +23,7 @@ export function createImages(
   warehouse: Res<Warehouse>,
   renderStore: Res<RenderStore>,
   localStore: SystemRes<LocalStore>,
-  entities: Query<[Entity, Asset, Image]>
+  entities: Query<[Entity, Asset, Image]>,
 ) {
   const ids: bigint[] = [];
 

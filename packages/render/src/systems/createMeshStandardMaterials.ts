@@ -28,7 +28,7 @@ import { disposeMaterial } from "../utils/dispose";
 
 export function createMeshStandardMaterials(
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, MeshStandardMaterial]>
+  entities: Query<[Entity, MeshStandardMaterial]>,
 ) {
   const ids: bigint[] = [];
 
@@ -83,7 +83,7 @@ export function createMeshStandardMaterials(
       object.map,
       material.baseColorTextureId,
       material.baseColorTextureInfo,
-      renderStore
+      renderStore,
     );
     if (object.map) object.map.colorSpace = SRGBColorSpace;
 
@@ -91,21 +91,21 @@ export function createMeshStandardMaterials(
       object.normalMap,
       material.normalTextureId,
       material.normalTextureInfo,
-      renderStore
+      renderStore,
     );
 
     object.aoMap = loadTexture(
       object.aoMap,
       material.occlusionTextureId,
       material.occlusionTextureInfo,
-      renderStore
+      renderStore,
     );
 
     object.emissiveMap = loadTexture(
       object.emissiveMap,
       material.emissiveTextureId,
       material.emissiveTextureInfo,
-      renderStore
+      renderStore,
     );
     if (object.emissiveMap) object.emissiveMap.colorSpace = SRGBColorSpace;
 
@@ -113,7 +113,7 @@ export function createMeshStandardMaterials(
       object.metalnessMap,
       material.metallicRoughnessTextureId,
       material.metallicRoughnessTextureInfo,
-      renderStore
+      renderStore,
     );
     object.metalnessMap = mrTexture;
     object.roughnessMap = mrTexture;
@@ -136,7 +136,7 @@ function loadTexture(
   object: ThreeTexture | null,
   textureId: bigint,
   info: TextureInfo,
-  renderStore: Readonly<RenderStore>
+  renderStore: Readonly<RenderStore>,
 ) {
   const newObject = getTextureObject(object, textureId, renderStore);
   if (!newObject) return null;
@@ -149,7 +149,7 @@ function loadTexture(
 function getTextureObject(
   object: ThreeTexture | null,
   imageId: bigint,
-  renderStore: Readonly<RenderStore>
+  renderStore: Readonly<RenderStore>,
 ) {
   // If the image is already loaded, use it
   const bitmap = renderStore.images.get(imageId);

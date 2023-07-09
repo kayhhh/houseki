@@ -6,7 +6,7 @@ import { PlayerAvatar } from "../components";
 export function createAnimations(
   commands: Commands,
   avatars: Query<[Entity, Mut<PlayerAvatar>]>,
-  animations: Query<[Entity, Mut<VrmAnimation>]>
+  animations: Query<[Entity, Mut<VrmAnimation>]>,
 ) {
   const ids: bigint[] = [];
 
@@ -62,7 +62,7 @@ export function createAnimations(
       idleAnimation,
       entity.id,
       avatar.idleAnimationId,
-      avatar.idleAnimation
+      avatar.idleAnimation,
     );
 
     avatar.walkAnimationId = createAnimation(
@@ -70,7 +70,7 @@ export function createAnimations(
       walkAnimation,
       entity.id,
       avatar.walkAnimationId,
-      avatar.walkAnimation
+      avatar.walkAnimation,
     );
 
     avatar.sprintAnimationId = createAnimation(
@@ -78,7 +78,7 @@ export function createAnimations(
       sprintAnimation,
       entity.id,
       avatar.sprintAnimationId,
-      avatar.sprintAnimation
+      avatar.sprintAnimation,
     );
 
     avatar.jumpAnimationId = createAnimation(
@@ -86,7 +86,7 @@ export function createAnimations(
       jumpAnimation,
       entity.id,
       avatar.jumpAnimationId,
-      avatar.jumpAnimation
+      avatar.jumpAnimation,
     );
 
     avatar.leftWalkAnimationId = createAnimation(
@@ -94,7 +94,7 @@ export function createAnimations(
       leftWalkAnimation,
       entity.id,
       avatar.leftWalkAnimationId,
-      avatar.leftWalkAnimation
+      avatar.leftWalkAnimation,
     );
 
     avatar.rightWalkAnimationId = createAnimation(
@@ -102,7 +102,7 @@ export function createAnimations(
       rightWalkAnimation,
       entity.id,
       avatar.rightWalkAnimationId,
-      avatar.rightWalkAnimation
+      avatar.rightWalkAnimation,
     );
   }
 
@@ -119,7 +119,7 @@ function createAnimation(
   animation: VrmAnimation | undefined,
   vrmId: bigint,
   animationId: bigint,
-  uri: string
+  uri: string,
 ) {
   if (animation) {
     animation.vrmId = vrmId;

@@ -29,7 +29,7 @@ export function moveCamera(
   cameras: Query<
     [PlayerCamera, Parent, Mut<Transform>, Mut<TargetTranslation>, Mut<Raycast>]
   >,
-  bodies: Query<[Entity, Transform], With<PlayerBody>>
+  bodies: Query<[Entity, Transform], With<PlayerBody>>,
 ) {
   for (const [
     camera,
@@ -57,7 +57,7 @@ export function moveCamera(
           cameraTransform.rotation.x,
           cameraTransform.rotation.y,
           cameraTransform.rotation.z,
-          cameraTransform.rotation.w
+          cameraTransform.rotation.w,
         );
         vector3.set(0, 0, distance);
         vector3.applyQuaternion(quaternion);
@@ -76,17 +76,17 @@ export function moveCamera(
       cameraTransform.translation.x = lerp(
         cameraTransform.translation.x,
         targetTranslation.x,
-        K
+        K,
       );
       cameraTransform.translation.y = lerp(
         cameraTransform.translation.y,
         targetTranslation.y,
-        K
+        K,
       );
       cameraTransform.translation.z = lerp(
         cameraTransform.translation.z,
         targetTranslation.z,
-        K
+        K,
       );
     }
   }

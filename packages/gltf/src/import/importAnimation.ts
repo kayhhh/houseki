@@ -15,7 +15,7 @@ export function importAnimation(
   rootId: bigint,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
-  context: ImportContext
+  context: ImportContext,
 ) {
   const clip = new AnimationClip(rootId, animation.getName(), true, true);
 

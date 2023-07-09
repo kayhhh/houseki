@@ -15,7 +15,7 @@ import { RenderStore } from "../resources";
  */
 export function createScenes(
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, Scene]>
+  entities: Query<[Entity, Scene]>,
 ) {
   const ids: bigint[] = [];
 
@@ -58,7 +58,7 @@ export function createScenes(
 function loadSkybox(
   scene: ThreeScene,
   imageId: bigint,
-  renderStore: RenderStore
+  renderStore: RenderStore,
 ) {
   const bitmap = renderStore.images.get(imageId);
 

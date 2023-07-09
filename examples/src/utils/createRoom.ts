@@ -17,14 +17,14 @@ const THICKNESS = 0.5;
 export function createRoom(
   size: Vec3,
   commands: Commands,
-  warehouse: Readonly<Warehouse>
+  warehouse: Readonly<Warehouse>,
 ) {
   // Create ground
   const groundId = createBox(
     [size[0], THICKNESS, size[2]],
     [0, -THICKNESS / 2, 0],
     commands,
-    warehouse
+    warehouse,
   );
 
   // Create walls
@@ -37,7 +37,7 @@ export function createRoom(
     [-x, y, 0],
     commands,
     warehouse,
-    groundId
+    groundId,
   );
 
   createBox(
@@ -45,7 +45,7 @@ export function createRoom(
     [x, y, 0],
     commands,
     warehouse,
-    groundId
+    groundId,
   );
 
   createBox(
@@ -53,7 +53,7 @@ export function createRoom(
     [0, y, -z],
     commands,
     warehouse,
-    groundId
+    groundId,
   );
 
   createBox(
@@ -61,7 +61,7 @@ export function createRoom(
     [0, y, z],
     commands,
     warehouse,
-    groundId
+    groundId,
   );
 
   return groundId;
@@ -75,7 +75,7 @@ function createBox(
   translation: Vec3,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
-  parentId?: bigint
+  parentId?: bigint,
 ) {
   const geometry = createBoxGeometry(warehouse, size);
 

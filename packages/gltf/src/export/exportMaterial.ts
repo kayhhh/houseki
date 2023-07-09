@@ -11,7 +11,7 @@ import { ExportContext } from "./context";
 export function exportMaterial(
   context: ExportContext,
   entityId: bigint,
-  material: MeshStandardMaterial
+  material: MeshStandardMaterial,
 ) {
   const gltfMaterial = context.doc.createMaterial();
 
@@ -19,7 +19,7 @@ export function exportMaterial(
 
   gltfMaterial.setAlphaCutoff(material.alphaCutoff);
   gltfMaterial.setAlphaMode(
-    MaterialAlphaMode[material.alphaMode] as GLTF.MaterialAlphaMode
+    MaterialAlphaMode[material.alphaMode] as GLTF.MaterialAlphaMode,
   );
 
   gltfMaterial.setBaseColorFactor(material.baseColor.toArray());
@@ -76,7 +76,7 @@ export function exportMaterial(
 function setTextureInfo(
   gltfInfo: GltfTextureInfo,
   info: TextureInfo,
-  context: ExportContext
+  context: ExportContext,
 ) {
   gltfInfo.setMagFilter(info.magFilter as GLTF.TextureMagFilter);
   gltfInfo.setMinFilter(info.minFilter as GLTF.TextureMinFilter);

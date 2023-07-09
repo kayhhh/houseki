@@ -26,7 +26,7 @@ export function rotateCamera(
   time: Res<Time>,
   inputStruct: Res<InputStruct>,
   pointerMoveReader: EventReader<PointerMoveEvent>,
-  entities: Query<[PlayerCamera, Mut<TargetRotation>, Mut<Transform>]>
+  entities: Query<[PlayerCamera, Mut<TargetRotation>, Mut<Transform>]>,
 ) {
   const rotate = inputStruct.enablePointerLock
     ? inputStruct.isPointerLocked
@@ -46,8 +46,8 @@ export function rotateCamera(
           targetRotation.x,
           targetRotation.y,
           targetRotation.z,
-          targetRotation.w
-        )
+          targetRotation.w,
+        ),
       );
 
       euler.y -= event.movementX * sensitivity;
@@ -64,7 +64,7 @@ export function rotateCamera(
 
       euler.x = Math.max(
         Math.PI / 2 - maxAngle,
-        Math.min(Math.PI / 2 - minAngle, euler.x)
+        Math.min(Math.PI / 2 - minAngle, euler.x),
       );
 
       quaternion.setFromEuler(euler);
@@ -79,7 +79,7 @@ export function rotateCamera(
       targetRotation.x,
       targetRotation.y,
       targetRotation.z,
-      targetRotation.w
+      targetRotation.w,
     );
 
     const slerpStrength =
@@ -93,7 +93,7 @@ export function rotateCamera(
         transform.rotation.x,
         transform.rotation.y,
         transform.rotation.z,
-        transform.rotation.w
+        transform.rotation.w,
       )
       .slerp(quaternion2, K);
 

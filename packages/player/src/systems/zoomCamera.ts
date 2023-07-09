@@ -18,7 +18,7 @@ const LERP_STRENGTH = 1e-8;
 export function zoomCamera(
   time: Res<Time>,
   wheelEventReader: EventReader<OnWheelEvent>,
-  entities: Query<Mut<PlayerCamera>>
+  entities: Query<Mut<PlayerCamera>>,
 ) {
   for (const camera of entities) {
     for (const event of wheelEventReader) {
@@ -70,6 +70,6 @@ function zoomOut(camera: PlayerCamera) {
 function clampTargetDistance(camera: PlayerCamera) {
   camera.targetDistance = Math.min(
     MAX_CAMERA_DISTANCE,
-    Math.max(MIN_CAMERA_DISTANCE, camera.targetDistance)
+    Math.max(MIN_CAMERA_DISTANCE, camera.targetDistance),
   );
 }

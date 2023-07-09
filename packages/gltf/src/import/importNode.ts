@@ -13,7 +13,7 @@ export function importNode(
   parentId: bigint,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
-  context: ImportContext
+  context: ImportContext,
 ) {
   const nodePosition = node.getTranslation();
   const nodeRotation = node.getRotation();
@@ -49,6 +49,6 @@ export function importNode(
   node
     .listChildren()
     .forEach((child) =>
-      importNode(child, entityId, commands, warehouse, context)
+      importNode(child, entityId, commands, warehouse, context),
     );
 }

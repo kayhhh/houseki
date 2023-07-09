@@ -5,7 +5,7 @@ import { PhysicsStore } from "../../resources";
 
 export function moveCharacters(
   physicsStore: Res<PhysicsStore>,
-  bodies: Query<[Entity, Mut<Velocity>], With<CharacterController>>
+  bodies: Query<[Entity, Mut<Velocity>], With<CharacterController>>,
 ) {
   const delta = physicsStore.world.timestep;
 

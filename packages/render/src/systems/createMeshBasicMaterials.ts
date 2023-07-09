@@ -11,7 +11,7 @@ import { disposeMaterial } from "../utils/dispose";
 
 export function createMeshBasicMaterials(
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, MeshBasicMaterial]>
+  entities: Query<[Entity, MeshBasicMaterial]>,
 ) {
   const ids: bigint[] = [];
 

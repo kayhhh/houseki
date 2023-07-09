@@ -10,7 +10,7 @@ import { RenderStore } from "../resources";
 export function createAnimationClips(
   renderStore: Res<RenderStore>,
   clips: Query<[Entity, AnimationClip]>,
-  tracks: Query<[Entity, KeyframeTrack]>
+  tracks: Query<[Entity, KeyframeTrack]>,
 ) {
   const ids: bigint[] = [];
 

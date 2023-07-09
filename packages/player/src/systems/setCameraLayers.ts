@@ -14,7 +14,7 @@ import { PlayerCameraView } from "../types";
  */
 export function setCameraLayers(
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, PlayerCamera]>
+  entities: Query<[Entity, PlayerCamera]>,
 ) {
   for (const [entity, camera] of entities) {
     const object = renderStore.perspectiveCameras.get(entity.id);

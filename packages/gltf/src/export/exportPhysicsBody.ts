@@ -19,7 +19,7 @@ export function exportStaticBody(context: ExportContext, entityId: bigint) {
 export function exportDynamicBody(
   context: ExportContext,
   entityId: bigint,
-  body: DynamicBody
+  body: DynamicBody,
 ) {
   const node = context.nodes.get(entityId);
   if (!node) return;
@@ -38,7 +38,7 @@ export function exportDynamicBody(
 export function exportKinematicBody(
   context: ExportContext,
   entityId: bigint,
-  body: KinematicBody
+  body: KinematicBody,
 ) {
   const node = context.nodes.get(entityId);
   if (!node) return;

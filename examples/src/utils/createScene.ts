@@ -17,7 +17,7 @@ export function createScene(
   coreStore: CoreStore,
   sceneStruct: SceneStruct,
   shadowResolution = 2048,
-  shadowArea = 8
+  shadowArea = 8,
 ) {
   const canvas = document.querySelector("canvas");
   coreStore.canvas = canvas;
@@ -79,7 +79,7 @@ export function createScene(
       shadowArea,
       -shadowArea,
       0.1,
-      50
+      50,
     );
     directional.add(shadowMap);
     dropStruct(shadowMap);

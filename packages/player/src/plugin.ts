@@ -23,8 +23,8 @@ export function playerPlugin(builder: WorldBuilder) {
         applyAvatarOffset,
         moveCamera,
         createAnimations,
-        animatePlayer
-      )
+        animatePlayer,
+      ),
     )
     .addSystemsToSchedule(LatticeSchedules.FixedUpdate, setAirTime);
 }

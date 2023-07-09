@@ -13,7 +13,7 @@ export function playAnimations(
   localStore: SystemRes<LocalStore>,
   vrmStore: Res<VrmStore>,
   animations: Query<[Entity, VrmAnimation]>,
-  avatars: Query<Entity, With<Vrm>>
+  avatars: Query<Entity, With<Vrm>>,
 ) {
   for (const [entity, animation] of animations) {
     const action = vrmStore.actions.get(entity.id);

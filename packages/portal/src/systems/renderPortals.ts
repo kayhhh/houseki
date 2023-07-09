@@ -17,7 +17,7 @@ export function renderPortals(
   renderStore: Res<Mut<RenderStore>>,
   portalStore: Res<PortalStore>,
   sceneStruct: Res<SceneStruct>,
-  portals: Query<[Entity, PortalMaterial]>
+  portals: Query<[Entity, PortalMaterial]>,
 ) {
   const camera = renderStore.perspectiveCameras.get(sceneStruct.activeCamera);
   if (!camera) return;
@@ -66,13 +66,13 @@ export function renderPortals(
     bottomRight.set(
       targetMesh.geometry.boundingBox.max.x,
       targetMesh.geometry.boundingBox.min.y,
-      targetMesh.geometry.boundingBox.min.z
+      targetMesh.geometry.boundingBox.min.z,
     );
 
     topLeft.set(
       targetMesh.geometry.boundingBox.min.x,
       targetMesh.geometry.boundingBox.max.y,
-      targetMesh.geometry.boundingBox.min.z
+      targetMesh.geometry.boundingBox.min.z,
     );
 
     bottomLeft.x *= -1;

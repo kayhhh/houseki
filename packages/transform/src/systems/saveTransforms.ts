@@ -9,7 +9,7 @@ export function saveTransforms(
   renderStore: Res<RenderStore>,
   store: Res<TransformControlsStore>,
   transformControls: Query<[Entity, TransformControls]>,
-  nodes: Query<[Entity, Mut<Transform>]>
+  nodes: Query<[Entity, Mut<Transform>]>,
 ) {
   for (const [controlsEnt, controls] of transformControls) {
     const controlsObject = store.objects.get(controlsEnt.id);
@@ -23,7 +23,7 @@ export function saveTransforms(
 
       transform.translation.fromArray(targetObject.position.toArray());
       transform.rotation.fromArray(
-        targetObject.quaternion.toArray() as [number, number, number, number]
+        targetObject.quaternion.toArray() as [number, number, number, number],
       );
       transform.scale.fromArray(targetObject.scale.toArray());
     }

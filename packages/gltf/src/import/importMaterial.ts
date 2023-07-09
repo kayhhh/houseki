@@ -19,7 +19,7 @@ export function importMaterial(
   gltfMaterial: Material,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
-  context: ImportContext
+  context: ImportContext,
 ) {
   const cached = context.materials.get(gltfMaterial);
   if (cached) return cached;
@@ -144,7 +144,7 @@ function applyTextureInfo(info: TextureInfo, gltfInfo: GltfTextureInfo | null) {
 function createTexture(
   gltfTexture: GltfTexture | null,
   warehouse: Readonly<Warehouse>,
-  commands: Commands
+  commands: Commands,
 ) {
   if (!gltfTexture) return;
 

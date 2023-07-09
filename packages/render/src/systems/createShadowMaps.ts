@@ -5,7 +5,7 @@ import { RenderStore } from "../resources";
 
 export function createShadowMaps(
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, ShadowMap]>
+  entities: Query<[Entity, ShadowMap]>,
 ) {
   const ids: bigint[] = [];
 

@@ -166,7 +166,7 @@ export class Raycast {
     origin: Readonly<[number, number, number]> = [0, 0, 0],
     direction: Readonly<[number, number, number]> = [0, 0, 0],
     maxToi = 1000,
-    solid = false
+    solid = false,
   ) {
     initStruct(this);
 

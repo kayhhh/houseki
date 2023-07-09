@@ -17,7 +17,7 @@ export function deepRemove(
   meshes: Query<[Entity, Mesh]>,
   basicMaterials: Query<Entity, With<MeshBasicMaterial>>,
   standardMaterials: Query<[Entity, MeshStandardMaterial]>,
-  images: Query<Entity, With<Image>>
+  images: Query<Entity, With<Image>>,
 ) {
   if (events.length === 0) return;
 

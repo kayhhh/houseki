@@ -19,7 +19,7 @@ export function keyframeTrackCleanup(
   commands: Commands,
   warehouse: Res<Warehouse>,
   tracker: SystemRes<EntityTracker>,
-  entities: Query<[Entity, KeyframeTrack]>
+  entities: Query<[Entity, KeyframeTrack]>,
 ) {
   const ids: bigint[] = [];
 

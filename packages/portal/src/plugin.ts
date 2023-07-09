@@ -10,6 +10,6 @@ export function portalPlugin(builder: WorldBuilder) {
     .addSystems(createPortalMaterials)
     .addSystemsToSchedule(
       LatticeSchedules.Render,
-      run(renderPortals).before(renderCanvas)
+      run(renderPortals).before(renderCanvas),
     );
 }

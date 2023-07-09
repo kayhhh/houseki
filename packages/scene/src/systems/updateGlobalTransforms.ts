@@ -5,7 +5,7 @@ import { GlobalTransform, Parent, Scene, Transform } from "../components";
 
 export function updateGlobalTransforms(
   scenes: Query<Entity, With<Scene>>,
-  nodes: Query<[Entity, Parent, Transform, Mut<GlobalTransform>]>
+  nodes: Query<[Entity, Parent, Transform, Mut<GlobalTransform>]>,
 ) {
   const childrenMap = new Map<bigint, bigint[]>();
   const transforms = new Map<bigint, Mat4>();
@@ -19,7 +19,7 @@ export function updateGlobalTransforms(
       localMat,
       transform.rotation.array,
       transform.translation.array,
-      transform.scale.array
+      transform.scale.array,
     );
 
     const globalMat = new Mat4();
@@ -35,7 +35,7 @@ export function updateGlobalTransforms(
       entity.id,
       childrenMap,
       transforms,
-      globalTransforms
+      globalTransforms,
     );
   }
 
@@ -53,7 +53,7 @@ function updateTransformRecursive(
   entityId: bigint,
   childrenMap: Map<bigint, bigint[]>,
   transforms: Map<bigint, Mat4>,
-  globalTransforms: Map<bigint, Mat4>
+  globalTransforms: Map<bigint, Mat4>,
 ) {
   const children = childrenMap.get(entityId);
   if (!children) return;
@@ -73,7 +73,7 @@ function updateTransformRecursive(
       childId,
       childrenMap,
       transforms,
-      globalTransforms
+      globalTransforms,
     );
   }
 }

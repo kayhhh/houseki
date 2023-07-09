@@ -29,7 +29,7 @@ export class OMIPhysicsShape extends Extension {
       return this;
 
     const parsedRootDef = colliderExtensionSchema.safeParse(
-      context.jsonDoc.json.extensions[this.extensionName]
+      context.jsonDoc.json.extensions[this.extensionName],
     );
 
     if (!parsedRootDef.success) {
@@ -70,7 +70,7 @@ export class OMIPhysicsShape extends Extension {
         return;
 
       const parsedColliderNodeDef = nodeColliderSchema.safeParse(
-        nodeDef.extensions[this.extensionName]
+        nodeDef.extensions[this.extensionName],
       );
 
       if (!parsedColliderNodeDef.success) {

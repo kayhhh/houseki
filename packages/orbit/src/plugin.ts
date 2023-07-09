@@ -7,6 +7,6 @@ import { updateObjects } from "./systems/updateObjects";
 
 export function orbitPlugin(builder: WorldBuilder) {
   builder.addSystems(
-    ...run.chain(createControls, sendEvents, updateObjects, saveTransforms)
+    ...run.chain(createControls, sendEvents, updateObjects, saveTransforms),
   );
 }

@@ -27,9 +27,9 @@ export function moveBody(
       Mut<PlayerBody>,
       CharacterController,
       Mut<TargetTransform>,
-      Mut<Velocity>
+      Mut<Velocity>,
     ]
-  >
+  >,
 ) {
   const input = readInput(inputStruct);
   const jump = inputStruct.keyPressed(Key.Space);
@@ -42,7 +42,7 @@ export function moveBody(
 
       const direction = getDirection(
         cameraTransform.rotation,
-        target.translation
+        target.translation,
       );
 
       const movementX = direction.x * input.x + direction.z * input.y;
