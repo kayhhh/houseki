@@ -133,8 +133,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
   packages/gltf:
     dependencies:
@@ -179,8 +179,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
   packages/input:
     dependencies:
@@ -204,8 +204,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
   packages/lattice-engine:
     dependencies:
@@ -271,8 +271,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
   packages/orbit:
     dependencies:
@@ -308,8 +308,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
   packages/physics:
     dependencies:
@@ -342,8 +342,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
       vite-plugin-wasm:
         specifier: ^3.2.2
         version: 3.2.2(vite@4.3.9)
@@ -391,8 +391,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
   packages/portal:
     dependencies:
@@ -428,8 +428,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
   packages/postprocessing:
     dependencies:
@@ -471,8 +471,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
   packages/render:
     dependencies:
@@ -508,8 +508,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
   packages/scene:
     dependencies:
@@ -536,8 +536,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
   packages/text:
     dependencies:
@@ -576,8 +576,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
   packages/transform:
     dependencies:
@@ -622,8 +622,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
   packages/utils:
     dependencies:
@@ -656,8 +656,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
   packages/vrm:
     dependencies:
@@ -696,8 +696,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9
       vite-plugin-dts:
-        specifier: ^3.0.2
-        version: 3.0.2(typescript@5.1.6)
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
 
 packages:
 
@@ -5773,8 +5773,8 @@ packages:
     engines: {node: '>= 0.10'}
     dev: true
 
-  /vite-plugin-dts@3.0.2(typescript@5.1.6):
-    resolution: {integrity: sha512-NcBOWlP94B79uB8gR2Y3h8Go7nDozqpD8GYkPZ7zTmg4xG8H2H5ituSht8aL4jYMCPwKH0cmqMRtRa2lrsDa9A==}
+  /vite-plugin-dts@3.2.0(typescript@5.1.6):
+    resolution: {integrity: sha512-s+dwJvDcb/AWgb49oVbq9JiUSIMwaVpFfV4SVIaBZmv9OZyeyDGxujaq+z4HJ4LB4hUG5c4oRAJyLfV66c763Q==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       typescript: '*'
