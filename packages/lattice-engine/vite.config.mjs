@@ -8,6 +8,7 @@ export default defineConfig({
     lib: {
       entry: {
         core: "./src/core.ts",
+        csm: "./src/csm.ts",
         gltf: "./src/gltf.ts",
         input: "./src/input.ts",
         orbit: "./src/orbit.ts",

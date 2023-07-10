@@ -26,6 +26,9 @@
     "./core": {
       "import": "./dist/core.js"
     },
+    "./csm": {
+      "import": "./dist/csm.js"
+    },
     "./gltf": {
       "import": "./dist/gltf.js"
     },
@@ -68,8 +71,9 @@
   },
   "types": "index.d.ts",
   "files": [
-    "dist",
     "core.d.ts",
+    "csm.d.ts",
+    "dist",
     "gltf.d.ts",
     "index.d.ts",
     "input.d.ts",
@@ -91,6 +95,7 @@
   },
   "dependencies": {
     "@lattice-engine/core": "workspace:^",
+    "@lattice-engine/csm": "workspace:^",
     "@lattice-engine/gltf": "workspace:^",
     "@lattice-engine/input": "workspace:^",
     "@lattice-engine/orbit": "workspace:^",

@@ -4,6 +4,7 @@ import { Link, Route, useRoute } from "wouter";
 
 import About from "./components/about/About";
 import Basic from "./demos/basic/Basic";
+import CSM from "./demos/csm/CSM";
 import Gltf from "./demos/gltf/Gltf";
 import Mesh from "./demos/mesh/Mesh";
 import Physics from "./demos/physics/Physics";
@@ -41,6 +42,7 @@ export default function App() {
         <h3>Examples</h3>
 
         <RouteLink href="/basic">Basic</RouteLink>
+        <RouteLink href="/cascading-shadow-maps">CSM</RouteLink>
         <RouteLink href="/gltf">glTF</RouteLink>
         <RouteLink href="/mesh">Mesh</RouteLink>
         <RouteLink href="/physics">Physics</RouteLink>
@@ -59,6 +61,7 @@ export default function App() {
 
       <Route path="/" component={About} />
       <Route path="/basic" component={Basic} />
+      <Route path="/cascading-shadow-maps" component={CSM} />
       <Route path="/gltf" component={Gltf} />
       <Route path="/mesh" component={Mesh} />
       <Route path="/physics" component={Physics} />

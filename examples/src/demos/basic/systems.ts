@@ -8,6 +8,7 @@ import {
 } from "lattice-engine/scene";
 import { Commands, dropStruct, Mut, Res } from "thyseus";
 
+import { createLights } from "../../utils/createLights";
 import { createOrbitControls } from "../../utils/createOrbitControls";
 import { createScene } from "../../utils/createScene";
 import { createBoxGeometry } from "../../utils/geometry";
@@ -19,7 +20,8 @@ export function initScene(
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   createOrbitControls(commands, sceneStruct);
-  const { rootId } = createScene(commands, coreStore, sceneStruct);
+  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+  createLights(commands, sceneId);
 
   const geometry = createBoxGeometry(warehouse);
   const parent = new Parent(rootId);

@@ -24,4 +24,6 @@ export function createOrbitControls(
   dropStruct(transform);
 
   sceneStruct.activeCamera = cameraId;
+
+  return cameraId;
 }

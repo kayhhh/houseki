@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/triple-slash-reference */
 /// <reference path="./core.d.ts" />
+/// <reference path="./csm.d.ts" />
 /// <reference path="./gltf.d.ts" />
 /// <reference path="./input.d.ts" />
 /// <reference path="./orbit.d.ts" />

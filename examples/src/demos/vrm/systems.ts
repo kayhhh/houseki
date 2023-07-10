@@ -8,6 +8,7 @@ import {
 import { Vrm } from "lattice-engine/vrm";
 import { Commands, dropStruct, Mut, Res } from "thyseus";
 
+import { createLights } from "../../utils/createLights";
 import { createOrbitControls } from "../../utils/createOrbitControls";
 import { createScene } from "../../utils/createScene";
 
@@ -17,7 +18,8 @@ export function initScene(
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   createOrbitControls(commands, sceneStruct, [0, 1, -3]);
-  const { rootId } = createScene(commands, coreStore, sceneStruct);
+  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+  createLights(commands, sceneId);
 
   const transform = new Transform([0, -0.5, 0]);
   const parent = new Parent(rootId);

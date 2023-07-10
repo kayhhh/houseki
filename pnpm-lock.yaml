@@ -136,6 +136,40 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0(typescript@5.1.6)
 
+  packages/csm:
+    dependencies:
+      '@lattice-engine/render':
+        specifier: workspace:^
+        version: link:../render
+      '@lattice-engine/scene':
+        specifier: workspace:^
+        version: link:../scene
+      three:
+        specifier: ~0.153.0
+        version: 0.153.0
+      thyseus:
+        specifier: ^0.13.2
+        version: 0.13.2
+    devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: ^0.13.0
+        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+      '@types/three':
+        specifier: ~0.153.0
+        version: 0.153.0
+      rollup-plugin-peer-deps-external:
+        specifier: ^2.2.4
+        version: 2.2.4(rollup@3.26.0)
+      typescript:
+        specifier: ~5.1.6
+        version: 5.1.6
+      vite:
+        specifier: ^4.4.2
+        version: 4.4.2
+      vite-plugin-dts:
+        specifier: ^3.2.0
+        version: 3.2.0(typescript@5.1.6)
+
   packages/gltf:
     dependencies:
       '@gltf-transform/core':
@@ -212,6 +246,9 @@ importers:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
+      '@lattice-engine/csm':
+        specifier: workspace:^
+        version: link:../csm
       '@lattice-engine/gltf':
         specifier: workspace:^
         version: link:../gltf

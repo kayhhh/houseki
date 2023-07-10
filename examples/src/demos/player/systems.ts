@@ -1,5 +1,4 @@
 import { Asset, CoreStore, Warehouse } from "lattice-engine/core";
-import { InputStruct } from "lattice-engine/input";
 import {
   BoxCollider,
   DynamicBody,
@@ -21,6 +20,7 @@ import {
 import { Text } from "lattice-engine/text";
 import { Commands, dropStruct, Mut, Res } from "thyseus";
 
+import { createLights } from "../../utils/createLights";
 import { createPlayer } from "../../utils/createPlayer";
 import { createScene } from "../../utils/createScene";
 import { createBoxGeometry, createSphereGeometry } from "../../utils/geometry";
@@ -30,20 +30,14 @@ export function initScene(
   warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
-  inputStruct: Res<Mut<InputStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
 ) {
   physicsConfig.debug = true;
 
-  const { sceneId, rootId } = createScene(
-    commands,
-    coreStore,
-    sceneStruct,
-    4096,
-    16
-  );
+  const { sceneId, rootId } = createScene(commands, coreStore, sceneStruct);
+  createLights(commands, sceneId, 4096, 16);
 
-  createPlayer([0, 4, 0], sceneId, commands, sceneStruct, inputStruct);
+  createPlayer([0, 4, 0], sceneId, commands, sceneStruct);
 
   const asset = new Asset("/DevGrid.png");
   const devTextureId = commands.spawn(true).add(asset).addType(Image).id;

@@ -1,8 +1,6 @@
 import { Engine, LatticeSchedules } from "lattice-engine/core";
-import { physicsPlugin } from "lattice-engine/physics";
-import { playerPlugin } from "lattice-engine/player";
-import { textPlugin } from "lattice-engine/text";
-import { vrmPlugin } from "lattice-engine/vrm";
+import { csmPlugin } from "lattice-engine/csm";
+import { orbitPlugin } from "lattice-engine/orbit";
 import { World } from "thyseus";
 
 import { demoPlugin } from "../../utils/demoPlugin";
@@ -13,10 +11,8 @@ export let world: World;
 export async function createWorld() {
   world = await Engine.createWorld()
     .addPlugin(demoPlugin)
-    .addPlugin(physicsPlugin)
-    .addPlugin(playerPlugin)
-    .addPlugin(textPlugin)
-    .addPlugin(vrmPlugin)
+    .addPlugin(orbitPlugin)
+    .addPlugin(csmPlugin)
     .addSystemsToSchedule(LatticeSchedules.Startup, initScene)
     .build();
 }

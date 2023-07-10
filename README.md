@@ -25,6 +25,7 @@ Packages are published individually to NPM under the `@lattice-engine` scope. Al
 | Package                                                       | Description                                                                                                          |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | [`@lattice-engine/core`](./packages/core)                     | Core engine, built with [Thyseus](https://github.com/JaimeGensler/thyseus) ECS                                       |
+| [`@lattice-engine/csm`](./packages/csm)                       | Cascading shadow maps                                                                                                |
 | [`@lattice-engine/gltf`](./packages/gltf)                     | [glTF](https://github.com/KhronosGroup/glTF) import and export                                                       |
 | [`@lattice-engine/input`](./packages/input)                   | Components for handling user input                                                                                   |
 | [`@lattice-engine/orbit`](./packages/orbit)                   | Orbit controls                                                                                                       |

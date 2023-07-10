@@ -4,6 +4,7 @@ import { N8AOPass } from "lattice-engine/postprocessing";
 import { SceneStruct } from "lattice-engine/scene";
 import { Commands, Mut, Query, Res } from "thyseus";
 
+import { createLights } from "../../utils/createLights";
 import { createOrbitControls } from "../../utils/createOrbitControls";
 import { createScene } from "../../utils/createScene";
 
@@ -17,7 +18,8 @@ export function initScene(
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   createOrbitControls(commands, sceneStruct);
-  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct, 0);
+  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+  createLights(commands, sceneId);
 
   commands.getById(sceneId).addType(N8AOPass);
 

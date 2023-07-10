@@ -1,4 +1,3 @@
-import { InputStruct } from "lattice-engine/input";
 import {
   CapsuleCollider,
   CharacterController,
@@ -33,8 +32,7 @@ export function createPlayer(
   spawn: [number, number, number],
   rootId: bigint,
   commands: Commands,
-  sceneStruct: SceneStruct,
-  inputStruct: InputStruct
+  sceneStruct: SceneStruct
 ) {
   const parent = new Parent();
   const transform = new Transform();
