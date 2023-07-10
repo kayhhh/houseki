@@ -1,0 +1,13 @@
+{
+  "name": "scripts",
+  "version": "0.0.0",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "package:add": "ts-node package-add.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.1",
+    "ts-node": "^10.9.1"
+  }
+}
