@@ -137,6 +137,11 @@ fs.appendFileSync(
   `/// <reference path="./${packageName}.d.ts" />`
 );
 
+// Sort the references
+const indexDts = fs.readFileSync(indexDtsPath, "utf-8");
+const sortedIndexDts = indexDts.split("\n").sort().join("\n");
+fs.writeFileSync(indexDtsPath, sortedIndexDts);
+
 console.info(`Updating package.json`);
 const latticePackageJsonPath = path.join(latticeDir, "package.json");
 const packageJson = JSON.parse(fs.readFileSync(latticePackageJsonPath));
@@ -147,6 +152,19 @@ packageJson.exports[`./${packageName}`] = {
   import: `./dist/${packageName}.js`,
 };
 
+// Sort the exports object
+const sortedExports = Object.keys(packageJson.exports)
+  .sort()
+  .reduce((acc, key) => {
+    // @ts-expect-error
+    acc[key] = packageJson.exports[key];
+    return acc;
+  }, {});
+packageJson.exports = sortedExports;
+
+// Sort the files array
+packageJson.files.sort();
+
 fs.writeFileSync(latticePackageJsonPath, JSON.stringify(packageJson, null, 2));
 
 console.info(`Updating vite.config.mjs`);
@@ -155,14 +173,13 @@ const viteConfig = fs.readFileSync(latticeViteConfigPath, "utf-8");
 
 // Add the new package to entries object
 const entries = viteConfig.match(/entry: {([\s\S]*?)},/)[1];
-const updatedEntries = `${entries}
-    ${packageName}: "./src/${packageName}.ts",`;
+const updatedEntries = `${entries}${packageName}: "./src/${packageName}.ts",`;
 
 // Replace the old entries object with the new one
 const updatedViteConfig = viteConfig.replace(
   /entry: {([\s\S]*?)},/,
   `entry: {${updatedEntries}
-  },`
+},`
 );
 
 // Write the updated config back to the file
