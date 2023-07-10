@@ -30,8 +30,8 @@ export function initScene(
 
   createBox(commands, warehouse, {
     parentId: rootId,
-    position: [0, -1, 0],
     size: [GROUND_SIZE, 1, GROUND_SIZE],
+    translation: [0, -1, 0],
   });
 
   for (let i = 0; i < BOX_COUNT; i++) {
@@ -42,8 +42,8 @@ export function initScene(
 
     createBox(commands, warehouse, {
       parentId: rootId,
-      position: [x, y, z],
       size: [scale, scale, scale],
+      translation: [x, y, z],
     });
   }
 }

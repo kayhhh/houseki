@@ -3,6 +3,7 @@ import { buttonGroup, useControls } from "leva";
 import { useCallback, useEffect, useState } from "react";
 import { World } from "thyseus";
 
+import { cleanupMaterials } from "./createBox";
 import { exportConfig, ExportSchedule } from "./export";
 
 export function useEngine(world: World | null) {
@@ -19,6 +20,7 @@ export function useEngine(world: World | null) {
     return () => {
       setEngine(null);
       newEngine.destroy();
+      cleanupMaterials();
     };
   }, [world]);
 

@@ -1,18 +1,13 @@
-import { Asset, CoreStore, Warehouse } from "lattice-engine/core";
+import { CoreStore, Warehouse } from "lattice-engine/core";
 import {
-  BoxCollider,
   DynamicBody,
   PhysicsConfig,
   SphereCollider,
-  StaticBody,
   TargetTransform,
 } from "lattice-engine/physics";
-import { WEBGL_CONSTANTS } from "lattice-engine/render";
 import {
   GlobalTransform,
-  Image,
   Mesh,
-  MeshStandardMaterial,
   Parent,
   SceneStruct,
   Transform,
@@ -20,10 +15,11 @@ import {
 import { Text } from "lattice-engine/text";
 import { Commands, dropStruct, Mut, Res } from "thyseus";
 
+import { createBox } from "../../utils/createBox";
 import { createLights } from "../../utils/createLights";
 import { createPlayer } from "../../utils/createPlayer";
 import { createScene } from "../../utils/createScene";
-import { createBoxGeometry, createSphereGeometry } from "../../utils/geometry";
+import { createSphereGeometry } from "../../utils/geometry";
 
 export function initScene(
   commands: Commands,
@@ -39,69 +35,35 @@ export function initScene(
 
   createPlayer([0, 4, 0], sceneId, commands, sceneStruct);
 
-  const asset = new Asset("/DevGrid.png");
-  const devTextureId = commands.spawn(true).add(asset).addType(Image).id;
-  dropStruct(asset);
+  createBox(commands, warehouse, {
+    parentId: rootId,
+    size: [32, 1, 32],
+    translation: [0, -0.5, 0],
+  });
 
-  const builder = new SceneBuilder(commands, warehouse);
-
-  builder
-    .createBox([32, 1, 32], devTextureId, builder.transform.set([0, -0.5, 0]))
-    .add(builder.parent.setId(rootId));
+  const parent = new Parent(rootId);
+  const transform = new Transform();
 
   const stairsId = commands
     .spawn(true)
-    .add(builder.parent.setId(rootId))
-    .add(builder.transform.set([-2, 0, -6]))
+    .add(parent)
+    .add(transform.set([-2, 0, -6]))
     .addType(GlobalTransform).id;
 
-  builder
-    .createStairs(2, 0.125, 1, 10, devTextureId)
-    .add(builder.parent.setId(stairsId))
-    .add(builder.transform.set([0, 0, 0]))
-    .addType(GlobalTransform);
-
-  builder
-    .createStairs(2, 0.125, 0.5, 20, devTextureId)
-    .add(builder.parent.setId(stairsId))
-    .add(builder.transform.set([-3, 0, 0]))
-    .addType(GlobalTransform);
-
-  builder
-    .createStairs(2, 0.25, 0.5, 20, devTextureId)
-    .add(builder.parent.setId(stairsId))
-    .add(builder.transform.set([-6, 0, 0]))
-    .addType(GlobalTransform);
+  createStairs(commands, warehouse, 2, 0.125, 1, 10, stairsId);
+  createStairs(commands, warehouse, 2, 0.125, 0.5, 20, stairsId, [-3, 0, 0]);
+  createStairs(commands, warehouse, 2, 0.25, 0.5, 20, stairsId, [-6, 0, 0]);
 
   const rampsId = commands
     .spawn(true)
-    .add(builder.parent.setId(rootId))
-    .add(builder.transform.set([2, 0, -6]))
+    .add(parent)
+    .add(transform.set([2, 0, -6]))
     .addType(GlobalTransform).id;
 
-  builder
-    .createRamp(2, 10, 1, 15, devTextureId)
-    .add(builder.parent.setId(rampsId))
-    .add(builder.transform.set([0, 0, 0]))
-    .addType(GlobalTransform);
-
-  builder
-    .createRamp(2, 10, 1, 30, devTextureId)
-    .add(builder.parent.setId(rampsId))
-    .add(builder.transform.set([3, 0, 0]))
-    .addType(GlobalTransform);
-
-  builder
-    .createRamp(2, 10, 1, 45, devTextureId)
-    .add(builder.parent.setId(rampsId))
-    .add(builder.transform.set([6, 0, 0]))
-    .addType(GlobalTransform);
-
-  builder
-    .createRamp(2, 10, 1, 60, devTextureId)
-    .add(builder.parent.setId(rampsId))
-    .add(builder.transform.set([9, 0, 0]))
-    .addType(GlobalTransform);
+  createRamp(commands, warehouse, 2, 10, 1, 15, rampsId);
+  createRamp(commands, warehouse, 2, 10, 1, 30, rampsId, [3, 0, 0]);
+  createRamp(commands, warehouse, 2, 10, 1, 45, rampsId, [6, 0, 0]);
+  createRamp(commands, warehouse, 2, 10, 1, 60, rampsId, [9, 0, 0]);
 
   const ballRadius = 1;
   const ballGeometry = createSphereGeometry(warehouse, ballRadius);
@@ -110,8 +72,8 @@ export function initScene(
 
   commands
     .spawn(true)
-    .add(builder.parent.setId(rootId))
-    .add(builder.transform.set([0, 3, 8]))
+    .add(parent)
+    .add(transform.set([0, 3, 8]))
     .add(targetTransform.set([0, 3, 8]))
     .addType(GlobalTransform)
     .add(ballGeometry)
@@ -122,149 +84,99 @@ export function initScene(
   dropStruct(ballGeometry);
   dropStruct(sphereCollider);
   dropStruct(targetTransform);
-
-  builder.destroy();
+  dropStruct(parent);
+  dropStruct(transform);
 }
 
-class SceneBuilder {
-  transform = new Transform();
-  parent = new Parent();
-  boxCollider = new BoxCollider();
-  mesh = new Mesh();
-  material = new MeshStandardMaterial();
-  text = new Text();
+function createStairs(
+  commands: Commands,
+  warehouse: Readonly<Warehouse>,
+  stairWidth: number,
+  stepHeight: number,
+  stepWidth: number,
+  steps: number,
+  parentId: bigint,
+  translation: [number, number, number] = [0, 0, 0]
+) {
+  const parent = new Parent(parentId);
+  const transform = new Transform(translation);
 
-  commands: Commands;
-  warehouse: Readonly<Warehouse>;
+  const stairId = commands
+    .spawn(true)
+    .add(parent)
+    .add(transform)
+    .addType(GlobalTransform).id;
 
-  constructor(commands: Commands, warehouse: Readonly<Warehouse>) {
-    this.commands = commands;
-    this.warehouse = warehouse;
+  for (let i = 0; i < steps; i++) {
+    createBox(commands, warehouse, {
+      parentId: stairId,
+      size: [stairWidth, stepHeight, stepWidth],
+      translation: [0, stepHeight * i + stepHeight / 2, -stepWidth * i],
+    });
   }
 
-  createRamp(
-    rampWidth: number,
-    rampHeight: number,
-    rampDepth: number,
-    rampAngle: number,
-    textureId: bigint
-  ) {
-    const rampId = this.commands.spawn(true).id;
+  const text = new Text();
+  text.value = `Step height: ${stepHeight}m\nStep width: ${stepWidth}m`;
+  text.fontSize = 0.3;
 
-    // Angle -> quaternion
-    const angle = (rampAngle * Math.PI) / 180;
-    const x = Math.sin(angle / 2);
-    const y = 0;
-    const z = 0;
-    const w = Math.cos(angle / 2);
+  commands
+    .spawn(true)
+    .add(parent.setId(stairId))
+    .add(transform.set([0, 3, 0]))
+    .addType(GlobalTransform)
+    .add(text);
 
-    this.createBox(
-      [rampWidth, rampDepth, rampHeight],
-      textureId,
-      this.transform.set([0, 0, 0], [x, y, z, w])
-    ).add(this.parent.setId(rampId));
+  dropStruct(text);
+  dropStruct(parent);
+  dropStruct(transform);
 
-    this.text.value = `Angle: ${rampAngle}°`;
-    this.text.fontSize = 0.3;
+  return stairId;
+}
 
-    this.commands
-      .spawn(true)
-      .add(this.parent.setId(rampId))
-      .add(this.transform.set([0, 3, 0], [0, 0, 0, 1]))
-      .addType(GlobalTransform)
-      .add(this.text);
+function createRamp(
+  commands: Commands,
+  warehouse: Readonly<Warehouse>,
+  rampWidth: number,
+  rampHeight: number,
+  rampDepth: number,
+  rampAngle: number,
+  parentId: bigint,
+  translation: [number, number, number] = [0, 0, 0]
+) {
+  const parent = new Parent(parentId);
+  const transform = new Transform(translation);
 
-    return this.commands.getById(rampId);
-  }
+  const rampId = commands
+    .spawn(true)
+    .add(parent)
+    .add(transform)
+    .addType(GlobalTransform).id;
 
-  createStairs(
-    stairWidth: number,
-    stepHeight: number,
-    stepWidth: number,
-    steps: number,
-    textureId: bigint
-  ) {
-    const stairsId = this.commands.spawn(true).id;
+  // Angle -> quaternion
+  const angle = (rampAngle * Math.PI) / 180;
+  const x = Math.sin(angle / 2);
+  const y = 0;
+  const z = 0;
+  const w = Math.cos(angle / 2);
 
-    const materialId = this.createMaterial(
-      textureId,
-      stepWidth / 2,
-      stepWidth / 2
-    );
+  createBox(commands, warehouse, {
+    parentId: rampId,
+    rotation: [x, y, z, w],
+    size: [rampWidth, rampDepth, rampHeight],
+  });
 
-    for (let i = 0; i < steps; i++) {
-      this.createBox(
-        [stairWidth, stepHeight, stepWidth],
-        textureId,
-        this.transform.set([
-          0,
-          stepHeight * i + stepHeight / 2,
-          -stepWidth * i + stepWidth / 2,
-        ]),
-        materialId
-      ).add(this.parent.setId(stairsId));
-    }
+  const text = new Text();
+  text.value = `Angle: ${rampAngle}°`;
+  text.fontSize = 0.3;
 
-    this.text.value = `Step height: ${stepHeight}m\nStep width: ${stepWidth}m`;
-    this.text.fontSize = 0.3;
+  commands
+    .spawn(true)
+    .add(parent.setId(rampId))
+    .add(transform.set([0, 3, 0]))
+    .addType(GlobalTransform)
+    .add(text);
 
-    this.commands
-      .spawn(true)
-      .add(this.parent.setId(stairsId))
-      .add(this.transform.set([0, 3, 0]))
-      .addType(GlobalTransform)
-      .add(this.text);
-
-    return this.commands.getById(stairsId);
-  }
-
-  createBox(
-    size: [number, number, number],
-    textureId: bigint,
-    transform: Transform,
-    materialId?: bigint
-  ) {
-    const geometry = createBoxGeometry(this.warehouse, size);
-
-    this.boxCollider.size.fromArray(size);
-
-    this.mesh.materialId =
-      materialId ?? this.createMaterial(textureId, size[0] / 2, size[2] / 2);
-
-    const entity = this.commands
-      .spawn(true)
-      .add(transform)
-      .addType(GlobalTransform)
-      .add(geometry)
-      .add(this.mesh)
-      .add(this.boxCollider)
-      .addType(StaticBody);
-
-    dropStruct(geometry);
-
-    return entity;
-  }
-
-  createMaterial(textureId: bigint, scaleX = 1, scaleY = 1) {
-    this.material.roughness = 1;
-    this.material.metalness = 0;
-    this.material.baseColorTextureId = textureId;
-    this.material.baseColorTextureInfo.wrapS = WEBGL_CONSTANTS.REPEAT;
-    this.material.baseColorTextureInfo.wrapT = WEBGL_CONSTANTS.REPEAT;
-    this.material.baseColorTextureInfo.minFilter =
-      WEBGL_CONSTANTS.LINEAR_MIPMAP_LINEAR;
-    this.material.baseColorTextureInfo.scale.set(scaleX, scaleY);
-
-    const materialEntityId = this.commands.spawn(true).add(this.material).id;
-    return materialEntityId;
-  }
-
-  destroy() {
-    dropStruct(this.transform);
-    dropStruct(this.parent);
-    dropStruct(this.boxCollider);
-    dropStruct(this.mesh);
-    dropStruct(this.material);
-    dropStruct(this.text);
-  }
+  dropStruct(text);
+  dropStruct(parent);
+  dropStruct(transform);
 }
