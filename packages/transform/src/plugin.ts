@@ -19,6 +19,6 @@ export function transformPlugin(builder: WorldBuilder) {
       selectTarget,
       setOutlineTargets
     ),
-    run(clearEvents).before(orbitSendEvents)
+    run(clearEvents).after(sendEvents).before(orbitSendEvents)
   );
 }
