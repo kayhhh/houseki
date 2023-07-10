@@ -26,14 +26,11 @@ export class Vrm {
 @struct
 export class VrmAnimation {
   @struct.u64 declare vrmId: bigint; // Vrm Entity ID
-
   @struct.string declare uri: string;
-
   @struct.bool declare play: boolean;
-
   @struct.bool declare loop: boolean;
-
   @struct.f32 declare weight: number;
+  @struct.f32 declare speed: number;
 
   constructor(vrmId = 0n, uri = "", play = false, loop = false, weight = 1.0) {
     initStruct(this);
@@ -43,5 +40,6 @@ export class VrmAnimation {
     this.play = play;
     this.loop = loop;
     this.weight = weight;
+    this.speed = 1;
   }
 }

@@ -26,6 +26,7 @@ export function playAnimations(
       action.reset();
     }
 
+    action.setEffectiveTimeScale(animation.speed);
     action.setLoop(animation.loop ? LoopRepeat : LoopOnce, Infinity);
     action.setEffectiveWeight(animation.weight);
   }

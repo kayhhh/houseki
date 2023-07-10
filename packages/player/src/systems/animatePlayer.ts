@@ -1,10 +1,11 @@
 import { Time } from "@lattice-engine/core";
 import { Velocity } from "@lattice-engine/physics";
-import { Parent } from "@lattice-engine/scene";
+import { Parent, Transform } from "@lattice-engine/scene";
 import { VrmAnimation } from "@lattice-engine/vrm";
 import { Entity, Mut, Query, Res } from "thyseus";
 
 import { PlayerAvatar, PlayerBody } from "../components";
+import { getDirection } from "../utils/getDirection";
 
 const WALK_SPEED = 5;
 const SPRINT_SPEED = 5;
@@ -13,23 +14,36 @@ const FALL_THRESHOLD_SECONDS = 0.35;
 
 export function animatePlayer(
   time: Res<Time>,
-  avatars: Query<[Entity, Parent, PlayerAvatar]>,
+  avatars: Query<[Entity, Parent, PlayerAvatar, Transform]>,
   animations: Query<[Entity, Mut<VrmAnimation>]>,
-  bodies: Query<[Entity, PlayerBody, Velocity]>
+  bodies: Query<[Entity, PlayerBody, Velocity, Transform]>
 ) {
-  for (const [entity, parent, avatar] of avatars) {
-    for (const [bodyEntity, player, velocity] of bodies) {
+  for (const [entity, parent, avatar, avatarTransform] of avatars) {
+    for (const [bodyEntity, player, velocity, bodyTransform] of bodies) {
       if (bodyEntity.id !== parent.id) continue;
 
       const isFalling = player.airTime > FALL_THRESHOLD_SECONDS;
       const isJumping = player.jumpTime > 0 && player.airTime !== 0;
-      const showFallAnimation = isFalling || isJumping;
 
       const moveLength = Math.sqrt(
         Math.abs(velocity.x) ** 2 + Math.abs(velocity.z) ** 2
       );
       const isSprinting = moveLength > player.speed * 1.05;
       const isWalking = moveLength / player.speed > 0.25 && !isSprinting;
+
+      const showFallAnimation = isFalling || isJumping;
+      const showSprintAnimation = isSprinting && !showFallAnimation;
+      const showWalkAnimation = isWalking && !showFallAnimation;
+
+      const direction = getDirection(
+        avatarTransform.rotation,
+        bodyTransform.translation
+      );
+
+      const movementRight =
+        (direction.x * velocity.x + direction.z * velocity.z) / player.speed;
+      const movementForward =
+        (direction.z * velocity.x - direction.x * velocity.z) / player.speed;
 
       let totalWeight = 0;
 
@@ -38,35 +52,35 @@ export function animatePlayer(
         if (animationEntity.id === avatar.idleAnimationId) continue;
 
         switch (animationEntity.id) {
-          case avatar.walkAnimationId: {
-            const change =
-              isWalking && !showFallAnimation ? WALK_SPEED : -WALK_SPEED;
-            animation.weight += time.mainDelta * change;
+          case avatar.jumpAnimationId: {
+            const change = showFallAnimation ? 1 : -1;
+            animation.weight += time.mainDelta * JUMP_SPEED * change;
             break;
           }
 
           case avatar.sprintAnimationId: {
-            const change =
-              isSprinting && !showFallAnimation ? SPRINT_SPEED : -SPRINT_SPEED;
-            animation.weight = clamp(
-              animation.weight + time.mainDelta * change
-            );
+            const change = showSprintAnimation ? 1 : -1;
+            animation.speed = movementForward > 0 ? 1 : -1;
+            animation.weight += time.mainDelta * SPRINT_SPEED * change;
             break;
           }
 
-          case avatar.jumpAnimationId: {
-            const change = showFallAnimation ? JUMP_SPEED : -JUMP_SPEED;
-            animation.weight += time.mainDelta * change;
+          case avatar.walkAnimationId: {
+            const change = showWalkAnimation ? Math.abs(movementForward) : -1;
+            animation.speed = movementForward > 0 ? 1 : -1;
+            animation.weight += time.mainDelta * WALK_SPEED * change;
             break;
           }
 
           case avatar.leftWalkAnimationId: {
-            animation.weight = 0;
+            const change = showWalkAnimation ? -movementRight : -1;
+            animation.weight += time.mainDelta * WALK_SPEED * change;
             break;
           }
 
           case avatar.rightWalkAnimationId: {
-            animation.weight = 0;
+            const change = showWalkAnimation ? movementRight : -1;
+            animation.weight += time.mainDelta * WALK_SPEED * change;
             break;
           }
         }
