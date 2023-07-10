@@ -1,5 +1,32 @@
 # lattice-engine
 
+## 0.3.7
+
+### Patch Changes
+
+- 7a82a45: upgrade thyseus to 0.13.2
+- Updated dependencies [bf31ae9]
+- Updated dependencies [3eee506]
+- Updated dependencies [dfd6b58]
+- Updated dependencies [094128d]
+- Updated dependencies [bf31ae9]
+- Updated dependencies [7a82a45]
+  - @lattice-engine/vrm@2.0.0
+  - @lattice-engine/scene@0.5.0
+  - @lattice-engine/player@3.0.0
+  - @lattice-engine/transform@3.0.0
+  - @lattice-engine/postprocessing@1.0.0
+  - @lattice-engine/physics@2.0.0
+  - @lattice-engine/portal@2.0.0
+  - @lattice-engine/render@2.0.0
+  - @lattice-engine/input@0.3.1
+  - @lattice-engine/orbit@3.0.0
+  - @lattice-engine/utils@3.0.0
+  - @lattice-engine/core@0.2.2
+  - @lattice-engine/gltf@3.0.0
+  - @lattice-engine/text@2.0.0
+  - @lattice-engine/csm@1.0.0
+
 ## 0.3.6
 
 ### Patch Changes

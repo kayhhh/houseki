@@ -1,5 +1,17 @@
 # @lattice-engine/scene
 
+## 0.5.0
+
+### Minor Changes
+
+- 3eee506: simplify material names
+
+### Patch Changes
+
+- 7a82a45: upgrade thyseus to 0.13.2
+- Updated dependencies [7a82a45]
+  - @lattice-engine/core@0.2.2
+
 ## 0.4.0
 
 ### Minor Changes
