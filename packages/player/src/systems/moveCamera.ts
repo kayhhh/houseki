@@ -4,11 +4,7 @@ import { Parent, Transform } from "@lattice-engine/scene";
 import { Quaternion, Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
-import {
-  PlayerBody,
-  PlayerCamera,
-  TargetPosition as TargetTranslation,
-} from "../components";
+import { PlayerBody, PlayerCamera, TargetTranslation } from "../components";
 import { PlayerCameraView } from "../types";
 import { lerp } from "../utils/lerp";
 

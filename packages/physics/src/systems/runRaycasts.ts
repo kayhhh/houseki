@@ -9,29 +9,29 @@ export function runRaycasts(
   raycasters: Query<[Entity, Mut<Raycast>]>
 ) {
   for (const [entity, raycast] of raycasters) {
-    let object = physicsStore.rays.get(entity.id);
+    let ray = physicsStore.rays.get(entity.id);
 
-    if (!object) {
+    if (!ray) {
       const origin = raycast.origin.toObject();
       const direction = raycast.direction.toObject();
 
-      object = new Ray(origin, direction);
-      physicsStore.rays.set(entity.id, object);
+      ray = new Ray(origin, direction);
+      physicsStore.rays.set(entity.id, ray);
     }
 
-    object.origin.x = raycast.origin.x;
-    object.origin.y = raycast.origin.y;
-    object.origin.z = raycast.origin.z;
+    ray.origin.x = raycast.origin.x;
+    ray.origin.y = raycast.origin.y;
+    ray.origin.z = raycast.origin.z;
 
-    object.dir.x = raycast.direction.x;
-    object.dir.y = raycast.direction.y;
-    object.dir.z = raycast.direction.z;
+    ray.dir.x = raycast.direction.x;
+    ray.dir.y = raycast.direction.y;
+    ray.dir.z = raycast.direction.z;
 
     const rigidBody = physicsStore.getRigidBody(raycast.excludeRigidBodyId);
 
     // Cast the ray
     const hit = physicsStore.world.castRay(
-      object,
+      ray,
       raycast.maxToi,
       raycast.solid,
       undefined,
@@ -43,9 +43,15 @@ export function runRaycasts(
     if (hit) {
       raycast.hit = true;
       raycast.hitToi = hit.toi;
+      raycast.hitEntityId = physicsStore.findColliderEntity(hit.collider) ?? 0n;
+
+      const hitPoint = ray.pointAt(hit.toi);
+      raycast.hitPosition.fromObject(hitPoint);
     } else {
       raycast.hit = false;
       raycast.hitToi = 0;
+      raycast.hitEntityId = 0n;
+      raycast.hitPosition.set(0, 0, 0);
     }
   }
 }

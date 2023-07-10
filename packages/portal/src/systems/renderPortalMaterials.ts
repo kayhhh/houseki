@@ -4,7 +4,7 @@ import { PerspectiveCamera, Vector3 } from "three";
 import { frameCorners } from "three/examples/jsm/utils/CameraUtils";
 import { Entity, Mut, Query, Res } from "thyseus";
 
-import { PortalMaterial } from "../components";
+import { PortalMaterial, PortalTarget } from "../components";
 import { PortalStore } from "../resources";
 
 const cameraPosition = new Vector3();
@@ -15,11 +15,11 @@ const topLeft = new Vector3();
 const portalCamera = new PerspectiveCamera();
 portalCamera.layers.enableAll();
 
-export function renderPortals(
+export function renderPortalMaterials(
   renderStore: Res<Mut<RenderStore>>,
   portalStore: Res<PortalStore>,
   sceneStruct: Res<SceneStruct>,
-  portals: Query<[Entity, PortalMaterial]>
+  portals: Query<[Entity, PortalMaterial, PortalTarget]>
 ) {
   const camera = renderStore.perspectiveCameras.get(sceneStruct.activeCamera);
   if (!camera) return;
@@ -38,17 +38,17 @@ export function renderPortals(
 
   camera.getWorldPosition(cameraPosition);
 
-  for (const [entity, portal] of portals) {
+  for (const [entity, portal, portalTarget] of portals) {
     const object = renderStore.nodes.get(entity.id);
     if (!object) continue;
 
     const renderTarget = portalStore.renderTargets.get(entity.id);
     if (!renderTarget) continue;
 
-    const target = renderStore.nodes.get(portal.targetId);
+    const target = renderStore.nodes.get(portalTarget.id);
     if (!target) continue;
 
-    const targetMesh = renderStore.meshes.get(portal.targetId);
+    const targetMesh = renderStore.meshes.get(portalTarget.id);
     if (!targetMesh) continue;
 
     portalCamera.aspect = portal.renderWidth / portal.renderHeight;

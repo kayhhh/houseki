@@ -436,6 +436,12 @@ importers:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
+      '@lattice-engine/physics':
+        specifier: workspace:^
+        version: link:../physics
+      '@lattice-engine/player':
+        specifier: workspace:^
+        version: link:../player
       '@lattice-engine/render':
         specifier: workspace:^
         version: link:../render

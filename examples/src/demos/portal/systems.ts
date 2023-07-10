@@ -1,7 +1,7 @@
 import { CoreStore, Warehouse } from "lattice-engine/core";
-import { PortalMaterial } from "lattice-engine/portal";
+import { PhysicsConfig } from "lattice-engine/physics";
+import { Portal, PortalRaycast, PortalTarget } from "lattice-engine/portal";
 import {
-  BasicMaterial,
   GlobalTransform,
   Mesh,
   Parent,
@@ -15,17 +15,22 @@ import { createBox } from "../../utils/createBox";
 import { createLights } from "../../utils/createLights";
 import { createPlayer } from "../../utils/createPlayer";
 import { createScene } from "../../utils/createScene";
-import { createBoxGeometry, createPlaneGeometry } from "../../utils/geometry";
+import { createBoxGeometry } from "../../utils/geometry";
 
 export function initScene(
   warehouse: Res<Warehouse>,
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
-  sceneStruct: Res<Mut<SceneStruct>>
+  sceneStruct: Res<Mut<SceneStruct>>,
+  physicsConfig: Res<Mut<PhysicsConfig>>
 ) {
+  physicsConfig.debug = true;
+
   const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
   createLights(commands, sceneId);
   createPlayer([0, 2, 0], rootId, commands, sceneStruct);
+
+  commands.getById(sceneStruct.activeCamera).addType(PortalRaycast);
 
   createBox(commands, warehouse, {
     parentId: rootId,
@@ -33,39 +38,36 @@ export function initScene(
     translation: [0, -1, 0],
   });
 
-  const geometry = createPlaneGeometry(warehouse, 3, 3);
   const transform = new Transform([-2, 0, -4]);
   const parent = new Parent(rootId);
 
-  const portalA = commands
-    .spawn()
+  const portal = new Portal(3, 4);
+
+  const aId = commands
+    .spawn(true)
     .add(transform)
     .addType(GlobalTransform)
     .add(parent)
-    .addType(Mesh)
-    .addType(BasicMaterial)
-    .add(geometry);
+    .add(portal).id;
 
-  const portalB = commands
-    .spawn()
+  const bId = commands
+    .spawn(true)
     .add(transform.set([2, 0, -4]))
     .addType(GlobalTransform)
     .add(parent)
-    .addType(Mesh)
-    .addType(BasicMaterial)
-    .add(geometry);
-
-  dropStruct(geometry);
-
-  const portal = new PortalMaterial();
-
-  portal.targetId = portalB.id;
-  portalA.add(portal);
-
-  portal.targetId = portalA.id;
-  portalB.add(portal);
+    .add(portal).id;
 
   dropStruct(portal);
+
+  const portalTarget = new PortalTarget();
+
+  portalTarget.id = bId;
+  commands.getById(aId).add(portalTarget);
+
+  portalTarget.id = aId;
+  commands.getById(bId).add(portalTarget);
+
+  dropStruct(portalTarget);
 
   const boxGeometry = createBoxGeometry(warehouse);
   const boxMaterial = new StandardMaterial([1, 0.3, 0.3, 1]);

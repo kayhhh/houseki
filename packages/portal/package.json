@@ -27,6 +27,8 @@
   },
   "peerDependencies": {
     "@lattice-engine/core": "workspace:^",
+    "@lattice-engine/physics": "workspace:^",
+    "@lattice-engine/player": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
     "three": "~0.153.0",

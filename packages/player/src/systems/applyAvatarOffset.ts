@@ -4,7 +4,7 @@ import { VrmStore } from "@lattice-engine/vrm";
 import { Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
-import { PlayerAvatar, PlayerCamera, TargetPosition } from "../components";
+import { PlayerAvatar, PlayerCamera, TargetTranslation } from "../components";
 import { PlayerCameraView } from "../types";
 
 const vector3 = new Vector3();
@@ -17,7 +17,7 @@ export function applyAvatarOffset(
   vrmStore: Res<VrmStore>,
   renderStore: Res<RenderStore>,
   avatars: Query<[Entity, Parent], With<PlayerAvatar>>,
-  cameras: Query<[PlayerCamera, Parent, Mut<TargetPosition>]>
+  cameras: Query<[PlayerCamera, Parent, Mut<TargetTranslation>]>
 ) {
   for (const [entity, parent] of avatars) {
     for (const [camera, cameraParent, targetPosition] of cameras) {
