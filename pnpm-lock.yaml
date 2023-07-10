@@ -71,8 +71,8 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.1
-        version: 0.13.1
+        specifier: ^0.13.2
+        version: 0.13.2
       wouter:
         specifier: ^2.11.0
         version: 2.11.0(react@18.2.0)
@@ -5497,6 +5497,12 @@ packages:
     resolution: {integrity: sha512-bORnObHR3bcjvR3KEv4BaMUt59355cSew/owRht5NlyEK/mrQ5/+HGeYI9+OdV9u/IOk9UeY72nHzjd0EIydxg==}
     dependencies:
       esm-env: 1.0.0
+
+  /thyseus@0.13.2:
+    resolution: {integrity: sha512-VCcrhGMAxXLoNuSMWia7QjNC5pRmcgZVcXmoubroB7we5TxXqR1fQ8xgrj+eWUfosXaA/k0atTbsVDLvpUhcFA==}
+    dependencies:
+      esm-env: 1.0.0
+    dev: false
 
   /titleize@3.0.0:
     resolution: {integrity: sha512-KxVu8EYHDPBdUYdKZdKtU2aj2XfEx9AfjXxE/Aj0vT06w2icA09Vus1rh6eSu1y01akYg6BjIK/hxyLJINoMLQ==}
