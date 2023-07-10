@@ -13,6 +13,7 @@ const bottomLeft = new Vector3();
 const bottomRight = new Vector3();
 const topLeft = new Vector3();
 const portalCamera = new PerspectiveCamera();
+portalCamera.layers.enableAll();
 
 export function renderPortals(
   renderStore: Res<Mut<RenderStore>>,
