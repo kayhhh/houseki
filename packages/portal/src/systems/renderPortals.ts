@@ -7,6 +7,7 @@ import { Entity, Mut, Query, Res } from "thyseus";
 import { PortalMaterial } from "../components";
 import { PortalStore } from "../resources";
 
+const cameraPosition = new Vector3();
 const reflected = new Vector3();
 const bottomLeft = new Vector3();
 const bottomRight = new Vector3();
@@ -34,6 +35,8 @@ export function renderPortals(
   renderStore.renderer.shadowMap.autoUpdate = false;
   renderStore.renderer.autoClear = false;
 
+  camera.getWorldPosition(cameraPosition);
+
   for (const [entity, portal] of portals) {
     const object = renderStore.nodes.get(entity.id);
     if (!object) continue;
@@ -51,7 +54,7 @@ export function renderPortals(
     portalCamera.updateProjectionMatrix();
 
     // Set the portal camera position to be reflected across the portal
-    object.worldToLocal(reflected.copy(camera.position));
+    object.worldToLocal(reflected.copy(cameraPosition));
     reflected.x *= -1;
     reflected.z *= -1;
     target.localToWorld(reflected);
