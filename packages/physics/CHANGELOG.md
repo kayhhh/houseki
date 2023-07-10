@@ -1,5 +1,15 @@
 # @lattice-engine/physics
 
+## 2.0.0
+
+### Patch Changes
+
+- 7a82a45: upgrade thyseus to 0.13.2
+- Updated dependencies [3eee506]
+- Updated dependencies [7a82a45]
+  - @lattice-engine/scene@0.5.0
+  - @lattice-engine/core@0.2.2
+
 ## 1.0.0
 
 ### Patch Changes
