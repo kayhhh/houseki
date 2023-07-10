@@ -8,7 +8,7 @@ import { Asset, Warehouse } from "@lattice-engine/core";
 import {
   Image,
   MaterialAlphaMode,
-  MeshStandardMaterial,
+  StandardMaterial,
   TextureInfo,
 } from "@lattice-engine/scene";
 import { Commands, dropStruct } from "thyseus";
@@ -24,7 +24,7 @@ export function importMaterial(
   const cached = context.materials.get(gltfMaterial);
   if (cached) return cached;
 
-  const material = new MeshStandardMaterial();
+  const material = new StandardMaterial();
 
   material.doubleSided = gltfMaterial.getDoubleSided();
   material.alphaCutoff = gltfMaterial.getAlphaCutoff();

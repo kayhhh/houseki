@@ -1,11 +1,11 @@
 import { Commands, Entity, EventReader, Query, With } from "thyseus";
 
 import {
+  BasicMaterial,
   Image,
   Mesh,
-  MeshBasicMaterial,
-  MeshStandardMaterial,
   Parent,
+  StandardMaterial,
   Transform,
 } from "../components";
 import { DeepRemove } from "../events";
@@ -15,8 +15,8 @@ export function deepRemove(
   events: EventReader<DeepRemove>,
   nodes: Query<[Entity, Parent], With<Transform>>,
   meshes: Query<[Entity, Mesh]>,
-  basicMaterials: Query<Entity, With<MeshBasicMaterial>>,
-  standardMaterials: Query<[Entity, MeshStandardMaterial]>,
+  basicMaterials: Query<Entity, With<BasicMaterial>>,
+  standardMaterials: Query<[Entity, StandardMaterial]>,
   images: Query<Entity, With<Image>>
 ) {
   if (events.length === 0) return;

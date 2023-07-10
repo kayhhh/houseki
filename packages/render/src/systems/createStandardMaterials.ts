@@ -1,6 +1,6 @@
 import {
   MaterialAlphaMode,
-  MeshStandardMaterial,
+  StandardMaterial,
   TextureInfo,
 } from "@lattice-engine/scene";
 import {
@@ -11,7 +11,7 @@ import {
   LinearFilter,
   LinearMipMapLinearFilter,
   LinearMipMapNearestFilter,
-  MeshStandardMaterial as ThreeMaterial,
+  MeshStandardMaterial,
   MirroredRepeatWrapping,
   NearestFilter,
   NearestMipMapLinearFilter,
@@ -26,9 +26,9 @@ import { WEBGL_CONSTANTS } from "../constants";
 import { RenderStore } from "../resources";
 import { disposeMaterial } from "../utils/dispose";
 
-export function createMeshStandardMaterials(
+export function createStandardMaterials(
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, MeshStandardMaterial]>
+  entities: Query<[Entity, StandardMaterial]>
 ) {
   const ids: bigint[] = [];
 
@@ -39,7 +39,7 @@ export function createMeshStandardMaterials(
 
     // Create new objects
     if (!object) {
-      object = new ThreeMaterial();
+      object = new MeshStandardMaterial();
       renderStore.standardMaterials.set(entity.id, object);
     }
 

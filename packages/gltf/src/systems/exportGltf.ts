@@ -16,10 +16,10 @@ import {
   Geometry,
   Image,
   Mesh,
-  MeshStandardMaterial,
   Name,
   Parent,
   Scene,
+  StandardMaterial,
   Transform,
 } from "@lattice-engine/scene";
 import { Text } from "@lattice-engine/text";
@@ -80,7 +80,7 @@ export function exportGltf(
   scenes: Query<[Entity, Scene]>,
   nodes: Query<[Entity, Parent, Transform]>,
   meshes: Query<[Entity, Mesh, Geometry]>,
-  materials: Query<[Entity, MeshStandardMaterial]>,
+  materials: Query<[Entity, StandardMaterial]>,
   images: Query<[Entity, Asset], With<Image>>,
   staticBodies: Query<Entity, With<StaticBody>>,
   dynamicBodies: Query<[Entity, DynamicBody]>,

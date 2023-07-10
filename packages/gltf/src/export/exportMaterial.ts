@@ -2,7 +2,7 @@ import { GLTF, TextureInfo as GltfTextureInfo } from "@gltf-transform/core";
 import { KHRTextureTransform } from "@gltf-transform/extensions";
 import {
   MaterialAlphaMode,
-  MeshStandardMaterial,
+  StandardMaterial,
   TextureInfo,
 } from "@lattice-engine/scene";
 
@@ -11,7 +11,7 @@ import { ExportContext } from "./context";
 export function exportMaterial(
   context: ExportContext,
   entityId: bigint,
-  material: MeshStandardMaterial
+  material: StandardMaterial
 ) {
   const gltfMaterial = context.doc.createMaterial();
 

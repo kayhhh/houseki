@@ -1,17 +1,13 @@
-import { MeshBasicMaterial } from "@lattice-engine/scene";
-import {
-  DoubleSide,
-  FrontSide,
-  MeshBasicMaterial as ThreeMaterial,
-} from "three";
+import { BasicMaterial } from "@lattice-engine/scene";
+import { DoubleSide, FrontSide, MeshBasicMaterial } from "three";
 import { Entity, Query, Res } from "thyseus";
 
 import { RenderStore } from "../resources";
 import { disposeMaterial } from "../utils/dispose";
 
-export function createMeshBasicMaterials(
+export function createBasicMaterials(
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, MeshBasicMaterial]>
+  entities: Query<[Entity, BasicMaterial]>
 ) {
   const ids: bigint[] = [];
 
@@ -22,7 +18,7 @@ export function createMeshBasicMaterials(
 
     // Create new objects
     if (!object) {
-      object = new ThreeMaterial();
+      object = new MeshBasicMaterial();
       renderStore.basicMaterials.set(entity.id, object);
     }
 

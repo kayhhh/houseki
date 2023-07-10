@@ -5,8 +5,8 @@ import {
   GlobalTransform,
   Image,
   Mesh,
-  MeshStandardMaterial,
   Parent,
+  StandardMaterial,
   Transform,
 } from "lattice-engine/scene";
 import { Commands, dropStruct } from "thyseus";
@@ -38,7 +38,7 @@ const materials = new Map<number, Map<number, bigint>>();
 function createMaterial(commands: Commands, scaleX: number, scaleZ: number) {
   const textureId = getTextureId(commands);
 
-  const material = new MeshStandardMaterial();
+  const material = new StandardMaterial();
   material.roughness = 1;
   material.metalness = 0;
   material.baseColorTextureId = textureId;

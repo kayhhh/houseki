@@ -1,12 +1,12 @@
 import { CoreStore, Warehouse } from "lattice-engine/core";
 import { PortalMaterial } from "lattice-engine/portal";
 import {
+  BasicMaterial,
   GlobalTransform,
   Mesh,
-  MeshBasicMaterial,
-  MeshStandardMaterial,
   Parent,
   SceneStruct,
+  StandardMaterial,
   Transform,
 } from "lattice-engine/scene";
 import { Commands, dropStruct, Mut, Res } from "thyseus";
@@ -36,7 +36,7 @@ export function initScene(
     .addType(GlobalTransform)
     .add(parent)
     .addType(Mesh)
-    .addType(MeshBasicMaterial)
+    .addType(BasicMaterial)
     .add(geometry);
 
   const portalB = commands
@@ -45,7 +45,7 @@ export function initScene(
     .addType(GlobalTransform)
     .add(parent)
     .addType(Mesh)
-    .addType(MeshBasicMaterial)
+    .addType(BasicMaterial)
     .add(geometry);
 
   dropStruct(geometry);
@@ -61,7 +61,7 @@ export function initScene(
   dropStruct(portal);
 
   const boxGeometry = createBoxGeometry(warehouse);
-  const boxMaterial = new MeshStandardMaterial([1, 0.3, 0.3, 1]);
+  const boxMaterial = new StandardMaterial([1, 0.3, 0.3, 1]);
 
   commands
     .spawn(true)

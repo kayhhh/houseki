@@ -8,9 +8,9 @@ import {
 import {
   GlobalTransform,
   Mesh,
-  MeshStandardMaterial,
   Parent,
   SceneStruct,
+  StandardMaterial,
   Transform,
 } from "lattice-engine/scene";
 import { Commands, dropStruct, Mut, Res } from "thyseus";
@@ -40,7 +40,7 @@ export function initScene(
   commands.getById(roomId).add(parent);
 
   // Add dynamic balls
-  const materialComponent = new MeshStandardMaterial([1, 0.2, 0.5, 1], 0, 0);
+  const materialComponent = new StandardMaterial([1, 0.2, 0.5, 1], 0, 0);
   const materialId = commands.spawn(true).add(materialComponent).id;
   dropStruct(materialComponent);
 

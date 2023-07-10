@@ -4,18 +4,18 @@ import { run, WorldBuilder } from "thyseus";
 import { createAmbientLights } from "./systems/createAmbientLights";
 import { createAnimationClips } from "./systems/createAnimationClips";
 import { createAnimationMixers } from "./systems/createAnimationMixers";
+import { createBasicMaterials } from "./systems/createBasicMaterials";
 import { createCameras } from "./systems/createCameras";
 import { createDirectionalLights } from "./systems/createDirectionalLights";
 import { createGeometries } from "./systems/createGeometries";
 import { createImages } from "./systems/createImages";
 import { createKeyframeTracks } from "./systems/createKeyframeTracks";
 import { createLineMaterials } from "./systems/createLineMaterials";
-import { createMeshBasicMaterials } from "./systems/createMeshBasicMaterials";
 import { createMeshes } from "./systems/createMeshes";
-import { createMeshStandardMaterials } from "./systems/createMeshStandardMaterials";
 import { createNodes } from "./systems/createNodes";
 import { createScenes } from "./systems/createScenes";
 import { createShadowMaps } from "./systems/createShadowMaps";
+import { createStandardMaterials } from "./systems/createStandardMaterials";
 import { playAnimations } from "./systems/playAnimations";
 import { renderCanvas } from "./systems/renderCanvas";
 import { saveAnimations } from "./systems/saveAnimations";
@@ -29,8 +29,8 @@ export function renderPlugin(builder: WorldBuilder) {
       ...run.chain(
         createImages,
         [
-          createMeshBasicMaterials,
-          createMeshStandardMaterials,
+          createBasicMaterials,
+          createStandardMaterials,
           createLineMaterials,
           createGeometries,
         ],
