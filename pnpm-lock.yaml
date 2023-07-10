@@ -239,9 +239,6 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@lattice-engine/test':
-        specifier: workspace:^
-        version: link:../test
       '@lattice-engine/text':
         specifier: workspace:^
         version: link:../text
@@ -522,28 +519,6 @@ importers:
       gl-matrix:
         specifier: ^4.0.0-beta.1
         version: 4.0.0-beta.1
-      thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
-    devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
-      rollup-plugin-peer-deps-external:
-        specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
-      typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
-      vite:
-        specifier: ^4.4.2
-        version: 4.4.2
-      vite-plugin-dts:
-        specifier: ^3.2.0
-        version: 3.2.0(typescript@5.1.6)
-
-  packages/test:
-    dependencies:
       thyseus:
         specifier: ^0.13.2
         version: 0.13.2
