@@ -16,7 +16,7 @@
     "three": "~0.153.0",
     "thyseus": "^0.13.1",
     "wouter": "^2.11.0",
-    "zustand": "^4.3.8"
+    "zustand": "^4.3.9"
   },
   "devDependencies": {
     "@gltf-transform/core": "^3.4.5",
