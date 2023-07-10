@@ -96,8 +96,8 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       '@vitejs/plugin-react':
-        specifier: ^4.0.1
-        version: 4.0.1(vite@4.4.2)
+        specifier: ^4.0.2
+        version: 4.0.2(vite@4.4.2)
       eslint:
         specifier: ^8.44.0
         version: 8.44.0
@@ -2311,8 +2311,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@vitejs/plugin-react@4.0.1(vite@4.4.2):
-    resolution: {integrity: sha512-g25lL98essfeSj43HJ0o4DMp0325XK0ITkxpgChzJU/CyemgyChtlxfnRbjfwxDGCTRxTiXtQAsdebQXKMRSOA==}
+  /@vitejs/plugin-react@4.0.2(vite@4.4.2):
+    resolution: {integrity: sha512-zbnVp3Esfg33zDaoLrjxG+p/dPiOtpvJA+1oOEQwSxMMTRL9zi1eghIcd2WtLjkcKnPsa3S15LzS/OzDn2BOCA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.2.0
