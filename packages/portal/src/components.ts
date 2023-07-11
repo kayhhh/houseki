@@ -32,7 +32,7 @@ export class PortalMaterial {
   @struct.f32 declare renderWidth: number;
   @struct.f32 declare renderHeight: number;
 
-  constructor(renderWidth = 512, renderHeight = 512) {
+  constructor(renderWidth = 1024, renderHeight = 1024) {
     initStruct(this);
 
     this.renderWidth = renderWidth;

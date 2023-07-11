@@ -9,6 +9,7 @@ import {
   StandardMaterial,
   Transform,
 } from "lattice-engine/scene";
+import { Quaternion, Vector3 } from "three";
 import { Commands, dropStruct, Mut, Res } from "thyseus";
 
 import { createBox } from "../../utils/createBox";
@@ -43,16 +44,32 @@ export function initScene(
 
   const portal = new Portal(3, 3);
 
+  const up = new Vector3(0, 1, 0);
+  const quaternion = new Quaternion();
+  quaternion.setFromAxisAngle(up, Math.PI / 2.5);
+
   const aId = commands
     .spawn(true)
-    .add(transform.set([-2, 1, -4]))
+    .add(
+      transform.set(
+        [-4, 1, -4],
+        [quaternion.x, quaternion.y, quaternion.z, quaternion.w]
+      )
+    )
     .addType(GlobalTransform)
     .add(parent)
     .add(portal).id;
 
+  quaternion.setFromAxisAngle(up, -Math.PI / 4);
+
   const bId = commands
     .spawn(true)
-    .add(transform.set([2, 1, -2]))
+    .add(
+      transform.set(
+        [4, 1, -2],
+        [quaternion.x, quaternion.y, quaternion.z, quaternion.w]
+      )
+    )
     .addType(GlobalTransform)
     .add(parent)
     .add(portal).id;

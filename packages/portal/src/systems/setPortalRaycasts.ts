@@ -34,33 +34,6 @@ export function setPortalRaycasts(
       portalRaycast.enterPortalId = portalEnt.id;
       portalRaycast.exitPortalId = portalTarget.id;
 
-      // Get relative position of raycast hit to portal
-      quaternion_a.set(
-        portalEnterGlobal.rotation.x,
-        portalEnterGlobal.rotation.y,
-        portalEnterGlobal.rotation.z,
-        portalEnterGlobal.rotation.w
-      );
-
-      vec3_a.set(
-        raycast1.hitPosition.x,
-        raycast1.hitPosition.y,
-        raycast1.hitPosition.z
-      );
-
-      vec3_b.set(
-        portalEnterGlobal.translation.x,
-        portalEnterGlobal.translation.y,
-        portalEnterGlobal.translation.z
-      );
-
-      vec3_a.sub(vec3_b);
-      vec3_a.applyQuaternion(quaternion_a);
-
-      const relativeX = -vec3_a.x; // Mirror x
-      const relativeY = vec3_a.y;
-      const relativeZ = vec3_a.z;
-
       // Get portal raycast
       for (const [raycastEnt, raycast2] of raycasts) {
         if (portalRaycast.raycastId !== raycastEnt.id) continue;
@@ -73,19 +46,42 @@ export function setPortalRaycasts(
         for (const [targetEnt, , portalExitGlobal] of portals) {
           if (targetEnt.id !== portalTarget.id) continue;
 
-          // Set raycast origin to the other side of the portal
-          quaternion_b
+          // 1. Get relative position of raycast hit on entrance portal
+          quaternion_a
             .set(
-              portalExitGlobal.rotation.x,
-              portalExitGlobal.rotation.y,
-              portalExitGlobal.rotation.z,
-              portalExitGlobal.rotation.w
+              portalEnterGlobal.rotation.x,
+              portalEnterGlobal.rotation.y,
+              portalEnterGlobal.rotation.z,
+              portalEnterGlobal.rotation.w
             )
             .invert();
 
-          vec3_a.set(relativeX, relativeY, relativeZ);
+          vec3_a.set(
+            raycast1.hitPosition.x,
+            raycast1.hitPosition.y,
+            raycast1.hitPosition.z
+          );
 
-          vec3_a.applyQuaternion(quaternion_b);
+          vec3_b.set(
+            portalEnterGlobal.translation.x,
+            portalEnterGlobal.translation.y,
+            portalEnterGlobal.translation.z
+          );
+
+          vec3_a.sub(vec3_b);
+          vec3_a.applyQuaternion(quaternion_a);
+
+          // Mirror relative position
+          vec3_a.x *= -1;
+          vec3_a.z *= -1;
+
+          // 2. Set raycast2 origin to the other side of the portal
+          quaternion_b.set(
+            portalExitGlobal.rotation.x,
+            portalExitGlobal.rotation.y,
+            portalExitGlobal.rotation.z,
+            portalExitGlobal.rotation.w
+          );
 
           vec3_b.set(
             portalExitGlobal.translation.x,
@@ -93,25 +89,36 @@ export function setPortalRaycasts(
             portalExitGlobal.translation.z
           );
 
+          vec3_a.applyQuaternion(quaternion_b);
           vec3_a.add(vec3_b);
 
           raycast2.origin.x = vec3_a.x;
           raycast2.origin.y = vec3_a.y;
           raycast2.origin.z = vec3_a.z;
 
-          // Set raycast direction to the other side of the portal
+          // 3. Set raycast2 direction, rotated through the portals
           vec3_a.set(
             raycast1.direction.x,
             raycast1.direction.y,
             raycast1.direction.z
           );
 
+          quaternion_b.set(
+            portalExitGlobal.rotation.x,
+            portalExitGlobal.rotation.y,
+            portalExitGlobal.rotation.z,
+            portalExitGlobal.rotation.w
+          );
+
+          vec3_a.applyQuaternion(quaternion_a);
           vec3_a.applyQuaternion(quaternion_b);
 
-          // TODO: Negative Z might be magic? might need to rotate by portals better
+          // Add a dash of magic 🪄
+          vec3_a.z *= -1;
+
           raycast2.direction.x = vec3_a.x;
           raycast2.direction.y = vec3_a.y;
-          raycast2.direction.z = -vec3_a.z;
+          raycast2.direction.z = vec3_a.z;
         }
       }
     }
