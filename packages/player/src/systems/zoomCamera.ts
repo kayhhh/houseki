@@ -1,10 +1,10 @@
 import { Time } from "@lattice-engine/core";
 import { OnWheelEvent } from "@lattice-engine/input";
+import { lerp } from "three/src/math/MathUtils";
 import { EventReader, Mut, Query, Res } from "thyseus";
 
 import { PlayerCamera } from "../components";
 import { PlayerCameraMode, PlayerCameraView } from "../types";
-import { lerp } from "../utils/lerp";
 
 const MIN_CAMERA_DISTANCE = 1;
 const MAX_CAMERA_DISTANCE = 10;

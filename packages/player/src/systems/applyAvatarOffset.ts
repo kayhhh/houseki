@@ -20,7 +20,7 @@ export function applyAvatarOffset(
   cameras: Query<[PlayerCamera, Parent, Mut<TargetTranslation>]>
 ) {
   for (const [entity, parent] of avatars) {
-    for (const [camera, cameraParent, targetPosition] of cameras) {
+    for (const [camera, cameraParent, targetTranslation] of cameras) {
       // Find camera that is attached to the same player body
       if (cameraParent.id !== parent.id) continue;
 
@@ -52,7 +52,7 @@ export function applyAvatarOffset(
       const body = renderStore.nodes.get(parent.id);
       if (body) vector3.sub(body.getWorldPosition(vector3b));
 
-      targetPosition.fromObject(vector3);
+      targetTranslation.fromObject(vector3);
     }
   }
 }

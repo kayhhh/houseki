@@ -1,6 +1,4 @@
-import { Time } from "@lattice-engine/core";
 import { InputStruct, PointerMoveEvent } from "@lattice-engine/input";
-import { Transform } from "@lattice-engine/scene";
 import { Euler, Quaternion } from "three";
 import { EventReader, Mut, Query, Res } from "thyseus";
 
@@ -10,23 +8,19 @@ import { PlayerCameraView } from "../types";
 const SENSITIVITY = 0.002;
 const SENSITIVITY_NO_POINTER_LOCK = SENSITIVITY * 2;
 
-const FIRST_PERSON_SLERP = 1e-17;
 const MIN_FIRST_PERSON_ANGLE = Math.PI / 10;
 const MAX_FIRST_PERSON_ANGLE = Math.PI - MIN_FIRST_PERSON_ANGLE;
 
-const THIRD_PERSON_SLERP = 1e-13;
 const MIN_THIRD_PERSON_ANGLE = 0;
 const MAX_THIRD_PERSON_ANGLE = Math.PI;
 
 const euler = new Euler(0, 0, 0, "YXZ");
 const quaternion = new Quaternion();
-const quaternion2 = new Quaternion();
 
 export function rotateCamera(
-  time: Res<Time>,
   inputStruct: Res<InputStruct>,
   pointerMoveReader: EventReader<PointerMoveEvent>,
-  entities: Query<[PlayerCamera, Mut<TargetRotation>, Mut<Transform>]>
+  entities: Query<[PlayerCamera, Mut<TargetRotation>]>
 ) {
   const rotate = inputStruct.enablePointerLock
     ? inputStruct.isPointerLocked
@@ -41,14 +35,14 @@ export function rotateCamera(
     if (!rotate) continue;
 
     for (const [camera, targetRotation] of entities) {
-      euler.setFromQuaternion(
-        quaternion.set(
-          targetRotation.x,
-          targetRotation.y,
-          targetRotation.z,
-          targetRotation.w
-        )
+      quaternion.set(
+        targetRotation.x,
+        targetRotation.y,
+        targetRotation.z,
+        targetRotation.w
       );
+
+      euler.setFromQuaternion(quaternion);
 
       euler.y -= event.movementX * sensitivity;
       euler.x -= event.movementY * sensitivity;
@@ -71,32 +65,5 @@ export function rotateCamera(
 
       targetRotation.fromObject(quaternion);
     }
-  }
-
-  // Slerp towards target rotation
-  for (const [camera, targetRotation, transform] of entities) {
-    quaternion2.set(
-      targetRotation.x,
-      targetRotation.y,
-      targetRotation.z,
-      targetRotation.w
-    );
-
-    const slerpStrength =
-      camera.currentView === PlayerCameraView.FirstPerson
-        ? FIRST_PERSON_SLERP
-        : THIRD_PERSON_SLERP;
-    const K = 1 - Math.pow(slerpStrength, time.mainDelta);
-
-    quaternion
-      .set(
-        transform.rotation.x,
-        transform.rotation.y,
-        transform.rotation.z,
-        transform.rotation.w
-      )
-      .slerp(quaternion2, K);
-
-    transform.rotation.fromObject(quaternion);
   }
 }

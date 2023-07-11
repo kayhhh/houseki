@@ -30,7 +30,7 @@ export function runRaycasts(
     const rigidBody = physicsStore.getRigidBody(raycast.excludeRigidBodyId);
 
     // Cast the ray
-    const hit = physicsStore.world.castRay(
+    const hit = physicsStore.world.castRayAndGetNormal(
       ray,
       raycast.maxToi,
       raycast.solid,
@@ -44,6 +44,8 @@ export function runRaycasts(
       raycast.hit = true;
       raycast.hitToi = hit.toi;
       raycast.hitEntityId = physicsStore.findColliderEntity(hit.collider) ?? 0n;
+
+      raycast.hitNormal.fromObject(hit.normal);
 
       const hitPoint = ray.pointAt(hit.toi);
       raycast.hitPosition.fromObject(hitPoint);

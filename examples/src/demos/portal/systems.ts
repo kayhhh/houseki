@@ -38,21 +38,21 @@ export function initScene(
     translation: [0, -1, 0],
   });
 
-  const transform = new Transform([-2, 0, -4]);
+  const transform = new Transform();
   const parent = new Parent(rootId);
 
-  const portal = new Portal(3, 4);
+  const portal = new Portal(3, 3);
 
   const aId = commands
     .spawn(true)
-    .add(transform)
+    .add(transform.set([-2, 1, -4]))
     .addType(GlobalTransform)
     .add(parent)
     .add(portal).id;
 
   const bId = commands
     .spawn(true)
-    .add(transform.set([2, 0, -4]))
+    .add(transform.set([2, 1, -2]))
     .addType(GlobalTransform)
     .add(parent)
     .add(portal).id;
@@ -72,6 +72,7 @@ export function initScene(
   const boxGeometry = createBoxGeometry(warehouse);
   const boxMaterial = new StandardMaterial([1, 0.3, 0.3, 1]);
 
+  // Red box
   commands
     .spawn(true)
     .add(transform.set([-1, 0, 2]))
@@ -83,6 +84,7 @@ export function initScene(
 
   boxMaterial.baseColor.set(0.6, 1, 0.4, 1);
 
+  // Green box
   commands
     .spawn(true)
     .add(transform.set([1, 0, 2]))
