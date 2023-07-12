@@ -14,7 +14,7 @@ import {
 import { Portal, PortalMaterial } from "../components";
 import { createPlaneGeometry } from "../utils/geometry";
 
-const PORTAL_DEPTH = 0.05;
+const PORTAL_DEPTH = 0.01;
 
 export function createPortals(
   commands: Commands,
@@ -37,15 +37,18 @@ export function createPortals(
       portal.height
     );
 
+    const basic = new BasicMaterial();
+
     commands
       .get(entity)
       .add(collider)
       .addType(StaticBody)
       .add(geometry)
       .addType(Mesh)
-      .addType(BasicMaterial)
+      .add(basic)
       .addType(PortalMaterial);
 
+    dropStruct(basic);
     dropStruct(geometry);
   }
 

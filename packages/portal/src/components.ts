@@ -28,17 +28,7 @@ export class PortalTarget {
 }
 
 @struct
-export class PortalMaterial {
-  @struct.f32 declare renderWidth: number;
-  @struct.f32 declare renderHeight: number;
-
-  constructor(renderWidth = 1024, renderHeight = 1024) {
-    initStruct(this);
-
-    this.renderWidth = renderWidth;
-    this.renderHeight = renderHeight;
-  }
-}
+export class PortalMaterial {}
 
 /**
  * Attach to an entity with a {@link Raycast} to move the raycast through portals.

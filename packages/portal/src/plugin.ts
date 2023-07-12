@@ -7,7 +7,6 @@ import { renderCanvas } from "@lattice-engine/render";
 import { updateGlobalTransforms } from "@lattice-engine/scene";
 import { run, WorldBuilder } from "thyseus";
 
-import { createPortalMaterials } from "./systems/createPortalMaterials";
 import { createPortals } from "./systems/createPortals";
 import { initPortalRaycasts } from "./systems/initPortalRaycasts";
 import { lerpTargetTranslation2 } from "./systems/lerpTargetTranslation2";
@@ -24,7 +23,6 @@ import { slerpTargetRotation2 } from "./systems/slerpTargetRotation2";
 export function portalPlugin(builder: WorldBuilder) {
   builder
     .addSystems(
-      createPortalMaterials,
       createPortals,
       initPortalRaycasts,
 

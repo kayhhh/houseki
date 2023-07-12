@@ -46,6 +46,11 @@ export class RenderStore {
   readonly ambientLights = new Map<EntityID, AmbientLight>();
   readonly directionalLights = new Map<EntityID, DirectionalLight>();
 
+  constructor() {
+    this.materials[Symbol.iterator] =
+      this.materials[Symbol.iterator].bind(this);
+  }
+
   getMaterial(id: EntityID) {
     return (
       this.standardMaterials.get(id) ??
@@ -53,6 +58,14 @@ export class RenderStore {
       this.lineMaterials.get(id)
     );
   }
+
+  readonly materials = {
+    [Symbol.iterator]: function* (this: RenderStore) {
+      for (const material of this.standardMaterials.values()) yield material;
+      for (const material of this.basicMaterials.values()) yield material;
+      for (const material of this.lineMaterials.values()) yield material;
+    },
+  };
 }
 
 @struct

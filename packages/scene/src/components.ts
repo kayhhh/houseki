@@ -232,6 +232,14 @@ export class StandardMaterial {
 @struct
 export class BasicMaterial {
   @struct.bool declare doubleSided: boolean;
+  @struct.bool declare colorWrite: boolean;
+
+  constructor() {
+    initStruct(this);
+
+    this.doubleSided = false;
+    this.colorWrite = true;
+  }
 }
 
 @struct

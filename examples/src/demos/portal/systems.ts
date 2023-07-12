@@ -35,7 +35,7 @@ export function initScene(
 
   createBox(commands, warehouse, {
     parentId: rootId,
-    size: [10, 1, 10],
+    size: [30, 1, 30],
     translation: [0, -1, 0],
   });
 
@@ -52,7 +52,7 @@ export function initScene(
     .spawn(true)
     .add(
       transform.set(
-        [-4, 1, -4],
+        [0, 1, -6],
         [quaternion.x, quaternion.y, quaternion.z, quaternion.w]
       )
     )
@@ -92,7 +92,7 @@ export function initScene(
   // Red box
   commands
     .spawn(true)
-    .add(transform.set([-1, 0, 2]))
+    .add(transform.set([-1, 0, 2], [0, 0, 0, 1]))
     .addType(GlobalTransform)
     .add(parent)
     .addType(Mesh)
