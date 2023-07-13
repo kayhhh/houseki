@@ -19,6 +19,7 @@ import { createSkybox } from "./systems/createSkybox";
 import { createStandardMaterials } from "./systems/createStandardMaterials";
 import { playAnimations } from "./systems/playAnimations";
 import { renderCanvas } from "./systems/renderCanvas";
+import { renderClearPass } from "./systems/renderClearPass";
 import { saveAnimations } from "./systems/saveAnimations";
 
 /**
@@ -48,5 +49,8 @@ export function renderPlugin(builder: WorldBuilder) {
         saveAnimations
       )
     )
-    .addSystemsToSchedule(LatticeSchedules.Render, renderCanvas);
+    .addSystemsToSchedule(
+      LatticeSchedules.Render,
+      ...run.chain(renderClearPass, renderCanvas)
+    );
 }

@@ -104,8 +104,6 @@ export function renderPortalMaterials(
   renderStore.renderer.shadowMap.autoUpdate = false; // Avoid re-computing shadows
   renderStore.renderer.autoClear = false;
 
-  clear(true, true, true);
-
   camera.getWorldPosition(cameraPosition);
   camera.updateMatrixWorld(true);
   camera.matrixAutoUpdate = false;

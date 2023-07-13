@@ -3,7 +3,7 @@ import {
   lerpTargetTranslation,
   slerpTargetRotation,
 } from "@lattice-engine/player";
-import { renderCanvas } from "@lattice-engine/render";
+import { renderCanvas, renderClearPass } from "@lattice-engine/render";
 import { updateGlobalTransforms } from "@lattice-engine/scene";
 import { run, WorldBuilder } from "thyseus";
 
@@ -42,6 +42,6 @@ export function portalPlugin(builder: WorldBuilder) {
     .addSystemsToSchedule(LatticeSchedules.PostFixedUpdate, setPortalRaycasts)
     .addSystemsToSchedule(
       LatticeSchedules.Render,
-      run(renderPortalMaterials).before(renderCanvas)
+      run(renderPortalMaterials).after(renderClearPass).before(renderCanvas)
     );
 }
