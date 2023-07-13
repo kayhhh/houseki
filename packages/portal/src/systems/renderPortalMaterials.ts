@@ -12,7 +12,6 @@ import {
   LessEqualStencilFunc,
   Material,
   Matrix4,
-  Mesh,
   MeshBasicMaterial,
   NotEqualStencilFunc,
   Object3D,
@@ -27,11 +26,11 @@ import {
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
 import { PortalMaterial, PortalTarget } from "../components";
+import { traverseMaterials } from "../utils/traverseMaterials";
 
 const cameraPosition = new Vector3();
 const exitCamera = new PerspectiveCamera();
 const group = new Object3D();
-const tempScene = new Scene();
 
 const INCREMENT_STENCIL_MAT = new MeshBasicMaterial();
 INCREMENT_STENCIL_MAT.colorWrite = false;
@@ -43,6 +42,7 @@ INCREMENT_STENCIL_MAT.stencilWrite = true;
 
 const DECREMENT_STENCIL_MAT = new MeshBasicMaterial();
 DECREMENT_STENCIL_MAT.colorWrite = false;
+DECREMENT_STENCIL_MAT.depthTest = false;
 DECREMENT_STENCIL_MAT.depthWrite = false;
 DECREMENT_STENCIL_MAT.stencilFail = DecrementStencilOp;
 DECREMENT_STENCIL_MAT.stencilFunc = NotEqualStencilFunc;
@@ -57,20 +57,11 @@ const materialSettings = new Map<Material, Partial<MatSettings>>();
 let store: RenderStore;
 let delta: number;
 
-const clearAllPass = new ClearPass(true, true, true);
-const clearDepthPass = new ClearPass(false, true, false);
+const clearPass = new ClearPass();
 
-function clearAll() {
-  clearAllPass.render(
-    store.renderer,
-    store.composer.inputBuffer,
-    store.composer.outputBuffer,
-    delta
-  );
-}
-
-function clearDepth() {
-  clearDepthPass.render(
+function clear(color: boolean, depth: boolean, stencil: boolean) {
+  clearPass.setClearFlags(color, depth, stencil);
+  clearPass.render(
     store.renderer,
     store.composer.inputBuffer,
     store.composer.outputBuffer,
@@ -92,7 +83,7 @@ type MatSettings = {
   depthTest: boolean;
 };
 
-type Portal = [entranceObj: Object3D, exitObj: Object3D, distance: number];
+type Portal = [entranceObj: Object3D, exitObj: Object3D];
 
 export function renderPortalMaterials(
   time: Res<Time>,
@@ -112,9 +103,8 @@ export function renderPortalMaterials(
   renderStore.renderer.localClippingEnabled = true;
   renderStore.renderer.shadowMap.autoUpdate = false; // Avoid re-computing shadows
   renderStore.renderer.autoClear = false;
-  renderStore.renderer.clear();
 
-  clearAll();
+  clear(true, true, true);
 
   camera.getWorldPosition(cameraPosition);
   camera.updateMatrixWorld(true);
@@ -123,37 +113,31 @@ export function renderPortalMaterials(
   const portals: Portal[] = [];
 
   for (const [entity, portalTarget] of portalTargets) {
-    const entranceObj = renderStore.nodes.get(entity.id);
-    if (!entranceObj) continue;
+    const entrance = renderStore.nodes.get(entity.id);
+    if (!entrance) continue;
 
-    const exitObj = renderStore.nodes.get(portalTarget.id);
-    if (!exitObj) continue;
+    const exit = renderStore.nodes.get(portalTarget.id);
+    if (!exit) continue;
 
-    const distance = entranceObj.position.distanceTo(cameraPosition);
+    entrance.updateMatrixWorld(true);
 
-    portals.push([entranceObj, exitObj, distance]);
+    portals.push([entrance, exit]);
   }
-
-  // Sort portals by distance to camera, rendering furthest first
-  portals.sort((a, b) => b[2] - a[2]);
 
   const recursionDepth = 0;
 
   for (const [entrance, exit] of portals) {
     // 1. Increment stencil buffer
     INCREMENT_STENCIL_MAT.stencilRef = recursionDepth;
-    render(camera, entrance, INCREMENT_STENCIL_MAT);
+    render(scene, camera, entrance, INCREMENT_STENCIL_MAT);
 
     // 2. Render scene from portal exit, with incremented stencil buffer as mask
     exitCamera.copy(camera);
     exitCamera.layers.enableAll();
     computeViewMatrix(exitCamera, camera, entrance, exit);
     computeProjectionMatrix(exitCamera, exit);
-    exitCamera.updateProjectionMatrix();
 
-    scene.traverse((obj) => {
-      if (!(obj instanceof Mesh)) return;
-      const mat = obj.material as Material;
+    traverseMaterials(scene, (mat) => {
       materialSettings.set(mat, {
         stencilFunc: mat.stencilFunc,
         stencilRef: mat.stencilRef,
@@ -166,12 +150,10 @@ export function renderPortalMaterials(
       mat.stencilWriteMask = 0x00;
     });
 
-    clearDepth();
-    render(exitCamera, scene);
+    clear(false, true, false);
+    render(scene, exitCamera);
 
-    scene.traverse((obj) => {
-      if (!(obj instanceof Mesh)) return;
-      const mat = obj.material as Material;
+    traverseMaterials(scene, (mat) => {
       const settings = materialSettings.get(mat);
       if (settings?.stencilFunc !== undefined) {
         mat.stencilFunc = settings.stencilFunc;
@@ -189,7 +171,7 @@ export function renderPortalMaterials(
 
     // 3. Decrement stencil buffer
     DECREMENT_STENCIL_MAT.stencilRef = recursionDepth + 1;
-    render(camera, entrance, DECREMENT_STENCIL_MAT);
+    render(scene, camera, entrance, DECREMENT_STENCIL_MAT);
   }
 
   // 4. Render portals into depth buffer
@@ -198,17 +180,15 @@ export function renderPortalMaterials(
     group.add(entrance);
   }
 
-  clearDepth();
-  render(camera, group, DEPTH_MAT);
+  clear(false, true, false);
+  render(scene, camera, group, DEPTH_MAT);
 
   // 5. Prepare for normal scene rendering
-  scene.traverse((obj) => {
-    if (!(obj instanceof Mesh)) return;
-    const material = obj.material as Material;
-    material.stencilFunc = LessEqualStencilFunc;
-    material.stencilRef = recursionDepth;
-    material.stencilWrite = true;
-    material.stencilWriteMask = 0x00;
+  traverseMaterials(scene, (mat) => {
+    mat.stencilFunc = LessEqualStencilFunc;
+    mat.stencilRef = recursionDepth;
+    mat.stencilWrite = true;
+    mat.stencilWriteMask = 0x00;
   });
 
   camera.matrixAutoUpdate = true;
@@ -218,26 +198,36 @@ export function renderPortalMaterials(
 }
 
 function render(
+  scene: Scene,
   camera: PerspectiveCamera,
-  objects: Scene | Object3D | Object3D[],
-  overrideMaterial: Material | null = null
+  objects: Object3D | Object3D[] | null = null,
+  overrideMaterial: Material | null = null,
+  renderToScreen = false
 ) {
-  let scene = tempScene;
+  const finalPass = store.composer.passes[store.composer.passes.length - 1];
+  if (!finalPass) return;
 
-  if (objects instanceof Scene) {
-    scene = objects;
-  } else {
-    tempScene.children = Array.isArray(objects) ? objects : [objects];
+  const ogRenderToScreen = finalPass.renderToScreen;
+  const ogChildren = scene.children;
+
+  if (objects) {
+    if (Array.isArray(objects)) {
+      scene.children = objects;
+    } else {
+      scene.children = [objects];
+    }
   }
+
+  finalPass.renderToScreen = renderToScreen;
+  scene.overrideMaterial = overrideMaterial;
 
   store.composer.setMainCamera(camera);
   store.composer.setMainScene(scene);
-  scene.overrideMaterial = overrideMaterial;
-
   store.composer.render(delta);
 
+  finalPass.renderToScreen = ogRenderToScreen;
+  scene.children = ogChildren;
   scene.overrideMaterial = null;
-  tempScene.children = [];
 }
 
 const mat4_a = new Matrix4();
@@ -254,12 +244,13 @@ function computeViewMatrix(
   mat4_a.multiplyMatrices(sourceCam.matrixWorldInverse, entrance.matrixWorld);
 
   // Entrance -> Exit
-  targetCam.matrixWorld
+  targetCam.matrixWorldInverse
     .identity()
     .multiply(mat4_a)
     .multiply(Y_ROTATE)
-    .multiply(mat4_b.copy(exit.matrixWorld).invert())
-    .invert();
+    .multiply(mat4_b.copy(exit.matrixWorld).invert());
+
+  targetCam.matrixWorld.copy(targetCam.matrixWorldInverse).invert();
 }
 
 const vec3_a = new Vector3();

@@ -38,6 +38,7 @@ export function createPortals(
     );
 
     const basic = new BasicMaterial();
+    basic.colorWrite = false;
 
     commands
       .get(entity)
