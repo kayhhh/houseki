@@ -105,11 +105,14 @@ export class Scene {
    * Useful for saving/loading scenes.
    */
   @struct.u64 declare rootId: bigint;
+}
 
-  /**
-   * Entity ID of the skybox {@link Image} entity.
-   */
-  @struct.u64 declare skyboxId: bigint;
+/**
+ * Attaches to a scene entity.
+ */
+@struct
+export class Skybox {
+  @struct.u64 declare imageId: bigint;
 }
 
 @struct
