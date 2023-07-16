@@ -1,5 +1,19 @@
 # @lattice-engine/render
 
+## 3.0.0
+
+### Minor Changes
+
+- a1c368e: move from scene background -> custom skybox mesh
+
+### Patch Changes
+
+- e3e7e0f: upgrade thyseus
+- Updated dependencies [a1c368e]
+- Updated dependencies [e3e7e0f]
+  - @lattice-engine/scene@0.6.0
+  - @lattice-engine/core@0.2.3
+
 ## 2.0.0
 
 ### Patch Changes

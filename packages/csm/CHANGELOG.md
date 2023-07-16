@@ -1,5 +1,15 @@
 # @lattice-engine/csm
 
+## 2.0.0
+
+### Patch Changes
+
+- e3e7e0f: upgrade thyseus
+- Updated dependencies [a1c368e]
+- Updated dependencies [e3e7e0f]
+  - @lattice-engine/render@3.0.0
+  - @lattice-engine/scene@0.6.0
+
 ## 1.0.0
 
 ### Patch Changes

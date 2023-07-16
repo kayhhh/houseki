@@ -1,5 +1,13 @@
 # @lattice-engine/input
 
+## 0.3.2
+
+### Patch Changes
+
+- e3e7e0f: upgrade thyseus
+- Updated dependencies [e3e7e0f]
+  - @lattice-engine/core@0.2.3
+
 ## 0.3.1
 
 ### Patch Changes

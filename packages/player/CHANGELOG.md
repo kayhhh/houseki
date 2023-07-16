@@ -1,5 +1,23 @@
 # @lattice-engine/player
 
+## 4.0.0
+
+### Minor Changes
+
+- a1c368e: add third person player camera portal teleport
+
+### Patch Changes
+
+- e3e7e0f: upgrade thyseus
+- Updated dependencies [a1c368e]
+- Updated dependencies [e3e7e0f]
+  - @lattice-engine/render@3.0.0
+  - @lattice-engine/scene@0.6.0
+  - @lattice-engine/physics@3.0.0
+  - @lattice-engine/input@0.3.2
+  - @lattice-engine/core@0.2.3
+  - @lattice-engine/vrm@3.0.0
+
 ## 3.0.0
 
 ### Minor Changes
