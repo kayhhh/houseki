@@ -21,7 +21,7 @@
   "devDependencies": {
     "@gltf-transform/core": "^3.4.8",
     "@thyseus/transformer-rollup": "^0.13.0",
-    "@types/react": "^18.2.14",
+    "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@types/three": "~0.153.0",
     "@vitejs/plugin-react": "^4.0.2",
