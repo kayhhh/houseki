@@ -4,15 +4,14 @@ import {
   ExportGltf,
   Gltf,
 } from "lattice-engine/gltf";
-import { DeepRemove, Scene } from "lattice-engine/scene";
+import { DeepRemove, Scene, SceneStruct } from "lattice-engine/scene";
 import {
   Commands,
   dropStruct,
-  Entity,
   EventReader,
   EventWriter,
   Query,
-  With,
+  Res,
 } from "thyseus";
 
 import { selectedModel } from "../demos/gltf/systems";
@@ -29,13 +28,11 @@ export const ExportSchedule = Symbol("Export");
 
 export function sendExportEvent(
   writer: EventWriter<ExportGltf>,
-  scenes: Query<[Entity], With<Scene>>
+  sceneStruct: Res<SceneStruct>
 ) {
-  for (const [entity] of scenes) {
-    const event = writer.create();
-    event.scene = entity.id;
-    event.binary = exportConfig.format === "binary";
-  }
+  const event = writer.create();
+  event.scene = sceneStruct.activeScene;
+  event.binary = exportConfig.format === "binary";
 }
 
 export function handleExport(
