@@ -1,5 +1,26 @@
 # @lattice-engine/portal
 
+## 3.0.0
+
+### Minor Changes
+
+- a1c368e: add third person player camera portal teleport
+- a1c368e: move from textures to stencil based portal rendering
+
+### Patch Changes
+
+- 66d5e34: fix portals not rendering all vrm layers
+- e3e7e0f: upgrade thyseus
+- 485da76: fix portal material not using global camera position
+- Updated dependencies [a1c368e]
+- Updated dependencies [a1c368e]
+- Updated dependencies [e3e7e0f]
+  - @lattice-engine/render@3.0.0
+  - @lattice-engine/scene@0.6.0
+  - @lattice-engine/player@4.0.0
+  - @lattice-engine/physics@3.0.0
+  - @lattice-engine/core@0.2.3
+
 ## 2.0.0
 
 ### Patch Changes
