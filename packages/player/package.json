@@ -33,7 +33,7 @@
     "@lattice-engine/scene": "workspace:^",
     "@lattice-engine/vrm": "workspace:^",
     "three": "~0.153.0",
-    "thyseus": "^0.13.2"
+    "thyseus": "^0.13.4"
   },
   "publishConfig": {
     "access": "public"

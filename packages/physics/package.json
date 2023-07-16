@@ -32,7 +32,7 @@
   "peerDependencies": {
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
-    "thyseus": "^0.13.2"
+    "thyseus": "^0.13.4"
   },
   "publishConfig": {
     "access": "public"

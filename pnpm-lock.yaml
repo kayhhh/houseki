@@ -71,8 +71,8 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
       wouter:
         specifier: ^2.11.0
         version: 2.11.0(react@18.2.0)
@@ -85,7 +85,7 @@ importers:
         version: 3.4.5
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       '@types/react':
         specifier: ^18.2.14
         version: 18.2.14
@@ -117,15 +117,15 @@ importers:
   packages/core:
     dependencies:
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -148,18 +148,18 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -194,18 +194,18 @@ importers:
         specifier: workspace:^
         version: link:../text
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
       zod:
         specifier: ^3.21.4
         version: 3.21.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -222,15 +222,15 @@ importers:
         specifier: workspace:^
         version: link:../core
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -295,12 +295,12 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -326,18 +326,18 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -363,15 +363,15 @@ importers:
         specifier: ^4.0.0-beta.1
         version: 4.0.0-beta.1
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -409,18 +409,18 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -455,18 +455,18 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -498,18 +498,18 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -535,18 +535,18 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -566,15 +566,15 @@ importers:
         specifier: ^4.0.0-beta.1
         version: 4.0.0-beta.1
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -600,21 +600,21 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
       troika-three-text:
         specifier: ^0.47.2
         version: 0.47.2(three@0.153.0)
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -649,18 +649,18 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -686,15 +686,15 @@ importers:
         specifier: workspace:^
         version: link:../scene
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -723,18 +723,18 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.2
-        version: 0.13.2
+        specifier: ^0.13.4
+        version: 0.13.4
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.0)(thyseus@0.13.2)
+        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.4)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.0)
+        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -2085,7 +2085,7 @@ packages:
       '@babel/runtime': 7.21.5
     dev: false
 
-  /@rollup/pluginutils@5.0.2(rollup@3.26.0):
+  /@rollup/pluginutils@5.0.2(rollup@3.26.2):
     resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -2097,7 +2097,7 @@ packages:
       '@types/estree': 1.0.1
       estree-walker: 2.0.2
       picomatch: 2.3.1
-      rollup: 3.26.0
+      rollup: 3.26.2
     dev: true
 
   /@rushstack/node-core-library@3.59.4:
@@ -2141,14 +2141,14 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@thyseus/transformer-rollup@0.13.0(rollup@3.26.0)(thyseus@0.13.2):
+  /@thyseus/transformer-rollup@0.13.0(rollup@3.26.2)(thyseus@0.13.4):
     resolution: {integrity: sha512-uEKoGsHjjO38/Jr1IRT/lY/khnyNHhKn8Q3VfLKDUG6QFRg05mm07vy7Af6OFMvGuwnT7e2u9U7Pl3d4VnoTNA==}
     peerDependencies:
       thyseus: ~0.13
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@3.26.0)
+      '@rollup/pluginutils': 5.0.2(rollup@3.26.2)
       '@thyseus/typescript-transformer': 0.12.0-beta.7
-      thyseus: 0.13.2
+      thyseus: 0.13.4
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -5194,16 +5194,25 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rollup-plugin-peer-deps-external@2.2.4(rollup@3.26.0):
+  /rollup-plugin-peer-deps-external@2.2.4(rollup@3.26.2):
     resolution: {integrity: sha512-AWdukIM1+k5JDdAqV/Cxd+nejvno2FVLVeZ74NKggm3Q5s9cbbcOgUPGdbxPi4BXu7xGaZ8HG12F+thImYu/0g==}
     peerDependencies:
       rollup: '*'
     dependencies:
-      rollup: 3.26.0
+      rollup: 3.26.2
     dev: true
 
   /rollup@3.26.0:
     resolution: {integrity: sha512-YzJH0eunH2hr3knvF3i6IkLO/jTjAEwU4HoMUbQl4//Tnl3ou0e7P5SjxdDr8HQJdeUJShlbEHXrrnEHy1l7Yg==}
+    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
+    hasBin: true
+    requiresBuild: true
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: true
+
+  /rollup@3.26.2:
+    resolution: {integrity: sha512-6umBIGVz93er97pMgQO08LuH3m6PUb3jlDUUGFsNJB6VgTCUaDFpupf5JfU30529m/UKOgmiX+uY6Sx8cOYpLA==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     requiresBuild: true
@@ -5599,8 +5608,8 @@ packages:
     resolution: {integrity: sha512-OCP2/uQR6GcDpSLnJt/3a4mdS0kNWcbfUXIwLoEMgLzEUIVIYsSDwskpmOii/AkDM+BBwrl6+CKgrjX9+E2aWg==}
     dev: false
 
-  /thyseus@0.13.2:
-    resolution: {integrity: sha512-VCcrhGMAxXLoNuSMWia7QjNC5pRmcgZVcXmoubroB7we5TxXqR1fQ8xgrj+eWUfosXaA/k0atTbsVDLvpUhcFA==}
+  /thyseus@0.13.4:
+    resolution: {integrity: sha512-ayFCWvuR8KsyREhQE2ys4XZgDFHxzH6ZEzSQk3hZxSLKZrGsBd90Kp9Crp7H3PpdSfNqkb3OkEzOSPWatpL3Rw==}
     dependencies:
       esm-env: 1.0.0
 
@@ -5921,7 +5930,7 @@ packages:
       typescript: '*'
     dependencies:
       '@microsoft/api-extractor': 7.36.0
-      '@rollup/pluginutils': 5.0.2(rollup@3.26.0)
+      '@rollup/pluginutils': 5.0.2(rollup@3.26.2)
       '@rushstack/node-core-library': 3.59.4
       '@vue/language-core': 1.8.3(typescript@5.1.6)
       debug: 4.3.4
@@ -5929,7 +5938,7 @@ packages:
       typescript: 5.1.6
       vue-tsc: 1.8.3(typescript@5.1.6)
     optionalDependencies:
-      rollup: 3.26.0
+      rollup: 3.26.2
       vite: 4.4.2
     transitivePeerDependencies:
       - '@types/node'

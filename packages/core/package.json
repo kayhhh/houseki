@@ -25,7 +25,7 @@
     "vite-plugin-dts": "^3.2.0"
   },
   "peerDependencies": {
-    "thyseus": "^0.13.2"
+    "thyseus": "^0.13.4"
   },
   "publishConfig": {
     "access": "public"
