@@ -1,12 +1,6 @@
 import { Scene } from "@lattice-engine/scene";
-import {
-  CanvasTexture,
-  EquirectangularReflectionMapping,
-  Scene as ThreeScene,
-  SRGBColorSpace,
-  Texture,
-} from "three";
-import { Entity, Query, Res } from "thyseus";
+import { Scene as ThreeScene, Texture } from "three";
+import { Entity, Query, Res, With } from "thyseus";
 
 import { RenderStore } from "../resources";
 
@@ -15,11 +9,11 @@ import { RenderStore } from "../resources";
  */
 export function createScenes(
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, Scene]>
+  entities: Query<Entity, With<Scene>>
 ) {
   const ids: bigint[] = [];
 
-  for (const [entity, scene] of entities) {
+  for (const entity of entities) {
     ids.push(entity.id);
 
     let object = renderStore.scenes.get(entity.id);
@@ -29,8 +23,6 @@ export function createScenes(
       object = new ThreeScene();
       renderStore.scenes.set(entity.id, object);
     }
-
-    loadSkybox(object, scene.skyboxId, renderStore);
   }
 
   // Remove objects that no longer exist
@@ -53,33 +45,4 @@ export function createScenes(
       renderStore.scenes.delete(id);
     }
   }
-}
-
-function loadSkybox(
-  scene: ThreeScene,
-  imageId: bigint,
-  renderStore: RenderStore
-) {
-  const bitmap = renderStore.images.get(imageId);
-
-  if (scene.background instanceof Texture) {
-    if (scene.background.image === bitmap) return;
-    scene.background.dispose();
-  }
-
-  if (scene.environment) scene.environment.dispose();
-
-  if (!bitmap) {
-    scene.environment = null;
-    scene.background = null;
-    return;
-  }
-
-  const texture = new CanvasTexture(bitmap);
-  texture.mapping = EquirectangularReflectionMapping;
-  texture.colorSpace = SRGBColorSpace;
-
-  // Set skybox
-  scene.environment = texture;
-  scene.background = texture;
 }

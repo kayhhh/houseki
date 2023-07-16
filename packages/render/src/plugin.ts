@@ -15,9 +15,11 @@ import { createMeshes } from "./systems/createMeshes";
 import { createNodes } from "./systems/createNodes";
 import { createScenes } from "./systems/createScenes";
 import { createShadowMaps } from "./systems/createShadowMaps";
+import { createSkybox } from "./systems/createSkybox";
 import { createStandardMaterials } from "./systems/createStandardMaterials";
 import { playAnimations } from "./systems/playAnimations";
 import { renderCanvas } from "./systems/renderCanvas";
+import { renderClearPass } from "./systems/renderClearPass";
 import { saveAnimations } from "./systems/saveAnimations";
 
 /**
@@ -26,6 +28,7 @@ import { saveAnimations } from "./systems/saveAnimations";
 export function renderPlugin(builder: WorldBuilder) {
   builder
     .addSystems(
+      createSkybox,
       ...run.chain(
         createImages,
         [
@@ -46,5 +49,8 @@ export function renderPlugin(builder: WorldBuilder) {
         saveAnimations
       )
     )
-    .addSystemsToSchedule(LatticeSchedules.Render, renderCanvas);
+    .addSystemsToSchedule(
+      LatticeSchedules.Render,
+      ...run.chain(renderClearPass, renderCanvas)
+    );
 }

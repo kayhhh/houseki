@@ -8,17 +8,9 @@ import {
   SMAAPreset,
 } from "postprocessing";
 import { PCFSoftShadowMap, WebGLRenderer } from "three";
-import { Mut, Res, SystemRes } from "thyseus";
+import { Mut, Res } from "thyseus";
 
 import { RenderStats, RenderStore } from "../resources";
-
-class LocalStore {
-  readonly renderPass = new RenderPass();
-  readonly effectPass = new EffectPass(
-    undefined,
-    new SMAAEffect({ preset: SMAAPreset.HIGH })
-  );
-}
 
 /**
  * Renders the scene to the canvas.
@@ -27,11 +19,24 @@ export function renderCanvas(
   coreStore: Res<CoreStore>,
   sceneStruct: Res<SceneStruct>,
   renderStore: Res<Mut<RenderStore>>,
-  stats: Res<Mut<RenderStats>>,
-  localStore: SystemRes<LocalStore>
+  stats: Res<Mut<RenderStats>>
 ) {
-  let renderer = renderStore.renderer;
   const canvas = coreStore.canvas;
+  if (!canvas) return;
+
+  const cameraId = sceneStruct.activeCamera;
+  if (cameraId === null) return;
+
+  const camera = renderStore.perspectiveCameras.get(cameraId);
+  if (!camera) return;
+
+  const sceneId = sceneStruct.activeScene;
+  if (sceneId === null) return;
+
+  const scene = renderStore.scenes.get(sceneId);
+  if (!scene) return;
+
+  let renderer = renderStore.renderer;
 
   // Create a new renderer if the canvas has changed
   if (renderer.domElement !== canvas) {
@@ -50,34 +55,30 @@ export function renderCanvas(
     renderer.shadowMap.type = PCFSoftShadowMap;
     renderer.info.autoReset = false;
 
-    const composer = new EffectComposer(renderer);
-    composer.addPass(localStore.renderPass);
-    composer.addPass(localStore.effectPass);
+    const composer = new EffectComposer(renderer, {
+      depthBuffer: true,
+      stencilBuffer: true,
+    });
+
+    const renderPass = new RenderPass(scene, camera);
+    renderPass.clearPass.enabled = false;
+
+    const effectPass = new EffectPass(
+      camera,
+      new SMAAEffect({ preset: SMAAPreset.HIGH })
+    );
+
+    composer.addPass(renderPass);
+    composer.addPass(effectPass);
 
     renderStore.renderer = renderer;
     renderStore.composer = composer;
   }
 
-  if (!canvas) return;
-
-  const cameraId = sceneStruct.activeCamera;
-  if (cameraId === null) return;
-
-  const camera = renderStore.perspectiveCameras.get(cameraId);
-  if (!camera) return;
-
-  const sceneId = sceneStruct.activeScene;
-  if (sceneId === null) return;
-
-  const scene = renderStore.scenes.get(sceneId);
-  if (!scene) return;
-
-  localStore.renderPass.mainCamera = camera;
-  localStore.renderPass.mainScene = scene;
-  localStore.effectPass.mainCamera = camera;
-  localStore.effectPass.mainScene = scene;
-
   renderStore.composer.setSize(canvas.width, canvas.height);
+  renderStore.composer.setMainCamera(camera);
+  renderStore.composer.setMainScene(scene);
+
   renderStore.composer.render();
 
   stats.frame += 1;

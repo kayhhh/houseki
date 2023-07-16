@@ -23,6 +23,7 @@ export function createBasicMaterials(
     }
 
     object.side = material.doubleSided ? DoubleSide : FrontSide;
+    object.colorWrite = material.colorWrite;
   }
 
   // Dispose unused objects

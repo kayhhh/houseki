@@ -10,5 +10,5 @@ import { updateGlobalTransforms } from "./systems/updateGlobalTransforms";
 export function scenePlugin(builder: WorldBuilder) {
   builder
     .addSystems(assetCleanup, geometryCleanup, keyframeTrackCleanup, deepRemove)
-    .addSystemsToSchedule(LatticeSchedules.PostUpdate, updateGlobalTransforms);
+    .addSystemsToSchedule(LatticeSchedules.PreUpdate, updateGlobalTransforms);
 }

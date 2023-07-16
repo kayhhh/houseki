@@ -4,7 +4,7 @@ import { initStruct, struct } from "thyseus";
 
 import { PlayerCameraMode, PlayerCameraView } from "./types";
 
-export class TargetPosition extends Vec3 {}
+export class TargetTranslation extends Vec3 {}
 
 export class TargetRotation extends Quat {}
 

@@ -6,11 +6,11 @@ import {
   Velocity,
 } from "@lattice-engine/physics";
 import { Parent, Transform } from "@lattice-engine/scene";
+import { lerp } from "three/src/math/MathUtils";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
 import { PlayerBody, PlayerCamera } from "../components";
 import { getDirection } from "../utils/getDirection";
-import { lerp } from "../utils/lerp";
 import { readInput } from "../utils/readInput";
 
 const VELOCITY_DAMPEN = 0.15;

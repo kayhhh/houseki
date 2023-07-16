@@ -5,6 +5,7 @@ import {
   Parent,
   Scene,
   SceneStruct,
+  Skybox,
   Transform,
 } from "lattice-engine/scene";
 import { Commands, dropStruct } from "thyseus";
@@ -30,18 +31,22 @@ export function createScene(
     .addType(Transform)
     .addType(GlobalTransform).id;
 
-  const sceneComponent = new Scene();
-  sceneComponent.skyboxId = skyboxId;
-  sceneComponent.rootId = rootId;
+  const skybox = new Skybox();
+  skybox.imageId = skyboxId;
 
-  const sceneId = commands.spawn(true).add(sceneComponent).id;
+  const scene = new Scene();
+  scene.rootId = rootId;
 
-  dropStruct(sceneComponent);
+  const sceneId = commands.spawn(true).add(scene).add(skybox).id;
+
+  dropStruct(scene);
+  dropStruct(skybox);
 
   sceneStruct.activeScene = sceneId;
 
   const parent = new Parent(sceneId);
   commands.getById(rootId).add(parent);
+  dropStruct(parent);
 
   return { rootId, sceneId };
 }

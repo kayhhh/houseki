@@ -64,6 +64,34 @@ export class PhysicsStore {
       this.meshColliders.get(id)
     );
   }
+
+  findColliderEntity(collider: Collider) {
+    for (const [id, c] of this.boxColliders) {
+      if (collider === c) return id;
+    }
+
+    for (const [id, c] of this.sphereColliders) {
+      if (collider === c) return id;
+    }
+
+    for (const [id, c] of this.capsuleColliders) {
+      if (collider === c) return id;
+    }
+
+    for (const [id, c] of this.cylinderColliders) {
+      if (collider === c) return id;
+    }
+
+    for (const [id, c] of this.hullColliders) {
+      if (collider === c) return id;
+    }
+
+    for (const [id, c] of this.meshColliders) {
+      if (collider === c) return id;
+    }
+
+    return undefined;
+  }
 }
 
 @struct

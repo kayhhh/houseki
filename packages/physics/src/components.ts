@@ -161,6 +161,9 @@ export class Raycast {
 
   @struct.bool declare hit: boolean;
   @struct.f32 declare hitToi: number;
+  @struct.u64 declare hitEntityId: bigint;
+  @struct.substruct(Vec3) declare hitPosition: Vec3;
+  @struct.substruct(Vec3) declare hitNormal: Vec3;
 
   constructor(
     origin: Readonly<[number, number, number]> = [0, 0, 0],
