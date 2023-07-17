@@ -1,5 +1,11 @@
 # @lattice-engine/core
 
+## 0.2.4
+
+### Patch Changes
+
+- ffea4d9: upgrade thyseus
+
 ## 0.2.3
 
 ### Patch Changes

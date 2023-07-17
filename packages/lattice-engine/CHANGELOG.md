@@ -1,5 +1,27 @@
 # lattice-engine
 
+## 0.3.9
+
+### Patch Changes
+
+- ffea4d9: upgrade thyseus
+- Updated dependencies [ffea4d9]
+  - @lattice-engine/postprocessing@2.0.1
+  - @lattice-engine/transform@4.0.1
+  - @lattice-engine/physics@3.0.1
+  - @lattice-engine/player@4.0.1
+  - @lattice-engine/portal@3.0.1
+  - @lattice-engine/render@3.0.1
+  - @lattice-engine/input@0.3.3
+  - @lattice-engine/orbit@4.0.1
+  - @lattice-engine/scene@0.6.1
+  - @lattice-engine/utils@4.0.1
+  - @lattice-engine/core@0.2.4
+  - @lattice-engine/gltf@4.0.1
+  - @lattice-engine/text@3.0.1
+  - @lattice-engine/csm@2.0.1
+  - @lattice-engine/vrm@3.0.1
+
 ## 0.3.8
 
 ### Patch Changes
