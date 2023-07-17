@@ -1,5 +1,15 @@
 # @lattice-engine/vrm
 
+## 3.0.1
+
+### Patch Changes
+
+- ffea4d9: upgrade thyseus
+- Updated dependencies [ffea4d9]
+  - @lattice-engine/render@3.0.1
+  - @lattice-engine/scene@0.6.1
+  - @lattice-engine/core@0.2.4
+
 ## 3.0.0
 
 ### Patch Changes
