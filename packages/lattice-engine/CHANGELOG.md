@@ -1,5 +1,12 @@
 # lattice-engine
 
+## 0.3.10
+
+### Patch Changes
+
+- Updated dependencies [5b47324]
+  - @lattice-engine/gltf@4.1.0
+
 ## 0.3.9
 
 ### Patch Changes

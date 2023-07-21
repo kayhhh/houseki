@@ -1,5 +1,11 @@
 # @lattice-engine/gltf
 
+## 4.1.0
+
+### Minor Changes
+
+- 5b47324: add gltf extras
+
 ## 4.0.1
 
 ### Patch Changes
