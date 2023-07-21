@@ -33,6 +33,7 @@ import {
   With,
 } from "thyseus";
 
+import { Extra } from "../components";
 import { ExportedGltf, ExportGltf } from "../events";
 import { ExportContext } from "../export/context";
 import {
@@ -43,6 +44,7 @@ import {
   exportMeshCollider,
   exportSphereCollider,
 } from "../export/exportCollider";
+import { exportExtras } from "../export/exportExtras";
 import { exportImage } from "../export/exportImage";
 import { exportMaterial } from "../export/exportMaterial";
 import { exportMesh } from "../export/exportMesh";
@@ -91,7 +93,8 @@ export function exportGltf(
   cylinderColliders: Query<[Entity, CylinderCollider]>,
   meshColliders: Query<[Entity, MeshCollider]>,
   hullColliders: Query<[Entity, HullCollider]>,
-  text: Query<[Entity, Text]>
+  text: Query<[Entity, Text]>,
+  extras: Query<Extra>
 ) {
   for (const binary of localStore.outBinary) {
     console.info(`📦 Exported glTF binary (${bytesToDisplay(binary.length)})`);
@@ -164,6 +167,10 @@ export function exportGltf(
 
     for (const [entity, t] of text) {
       exportText(context, entity.id, t);
+    }
+
+    for (const extra of extras) {
+      exportExtras(context, extra);
     }
 
     for (const entity of staticBodies) {

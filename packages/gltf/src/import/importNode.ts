@@ -4,6 +4,7 @@ import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";
 import { importCollider } from "./importCollider";
+import { importExtras } from "./importExtras";
 import { importMesh } from "./importMesh";
 import { importPhysicsBody } from "./importPhysicsBody";
 import { importText } from "./importText";
@@ -45,6 +46,7 @@ export function importNode(
   importCollider(context, commands, node, entityId);
   importPhysicsBody(context, commands, node, entityId);
   importText(commands, node, entityId);
+  importExtras(commands, node, entityId);
 
   node
     .listChildren()
