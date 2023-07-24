@@ -1,5 +1,11 @@
 # @lattice-engine/physics
 
+## 3.0.3
+
+### Patch Changes
+
+- 3addbfb: add catch for 0 direction raycast
+
 ## 3.0.2
 
 ### Patch Changes

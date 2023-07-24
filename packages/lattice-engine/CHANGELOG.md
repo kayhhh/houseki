@@ -1,5 +1,16 @@
 # lattice-engine
 
+## 0.3.15
+
+### Patch Changes
+
+- Updated dependencies [3addbfb]
+  - @lattice-engine/physics@3.0.3
+  - @lattice-engine/gltf@4.1.2
+  - @lattice-engine/player@4.0.4
+  - @lattice-engine/portal@3.0.4
+  - @lattice-engine/transform@4.4.1
+
 ## 0.3.14
 
 ### Patch Changes
