@@ -27,6 +27,16 @@ export function runRaycasts(
     ray.dir.y = raycast.direction.y;
     ray.dir.z = raycast.direction.z;
 
+    // Rapier throws an error if the ray direction is zero
+    if (ray.dir.x === 0 && ray.dir.y === 0 && ray.dir.z === 0) {
+      raycast.hit = false;
+      raycast.hitToi = 0;
+      raycast.hitEntityId = 0n;
+      raycast.hitPosition.set(0, 0, 0);
+      raycast.hitNormal.set(0, 0, 0);
+      continue;
+    }
+
     const rigidBody = physicsStore.getRigidBody(raycast.excludeRigidBodyId);
 
     // Cast the ray
