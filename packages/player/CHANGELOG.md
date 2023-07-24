@@ -1,5 +1,12 @@
 # @lattice-engine/player
 
+## 4.0.4
+
+### Patch Changes
+
+- Updated dependencies [3addbfb]
+  - @lattice-engine/physics@3.0.3
+
 ## 4.0.3
 
 ### Patch Changes

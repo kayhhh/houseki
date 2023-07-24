@@ -1,5 +1,12 @@
 # @lattice-engine/gltf
 
+## 4.1.2
+
+### Patch Changes
+
+- Updated dependencies [3addbfb]
+  - @lattice-engine/physics@3.0.3
+
 ## 4.1.1
 
 ### Patch Changes
