@@ -1,5 +1,15 @@
 # @lattice-engine/transform
 
+## 4.3.0
+
+### Minor Changes
+
+- ecc5423: create getTransformPlugin for compatibility with orbit + player controls
+
+### Patch Changes
+
+- 33601d8: fix deselecting transform target after drag
+
 ## 4.2.0
 
 ### Minor Changes
