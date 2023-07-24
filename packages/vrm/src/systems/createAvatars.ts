@@ -102,7 +102,9 @@ async function loadVrm(entityId: bigint, uri: string, localStore: LocalStore) {
   VRMUtils.rotateVRM0(vrm);
 
   vrm.scene.traverse((object) => {
-    if (object instanceof Mesh) object.castShadow = true;
+    if (object instanceof Mesh) {
+      object.castShadow = true;
+    }
   });
 
   localStore.loaded.set(entityId, vrm);

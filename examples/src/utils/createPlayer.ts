@@ -41,6 +41,7 @@ export function createPlayer(
   player.spawnPoint.fromArray(spawn);
 
   const targetTransform = new TargetTransform();
+  const targetRotation = new TargetRotation(0, 0, 0, 1);
   const capsuleCollider = new CapsuleCollider(
     PLAYER_WIDTH,
     PLAYER_HEIGHT - PLAYER_WIDTH * 2
@@ -51,6 +52,7 @@ export function createPlayer(
     .add(parent.setId(rootId))
     .add(transform.set(spawn))
     .add(targetTransform.set(spawn))
+    .add(targetRotation)
     .addType(GlobalTransform)
     .addType(Velocity)
     .add(capsuleCollider)
@@ -70,14 +72,12 @@ export function createPlayer(
   playerAvatar.sprintAnimation = "/animation/Sprint.fbx";
   playerAvatar.walkAnimation = "/animation/Walk.fbx";
 
-  const targetRotation = new TargetRotation();
   const vrm = new Vrm("/k-robot.vrm", true);
 
   commands
     .spawn(true)
     .add(transform.set([0, -PLAYER_HEIGHT / 2, 0]))
     .addType(GlobalTransform)
-    .add(targetRotation.set(0, 0, 0, 1))
     .add(parent.setId(bodyId))
     .add(vrm)
     .add(playerAvatar);
@@ -89,14 +89,14 @@ export function createPlayer(
     PlayerCameraMode.Both,
     PlayerCameraView.ThirdPerson
   );
+  playerCamera.bodyId = bodyId;
 
   const cameraId = commands
     .spawn(true)
     .addType(Transform)
     .addType(GlobalTransform)
     .addType(TargetTranslation)
-    .add(targetRotation.set(0, 0, 0, 1))
-    .add(parent.setId(bodyId))
+    .add(targetRotation)
     .addType(PerspectiveCamera)
     .add(playerCamera)
     .addType(Raycast).id;

@@ -1,7 +1,7 @@
 import { LatticeSchedules } from "@lattice-engine/core";
 import {
   lerpTargetTranslation,
-  slerpTargetRotation,
+  slerpCameraRotation,
 } from "@lattice-engine/player";
 import { renderCanvas, renderClearPass } from "@lattice-engine/render";
 import { updateGlobalTransforms } from "@lattice-engine/scene";
@@ -30,7 +30,7 @@ export function portalPlugin(builder: WorldBuilder) {
       run(movePlayerCamera).after(saveOriginalTranslation),
       run(lerpTargetTranslation2).after(movePlayerCamera),
 
-      run(saveOriginalRotation).after(slerpTargetRotation),
+      run(saveOriginalRotation).after(slerpCameraRotation),
       run(rotatePlayerCamera).after(saveOriginalRotation),
       run(slerpTargetRotation2).after(rotatePlayerCamera)
     )

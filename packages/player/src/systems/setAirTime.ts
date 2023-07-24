@@ -9,7 +9,10 @@ export function setAirTime(
   entities: Query<[Mut<PlayerBody>, CharacterController]>
 ) {
   for (const [player, controller] of entities) {
-    if (controller.isGrounded) player.airTime = 0;
-    else player.airTime += time.fixedDelta;
+    if (controller.isGrounded) {
+      player.airTime = 0;
+    } else {
+      player.airTime += time.fixedDelta;
+    }
   }
 }

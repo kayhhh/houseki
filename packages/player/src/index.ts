@@ -4,5 +4,5 @@ export * from "./plugin";
 export * from "./systems/lerpTargetTranslation";
 export * from "./systems/moveCamera";
 export * from "./systems/rotateCamera";
-export * from "./systems/slerpTargetRotation";
+export * from "./systems/slerpCameraRotation";
 export * from "./types";

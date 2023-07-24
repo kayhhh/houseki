@@ -1,4 +1,3 @@
-import { RenderStore } from "@lattice-engine/render";
 import { Parent } from "@lattice-engine/scene";
 import { VrmStore } from "@lattice-engine/vrm";
 import { Vector3 } from "three";
@@ -15,14 +14,17 @@ const vector3b = new Vector3();
  */
 export function applyAvatarOffset(
   vrmStore: Res<VrmStore>,
-  renderStore: Res<RenderStore>,
   avatars: Query<[Entity, Parent], With<PlayerAvatar>>,
-  cameras: Query<[PlayerCamera, Parent, Mut<TargetTranslation>]>
+  cameras: Query<[PlayerCamera, Mut<TargetTranslation>]>
 ) {
-  for (const [entity, parent] of avatars) {
-    for (const [camera, cameraParent, targetTranslation] of cameras) {
-      // Find camera that is attached to the same player body
-      if (cameraParent.id !== parent.id) continue;
+  for (const [camera, targetTranslation] of cameras) {
+    let foundAvatar = false;
+
+    for (const [entity, parent] of avatars) {
+      // Find avatar that matches the camera body
+      if (camera.bodyId !== parent.id) continue;
+
+      foundAvatar = true;
 
       const vrm = vrmStore.avatars.get(entity.id);
       if (!vrm) continue;
@@ -48,11 +50,11 @@ export function applyAvatarOffset(
         head.getWorldPosition(vector3);
       }
 
-      // Get relative position from body
-      const body = renderStore.nodes.get(parent.id);
-      if (body) vector3.sub(body.getWorldPosition(vector3b));
-
       targetTranslation.fromObject(vector3);
+    }
+
+    if (!foundAvatar) {
+      targetTranslation.set(0, 0, 0);
     }
   }
 }

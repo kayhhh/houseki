@@ -20,7 +20,7 @@ const quaternion = new Quaternion();
 export function rotateCamera(
   inputStruct: Res<InputStruct>,
   pointerMoveReader: EventReader<PointerMoveEvent>,
-  entities: Query<[PlayerCamera, Mut<TargetRotation>]>
+  cameras: Query<[PlayerCamera, Mut<TargetRotation>]>
 ) {
   const rotate = inputStruct.enablePointerLock
     ? inputStruct.isPointerLocked
@@ -34,7 +34,7 @@ export function rotateCamera(
   for (const event of pointerMoveReader) {
     if (!rotate) continue;
 
-    for (const [camera, targetRotation] of entities) {
+    for (const [camera, targetRotation] of cameras) {
       quaternion.set(
         targetRotation.x,
         targetRotation.y,

@@ -1,13 +1,13 @@
+import { Time } from "@lattice-engine/core";
 import { InputStruct, Key } from "@lattice-engine/input";
 import {
   CharacterController,
-  PhysicsStore,
   TargetTransform,
   Velocity,
 } from "@lattice-engine/physics";
-import { GlobalTransform, Parent, Transform } from "@lattice-engine/scene";
+import { GlobalTransform, Transform } from "@lattice-engine/scene";
 import { lerp } from "three/src/math/MathUtils";
-import { Entity, Mut, Query, Res, With } from "thyseus";
+import { Entity, Mut, Query, Res } from "thyseus";
 
 import { PlayerBody, PlayerCamera } from "../components";
 import { getDirection } from "../utils/getDirection";
@@ -15,12 +15,12 @@ import { readInput } from "../utils/readInput";
 
 const VELOCITY_DAMPEN = 0.15;
 const SPRINT_MULTIPLIER = 1.5;
-const JUMP_TIME = 1.25;
+const JUMP_TIME = 0.6;
 
 export function moveBody(
-  physicsStore: Res<PhysicsStore>,
+  time: Res<Time>,
   inputStruct: Res<InputStruct>,
-  cameras: Query<[Parent, Transform], With<PlayerCamera>>,
+  cameras: Query<[PlayerCamera, Transform]>,
   bodies: Query<
     [
       Entity,
@@ -37,7 +37,7 @@ export function moveBody(
   const jump = inputStruct.keyPressed(Key.Space);
   const sprint = inputStruct.keyPressed(Key.Shift);
 
-  for (const [parent, cameraTransform] of cameras) {
+  for (const [camera, cameraTransform] of cameras) {
     for (const [
       entity,
       player,
@@ -47,8 +47,8 @@ export function moveBody(
       globalTransform,
       velocity,
     ] of bodies) {
-      // Find the body that matches the camera parent
-      if (entity.id !== parent.id) continue;
+      // Find the body that matches the camera
+      if (entity.id !== camera.bodyId) continue;
 
       const direction = getDirection(
         cameraTransform.rotation,
@@ -83,7 +83,7 @@ export function moveBody(
 
       if (player.jumpTime > 0) {
         velocity.y = player.jumpStrength * (player.jumpTime / JUMP_TIME);
-        player.jumpTime -= physicsStore.world.timestep;
+        player.jumpTime -= time.mainDelta;
       }
     }
   }

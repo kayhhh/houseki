@@ -12,12 +12,11 @@ const THIRD_PERSON_SLERP = 1e-13;
 const quaternion = new Quaternion();
 const quaternion2 = new Quaternion();
 
-export function slerpTargetRotation(
+export function slerpCameraRotation(
   time: Res<Time>,
-  entities: Query<[PlayerCamera, Mut<Transform>, TargetRotation]>
+  cameras: Query<[PlayerCamera, Mut<Transform>, TargetRotation]>
 ) {
-  // Slerp towards target rotation
-  for (const [camera, transform, target] of entities) {
+  for (const [camera, transform, target] of cameras) {
     quaternion2.set(target.x, target.y, target.z, target.w);
 
     const slerpFactor =

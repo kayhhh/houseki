@@ -21,7 +21,9 @@ export function updateAvatars(
 
     // Add to scene
     const node = renderStore.nodes.get(entity.id);
-    if (node) node.add(object.scene);
+    if (node) {
+      node.add(object.scene);
+    }
 
     // Setup first person layers
     if (vrm.setupFirstPerson && object.firstPerson) {

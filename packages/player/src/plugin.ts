@@ -7,11 +7,11 @@ import { createAnimations } from "./systems/createAnimations";
 import { lerpTargetTranslation } from "./systems/lerpTargetTranslation";
 import { moveBody } from "./systems/moveBody";
 import { moveCamera } from "./systems/moveCamera";
-import { rotateAvatar } from "./systems/rotateAvatar";
+import { rotateBody } from "./systems/rotateBody";
 import { rotateCamera } from "./systems/rotateCamera";
 import { setAirTime } from "./systems/setAirTime";
 import { setCameraLayers } from "./systems/setCameraLayers";
-import { slerpTargetRotation } from "./systems/slerpTargetRotation";
+import { slerpCameraRotation } from "./systems/slerpCameraRotation";
 import { zoomCamera } from "./systems/zoomCamera";
 
 export function playerPlugin(builder: WorldBuilder) {
@@ -20,13 +20,14 @@ export function playerPlugin(builder: WorldBuilder) {
       createAnimations,
       setCameraLayers,
       ...run.chain(
-        [zoomCamera, moveBody],
+        zoomCamera,
+        moveBody,
         rotateCamera,
-        slerpTargetRotation,
-        rotateAvatar,
+        slerpCameraRotation,
         applyAvatarOffset,
         moveCamera,
         lerpTargetTranslation,
+        rotateBody,
         animatePlayer
       )
     )

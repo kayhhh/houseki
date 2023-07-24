@@ -80,6 +80,8 @@ export class PlayerAvatar {
  */
 @struct
 export class PlayerCamera {
+  @struct.u64 declare bodyId: bigint; // Entity ID
+
   /**
    * Whether the controls are for first person, third person, or both.
    */

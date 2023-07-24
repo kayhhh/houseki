@@ -1,13 +1,15 @@
+import { Time } from "@lattice-engine/core";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
 import { CharacterController, Velocity } from "../../components";
 import { PhysicsStore } from "../../resources";
 
 export function moveCharacters(
+  time: Res<Time>,
   physicsStore: Res<PhysicsStore>,
   bodies: Query<[Entity, Mut<Velocity>], With<CharacterController>>
 ) {
-  const delta = physicsStore.world.timestep;
+  const delta = time.fixedDelta;
 
   for (const [entity, velocity] of bodies) {
     const controller = physicsStore.characterControllers.get(entity.id);

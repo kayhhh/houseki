@@ -14,12 +14,12 @@ const FALL_THRESHOLD_SECONDS = 0.35;
 
 export function animatePlayer(
   time: Res<Time>,
-  avatars: Query<[Entity, Parent, PlayerAvatar, Transform]>,
+  avatars: Query<[Entity, Parent, PlayerAvatar]>,
   animations: Query<[Entity, Mut<VrmAnimation>]>,
   bodies: Query<[Entity, PlayerBody, Velocity, Transform]>
 ) {
-  for (const [entity, parent, avatar, avatarTransform] of avatars) {
-    for (const [bodyEntity, player, velocity, bodyTransform] of bodies) {
+  for (const [entity, parent, avatar] of avatars) {
+    for (const [bodyEntity, player, velocity, transform] of bodies) {
       if (bodyEntity.id !== parent.id) continue;
 
       const isFalling = player.airTime > FALL_THRESHOLD_SECONDS;
@@ -35,10 +35,7 @@ export function animatePlayer(
       const showSprintAnimation = isSprinting && !showFallAnimation;
       const showWalkAnimation = isWalking && !showFallAnimation;
 
-      const direction = getDirection(
-        avatarTransform.rotation,
-        bodyTransform.translation
-      );
+      const direction = getDirection(transform.rotation);
 
       const movementRight =
         (direction.x * velocity.x + direction.z * velocity.z) / player.speed;
