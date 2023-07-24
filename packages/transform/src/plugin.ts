@@ -32,10 +32,10 @@ export function getTransformPlugin({
     builder.addSystems(
       calcRect,
       ...run.chain(
+        selectTarget,
         createControls,
         sendEvents,
         saveTransforms,
-        selectTarget,
         setOutlineTargets
       ),
       run(clearEvents).after(sendEvents).before(beforeEvents)
