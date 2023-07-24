@@ -5,7 +5,7 @@ import {
   TargetTransform,
   Velocity,
 } from "@lattice-engine/physics";
-import { Parent, Transform } from "@lattice-engine/scene";
+import { GlobalTransform, Parent, Transform } from "@lattice-engine/scene";
 import { lerp } from "three/src/math/MathUtils";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
@@ -28,6 +28,7 @@ export function moveBody(
       CharacterController,
       Mut<Transform>,
       Mut<TargetTransform>,
+      Mut<GlobalTransform>,
       Mut<Velocity>
     ]
   >
@@ -42,7 +43,8 @@ export function moveBody(
       player,
       character,
       transform,
-      target,
+      targetTransform,
+      globalTransform,
       velocity,
     ] of bodies) {
       // Find the body that matches the camera parent
@@ -50,7 +52,7 @@ export function moveBody(
 
       const direction = getDirection(
         cameraTransform.rotation,
-        target.translation
+        targetTransform.translation
       );
 
       const movementX = direction.x * input.x + direction.z * input.y;
@@ -67,11 +69,12 @@ export function moveBody(
 
       if (
         player.enableVoidTeleport &&
-        target.translation.y < player.voidLevel
+        targetTransform.translation.y < player.voidLevel
       ) {
         velocity.set(0, 0, 0);
-        target.translation.copy(player.spawnPoint);
         transform.translation.copy(player.spawnPoint);
+        targetTransform.translation.copy(player.spawnPoint);
+        globalTransform.translation.copy(player.spawnPoint);
       }
 
       if (jump && character.isGrounded) {
