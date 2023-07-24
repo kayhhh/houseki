@@ -66,6 +66,7 @@ export function initScene(
 }
 
 export const transformConfig = {
+  enabled: true,
   mode: TransformMode.Translate,
 };
 
@@ -74,5 +75,6 @@ export function setTransformMode(
 ) {
   for (const controls of transformControls) {
     controls.mode = transformConfig.mode;
+    controls.enabled = transformConfig.enabled;
   }
 }

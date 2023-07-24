@@ -22,6 +22,12 @@ export default function Transform() {
   useEngine(world);
 
   useControls({
+    enabled: {
+      onChange: (value) => {
+        transformConfig.enabled = value;
+      },
+      value: true,
+    },
     mode: {
       onChange: (value) => {
         switch (value) {

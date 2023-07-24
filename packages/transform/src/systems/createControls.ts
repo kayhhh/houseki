@@ -53,6 +53,10 @@ export function createControls(
 
     object.enabled = controls.enabled;
 
+    for (const child of object.children) {
+      child.visible = controls.enabled;
+    }
+
     switch (controls.mode) {
       case TransformMode.Translate: {
         object.setMode("translate");
