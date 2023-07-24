@@ -1,5 +1,13 @@
 # lattice-engine
 
+## 0.3.13
+
+### Patch Changes
+
+- Updated dependencies [33601d8]
+- Updated dependencies [ecc5423]
+  - @lattice-engine/transform@4.3.0
+
 ## 0.3.12
 
 ### Patch Changes
