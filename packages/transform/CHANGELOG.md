@@ -1,5 +1,11 @@
 # @lattice-engine/transform
 
+## 4.2.0
+
+### Minor Changes
+
+- 795258e: hide transform controls when disabled
+
 ## 4.1.0
 
 ### Minor Changes
