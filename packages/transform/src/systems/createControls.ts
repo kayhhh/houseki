@@ -51,6 +51,8 @@ export function createControls(
       store.objects.set(entity.id, object);
     }
 
+    object.enabled = controls.enabled;
+
     switch (controls.mode) {
       case TransformMode.Translate: {
         object.setMode("translate");

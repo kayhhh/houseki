@@ -6,7 +6,7 @@ import { TransformMode } from "./types";
 export class TransformControls {
   @struct.u64 declare targetId: bigint;
   @struct.u8 declare mode: TransformMode;
-
+  @struct.bool declare enabled: boolean;
   @struct.bool declare outline: boolean;
 
   /**
@@ -18,6 +18,7 @@ export class TransformControls {
   constructor() {
     initStruct(this);
 
+    this.enabled = true;
     this.outline = true;
     this.clearEvents = true;
   }
