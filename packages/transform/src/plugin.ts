@@ -1,5 +1,6 @@
-import { sendEvents as orbitSendEvents } from "@lattice-engine/orbit";
-import { run, WorldBuilder } from "thyseus";
+import { sendEvents as orbitEvents } from "@lattice-engine/orbit";
+import { rotateCamera as playerEvents } from "@lattice-engine/player";
+import { run, System, WorldBuilder } from "thyseus";
 
 import { calcRect } from "./systems/calcRect";
 import { clearEvents } from "./systems/clearEvents";
@@ -9,16 +10,35 @@ import { selectTarget } from "./systems/selectTarget";
 import { sendEvents } from "./systems/sendEvents";
 import { setOutlineTargets } from "./systems/setOutlineTargets";
 
-export function transformPlugin(builder: WorldBuilder) {
-  builder.addSystems(
-    calcRect,
-    ...run.chain(
-      createControls,
-      sendEvents,
-      saveTransforms,
-      selectTarget,
-      setOutlineTargets
-    ),
-    run(clearEvents).after(sendEvents).before(orbitSendEvents)
-  );
+/**
+ * @param orbitControls - Whether orbit controls are used.
+ * @param playerControls - Whether player controls are used.
+ */
+export function getTransformPlugin({
+  orbitControls = false,
+  playerControls = false,
+}) {
+  const beforeEvents: System[] = [];
+
+  if (orbitControls) {
+    beforeEvents.push(orbitEvents);
+  }
+
+  if (playerControls) {
+    beforeEvents.push(playerEvents);
+  }
+
+  return function transformPlugin(builder: WorldBuilder) {
+    builder.addSystems(
+      calcRect,
+      ...run.chain(
+        createControls,
+        sendEvents,
+        saveTransforms,
+        selectTarget,
+        setOutlineTargets
+      ),
+      run(clearEvents).after(sendEvents).before(beforeEvents)
+    );
+  };
 }

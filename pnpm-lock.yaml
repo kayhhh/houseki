@@ -636,6 +636,9 @@ importers:
       '@lattice-engine/orbit':
         specifier: workspace:^
         version: link:../orbit
+      '@lattice-engine/player':
+        specifier: workspace:^
+        version: link:../player
       '@lattice-engine/postprocessing':
         specifier: workspace:^
         version: link:../postprocessing
