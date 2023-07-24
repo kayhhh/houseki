@@ -1,5 +1,19 @@
 # @lattice-engine/player
 
+## 4.0.3
+
+### Patch Changes
+
+- 1ccc490: fix void teleport sometimes glitchy
+- b7ef674: fix weird animations when moving diagonal
+- Updated dependencies [a74c565]
+  - @lattice-engine/physics@3.0.2
+  - @lattice-engine/core@0.2.5
+  - @lattice-engine/input@0.3.4
+  - @lattice-engine/render@3.0.2
+  - @lattice-engine/scene@0.6.2
+  - @lattice-engine/vrm@3.0.3
+
 ## 4.0.2
 
 ### Patch Changes

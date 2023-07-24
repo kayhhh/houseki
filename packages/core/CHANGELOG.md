@@ -1,5 +1,11 @@
 # @lattice-engine/core
 
+## 0.2.5
+
+### Patch Changes
+
+- a74c565: fixed loop timing fixes
+
 ## 0.2.4
 
 ### Patch Changes

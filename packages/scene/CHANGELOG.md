@@ -1,5 +1,12 @@
 # @lattice-engine/scene
 
+## 0.6.2
+
+### Patch Changes
+
+- Updated dependencies [a74c565]
+  - @lattice-engine/core@0.2.5
+
 ## 0.6.1
 
 ### Patch Changes

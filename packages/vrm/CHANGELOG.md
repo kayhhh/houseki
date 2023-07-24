@@ -1,5 +1,14 @@
 # @lattice-engine/vrm
 
+## 3.0.3
+
+### Patch Changes
+
+- Updated dependencies [a74c565]
+  - @lattice-engine/core@0.2.5
+  - @lattice-engine/render@3.0.2
+  - @lattice-engine/scene@0.6.2
+
 ## 3.0.2
 
 ### Patch Changes

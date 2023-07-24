@@ -1,5 +1,15 @@
 # @lattice-engine/gltf
 
+## 4.1.1
+
+### Patch Changes
+
+- Updated dependencies [a74c565]
+  - @lattice-engine/physics@3.0.2
+  - @lattice-engine/core@0.2.5
+  - @lattice-engine/scene@0.6.2
+  - @lattice-engine/text@3.0.2
+
 ## 4.1.0
 
 ### Minor Changes
