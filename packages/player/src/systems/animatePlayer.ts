@@ -42,6 +42,8 @@ export function animatePlayer(
       const movementForward =
         (direction.z * velocity.x - direction.x * velocity.z) / player.speed;
 
+      const movingZ = Math.abs(movementForward) > 0.1;
+
       let totalWeight = 0;
 
       for (const [animationEntity, animation] of animations) {
@@ -70,13 +72,13 @@ export function animatePlayer(
           }
 
           case avatar.leftWalkAnimationId: {
-            const change = showWalkAnimation ? -movementRight : -1;
+            const change = !movingZ && showWalkAnimation ? -movementRight : -1;
             animation.weight += time.mainDelta * WALK_SPEED * change;
             break;
           }
 
           case avatar.rightWalkAnimationId: {
-            const change = showWalkAnimation ? movementRight : -1;
+            const change = !movingZ && showWalkAnimation ? movementRight : -1;
             animation.weight += time.mainDelta * WALK_SPEED * change;
             break;
           }
