@@ -1,5 +1,12 @@
 # @lattice-engine/input
 
+## 0.3.4
+
+### Patch Changes
+
+- Updated dependencies [a74c565]
+  - @lattice-engine/core@0.2.5
+
 ## 0.3.3
 
 ### Patch Changes

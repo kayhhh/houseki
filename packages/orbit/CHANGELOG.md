@@ -1,5 +1,13 @@
 # @lattice-engine/orbit
 
+## 4.0.2
+
+### Patch Changes
+
+- @lattice-engine/input@0.3.4
+- @lattice-engine/render@3.0.2
+- @lattice-engine/scene@0.6.2
+
 ## 4.0.1
 
 ### Patch Changes
