@@ -1,5 +1,12 @@
 # @lattice-engine/player
 
+## 4.0.2
+
+### Patch Changes
+
+- Updated dependencies [f8d3ae5]
+  - @lattice-engine/vrm@3.0.2
+
 ## 4.0.1
 
 ### Patch Changes

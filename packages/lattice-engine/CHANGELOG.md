@@ -1,5 +1,16 @@
 # lattice-engine
 
+## 0.3.11
+
+### Patch Changes
+
+- Updated dependencies [f8d3ae5]
+- Updated dependencies [df5996e]
+  - @lattice-engine/vrm@3.0.2
+  - @lattice-engine/transform@4.1.0
+  - @lattice-engine/player@4.0.2
+  - @lattice-engine/portal@3.0.2
+
 ## 0.3.10
 
 ### Patch Changes

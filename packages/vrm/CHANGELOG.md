@@ -1,5 +1,11 @@
 # @lattice-engine/vrm
 
+## 3.0.2
+
+### Patch Changes
+
+- f8d3ae5: upgrade three-vrm
+
 ## 3.0.1
 
 ### Patch Changes
