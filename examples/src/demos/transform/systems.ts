@@ -1,4 +1,10 @@
 import { CoreStore, Warehouse } from "lattice-engine/core";
+import {
+  BoxCollider,
+  PhysicsConfig,
+  StaticBody,
+  TargetTransform,
+} from "lattice-engine/physics";
 import { OutlinePass } from "lattice-engine/postprocessing";
 import {
   GlobalTransform,
@@ -19,8 +25,11 @@ export function initScene(
   commands: Commands,
   warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
-  sceneStruct: Res<Mut<SceneStruct>>
+  sceneStruct: Res<Mut<SceneStruct>>,
+  physicsConfig: Res<Mut<PhysicsConfig>>
 ) {
+  physicsConfig.debug = true;
+
   createOrbitControls(commands, sceneStruct);
   const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
   createLights(commands, sceneId);
@@ -36,6 +45,7 @@ export function initScene(
   const geometry = createBoxGeometry(warehouse);
   const parent = new Parent(rootId);
   const transform = new Transform([2, 0, 0]);
+  const boxCollider = new BoxCollider([1, 1, 1]);
 
   commands
     .spawn(true)
@@ -50,6 +60,9 @@ export function initScene(
   const boxId = commands
     .spawn(true)
     .add(transform)
+    .add(boxCollider)
+    .addType(StaticBody)
+    .addType(TargetTransform)
     .addType(GlobalTransform)
     .add(parent)
     .addType(Mesh)

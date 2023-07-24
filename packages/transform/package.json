@@ -29,6 +29,7 @@
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/input": "workspace:^",
     "@lattice-engine/orbit": "workspace:^",
+    "@lattice-engine/physics": "workspace:^",
     "@lattice-engine/player": "workspace:^",
     "@lattice-engine/postprocessing": "workspace:^",
     "@lattice-engine/render": "workspace:^",

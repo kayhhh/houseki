@@ -5,6 +5,7 @@ import { run, System, WorldBuilder } from "thyseus";
 import { calcRect } from "./systems/calcRect";
 import { clearEvents } from "./systems/clearEvents";
 import { createControls } from "./systems/createControls";
+import { saveTargetTransforms } from "./systems/saveTargetTransforms";
 import { saveTransforms } from "./systems/saveTransforms";
 import { selectTarget } from "./systems/selectTarget";
 import { sendEvents } from "./systems/sendEvents";
@@ -17,6 +18,7 @@ import { setOutlineTargets } from "./systems/setOutlineTargets";
 export function getTransformPlugin({
   orbitControls = false,
   playerControls = false,
+  physics = false,
 }) {
   const beforeEvents: System[] = [];
 
@@ -40,5 +42,9 @@ export function getTransformPlugin({
       ),
       run(clearEvents).after(sendEvents).before(beforeEvents)
     );
+
+    if (physics) {
+      builder.addSystems(run(saveTargetTransforms).after(saveTransforms));
+    }
   };
 }

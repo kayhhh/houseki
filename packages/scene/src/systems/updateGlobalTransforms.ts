@@ -3,14 +3,14 @@ import { Entity, Mut, Query, With } from "thyseus";
 
 import { GlobalTransform, Parent, Scene, Transform } from "../components";
 
+const childrenMap = new Map<bigint, bigint[]>();
+const transforms = new Map<bigint, Mat4>();
+const globalTransforms = new Map<bigint, Mat4>();
+
 export function updateGlobalTransforms(
   scenes: Query<Entity, With<Scene>>,
   nodes: Query<[Entity, Parent, Transform, Mut<GlobalTransform>]>
 ) {
-  const childrenMap = new Map<bigint, bigint[]>();
-  const transforms = new Map<bigint, Mat4>();
-  const globalTransforms = new Map<bigint, Mat4>();
-
   for (const [entity, parent, transform] of nodes) {
     const localMat = new Mat4();
     transforms.set(entity.id, localMat);
@@ -47,6 +47,10 @@ export function updateGlobalTransforms(
     Mat4.getTranslation(globalTransform.translation.array, globalMat);
     Mat4.getScaling(globalTransform.scale.array, globalMat);
   }
+
+  childrenMap.clear();
+  transforms.clear();
+  globalTransforms.clear();
 }
 
 function updateTransformRecursive(
