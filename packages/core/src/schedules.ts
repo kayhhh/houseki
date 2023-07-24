@@ -3,6 +3,7 @@ import { DefaultSchedule, StartSchedule } from "thyseus";
 export const LatticeSchedules = {
   ApplyCommands: Symbol("ApplyCommands"),
   Destroy: Symbol("Destroy"),
+  FixedLoop: Symbol("FixedLoop"),
   FixedUpdate: Symbol("FixedUpdate"),
   PostFixedUpdate: Symbol("PostFixedUpdate"),
   PostUpdate: Symbol("PostUpdate"),

@@ -2,16 +2,11 @@ import { World } from "thyseus";
 
 import { LatticeSchedules } from "./schedules";
 
-const FIXED_HZ = 60;
-
 /**
  * Stores the ECS world and manages the game loop.
  */
 export class Engine {
   readonly world: World;
-
-  #lastFixedTime = 0;
-  #leftoverFixedTime = 0;
 
   #animationFrame: number | null = null;
   #startPromise: Promise<void> | null = null;
@@ -40,29 +35,15 @@ export class Engine {
     this.#startPromise = this.world.runSchedule(LatticeSchedules.Startup);
     await this.#startPromise;
 
-    this.#lastFixedTime = performance.now();
-
     this.#animationFrame = requestAnimationFrame(this.#loop.bind(this));
   }
 
   async #loop() {
-    const time = performance.now();
-
     await this.#runSchedule(LatticeSchedules.PreUpdate);
     await this.#runSchedule(LatticeSchedules.Update);
     await this.#runSchedule(LatticeSchedules.PostUpdate);
 
-    const fixedStep = 1000 / FIXED_HZ;
-    this.#leftoverFixedTime += time - this.#lastFixedTime;
-
-    if (this.#leftoverFixedTime >= fixedStep) {
-      await this.#runSchedule(LatticeSchedules.PreFixedUpdate);
-      await this.#runSchedule(LatticeSchedules.FixedUpdate);
-      await this.#runSchedule(LatticeSchedules.PostFixedUpdate);
-
-      this.#leftoverFixedTime -= fixedStep;
-      this.#lastFixedTime = time;
-    }
+    await this.#runSchedule(LatticeSchedules.FixedLoop);
 
     while (this.#scheduleQueue.length > 0) {
       const schedule = this.#scheduleQueue.shift();
@@ -70,7 +51,6 @@ export class Engine {
     }
 
     await this.#runSchedule(LatticeSchedules.Render);
-
     await this.#runSchedule(LatticeSchedules.ApplyCommands);
 
     this.#animationFrame = requestAnimationFrame(this.#loop.bind(this));
