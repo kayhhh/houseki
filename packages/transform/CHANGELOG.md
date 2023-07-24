@@ -1,5 +1,11 @@
 # @lattice-engine/transform
 
+## 4.1.0
+
+### Minor Changes
+
+- df5996e: add enabled field to transform controls component
+
 ## 4.0.1
 
 ### Patch Changes
