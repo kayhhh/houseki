@@ -1,5 +1,11 @@
 # @lattice-engine/transform
 
+## 4.4.2
+
+### Patch Changes
+
+- 2e7f9dd: export systems
+
 ## 4.4.1
 
 ### Patch Changes
