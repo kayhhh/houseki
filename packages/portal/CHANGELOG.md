@@ -1,5 +1,16 @@
 # @lattice-engine/portal
 
+## 4.0.0
+
+### Patch Changes
+
+- Updated dependencies [0e4d752]
+- Updated dependencies [0e4d752]
+  - @lattice-engine/player@5.0.0
+  - @lattice-engine/scene@0.7.0
+  - @lattice-engine/physics@4.0.0
+  - @lattice-engine/render@4.0.0
+
 ## 3.0.4
 
 ### Patch Changes

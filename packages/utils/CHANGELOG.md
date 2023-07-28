@@ -1,5 +1,13 @@
 # @lattice-engine/utils
 
+## 5.0.0
+
+### Patch Changes
+
+- Updated dependencies [0e4d752]
+  - @lattice-engine/scene@0.7.0
+  - @lattice-engine/render@4.0.0
+
 ## 4.0.2
 
 ### Patch Changes

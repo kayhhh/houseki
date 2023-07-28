@@ -1,5 +1,11 @@
 # @lattice-engine/scene
 
+## 0.7.0
+
+### Minor Changes
+
+- 0e4d752: run updateGlobalTransforms before both main and fixed loop
+
 ## 0.6.2
 
 ### Patch Changes
