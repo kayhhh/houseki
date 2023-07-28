@@ -27,8 +27,8 @@ export function playerPlugin(builder: WorldBuilder) {
         moveCamera,
         lerpTargetTranslation,
         rotateBody,
-        animatePlayer,
-      ),
+        animatePlayer
+      )
     )
     .addSystemsToSchedule(LatticeSchedules.FixedUpdate, moveBody, setAirTime);
 }
