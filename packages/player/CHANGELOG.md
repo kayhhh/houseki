@@ -1,5 +1,16 @@
 # @lattice-engine/player
 
+## 5.0.0
+
+### Patch Changes
+
+- 0e4d752: fix glitchy player movement
+- Updated dependencies [0e4d752]
+  - @lattice-engine/scene@0.7.0
+  - @lattice-engine/physics@4.0.0
+  - @lattice-engine/render@4.0.0
+  - @lattice-engine/vrm@4.0.0
+
 ## 4.0.4
 
 ### Patch Changes

@@ -16,7 +16,7 @@ export function animatePlayer(
   time: Res<Time>,
   avatars: Query<[Entity, Parent, PlayerAvatar]>,
   animations: Query<[Entity, Mut<VrmAnimation>]>,
-  bodies: Query<[Entity, PlayerBody, Velocity, Transform]>,
+  bodies: Query<[Entity, PlayerBody, Velocity, Transform]>
 ) {
   for (const [entity, parent, avatar] of avatars) {
     for (const [bodyEntity, player, velocity, transform] of bodies) {
@@ -25,7 +25,7 @@ export function animatePlayer(
       const isJumping = player.jumpTime > 0 && player.airTime !== 0;
 
       const moveLength = Math.sqrt(
-        Math.abs(velocity.x) ** 2 + Math.abs(velocity.z) ** 2,
+        Math.abs(velocity.x) ** 2 + Math.abs(velocity.z) ** 2
       );
       const isSprinting = moveLength > player.speed * 1.05;
       const isWalking = moveLength / player.speed > 0.25 && !isSprinting;

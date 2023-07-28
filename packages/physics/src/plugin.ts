@@ -40,11 +40,11 @@ export function physicsPlugin(builder: WorldBuilder) {
         moveCharacters,
         [moveRigidBodies, rotateRigidBodies],
         stepWorld,
-        [runRaycasts, saveCharacters, saveRigidBodies, generateDebug],
-      ),
+        [runRaycasts, saveCharacters, saveRigidBodies, generateDebug]
+      )
     )
     .addSystemsToSchedule(
       LatticeSchedules.PreUpdate,
-      run(applyTargetTransforms).before(updateGlobalTransforms),
+      run(applyTargetTransforms).before(updateGlobalTransforms)
     );
 }

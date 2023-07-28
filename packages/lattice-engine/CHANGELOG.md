@@ -1,5 +1,25 @@
 # lattice-engine
 
+## 0.3.17
+
+### Patch Changes
+
+- Updated dependencies [0e4d752]
+- Updated dependencies [0e4d752]
+  - @lattice-engine/player@5.0.0
+  - @lattice-engine/scene@0.7.0
+  - @lattice-engine/portal@4.0.0
+  - @lattice-engine/transform@5.0.0
+  - @lattice-engine/csm@3.0.0
+  - @lattice-engine/gltf@5.0.0
+  - @lattice-engine/orbit@5.0.0
+  - @lattice-engine/physics@4.0.0
+  - @lattice-engine/postprocessing@3.0.0
+  - @lattice-engine/render@4.0.0
+  - @lattice-engine/text@4.0.0
+  - @lattice-engine/utils@5.0.0
+  - @lattice-engine/vrm@4.0.0
+
 ## 0.3.16
 
 ### Patch Changes

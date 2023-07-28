@@ -13,7 +13,7 @@ const desiredTranslation = {
 export function moveCharacters(
   time: Res<Time>,
   physicsStore: Res<PhysicsStore>,
-  bodies: Query<[Entity, Mut<Velocity>], With<CharacterController>>,
+  bodies: Query<[Entity, Mut<Velocity>], With<CharacterController>>
 ) {
   const delta = time.fixedDelta;
 
