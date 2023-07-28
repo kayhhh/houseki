@@ -8,7 +8,7 @@ import { PlayerBody, PlayerCamera, TargetRotation } from "../components";
 import { PlayerCameraView } from "../types";
 import { getDirection } from "../utils/getDirection";
 
-const SLERP_FACTOR = 1e-13;
+const SLERP_FACTOR = 1e-7;
 
 const quaternion = new Quaternion();
 const quaternion2 = new Quaternion();
