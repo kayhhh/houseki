@@ -29,9 +29,9 @@ export function moveBody(
       Mut<Transform>,
       Mut<TargetTransform>,
       Mut<GlobalTransform>,
-      Mut<Velocity>
+      Mut<Velocity>,
     ]
-  >
+  >,
 ) {
   const input = readInput(inputStruct);
   const jump = inputStruct.keyPressed(Key.Space);
@@ -52,7 +52,7 @@ export function moveBody(
 
       const direction = getDirection(
         cameraTransform.rotation,
-        targetTransform.translation
+        targetTransform.translation,
       );
 
       const movementX = direction.x * input.x + direction.z * input.y;
@@ -83,7 +83,8 @@ export function moveBody(
 
       if (player.jumpTime > 0) {
         velocity.y = player.jumpStrength * (player.jumpTime / JUMP_TIME);
-        player.jumpTime -= time.mainDelta;
+        player.jumpTime -= time.fixedDelta;
+        player.jumpTime = Math.max(player.jumpTime, 0);
       }
     }
   }

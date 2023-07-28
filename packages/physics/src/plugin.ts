@@ -1,4 +1,5 @@
 import { LatticeSchedules } from "@lattice-engine/core";
+import { updateGlobalTransforms } from "@lattice-engine/scene";
 import { run, WorldBuilder } from "thyseus";
 
 import { applyTargetTransforms } from "./systems/applyTargetTransforms";
@@ -39,8 +40,11 @@ export function physicsPlugin(builder: WorldBuilder) {
         moveCharacters,
         [moveRigidBodies, rotateRigidBodies],
         stepWorld,
-        [runRaycasts, saveCharacters, saveRigidBodies, generateDebug]
-      )
+        [runRaycasts, saveCharacters, saveRigidBodies, generateDebug],
+      ),
     )
-    .addSystemsToSchedule(LatticeSchedules.PostUpdate, applyTargetTransforms);
+    .addSystemsToSchedule(
+      LatticeSchedules.PreUpdate,
+      run(applyTargetTransforms).before(updateGlobalTransforms),
+    );
 }

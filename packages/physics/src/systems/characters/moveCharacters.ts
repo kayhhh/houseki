@@ -4,10 +4,16 @@ import { Entity, Mut, Query, Res, With } from "thyseus";
 import { CharacterController, Velocity } from "../../components";
 import { PhysicsStore } from "../../resources";
 
+const desiredTranslation = {
+  x: 0,
+  y: 0,
+  z: 0,
+};
+
 export function moveCharacters(
   time: Res<Time>,
   physicsStore: Res<PhysicsStore>,
-  bodies: Query<[Entity, Mut<Velocity>], With<CharacterController>>
+  bodies: Query<[Entity, Mut<Velocity>], With<CharacterController>>,
 ) {
   const delta = time.fixedDelta;
 
@@ -18,26 +24,22 @@ export function moveCharacters(
     if (!controller || !collider || !rigidbody) continue;
 
     // Apply gravity to velocity
-    const newVelocity = {
-      x: velocity.x + physicsStore.world.gravity.x * delta,
-      y: velocity.y + physicsStore.world.gravity.y * delta,
-      z: velocity.z + physicsStore.world.gravity.z * delta,
-    };
+    velocity.x += physicsStore.world.gravity.x * delta;
+    velocity.y += physicsStore.world.gravity.y * delta;
+    velocity.z += physicsStore.world.gravity.z * delta;
 
-    // Use velocity to compute desired translation
-    const desiredTranslation = {
-      x: newVelocity.x * delta,
-      y: newVelocity.y * delta,
-      z: newVelocity.z * delta,
-    };
+    // Calculate desired translation over delta time
+    desiredTranslation.x = velocity.x * delta;
+    desiredTranslation.y = velocity.y * delta;
+    desiredTranslation.z = velocity.z * delta;
 
-    // Compute movement
+    // Compute actual translation
     controller.computeColliderMovement(collider, desiredTranslation);
-    const movement = controller.computedMovement();
+    const correctedTranslation = controller.computedMovement();
 
-    // Apply movement
-    velocity.x = movement.x / delta;
-    velocity.y = movement.y / delta;
-    velocity.z = movement.z / delta;
+    // Modify velocity to match corrected translation
+    velocity.x = correctedTranslation.x / delta;
+    velocity.y = correctedTranslation.y / delta;
+    velocity.z = correctedTranslation.z / delta;
   }
 }

@@ -18,14 +18,14 @@ export function moveRigidBodies(
   velocities: Query<
     [Entity, Velocity],
     [Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>]
-  >
+  >,
 ) {
   // Set positions
   for (const [entity, globalTransform] of globalTransforms) {
     const body = store.getRigidBody(entity.id);
     if (!body) continue;
 
-    body.setTranslation(globalTransform.translation.toObject(), true);
+    body.setTranslation(globalTransform.translation, true);
   }
 
   // Set velocities
@@ -33,6 +33,6 @@ export function moveRigidBodies(
     const body = store.getRigidBody(entity.id);
     if (!body) continue;
 
-    body.setLinvel(velocity.toObject(), true);
+    body.setLinvel(velocity, true);
   }
 }

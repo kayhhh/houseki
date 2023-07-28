@@ -21,15 +21,14 @@ export function playerPlugin(builder: WorldBuilder) {
       setCameraLayers,
       ...run.chain(
         zoomCamera,
-        moveBody,
         rotateCamera,
         slerpCameraRotation,
         applyAvatarOffset,
         moveCamera,
         lerpTargetTranslation,
         rotateBody,
-        animatePlayer
-      )
+        animatePlayer,
+      ),
     )
-    .addSystemsToSchedule(LatticeSchedules.FixedUpdate, setAirTime);
+    .addSystemsToSchedule(LatticeSchedules.FixedUpdate, moveBody, setAirTime);
 }
