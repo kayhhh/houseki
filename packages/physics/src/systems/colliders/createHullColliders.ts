@@ -11,7 +11,7 @@ export function createHullColliders(
   store: Res<PhysicsStore>,
   colliders: Query<[Entity, HullCollider]>,
   withParent: Query<[Entity, Parent], With<HullCollider>>,
-  geometries: Query<[Entity, Geometry]>
+  geometries: Query<[Entity, Geometry]>,
 ) {
   const ids: bigint[] = [];
 
@@ -50,6 +50,7 @@ export function createHullColliders(
         if (geometryEntity.id !== meshId) continue;
 
         const vertices = geometry.positions.read(warehouse);
+        if (!vertices) continue;
 
         const colliderDesc = ColliderDesc.convexHull(vertices);
         if (!colliderDesc) continue;

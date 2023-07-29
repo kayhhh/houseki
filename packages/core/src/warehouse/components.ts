@@ -10,7 +10,7 @@ export class Resource<T> {
   @struct.u32 declare id: number;
 
   read(warehouse: Readonly<Warehouse>) {
-    return warehouse.get(this.id) as T;
+    return warehouse.get(this.id) as T | undefined;
   }
 
   write(data: T, warehouse: Readonly<Warehouse>) {

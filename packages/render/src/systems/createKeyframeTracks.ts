@@ -20,7 +20,7 @@ import { setCubicSpline } from "../utils/CubicSplineInterpolation";
 export function createKeyframeTracks(
   warehouse: Res<Warehouse>,
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, KeyframeTrack]>
+  entities: Query<[Entity, KeyframeTrack]>,
 ) {
   const ids: bigint[] = [];
 
@@ -29,7 +29,7 @@ export function createKeyframeTracks(
     const values = track.values.read(warehouse);
 
     // Skip empty tracks
-    if (times.length === 0 || values.length === 0) continue;
+    if (!times?.length || !values?.length) continue;
 
     const targetObject = renderStore.nodes.get(track.targetId);
     if (!targetObject) continue;

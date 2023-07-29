@@ -11,7 +11,7 @@ import { RenderStore } from "../resources";
 export function createGeometries(
   warehouse: Res<Warehouse>,
   store: Res<RenderStore>,
-  entities: Query<[Geometry, Entity]>
+  entities: Query<[Geometry, Entity]>,
 ) {
   const ids: bigint[] = [];
 
@@ -29,52 +29,52 @@ export function createGeometries(
     // Sync object properties
     if (geometry.colors.id) {
       const colors = geometry.colors.read(warehouse);
-      setAttribute(object, "color", colors, 4);
+      if (colors) setAttribute(object, "color", colors, 4);
     }
 
     if (geometry.positions.id) {
       const positions = geometry.positions.read(warehouse);
-      setAttribute(object, "position", positions, 3);
+      if (positions) setAttribute(object, "position", positions, 3);
     }
 
     if (geometry.normals.id) {
       const normals = geometry.normals.read(warehouse);
-      setAttribute(object, "normal", normals, 3);
+      if (normals) setAttribute(object, "normal", normals, 3);
     }
 
     if (geometry.uv.id) {
       const uvs = geometry.uv.read(warehouse);
-      setAttribute(object, "uv", uvs, 2);
+      if (uvs) setAttribute(object, "uv", uvs, 2);
     }
 
     if (geometry.uv1.id) {
       const uvs = geometry.uv1.read(warehouse);
-      setAttribute(object, "uv1", uvs, 2);
+      if (uvs) setAttribute(object, "uv1", uvs, 2);
     }
 
     if (geometry.uv2.id) {
       const uvs = geometry.uv2.read(warehouse);
-      setAttribute(object, "uv2", uvs, 2);
+      if (uvs) setAttribute(object, "uv2", uvs, 2);
     }
 
     if (geometry.uv3.id) {
       const uvs = geometry.uv3.read(warehouse);
-      setAttribute(object, "uv3", uvs, 2);
+      if (uvs) setAttribute(object, "uv3", uvs, 2);
     }
 
     if (geometry.joints.id) {
       const joints = geometry.joints.read(warehouse);
-      setAttribute(object, "skinIndex", joints, 4);
+      if (joints) setAttribute(object, "skinIndex", joints, 4);
     }
 
     if (geometry.weights.id) {
       const weights = geometry.weights.read(warehouse);
-      setAttribute(object, "skinWeight", weights, 4);
+      if (weights) setAttribute(object, "skinWeight", weights, 4);
     }
 
     if (geometry.indices.id) {
       const indices = geometry.indices.read(warehouse);
-      setAttribute(object, "index", indices, 1);
+      if (indices) setAttribute(object, "index", indices, 1);
     }
   }
 
@@ -98,7 +98,7 @@ function setAttribute(
   geometry: BufferGeometry,
   name: string,
   data: ArrayLike<number>,
-  itemSize: number
+  itemSize: number,
 ) {
   const attribute =
     name === "index" ? geometry.getIndex() : geometry.getAttribute(name);
