@@ -1,5 +1,14 @@
 # @lattice-engine/render
 
+## 4.0.1
+
+### Patch Changes
+
+- 33a8344: add better warehouse typesafety
+- Updated dependencies [33a8344]
+  - @lattice-engine/core@0.2.6
+  - @lattice-engine/scene@0.7.1
+
 ## 4.0.0
 
 ### Patch Changes

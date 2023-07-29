@@ -1,5 +1,11 @@
 # @lattice-engine/core
 
+## 0.2.6
+
+### Patch Changes
+
+- 33a8344: add better warehouse typesafety
+
 ## 0.2.5
 
 ### Patch Changes

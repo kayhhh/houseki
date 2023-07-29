@@ -1,5 +1,27 @@
 # lattice-engine
 
+## 0.3.18
+
+### Patch Changes
+
+- Updated dependencies [33a8344]
+- Updated dependencies [d73cba1]
+  - @lattice-engine/physics@4.0.1
+  - @lattice-engine/render@4.0.1
+  - @lattice-engine/core@0.2.6
+  - @lattice-engine/gltf@5.0.1
+  - @lattice-engine/player@5.0.1
+  - @lattice-engine/portal@4.0.1
+  - @lattice-engine/transform@5.0.1
+  - @lattice-engine/csm@3.0.1
+  - @lattice-engine/orbit@5.0.1
+  - @lattice-engine/postprocessing@3.0.1
+  - @lattice-engine/text@4.0.1
+  - @lattice-engine/utils@5.0.1
+  - @lattice-engine/vrm@4.0.1
+  - @lattice-engine/input@0.3.5
+  - @lattice-engine/scene@0.7.1
+
 ## 0.3.17
 
 ### Patch Changes
