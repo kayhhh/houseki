@@ -1,5 +1,14 @@
 # @lattice-engine/postprocessing
 
+## 3.0.1
+
+### Patch Changes
+
+- Updated dependencies [33a8344]
+  - @lattice-engine/render@4.0.1
+  - @lattice-engine/core@0.2.6
+  - @lattice-engine/scene@0.7.1
+
 ## 3.0.0
 
 ### Patch Changes
