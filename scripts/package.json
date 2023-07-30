@@ -7,7 +7,7 @@
     "package:add": "ts-node package-add.ts"
   },
   "devDependencies": {
-    "@types/node": "^20.4.4",
+    "@types/node": "^20.4.5",
     "ts-node": "^10.9.1"
   }
 }
