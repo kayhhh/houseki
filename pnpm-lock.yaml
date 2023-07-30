@@ -68,8 +68,8 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       three:
-        specifier: ~0.153.0
-        version: 0.153.0
+        specifier: ~0.155.0
+        version: 0.155.0
       thyseus:
         specifier: ^0.13.5
         version: 0.13.5
@@ -5601,6 +5601,10 @@ packages:
 
   /three@0.153.0:
     resolution: {integrity: sha512-OCP2/uQR6GcDpSLnJt/3a4mdS0kNWcbfUXIwLoEMgLzEUIVIYsSDwskpmOii/AkDM+BBwrl6+CKgrjX9+E2aWg==}
+    dev: false
+
+  /three@0.155.0:
+    resolution: {integrity: sha512-sNgCYmDijnIqkD/bMfk+1pHg3YzsxW7V2ChpuP6HCQ8NiZr3RufsXQr8M3SSUMjW4hG+sUk7YbyuY0DncaDTJQ==}
     dev: false
 
   /thyseus@0.13.5:
