@@ -1,19 +1,13 @@
-import { initStruct, struct } from "thyseus";
+import { struct, type u64 } from "thyseus";
 
 @struct
 export class ExportGltf {
-  @struct.bool declare binary: boolean;
-  @struct.u64 declare scene: bigint;
-
-  constructor() {
-    initStruct(this);
-
-    this.binary = true;
-  }
+  binary: boolean = true;
+  scene: u64 = 0n;
 }
 
 @struct
 export class ExportedGltf {
-  @struct.string declare uri: string;
-  @struct.bool declare binary: boolean;
+  uri: string = "";
+  binary: boolean = false;
 }

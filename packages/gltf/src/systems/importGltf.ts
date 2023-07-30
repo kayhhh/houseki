@@ -1,6 +1,6 @@
 import { Document, WebIO } from "@gltf-transform/core";
 import { Loading, Warehouse } from "@lattice-engine/core";
-import { Commands, dropStruct, Entity, Query, Res, SystemRes } from "thyseus";
+import { Commands, Entity, Query, Res, SystemRes } from "thyseus";
 
 import { Gltf } from "../components";
 import { extensions } from "../extensions/extensions";
@@ -61,7 +61,6 @@ export function importGltf(
 
       const loading = new Loading(`Loading ${gltf.uri}`);
       commands.getById(entity.id).add(loading);
-      dropStruct(loading);
 
       // Start loading document
       io.read(gltf.uri).then((doc) => store.docs.set(id, doc));

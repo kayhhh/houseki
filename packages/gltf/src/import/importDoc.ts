@@ -36,7 +36,5 @@ export function importDoc(
     context.animationMixerIds.push(mixer.id);
   }
 
-  context.dropStructs();
-
   return context;
 }

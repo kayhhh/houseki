@@ -1,35 +1,33 @@
-import { initStruct, struct } from "thyseus";
+import { struct, type f32, type u8 } from "thyseus";
 
 import { AnchorX, AnchorY } from "./types";
 
 @struct
 export class Text {
-  @struct.string declare value: string;
+  value: string;
 
   /**
    * URI to a font file (.ttf, .otf, .woff)
    */
-  @struct.string declare font: string;
-  @struct.f32 declare fontSize: number;
+  font: string;
+  fontSize: f32;
 
-  @struct.u8 declare anchorX: AnchorX;
-  @struct.u8 declare anchorY: AnchorY;
+  anchorX: u8;
+  anchorY: u8;
 
-  @struct.array({ length: 3, type: "u8" }) declare color: Uint8Array;
+  color: [u8, u8, u8];
 
   constructor(
     value = "",
     font = "",
     fontSize = 1,
-    color: [number, number, number] = [255, 255, 255]
+    color: [u8, u8, u8] = [255, 255, 255]
   ) {
-    initStruct(this);
-
     this.value = value;
     this.font = font;
     this.fontSize = fontSize;
     this.anchorX = AnchorX.Center;
     this.anchorY = AnchorY.Middle;
-    this.color.set(color);
+    this.color = [...color];
   }
 }

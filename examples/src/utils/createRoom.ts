@@ -1,7 +1,7 @@
 import { Warehouse } from "lattice-engine/core";
 import { BoxCollider, StaticBody } from "lattice-engine/physics";
 import { GlobalTransform, Mesh, Parent, Transform } from "lattice-engine/scene";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 import { createBoxGeometry } from "./geometry";
 import { Vec3 } from "./types";
@@ -91,13 +91,9 @@ function createBox(
     .add(collider)
     .addType(StaticBody);
 
-  dropStruct(transform);
-  dropStruct(collider);
-
   if (parentId) {
     const parent = new Parent(parentId);
     entity.add(parent);
-    dropStruct(parent);
   }
 
   return entity.id;

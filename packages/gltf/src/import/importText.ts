@@ -1,6 +1,6 @@
 import { Node } from "@gltf-transform/core";
 import { AnchorX, AnchorY, Text as TextComp } from "@lattice-engine/text";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 import { Text } from "../extensions/MOZ_text/Text";
 
@@ -60,6 +60,4 @@ export function importText(commands: Commands, node: Node, entityId: bigint) {
   }
 
   commands.getById(entityId).add(textComp);
-
-  dropStruct(textComp);
 }

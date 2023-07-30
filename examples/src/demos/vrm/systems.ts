@@ -6,7 +6,7 @@ import {
   Transform,
 } from "lattice-engine/scene";
 import { Vrm } from "lattice-engine/vrm";
-import { Commands, dropStruct, Mut, Res } from "thyseus";
+import { Commands, Mut, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";
 import { createOrbitControls } from "../../utils/createOrbitControls";
@@ -31,8 +31,4 @@ export function initScene(
     .addType(GlobalTransform)
     .add(parent)
     .add(vrm);
-
-  dropStruct(transform);
-  dropStruct(parent);
-  dropStruct(vrm);
 }

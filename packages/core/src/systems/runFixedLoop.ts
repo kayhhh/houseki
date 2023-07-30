@@ -1,4 +1,4 @@
-import { Mut, Res, struct, SystemRes, World } from "thyseus";
+import { Mut, Res, struct, SystemRes, World, type f32 } from "thyseus";
 
 import { Time } from "../resources";
 import { LatticeSchedules } from "../schedules";
@@ -8,7 +8,7 @@ const FIXED_STEP_MS = 1000 / FIXED_HZ;
 
 @struct
 class LocalRes {
-  @struct.f32 declare timeSinceLastFixedUpdate: number;
+  timeSinceLastFixedUpdate: f32 = 0;
 }
 
 export async function runFixedLoop(

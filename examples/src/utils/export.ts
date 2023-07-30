@@ -5,14 +5,7 @@ import {
   Gltf,
 } from "lattice-engine/gltf";
 import { DeepRemove, Scene, SceneStruct } from "lattice-engine/scene";
-import {
-  Commands,
-  dropStruct,
-  EventReader,
-  EventWriter,
-  Query,
-  Res,
-} from "thyseus";
+import { Commands, EventReader, EventWriter, Query, Res } from "thyseus";
 
 import { selectedModel } from "../demos/gltf/systems";
 
@@ -86,7 +79,6 @@ export function handleExport(
 
       const gltf = new Gltf(event.uri);
       commands.getById(rootId).add(gltf);
-      dropStruct(gltf);
     }
   }
 

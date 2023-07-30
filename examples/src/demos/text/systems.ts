@@ -6,7 +6,7 @@ import {
   Transform,
 } from "lattice-engine/scene";
 import { Text } from "lattice-engine/text";
-import { Commands, dropStruct, Mut, Res } from "thyseus";
+import { Commands, Mut, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";
 import { createOrbitControls } from "../../utils/createOrbitControls";
@@ -33,8 +33,4 @@ export function initScene(
     .addType(GlobalTransform)
     .add(parent)
     .add(text);
-
-  dropStruct(transform);
-  dropStruct(parent);
-  dropStruct(text);
 }

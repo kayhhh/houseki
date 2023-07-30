@@ -1,7 +1,7 @@
 import { Mesh as GltfMesh, Primitive } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
 import { Geometry, Mesh } from "@lattice-engine/scene";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";
 import { importMaterial } from "./importMaterial";
@@ -71,9 +71,6 @@ export function importMesh(
       .add(mesh)
       .add(geometry)
       .add(context.name).id;
-
-    dropStruct(mesh);
-    dropStruct(geometry);
 
     context.meshIds.push(meshId);
   });

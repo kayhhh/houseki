@@ -1,7 +1,7 @@
 import { CoreStore, Warehouse } from "lattice-engine/core";
 import { CascadingShadowMaps } from "lattice-engine/csm";
 import { SceneStruct } from "lattice-engine/scene";
-import { Commands, dropStruct, Mut, Res } from "thyseus";
+import { Commands, Mut, Res } from "thyseus";
 
 import { createBox } from "../../utils/createBox";
 import { createOrbitControls } from "../../utils/createOrbitControls";
@@ -25,8 +25,6 @@ export function initScene(
   csm.far = GROUND_SIZE * 0.75;
 
   commands.getById(cameraId).add(csm);
-
-  dropStruct(csm);
 
   createBox(commands, warehouse, {
     parentId: rootId,

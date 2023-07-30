@@ -1,26 +1,23 @@
-import { initStruct, struct } from "thyseus";
+import { struct, type u64 } from "thyseus";
 
 @struct
 export class Gltf {
-  @struct.string declare uri: string;
+  uri: string;
 
   constructor(uri = "") {
-    initStruct(this);
-
     this.uri = uri;
   }
 }
 
 @struct
 export class Extra {
-  @struct.u64 declare target: bigint;
+  target: u64;
 
-  @struct.string declare key: string;
-  @struct.string declare value: string;
+  key: string;
+  value: string;
 
   constructor(key = "", value = "") {
-    initStruct(this);
-
+    this.target = 0n;
     this.key = key;
     this.value = value;
   }

@@ -13,7 +13,7 @@ import {
   Transform,
 } from "lattice-engine/scene";
 import { Text } from "lattice-engine/text";
-import { Commands, dropStruct, Mut, Res } from "thyseus";
+import { Commands, Mut, Res } from "thyseus";
 
 import { createBox } from "../../utils/createBox";
 import { createLights } from "../../utils/createLights";
@@ -66,26 +66,17 @@ export function initScene(
   createRamp(commands, warehouse, 2, 10, 1, 60, rampsId, [9, 0, 0]);
 
   const ballRadius = 1;
-  const ballGeometry = createSphereGeometry(warehouse, ballRadius);
-  const sphereCollider = new SphereCollider(ballRadius);
-  const targetTransform = new TargetTransform();
 
   commands
     .spawn(true)
     .add(parent)
     .add(transform.set([0, 3, 8]))
-    .add(targetTransform.set([0, 3, 8]))
+    .add(new TargetTransform().set([0, 3, 8]))
     .addType(GlobalTransform)
-    .add(ballGeometry)
+    .add(createSphereGeometry(warehouse, ballRadius))
     .addType(Mesh)
-    .add(sphereCollider)
+    .add(new SphereCollider(ballRadius))
     .addType(DynamicBody);
-
-  dropStruct(ballGeometry);
-  dropStruct(sphereCollider);
-  dropStruct(targetTransform);
-  dropStruct(parent);
-  dropStruct(transform);
 }
 
 function createStairs(
@@ -125,10 +116,6 @@ function createStairs(
     .add(transform.set([0, 3, 0]))
     .addType(GlobalTransform)
     .add(text);
-
-  dropStruct(text);
-  dropStruct(parent);
-  dropStruct(transform);
 
   return stairId;
 }
@@ -175,8 +162,4 @@ function createRamp(
     .add(transform.set([0, 3, 0]))
     .addType(GlobalTransform)
     .add(text);
-
-  dropStruct(text);
-  dropStruct(parent);
-  dropStruct(transform);
 }

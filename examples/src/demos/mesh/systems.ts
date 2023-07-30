@@ -12,16 +12,7 @@ import {
   SceneStruct,
   Transform,
 } from "lattice-engine/scene";
-import {
-  Commands,
-  dropStruct,
-  Entity,
-  Mut,
-  Query,
-  Res,
-  With,
-  Without,
-} from "thyseus";
+import { Commands, Entity, Mut, Query, Res, With, Without } from "thyseus";
 
 import { createLights } from "../../utils/createLights";
 import { createPlayer } from "../../utils/createPlayer";
@@ -40,20 +31,12 @@ export function initScene(
 
   createPlayer([0, 5, 0], sceneId, commands, sceneStruct);
 
-  const transform = new Transform(undefined, undefined, [4, 4, 4]);
-  const parent = new Parent(rootId);
-  const gltf = new Gltf("/gltf/Accumula-Town.glb");
-
   commands
     .spawn(true)
-    .add(transform)
+    .add(new Transform(undefined, undefined, [4, 4, 4]))
     .addType(GlobalTransform)
-    .add(parent)
-    .add(gltf);
-
-  dropStruct(transform);
-  dropStruct(parent);
-  dropStruct(gltf);
+    .add(new Parent(rootId))
+    .add(new Gltf("/gltf/Accumula-Town.glb"));
 }
 
 export function addPhysics(
@@ -63,14 +46,12 @@ export function addPhysics(
 ) {
   for (const [entity, mesh] of meshes) {
     // Add mesh collider
-    const parent = new Parent(mesh.parentId);
     commands
       .getById(entity.id)
       .addType(Transform)
       .addType(GlobalTransform)
-      .add(parent)
+      .add(new Parent(mesh.parentId))
       .addType(MeshCollider);
-    dropStruct(parent);
 
     // Add static body to parent
     for (const nodeEntity of nodes) {

@@ -5,7 +5,7 @@ import {
   RigidBody,
   World,
 } from "@dimforge/rapier3d";
-import { struct } from "thyseus";
+import { struct, type u64 } from "thyseus";
 
 export class PhysicsStore {
   readonly world = new World({ x: 0, y: -9.81, z: 0 });
@@ -96,7 +96,7 @@ export class PhysicsStore {
 
 @struct
 export class PhysicsConfig {
-  @struct.bool declare debug: boolean;
+  debug: boolean = false;
 }
 
 @struct
@@ -104,5 +104,5 @@ export class DebugResource {
   /**
    * The entity id of the debug lines.
    */
-  @struct.u64 declare linesId: bigint;
+  linesId: u64 = 0n;
 }

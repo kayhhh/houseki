@@ -9,7 +9,7 @@ import {
   StandardMaterial,
   Transform,
 } from "lattice-engine/scene";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 import { createBoxGeometry } from "./geometry";
 
@@ -25,7 +25,6 @@ function getTextureId(commands: Commands) {
 
   const asset = new Asset("/DevGrid.png");
   _textureId = commands.spawn(true).add(asset).addType(Image).id;
-  dropStruct(asset);
 
   return _textureId;
 }
@@ -49,8 +48,6 @@ function createMaterial(commands: Commands, scaleX: number, scaleZ: number) {
   material.baseColorTextureInfo.scale.set(scaleX, scaleZ);
 
   const materialId = commands.spawn(true).add(material).id;
-
-  dropStruct(material);
 
   const materialMap = materials.get(scaleX) || new Map<number, bigint>();
   materialMap.set(scaleZ, materialId);
@@ -107,20 +104,12 @@ export function createBox(
     .add(geometry).id;
 
   if (parentId) {
-    const parent = new Parent(parentId);
-    commands.getById(boxId).add(parent);
-    dropStruct(parent);
+    commands.getById(boxId).add(new Parent(parentId));
   }
 
   if (addCollider) {
-    const collider = new BoxCollider();
-    collider.size.fromArray(size);
-    commands.getById(boxId).add(collider).addType(StaticBody);
-    dropStruct(collider);
+    commands.getById(boxId).add(new BoxCollider(size)).addType(StaticBody);
   }
-
-  dropStruct(geometry);
-  dropStruct(mesh);
 
   return boxId;
 }

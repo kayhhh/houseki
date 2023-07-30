@@ -4,7 +4,6 @@ import { Mesh } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import {
   Commands,
-  dropStruct,
   Entity,
   Query,
   Res,
@@ -59,7 +58,6 @@ export function createAvatars(
 
     const loadMessage = new Loading(`Loading ${uri}`);
     commands.getById(entity.id).add(loadMessage);
-    dropStruct(loadMessage);
 
     loadVrm(entityId, uri, localStore);
   }

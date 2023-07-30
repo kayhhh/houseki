@@ -16,7 +16,6 @@ import {
   Parent,
   Transform,
 } from "@lattice-engine/scene";
-import { dropStruct } from "thyseus";
 
 type EntityID = bigint;
 
@@ -47,22 +46,4 @@ export class ImportContext {
   readonly cylinderCollider = new CylinderCollider();
   readonly hullCollider = new HullCollider();
   readonly meshCollider = new MeshCollider();
-
-  dropStructs() {
-    dropStruct(this.parent);
-    dropStruct(this.transform);
-    dropStruct(this.globalTransform);
-    dropStruct(this.targetTransform);
-    dropStruct(this.name);
-
-    dropStruct(this.kinematicBody);
-    dropStruct(this.dynamicBody);
-
-    dropStruct(this.boxCollider);
-    dropStruct(this.sphereCollider);
-    dropStruct(this.capsuleCollider);
-    dropStruct(this.cylinderCollider);
-    dropStruct(this.hullCollider);
-    dropStruct(this.meshCollider);
-  }
 }

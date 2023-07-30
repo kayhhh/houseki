@@ -19,7 +19,7 @@ import {
   Scene,
   WebGLRenderer,
 } from "three";
-import { struct } from "thyseus";
+import { struct, type u32 } from "thyseus";
 
 export type EntityID = bigint;
 
@@ -70,12 +70,12 @@ export class RenderStore {
 
 @struct
 export class RenderStats {
-  @struct.u32 declare frame: number;
-  @struct.u32 declare calls: number;
-  @struct.u32 declare lines: number;
-  @struct.u32 declare points: number;
-  @struct.u32 declare triangles: number;
-  @struct.u32 declare geometries: number;
-  @struct.u32 declare textures: number;
-  @struct.u32 declare shaders: number;
+  frame: u32 = 0;
+  calls: u32 = 0;
+  lines: u32 = 0;
+  points: u32 = 0;
+  triangles: u32 = 0;
+  geometries: u32 = 0;
+  textures: u32 = 0;
+  shaders: u32 = 0;
 }

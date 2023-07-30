@@ -1,6 +1,5 @@
 import {
   Commands,
-  dropStruct,
   Entity,
   Query,
   Res,
@@ -36,9 +35,7 @@ export function fetchAssets(
       continue;
     }
 
-    const loadMessage = new Loading(`Fetching ${uri}`);
-    commands.getById(entity.id).add(loadMessage);
-    dropStruct(loadMessage);
+    commands.getById(entity.id).add(new Loading(`Fetching ${uri}`));
 
     fetch(uri)
       .then((response) => response.arrayBuffer())

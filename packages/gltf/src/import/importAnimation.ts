@@ -6,7 +6,7 @@ import {
   KeyframePath,
   KeyframeTrack,
 } from "@lattice-engine/scene";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";
 
@@ -21,8 +21,6 @@ export function importAnimation(
 
   const entityId = commands.spawn(true).add(clip).id;
   context.animationClipIds.push(entityId);
-
-  dropStruct(clip);
 
   animation.listChannels().forEach((channel) => {
     const track = new KeyframeTrack();
@@ -88,7 +86,5 @@ export function importAnimation(
 
     const trackEntityId = commands.spawn(true).add(track).id;
     context.keyframeTrackIds.push(trackEntityId);
-
-    dropStruct(track);
   });
 }

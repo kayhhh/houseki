@@ -1,4 +1,4 @@
-import { struct } from "thyseus";
+import { struct, type u32 } from "thyseus";
 
 import { Warehouse } from "./Warehouse";
 
@@ -7,7 +7,7 @@ import { Warehouse } from "./Warehouse";
  */
 @struct
 export class Resource<T> {
-  @struct.u32 declare id: number;
+  id: u32 = 0;
 
   read(warehouse: Readonly<Warehouse>) {
     return warehouse.get(this.id) as T | undefined;

@@ -11,7 +11,7 @@ import {
   StandardMaterial,
   TextureInfo,
 } from "@lattice-engine/scene";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";
 
@@ -111,8 +111,6 @@ export function importMaterial(
   context.materials.set(gltfMaterial, entityId);
   context.materialIds.push(entityId);
 
-  dropStruct(material);
-
   return entityId;
 }
 
@@ -157,8 +155,6 @@ function createTexture(
   asset.mimeType = gltfTexture.getMimeType();
 
   const imageId = commands.spawn(true).add(asset).addType(Image).id;
-
-  dropStruct(asset);
 
   return imageId;
 }

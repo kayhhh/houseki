@@ -1,5 +1,5 @@
 import { Node } from "@gltf-transform/core";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 import { Extra } from "../components";
 
@@ -16,6 +16,4 @@ export function importExtras(commands: Commands, node: Node, entityId: bigint) {
 
     commands.spawn(true).add(extra);
   }
-
-  dropStruct(extra);
 }

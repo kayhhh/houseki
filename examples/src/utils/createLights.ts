@@ -6,7 +6,7 @@ import {
   ShadowMap,
   Transform,
 } from "lattice-engine/scene";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 export function createLights(
   commands: Commands,
@@ -23,7 +23,6 @@ export function createLights(
     .addType(Transform)
     .addType(GlobalTransform)
     .add(parent);
-  dropStruct(ambient);
 
   const directionalComponent = new DirectionalLight([1, 1, 1], 0.75);
   const transform = new Transform([0, 30, 0]);
@@ -34,10 +33,6 @@ export function createLights(
     .add(transform)
     .addType(GlobalTransform)
     .add(parent);
-
-  dropStruct(transform);
-  dropStruct(directionalComponent);
-  dropStruct(parent);
 
   if (shadowResolution > 0) {
     const shadowMap = new ShadowMap(
@@ -50,6 +45,5 @@ export function createLights(
       50
     );
     directional.add(shadowMap);
-    dropStruct(shadowMap);
   }
 }

@@ -1,20 +1,18 @@
-import { initStruct, struct } from "thyseus";
+import { struct, type f32, type u64 } from "thyseus";
 
 @struct
 export class Vrm {
   /**
    * The URI of the VRM file to load.
    */
-  @struct.string declare uri: string;
+  uri: string;
 
   /**
    * Whether to setup first person layers.
    */
-  @struct.bool declare setupFirstPerson: boolean;
+  setupFirstPerson: boolean;
 
   constructor(uri = "", setupFirstPerson = false) {
-    initStruct(this);
-
     this.uri = uri;
     this.setupFirstPerson = setupFirstPerson;
   }
@@ -25,16 +23,14 @@ export class Vrm {
  */
 @struct
 export class VrmAnimation {
-  @struct.u64 declare vrmId: bigint; // Vrm Entity ID
-  @struct.string declare uri: string;
-  @struct.bool declare play: boolean;
-  @struct.bool declare loop: boolean;
-  @struct.f32 declare weight: number;
-  @struct.f32 declare speed: number;
+  vrmId: u64; // Vrm Entity ID
+  uri: string;
+  play: boolean;
+  loop: boolean;
+  weight: f32;
+  speed: f32;
 
   constructor(vrmId = 0n, uri = "", play = false, loop = false, weight = 1.0) {
-    initStruct(this);
-
     this.vrmId = vrmId;
     this.uri = uri;
     this.play = play;
