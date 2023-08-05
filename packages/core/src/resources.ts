@@ -1,4 +1,4 @@
-import { struct, type f32 } from "thyseus";
+import { type f32, struct } from "thyseus";
 
 export class CoreStore {
   /**

@@ -1,6 +1,6 @@
 import { JSONDocument, WebIO } from "@gltf-transform/core";
 import { dedup, prune } from "@gltf-transform/functions";
-import { Asset, Warehouse } from "@lattice-engine/core";
+import { Asset } from "@lattice-engine/core";
 import {
   BoxCollider,
   CapsuleCollider,
@@ -28,7 +28,6 @@ import {
   EventReader,
   EventWriter,
   Query,
-  Res,
   SystemRes,
   With,
 } from "thyseus";
@@ -75,7 +74,6 @@ class LocalStore {
 
 export function exportGltf(
   localStore: SystemRes<LocalStore>,
-  warehouse: Res<Warehouse>,
   reader: EventReader<ExportGltf>,
   outWriter: EventWriter<ExportedGltf>,
   names: Query<[Entity, Name]>,
@@ -99,11 +97,9 @@ export function exportGltf(
   for (const binary of localStore.outBinary) {
     console.info(`📦 Exported glTF binary (${bytesToDisplay(binary.length)})`);
 
-    const event = outWriter.create();
-    event.binary = true;
-
     const blob = new Blob([binary], { type: "model/gltf-binary" });
-    event.uri = URL.createObjectURL(blob);
+
+    outWriter.create({ binary: true, uri: URL.createObjectURL(blob) });
 
     localStore.outBinary.shift();
   }
@@ -121,8 +117,7 @@ export function exportGltf(
       type: "application/json",
     });
 
-    const event = outWriter.create();
-    event.uri = URL.createObjectURL(blob);
+    outWriter.create({ binary: false, uri: URL.createObjectURL(blob) });
 
     localStore.outJson.shift();
   }
@@ -150,7 +145,7 @@ export function exportGltf(
     }
 
     for (const [entity, asset] of images) {
-      exportImage(context, warehouse, entity.id, asset);
+      exportImage(context, entity.id, asset);
     }
 
     for (const [entity, material] of materials) {
@@ -158,7 +153,7 @@ export function exportGltf(
     }
 
     for (const [entity, mesh, geometry] of meshes) {
-      exportMesh(context, warehouse, entity.id, mesh, geometry);
+      exportMesh(context, entity.id, mesh, geometry);
     }
 
     for (const [entity, parent, transform] of nodes) {

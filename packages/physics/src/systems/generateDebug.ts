@@ -1,4 +1,3 @@
-import { Warehouse } from "@lattice-engine/core";
 import {
   Geometry,
   GlobalTransform,
@@ -15,7 +14,6 @@ import { DebugResource, PhysicsConfig, PhysicsStore } from "../resources";
 
 export function generateDebug(
   commands: Commands,
-  warehouse: Res<Warehouse>,
   debug: Res<Mut<DebugResource>>,
   physicsStore: Res<PhysicsStore>,
   physicsConfig: Res<PhysicsConfig>,
@@ -67,8 +65,8 @@ export function generateDebug(
 
     parent.id = sceneStruct.activeScene;
 
-    geometry.positions.write(buffers.vertices, warehouse);
-    geometry.colors.write(buffers.colors, warehouse);
+    geometry.positions = Array.from(buffers.vertices);
+    geometry.colors = Array.from(buffers.colors);
   }
 
   if (!linesFound && debug.linesId) {

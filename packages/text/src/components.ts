@@ -1,4 +1,4 @@
-import { struct, type f32, type u8 } from "thyseus";
+import { type f32, struct, type u8 } from "thyseus";
 
 import { AnchorX, AnchorY } from "./types";
 

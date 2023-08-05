@@ -1,5 +1,4 @@
 import { Node } from "@gltf-transform/core";
-import { Warehouse } from "@lattice-engine/core";
 import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";
@@ -13,7 +12,6 @@ export function importNode(
   node: Node,
   parentId: bigint,
   commands: Commands,
-  warehouse: Readonly<Warehouse>,
   context: ImportContext
 ) {
   const nodePosition = node.getTranslation();
@@ -41,7 +39,7 @@ export function importNode(
   context.nodes.set(node, entityId);
 
   const mesh = node.getMesh();
-  if (mesh) importMesh(mesh, entityId, commands, warehouse, context);
+  if (mesh) importMesh(mesh, entityId, commands, context);
 
   importCollider(context, commands, node, entityId);
   importPhysicsBody(context, commands, node, entityId);
@@ -50,7 +48,5 @@ export function importNode(
 
   node
     .listChildren()
-    .forEach((child) =>
-      importNode(child, entityId, commands, warehouse, context)
-    );
+    .forEach((child) => importNode(child, entityId, commands, context));
 }

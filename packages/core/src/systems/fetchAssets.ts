@@ -1,37 +1,52 @@
 import {
   Commands,
   Entity,
+  Mut,
   Query,
-  Res,
   SystemRes,
   With,
   Without,
 } from "thyseus";
 
 import { Asset, Loading } from "../components";
-import { Warehouse } from "../warehouse";
 
 class LocalStore {
-  readonly loaded = new Map<string, ArrayBuffer>();
+  /**
+   * Entity ID -> URI
+   */
+  readonly loaded = new Map<bigint, string>();
+
+  /**
+   * URI -> Data
+   */
+  readonly fetched = new Map<string, Uint8Array>();
 }
 
 export function fetchAssets(
   commands: Commands,
-  warehouse: Res<Warehouse>,
   localStore: SystemRes<LocalStore>,
-  toLoad: Query<[Entity, Asset], Without<Loading>>,
+  toLoad: Query<[Entity, Mut<Asset>], Without<Loading>>,
   loading: Query<[Entity, Asset], With<Loading>>
 ) {
   for (const [entity, resource] of toLoad) {
     const uri = resource.uri;
-    if (!uri) continue;
 
-    const loaded = localStore.loaded.get(uri);
+    const loaded = localStore.loaded.get(entity.id);
 
-    if (loaded) {
-      if (loaded !== resource.data.read(warehouse)) {
-        resource.data.write(loaded, warehouse);
-      }
+    if (uri === loaded) {
+      continue;
+    }
+
+    const data = localStore.fetched.get(uri);
+
+    if (data) {
+      resource.data = Array.from(data);
+      localStore.loaded.set(entity.id, uri);
+      continue;
+    }
+
+    if (!uri) {
+      localStore.fetched.set(uri, new Uint8Array());
       continue;
     }
 
@@ -39,13 +54,12 @@ export function fetchAssets(
 
     fetch(uri)
       .then((response) => response.arrayBuffer())
-      .then((data) => localStore.loaded.set(uri, data));
+      .then((data) => localStore.fetched.set(uri, new Uint8Array(data)));
   }
 
   for (const [entity, resource] of loading) {
-    const loaded = localStore.loaded.get(resource.uri);
+    const loaded = localStore.fetched.get(resource.uri);
     if (loaded) {
-      resource.data.write(loaded, warehouse);
       commands.getById(entity.id).remove(Loading);
     }
   }

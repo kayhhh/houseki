@@ -1,20 +1,15 @@
-import { Resource, Vec2, Vec3, Vec4 } from "@lattice-engine/core";
+import { Vec2, Vec3, Vec4 } from "@lattice-engine/core";
 import {
   Entity,
   EntityCommands,
+  type f32,
   struct,
-  type u64,
   type u8,
   type u16,
-  type f32,
+  type u64,
 } from "thyseus";
 
-import {
-  KeyframeInterpolation,
-  KeyframePath,
-  MaterialAlphaMode,
-  MeshMode,
-} from "./types";
+import { MeshMode } from "./types";
 
 export class Quat extends Vec4 {
   constructor(x = 0, y = 0, z = 0, w = 1) {
@@ -82,8 +77,8 @@ export class Name {
 export class Parent {
   id: u64;
 
-  constructor(id: bigint = 0n) {
-    if (id) this.id = id;
+  constructor(id = 0n) {
+    this.id = id;
   }
 
   setEntity(entity: Readonly<Entity> | EntityCommands): this {
@@ -106,7 +101,7 @@ export class Scene {
    * Used for scene content (ie. meshes) not temporary runtime things (player, camera, etc).
    * Useful for saving/loading scenes.
    */
-  rootId: u64;
+  rootId: u64 = 0n;
 }
 
 /**
@@ -114,13 +109,13 @@ export class Scene {
  */
 @struct
 export class Skybox {
-  imageId: u64;
+  imageId: u64 = 0n;
 }
 
 @struct
 export class Mesh {
-  parentId: u64; // Entity ID
-  materialId: u64; // Entity ID
+  parentId: u64 = 0n;
+  materialId: u64 = 0n;
 
   mode: u8;
   frustumCulled: boolean;
@@ -135,17 +130,16 @@ export class Mesh {
 
 @struct
 export class Geometry {
-  indices: Resource<Uint32Array> = new Resource();
-
-  colors: Resource<Float32Array> = new Resource();
-  joints: Resource<Float32Array> = new Resource();
-  normals: Resource<Float32Array> = new Resource();
-  positions: Resource<Float32Array> = new Resource();
-  uv1: Resource<Float32Array> = new Resource();
-  uv2: Resource<Float32Array> = new Resource();
-  uv3: Resource<Float32Array> = new Resource();
-  uv: Resource<Float32Array> = new Resource();
-  weights: Resource<Float32Array> = new Resource();
+  indices: f32[] = [];
+  colors: f32[] = [];
+  joints: f32[] = [];
+  normals: f32[] = [];
+  positions: f32[] = [];
+  uv1: f32[] = [];
+  uv2: f32[] = [];
+  uv3: f32[] = [];
+  uv: f32[] = [];
+  weights: f32[] = [];
 }
 
 @struct
@@ -174,11 +168,11 @@ export class Image {
 
 @struct
 export class StandardMaterial {
-  vertexColors: boolean = false;
+  vertexColors = false;
 
   alphaMode: u8 = 0;
   alphaCutoff: f32 = 0;
-  doubleSided: boolean = false;
+  doubleSided = false;
 
   baseColor: Vec4;
   baseColorTextureId: u64 = 0n; // Entity ID
@@ -216,14 +210,14 @@ export class StandardMaterial {
 
 @struct
 export class BasicMaterial {
-  doubleSided: boolean = false;
-  colorWrite: boolean = true;
+  doubleSided = false;
+  colorWrite = true;
 }
 
 @struct
 export class LineMaterial {
   color: [f32, f32, f32, f32];
-  vertexColors: boolean = false;
+  vertexColors = false;
 
   constructor(color = [1, 1, 1, 1]) {
     this.color = [...color] as [f32, f32, f32, f32];
@@ -277,16 +271,11 @@ export class AnimationClip {
 @struct
 export class KeyframeTrack {
   clipId: u64 = 0n; // Entity ID
-
   targetId: u64 = 0n; // Entity ID
-
   path: u8 = 0;
-
   interpolation: u8 = 0;
-
-  times: Resource<Float32Array> = new Resource();
-
-  values: Resource<Float32Array> = new Resource();
+  times: f32[] = [];
+  values: f32[] = [];
 }
 
 @struct

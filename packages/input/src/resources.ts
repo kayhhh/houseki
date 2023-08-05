@@ -1,23 +1,21 @@
 import { struct, type u64 } from "thyseus";
 
-import { NUM_KEYS } from "./types";
-
 @struct
 export class InputStruct {
   /**
    * Whether to enable pointer lock on the canvas.
    */
-  enablePointerLock: boolean = false;
+  enablePointerLock = false;
 
   /**
    * Whether the pointer is currently locked.
    */
-  isPointerLocked: boolean = false;
+  isPointerLocked = false;
 
   /**
    * Whether the pointer is currently down.
    */
-  isPointerDown: boolean = false;
+  isPointerDown = false;
 
   /**
    * The currently pressed keys.

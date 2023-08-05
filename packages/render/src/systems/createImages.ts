@@ -1,4 +1,4 @@
-import { Asset, Warehouse } from "@lattice-engine/core";
+import { Asset } from "@lattice-engine/core";
 import { Image } from "@lattice-engine/scene";
 import { Entity, Query, Res, SystemRes } from "thyseus";
 
@@ -20,7 +20,6 @@ class LocalStore {
  * Creates ImageBitmaps.
  */
 export function createImages(
-  warehouse: Res<Warehouse>,
   renderStore: Res<RenderStore>,
   localStore: SystemRes<LocalStore>,
   entities: Query<[Entity, Asset, Image]>
@@ -33,10 +32,8 @@ export function createImages(
     // If already created, skip
     if (localStore.bitmaps.has(entity.id)) continue;
 
-    const data = asset.data.read(warehouse);
-
     // If data is empty, remove the bitmap
-    if (!data || data.byteLength === 0) {
+    if (!asset.data.length) {
       localStore.bitmaps.delete(entity.id);
       localStore.loadedData.delete(entity.id);
       renderStore.images.delete(entity.id);
@@ -45,12 +42,13 @@ export function createImages(
 
     // If data hasn't changed, skip
     const loaded = localStore.loadedData.get(entity.id);
-    if (loaded && loaded.byteLength === data.byteLength) continue;
+    if (loaded && loaded.byteLength === asset.data.length) continue;
 
     // Create the bitmap
-    localStore.loadedData.set(entity.id, data);
+    const array = new Uint8Array(asset.data);
+    localStore.loadedData.set(entity.id, array.buffer);
 
-    const blob = new Blob([data], { type: asset.mimeType });
+    const blob = new Blob([array], { type: asset.mimeType });
     const entityId = entity.id;
     const imageOrientation: ImageOrientation = image.flipY ? "flipY" : "none";
 

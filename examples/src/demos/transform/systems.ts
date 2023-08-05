@@ -1,4 +1,4 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
+import { CoreStore } from "lattice-engine/core";
 import {
   BoxCollider,
   PhysicsConfig,
@@ -23,7 +23,6 @@ import { createBoxGeometry } from "../../utils/geometry";
 
 export function initScene(
   commands: Commands,
-  warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
@@ -35,12 +34,12 @@ export function initScene(
   createLights(commands, sceneId);
 
   const outlinePass = new OutlinePass();
-  outlinePass.visibleEdgeColor.set([1, 0, 0]);
-  outlinePass.hiddenEdgeColor.set([0, 1, 1]);
+  outlinePass.visibleEdgeColor = [1, 0, 0];
+  outlinePass.hiddenEdgeColor = [0, 1, 1];
 
   commands.getById(sceneId).add(outlinePass);
 
-  const geometry = createBoxGeometry(warehouse);
+  const geometry = createBoxGeometry();
   const parent = new Parent(rootId);
   const transform = new Transform([2, 0, 0]);
   const boxCollider = new BoxCollider([1, 1, 1]);

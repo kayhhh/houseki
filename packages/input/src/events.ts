@@ -1,30 +1,28 @@
 import {
-  struct,
-  type i8,
-  type u8,
-  type u16,
-  type i16,
-  type u32,
   type f32,
   type f64,
+  type i8,
+  type i16,
+  struct,
+  type u8,
+  type u16,
+  type u32,
 } from "thyseus";
-
-import { Key, PointerType } from "./types";
 
 @struct
 export class MouseEvent {
-  altKey: boolean = false;
+  altKey = false;
   button: i8 = 0;
   buttons: u16 = 0;
   clientX: u16 = 0;
   clientY: u16 = 0;
-  ctrlKey: boolean = false;
-  metaKey: boolean = false;
+  ctrlKey = false;
+  metaKey = false;
   movementX: i16 = 0;
   movementY: i16 = 0;
   screenX: u16 = 0;
   screenY: u16 = 0;
-  shiftKey: boolean = false;
+  shiftKey = false;
 }
 
 /**
@@ -32,18 +30,18 @@ export class MouseEvent {
  */
 @struct
 export class PointerEvent {
-  altKey: boolean = false;
+  altKey = false;
   button: i8 = 0;
   buttons: u16 = 0;
   clientX: u16 = 0;
   clientY: u16 = 0;
-  ctrlKey: boolean = false;
-  metaKey: boolean = false;
+  ctrlKey = false;
+  metaKey = false;
   movementX: i16 = 0;
   movementY: i16 = 0;
   screenX: u16 = 0;
   screenY: u16 = 0;
-  shiftKey: boolean = false;
+  shiftKey = false;
 
   pointerId: u32 = 0;
   width: u16 = 0;
@@ -54,7 +52,7 @@ export class PointerEvent {
   tiltY: f32 = 0;
   twist: u16 = 0;
   pointerType: u8 = 0;
-  isPrimary: boolean = false;
+  isPrimary = false;
 }
 
 @struct
@@ -67,12 +65,12 @@ export class WheelEvent {
 
 @struct
 export class KeyboardEvent {
-  altKey: boolean = false;
-  ctrlKey: boolean = false;
+  altKey = false;
+  ctrlKey = false;
   key: u8 = 0;
-  metaKey: boolean = false;
-  repeat: boolean = false;
-  shiftKey: boolean = false;
+  metaKey = false;
+  repeat = false;
+  shiftKey = false;
 }
 
 export class PointerMoveEvent extends PointerEvent {}

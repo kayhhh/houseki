@@ -1,5 +1,4 @@
 import { ColliderDesc } from "@dimforge/rapier3d";
-import { Warehouse } from "@lattice-engine/core";
 import { Geometry, Parent } from "@lattice-engine/scene";
 import { Entity, Query, Res, With } from "thyseus";
 
@@ -7,11 +6,10 @@ import { HullCollider } from "../../components";
 import { PhysicsStore } from "../../resources";
 
 export function createHullColliders(
-  warehouse: Res<Warehouse>,
   store: Res<PhysicsStore>,
   colliders: Query<[Entity, HullCollider]>,
   withParent: Query<[Entity, Parent], With<HullCollider>>,
-  geometries: Query<[Entity, Geometry]>,
+  geometries: Query<[Entity, Geometry]>
 ) {
   const ids: bigint[] = [];
 
@@ -49,10 +47,11 @@ export function createHullColliders(
       for (const [geometryEntity, geometry] of geometries) {
         if (geometryEntity.id !== meshId) continue;
 
-        const vertices = geometry.positions.read(warehouse);
-        if (!vertices) continue;
+        if (!geometry.positions.length) continue;
 
-        const colliderDesc = ColliderDesc.convexHull(vertices);
+        const colliderDesc = ColliderDesc.convexHull(
+          new Float32Array(geometry.positions)
+        );
         if (!colliderDesc) continue;
 
         object = store.world.createCollider(colliderDesc, rigidbody);

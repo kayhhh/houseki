@@ -1,4 +1,4 @@
-import { Mut, Res, struct, SystemRes, World, type f32 } from "thyseus";
+import { type f32, Mut, Res, struct, SystemRes, World } from "thyseus";
 
 import { Time } from "../resources";
 import { LatticeSchedules } from "../schedules";

@@ -6,11 +6,9 @@ import { fetchAssets } from "./systems/fetchAssets";
 import { initWorld } from "./systems/initWorld";
 import { runFixedLoop } from "./systems/runFixedLoop";
 import { setMainTime } from "./systems/setMainTime";
-import { Resource } from "./warehouse/components";
 
 export function corePlugin(builder: WorldBuilder) {
   builder
-    .registerComponent(Resource)
     .addSystems(fetchAssets)
     .addSystemsToSchedule(LatticeSchedules.ApplyCommands, applyCommands)
     .addSystemsToSchedule(LatticeSchedules.Destroy, despawnEntities)

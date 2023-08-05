@@ -25,7 +25,7 @@ export function initScene(
   const parent = new Parent(rootId);
 
   const text = new Text("Hello world!");
-  text.color.set([255, 200, 255]);
+  text.color = [255, 200, 255];
 
   commands
     .spawn(true)

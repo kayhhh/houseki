@@ -1,4 +1,4 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
+import { CoreStore } from "lattice-engine/core";
 import { CascadingShadowMaps } from "lattice-engine/csm";
 import { SceneStruct } from "lattice-engine/scene";
 import { Commands, Mut, Res } from "thyseus";
@@ -13,7 +13,6 @@ const BOX_SCALE = 2;
 
 export function initScene(
   commands: Commands,
-  warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
@@ -26,7 +25,7 @@ export function initScene(
 
   commands.getById(cameraId).add(csm);
 
-  createBox(commands, warehouse, {
+  createBox(commands, {
     parentId: rootId,
     size: [GROUND_SIZE, 1, GROUND_SIZE],
     translation: [0, -1, 0],
@@ -38,7 +37,7 @@ export function initScene(
     const z = (Math.random() - 0.5) * GROUND_SIZE;
     const y = scale * 1.5;
 
-    createBox(commands, warehouse, {
+    createBox(commands, {
       parentId: rootId,
       size: [scale, scale, scale],
       translation: [x, y, z],

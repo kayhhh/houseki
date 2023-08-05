@@ -1,5 +1,4 @@
 import { Animation } from "@gltf-transform/core";
-import { Warehouse } from "@lattice-engine/core";
 import {
   AnimationClip,
   KeyframeInterpolation,
@@ -14,7 +13,6 @@ export function importAnimation(
   animation: Animation,
   rootId: bigint,
   commands: Commands,
-  warehouse: Readonly<Warehouse>,
   context: ImportContext
 ) {
   const clip = new AnimationClip(rootId, animation.getName(), true, true);
@@ -62,23 +60,19 @@ export function importAnimation(
       }
     }
 
-    // Initialize empty tracks to avoid errors
-    track.times.write(new Float32Array(), warehouse);
-    track.values.write(new Float32Array(), warehouse);
-
     if (sampler) {
       const inputAccessor = sampler.getInput();
       const inputArray = inputAccessor?.getArray();
 
       if (inputArray instanceof Float32Array) {
-        track.times.write(inputArray, warehouse);
+        track.times = Array.from(inputArray);
       }
 
       const outputAccessor = sampler.getOutput();
       const outputArray = outputAccessor?.getArray();
 
       if (outputArray instanceof Float32Array) {
-        track.values.write(outputArray, warehouse);
+        track.values = Array.from(outputArray);
       }
 
       track.interpolation = KeyframeInterpolation[sampler.getInterpolation()];

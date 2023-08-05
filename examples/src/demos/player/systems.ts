@@ -1,4 +1,4 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
+import { CoreStore } from "lattice-engine/core";
 import {
   DynamicBody,
   PhysicsConfig,
@@ -23,7 +23,6 @@ import { createSphereGeometry } from "../../utils/geometry";
 
 export function initScene(
   commands: Commands,
-  warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
@@ -35,7 +34,7 @@ export function initScene(
 
   createPlayer([0, 4, 0], sceneId, commands, sceneStruct);
 
-  createBox(commands, warehouse, {
+  createBox(commands, {
     parentId: rootId,
     size: [32, 1, 32],
     translation: [0, -0.5, 0],
@@ -50,9 +49,9 @@ export function initScene(
     .add(transform.set([-2, 0, -6]))
     .addType(GlobalTransform).id;
 
-  createStairs(commands, warehouse, 2, 0.125, 1, 10, stairsId);
-  createStairs(commands, warehouse, 2, 0.125, 0.5, 20, stairsId, [-3, 0, 0]);
-  createStairs(commands, warehouse, 2, 0.25, 0.5, 20, stairsId, [-6, 0, 0]);
+  createStairs(commands, 2, 0.125, 1, 10, stairsId);
+  createStairs(commands, 2, 0.125, 0.5, 20, stairsId, [-3, 0, 0]);
+  createStairs(commands, 2, 0.25, 0.5, 20, stairsId, [-6, 0, 0]);
 
   const rampsId = commands
     .spawn(true)
@@ -60,10 +59,10 @@ export function initScene(
     .add(transform.set([2, 0, -6]))
     .addType(GlobalTransform).id;
 
-  createRamp(commands, warehouse, 2, 10, 1, 15, rampsId);
-  createRamp(commands, warehouse, 2, 10, 1, 30, rampsId, [3, 0, 0]);
-  createRamp(commands, warehouse, 2, 10, 1, 45, rampsId, [6, 0, 0]);
-  createRamp(commands, warehouse, 2, 10, 1, 60, rampsId, [9, 0, 0]);
+  createRamp(commands, 2, 10, 1, 15, rampsId);
+  createRamp(commands, 2, 10, 1, 30, rampsId, [3, 0, 0]);
+  createRamp(commands, 2, 10, 1, 45, rampsId, [6, 0, 0]);
+  createRamp(commands, 2, 10, 1, 60, rampsId, [9, 0, 0]);
 
   const ballRadius = 1;
 
@@ -73,7 +72,7 @@ export function initScene(
     .add(transform.set([0, 3, 8]))
     .add(new TargetTransform().set([0, 3, 8]))
     .addType(GlobalTransform)
-    .add(createSphereGeometry(warehouse, ballRadius))
+    .add(createSphereGeometry(ballRadius))
     .addType(Mesh)
     .add(new SphereCollider(ballRadius))
     .addType(DynamicBody);
@@ -81,7 +80,6 @@ export function initScene(
 
 function createStairs(
   commands: Commands,
-  warehouse: Readonly<Warehouse>,
   stairWidth: number,
   stepHeight: number,
   stepWidth: number,
@@ -99,7 +97,7 @@ function createStairs(
     .addType(GlobalTransform).id;
 
   for (let i = 0; i < steps; i++) {
-    createBox(commands, warehouse, {
+    createBox(commands, {
       parentId: stairId,
       size: [stairWidth, stepHeight, stepWidth],
       translation: [0, stepHeight * i + stepHeight / 2, -stepWidth * i],
@@ -122,7 +120,6 @@ function createStairs(
 
 function createRamp(
   commands: Commands,
-  warehouse: Readonly<Warehouse>,
   rampWidth: number,
   rampHeight: number,
   rampDepth: number,
@@ -146,7 +143,7 @@ function createRamp(
   const z = 0;
   const w = Math.cos(angle / 2);
 
-  createBox(commands, warehouse, {
+  createBox(commands, {
     parentId: rampId,
     rotation: [x, y, z, w],
     size: [rampWidth, rampDepth, rampHeight],

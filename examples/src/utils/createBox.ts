@@ -1,4 +1,4 @@
-import { Asset, Warehouse } from "lattice-engine/core";
+import { Asset } from "lattice-engine/core";
 import { BoxCollider, StaticBody } from "lattice-engine/physics";
 import { WEBGL_CONSTANTS } from "lattice-engine/render";
 import {
@@ -69,7 +69,6 @@ function getMaterialId(
 
 export function createBox(
   commands: Commands,
-  warehouse: Readonly<Warehouse>,
   options: {
     size?: [number, number, number];
     translation?: [number, number, number];
@@ -86,7 +85,7 @@ export function createBox(
   const addTexture = options.addTexture ?? true;
   const addCollider = options.addCollider ?? true;
 
-  const geometry = createBoxGeometry(warehouse, size);
+  const geometry = createBoxGeometry(size);
 
   const transform = new Transform();
   const mesh = new Mesh();

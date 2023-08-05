@@ -1,6 +1,6 @@
 import { Vec3 } from "@lattice-engine/core";
 import { Transform } from "@lattice-engine/scene";
-import { Entity, EntityCommands, struct, type f32, type u64 } from "thyseus";
+import { Entity, EntityCommands, type f32, struct, type u64 } from "thyseus";
 
 export class TargetTransform extends Transform {}
 
@@ -142,7 +142,7 @@ export class Raycast {
    */
   excludeRigidBodyId: u64;
 
-  hit: boolean = false;
+  hit = false;
   hitToi: f32;
   hitEntityId: u64;
   hitPosition: Vec3 = new Vec3();

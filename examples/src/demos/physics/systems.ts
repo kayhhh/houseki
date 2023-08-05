@@ -1,4 +1,4 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
+import { CoreStore } from "lattice-engine/core";
 import {
   DynamicBody,
   PhysicsConfig,
@@ -23,7 +23,6 @@ import { createSphereGeometry } from "../../utils/geometry";
 
 export function initScene(
   commands: Commands,
-  warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
@@ -36,7 +35,7 @@ export function initScene(
 
   const parent = new Parent(rootId);
 
-  const roomId = createRoom([8, 1, 8], commands, warehouse);
+  const roomId = createRoom([8, 1, 8], commands);
   commands.getById(roomId).add(parent);
 
   // Add dynamic balls
@@ -50,7 +49,7 @@ export function initScene(
   const sphereCollider = new SphereCollider();
 
   function createBall(radius: number, translation: [number, number, number]) {
-    const ballGeometry = createSphereGeometry(warehouse, radius);
+    const ballGeometry = createSphereGeometry(radius);
 
     transform.translation.fromArray(translation);
     targetTransform.translation.fromArray(translation);

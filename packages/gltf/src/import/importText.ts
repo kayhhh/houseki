@@ -19,11 +19,11 @@ export function importText(commands: Commands, node: Node, entityId: bigint) {
   color[1] *= 255;
   color[2] *= 255;
 
-  textComp.color.set([
+  textComp.color = [
     Math.round(color[0]),
     Math.round(color[1]),
     Math.round(color[2]),
-  ]);
+  ];
 
   switch (text.getAlignX()) {
     case "left": {

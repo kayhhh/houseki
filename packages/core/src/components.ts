@@ -1,6 +1,4 @@
-import { struct, type f32 } from "thyseus";
-
-import { Resource } from "./warehouse";
+import { type f32, struct, u8 } from "thyseus";
 
 /**
  * Marks an entity as loading.
@@ -25,7 +23,7 @@ export class Loading {
 export class Asset {
   uri: string;
   mimeType: string;
-  data: Resource<ArrayBuffer> = new Resource();
+  data: u8[] = [];
 
   constructor(uri = "", mimeType = "") {
     this.uri = uri;

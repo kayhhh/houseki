@@ -1,6 +1,6 @@
 import { Vec3 } from "@lattice-engine/core";
 import { Quat } from "@lattice-engine/scene";
-import { struct, type u8, type f32, type u64 } from "thyseus";
+import { type f32, struct, type u8, type u64 } from "thyseus";
 
 import { PlayerCameraMode, PlayerCameraView } from "./types";
 
@@ -53,22 +53,22 @@ export class PlayerBody {
  */
 @struct
 export class PlayerAvatar {
-  idleAnimation: string = "";
+  idleAnimation = "";
   idleAnimationId: u64 = 0n; // Entity ID
 
-  jumpAnimation: string = "";
+  jumpAnimation = "";
   jumpAnimationId: u64 = 0n; // Entity ID
 
-  leftWalkAnimation: string = "";
+  leftWalkAnimation = "";
   leftWalkAnimationId: u64 = 0n; // Entity ID
 
-  rightWalkAnimation: string = "";
+  rightWalkAnimation = "";
   rightWalkAnimationId: u64 = 0n; // Entity ID
 
-  sprintAnimation: string = "";
+  sprintAnimation = "";
   sprintAnimationId: u64 = 0n; // Entity ID
 
-  walkAnimation: string = "";
+  walkAnimation = "";
   walkAnimationId: u64 = 0n; // Entity ID
 }
 

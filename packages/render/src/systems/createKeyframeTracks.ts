@@ -1,4 +1,3 @@
-import { Warehouse } from "@lattice-engine/core";
 import {
   KeyframeInterpolation,
   KeyframePath,
@@ -18,18 +17,17 @@ import { RenderStore } from "../resources";
 import { setCubicSpline } from "../utils/CubicSplineInterpolation";
 
 export function createKeyframeTracks(
-  warehouse: Res<Warehouse>,
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, KeyframeTrack]>,
+  entities: Query<[Entity, KeyframeTrack]>
 ) {
   const ids: bigint[] = [];
 
   for (const [entity, track] of entities) {
-    const times = track.times.read(warehouse);
-    const values = track.values.read(warehouse);
+    const times = track.times;
+    const values = track.values;
 
     // Skip empty tracks
-    if (!times?.length || !values?.length) continue;
+    if (!times.length || !values.length) continue;
 
     const targetObject = renderStore.nodes.get(track.targetId);
     if (!targetObject) continue;
@@ -68,7 +66,7 @@ export function createKeyframeTracks(
       }
 
       default: {
-        throw new Error("Invalid path", track.path);
+        throw new Error(`Unsupported animation target path: ${track.path}`);
       }
     }
 
@@ -98,8 +96,8 @@ export function createKeyframeTracks(
 
     // Sync object properties
     object.name = trackName;
-    object.times = times;
-    object.values = values;
+    object.times = new Float32Array(times);
+    object.values = new Float32Array(values);
 
     if (object.getInterpolation() !== interpolation) {
       if (!interpolation) setCubicSpline(object);

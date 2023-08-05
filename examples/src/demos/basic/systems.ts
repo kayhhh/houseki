@@ -1,4 +1,4 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
+import { CoreStore } from "lattice-engine/core";
 import {
   GlobalTransform,
   Mesh,
@@ -15,7 +15,6 @@ import { createBoxGeometry } from "../../utils/geometry";
 
 export function initScene(
   commands: Commands,
-  warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
@@ -29,5 +28,5 @@ export function initScene(
     .addType(GlobalTransform)
     .add(new Parent(rootId))
     .addType(Mesh)
-    .add(createBoxGeometry(warehouse));
+    .add(createBoxGeometry());
 }

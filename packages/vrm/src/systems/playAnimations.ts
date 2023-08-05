@@ -1,5 +1,5 @@
 import { LoopOnce, LoopRepeat } from "three";
-import { Entity, Query, Res, struct, SystemRes, With, type f32 } from "thyseus";
+import { Entity, type f32, Query, Res, struct, SystemRes, With } from "thyseus";
 
 import { Vrm, VrmAnimation } from "../components";
 import { VrmStore } from "../resources";

@@ -1,4 +1,4 @@
-import { struct, type f32, type u16, type u8 } from "thyseus";
+import { type f32, struct, type u8, type u16 } from "thyseus";
 
 import { N8QualityMode } from "./types";
 
@@ -14,7 +14,7 @@ export class OutlinePass {
   edgeStrength: f32 = 3;
   resolution: u16 = 1 - 24;
   multisampling: u8 = 4;
-  xray: boolean = true;
+  xray = true;
 }
 
 /**

@@ -1,4 +1,4 @@
-import { struct, type f32, type u64 } from "thyseus";
+import { type f32, struct, type u64 } from "thyseus";
 
 @struct
 export class Vrm {

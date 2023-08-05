@@ -1,5 +1,4 @@
 import { ColliderDesc } from "@dimforge/rapier3d";
-import { Warehouse } from "@lattice-engine/core";
 import { Geometry, GlobalTransform, Parent } from "@lattice-engine/scene";
 import { Entity, Query, Res, With } from "thyseus";
 
@@ -7,7 +6,6 @@ import { MeshCollider } from "../../components";
 import { PhysicsStore } from "../../resources";
 
 export function createMeshColliders(
-  warehouse: Res<Warehouse>,
   store: Res<PhysicsStore>,
   colliders: Query<[Entity, MeshCollider]>,
   withParent: Query<[Entity, Parent], With<MeshCollider>>,
@@ -50,9 +48,8 @@ export function createMeshColliders(
       for (const [geometryEntity, geometry] of geometries) {
         if (geometryEntity.id !== meshId) continue;
 
-        const vertices = geometry.positions.read(warehouse);
-        const indices = geometry.indices.read(warehouse);
-        if (!vertices || !indices) continue;
+        const vertices = geometry.positions;
+        const indices = geometry.indices;
 
         const scaledVertices = new Float32Array(vertices.length);
 

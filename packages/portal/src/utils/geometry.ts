@@ -1,20 +1,12 @@
-import { Warehouse } from "@lattice-engine/core";
 import { Geometry } from "@lattice-engine/scene";
 import { BufferAttribute, BufferGeometry, PlaneGeometry } from "three";
 
-export function createPlaneGeometry(
-  warehouse: Readonly<Warehouse>,
-  width = 1,
-  height = 1
-) {
+export function createPlaneGeometry(width = 1, height = 1) {
   const geometry = new PlaneGeometry(width, height);
-  return writeGeometry(geometry, warehouse);
+  return writeGeometry(geometry);
 }
 
-function writeGeometry(
-  threeGeometry: BufferGeometry,
-  warehouse: Readonly<Warehouse>
-) {
+function writeGeometry(threeGeometry: BufferGeometry) {
   const positionsAttribute = threeGeometry.getAttribute(
     "position"
   ) as BufferAttribute;
@@ -30,9 +22,9 @@ function writeGeometry(
   const indices = indicesAttribute.array as Uint16Array;
 
   const geometry = new Geometry();
-  geometry.positions.write(positions, warehouse);
-  geometry.normals.write(normals, warehouse);
-  geometry.uv.write(uvs, warehouse);
+  geometry.positions = Array.from(positions);
+  geometry.normals = Array.from(normals);
+  geometry.uv = Array.from(uvs);
 
   const indices32 = new Uint32Array(indices.length);
 
@@ -40,7 +32,7 @@ function writeGeometry(
     indices32[i] = indices[i] ?? 0;
   }
 
-  geometry.indices.write(indices32, warehouse);
+  geometry.indices = Array.from(indices32);
 
   return geometry;
 }
