@@ -6,7 +6,7 @@ import { RenderStore } from "../resources";
 
 export function createDirectionalLights(
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, DirectionalLight]>
+  entities: Query<[Entity, DirectionalLight]>,
 ) {
   const ids: bigint[] = [];
 

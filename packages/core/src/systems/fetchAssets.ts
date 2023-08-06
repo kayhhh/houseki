@@ -21,7 +21,7 @@ export function fetchAssets(
   warehouse: Res<Warehouse>,
   localStore: SystemRes<LocalStore>,
   toLoad: Query<[Entity, Asset], Without<Loading>>,
-  loading: Query<[Entity, Asset], With<Loading>>
+  loading: Query<[Entity, Asset], With<Loading>>,
 ) {
   for (const [entity, resource] of toLoad) {
     const uri = resource.uri;

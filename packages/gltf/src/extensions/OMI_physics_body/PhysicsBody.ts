@@ -17,7 +17,7 @@ type Vec9 = [
   number,
   number,
   number,
-  number
+  number,
 ];
 
 export interface IPhysicsBody extends IProperty {

@@ -15,7 +15,7 @@ export const selectedModel = {
 export function initScene(
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
-  sceneStruct: Res<Mut<SceneStruct>>
+  sceneStruct: Res<Mut<SceneStruct>>,
 ) {
   createOrbitControls(commands, sceneStruct);
   const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);

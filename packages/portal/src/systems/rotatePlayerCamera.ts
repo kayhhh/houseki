@@ -23,11 +23,11 @@ export function rotatePlayerCamera(
       Mut<TargetRotation>,
       Mut<Transform>,
       Raycast,
-      Mut<PortalRaycast>
+      Mut<PortalRaycast>,
     ]
   >,
   raycasts: Query<[Entity, Raycast]>,
-  portals: Query<Entity, With<Portal>>
+  portals: Query<Entity, With<Portal>>,
 ) {
   for (const [
     cameraEntity,
@@ -57,7 +57,7 @@ export function rotatePlayerCamera(
             vec3_b.set(
               -raycast2.direction.x * raycast1.hitToi,
               raycast2.direction.y * raycast1.hitToi,
-              raycast2.direction.z * raycast1.hitToi
+              raycast2.direction.z * raycast1.hitToi,
             );
 
             vec3_a.sub(vec3_b);

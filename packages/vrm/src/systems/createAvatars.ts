@@ -36,7 +36,7 @@ export function createAvatars(
   vrmStore: Res<VrmStore>,
   localStore: SystemRes<LocalStore>,
   toLoad: Query<[Entity, Vrm], Without<Loading>>,
-  loading: Query<Entity, With<[Vrm, Loading]>>
+  loading: Query<Entity, With<[Vrm, Loading]>>,
 ) {
   const ids: bigint[] = [];
 
@@ -116,7 +116,7 @@ async function loadVrm(entityId: bigint, uri: string, localStore: LocalStore) {
 function removeVrm(
   entityId: bigint,
   localStore: LocalStore,
-  vrmStore: VrmStore
+  vrmStore: VrmStore,
 ) {
   const vrm = vrmStore.avatars.get(entityId);
   if (vrm) {

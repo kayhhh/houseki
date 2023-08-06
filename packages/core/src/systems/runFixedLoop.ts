@@ -14,7 +14,7 @@ class LocalRes {
 export async function runFixedLoop(
   world: World,
   time: Res<Mut<Time>>,
-  localRes: SystemRes<LocalRes>
+  localRes: SystemRes<LocalRes>,
 ) {
   const now = performance.now();
   const delta = now - time.fixedTime;

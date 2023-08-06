@@ -8,7 +8,7 @@ export function importCollider(
   context: ImportContext,
   commands: Commands,
   node: Node,
-  entityId: bigint
+  entityId: bigint,
 ) {
   const collider = node.getExtension<Shape>(Shape.EXTENSION_NAME);
 

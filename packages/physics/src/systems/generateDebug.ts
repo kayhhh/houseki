@@ -20,7 +20,7 @@ export function generateDebug(
   physicsStore: Res<PhysicsStore>,
   physicsConfig: Res<PhysicsConfig>,
   sceneStruct: Res<SceneStruct>,
-  meshes: Query<[Entity, Mut<Geometry>, Mut<Parent>], With<LineMaterial>>
+  meshes: Query<[Entity, Mut<Geometry>, Mut<Parent>], With<LineMaterial>>,
 ) {
   if (!physicsConfig.debug) {
     // Remove the debug lines if they exist

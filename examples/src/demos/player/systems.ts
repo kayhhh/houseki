@@ -26,7 +26,7 @@ export function initScene(
   warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
-  physicsConfig: Res<Mut<PhysicsConfig>>
+  physicsConfig: Res<Mut<PhysicsConfig>>,
 ) {
   physicsConfig.debug = true;
 
@@ -96,7 +96,7 @@ function createStairs(
   stepWidth: number,
   steps: number,
   parentId: bigint,
-  translation: [number, number, number] = [0, 0, 0]
+  translation: [number, number, number] = [0, 0, 0],
 ) {
   const parent = new Parent(parentId);
   const transform = new Transform(translation);
@@ -141,7 +141,7 @@ function createRamp(
   rampDepth: number,
   rampAngle: number,
   parentId: bigint,
-  translation: [number, number, number] = [0, 0, 0]
+  translation: [number, number, number] = [0, 0, 0],
 ) {
   const parent = new Parent(parentId);
   const transform = new Transform(translation);

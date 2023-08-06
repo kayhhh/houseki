@@ -19,7 +19,7 @@ export function renderCanvas(
   coreStore: Res<CoreStore>,
   sceneStruct: Res<SceneStruct>,
   renderStore: Res<Mut<RenderStore>>,
-  stats: Res<Mut<RenderStats>>
+  stats: Res<Mut<RenderStats>>,
 ) {
   const canvas = coreStore.canvas;
   if (!canvas) return;
@@ -65,7 +65,7 @@ export function renderCanvas(
 
     const effectPass = new EffectPass(
       camera,
-      new SMAAEffect({ preset: SMAAPreset.HIGH })
+      new SMAAEffect({ preset: SMAAPreset.HIGH }),
     );
 
     composer.addPass(renderPass);

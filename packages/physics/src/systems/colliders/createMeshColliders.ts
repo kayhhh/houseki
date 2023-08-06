@@ -12,7 +12,7 @@ export function createMeshColliders(
   colliders: Query<[Entity, MeshCollider]>,
   withParent: Query<[Entity, Parent], With<MeshCollider>>,
   nodes: Query<[Entity, GlobalTransform]>,
-  geometries: Query<[Entity, Geometry]>
+  geometries: Query<[Entity, Geometry]>,
 ) {
   const ids: bigint[] = [];
 

@@ -16,7 +16,7 @@ import { RenderStore } from "../resources";
  */
 export function createMeshes(
   store: Res<RenderStore>,
-  entities: Query<[Entity, Mesh], With<Geometry>>
+  entities: Query<[Entity, Mesh], With<Geometry>>,
 ) {
   const ids: bigint[] = [];
 

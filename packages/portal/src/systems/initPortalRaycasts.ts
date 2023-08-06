@@ -36,9 +36,9 @@ export function initPortalRaycasts(
       With<PortalRaycast>,
       Without<OriginalTransform>,
       Without<OriginalTranslation>,
-      Without<OriginalRotation>
+      Without<OriginalRotation>,
     ]
-  >
+  >,
 ) {
   for (const entity of withoutOriginals) {
     commands

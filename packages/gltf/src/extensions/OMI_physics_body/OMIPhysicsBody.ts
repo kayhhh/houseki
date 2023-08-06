@@ -26,7 +26,7 @@ export class OMIPhysicsBody extends Extension {
       if (!node) return;
 
       const parsedDef = nodePhysicsBodySchema.safeParse(
-        nodeDef.extensions[this.extensionName]
+        nodeDef.extensions[this.extensionName],
       );
 
       if (!parsedDef.success) {
@@ -67,7 +67,7 @@ export class OMIPhysicsBody extends Extension {
       .listNodes()
       .forEach((node) => {
         const physicsBody = node.getExtension<PhysicsBody>(
-          PhysicsBody.EXTENSION_NAME
+          PhysicsBody.EXTENSION_NAME,
         );
         if (!physicsBody) return;
 

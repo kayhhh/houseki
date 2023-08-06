@@ -38,9 +38,9 @@ export function getTransformPlugin({
         createControls,
         sendEvents,
         saveTransforms,
-        setOutlineTargets
+        setOutlineTargets,
       ),
-      run(clearEvents).after(sendEvents).before(beforeEvents)
+      run(clearEvents).after(sendEvents).before(beforeEvents),
     );
 
     if (physics) {

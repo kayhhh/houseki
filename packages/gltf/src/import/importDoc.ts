@@ -11,7 +11,7 @@ export function importDoc(
   doc: Document,
   entity: Readonly<Entity>,
   commands: Commands,
-  warehouse: Readonly<Warehouse>
+  warehouse: Readonly<Warehouse>,
 ) {
   const root = doc.getRoot();
   const scene = root.getDefaultScene() ?? root.listScenes()[0];
@@ -22,13 +22,13 @@ export function importDoc(
   scene
     .listChildren()
     .forEach((child) =>
-      importNode(child, entity.id, commands, warehouse, context)
+      importNode(child, entity.id, commands, warehouse, context),
     );
 
   root
     .listAnimations()
     .forEach((animation) =>
-      importAnimation(animation, entity.id, commands, warehouse, context)
+      importAnimation(animation, entity.id, commands, warehouse, context),
     );
 
   if (root.listAnimations().length > 0) {

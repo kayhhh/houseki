@@ -22,7 +22,7 @@ export function exportMesh(
   warehouse: Readonly<Warehouse>,
   entityId: bigint,
   mesh: Mesh,
-  geometry: Geometry
+  geometry: Geometry,
 ) {
   const parentId = mesh.parentId || entityId;
   let gltfMesh = context.meshes.get(parentId);

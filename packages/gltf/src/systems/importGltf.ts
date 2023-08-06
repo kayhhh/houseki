@@ -42,7 +42,7 @@ export function importGltf(
   commands: Commands,
   warehouse: Res<Warehouse>,
   store: SystemRes<GltfStore>,
-  entities: Query<[Entity, Gltf]>
+  entities: Query<[Entity, Gltf]>,
 ) {
   const ids: bigint[] = [];
 

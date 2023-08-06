@@ -32,16 +32,16 @@ export function portalPlugin(builder: WorldBuilder) {
 
       run(saveOriginalRotation).after(slerpCameraRotation),
       run(rotatePlayerCamera).after(saveOriginalRotation),
-      run(slerpTargetRotation2).after(rotatePlayerCamera)
+      run(slerpTargetRotation2).after(rotatePlayerCamera),
     )
     .addSystemsToSchedule(
       LatticeSchedules.PreUpdate,
       run(restoreOriginalTranslation).before(updateGlobalTransforms),
-      run(restoreOriginalRotation).before(updateGlobalTransforms)
+      run(restoreOriginalRotation).before(updateGlobalTransforms),
     )
     .addSystemsToSchedule(LatticeSchedules.PostFixedUpdate, setPortalRaycasts)
     .addSystemsToSchedule(
       LatticeSchedules.Render,
-      run(renderPortalMaterials).after(renderClearPass).before(renderCanvas)
+      run(renderPortalMaterials).after(renderClearPass).before(renderCanvas),
     );
 }

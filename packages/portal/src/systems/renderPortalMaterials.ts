@@ -65,7 +65,7 @@ function clear(color: boolean, depth: boolean, stencil: boolean) {
     store.renderer,
     store.composer.inputBuffer,
     store.composer.outputBuffer,
-    delta
+    delta,
   );
 }
 
@@ -89,7 +89,7 @@ export function renderPortalMaterials(
   time: Res<Time>,
   renderStore: Res<Mut<RenderStore>>,
   sceneStruct: Res<SceneStruct>,
-  portalTargets: Query<[Entity, PortalTarget], With<PortalMaterial>>
+  portalTargets: Query<[Entity, PortalTarget], With<PortalMaterial>>,
 ) {
   const camera = renderStore.perspectiveCameras.get(sceneStruct.activeCamera);
   if (!camera) return;
@@ -200,7 +200,7 @@ function render(
   camera: PerspectiveCamera,
   objects: Object3D | Object3D[] | null = null,
   overrideMaterial: Material | null = null,
-  renderToScreen = false
+  renderToScreen = false,
 ) {
   const finalPass = store.composer.passes[store.composer.passes.length - 1];
   if (!finalPass) return;
@@ -236,7 +236,7 @@ function computeViewMatrix(
   targetCam: Camera,
   sourceCam: Camera,
   entrance: Object3D,
-  exit: Object3D
+  exit: Object3D,
 ) {
   // Entrance -> Camera
   mat4_a.multiplyMatrices(sourceCam.matrixWorldInverse, entrance.matrixWorld);
@@ -273,7 +273,7 @@ type Vec16 = [
   number,
   number,
   number,
-  number
+  number,
 ];
 
 /**
@@ -286,7 +286,7 @@ function computeProjectionMatrix(targetCam: PerspectiveCamera, exit: Object3D) {
 
   clip_plane.setFromNormalAndCoplanarPoint(
     normal,
-    exit.getWorldPosition(vec3_b)
+    exit.getWorldPosition(vec3_b),
   );
   clip_plane.applyMatrix4(inverseView);
 
@@ -294,7 +294,7 @@ function computeProjectionMatrix(targetCam: PerspectiveCamera, exit: Object3D) {
     clip_plane.normal.x,
     clip_plane.normal.y,
     clip_plane.normal.z,
-    clip_plane.constant
+    clip_plane.constant,
   );
 
   const elements = targetCam.projectionMatrix.elements as Vec16;

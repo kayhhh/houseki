@@ -94,7 +94,7 @@ export function exportGltf(
   meshColliders: Query<[Entity, MeshCollider]>,
   hullColliders: Query<[Entity, HullCollider]>,
   text: Query<[Entity, Text]>,
-  extras: Query<Extra>
+  extras: Query<Extra>,
 ) {
   for (const binary of localStore.outBinary) {
     console.info(`📦 Exported glTF binary (${bytesToDisplay(binary.length)})`);

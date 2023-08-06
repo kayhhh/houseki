@@ -48,7 +48,7 @@ export function inputWriter(
   contextMenuWriter: EventWriter<ContextMenuEvent>,
   onWheelWriter: EventWriter<OnWheelEvent>,
   keyDownWriter: EventWriter<KeyDownEvent>,
-  keyUpWriter: EventWriter<KeyUpEvent>
+  keyUpWriter: EventWriter<KeyUpEvent>,
 ) {
   // Clear events from last frame
   pointerMoveWriter.clear();

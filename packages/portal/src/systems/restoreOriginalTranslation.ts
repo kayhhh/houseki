@@ -10,9 +10,9 @@ export function restoreOriginalTranslation(
       Mut<TargetTranslation>,
       Mut<Transform>,
       OriginalTranslation,
-      OriginalTransform
+      OriginalTransform,
     ]
-  >
+  >,
 ) {
   for (const [target, transform, ogTarget, ogTransform] of entities) {
     target.copy(ogTarget);

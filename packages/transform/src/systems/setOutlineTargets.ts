@@ -10,7 +10,7 @@ class LocalRes {
 export function setOutlineTargets(
   commands: Commands,
   localRes: SystemRes<LocalRes>,
-  transformControls: Query<TransformControls>
+  transformControls: Query<TransformControls>,
 ) {
   const ids: bigint[] = [];
 

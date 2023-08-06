@@ -62,7 +62,7 @@ function createMaterial(commands: Commands, scaleX: number, scaleZ: number) {
 function getMaterialId(
   commands: Commands,
   scaleX: number,
-  scaleZ: number
+  scaleZ: number,
 ): bigint {
   const existingId = materials.get(scaleX)?.get(scaleZ);
   if (existingId) return existingId;
@@ -80,7 +80,7 @@ export function createBox(
     parentId?: bigint;
     addTexture?: boolean;
     addCollider?: boolean;
-  } = {}
+  } = {},
 ) {
   const size = options.size || [1, 1, 1];
   const translation = options.translation || [0, 0, 0];

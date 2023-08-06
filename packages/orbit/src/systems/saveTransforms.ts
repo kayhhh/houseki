@@ -11,7 +11,7 @@ export function saveTransforms(
   entities: Query<
     [Entity, Mut<Transform>],
     With<[OrbitControls, PerspectiveCamera]>
-  >
+  >,
 ) {
   for (const [entity, transform] of entities) {
     const object = store.objects.get(entity.id);

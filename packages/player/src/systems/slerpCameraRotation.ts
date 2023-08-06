@@ -14,7 +14,7 @@ const quaternion2 = new Quaternion();
 
 export function slerpCameraRotation(
   time: Res<Time>,
-  cameras: Query<[PlayerCamera, Mut<Transform>, TargetRotation]>
+  cameras: Query<[PlayerCamera, Mut<Transform>, TargetRotation]>,
 ) {
   for (const [camera, transform, target] of cameras) {
     quaternion2.set(target.x, target.y, target.z, target.w);
@@ -31,7 +31,7 @@ export function slerpCameraRotation(
         transform.rotation.x,
         transform.rotation.y,
         transform.rotation.z,
-        transform.rotation.w
+        transform.rotation.w,
       )
       .slerp(quaternion2, K);
 

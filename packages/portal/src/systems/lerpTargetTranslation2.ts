@@ -8,7 +8,7 @@ const LERP_STRENGTH = 0.05;
 
 export function lerpTargetTranslation2(
   time: Res<Time>,
-  entities: Query<[Mut<Transform>, TargetTranslation]>
+  entities: Query<[Mut<Transform>, TargetTranslation]>,
 ) {
   const K = 1 - LERP_STRENGTH ** (time.mainDelta * 100);
 

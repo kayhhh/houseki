@@ -8,7 +8,7 @@ import { PhysicsStore } from "../../resources";
 export function createCylinderColliders(
   store: Res<PhysicsStore>,
   colliders: Query<[Entity, CylinderCollider]>,
-  withParent: Query<[Entity, Parent], With<CylinderCollider>>
+  withParent: Query<[Entity, Parent], With<CylinderCollider>>,
 ) {
   const ids: bigint[] = [];
 
@@ -43,7 +43,7 @@ export function createCylinderColliders(
 
       const colliderDesc = ColliderDesc.cylinder(
         collider.height / 2,
-        collider.radius
+        collider.radius,
       );
       object = store.world.createCollider(colliderDesc, rigidbody);
       store.cylinderColliders.set(entity.id, object);

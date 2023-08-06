@@ -28,7 +28,7 @@ export const ExportSchedule = Symbol("Export");
 
 export function sendExportEvent(
   writer: EventWriter<ExportGltf>,
-  sceneStruct: Res<SceneStruct>
+  sceneStruct: Res<SceneStruct>,
 ) {
   const event = writer.create();
   event.scene = sceneStruct.activeScene;
@@ -39,7 +39,7 @@ export function handleExport(
   commands: Commands,
   reader: EventReader<ExportedGltf>,
   scenes: Query<Scene>,
-  deepRemove: EventWriter<DeepRemove>
+  deepRemove: EventWriter<DeepRemove>,
 ) {
   if (reader.length === 0) return;
 

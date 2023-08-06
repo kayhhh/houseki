@@ -57,7 +57,7 @@ export class N8AOPass {
     qualityMode = N8QualityMode.Medium,
     aoRadius = 2,
     distanceFalloff = 0.4,
-    instensity = 1
+    instensity = 1,
   ) {
     initStruct(this);
 

@@ -6,7 +6,7 @@ export function exportNode(
   context: ExportContext,
   entityId: bigint,
   parentId: bigint,
-  transform: Transform
+  transform: Transform,
 ) {
   const name = context.names.get(entityId);
 

@@ -18,7 +18,7 @@ export default function Stats() {
 
   const [fps, setFps] = useState(0);
   const [collapsed, setCollapsed] = useState(
-    sessionStorage.getItem(COLLAPSED_KEY) === "true"
+    sessionStorage.getItem(COLLAPSED_KEY) === "true",
   );
 
   useEffect(() => {

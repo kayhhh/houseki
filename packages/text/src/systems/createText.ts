@@ -18,7 +18,7 @@ import { AnchorX, AnchorY } from "../types";
 export function createText(
   renderStore: Res<RenderStore>,
   textStore: Res<TextStore>,
-  entities: Query<[Entity, Text]>
+  entities: Query<[Entity, Text]>,
 ) {
   const ids: bigint[] = [];
 

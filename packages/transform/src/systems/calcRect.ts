@@ -5,7 +5,7 @@ import { CanvasRect } from "../resources";
 
 export function calcRect(
   coreStore: Res<CoreStore>,
-  canvasRect: Res<Mut<CanvasRect>>
+  canvasRect: Res<Mut<CanvasRect>>,
 ) {
   const canvas = coreStore.canvas;
   if (!canvas) return;

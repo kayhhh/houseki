@@ -15,7 +15,7 @@ export function demoPlugin(builder: WorldBuilder) {
       statsSystem,
       exportLoadingInfo,
       handleExport,
-      handlePointerLockToggle
+      handlePointerLockToggle,
     )
     .addSystemsToSchedule(ExportSchedule, sendExportEvent);
 }

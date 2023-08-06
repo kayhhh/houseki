@@ -8,7 +8,7 @@ export function clearEvents(
   store: Res<TransformControlsStore>,
   pointerDown: EventWriter<PointerDownEvent>,
   pointerMove: EventWriter<PointerMoveEvent>,
-  transformControls: Query<[Entity, TransformControls]>
+  transformControls: Query<[Entity, TransformControls]>,
 ) {
   for (const [entity, controls] of transformControls) {
     if (!controls.clearEvents) continue;

@@ -23,7 +23,7 @@ export function sendEvents(
   pointerUpReader: EventReader<PointerUpEvent>,
   contextMenuReader: EventReader<ContextMenuEvent>,
   onWheelReader: EventReader<OnWheelEvent>,
-  keyDownReader: EventReader<KeyDownEvent>
+  keyDownReader: EventReader<KeyDownEvent>,
 ) {
   for (const data of pointerDownReader) {
     const event = pointerEventFromECS("pointerdown", data);

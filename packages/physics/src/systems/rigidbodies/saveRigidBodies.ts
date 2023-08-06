@@ -21,7 +21,7 @@ export function saveRigidBodies(
     Parent,
     [
       With<[Transform, GlobalTransform]>,
-      Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>
+      Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>,
     ]
   >,
   withTarget: Query<
@@ -32,10 +32,10 @@ export function saveRigidBodies(
     [Entity, Parent, Mut<Transform>],
     [
       Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>,
-      Without<TargetTransform>
+      Without<TargetTransform>,
     ]
   >,
-  transforms: Query<[Entity, GlobalTransform]>
+  transforms: Query<[Entity, GlobalTransform]>,
 ) {
   const parentIds = new Set<bigint>();
 
@@ -55,7 +55,7 @@ export function saveRigidBodies(
       globalMat,
       globalTransform.rotation.array,
       globalTransform.translation.array,
-      globalTransform.scale.array
+      globalTransform.scale.array,
     );
 
     globalMat.invert();

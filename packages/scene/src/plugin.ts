@@ -13,6 +13,6 @@ export function scenePlugin(builder: WorldBuilder) {
     .addSystemsToSchedule(LatticeSchedules.PreUpdate, updateGlobalTransforms)
     .addSystemsToSchedule(
       LatticeSchedules.PreFixedUpdate,
-      updateGlobalTransforms
+      updateGlobalTransforms,
     );
 }

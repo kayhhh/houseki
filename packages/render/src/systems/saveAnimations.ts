@@ -9,7 +9,7 @@ import { RenderStore } from "../resources";
 export function saveAnimations(
   renderStore: Res<RenderStore>,
   tracks: Query<KeyframeTrack>,
-  nodes: Query<[Entity, Mut<Transform>]>
+  nodes: Query<[Entity, Mut<Transform>]>,
 ) {
   for (const track of tracks) {
     const targetObject = renderStore.nodes.get(track.targetId);
