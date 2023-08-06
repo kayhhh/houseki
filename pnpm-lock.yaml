@@ -97,7 +97,7 @@ importers:
         version: 0.153.0
       '@vitejs/plugin-react':
         specifier: ^4.0.3
-        version: 4.0.3(vite@4.4.7)
+        version: 4.0.3(vite@4.4.8)
       eslint:
         specifier: ^8.45.0
         version: 8.45.0
@@ -111,8 +111,8 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
 
   packages/core:
     dependencies:
@@ -130,11 +130,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/csm:
     dependencies:
@@ -164,11 +164,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/gltf:
     dependencies:
@@ -210,11 +210,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/input:
     dependencies:
@@ -235,11 +235,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/lattice-engine:
     dependencies:
@@ -305,11 +305,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/orbit:
     dependencies:
@@ -342,11 +342,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/physics:
     dependencies:
@@ -376,14 +376,14 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
       vite-plugin-wasm:
         specifier: ^3.2.2
-        version: 3.2.2(vite@4.4.7)
+        version: 3.2.2(vite@4.4.8)
 
   packages/player:
     dependencies:
@@ -425,11 +425,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/portal:
     dependencies:
@@ -471,11 +471,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/postprocessing:
     dependencies:
@@ -514,11 +514,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/render:
     dependencies:
@@ -551,11 +551,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/scene:
     dependencies:
@@ -579,11 +579,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/text:
     dependencies:
@@ -619,11 +619,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/transform:
     dependencies:
@@ -671,11 +671,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/utils:
     dependencies:
@@ -705,11 +705,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   packages/vrm:
     dependencies:
@@ -745,11 +745,11 @@ importers:
         specifier: ~5.1.6
         version: 5.1.6
       vite:
-        specifier: ^4.4.7
-        version: 4.4.7
+        specifier: ^4.4.8
+        version: 4.4.8
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8)
 
   scripts:
     devDependencies:
@@ -2406,7 +2406,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@vitejs/plugin-react@4.0.3(vite@4.4.7):
+  /@vitejs/plugin-react@4.0.3(vite@4.4.8):
     resolution: {integrity: sha512-pwXDog5nwwvSIzwrvYYmA2Ljcd/ZNlcsSG2Q9CNDBwnsd55UGAyr2doXtB5j+2uymRCnCfExlznzzSFbBRcoCg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -2416,7 +2416,7 @@ packages:
       '@babel/plugin-transform-react-jsx-self': 7.22.5(@babel/core@7.22.5)
       '@babel/plugin-transform-react-jsx-source': 7.22.5(@babel/core@7.22.5)
       react-refresh: 0.14.0
-      vite: 4.4.7
+      vite: 4.4.8
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5918,7 +5918,7 @@ packages:
     engines: {node: '>= 0.10'}
     dev: true
 
-  /vite-plugin-dts@3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7):
+  /vite-plugin-dts@3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.8):
     resolution: {integrity: sha512-RFebFGg6GWKkZqRQ5n6ls8giSiygKMBriJTFp8N+CRbYgI4lMXBxXEx0z2bthfeQv/xB53Wmhn/LNOOqb9OQHQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -5934,7 +5934,7 @@ packages:
       debug: 4.3.4
       kolorist: 1.8.0
       typescript: 5.1.6
-      vite: 4.4.7
+      vite: 4.4.8
       vue-tsc: 1.8.3(typescript@5.1.6)
     transitivePeerDependencies:
       - '@types/node'
@@ -5942,16 +5942,16 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-wasm@3.2.2(vite@4.4.7):
+  /vite-plugin-wasm@3.2.2(vite@4.4.8):
     resolution: {integrity: sha512-cdbBUNR850AEoMd5nvLmnyeq63CSfoP1ctD/L2vLk/5+wsgAPlAVAzUK5nGKWO/jtehNlrSSHLteN+gFQw7VOA==}
     peerDependencies:
       vite: ^2 || ^3 || ^4
     dependencies:
-      vite: 4.4.7
+      vite: 4.4.8
     dev: true
 
-  /vite@4.4.7:
-    resolution: {integrity: sha512-6pYf9QJ1mHylfVh39HpuSfMPojPSKVxZvnclX1K1FyZ1PXDOcLBibdq5t1qxJSnL63ca8Wf4zts6mD8u8oc9Fw==}
+  /vite@4.4.8:
+    resolution: {integrity: sha512-LONawOUUjxQridNWGQlNizfKH89qPigK36XhMI7COMGztz8KNY0JHim7/xDd71CZwGT4HtSRgI7Hy+RlhG0Gvg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
