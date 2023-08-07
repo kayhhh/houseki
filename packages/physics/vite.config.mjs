@@ -1,4 +1,4 @@
-import { thyseusPlugin } from "@thyseus/transformer-rollup";
+import { thyseus } from "@thyseus/transformer-rollup";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
@@ -15,5 +15,5 @@ export default defineConfig({
     minify: false,
     target: "esnext",
   },
-  plugins: [dts(), peerDepsExternal(), thyseusPlugin(), wasm()],
+  plugins: [dts(), peerDepsExternal(), thyseus(), wasm()],
 });

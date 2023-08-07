@@ -18,7 +18,7 @@
     "dev": "vite build --watch"
   },
   "devDependencies": {
-    "@thyseus/transformer-rollup": "^0.13.0",
+    "@thyseus/transformer-rollup": "0.14.0-beta.1",
     "@types/three": "~0.153.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "~5.1.6",
@@ -33,7 +33,7 @@
     "@lattice-engine/scene": "workspace:^",
     "@lattice-engine/vrm": "workspace:^",
     "three": "~0.153.0",
-    "thyseus": "^0.13.5"
+    "thyseus": "^0.14.0-beta.1"
   },
   "publishConfig": {
     "access": "public"

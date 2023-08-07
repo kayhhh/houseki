@@ -1,4 +1,4 @@
-import { thyseusPlugin } from "@thyseus/transformer-rollup";
+import { thyseus } from "@thyseus/transformer-rollup";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
@@ -9,7 +9,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    thyseusPlugin(),
+    thyseus(),
     // Cross Origin Isolation required for multi-threading
     {
       configureServer: (server) => {
