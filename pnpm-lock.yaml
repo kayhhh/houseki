@@ -68,8 +68,8 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       three:
-        specifier: ~0.153.0
-        version: 0.153.0
+        specifier: ~0.155.0
+        version: 0.155.0
       thyseus:
         specifier: ^0.13.5
         version: 0.13.5
@@ -93,8 +93,8 @@ importers:
         specifier: ^18.2.7
         version: 18.2.7
       '@types/three':
-        specifier: ~0.153.0
-        version: 0.153.0
+        specifier: ~0.155.0
+        version: 0.155.0
       '@vitejs/plugin-react':
         specifier: ^4.0.3
         version: 4.0.3(vite@4.4.7)
@@ -155,8 +155,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
-        specifier: ~0.153.0
-        version: 0.153.0
+        specifier: ~0.155.0
+        version: 0.155.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
@@ -333,8 +333,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
-        specifier: ~0.153.0
-        version: 0.153.0
+        specifier: ~0.155.0
+        version: 0.155.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
@@ -416,8 +416,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
-        specifier: ~0.153.0
-        version: 0.153.0
+        specifier: ~0.155.0
+        version: 0.155.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
@@ -462,8 +462,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
-        specifier: ~0.153.0
-        version: 0.153.0
+        specifier: ~0.155.0
+        version: 0.155.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
@@ -505,8 +505,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
-        specifier: ~0.153.0
-        version: 0.153.0
+        specifier: ~0.155.0
+        version: 0.155.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
@@ -542,8 +542,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
-        specifier: ~0.153.0
-        version: 0.153.0
+        specifier: ~0.155.0
+        version: 0.155.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
@@ -610,8 +610,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
-        specifier: ~0.153.0
-        version: 0.153.0
+        specifier: ~0.155.0
+        version: 0.155.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
@@ -662,8 +662,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
-        specifier: ~0.153.0
-        version: 0.153.0
+        specifier: ~0.155.0
+        version: 0.155.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
@@ -724,7 +724,7 @@ importers:
         version: link:../scene
       '@pixiv/three-vrm':
         specifier: ^2.0.1
-        version: 2.0.1(@types/three@0.153.0)(three@0.153.0)
+        version: 2.0.1(@types/three@0.155.0)(three@0.153.0)
       three:
         specifier: ~0.153.0
         version: 0.153.0
@@ -736,8 +736,8 @@ importers:
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
-        specifier: ~0.153.0
-        version: 0.153.0
+        specifier: ~0.155.0
+        version: 0.155.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
@@ -1620,7 +1620,7 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@pixiv/three-vrm-core@2.0.1(@types/three@0.153.0)(three@0.153.0):
+  /@pixiv/three-vrm-core@2.0.1(@types/three@0.155.0)(three@0.153.0):
     resolution: {integrity: sha512-znOS5n4l0tQ8ZTqlLI4VEWe65l1OuDRXxVfeuIQW3rfIq7J26MBNfpdBRswKoWAkTBxVHer+sULTQI9NZKBesg==}
     peerDependencies:
       '@types/three': ^0.153.0
@@ -1628,22 +1628,22 @@ packages:
     dependencies:
       '@pixiv/types-vrm-0.0': 2.0.0
       '@pixiv/types-vrmc-vrm-1.0': 2.0.0
-      '@types/three': 0.153.0
+      '@types/three': 0.155.0
       three: 0.153.0
     dev: false
 
-  /@pixiv/three-vrm-materials-hdr-emissive-multiplier@2.0.1(@types/three@0.153.0)(three@0.153.0):
+  /@pixiv/three-vrm-materials-hdr-emissive-multiplier@2.0.1(@types/three@0.155.0)(three@0.153.0):
     resolution: {integrity: sha512-qsElZav9809gpn8A73ack7uwQGkywSFSxyd5ZaSVWvRswBGUPj7/hqNyONM7d2zV1Mmrjmg+lA5SDDrDGushvQ==}
     peerDependencies:
       '@types/three': ^0.153.0
       three: ^0.153.0
     dependencies:
       '@pixiv/types-vrmc-materials-hdr-emissive-multiplier-1.0': 2.0.0
-      '@types/three': 0.153.0
+      '@types/three': 0.155.0
       three: 0.153.0
     dev: false
 
-  /@pixiv/three-vrm-materials-mtoon@2.0.1(@types/three@0.153.0)(three@0.153.0):
+  /@pixiv/three-vrm-materials-mtoon@2.0.1(@types/three@0.155.0)(three@0.153.0):
     resolution: {integrity: sha512-ORQPmGrs+gzSQ3KXcUyZM2TrpjrgJ8Rec1n1Ka4qFrAECLqj9LZqPKc/0SJbOKfo5Y1RexgnhFopEP/FZkQMkA==}
     peerDependencies:
       '@types/three': ^0.153.0
@@ -1651,11 +1651,11 @@ packages:
     dependencies:
       '@pixiv/types-vrm-0.0': 2.0.0
       '@pixiv/types-vrmc-materials-mtoon-1.0': 2.0.0
-      '@types/three': 0.153.0
+      '@types/three': 0.155.0
       three: 0.153.0
     dev: false
 
-  /@pixiv/three-vrm-materials-v0compat@2.0.1(@types/three@0.153.0)(three@0.153.0):
+  /@pixiv/three-vrm-materials-v0compat@2.0.1(@types/three@0.155.0)(three@0.153.0):
     resolution: {integrity: sha512-ljy7ZVif7qVJ5WXqAbNCRIoNTp/+H6mNNFgH/3SrxwJQdBWhHnW2GYIuDnHBZ7Z36uKFn28SbO/kd/HlYpe0Jg==}
     peerDependencies:
       '@types/three': ^0.153.0
@@ -1663,18 +1663,18 @@ packages:
     dependencies:
       '@pixiv/types-vrm-0.0': 2.0.0
       '@pixiv/types-vrmc-materials-mtoon-1.0': 2.0.0
-      '@types/three': 0.153.0
+      '@types/three': 0.155.0
       three: 0.153.0
     dev: false
 
-  /@pixiv/three-vrm-node-constraint@2.0.1(@types/three@0.153.0)(three@0.153.0):
+  /@pixiv/three-vrm-node-constraint@2.0.1(@types/three@0.155.0)(three@0.153.0):
     resolution: {integrity: sha512-JwaHFdAzdhsaGHA4o4fNJU57s6oQxnPe9Eq6KgJlGaJzB9o5PBhCR2BHUYQIOJvSgo7LLskBapEQJ4ZW55mI8Q==}
     peerDependencies:
       '@types/three': ^0.153.0
       three: ^0.153.0
     dependencies:
       '@pixiv/types-vrmc-node-constraint-1.0': 2.0.0
-      '@types/three': 0.153.0
+      '@types/three': 0.155.0
       three: 0.153.0
     dev: false
 
@@ -1688,19 +1688,19 @@ packages:
       three: 0.153.0
     dev: false
 
-  /@pixiv/three-vrm@2.0.1(@types/three@0.153.0)(three@0.153.0):
+  /@pixiv/three-vrm@2.0.1(@types/three@0.155.0)(three@0.153.0):
     resolution: {integrity: sha512-bJ17Dnt6vD+CGdez3y44gOeeRFtDGFuXEpJIuoi+zky0qhkEAvTJltruc66rwxwvdgkKd7dhNNSj82s9Ng6f6A==}
     peerDependencies:
       '@types/three': ^0.153.0
       three: ^0.153.0
     dependencies:
-      '@pixiv/three-vrm-core': 2.0.1(@types/three@0.153.0)(three@0.153.0)
-      '@pixiv/three-vrm-materials-hdr-emissive-multiplier': 2.0.1(@types/three@0.153.0)(three@0.153.0)
-      '@pixiv/three-vrm-materials-mtoon': 2.0.1(@types/three@0.153.0)(three@0.153.0)
-      '@pixiv/three-vrm-materials-v0compat': 2.0.1(@types/three@0.153.0)(three@0.153.0)
-      '@pixiv/three-vrm-node-constraint': 2.0.1(@types/three@0.153.0)(three@0.153.0)
+      '@pixiv/three-vrm-core': 2.0.1(@types/three@0.155.0)(three@0.153.0)
+      '@pixiv/three-vrm-materials-hdr-emissive-multiplier': 2.0.1(@types/three@0.155.0)(three@0.153.0)
+      '@pixiv/three-vrm-materials-mtoon': 2.0.1(@types/three@0.155.0)(three@0.153.0)
+      '@pixiv/three-vrm-materials-v0compat': 2.0.1(@types/three@0.155.0)(three@0.153.0)
+      '@pixiv/three-vrm-node-constraint': 2.0.1(@types/three@0.155.0)(three@0.153.0)
       '@pixiv/three-vrm-springbone': 2.0.0(three@0.153.0)
-      '@types/three': 0.153.0
+      '@types/three': 0.155.0
       three: 0.153.0
     dev: false
 
@@ -2251,14 +2251,15 @@ packages:
   /@types/stats.js@0.17.0:
     resolution: {integrity: sha512-9w+a7bR8PeB0dCT/HBULU2fMqf6BAzvKbxFboYhmDtDkKPiyXYbjoe2auwsXlEFI7CFNMF1dCv3dFH5Poy9R1w==}
 
-  /@types/three@0.153.0:
-    resolution: {integrity: sha512-L9quzIP4lsl6asDCw5zqN5opewCVOKRuB09apw5Acf2AIkoj5gLnUOY5AMB/ntFUt/QfFey0uKZaAd5t+HXSUw==}
+  /@types/three@0.155.0:
+    resolution: {integrity: sha512-IzdbqXsGsbG0flvq9D5L9pZRwySQQps2bGcizLYEsfvK3dM+B0sqKR6S+xAOXbouXemfDmHttrcQjVOM46YnAw==}
     dependencies:
       '@tweenjs/tween.js': 18.6.4
       '@types/stats.js': 0.17.0
       '@types/webxr': 0.5.2
       fflate: 0.6.10
       lil-gui: 0.17.0
+      meshoptimizer: 0.18.1
 
   /@types/webxr@0.5.2:
     resolution: {integrity: sha512-szL74BnIcok9m7QwYtVmQ+EdIKwbjPANudfuvDrAF8Cljg9MKUlIoc1w5tjj9PMpeSH3U1Xnx//czQybJ0EfSw==}
@@ -4528,6 +4529,9 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
+  /meshoptimizer@0.18.1:
+    resolution: {integrity: sha512-ZhoIoL7TNV4s5B6+rx5mC//fw8/POGyNxS/DZyCJeiZ12ScLfVwRE/GfsxwiTkMYYD5DmK2/JXnEVXqL4rF+Sw==}
+
   /micromatch@4.0.5:
     resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==}
     engines: {node: '>=8.6'}
@@ -5601,6 +5605,10 @@ packages:
 
   /three@0.153.0:
     resolution: {integrity: sha512-OCP2/uQR6GcDpSLnJt/3a4mdS0kNWcbfUXIwLoEMgLzEUIVIYsSDwskpmOii/AkDM+BBwrl6+CKgrjX9+E2aWg==}
+    dev: false
+
+  /three@0.155.0:
+    resolution: {integrity: sha512-sNgCYmDijnIqkD/bMfk+1pHg3YzsxW7V2ChpuP6HCQ8NiZr3RufsXQr8M3SSUMjW4hG+sUk7YbyuY0DncaDTJQ==}
     dev: false
 
   /thyseus@0.13.5:
