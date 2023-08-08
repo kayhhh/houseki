@@ -6,7 +6,7 @@ export function exportImage(
   context: ExportContext,
   warehouse: Readonly<Warehouse>,
   entityId: bigint,
-  asset: Asset,
+  asset: Asset
 ) {
   const texture = context.doc.createTexture();
 
