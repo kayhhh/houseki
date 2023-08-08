@@ -18,7 +18,7 @@
     "dev": "vite build --watch"
   },
   "dependencies": {
-    "@gltf-transform/core": "^3.4.8",
+    "@gltf-transform/core": "^3.5.1",
     "@gltf-transform/extensions": "^3.4.8",
     "@gltf-transform/functions": "^3.4.8",
     "zod": "^3.21.4"
