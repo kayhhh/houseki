@@ -10,7 +10,7 @@ import { RenderStore } from "../resources";
 export function createCameras(
   store: Res<RenderStore>,
   cameras: Query<[Entity, PerspectiveCamera, Transform]>,
-  withParent: Query<[Entity, Parent], With<PerspectiveCamera>>
+  withParent: Query<[Entity, Parent], With<PerspectiveCamera>>,
 ) {
   const ids: bigint[] = [];
 
@@ -37,13 +37,13 @@ export function createCameras(
     object.position.set(
       transform.translation.x,
       transform.translation.y,
-      transform.translation.z
+      transform.translation.z,
     );
     object.quaternion.set(
       transform.rotation.x,
       transform.rotation.y,
       transform.rotation.z,
-      transform.rotation.w
+      transform.rotation.w,
     );
   }
 

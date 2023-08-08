@@ -13,7 +13,7 @@ import { ExportContext } from "./context";
 export function exportBoxCollider(
   context: ExportContext,
   entityId: bigint,
-  collider: BoxCollider
+  collider: BoxCollider,
 ) {
   const node = context.nodes.get(entityId);
   if (!node) return;
@@ -30,7 +30,7 @@ export function exportBoxCollider(
 export function exportSphereCollider(
   context: ExportContext,
   entityId: bigint,
-  collider: SphereCollider
+  collider: SphereCollider,
 ) {
   const node = context.nodes.get(entityId);
   if (!node) return;
@@ -47,7 +47,7 @@ export function exportSphereCollider(
 export function exportCapsuleCollider(
   context: ExportContext,
   entityId: bigint,
-  collider: CapsuleCollider
+  collider: CapsuleCollider,
 ) {
   const node = context.nodes.get(entityId);
   if (!node) return;
@@ -65,7 +65,7 @@ export function exportCapsuleCollider(
 export function exportCylinderCollider(
   context: ExportContext,
   entityId: bigint,
-  collider: CylinderCollider
+  collider: CylinderCollider,
 ) {
   const node = context.nodes.get(entityId);
   if (!node) return;
@@ -83,7 +83,7 @@ export function exportCylinderCollider(
 export function exportHullCollider(
   context: ExportContext,
   entityId: bigint,
-  collider: HullCollider
+  collider: HullCollider,
 ) {
   const node = context.nodes.get(entityId);
   if (!node) return;
@@ -103,7 +103,7 @@ export function exportHullCollider(
 export function exportMeshCollider(
   context: ExportContext,
   entityId: bigint,
-  collider: MeshCollider
+  collider: MeshCollider,
 ) {
   const node = context.nodes.get(entityId);
   if (!node) return;

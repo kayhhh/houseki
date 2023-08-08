@@ -20,7 +20,7 @@ export function createAnimationMixers(
   renderStore: Res<RenderStore>,
   localStore: SystemRes<LocalStore>,
   entities: Query<Entity, With<AnimationMixer>>,
-  clips: Query<[Entity, AnimationClip]>
+  clips: Query<[Entity, AnimationClip]>,
 ) {
   const ids: bigint[] = [];
   const clipIds: bigint[] = [];

@@ -13,7 +13,7 @@ const vec3_b = new Vector3();
 export function setPortalRaycasts(
   portalRaycasts: Query<[Raycast, Mut<PortalRaycast>]>,
   raycasts: Query<[Entity, Mut<Raycast>]>,
-  portals: Query<[Entity, PortalTarget, GlobalTransform]>
+  portals: Query<[Entity, PortalTarget, GlobalTransform]>,
 ) {
   for (const [raycast1, portalRaycast] of portalRaycasts) {
     const wasActive = portalRaycast.active;
@@ -52,20 +52,20 @@ export function setPortalRaycasts(
               portalEnterGlobal.rotation.x,
               portalEnterGlobal.rotation.y,
               portalEnterGlobal.rotation.z,
-              portalEnterGlobal.rotation.w
+              portalEnterGlobal.rotation.w,
             )
             .invert();
 
           vec3_a.set(
             raycast1.hitPosition.x,
             raycast1.hitPosition.y,
-            raycast1.hitPosition.z
+            raycast1.hitPosition.z,
           );
 
           vec3_b.set(
             portalEnterGlobal.translation.x,
             portalEnterGlobal.translation.y,
-            portalEnterGlobal.translation.z
+            portalEnterGlobal.translation.z,
           );
 
           vec3_a.sub(vec3_b);
@@ -80,13 +80,13 @@ export function setPortalRaycasts(
             portalExitGlobal.rotation.x,
             portalExitGlobal.rotation.y,
             portalExitGlobal.rotation.z,
-            portalExitGlobal.rotation.w
+            portalExitGlobal.rotation.w,
           );
 
           vec3_b.set(
             portalExitGlobal.translation.x,
             portalExitGlobal.translation.y,
-            portalExitGlobal.translation.z
+            portalExitGlobal.translation.z,
           );
 
           vec3_a.applyQuaternion(quaternion_b);
@@ -100,14 +100,14 @@ export function setPortalRaycasts(
           vec3_a.set(
             raycast1.direction.x,
             raycast1.direction.y,
-            raycast1.direction.z
+            raycast1.direction.z,
           );
 
           quaternion_b.set(
             portalExitGlobal.rotation.x,
             portalExitGlobal.rotation.y,
             portalExitGlobal.rotation.z,
-            portalExitGlobal.rotation.w
+            portalExitGlobal.rotation.w,
           );
 
           vec3_a.applyQuaternion(quaternion_a);

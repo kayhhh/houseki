@@ -9,6 +9,6 @@ export function renderClearPass(renderStore: Res<RenderStore>) {
   clearPass.render(
     renderStore.renderer,
     renderStore.composer.inputBuffer,
-    renderStore.composer.outputBuffer
+    renderStore.composer.outputBuffer,
   );
 }

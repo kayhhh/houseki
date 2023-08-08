@@ -26,7 +26,7 @@ export function initScene(
   warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
-  physicsConfig: Res<Mut<PhysicsConfig>>
+  physicsConfig: Res<Mut<PhysicsConfig>>,
 ) {
   physicsConfig.debug = true;
 
@@ -84,7 +84,7 @@ export const transformConfig = {
 };
 
 export function setTransformMode(
-  transformControls: Query<Mut<TransformControls>>
+  transformControls: Query<Mut<TransformControls>>,
 ) {
   for (const controls of transformControls) {
     controls.mode = transformConfig.mode;

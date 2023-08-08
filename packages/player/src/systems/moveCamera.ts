@@ -13,7 +13,7 @@ const vector3 = new Vector3();
 export function moveCamera(
   cameras: Query<
     [PlayerCamera, Transform, Mut<TargetTranslation>, Mut<Raycast>]
-  >
+  >,
 ) {
   for (const [camera, cameraTransform, targetTranslation, raycast] of cameras) {
     raycast.excludeRigidBodyId = camera.bodyId;
@@ -32,7 +32,7 @@ export function moveCamera(
         cameraTransform.rotation.x,
         cameraTransform.rotation.y,
         cameraTransform.rotation.z,
-        cameraTransform.rotation.w
+        cameraTransform.rotation.w,
       );
       vector3.set(0, 0, distance);
       vector3.applyQuaternion(quaternion);

@@ -13,7 +13,7 @@ import { Commands, dropStruct } from "thyseus";
 export function createScene(
   commands: Commands,
   coreStore: CoreStore,
-  sceneStruct: SceneStruct
+  sceneStruct: SceneStruct,
 ) {
   const canvas = document.querySelector("canvas");
   coreStore.canvas = canvas;

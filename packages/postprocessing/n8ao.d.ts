@@ -4,7 +4,7 @@ declare module "n8ao" {
       scene?: Scene,
       camera?: Camera,
       width?: number,
-      height?: number
+      height?: number,
     );
 
     scene: Scene;
@@ -19,7 +19,7 @@ declare module "n8ao" {
     };
 
     setQualityMode(
-      mode: "Performance" | "Low" | "Medium" | "High" | "Ultra"
+      mode: "Performance" | "Low" | "Medium" | "High" | "Ultra",
     ): void;
 
     enableDebugMode(): void;

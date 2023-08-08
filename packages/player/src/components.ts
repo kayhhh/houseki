@@ -37,7 +37,7 @@ export class PlayerBody {
     jumpStrength = 4,
     spawnPoint: [number, number, number] = [0, 0, 0],
     enableVoidTeleport = true,
-    voidLevel = -50
+    voidLevel = -50,
   ) {
     initStruct(this);
 
@@ -102,7 +102,7 @@ export class PlayerCamera {
   constructor(
     mode = PlayerCameraMode.Both,
     currentView = PlayerCameraView.FirstPerson,
-    cameraDistance = 3
+    cameraDistance = 3,
   ) {
     initStruct(this);
 

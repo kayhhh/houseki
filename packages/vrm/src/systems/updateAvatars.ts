@@ -10,7 +10,7 @@ export function updateAvatars(
   time: Res<Time>,
   vrmStore: Res<VrmStore>,
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, Vrm]>
+  entities: Query<[Entity, Vrm]>,
 ) {
   for (const [entity, vrm] of entities) {
     const object = vrmStore.avatars.get(entity.id);

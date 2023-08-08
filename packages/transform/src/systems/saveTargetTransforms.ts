@@ -6,7 +6,7 @@ import { TransformControls } from "../components";
 
 export function saveTargetTransforms(
   transformControls: Query<TransformControls>,
-  nodes: Query<[Entity, Transform, Mut<TargetTransform>]>
+  nodes: Query<[Entity, Transform, Mut<TargetTransform>]>,
 ) {
   for (const controls of transformControls) {
     for (const [nodeEnt, transform, targetTransform] of nodes) {

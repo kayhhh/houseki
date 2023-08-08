@@ -10,7 +10,7 @@ class LocalStore {
 export function playAnimations(
   renderStore: Res<RenderStore>,
   localStore: SystemRes<LocalStore>,
-  mixers: Query<Entity, With<AnimationMixer>>
+  mixers: Query<Entity, With<AnimationMixer>>,
 ) {
   const time = performance.now();
   const delta = (time - localStore.lastTime) / 1000;

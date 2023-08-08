@@ -23,7 +23,7 @@ export function initScene(
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
-  physicsConfig: Res<Mut<PhysicsConfig>>
+  physicsConfig: Res<Mut<PhysicsConfig>>,
 ) {
   physicsConfig.debug = true;
 
@@ -53,8 +53,8 @@ export function initScene(
     .add(
       transform.set(
         [0, 1, -6],
-        [quaternion.x, quaternion.y, quaternion.z, quaternion.w]
-      )
+        [quaternion.x, quaternion.y, quaternion.z, quaternion.w],
+      ),
     )
     .addType(GlobalTransform)
     .add(parent)
@@ -67,8 +67,8 @@ export function initScene(
     .add(
       transform.set(
         [4, 1, -2],
-        [quaternion.x, quaternion.y, quaternion.z, quaternion.w]
-      )
+        [quaternion.x, quaternion.y, quaternion.z, quaternion.w],
+      ),
     )
     .addType(GlobalTransform)
     .add(parent)

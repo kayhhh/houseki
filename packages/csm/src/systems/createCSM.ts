@@ -13,7 +13,7 @@ export function createCSM(
   csmStore: Res<Mut<CSMStore>>,
   renderStore: Res<RenderStore>,
   sceneStruct: Res<SceneStruct>,
-  entities: Query<[Entity, CascadingShadowMaps]>
+  entities: Query<[Entity, CascadingShadowMaps]>,
 ) {
   const ids: bigint[] = [];
 

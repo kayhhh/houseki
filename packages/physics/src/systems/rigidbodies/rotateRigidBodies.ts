@@ -9,7 +9,7 @@ export function rotateRigidBodies(
   bodies: Query<
     [Entity, GlobalTransform],
     Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>
-  >
+  >,
 ) {
   for (const [entity, globalTransform] of bodies) {
     const body = store.getRigidBody(entity.id);

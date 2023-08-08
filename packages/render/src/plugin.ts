@@ -46,11 +46,11 @@ export function renderPlugin(builder: WorldBuilder) {
         createAnimationClips,
         createAnimationMixers,
         playAnimations,
-        saveAnimations
-      )
+        saveAnimations,
+      ),
     )
     .addSystemsToSchedule(
       LatticeSchedules.Render,
-      ...run.chain(renderClearPass, renderCanvas)
+      ...run.chain(renderClearPass, renderCanvas),
     );
 }

@@ -40,7 +40,7 @@ class LocalRes {
  */
 export function exportLoadingInfo(
   localRes: SystemRes<LocalRes>,
-  loading: Query<[Entity, Loading]>
+  loading: Query<[Entity, Loading]>,
 ) {
   const entityIds = useLoadingStore.getState().entityIds;
 

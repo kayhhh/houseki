@@ -20,7 +20,7 @@ const quaternion = new Quaternion();
 export function rotateCamera(
   inputStruct: Res<InputStruct>,
   pointerMoveReader: EventReader<PointerMoveEvent>,
-  cameras: Query<[PlayerCamera, Mut<TargetRotation>]>
+  cameras: Query<[PlayerCamera, Mut<TargetRotation>]>,
 ) {
   const rotate = inputStruct.enablePointerLock
     ? inputStruct.isPointerLocked
@@ -39,7 +39,7 @@ export function rotateCamera(
         targetRotation.x,
         targetRotation.y,
         targetRotation.z,
-        targetRotation.w
+        targetRotation.w,
       );
 
       euler.setFromQuaternion(quaternion);
@@ -58,7 +58,7 @@ export function rotateCamera(
 
       euler.x = Math.max(
         Math.PI / 2 - maxAngle,
-        Math.min(Math.PI / 2 - minAngle, euler.x)
+        Math.min(Math.PI / 2 - minAngle, euler.x),
       );
 
       quaternion.setFromEuler(euler);

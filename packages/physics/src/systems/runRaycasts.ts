@@ -6,7 +6,7 @@ import { PhysicsStore } from "../resources";
 
 export function runRaycasts(
   physicsStore: Res<PhysicsStore>,
-  raycasters: Query<[Entity, Mut<Raycast>]>
+  raycasters: Query<[Entity, Mut<Raycast>]>,
 ) {
   for (const [entity, raycast] of raycasters) {
     let ray = physicsStore.rays.get(entity.id);
@@ -47,7 +47,7 @@ export function runRaycasts(
       undefined,
       undefined,
       undefined,
-      rigidBody
+      rigidBody,
     );
 
     if (hit) {

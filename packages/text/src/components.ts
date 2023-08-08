@@ -21,7 +21,7 @@ export class Text {
     value = "",
     font = "",
     fontSize = 1,
-    color: [number, number, number] = [255, 255, 255]
+    color: [number, number, number] = [255, 255, 255],
   ) {
     initStruct(this);
 

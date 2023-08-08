@@ -12,7 +12,7 @@ export function createLights(
   commands: Commands,
   parentId: bigint,
   shadowResolution = 2048,
-  shadowArea = 8
+  shadowArea = 8,
 ) {
   const parent = new Parent(parentId);
 
@@ -47,7 +47,7 @@ export function createLights(
       shadowArea,
       -shadowArea,
       0.1,
-      50
+      50,
     );
     directional.add(shadowMap);
     dropStruct(shadowMap);

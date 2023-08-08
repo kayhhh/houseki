@@ -24,10 +24,10 @@ export function rotateBody(
       Velocity,
       Mut<Transform>,
       Mut<TargetTransform>,
-      Mut<TargetRotation>
+      Mut<TargetRotation>,
     ],
     With<PlayerBody>
-  >
+  >,
 ) {
   for (const [camera, cameraRotation] of cameras) {
     for (const [
@@ -44,7 +44,7 @@ export function rotateBody(
         rotateFirstPerson(
           cameraRotation,
           targetTransform.rotation,
-          targetRotation
+          targetRotation,
         );
       } else if (camera.currentView === PlayerCameraView.ThirdPerson) {
         rotateThirdPerson(
@@ -52,7 +52,7 @@ export function rotateBody(
           cameraRotation,
           targetTransform.rotation,
           targetRotation,
-          time
+          time,
         );
       }
 
@@ -64,13 +64,13 @@ export function rotateBody(
 function rotateFirstPerson(
   cameraRotation: Quat,
   bodyRotation: Quat,
-  targetRotation: Quat
+  targetRotation: Quat,
 ) {
   quaternion.set(
     cameraRotation.x,
     cameraRotation.y,
     cameraRotation.z,
-    cameraRotation.w
+    cameraRotation.w,
   );
 
   quaternion.x = 0;
@@ -86,7 +86,7 @@ function rotateThirdPerson(
   cameraRotation: Quat,
   bodyRotation: Quat,
   targetRotation: Quat,
-  time: Time
+  time: Time,
 ) {
   // Set new target rotation if there is input
   if (velocity.x !== 0 || velocity.z !== 0) {
@@ -95,7 +95,7 @@ function rotateThirdPerson(
     vector3.set(
       velocity.x * direction.x + velocity.z * direction.z,
       0,
-      velocity.x * direction.z - velocity.z * direction.x
+      velocity.x * direction.z - velocity.z * direction.x,
     );
 
     quaternion.setFromAxisAngle(upVector, Math.atan2(-velocity.x, -velocity.z));
@@ -110,7 +110,7 @@ function rotateThirdPerson(
       targetRotation.x,
       targetRotation.y,
       targetRotation.z,
-      targetRotation.w
+      targetRotation.w,
     );
   }
 
@@ -121,7 +121,7 @@ function rotateThirdPerson(
     bodyRotation.x,
     bodyRotation.y,
     bodyRotation.z,
-    bodyRotation.w
+    bodyRotation.w,
   );
   quaternion2.slerp(quaternion, K);
   bodyRotation.fromObject(quaternion2);

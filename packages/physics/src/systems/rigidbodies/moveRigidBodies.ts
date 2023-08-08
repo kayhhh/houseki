@@ -18,7 +18,7 @@ export function moveRigidBodies(
   velocities: Query<
     [Entity, Velocity],
     [Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>]
-  >
+  >,
 ) {
   // Set positions
   for (const [entity, globalTransform] of globalTransforms) {

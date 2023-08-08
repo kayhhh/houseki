@@ -17,7 +17,7 @@ export function initScene(
   commands: Commands,
   warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
-  sceneStruct: Res<Mut<SceneStruct>>
+  sceneStruct: Res<Mut<SceneStruct>>,
 ) {
   createOrbitControls(commands, sceneStruct);
   const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);

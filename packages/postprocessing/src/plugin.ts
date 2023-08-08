@@ -11,7 +11,7 @@ export function postprocessingPlugin(builder: WorldBuilder) {
     LatticeSchedules.PostUpdate,
     ...run.chain(
       [createOutlineEffects, createN8aoPass],
-      [addEffectPass, addN8aoPass]
-    )
+      [addEffectPass, addN8aoPass],
+    ),
   );
 }

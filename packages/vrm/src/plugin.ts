@@ -10,6 +10,6 @@ export function vrmPlugin(builder: WorldBuilder) {
     createAvatars,
     createAnimations,
     updateAvatars,
-    playAnimations
+    playAnimations,
   );
 }

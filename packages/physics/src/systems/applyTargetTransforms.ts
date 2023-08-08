@@ -7,7 +7,7 @@ import { TargetTransform } from "../components";
 
 export function applyTargetTransforms(
   time: Res<Time>,
-  entities: Query<[Mut<Transform>, TargetTransform]>
+  entities: Query<[Mut<Transform>, TargetTransform]>,
 ) {
   const timeSinceLastFixedUpdate = time.mainTime - time.fixedTime;
   const percentThroughDelta =
@@ -20,21 +20,21 @@ export function applyTargetTransforms(
       transform.translation.array,
       transform.translation.array,
       target.translation.array,
-      K
+      K,
     );
 
     Quat.slerp(
       transform.rotation.array,
       transform.rotation.array,
       target.rotation.array,
-      K
+      K,
     );
 
     Vec3.lerp(
       transform.scale.array,
       transform.scale.array,
       target.scale.array,
-      K
+      K,
     );
   }
 }

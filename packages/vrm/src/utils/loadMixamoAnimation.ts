@@ -15,7 +15,7 @@ import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
  */
 export async function loadMixamoAnimation(
   animationPath: string,
-  vrm: VRM
+  vrm: VRM,
 ): Promise<AnimationClip[]> {
   const loader = new FBXLoader();
 
@@ -86,22 +86,22 @@ export async function loadMixamoAnimation(
             `${vrmBone.name}.${propertyName}`,
             track.times,
             track.values.map((v, i) =>
-              vrm.meta?.metaVersion === "0" && i % 2 === 0 ? -v : v
-            )
-          )
+              vrm.meta?.metaVersion === "0" && i % 2 === 0 ? -v : v,
+            ),
+          ),
         );
       } else if (track instanceof VectorKeyframeTrack) {
         const value = track.values.map(
           (v, i) =>
             (vrm.meta?.metaVersion === "0" && i % 3 !== 1 ? -v : v) *
-            hipsPositionScale
+            hipsPositionScale,
         );
         tracks.push(
           new VectorKeyframeTrack(
             `${vrmBone.name}.${propertyName}`,
             track.times,
-            value
-          )
+            value,
+          ),
         );
       }
     });

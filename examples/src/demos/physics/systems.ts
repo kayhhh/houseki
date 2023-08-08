@@ -26,7 +26,7 @@ export function initScene(
   warehouse: Res<Warehouse>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
-  physicsConfig: Res<Mut<PhysicsConfig>>
+  physicsConfig: Res<Mut<PhysicsConfig>>,
 ) {
   physicsConfig.debug = true;
 

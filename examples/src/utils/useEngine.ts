@@ -54,7 +54,7 @@ export function useEngine(world: World | null) {
         },
       }),
     },
-    [exportScene]
+    [exportScene],
   );
 
   return engine;

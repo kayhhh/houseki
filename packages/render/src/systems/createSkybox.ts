@@ -24,7 +24,7 @@ export function createSkybox(
   localRes: SystemRes<LocalRes>,
   renderStore: Res<RenderStore>,
   sceneStruct: Res<SceneStruct>,
-  scenes: Query<[Entity, Skybox], With<Scene>>
+  scenes: Query<[Entity, Skybox], With<Scene>>,
 ) {
   const ids: bigint[] = [];
 

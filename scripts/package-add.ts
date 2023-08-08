@@ -54,7 +54,7 @@ fs.writeFileSync(
     type: "module",
     types: "./dist/index.d.ts",
     version: "0.0.0",
-  })
+  }),
 );
 
 console.info("Creating src");
@@ -65,7 +65,7 @@ console.info("Creating index.ts");
 const indexFilePath = path.join(srcDir, "index.ts");
 fs.writeFileSync(
   indexFilePath,
-  `export const ${packageName} = "Hello from ${packageName}";`
+  `export const ${packageName} = "Hello from ${packageName}";`,
 );
 
 console.info("Creating vite.config.mjs");
@@ -90,7 +90,7 @@ export default defineConfig({
   },
   plugins: [dts(), peerDepsExternal(), thyseusPlugin()],
 });
-`
+`,
 );
 
 console.info("Creating tsconfig.json");
@@ -105,7 +105,7 @@ fs.writeFileSync(
   "extends": "../../tsconfig.json",
   "include": ["src"]
 }
-`
+`,
 );
 
 console.info("Creating README.md");
@@ -113,7 +113,7 @@ const readmePath = path.join(packageDir, "README.md");
 fs.writeFileSync(
   readmePath,
   `# @lattice-engine/${packageName}
-`
+`,
 );
 
 // Enter lattice-engine directory
@@ -123,7 +123,7 @@ console.info(`Creating src/${packageName}.ts`);
 const srcFilePath = path.join(latticeDir, "src", `${packageName}.ts`);
 fs.writeFileSync(
   srcFilePath,
-  `export * from "@lattice-engine/${packageName}";`
+  `export * from "@lattice-engine/${packageName}";`,
 );
 
 console.info(`Creating ${packageName}.d.ts`);
@@ -134,7 +134,7 @@ console.info(`Appending reference to index.d.ts`);
 const indexDtsPath = path.join(latticeDir, "index.d.ts");
 fs.appendFileSync(
   indexDtsPath,
-  `/// <reference path="./${packageName}.d.ts" />`
+  `/// <reference path="./${packageName}.d.ts" />`,
 );
 
 // Sort the references
@@ -179,7 +179,7 @@ const updatedEntries = `${entries}${packageName}: "./src/${packageName}.ts",`;
 const updatedViteConfig = viteConfig.replace(
   /entry: {([\s\S]*?)},/,
   `entry: {${updatedEntries}
-},`
+},`,
 );
 
 // Write the updated config back to the file

@@ -48,7 +48,7 @@ export type PointerEventType =
 
 export function pointerEventFromECS(
   type: PointerEventType,
-  event: LatticePointerEvent
+  event: LatticePointerEvent,
 ): PointerEvent {
   return new PointerEvent(type, {
     altKey: event.altKey,
@@ -97,7 +97,7 @@ export type MouseEventType = "click" | "contextmenu" | "dblclick";
 
 export function mouseEventFromECS(
   type: MouseEventType,
-  event: LatticeMouseEvent
+  event: LatticeMouseEvent,
 ): MouseEvent {
   return new MouseEvent(type, {
     altKey: event.altKey,
@@ -130,7 +130,7 @@ export type WheelEventType = "wheel";
 
 export function wheelEventFromECS(
   type: WheelEventType,
-  event: LatticeWheelEvent
+  event: LatticeWheelEvent,
 ): WheelEvent {
   return new WheelEvent(type, {
     deltaMode: event.deltaMode,
@@ -157,7 +157,7 @@ export type KeyEventType = "keydown" | "keyup";
 
 export function keyboardEventFromECS(
   type: KeyEventType,
-  event: LatticeKeyboardEvent
+  event: LatticeKeyboardEvent,
 ): KeyboardEvent {
   return new KeyboardEvent(type, {
     altKey: event.altKey,

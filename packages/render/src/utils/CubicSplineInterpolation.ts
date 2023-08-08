@@ -11,7 +11,7 @@ export class GLTFCubicSplineInterpolant extends Interpolant {
     parameterPositions: any,
     sampleValues: any,
     sampleSize: any,
-    resultBuffer: any
+    resultBuffer: any,
   ) {
     super(parameterPositions, sampleValues, sampleSize, resultBuffer);
   }
@@ -88,7 +88,7 @@ export class GLTFCubicSplineQuaternionInterpolant extends GLTFCubicSplineInterpo
 export function setCubicSpline(object: KeyframeTrack) {
   // @ts-expect-error - monkey patching
   object.createInterpolant = function InterpolantFactoryMethodGLTFCubicSpline(
-    result: any
+    result: any,
   ) {
     // A CUBICSPLINE keyframe in glTF has three output values for each input value,
     // representing inTangent, splineVertex, and outTangent. As a result, track.getValueSize()
@@ -102,7 +102,7 @@ export function setCubicSpline(object: KeyframeTrack) {
       this.times,
       this.values,
       this.getValueSize() / 3,
-      result
+      result,
     );
   };
 }

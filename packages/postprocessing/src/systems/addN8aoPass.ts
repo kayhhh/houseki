@@ -11,7 +11,7 @@ class LocalStore {
 export function addN8aoPass(
   renderStore: Res<RenderStore>,
   res: Res<N8aoRes>,
-  localStore: SystemRes<LocalStore>
+  localStore: SystemRes<LocalStore>,
 ) {
   if (renderStore.composer !== localStore.composer) {
     if (!res.pass) return;
@@ -19,7 +19,7 @@ export function addN8aoPass(
     // We want to add the pass immediately after the render pass
     // before other post-processing effects, like anti-aliasing.
     const renderIndex = renderStore.composer.passes.findIndex(
-      (pass) => pass.name === "RenderPass"
+      (pass) => pass.name === "RenderPass",
     );
     if (renderIndex === -1) return;
 

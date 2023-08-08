@@ -32,7 +32,7 @@ export function selectTarget(
   pointerUp: EventReader<PointerUpEvent>,
   scenes: Query<[Entity, Scene]>,
   store: Res<TransformControlsStore>,
-  transformControls: Query<[Entity, Mut<TransformControls>]>
+  transformControls: Query<[Entity, Mut<TransformControls>]>,
 ) {
   for (const _ of pointerDown) {
     localRes.movement = 0;
@@ -99,7 +99,7 @@ export function selectTarget(
       let potentialNode = intersect.object;
 
       const foundMesh = meshObjects.find(
-        ([_, obj]) => obj === intersect.object
+        ([_, obj]) => obj === intersect.object,
       );
 
       if (foundMesh && foundMesh[1].parent) {

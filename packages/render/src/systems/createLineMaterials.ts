@@ -7,7 +7,7 @@ import { disposeMaterial } from "../utils/dispose";
 
 export function createLineMaterials(
   renderStore: Res<RenderStore>,
-  entities: Query<[Entity, LineMaterial]>
+  entities: Query<[Entity, LineMaterial]>,
 ) {
   const ids: bigint[] = [];
 

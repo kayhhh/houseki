@@ -26,7 +26,7 @@ export class MOZText extends Extension {
       if (!node) return;
 
       const parsedText = textSchema.safeParse(
-        nodeDef.extensions[this.extensionName]
+        nodeDef.extensions[this.extensionName],
       );
 
       if (!parsedText.success) {

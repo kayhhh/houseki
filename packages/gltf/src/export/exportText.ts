@@ -6,7 +6,7 @@ import { ExportContext } from "./context";
 export function exportText(
   context: ExportContext,
   entityId: bigint,
-  text: Text
+  text: Text,
 ) {
   const node = context.nodes.get(entityId);
   if (!node) return;

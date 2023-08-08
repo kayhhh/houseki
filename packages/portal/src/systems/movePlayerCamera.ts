@@ -19,7 +19,7 @@ export function movePlayerCamera(
     [PlayerCamera, Mut<TargetTranslation>, Mut<Transform>, Mut<PortalRaycast>]
   >,
   raycasts: Query<[Entity, Raycast]>,
-  portals: Query<Entity, With<Portal>>
+  portals: Query<Entity, With<Portal>>,
 ) {
   for (const [camera, targetTranslation, transform, portalRaycast] of cameras) {
     if (!portalRaycast.active) continue;
@@ -43,7 +43,7 @@ export function movePlayerCamera(
             vec3_c.set(
               -raycast2.direction.x,
               raycast2.direction.y,
-              raycast2.direction.z
+              raycast2.direction.z,
             );
 
             vec3_c.multiplyScalar(distance);

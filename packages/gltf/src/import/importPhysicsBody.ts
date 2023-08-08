@@ -9,10 +9,10 @@ export function importPhysicsBody(
   context: ImportContext,
   commands: Commands,
   node: Node,
-  entityId: bigint
+  entityId: bigint,
 ) {
   const physicsBody = node.getExtension<PhysicsBody>(
-    PhysicsBody.EXTENSION_NAME
+    PhysicsBody.EXTENSION_NAME,
   );
 
   if (!physicsBody) return;
@@ -26,10 +26,10 @@ export function importPhysicsBody(
     case "Kinematic": {
       context.kinematicBody.mass = physicsBody.getMass();
       context.kinematicBody.linearVelocity.fromArray(
-        physicsBody.getLinearVelocity()
+        physicsBody.getLinearVelocity(),
       );
       context.kinematicBody.angularVelocity.fromArray(
-        physicsBody.getAngularVelocity()
+        physicsBody.getAngularVelocity(),
       );
 
       commands.getById(entityId).add(context.kinematicBody);
@@ -39,10 +39,10 @@ export function importPhysicsBody(
     case "Rigid": {
       context.dynamicBody.mass = physicsBody.getMass();
       context.dynamicBody.linearVelocity.fromArray(
-        physicsBody.getLinearVelocity()
+        physicsBody.getLinearVelocity(),
       );
       context.dynamicBody.angularVelocity.fromArray(
-        physicsBody.getAngularVelocity()
+        physicsBody.getAngularVelocity(),
       );
 
       const nodePosition = node.getTranslation();

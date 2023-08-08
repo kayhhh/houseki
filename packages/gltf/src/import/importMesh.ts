@@ -23,7 +23,7 @@ export function importMesh(
   nodeId: bigint,
   commands: Commands,
   warehouse: Readonly<Warehouse>,
-  context: ImportContext
+  context: ImportContext,
 ) {
   gltfMesh.listPrimitives().forEach((primitive) => {
     const mesh = new Mesh();
@@ -85,7 +85,7 @@ function setAttribute(
   name: keyof typeof THREE_TO_ECS_ATTRIBUTES,
   primitive: Primitive,
   geometry: Geometry,
-  warehouse: Readonly<Warehouse>
+  warehouse: Readonly<Warehouse>,
 ) {
   const array = primitive.getAttribute(name)?.getArray();
   const ecsName = THREE_TO_ECS_ATTRIBUTES[name];

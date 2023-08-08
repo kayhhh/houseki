@@ -29,7 +29,7 @@ export function createAnimations(
   localStore: SystemRes<LocalStore>,
   vrmStore: Res<VrmStore>,
   vrms: Query<Entity, With<Vrm>>,
-  animations: Query<[Entity, VrmAnimation]>
+  animations: Query<[Entity, VrmAnimation]>,
 ) {
   const ids: bigint[] = [];
 

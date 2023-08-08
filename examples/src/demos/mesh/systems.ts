@@ -31,7 +31,7 @@ export function initScene(
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
-  physicsConfig: Res<Mut<PhysicsConfig>>
+  physicsConfig: Res<Mut<PhysicsConfig>>,
 ) {
   physicsConfig.debug = true;
 
@@ -59,7 +59,7 @@ export function initScene(
 export function addPhysics(
   commands: Commands,
   meshes: Query<[Entity, Mesh], Without<[MeshCollider, Parent]>>,
-  nodes: Query<Entity, [With<Transform>, Without<StaticBody>]>
+  nodes: Query<Entity, [With<Transform>, Without<StaticBody>]>,
 ) {
   for (const [entity, mesh] of meshes) {
     // Add mesh collider

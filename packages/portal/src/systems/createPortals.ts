@@ -22,7 +22,7 @@ export function createPortals(
   portals: Query<
     [Entity, Portal],
     [Without<BoxCollider>, Without<Mesh>, Without<BasicMaterial>]
-  >
+  >,
 ) {
   if (portals.length === 0) return;
 
@@ -34,7 +34,7 @@ export function createPortals(
     const geometry = createPlaneGeometry(
       warehouse,
       portal.width,
-      portal.height
+      portal.height,
     );
 
     const basic = new BasicMaterial();

@@ -15,7 +15,7 @@ const vector3b = new Vector3();
 export function applyAvatarOffset(
   vrmStore: Res<VrmStore>,
   avatars: Query<[Entity, Parent], With<PlayerAvatar>>,
-  cameras: Query<[PlayerCamera, Mut<TargetTranslation>]>
+  cameras: Query<[PlayerCamera, Mut<TargetTranslation>]>,
 ) {
   for (const [camera, targetTranslation] of cameras) {
     let foundAvatar = false;

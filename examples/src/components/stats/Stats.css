@@ -21,7 +21,9 @@
   right: 0.5rem;
   font-size: 1rem;
   font-weight: bold;
-  transition: transform 0.25s ease, color 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
   border-radius: 9999px;
   width: 2rem;
   height: 2rem;

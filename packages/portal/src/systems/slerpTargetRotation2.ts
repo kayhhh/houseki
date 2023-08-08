@@ -16,7 +16,7 @@ const quaternion2 = new Quaternion();
 
 export function slerpTargetRotation2(
   time: Res<Time>,
-  entities: Query<[PlayerCamera, Mut<Transform>, TargetRotation]>
+  entities: Query<[PlayerCamera, Mut<Transform>, TargetRotation]>,
 ) {
   // Slerp towards target rotation
   for (const [camera, transform, target] of entities) {
@@ -34,7 +34,7 @@ export function slerpTargetRotation2(
         transform.rotation.x,
         transform.rotation.y,
         transform.rotation.z,
-        transform.rotation.w
+        transform.rotation.w,
       )
       .slerp(quaternion2, K);
 

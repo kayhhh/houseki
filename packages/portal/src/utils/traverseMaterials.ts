@@ -2,7 +2,7 @@ import { Material, Object3D } from "three";
 
 export function traverseMaterials(
   object: Object3D,
-  callback: (material: Material) => void
+  callback: (material: Material) => void,
 ) {
   object.traverse((obj) => {
     // @ts-expect-error

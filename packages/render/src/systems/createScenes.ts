@@ -9,7 +9,7 @@ import { RenderStore } from "../resources";
  */
 export function createScenes(
   renderStore: Res<RenderStore>,
-  entities: Query<Entity, With<Scene>>
+  entities: Query<Entity, With<Scene>>,
 ) {
   const ids: bigint[] = [];
 
