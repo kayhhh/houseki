@@ -5,17 +5,17 @@ export class InputStruct {
   /**
    * Whether to enable pointer lock on the canvas.
    */
-  enablePointerLock = false;
+  enablePointerLock: boolean = false;
 
   /**
    * Whether the pointer is currently locked.
    */
-  isPointerLocked = false;
+  isPointerLocked: boolean = false;
 
   /**
    * Whether the pointer is currently down.
    */
-  isPointerDown = false;
+  isPointerDown: boolean = false;
 
   /**
    * The currently pressed keys.

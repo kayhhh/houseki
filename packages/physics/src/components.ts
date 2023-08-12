@@ -2,9 +2,9 @@ import { Vec3 } from "@lattice-engine/core";
 import { Transform } from "@lattice-engine/scene";
 import { Entity, EntityCommands, type f32, struct, type u64 } from "thyseus";
 
-export class TargetTransform extends Transform {}
+export class TargetTransform extends Transform { }
 
-export class Velocity extends Vec3 {}
+export class Velocity extends Vec3 { }
 
 @struct
 export class BoxCollider {
@@ -65,7 +65,7 @@ export class MeshCollider {
 }
 
 @struct
-export class StaticBody {}
+export class StaticBody { }
 
 @struct
 export class KinematicBody {
@@ -140,11 +140,11 @@ export class Raycast {
   /**
    * Entity ID of a rigid body that should be excluded from the ray cast.
    */
-  excludeRigidBodyId: u64;
+  excludeRigidBodyId: u64 = 0n;
 
-  hit = false;
-  hitToi: f32;
-  hitEntityId: u64;
+  hit: boolean = false;
+  hitToi: f32 = 0;
+  hitEntityId: u64 = 0n;
   hitPosition: Vec3 = new Vec3();
   hitNormal: Vec3 = new Vec3();
 

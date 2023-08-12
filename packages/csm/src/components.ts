@@ -2,7 +2,7 @@ import { f32, struct, u8, u16 } from "thyseus";
 
 @struct
 export class CascadingShadowMaps {
-  fade = true;
+  fade: boolean = true;
   far: f32 = 40;
   lightIntensity: f32 = 1;
   shadowBias: f32 = -0.00007;

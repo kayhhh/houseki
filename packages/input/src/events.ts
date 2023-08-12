@@ -11,18 +11,18 @@ import {
 
 @struct
 export class MouseEvent {
-  altKey = false;
+  altKey: boolean = false;
   button: i8 = 0;
   buttons: u16 = 0;
   clientX: u16 = 0;
   clientY: u16 = 0;
-  ctrlKey = false;
-  metaKey = false;
+  ctrlKey: boolean = false;
+  metaKey: boolean = false;
   movementX: i16 = 0;
   movementY: i16 = 0;
   screenX: u16 = 0;
   screenY: u16 = 0;
-  shiftKey = false;
+  shiftKey: boolean = false;
 }
 
 /**
@@ -30,18 +30,18 @@ export class MouseEvent {
  */
 @struct
 export class PointerEvent {
-  altKey = false;
+  altKey: boolean = false;
   button: i8 = 0;
   buttons: u16 = 0;
   clientX: u16 = 0;
   clientY: u16 = 0;
-  ctrlKey = false;
-  metaKey = false;
+  ctrlKey: boolean = false;
+  metaKey: boolean = false;
   movementX: i16 = 0;
   movementY: i16 = 0;
   screenX: u16 = 0;
   screenY: u16 = 0;
-  shiftKey = false;
+  shiftKey: boolean = false;
 
   pointerId: u32 = 0;
   width: u16 = 0;
@@ -52,7 +52,7 @@ export class PointerEvent {
   tiltY: f32 = 0;
   twist: u16 = 0;
   pointerType: u8 = 0;
-  isPrimary = false;
+  isPrimary: boolean = false;
 }
 
 @struct
@@ -65,19 +65,19 @@ export class WheelEvent {
 
 @struct
 export class KeyboardEvent {
-  altKey = false;
-  ctrlKey = false;
+  altKey: boolean = false;
+  ctrlKey: boolean = false;
   key: u8 = 0;
-  metaKey = false;
-  repeat = false;
-  shiftKey = false;
+  metaKey: boolean = false;
+  repeat: boolean = false;
+  shiftKey: boolean = false;
 }
 
-export class PointerMoveEvent extends PointerEvent {}
-export class PointerDownEvent extends PointerEvent {}
-export class PointerUpEvent extends PointerEvent {}
-export class PointerCancelEvent extends PointerEvent {}
-export class ContextMenuEvent extends MouseEvent {}
-export class OnWheelEvent extends WheelEvent {}
-export class KeyDownEvent extends KeyboardEvent {}
-export class KeyUpEvent extends KeyboardEvent {}
+export class PointerMoveEvent extends PointerEvent { }
+export class PointerDownEvent extends PointerEvent { }
+export class PointerUpEvent extends PointerEvent { }
+export class PointerCancelEvent extends PointerEvent { }
+export class ContextMenuEvent extends MouseEvent { }
+export class OnWheelEvent extends WheelEvent { }
+export class KeyDownEvent extends KeyboardEvent { }
+export class KeyUpEvent extends KeyboardEvent { }

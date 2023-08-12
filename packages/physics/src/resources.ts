@@ -96,7 +96,7 @@ export class PhysicsStore {
 
 @struct
 export class PhysicsConfig {
-  debug = false;
+  debug: boolean = false;
 }
 
 @struct

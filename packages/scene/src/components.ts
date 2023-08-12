@@ -62,7 +62,7 @@ export class Transform {
  * GlobalTransform is managed by the engine and should not be modified.
  * To modify the transform of an entity, use the {@link Transform} component.
  */
-export class GlobalTransform extends Transform {}
+export class GlobalTransform extends Transform { }
 
 @struct
 export class Name {
@@ -83,13 +83,11 @@ export class Parent {
 
   setEntity(entity: Readonly<Entity> | EntityCommands): this {
     this.id = entity.id;
-
     return this;
   }
 
   setId(id: bigint): this {
     this.id = id;
-
     return this;
   }
 }
@@ -122,7 +120,6 @@ export class Mesh {
 
   constructor(material?: Entity | EntityCommands) {
     this.materialId = material?.id ?? 0n;
-
     this.mode = MeshMode.TRIANGLES;
     this.frustumCulled = true;
   }
@@ -168,11 +165,11 @@ export class Image {
 
 @struct
 export class StandardMaterial {
-  vertexColors = false;
+  vertexColors: boolean = false;
 
   alphaMode: u8 = 0;
   alphaCutoff: f32 = 0;
-  doubleSided = false;
+  doubleSided: boolean = false;
 
   baseColor: Vec4;
   baseColorTextureId: u64 = 0n; // Entity ID
@@ -210,14 +207,14 @@ export class StandardMaterial {
 
 @struct
 export class BasicMaterial {
-  doubleSided = false;
-  colorWrite = true;
+  doubleSided: boolean = false;
+  colorWrite: boolean = true;
 }
 
 @struct
 export class LineMaterial {
   color: [f32, f32, f32, f32];
-  vertexColors = false;
+  vertexColors: boolean = false;
 
   constructor(color = [1, 1, 1, 1]) {
     this.color = [...color] as [f32, f32, f32, f32];
@@ -239,7 +236,7 @@ export class PerspectiveCamera {
  * @see https://threejs.org/docs/#manual/en/introduction/Animation-system
  */
 @struct
-export class AnimationMixer {}
+export class AnimationMixer { }
 
 /**
  * Represents an animation clip. (e.g. "walk", "run", "idle")
@@ -247,13 +244,9 @@ export class AnimationMixer {}
 @struct
 export class AnimationClip {
   mixerId: u64; // Entity ID
-
   name: string;
-
   play: boolean;
-
   loop: boolean;
-
   speed: f32;
 
   constructor(mixerId = 0n, name = "", play = false, loop = false, speed = 1) {
