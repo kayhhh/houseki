@@ -21,7 +21,7 @@
     "troika-three-text": "^0.47.2"
   },
   "devDependencies": {
-    "@thyseus/transformer-rollup": "0.14.0-beta.1",
+    "@thyseus/transformer-rollup": "0.14.0-beta.3",
     "@types/three": "~0.153.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "~5.1.6",
@@ -33,7 +33,7 @@
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
     "three": "~0.153.0",
-    "thyseus": "^0.14.0-beta.1"
+    "thyseus": "^0.14.0-beta.3"
   },
   "publishConfig": {
     "access": "public"

@@ -24,7 +24,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@thyseus/transformer-rollup": "0.14.0-beta.1",
+    "@thyseus/transformer-rollup": "0.14.0-beta.3",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "~5.1.6",
     "vite": "^4.4.7",
@@ -35,7 +35,7 @@
     "@lattice-engine/physics": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
     "@lattice-engine/text": "workspace:^",
-    "thyseus": "^0.14.0-beta.1"
+    "thyseus": "^0.14.0-beta.3"
   },
   "publishConfig": {
     "access": "public"
