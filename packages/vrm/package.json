@@ -21,12 +21,11 @@
     "@pixiv/three-vrm": "^2.0.1"
   },
   "devDependencies": {
-    "@thyseus/transformer-rollup": "0.14.0-beta.3",
     "@types/three": "~0.153.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "~5.1.6",
     "vite": "^4.4.7",
-    "vite-plugin-dts": "^3.3.1"
+    "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
     "@lattice-engine/core": "workspace:^",

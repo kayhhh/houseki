@@ -1,0 +1,20 @@
+{
+  "name": "vite-plugin-thyseus-ts",
+  "version": "0.0.1",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w"
+  },
+  "devDependencies": {
+    "@thyseus/transformer-rollup": "0.14.0-beta.3",
+    "thyseus": "^0.14.0-beta.3",
+    "typescript": "~5.1.6",
+    "vite": "^4.4.7",
+    "vite-plugin-dts": "^3.3.1"
+  }
+}

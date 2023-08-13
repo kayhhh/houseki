@@ -85,7 +85,7 @@ importers:
         version: 3.4.8
       '@thyseus/transformer-rollup':
         specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
+        version: 0.14.0-beta.3(thyseus@0.14.0-beta.3)(vite@4.4.7)
       '@types/react':
         specifier: ^18.2.15
         version: 18.2.15
@@ -120,9 +120,6 @@ importers:
         specifier: ^0.14.0-beta.3
         version: 0.14.0-beta.3
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.28.0)
@@ -132,9 +129,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/csm:
     dependencies:
@@ -151,9 +148,6 @@ importers:
         specifier: ^0.14.0-beta.3
         version: 0.14.0-beta.3
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
@@ -166,9 +160,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/gltf:
     dependencies:
@@ -200,9 +194,6 @@ importers:
         specifier: ^3.21.4
         version: 3.21.4
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.28.0)
@@ -212,9 +203,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/input:
     dependencies:
@@ -225,9 +216,6 @@ importers:
         specifier: ^0.14.0-beta.3
         version: 0.14.0-beta.3
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.28.0)
@@ -237,9 +225,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/lattice-engine:
     dependencies:
@@ -329,9 +317,6 @@ importers:
         specifier: ^0.14.0-beta.3
         version: 0.14.0-beta.3
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
@@ -344,9 +329,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/physics:
     dependencies:
@@ -366,9 +351,6 @@ importers:
         specifier: ^0.14.0-beta.3
         version: 0.14.0-beta.3
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.28.0)
@@ -378,9 +360,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
       vite-plugin-wasm:
         specifier: ^3.2.2
         version: 3.2.2(vite@4.4.7)
@@ -412,9 +394,6 @@ importers:
         specifier: ^0.14.0-beta.3
         version: 0.14.0-beta.3
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
@@ -427,9 +406,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/portal:
     dependencies:
@@ -458,9 +437,6 @@ importers:
         specifier: ^0.14.0-beta.3
         version: 0.14.0-beta.3
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
@@ -473,9 +449,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/postprocessing:
     dependencies:
@@ -501,9 +477,6 @@ importers:
         specifier: ^0.14.0-beta.3
         version: 0.14.0-beta.3
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
@@ -516,9 +489,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/render:
     dependencies:
@@ -538,9 +511,6 @@ importers:
         specifier: ^0.14.0-beta.3
         version: 0.14.0-beta.3
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
@@ -553,9 +523,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/scene:
     dependencies:
@@ -569,9 +539,6 @@ importers:
         specifier: ^0.14.0-beta.3
         version: 0.14.0-beta.3
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.28.0)
@@ -581,9 +548,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/text:
     dependencies:
@@ -606,9 +573,6 @@ importers:
         specifier: ^0.47.2
         version: 0.47.2(three@0.153.0)
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
@@ -621,9 +585,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/transform:
     dependencies:
@@ -658,9 +622,6 @@ importers:
         specifier: ^0.14.0-beta.3
         version: 0.14.0-beta.3
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
@@ -673,9 +634,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/utils:
     dependencies:
@@ -695,12 +656,27 @@ importers:
         specifier: ^0.14.0-beta.3
         version: 0.14.0-beta.3
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.28.0)
+      typescript:
+        specifier: ~5.1.6
+        version: 5.1.6
+      vite:
+        specifier: ^4.4.7
+        version: 4.4.7
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
+
+  packages/vite-plugin-thyseus-ts:
+    devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: 0.14.0-beta.3
+        version: 0.14.0-beta.3(thyseus@0.14.0-beta.3)(vite@4.4.7)
+      thyseus:
+        specifier: ^0.14.0-beta.3
+        version: 0.14.0-beta.3
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -732,9 +708,6 @@ importers:
         specifier: ^0.14.0-beta.3
         version: 0.14.0-beta.3
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
@@ -747,9 +720,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.28.0)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   scripts:
     devDependencies:
@@ -2147,7 +2120,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@thyseus/transformer-rollup@0.14.0-beta.3(rollup@3.28.0)(thyseus@0.14.0-beta.3)(vite@4.4.7):
+  /@thyseus/transformer-rollup@0.14.0-beta.3(thyseus@0.14.0-beta.3)(vite@4.4.7):
     resolution: {integrity: sha512-gdayyfZLjR5fVv8vpES2VXXI041pfMX9/VPwtoFu5/CYnxW6iW/WoxVZRIEu1YcAaf+UOBFKWVufrMMoTAMDqA==}
     peerDependencies:
       thyseus: ~0.14-beta.0

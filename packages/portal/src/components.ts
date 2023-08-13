@@ -2,9 +2,9 @@ import { Vec3 } from "@lattice-engine/core";
 import { Quat, Transform } from "@lattice-engine/scene";
 import { type f32, struct, type u64 } from "thyseus";
 
-export class OriginalTransform extends Transform { }
-export class OriginalTranslation extends Vec3 { }
-export class OriginalRotation extends Quat { }
+export class OriginalTransform extends Transform {}
+export class OriginalTranslation extends Vec3 {}
+export class OriginalRotation extends Quat {}
 
 /**
  * A 2D plane that can be used as a portal.
@@ -26,7 +26,7 @@ export class PortalTarget {
 }
 
 @struct
-export class PortalMaterial { }
+export class PortalMaterial {}
 
 /**
  * Attach to an entity with a {@link Raycast} to move the raycast through portals.
@@ -35,7 +35,7 @@ export class PortalMaterial { }
  */
 @struct
 export class PortalRaycast {
-  raycastId = 0n; // Entity ID of the Raycast
+  raycastId: u64 = 0n; // Entity ID of the Raycast
 
   /**
    * Whether the raycast is going through a portal.
@@ -47,6 +47,6 @@ export class PortalRaycast {
    */
   firstFrame: boolean = false;
 
-  enterPortalId = 0n; // Entity ID of the portal the raycast entered
-  exitPortalId = 0n; // Entity ID of the portal the raycast exited
+  enterPortalId: u64 = 0n; // Entity ID of the portal the raycast entered
+  exitPortalId: u64 = 0n; // Entity ID of the portal the raycast exited
 }

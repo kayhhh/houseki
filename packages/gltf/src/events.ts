@@ -8,6 +8,6 @@ export class ExportGltf {
 
 @struct
 export class ExportedGltf {
-  uri = "";
+  uri: string = "";
   binary: boolean = false;
 }

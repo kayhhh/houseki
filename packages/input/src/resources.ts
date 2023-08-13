@@ -19,8 +19,6 @@ export class InputStruct {
 
   /**
    * The currently pressed keys.
-   * Each index is a `Key` enum value.
-   * The value is `1` if the key is pressed, `0` otherwise.
    */
   #keys: u64 = 0n;
 
@@ -32,6 +30,7 @@ export class InputStruct {
   setKeyPressed(key: number): void {
     this.#keys |= 1n << BigInt(key);
   }
+
   clearKeyPressed(key: number): void {
     if (this.keyPressed(key)) {
       this.#keys ^= 1n << BigInt(key);

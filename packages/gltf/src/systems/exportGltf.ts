@@ -99,7 +99,10 @@ export function exportGltf(
 
     const blob = new Blob([binary], { type: "model/gltf-binary" });
 
-    outWriter.create({ binary: true, uri: URL.createObjectURL(blob) });
+    const outEvent = new ExportedGltf();
+    outEvent.uri = URL.createObjectURL(blob);
+    outEvent.binary = true;
+    outWriter.create(outEvent);
 
     localStore.outBinary.shift();
   }
@@ -117,7 +120,10 @@ export function exportGltf(
       type: "application/json",
     });
 
-    outWriter.create({ binary: false, uri: URL.createObjectURL(blob) });
+    const outEvent = new ExportedGltf();
+    outEvent.uri = URL.createObjectURL(blob);
+    outEvent.binary = false;
+    outWriter.create(outEvent);
 
     localStore.outJson.shift();
   }

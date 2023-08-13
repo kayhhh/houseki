@@ -17,23 +17,23 @@ export function applyTargetTransforms(
 
   for (const [transform, target] of entities) {
     Vec3.lerp(
-      transform.translation.array,
-      transform.translation.array,
-      target.translation.array,
+      transform.translation.toArray(),
+      transform.translation.toArray(),
+      target.translation.toArray(),
       K
     );
 
     Quat.slerp(
-      transform.rotation.array,
-      transform.rotation.array,
-      target.rotation.array,
+      transform.rotation.toArray(),
+      transform.rotation.toArray(),
+      target.rotation.toArray(),
       K
     );
 
     Vec3.lerp(
-      transform.scale.array,
-      transform.scale.array,
-      target.scale.array,
+      transform.scale.toArray(),
+      transform.scale.toArray(),
+      target.scale.toArray(),
       K
     );
   }

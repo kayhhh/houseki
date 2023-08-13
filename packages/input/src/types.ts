@@ -6,7 +6,6 @@ export enum PointerType {
 
 /**
  * Converts keyboard input -> a number that can be stored in the ECS
- * There is probably a better way to do this lol
  */
 export enum Key {
   // 0-9 are the numbers 0-9

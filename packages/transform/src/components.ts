@@ -4,12 +4,12 @@ import { struct, type u8, type u64 } from "thyseus";
 export class TransformControls {
   targetId: u64 = 0n;
   mode: u8 = 0;
-  enabled = true;
-  outline = true;
+  enabled: boolean = true;
+  outline: boolean = true;
 
   /**
    * Whether to clear events when dragging starts.
    * Useful when combining with other controls.
    */
-  clearEvents = true;
+  clearEvents: boolean = true;
 }

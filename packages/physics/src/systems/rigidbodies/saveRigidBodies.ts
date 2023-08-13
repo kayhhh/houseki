@@ -53,9 +53,9 @@ export function saveRigidBodies(
 
     Mat4.fromRotationTranslationScale(
       globalMat,
-      globalTransform.rotation.array,
-      globalTransform.translation.array,
-      globalTransform.scale.array
+      globalTransform.rotation.toArray(),
+      globalTransform.translation.toArray(),
+      globalTransform.scale.toArray()
     );
 
     globalMat.invert();

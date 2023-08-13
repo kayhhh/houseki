@@ -23,10 +23,10 @@ export function sendExportEvent(
   writer: EventWriter<ExportGltf>,
   sceneStruct: Res<SceneStruct>
 ) {
-  writer.create({
-    binary: exportConfig.format === "binary",
-    scene: sceneStruct.activeScene,
-  });
+  const event = new ExportGltf();
+  event.binary = exportConfig.format === "binary";
+  event.scene = sceneStruct.activeScene;
+  writer.create(event);
 }
 
 export function handleExport(
@@ -69,9 +69,9 @@ export function handleExport(
 
       // Clear scene
       for (const scene of scenes) {
-        deepRemove.create({
-          rootId: scene.rootId,
-        });
+        const deepRemoveEvent = new DeepRemove();
+        deepRemoveEvent.rootId = scene.rootId;
+        deepRemove.create(deepRemoveEvent);
 
         rootId = scene.rootId;
       }

@@ -62,7 +62,7 @@ export class Transform {
  * GlobalTransform is managed by the engine and should not be modified.
  * To modify the transform of an entity, use the {@link Transform} component.
  */
-export class GlobalTransform extends Transform { }
+export class GlobalTransform extends Transform {}
 
 @struct
 export class Name {
@@ -236,7 +236,7 @@ export class PerspectiveCamera {
  * @see https://threejs.org/docs/#manual/en/introduction/Animation-system
  */
 @struct
-export class AnimationMixer { }
+export class AnimationMixer {}
 
 /**
  * Represents an animation clip. (e.g. "walk", "run", "idle")

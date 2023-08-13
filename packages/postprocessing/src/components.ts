@@ -14,13 +14,12 @@ export class OutlinePass {
   edgeStrength: f32 = 3;
   resolution: u16 = 1 - 24;
   multisampling: u8 = 4;
-  xray = true;
+  xray: boolean = true;
 }
 
 /**
  * Marks a node as a target for the outline pass.
  */
-@struct
 export class OutlineTarget {}
 
 /**

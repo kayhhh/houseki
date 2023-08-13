@@ -22,10 +22,10 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/no-unused-imports": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-var-requires": "off",
-    "@typescript-eslint/no-inferrable-types": "off",
     "simple-import-sort/exports": "warn",
     "simple-import-sort/imports": "warn",
     "sort-keys-fix/sort-keys-fix": [
@@ -39,10 +39,7 @@
   },
   "settings": {
     "import/parsers": {
-      "@typescript-eslint/parser": [
-        ".ts",
-        ".tsx"
-      ]
+      "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
       "typescript": true

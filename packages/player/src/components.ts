@@ -13,14 +13,14 @@ export class PlayerBody {
   speed: f32;
 
   jumpStrength: f32;
-  jumpTime: f32;
+  jumpTime: f32 = 0;
 
   spawnPoint: Vec3;
 
   /**
    * Stores how long the player has been in the air.
    */
-  airTime: f32;
+  airTime: f32 = 0;
 
   /**
    * Teleport the player to spawn if they fall out of the world.
@@ -53,22 +53,22 @@ export class PlayerBody {
  */
 @struct
 export class PlayerAvatar {
-  idleAnimation = "";
+  idleAnimation: string = "";
   idleAnimationId: u64 = 0n; // Entity ID
 
-  jumpAnimation = "";
+  jumpAnimation: string = "";
   jumpAnimationId: u64 = 0n; // Entity ID
 
-  leftWalkAnimation = "";
+  leftWalkAnimation: string = "";
   leftWalkAnimationId: u64 = 0n; // Entity ID
 
-  rightWalkAnimation = "";
+  rightWalkAnimation: string = "";
   rightWalkAnimationId: u64 = 0n; // Entity ID
 
-  sprintAnimation = "";
+  sprintAnimation: string = "";
   sprintAnimationId: u64 = 0n; // Entity ID
 
-  walkAnimation = "";
+  walkAnimation: string = "";
   walkAnimationId: u64 = 0n; // Entity ID
 }
 
@@ -78,7 +78,7 @@ export class PlayerAvatar {
  */
 @struct
 export class PlayerCamera {
-  bodyId: u64; // Entity ID
+  bodyId: u64 = 0n; // Entity ID
 
   /**
    * Whether the controls are for first person, third person, or both.

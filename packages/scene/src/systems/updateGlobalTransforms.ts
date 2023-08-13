@@ -17,9 +17,9 @@ export function updateGlobalTransforms(
 
     Mat4.fromRotationTranslationScale(
       localMat,
-      transform.rotation.array,
-      transform.translation.array,
-      transform.scale.array
+      transform.rotation.toArray(),
+      transform.translation.toArray(),
+      transform.scale.toArray()
     );
 
     const globalMat = new Mat4();
@@ -43,9 +43,9 @@ export function updateGlobalTransforms(
     const globalMat = globalTransforms.get(entity.id);
     if (!globalMat) continue;
 
-    Mat4.getRotation(globalTransform.rotation.array, globalMat);
-    Mat4.getTranslation(globalTransform.translation.array, globalMat);
-    Mat4.getScaling(globalTransform.scale.array, globalMat);
+    Mat4.getRotation(globalTransform.rotation.toArray(), globalMat);
+    Mat4.getTranslation(globalTransform.translation.toArray(), globalMat);
+    Mat4.getScaling(globalTransform.scale.toArray(), globalMat);
   }
 
   childrenMap.clear();

@@ -61,44 +61,44 @@ export function inputWriter(
 
   // Process queued events
   for (const event of localStore.pointerMoveEvents) {
-    pointerMoveWriter.createFrom(event);
+    pointerMoveWriter.create(event);
   }
 
   for (const event of localStore.pointerDownEvents) {
     inputStruct.isPointerDown = true;
-    pointerDownWriter.createFrom(event);
+    pointerDownWriter.create(event);
   }
 
   for (const event of localStore.pointerUpEvents) {
     inputStruct.isPointerDown = false;
-    pointerUpWriter.createFrom(event);
+    pointerUpWriter.create(event);
   }
 
   for (const event of localStore.pointerCancelEvents) {
     inputStruct.isPointerDown = false;
-    pointerCancelWriter.createFrom(event);
+    pointerCancelWriter.create(event);
   }
 
   for (const event of localStore.contextMenuEvents) {
-    contextMenuWriter.createFrom(event);
+    contextMenuWriter.create(event);
   }
 
   for (const event of localStore.onWheelEvents) {
-    onWheelWriter.createFrom(event);
+    onWheelWriter.create(event);
   }
 
   for (const event of localStore.keyDownEvents) {
-    keyDownWriter.createFrom(event);
+    keyDownWriter.create(event);
 
     // Update pressed keys
-    inputStruct.keys[event.key] = 1;
+    inputStruct.setKeyPressed(event.key);
   }
 
   for (const event of localStore.keyUpEvents) {
-    keyUpWriter.createFrom(event);
+    keyUpWriter.create(event);
 
     // Update pressed keys
-    inputStruct.keys[event.key] = 0;
+    inputStruct.clearKeyPressed(event.key);
   }
 
   // Clear local queues

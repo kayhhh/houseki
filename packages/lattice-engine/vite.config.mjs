@@ -28,5 +28,5 @@ export default defineConfig({
     minify: false,
     target: "esnext",
   },
-  plugins: [dts(), peerDepsExternal()],
+  plugins: [peerDepsExternal(), dts()],
 });
