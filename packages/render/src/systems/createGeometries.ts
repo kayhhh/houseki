@@ -75,9 +75,13 @@ function setAttribute(
     attribute.needsUpdate = true;
   } else {
     // Create new attribute
-    const attribute = new BufferAttribute(data, itemSize);
+    const array = new Float32Array(data);
+    const attribute = new BufferAttribute(array, itemSize);
 
-    if (name === "index") geometry.setIndex(attribute);
-    else geometry.setAttribute(name, attribute);
+    if (name === "index") {
+      geometry.setIndex(attribute);
+    } else {
+      geometry.setAttribute(name, attribute);
+    }
   }
 }

@@ -21,14 +21,16 @@
     "gl-matrix": "^4.0.0-beta.1"
   },
   "devDependencies": {
+    "@lattice-engine/core": "workspace:^",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "thyseus": "^0.14.0-beta.5",
     "typescript": "~5.1.6",
     "vite": "^4.4.7",
     "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
     "@lattice-engine/core": "workspace:^",
-    "thyseus": "^0.14.0-beta.3"
+    "thyseus": "*"
   },
   "publishConfig": {
     "access": "public"

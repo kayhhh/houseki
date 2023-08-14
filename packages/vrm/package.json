@@ -21,8 +21,13 @@
     "@pixiv/three-vrm": "^2.0.1"
   },
   "devDependencies": {
+    "@lattice-engine/core": "workspace:^",
+    "@lattice-engine/render": "workspace:^",
+    "@lattice-engine/scene": "workspace:^",
     "@types/three": "~0.153.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "three": "~0.153.0",
+    "thyseus": "^0.14.0-beta.5",
     "typescript": "~5.1.6",
     "vite": "^4.4.7",
     "vite-plugin-thyseus-ts": "workspace:^"
@@ -31,8 +36,8 @@
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
-    "three": "~0.153.0",
-    "thyseus": "^0.14.0-beta.3"
+    "three": "*",
+    "thyseus": "*"
   },
   "publishConfig": {
     "access": "public"
