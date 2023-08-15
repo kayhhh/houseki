@@ -7,8 +7,8 @@ import { struct } from "thyseus";
  */
 class MockElement extends EventTarget {
   style = {};
-  setPointerCapture() { }
-  releasePointerCapture() { }
+  setPointerCapture() {}
+  releasePointerCapture() {}
   clientWidth = 0;
   clientHeight = 0;
   ownerDocument = { pointerLockElement: null };
