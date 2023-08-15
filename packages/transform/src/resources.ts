@@ -7,8 +7,8 @@ import { struct } from "thyseus";
  */
 class MockElement extends EventTarget {
   style = {};
-  setPointerCapture() {}
-  releasePointerCapture() {}
+  setPointerCapture() { }
+  releasePointerCapture() { }
   clientWidth = 0;
   clientHeight = 0;
   ownerDocument = { pointerLockElement: null };
@@ -33,10 +33,10 @@ export class TransformControlsStore {
 
 @struct
 export class CanvasRect {
-  @struct.u32 x = 0;
-  @struct.u32 y = 0;
-  @struct.u32 width = 0;
-  @struct.u32 height = 0;
-  @struct.u32 left = 0;
-  @struct.u32 top = 0;
+  @struct.u32 declare x: number;
+  @struct.u32 declare y: number;
+  @struct.u32 declare width: number;
+  @struct.u32 declare height: number;
+  @struct.u32 declare left: number;
+  @struct.u32 declare top: number;
 }
