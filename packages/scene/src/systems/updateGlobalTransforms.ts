@@ -1,4 +1,4 @@
-import { Mat4 } from "gl-matrix/dist/esm";
+import { Mat4, Quat, Vec3 } from "gl-matrix/dist/esm";
 import { Entity, Mut, Query, With } from "thyseus";
 
 import { GlobalTransform, Parent, Scene, Transform } from "../components";
@@ -6,6 +6,9 @@ import { GlobalTransform, Parent, Scene, Transform } from "../components";
 const childrenMap = new Map<bigint, bigint[]>();
 const transforms = new Map<bigint, Mat4>();
 const globalTransforms = new Map<bigint, Mat4>();
+
+const quat = new Quat();
+const vec3 = new Vec3();
 
 export function updateGlobalTransforms(
   scenes: Query<Entity, With<Scene>>,
@@ -22,8 +25,7 @@ export function updateGlobalTransforms(
       transform.scale.toArray()
     );
 
-    const globalMat = new Mat4();
-    globalTransforms.set(entity.id, globalMat);
+    globalTransforms.set(entity.id, localMat);
 
     const children = childrenMap.get(parent.id) ?? [];
     children.push(entity.id);
@@ -43,9 +45,14 @@ export function updateGlobalTransforms(
     const globalMat = globalTransforms.get(entity.id);
     if (!globalMat) continue;
 
-    Mat4.getRotation(globalTransform.rotation.toArray(), globalMat);
-    Mat4.getTranslation(globalTransform.translation.toArray(), globalMat);
-    Mat4.getScaling(globalTransform.scale.toArray(), globalMat);
+    Mat4.getRotation(quat, globalMat);
+    globalTransform.rotation.fromObject(quat);
+
+    Mat4.getTranslation(vec3, globalMat);
+    globalTransform.translation.fromObject(vec3);
+
+    Mat4.getScaling(vec3, globalMat);
+    globalTransform.scale.fromObject(vec3);
   }
 
   childrenMap.clear();

@@ -9,7 +9,7 @@ import { RenderStore } from "../resources";
  */
 export function createNodes(
   store: Res<RenderStore>,
-  entities: Query<[Entity, Transform, Parent]>,
+  entities: Query<[Entity, Transform, Parent]>
 ) {
   const ids: bigint[] = [];
 
@@ -28,13 +28,13 @@ export function createNodes(
     object.position.set(
       transform.translation.x,
       transform.translation.y,
-      transform.translation.z,
+      transform.translation.z
     );
     object.quaternion.set(
       transform.rotation.x,
       transform.rotation.y,
       transform.rotation.z,
-      transform.rotation.w,
+      transform.rotation.w
     );
     object.scale.set(transform.scale.x, transform.scale.y, transform.scale.z);
 
