@@ -9,7 +9,7 @@ import { RenderStore } from "../resources";
  */
 export function createGeometries(
   store: Res<RenderStore>,
-  entities: Query<[Geometry, Entity]>
+  entities: Query<[Geometry, Entity]>,
 ) {
   const ids: bigint[] = [];
 
@@ -57,7 +57,7 @@ function setAttribute(
   geometry: BufferGeometry,
   name: string,
   data: ArrayLike<number>,
-  itemSize: number
+  itemSize: number,
 ) {
   const attribute =
     name === "index" ? geometry.getIndex() : geometry.getAttribute(name);
@@ -75,12 +75,13 @@ function setAttribute(
     attribute.needsUpdate = true;
   } else {
     // Create new attribute
-    const array = new Float32Array(data);
-    const attribute = new BufferAttribute(array, itemSize);
-
     if (name === "index") {
+      const array = new Uint32Array(data);
+      const attribute = new BufferAttribute(array, 1);
       geometry.setIndex(attribute);
     } else {
+      const array = new Float32Array(data);
+      const attribute = new BufferAttribute(array, itemSize);
       geometry.setAttribute(name, attribute);
     }
   }

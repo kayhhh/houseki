@@ -21,7 +21,10 @@ export default function thyseusTS(): Plugin[] {
           supports(id) {
             return id.endsWith(".ts");
           },
-          async transform({ id, code }) {
+          async transform({ id, code, service }) {
+            // run ts check
+            service.getEmitOutput(id);
+
             // @ts-expect-error "this" type is wrong
             const content = tys.transform(code, id);
             const withoutExtension = id.replace(/\.ts$/, "");

@@ -84,8 +84,8 @@ importers:
         specifier: ^3.4.8
         version: 3.4.8
       '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(thyseus@0.14.0-beta.5)(vite@4.4.7)
+        specifier: 0.14.0-beta.6
+        version: 0.14.0-beta.6(thyseus@0.14.0-beta.5)(vite@4.4.7)
       '@types/react':
         specifier: ^18.2.15
         version: 18.2.15
@@ -663,8 +663,8 @@ importers:
   packages/vite-plugin-thyseus-ts:
     devDependencies:
       '@thyseus/transformer-rollup':
-        specifier: 0.14.0-beta.3
-        version: 0.14.0-beta.3(thyseus@0.14.0-beta.5)(vite@4.4.7)
+        specifier: 0.14.0-beta.6
+        version: 0.14.0-beta.6(thyseus@0.14.0-beta.5)(vite@4.4.7)
       thyseus:
         specifier: 0.14.0-beta.5
         version: 0.14.0-beta.5
@@ -2111,13 +2111,13 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@thyseus/transformer-rollup@0.14.0-beta.3(thyseus@0.14.0-beta.5)(vite@4.4.7):
-    resolution: {integrity: sha512-gdayyfZLjR5fVv8vpES2VXXI041pfMX9/VPwtoFu5/CYnxW6iW/WoxVZRIEu1YcAaf+UOBFKWVufrMMoTAMDqA==}
+  /@thyseus/transformer-rollup@0.14.0-beta.6(thyseus@0.14.0-beta.5)(vite@4.4.7):
+    resolution: {integrity: sha512-R/83ll08VMX9qf+H8ezc4upLXO6KR8Ykq/SLmJl4Ik8NH4zBFbbg8kN7gKFiQ+UiAVvUdphdsNsfvQn/SJTcCg==}
     peerDependencies:
-      thyseus: ~0.14-beta.0
+      thyseus: ^0.14.0
     dependencies:
       '@rollup/pluginutils': 5.0.2(rollup@3.28.0)
-      '@thyseus/typescript-transformer': 0.14.0-beta.3(vite@4.4.7)
+      '@thyseus/typescript-transformer': 0.14.0-beta.6(vite@4.4.7)
       thyseus: 0.14.0-beta.5
       typescript: 5.1.6
     transitivePeerDependencies:
@@ -2126,8 +2126,8 @@ packages:
       - vite
     dev: true
 
-  /@thyseus/typescript-transformer@0.14.0-beta.3(vite@4.4.7):
-    resolution: {integrity: sha512-WTr/TplpMMiLvSIOZXs/25t3fsgOG53silzQjp5DhX0PU5GIVMFtQt8t8zvtvri1c1kJbPEbPR0HQNkBimABmg==}
+  /@thyseus/typescript-transformer@0.14.0-beta.6(vite@4.4.7):
+    resolution: {integrity: sha512-B5M7RiGakR6nddSMI686OT2Vh3qcgnNqmibqE38Cu7mPnGN03M5B816Por9R3qcu7BI/tlnwDpU0Sad6nribPA==}
     dependencies:
       typescript: 5.1.6
       vite-tsconfig-paths: 4.2.0(typescript@5.1.6)(vite@4.4.7)

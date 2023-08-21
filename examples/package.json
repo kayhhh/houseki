@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@gltf-transform/core": "^3.4.8",
-    "@thyseus/transformer-rollup": "0.14.0-beta.3",
+    "@thyseus/transformer-rollup": "0.14.0-beta.6",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@types/three": "~0.153.0",
