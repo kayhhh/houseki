@@ -20,20 +20,20 @@ export class InputStruct {
   /**
    * The currently pressed keys.
    */
-  #keys: u64 = 0n;
+  keys: u64 = 0n;
 
   keyPressed(key: number): boolean {
     const bit = 1n << BigInt(key);
-    return (this.#keys & bit) === bit;
+    return (this.keys & bit) === bit;
   }
 
   setKeyPressed(key: number): void {
-    this.#keys |= 1n << BigInt(key);
+    this.keys |= 1n << BigInt(key);
   }
 
   clearKeyPressed(key: number): void {
     if (this.keyPressed(key)) {
-      this.#keys ^= 1n << BigInt(key);
+      this.keys ^= 1n << BigInt(key);
     }
   }
 }

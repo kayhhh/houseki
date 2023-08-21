@@ -14,6 +14,7 @@ import {
 import { InputStruct } from "../resources";
 import {
   keyboardEventToECS,
+  keyToECS,
   mouseEventToECS,
   pointerEventToECS,
   wheelEventToECS,
@@ -22,6 +23,10 @@ import {
 class LocalStore {
   canvas: HTMLCanvasElement | null = null;
   removeEventListeners: (() => void) | null = null;
+
+  isPointerLocked = false;
+  isPointerDown = false;
+  keysPressed = new Set<number>();
 
   // Store events in a queue so we can process them in the next frame
   readonly pointerMoveEvents: PointerMoveEvent[] = [];
@@ -65,17 +70,14 @@ export function inputWriter(
   }
 
   for (const event of localStore.pointerDownEvents) {
-    inputStruct.isPointerDown = true;
     pointerDownWriter.create(event);
   }
 
   for (const event of localStore.pointerUpEvents) {
-    inputStruct.isPointerDown = false;
     pointerUpWriter.create(event);
   }
 
   for (const event of localStore.pointerCancelEvents) {
-    inputStruct.isPointerDown = false;
     pointerCancelWriter.create(event);
   }
 
@@ -89,16 +91,19 @@ export function inputWriter(
 
   for (const event of localStore.keyDownEvents) {
     keyDownWriter.create(event);
-
-    // Update pressed keys
-    inputStruct.setKeyPressed(event.key);
   }
 
   for (const event of localStore.keyUpEvents) {
     keyUpWriter.create(event);
+  }
 
-    // Update pressed keys
-    inputStruct.clearKeyPressed(event.key);
+  inputStruct.isPointerDown = localStore.isPointerDown;
+  inputStruct.isPointerLocked = localStore.isPointerLocked;
+
+  inputStruct.keys = 0n;
+
+  for (const key of localStore.keysPressed) {
+    inputStruct.setKeyPressed(key);
   }
 
   // Clear local queues
@@ -125,6 +130,8 @@ export function inputWriter(
 
   // Add new listeners
   function onPointerDown(event: PointerEvent) {
+    localStore.isPointerDown = true;
+
     if (inputStruct.enablePointerLock) {
       if (document.pointerLockElement !== canvas) canvas?.requestPointerLock();
     } else {
@@ -140,11 +147,13 @@ export function inputWriter(
 
   function onPointerCancel(event: PointerEvent) {
     canvas?.releasePointerCapture(event.pointerId);
+    localStore.isPointerDown = false;
     localStore.pointerCancelEvents.push(pointerEventToECS(event));
   }
 
   function onPointerUp(event: PointerEvent) {
     canvas?.releasePointerCapture(event.pointerId);
+    localStore.isPointerDown = false;
     localStore.pointerUpEvents.push(pointerEventToECS(event));
   }
 
@@ -158,10 +167,12 @@ export function inputWriter(
   }
 
   function onKeyDown(event: KeyboardEvent) {
+    localStore.keysPressed.add(keyToECS(event.key));
     localStore.keyDownEvents.push(keyboardEventToECS(event));
   }
 
   function onKeyUp(event: KeyboardEvent) {
+    localStore.keysPressed.delete(keyToECS(event.key));
     localStore.keyUpEvents.push(keyboardEventToECS(event));
   }
 
