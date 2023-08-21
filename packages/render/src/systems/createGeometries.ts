@@ -9,7 +9,7 @@ import { RenderStore } from "../resources";
  */
 export function createGeometries(
   store: Res<RenderStore>,
-  entities: Query<[Geometry, Entity]>,
+  entities: Query<[Geometry, Entity]>
 ) {
   const ids: bigint[] = [];
 
@@ -57,7 +57,7 @@ function setAttribute(
   geometry: BufferGeometry,
   name: string,
   data: ArrayLike<number>,
-  itemSize: number,
+  itemSize: number
 ) {
   const attribute =
     name === "index" ? geometry.getIndex() : geometry.getAttribute(name);
