@@ -1,5 +1,11 @@
 # @lattice-engine/core
 
+## 0.2.7
+
+### Patch Changes
+
+- 4588798: remove string component types
+
 ## 0.2.6
 
 ### Patch Changes

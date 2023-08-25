@@ -1,5 +1,27 @@
 # lattice-engine
 
+## 0.3.19
+
+### Patch Changes
+
+- 4588798: remove string component types
+- Updated dependencies [4588798]
+  - @lattice-engine/postprocessing@3.0.2
+  - @lattice-engine/transform@5.0.2
+  - @lattice-engine/physics@4.0.2
+  - @lattice-engine/player@5.0.2
+  - @lattice-engine/portal@4.0.2
+  - @lattice-engine/render@4.0.2
+  - @lattice-engine/input@0.3.6
+  - @lattice-engine/orbit@5.0.2
+  - @lattice-engine/scene@0.7.2
+  - @lattice-engine/utils@5.0.2
+  - @lattice-engine/core@0.2.7
+  - @lattice-engine/gltf@5.0.2
+  - @lattice-engine/text@4.0.2
+  - @lattice-engine/csm@3.0.2
+  - @lattice-engine/vrm@4.0.2
+
 ## 0.3.18
 
 ### Patch Changes
