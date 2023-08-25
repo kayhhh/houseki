@@ -111,15 +111,18 @@
     "@lattice-engine/vrm": "workspace:^"
   },
   "devDependencies": {
+    "postprocessing": "^6.32.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "three": "~0.153.0",
+    "thyseus": "^0.13.5",
     "typescript": "~5.1.6",
     "vite": "^4.4.7",
     "vite-plugin-dts": "^3.3.1"
   },
   "peerDependencies": {
-    "postprocessing": "^6.32.2",
-    "three": "~0.153.0",
-    "thyseus": "^0.13.5"
+    "postprocessing": "*",
+    "three": "*",
+    "thyseus": "*"
   },
   "publishConfig": {
     "access": "public"

@@ -115,10 +115,6 @@ importers:
         version: 4.4.7
 
   packages/core:
-    dependencies:
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
     devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
@@ -126,6 +122,9 @@ importers:
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -137,20 +136,13 @@ importers:
         version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
 
   packages/csm:
-    dependencies:
+    devDependencies:
       '@lattice-engine/render':
         specifier: workspace:^
         version: link:../render
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      three:
-        specifier: ~0.153.0
-        version: 0.153.0
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
-    devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
@@ -160,6 +152,12 @@ importers:
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      three:
+        specifier: ~0.153.0
+        version: 0.153.0
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -181,6 +179,10 @@ importers:
       '@gltf-transform/functions':
         specifier: ^3.4.8
         version: 3.4.8
+      zod:
+        specifier: ^3.21.4
+        version: 3.21.4
+    devDependencies:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
@@ -193,19 +195,15 @@ importers:
       '@lattice-engine/text':
         specifier: workspace:^
         version: link:../text
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
-      zod:
-        specifier: ^3.21.4
-        version: 3.21.4
-    devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -217,20 +215,19 @@ importers:
         version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
 
   packages/input:
-    dependencies:
+    devDependencies:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
-    devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -288,19 +285,19 @@ importers:
       '@lattice-engine/vrm':
         specifier: workspace:^
         version: link:../vrm
+    devDependencies:
       postprocessing:
         specifier: ^6.32.2
         version: 6.32.2(three@0.153.0)
+      rollup-plugin-peer-deps-external:
+        specifier: ^2.2.4
+        version: 2.2.4(rollup@3.26.2)
       three:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
         specifier: ^0.13.5
         version: 0.13.5
-    devDependencies:
-      rollup-plugin-peer-deps-external:
-        specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -312,7 +309,7 @@ importers:
         version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
 
   packages/orbit:
-    dependencies:
+    devDependencies:
       '@lattice-engine/input':
         specifier: workspace:^
         version: link:../input
@@ -322,13 +319,6 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      three:
-        specifier: ~0.153.0
-        version: 0.153.0
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
-    devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
@@ -338,6 +328,12 @@ importers:
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      three:
+        specifier: ~0.153.0
+        version: 0.153.0
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -353,25 +349,25 @@ importers:
       '@dimforge/rapier3d':
         specifier: ^0.11.2
         version: 0.11.2
+      gl-matrix:
+        specifier: ^4.0.0-beta.1
+        version: 4.0.0-beta.1
+    devDependencies:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      gl-matrix:
-        specifier: ^4.0.0-beta.1
-        version: 4.0.0-beta.1
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
-    devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -386,7 +382,7 @@ importers:
         version: 3.2.2(vite@4.4.7)
 
   packages/player:
-    dependencies:
+    devDependencies:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
@@ -405,13 +401,6 @@ importers:
       '@lattice-engine/vrm':
         specifier: workspace:^
         version: link:../vrm
-      three:
-        specifier: ~0.153.0
-        version: 0.153.0
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
-    devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
@@ -421,6 +410,12 @@ importers:
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      three:
+        specifier: ~0.153.0
+        version: 0.153.0
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -432,7 +427,7 @@ importers:
         version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
 
   packages/portal:
-    dependencies:
+    devDependencies:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
@@ -448,25 +443,24 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      postprocessing:
-        specifier: ^6.32.2
-        version: 6.32.2(three@0.153.0)
-      three:
-        specifier: ~0.153.0
-        version: 0.153.0
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
-    devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
+      postprocessing:
+        specifier: ^6.32.2
+        version: 6.32.2(three@0.153.0)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      three:
+        specifier: ~0.153.0
+        version: 0.153.0
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -479,6 +473,10 @@ importers:
 
   packages/postprocessing:
     dependencies:
+      n8ao:
+        specifier: ^1.6.8
+        version: 1.6.8(postprocessing@6.32.2)(three@0.153.0)
+    devDependencies:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
@@ -488,28 +486,24 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      n8ao:
-        specifier: ^1.6.8
-        version: 1.6.8(postprocessing@6.32.2)(three@0.153.0)
-      postprocessing:
-        specifier: ^6.32.2
-        version: 6.32.2(three@0.153.0)
-      three:
-        specifier: ~0.153.0
-        version: 0.153.0
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
-    devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
+      postprocessing:
+        specifier: ^6.32.2
+        version: 6.32.2(three@0.153.0)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      three:
+        specifier: ~0.153.0
+        version: 0.153.0
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -521,32 +515,31 @@ importers:
         version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
 
   packages/render:
-    dependencies:
+    devDependencies:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      postprocessing:
-        specifier: ^6.32.2
-        version: 6.32.2(three@0.153.0)
-      three:
-        specifier: ~0.153.0
-        version: 0.153.0
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
-    devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
+      postprocessing:
+        specifier: ^6.32.2
+        version: 6.32.2(three@0.153.0)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      three:
+        specifier: ~0.153.0
+        version: 0.153.0
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -559,22 +552,22 @@ importers:
 
   packages/scene:
     dependencies:
-      '@lattice-engine/core':
-        specifier: workspace:^
-        version: link:../core
       gl-matrix:
         specifier: ^4.0.0-beta.1
         version: 4.0.0-beta.1
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
     devDependencies:
+      '@lattice-engine/core':
+        specifier: workspace:^
+        version: link:../core
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -587,6 +580,10 @@ importers:
 
   packages/text:
     dependencies:
+      troika-three-text:
+        specifier: ^0.47.2
+        version: 0.47.2(three@0.153.0)
+    devDependencies:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
@@ -596,16 +593,6 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      three:
-        specifier: ~0.153.0
-        version: 0.153.0
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
-      troika-three-text:
-        specifier: ^0.47.2
-        version: 0.47.2(three@0.153.0)
-    devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
@@ -615,6 +602,12 @@ importers:
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      three:
+        specifier: ~0.153.0
+        version: 0.153.0
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -626,7 +619,7 @@ importers:
         version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
 
   packages/transform:
-    dependencies:
+    devDependencies:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
@@ -651,13 +644,6 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      three:
-        specifier: ~0.153.0
-        version: 0.153.0
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
-    devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
@@ -667,6 +653,12 @@ importers:
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      three:
+        specifier: ~0.153.0
+        version: 0.153.0
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -678,7 +670,7 @@ importers:
         version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
 
   packages/utils:
-    dependencies:
+    devDependencies:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
@@ -691,16 +683,15 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
-    devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -713,6 +704,10 @@ importers:
 
   packages/vrm:
     dependencies:
+      '@pixiv/three-vrm':
+        specifier: ^2.0.1
+        version: 2.0.1(@types/three@0.153.0)(three@0.153.0)
+    devDependencies:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
@@ -722,16 +717,6 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@pixiv/three-vrm':
-        specifier: ^2.0.1
-        version: 2.0.1(@types/three@0.153.0)(three@0.153.0)
-      three:
-        specifier: ~0.153.0
-        version: 0.153.0
-      thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
-    devDependencies:
       '@thyseus/transformer-rollup':
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
@@ -741,6 +726,12 @@ importers:
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.26.2)
+      three:
+        specifier: ~0.153.0
+        version: 0.153.0
+      thyseus:
+        specifier: ^0.13.5
+        version: 0.13.5
       typescript:
         specifier: ~5.1.6
         version: 5.1.6
@@ -4934,7 +4925,6 @@ packages:
       three: '>= 0.138.0 < 0.155.0'
     dependencies:
       three: 0.153.0
-    dev: false
 
   /prebuild-install@7.1.1:
     resolution: {integrity: sha512-jAXscXWMcCK8GgCoHOfIr0ODh5ai8mj63L2nWrjuAgXE6tDyYGnx4/8o/rCgU+B4JSyZBKbeZqzhtwtC3ovxjw==}
@@ -5601,7 +5591,6 @@ packages:
 
   /three@0.153.0:
     resolution: {integrity: sha512-OCP2/uQR6GcDpSLnJt/3a4mdS0kNWcbfUXIwLoEMgLzEUIVIYsSDwskpmOii/AkDM+BBwrl6+CKgrjX9+E2aWg==}
-    dev: false
 
   /thyseus@0.13.5:
     resolution: {integrity: sha512-UnO94weyONkiA4SCCw+FwCALRjQ6fOdaObwJTaKup+B/vUEPA9+usgmrQBLuQVT2Sz2oM6fyDG3EgADZHuAf7g==}
