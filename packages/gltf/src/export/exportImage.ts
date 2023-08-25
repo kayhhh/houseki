@@ -4,18 +4,21 @@ import { ExportContext } from "./context";
 
 export function exportImage(
   context: ExportContext,
-  warehouse: Readonly<Warehouse>,
+  warehouse: Warehouse,
   entityId: bigint,
   asset: Asset
 ) {
   const texture = context.doc.createTexture();
 
-  texture.setMimeType(asset.mimeType);
+  const mimeType = asset.mimeType.read(warehouse) ?? "";
+  const uri = asset.uri.read(warehouse) ?? "";
 
-  if (asset.uri.startsWith("/")) {
-    texture.setURI(asset.uri.slice(1));
+  texture.setMimeType(mimeType);
+
+  if (uri.startsWith("/")) {
+    texture.setURI(uri.slice(1));
   } else {
-    texture.setURI(asset.uri);
+    texture.setURI(uri);
   }
 
   const buffer = asset.data.read(warehouse);

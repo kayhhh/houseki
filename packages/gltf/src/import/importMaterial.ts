@@ -18,7 +18,7 @@ import { ImportContext } from "./context";
 export function importMaterial(
   gltfMaterial: Material,
   commands: Commands,
-  warehouse: Readonly<Warehouse>,
+  warehouse: Warehouse,
   context: ImportContext
 ) {
   const cached = context.materials.get(gltfMaterial);
@@ -103,8 +103,10 @@ export function importMaterial(
     applyTextureInfo(material.metallicRoughnessTextureInfo, info);
   }
 
-  context.name.value =
-    gltfMaterial.getName() || `Material_${context.materials.size}`;
+  context.name.value.write(
+    gltfMaterial.getName() || `Material_${context.materials.size}`,
+    warehouse
+  );
 
   const entityId = commands.spawn(true).add(material).id;
 
@@ -143,7 +145,7 @@ function applyTextureInfo(info: TextureInfo, gltfInfo: GltfTextureInfo | null) {
 
 function createTexture(
   gltfTexture: GltfTexture | null,
-  warehouse: Readonly<Warehouse>,
+  warehouse: Warehouse,
   commands: Commands
 ) {
   if (!gltfTexture) return;
@@ -154,7 +156,7 @@ function createTexture(
   const asset = new Asset();
   asset.data.write(imageData, warehouse);
 
-  asset.mimeType = gltfTexture.getMimeType();
+  asset.mimeType.write(gltfTexture.getMimeType(), warehouse);
 
   const imageId = commands.spawn(true).add(asset).addType(Image).id;
 

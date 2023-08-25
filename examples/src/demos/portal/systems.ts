@@ -19,7 +19,7 @@ import { createScene } from "../../utils/createScene";
 import { createBoxGeometry } from "../../utils/geometry";
 
 export function initScene(
-  warehouse: Res<Warehouse>,
+  warehouse: Res<Mut<Warehouse>>,
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
@@ -27,9 +27,14 @@ export function initScene(
 ) {
   physicsConfig.debug = true;
 
-  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+  const { rootId, sceneId } = createScene(
+    commands,
+    warehouse,
+    coreStore,
+    sceneStruct
+  );
   createLights(commands, sceneId);
-  createPlayer([0, 2, 0], rootId, commands, sceneStruct);
+  createPlayer([0, 2, 0], rootId, commands, warehouse, sceneStruct);
 
   commands.getById(sceneStruct.activeCamera).addType(PortalRaycast);
 

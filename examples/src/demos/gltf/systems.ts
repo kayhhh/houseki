@@ -1,4 +1,4 @@
-import { CoreStore } from "lattice-engine/core";
+import { CoreStore, Warehouse } from "lattice-engine/core";
 import { Gltf } from "lattice-engine/gltf";
 import { N8AOPass } from "lattice-engine/postprocessing";
 import { SceneStruct } from "lattice-engine/scene";
@@ -14,11 +14,17 @@ export const selectedModel = {
 
 export function initScene(
   commands: Commands,
+  warehouse: Res<Mut<Warehouse>>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   createOrbitControls(commands, sceneStruct);
-  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+  const { rootId, sceneId } = createScene(
+    commands,
+    warehouse,
+    coreStore,
+    sceneStruct
+  );
   createLights(commands, sceneId);
 
   commands.getById(sceneId).addType(N8AOPass);
@@ -29,8 +35,11 @@ export function initScene(
 /**
  * System to update the glTF uri.
  */
-export function loadGltf(entities: Query<Mut<Gltf>>) {
+export function loadGltf(
+  warehouse: Res<Mut<Warehouse>>,
+  entities: Query<Mut<Gltf>>
+) {
   for (const gltf of entities) {
-    gltf.uri = selectedModel.uri;
+    gltf.uri.write(selectedModel.uri, warehouse);
   }
 }

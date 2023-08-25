@@ -23,17 +23,22 @@ import { createSphereGeometry } from "../../utils/geometry";
 
 export function initScene(
   commands: Commands,
-  warehouse: Res<Warehouse>,
+  warehouse: Res<Mut<Warehouse>>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
 ) {
   physicsConfig.debug = true;
 
-  const { sceneId, rootId } = createScene(commands, coreStore, sceneStruct);
+  const { sceneId, rootId } = createScene(
+    commands,
+    warehouse,
+    coreStore,
+    sceneStruct
+  );
   createLights(commands, sceneId, 4096, 16);
 
-  createPlayer([0, 4, 0], sceneId, commands, sceneStruct);
+  createPlayer([0, 4, 0], sceneId, commands, warehouse, sceneStruct);
 
   createBox(commands, warehouse, {
     parentId: rootId,
@@ -90,7 +95,7 @@ export function initScene(
 
 function createStairs(
   commands: Commands,
-  warehouse: Readonly<Warehouse>,
+  warehouse: Warehouse,
   stairWidth: number,
   stepHeight: number,
   stepWidth: number,
@@ -116,7 +121,10 @@ function createStairs(
   }
 
   const text = new Text();
-  text.value = `Step height: ${stepHeight}m\nStep width: ${stepWidth}m`;
+  text.value.write(
+    `Step height: ${stepHeight}m\nStep width: ${stepWidth}m`,
+    warehouse
+  );
   text.fontSize = 0.3;
 
   commands
@@ -135,7 +143,7 @@ function createStairs(
 
 function createRamp(
   commands: Commands,
-  warehouse: Readonly<Warehouse>,
+  warehouse: Warehouse,
   rampWidth: number,
   rampHeight: number,
   rampDepth: number,
@@ -166,7 +174,7 @@ function createRamp(
   });
 
   const text = new Text();
-  text.value = `Angle: ${rampAngle}°`;
+  text.value.write(`Angle: ${rampAngle}°`, warehouse);
   text.fontSize = 0.3;
 
   commands

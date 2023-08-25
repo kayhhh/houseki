@@ -8,16 +8,13 @@ import {
   SphereGeometry,
 } from "three";
 
-export function createSphereGeometry(
-  warehouse: Readonly<Warehouse>,
-  radius = 0.5
-) {
+export function createSphereGeometry(warehouse: Warehouse, radius = 0.5) {
   const sphere = new SphereGeometry(radius);
   return writeGeometry(sphere, warehouse);
 }
 
 export function createBoxGeometry(
-  warehouse: Readonly<Warehouse>,
+  warehouse: Warehouse,
   size: Readonly<[number, number, number]> = [1, 1, 1]
 ) {
   const box = new BoxGeometry(...size);
@@ -25,7 +22,7 @@ export function createBoxGeometry(
 }
 
 export function createPlaneGeometry(
-  warehouse: Readonly<Warehouse>,
+  warehouse: Warehouse,
   width = 1,
   height = 1
 ) {
@@ -33,10 +30,7 @@ export function createPlaneGeometry(
   return writeGeometry(geometry, warehouse);
 }
 
-function writeGeometry(
-  threeGeometry: BufferGeometry,
-  warehouse: Readonly<Warehouse>
-) {
+function writeGeometry(threeGeometry: BufferGeometry, warehouse: Warehouse) {
   const positionsAttribute = threeGeometry.getAttribute(
     "position"
   ) as BufferAttribute;

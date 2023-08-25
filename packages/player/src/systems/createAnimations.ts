@@ -1,10 +1,12 @@
+import { Warehouse } from "@lattice-engine/core";
 import { VrmAnimation } from "@lattice-engine/vrm";
-import { Commands, dropStruct, Entity, Mut, Query } from "thyseus";
+import { Commands, dropStruct, Entity, Mut, Query, Res } from "thyseus";
 
 import { PlayerAvatar } from "../components";
 
 export function createAnimations(
   commands: Commands,
+  warehouse: Res<Mut<Warehouse>>,
   avatars: Query<[Entity, Mut<PlayerAvatar>]>,
   animations: Query<[Entity, Mut<VrmAnimation>]>
 ) {
@@ -57,52 +59,65 @@ export function createAnimations(
       }
     }
 
+    const idleAnimationUri = avatar.idleAnimation.read(warehouse) ?? "";
     avatar.idleAnimationId = createAnimation(
       commands,
+      warehouse,
       idleAnimation,
       entity.id,
       avatar.idleAnimationId,
-      avatar.idleAnimation
+      idleAnimationUri
     );
 
+    const walkAnimationUri = avatar.walkAnimation.read(warehouse) ?? "";
     avatar.walkAnimationId = createAnimation(
       commands,
+      warehouse,
       walkAnimation,
       entity.id,
       avatar.walkAnimationId,
-      avatar.walkAnimation
+      walkAnimationUri
     );
 
+    const sprintAnimationUri = avatar.sprintAnimation.read(warehouse) ?? "";
     avatar.sprintAnimationId = createAnimation(
       commands,
+      warehouse,
       sprintAnimation,
       entity.id,
       avatar.sprintAnimationId,
-      avatar.sprintAnimation
+      sprintAnimationUri
     );
 
+    const jumpAnimationUri = avatar.jumpAnimation.read(warehouse) ?? "";
     avatar.jumpAnimationId = createAnimation(
       commands,
+      warehouse,
       jumpAnimation,
       entity.id,
       avatar.jumpAnimationId,
-      avatar.jumpAnimation
+      jumpAnimationUri
     );
 
+    const leftWalkAnimationUri = avatar.leftWalkAnimation.read(warehouse) ?? "";
     avatar.leftWalkAnimationId = createAnimation(
       commands,
+      warehouse,
       leftWalkAnimation,
       entity.id,
       avatar.leftWalkAnimationId,
-      avatar.leftWalkAnimation
+      leftWalkAnimationUri
     );
 
+    const rightWalkAnimationUri =
+      avatar.rightWalkAnimation.read(warehouse) ?? "";
     avatar.rightWalkAnimationId = createAnimation(
       commands,
+      warehouse,
       rightWalkAnimation,
       entity.id,
       avatar.rightWalkAnimationId,
-      avatar.rightWalkAnimation
+      rightWalkAnimationUri
     );
   }
 
@@ -116,6 +131,7 @@ export function createAnimations(
 
 function createAnimation(
   commands: Commands,
+  warehouse: Warehouse,
   animation: VrmAnimation | undefined,
   vrmId: bigint,
   animationId: bigint,
@@ -123,11 +139,13 @@ function createAnimation(
 ) {
   if (animation) {
     animation.vrmId = vrmId;
-    animation.uri = uri;
+    animation.uri.write(uri, warehouse);
 
     return animationId;
   } else {
-    const vrmAnimation = new VrmAnimation(vrmId, uri, false, true);
+    const vrmAnimation = new VrmAnimation(vrmId, false, true);
+    vrmAnimation.uri.write(uri, warehouse);
+
     const entityId = commands.spawn(true).add(vrmAnimation).id;
     dropStruct(vrmAnimation);
 

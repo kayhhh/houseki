@@ -1,16 +1,22 @@
 import { Node } from "@gltf-transform/core";
+import { Warehouse } from "@lattice-engine/core";
 import { AnchorX, AnchorY, Text as TextComp } from "@lattice-engine/text";
 import { Commands, dropStruct } from "thyseus";
 
 import { Text } from "../extensions/MOZ_text/Text";
 
-export function importText(commands: Commands, node: Node, entityId: bigint) {
+export function importText(
+  commands: Commands,
+  warehouse: Warehouse,
+  node: Node,
+  entityId: bigint
+) {
   const text = node.getExtension<Text>(Text.EXTENSION_NAME);
   if (!text) return;
 
   const textComp = new TextComp();
-  textComp.value = text.getValue();
-  textComp.font = text.getFontFile();
+  textComp.value.write(text.getValue(), warehouse);
+  textComp.font.write(text.getFontFile(), warehouse);
   textComp.fontSize = text.getSize();
 
   const color = text.getColor();

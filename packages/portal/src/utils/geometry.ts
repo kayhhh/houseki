@@ -3,7 +3,7 @@ import { Geometry } from "@lattice-engine/scene";
 import { BufferAttribute, BufferGeometry, PlaneGeometry } from "three";
 
 export function createPlaneGeometry(
-  warehouse: Readonly<Warehouse>,
+  warehouse: Warehouse,
   width = 1,
   height = 1
 ) {
@@ -11,10 +11,7 @@ export function createPlaneGeometry(
   return writeGeometry(geometry, warehouse);
 }
 
-function writeGeometry(
-  threeGeometry: BufferGeometry,
-  warehouse: Readonly<Warehouse>
-) {
+function writeGeometry(threeGeometry: BufferGeometry, warehouse: Warehouse) {
   const positionsAttribute = threeGeometry.getAttribute(
     "position"
   ) as BufferAttribute;

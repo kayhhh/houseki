@@ -50,7 +50,8 @@ export function createImages(
     // Create the bitmap
     localStore.loadedData.set(entity.id, data);
 
-    const blob = new Blob([data], { type: asset.mimeType });
+    const type = asset.mimeType.read(warehouse);
+    const blob = new Blob([data], { type });
     const entityId = entity.id;
     const imageOrientation: ImageOrientation = image.flipY ? "flipY" : "none";
 

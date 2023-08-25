@@ -15,12 +15,17 @@ import { createBoxGeometry } from "../../utils/geometry";
 
 export function initScene(
   commands: Commands,
-  warehouse: Res<Warehouse>,
+  warehouse: Res<Mut<Warehouse>>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   createOrbitControls(commands, sceneStruct);
-  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+  const { rootId, sceneId } = createScene(
+    commands,
+    warehouse,
+    coreStore,
+    sceneStruct
+  );
   createLights(commands, sceneId);
 
   const geometry = createBoxGeometry(warehouse);

@@ -14,13 +14,21 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build --emptyOutDir",
+    "build": "tsc --noEmit && vite build --emptyOutDir",
     "dev": "vite build --watch"
   },
   "devDependencies": {
+    "@lattice-engine/core": "workspace:^",
+    "@lattice-engine/input": "workspace:^",
+    "@lattice-engine/physics": "workspace:^",
+    "@lattice-engine/render": "workspace:^",
+    "@lattice-engine/scene": "workspace:^",
+    "@lattice-engine/vrm": "workspace:^",
     "@thyseus/transformer-rollup": "^0.13.0",
     "@types/three": "~0.153.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "three": "~0.153.0",
+    "thyseus": "^0.13.5",
     "typescript": "~5.1.6",
     "vite": "^4.4.7",
     "vite-plugin-dts": "^3.3.1"
@@ -32,8 +40,8 @@
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
     "@lattice-engine/vrm": "workspace:^",
-    "three": "~0.153.0",
-    "thyseus": "^0.13.5"
+    "three": "*",
+    "thyseus": "*"
   },
   "publishConfig": {
     "access": "public"

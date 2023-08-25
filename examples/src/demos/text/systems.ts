@@ -1,4 +1,4 @@
-import { CoreStore } from "lattice-engine/core";
+import { CoreStore, Warehouse } from "lattice-engine/core";
 import {
   GlobalTransform,
   Parent,
@@ -14,17 +14,24 @@ import { createScene } from "../../utils/createScene";
 
 export function initScene(
   commands: Commands,
+  warehouse: Res<Mut<Warehouse>>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   createOrbitControls(commands, sceneStruct);
-  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+  const { rootId, sceneId } = createScene(
+    commands,
+    warehouse,
+    coreStore,
+    sceneStruct
+  );
   createLights(commands, sceneId);
 
   const transform = new Transform();
   const parent = new Parent(rootId);
 
-  const text = new Text("Hello world!");
+  const text = new Text();
+  text.value.write("Hello world!", warehouse);
   text.color.set([255, 200, 255]);
 
   commands

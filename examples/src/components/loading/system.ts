@@ -1,5 +1,5 @@
-import { Loading } from "lattice-engine/core";
-import { Entity, Query, SystemRes } from "thyseus";
+import { Loading, Warehouse } from "lattice-engine/core";
+import { Entity, Query, Res, SystemRes } from "thyseus";
 import { create } from "zustand";
 
 type LoadingStore = {
@@ -39,6 +39,7 @@ class LocalRes {
  * Counts the number of entities with a Loading component and updates the loading store.
  */
 export function exportLoadingInfo(
+  warehouse: Res<Warehouse>,
   localRes: SystemRes<LocalRes>,
   loading: Query<[Entity, Loading]>
 ) {
@@ -59,7 +60,7 @@ export function exportLoadingInfo(
 
     if (!displayedMessage && load.message) {
       displayedId = entity.id;
-      displayedMessage = load.message;
+      displayedMessage = load.message.read(warehouse) ?? "";
     }
   }
 

@@ -14,10 +14,11 @@ export function importAnimation(
   animation: Animation,
   rootId: bigint,
   commands: Commands,
-  warehouse: Readonly<Warehouse>,
+  warehouse: Warehouse,
   context: ImportContext
 ) {
-  const clip = new AnimationClip(rootId, animation.getName(), true, true);
+  const clip = new AnimationClip(rootId, true, true);
+  clip.name.write(animation.getName(), warehouse);
 
   const entityId = commands.spawn(true).add(clip).id;
   context.animationClipIds.push(entityId);

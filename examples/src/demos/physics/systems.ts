@@ -23,7 +23,7 @@ import { createSphereGeometry } from "../../utils/geometry";
 
 export function initScene(
   commands: Commands,
-  warehouse: Res<Warehouse>,
+  warehouse: Res<Mut<Warehouse>>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
@@ -31,7 +31,12 @@ export function initScene(
   physicsConfig.debug = true;
 
   createOrbitControls(commands, sceneStruct, [0, 5, 7]);
-  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+  const { rootId, sceneId } = createScene(
+    commands,
+    warehouse,
+    coreStore,
+    sceneStruct
+  );
   createLights(commands, sceneId);
 
   const parent = new Parent(rootId);
