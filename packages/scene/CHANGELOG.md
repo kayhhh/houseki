@@ -1,5 +1,13 @@
 # @lattice-engine/scene
 
+## 0.7.2
+
+### Patch Changes
+
+- 4588798: remove string component types
+- Updated dependencies [4588798]
+  - @lattice-engine/core@0.2.7
+
 ## 0.7.1
 
 ### Patch Changes

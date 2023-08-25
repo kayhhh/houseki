@@ -1,5 +1,15 @@
 # @lattice-engine/orbit
 
+## 5.0.2
+
+### Patch Changes
+
+- 4588798: remove string component types
+- Updated dependencies [4588798]
+  - @lattice-engine/render@4.0.2
+  - @lattice-engine/input@0.3.6
+  - @lattice-engine/scene@0.7.2
+
 ## 5.0.1
 
 ### Patch Changes
