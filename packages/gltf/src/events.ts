@@ -1,3 +1,4 @@
+import { Resource } from "@lattice-engine/core";
 import { initStruct, struct } from "thyseus";
 
 @struct
@@ -14,6 +15,6 @@ export class ExportGltf {
 
 @struct
 export class ExportedGltf {
-  @struct.string declare uri: string;
+  @struct.substruct(Resource) declare uri: Resource<string>;
   @struct.bool declare binary: boolean;
 }

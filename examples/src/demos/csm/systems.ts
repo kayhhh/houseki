@@ -13,12 +13,12 @@ const BOX_SCALE = 2;
 
 export function initScene(
   commands: Commands,
-  warehouse: Res<Warehouse>,
+  warehouse: Res<Mut<Warehouse>>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   const cameraId = createOrbitControls(commands, sceneStruct);
-  const { rootId } = createScene(commands, coreStore, sceneStruct);
+  const { rootId } = createScene(commands, warehouse, coreStore, sceneStruct);
 
   const csm = new CascadingShadowMaps();
   csm.shadowMapSize = 4096;

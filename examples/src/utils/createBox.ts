@@ -20,10 +20,11 @@ export function cleanupMaterials() {
 
 let _textureId: bigint | undefined = undefined;
 
-function getTextureId(commands: Commands) {
+function getTextureId(commands: Commands, warehouse: Warehouse) {
   if (_textureId) return _textureId;
 
-  const asset = new Asset("/DevGrid.png");
+  const asset = new Asset();
+  asset.uri.write("/DevGrid.png", warehouse);
   _textureId = commands.spawn(true).add(asset).addType(Image).id;
   dropStruct(asset);
 
@@ -35,8 +36,13 @@ function getTextureId(commands: Commands) {
  */
 const materials = new Map<number, Map<number, bigint>>();
 
-function createMaterial(commands: Commands, scaleX: number, scaleZ: number) {
-  const textureId = getTextureId(commands);
+function createMaterial(
+  commands: Commands,
+  warehouse: Warehouse,
+  scaleX: number,
+  scaleZ: number
+) {
+  const textureId = getTextureId(commands, warehouse);
 
   const material = new StandardMaterial();
   material.roughness = 1;
@@ -61,18 +67,19 @@ function createMaterial(commands: Commands, scaleX: number, scaleZ: number) {
 
 function getMaterialId(
   commands: Commands,
+  warehouse: Warehouse,
   scaleX: number,
   scaleZ: number
 ): bigint {
   const existingId = materials.get(scaleX)?.get(scaleZ);
   if (existingId) return existingId;
 
-  return createMaterial(commands, scaleX, scaleZ);
+  return createMaterial(commands, warehouse, scaleX, scaleZ);
 }
 
 export function createBox(
   commands: Commands,
-  warehouse: Readonly<Warehouse>,
+  warehouse: Warehouse,
   options: {
     size?: [number, number, number];
     translation?: [number, number, number];
@@ -95,7 +102,12 @@ export function createBox(
   const mesh = new Mesh();
 
   if (addTexture) {
-    const materialId = getMaterialId(commands, size[0] / 2, size[2] / 2);
+    const materialId = getMaterialId(
+      commands,
+      warehouse,
+      size[0] / 2,
+      size[2] / 2
+    );
     mesh.materialId = materialId;
   }
 

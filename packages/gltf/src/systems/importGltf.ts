@@ -1,6 +1,14 @@
 import { Document, WebIO } from "@gltf-transform/core";
 import { Loading, Warehouse } from "@lattice-engine/core";
-import { Commands, dropStruct, Entity, Query, Res, SystemRes } from "thyseus";
+import {
+  Commands,
+  dropStruct,
+  Entity,
+  Mut,
+  Query,
+  Res,
+  SystemRes,
+} from "thyseus";
 
 import { Gltf } from "../components";
 import { extensions } from "../extensions/extensions";
@@ -40,7 +48,7 @@ class GltfStore {
 
 export function importGltf(
   commands: Commands,
-  warehouse: Res<Warehouse>,
+  warehouse: Res<Mut<Warehouse>>,
   store: SystemRes<GltfStore>,
   entities: Query<[Entity, Gltf]>
 ) {
@@ -59,7 +67,9 @@ export function importGltf(
     if (store.uris.get(id) !== gltf.uri) {
       store.uris.set(id, gltf.uri);
 
-      const loading = new Loading(`Loading ${gltf.uri}`);
+      const loading = new Loading();
+      loading.message.write(`Loading ${gltf.uri}`, warehouse);
+
       commands.getById(entity.id).add(loading);
       dropStruct(loading);
 

@@ -27,6 +27,7 @@ import {
   Entity,
   EventReader,
   EventWriter,
+  Mut,
   Query,
   Res,
   SystemRes,
@@ -75,7 +76,7 @@ class LocalStore {
 
 export function exportGltf(
   localStore: SystemRes<LocalStore>,
-  warehouse: Res<Warehouse>,
+  warehouse: Res<Mut<Warehouse>>,
   reader: EventReader<ExportGltf>,
   outWriter: EventWriter<ExportedGltf>,
   names: Query<[Entity, Name]>,
@@ -103,7 +104,7 @@ export function exportGltf(
     event.binary = true;
 
     const blob = new Blob([binary], { type: "model/gltf-binary" });
-    event.uri = URL.createObjectURL(blob);
+    event.uri.write(URL.createObjectURL(blob), warehouse);
 
     localStore.outBinary.shift();
   }
@@ -122,7 +123,7 @@ export function exportGltf(
     });
 
     const event = outWriter.create();
-    event.uri = URL.createObjectURL(blob);
+    event.uri.write(URL.createObjectURL(blob), warehouse);
 
     localStore.outJson.shift();
   }
@@ -133,7 +134,8 @@ export function exportGltf(
     const context = new ExportContext();
 
     for (const [entity, name] of names) {
-      context.names.set(entity.id, name.value);
+      const value = name.value.read(warehouse) ?? "";
+      context.names.set(entity.id, value);
     }
 
     let rootId: bigint | undefined;

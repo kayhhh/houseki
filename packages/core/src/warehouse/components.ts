@@ -13,8 +13,11 @@ export class Resource<T> {
     return warehouse.get(this.id) as T | undefined;
   }
 
-  write(data: T, warehouse: Readonly<Warehouse>) {
-    if (!this.id) this.id = warehouse.store(data);
-    else warehouse.set(this.id, data);
+  write(data: T, warehouse: Warehouse) {
+    if (!this.id) {
+      this.id = warehouse.store(data);
+    } else {
+      warehouse.set(this.id, data);
+    }
   }
 }

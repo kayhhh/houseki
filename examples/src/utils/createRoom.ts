@@ -17,7 +17,7 @@ const THICKNESS = 0.5;
 export function createRoom(
   size: Vec3,
   commands: Commands,
-  warehouse: Readonly<Warehouse>
+  warehouse: Warehouse
 ) {
   // Create ground
   const groundId = createBox(
@@ -74,7 +74,7 @@ function createBox(
   size: Vec3,
   translation: Vec3,
   commands: Commands,
-  warehouse: Readonly<Warehouse>,
+  warehouse: Warehouse,
   parentId?: bigint
 ) {
   const geometry = createBoxGeometry(warehouse, size);

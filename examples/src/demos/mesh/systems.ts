@@ -1,4 +1,4 @@
-import { CoreStore } from "lattice-engine/core";
+import { CoreStore, Warehouse } from "lattice-engine/core";
 import { Gltf } from "lattice-engine/gltf";
 import {
   MeshCollider,
@@ -29,20 +29,27 @@ import { createScene } from "../../utils/createScene";
 
 export function initScene(
   commands: Commands,
+  warehouse: Res<Mut<Warehouse>>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
 ) {
   physicsConfig.debug = true;
 
-  const { sceneId, rootId } = createScene(commands, coreStore, sceneStruct);
+  const { sceneId, rootId } = createScene(
+    commands,
+    warehouse,
+    coreStore,
+    sceneStruct
+  );
   createLights(commands, sceneId, 4096, 20);
 
-  createPlayer([0, 5, 0], sceneId, commands, sceneStruct);
+  createPlayer([0, 5, 0], sceneId, commands, warehouse, sceneStruct);
 
   const transform = new Transform(undefined, undefined, [4, 4, 4]);
   const parent = new Parent(rootId);
-  const gltf = new Gltf("/gltf/Accumula-Town.glb");
+  const gltf = new Gltf();
+  gltf.uri.write("/gltf/Accumula-Town.glb", warehouse);
 
   commands
     .spawn(true)

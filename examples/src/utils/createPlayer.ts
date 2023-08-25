@@ -1,3 +1,4 @@
+import { Warehouse } from "lattice-engine/core";
 import {
   CapsuleCollider,
   CharacterController,
@@ -32,6 +33,7 @@ export function createPlayer(
   spawn: [number, number, number],
   rootId: bigint,
   commands: Commands,
+  warehouse: Warehouse,
   sceneStruct: SceneStruct
 ) {
   const parent = new Parent();
@@ -65,14 +67,15 @@ export function createPlayer(
   dropStruct(capsuleCollider);
 
   const playerAvatar = new PlayerAvatar();
-  playerAvatar.idleAnimation = "/animation/Idle.fbx";
-  playerAvatar.jumpAnimation = "/animation/Falling.fbx";
-  playerAvatar.leftWalkAnimation = "/animation/LeftWalk.fbx";
-  playerAvatar.rightWalkAnimation = "/animation/RightWalk.fbx";
-  playerAvatar.sprintAnimation = "/animation/Sprint.fbx";
-  playerAvatar.walkAnimation = "/animation/Walk.fbx";
+  playerAvatar.idleAnimation.write("/animation/Idle.fbx", warehouse);
+  playerAvatar.jumpAnimation.write("/animation/Falling.fbx", warehouse);
+  playerAvatar.leftWalkAnimation.write("/animation/LeftWalk.fbx", warehouse);
+  playerAvatar.rightWalkAnimation.write("/animation/RightWalk.fbx", warehouse);
+  playerAvatar.sprintAnimation.write("/animation/Sprint.fbx", warehouse);
+  playerAvatar.walkAnimation.write("/animation/Walk.fbx", warehouse);
 
-  const vrm = new Vrm("/k-robot.vrm", true);
+  const vrm = new Vrm(true);
+  vrm.uri.write("/k-robot.vrm", warehouse);
 
   commands
     .spawn(true)

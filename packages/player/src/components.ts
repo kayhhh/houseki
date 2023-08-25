@@ -1,12 +1,12 @@
-import { Vec3 } from "@lattice-engine/core";
+import { Resource, Vec3 } from "@lattice-engine/core";
 import { Quat } from "@lattice-engine/scene";
 import { initStruct, struct } from "thyseus";
 
 import { PlayerCameraMode, PlayerCameraView } from "./types";
 
-export class TargetTranslation extends Vec3 {}
+export class TargetTranslation extends Vec3 { }
 
-export class TargetRotation extends Quat {}
+export class TargetRotation extends Quat { }
 
 @struct
 export class PlayerBody {
@@ -55,22 +55,22 @@ export class PlayerBody {
  */
 @struct
 export class PlayerAvatar {
-  @struct.string declare idleAnimation: string;
+  @struct.substruct(Resource) declare idleAnimation: Resource<string>;
   @struct.u64 declare idleAnimationId: bigint; // Entity ID
 
-  @struct.string declare jumpAnimation: string;
+  @struct.substruct(Resource) declare jumpAnimation: Resource<string>;
   @struct.u64 declare jumpAnimationId: bigint; // Entity ID
 
-  @struct.string declare leftWalkAnimation: string;
+  @struct.substruct(Resource) declare leftWalkAnimation: Resource<string>;
   @struct.u64 declare leftWalkAnimationId: bigint; // Entity ID
 
-  @struct.string declare rightWalkAnimation: string;
+  @struct.substruct(Resource) declare rightWalkAnimation: Resource<string>;
   @struct.u64 declare rightWalkAnimationId: bigint; // Entity ID
 
-  @struct.string declare sprintAnimation: string;
+  @struct.substruct(Resource) declare sprintAnimation: Resource<string>;
   @struct.u64 declare sprintAnimationId: bigint; // Entity ID
 
-  @struct.string declare walkAnimation: string;
+  @struct.substruct(Resource) declare walkAnimation: Resource<string>;
   @struct.u64 declare walkAnimationId: bigint; // Entity ID
 }
 

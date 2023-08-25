@@ -11,13 +11,7 @@ export class Loading {
   /**
    * A message to display while loading.
    */
-  @struct.string declare message: string;
-
-  constructor(message = "") {
-    initStruct(this);
-
-    this.message = message;
-  }
+  @struct.substruct(Resource) declare message: Resource<string>;
 }
 
 /**
@@ -25,17 +19,9 @@ export class Loading {
  */
 @struct
 export class Asset {
-  @struct.string declare uri: string;
-  @struct.string declare mimeType: string;
-
+  @struct.substruct(Resource) declare uri: Resource<string>;
+  @struct.substruct(Resource) declare mimeType: Resource<string>;
   @struct.substruct(Resource) declare data: Resource<ArrayBuffer>;
-
-  constructor(uri = "", mimeType = "") {
-    initStruct(this);
-
-    this.uri = uri;
-    this.mimeType = mimeType;
-  }
 }
 
 @struct

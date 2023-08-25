@@ -61,17 +61,11 @@ export class Transform {
  * GlobalTransform is managed by the engine and should not be modified.
  * To modify the transform of an entity, use the {@link Transform} component.
  */
-export class GlobalTransform extends Transform {}
+export class GlobalTransform extends Transform { }
 
 @struct
 export class Name {
-  @struct.string declare value: string;
-
-  constructor(value = "") {
-    initStruct(this);
-
-    this.value = value;
-  }
+  @struct.substruct(Resource) declare value: Resource<string>;
 }
 
 @struct
@@ -280,7 +274,7 @@ export class PerspectiveCamera {
  * @see https://threejs.org/docs/#manual/en/introduction/Animation-system
  */
 @struct
-export class AnimationMixer {}
+export class AnimationMixer { }
 
 /**
  * Represents an animation clip. (e.g. "walk", "run", "idle")
@@ -289,7 +283,7 @@ export class AnimationMixer {}
 export class AnimationClip {
   @struct.u64 declare mixerId: bigint; // Entity ID
 
-  @struct.string declare name: string;
+  @struct.substruct(Resource) declare name: Resource<string>;
 
   @struct.bool declare play: boolean;
 
@@ -297,11 +291,10 @@ export class AnimationClip {
 
   @struct.f32 declare speed: number;
 
-  constructor(mixerId = 0n, name = "", play = false, loop = false, speed = 1) {
+  constructor(mixerId = 0n, play = false, loop = false, speed = 1) {
     initStruct(this);
 
     this.mixerId = mixerId;
-    this.name = name;
     this.play = play;
     this.loop = loop;
     this.speed = speed;
