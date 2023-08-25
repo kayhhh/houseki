@@ -22,7 +22,7 @@ export function importMesh(
   gltfMesh: GltfMesh,
   nodeId: bigint,
   commands: Commands,
-  warehouse: Readonly<Warehouse>,
+  warehouse: Warehouse,
   context: ImportContext
 ) {
   gltfMesh.listPrimitives().forEach((primitive) => {
@@ -64,7 +64,10 @@ export function importMesh(
       mesh.materialId = importMaterial(material, commands, warehouse, context);
     }
 
-    context.name.value = gltfMesh.getName() || `Mesh_${context.meshIds.length}`;
+    context.name.value.write(
+      gltfMesh.getName() || `Mesh_${context.meshIds.length}`,
+      warehouse
+    );
 
     const meshId = commands
       .spawn(true)
@@ -85,7 +88,7 @@ function setAttribute(
   name: keyof typeof THREE_TO_ECS_ATTRIBUTES,
   primitive: Primitive,
   geometry: Geometry,
-  warehouse: Readonly<Warehouse>
+  warehouse: Warehouse
 ) {
   const array = primitive.getAttribute(name)?.getArray();
   const ecsName = THREE_TO_ECS_ATTRIBUTES[name];

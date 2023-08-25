@@ -11,7 +11,7 @@ export function importDoc(
   doc: Document,
   entity: Readonly<Entity>,
   commands: Commands,
-  warehouse: Readonly<Warehouse>
+  warehouse: Warehouse
 ) {
   const root = doc.getRoot();
   const scene = root.getDefaultScene() ?? root.listScenes()[0];

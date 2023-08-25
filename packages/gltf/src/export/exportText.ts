@@ -1,3 +1,4 @@
+import { Warehouse } from "@lattice-engine/core";
 import { AnchorX, AnchorY, Text } from "@lattice-engine/text";
 
 import { MOZText } from "../extensions/MOZ_text/MOZText";
@@ -5,6 +6,7 @@ import { ExportContext } from "./context";
 
 export function exportText(
   context: ExportContext,
+  warehouse: Warehouse,
   entityId: bigint,
   text: Text
 ) {
@@ -14,9 +16,12 @@ export function exportText(
   const textExtension = context.doc.createExtension(MOZText);
   const textProp = textExtension.createText();
 
-  textProp.setValue(text.value);
+  const value = text.value.read(warehouse) ?? "";
+  const font = text.font.read(warehouse) ?? "";
+
+  textProp.setValue(value);
   textProp.setSize(text.fontSize);
-  textProp.setFontFile(text.font);
+  textProp.setFontFile(font);
 
   const color = [
     (text.color.at(0) ?? 0) / 255,

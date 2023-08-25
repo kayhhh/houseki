@@ -1,5 +1,6 @@
 /// <reference types="../../troika.d.ts" />
 
+import { Warehouse } from "@lattice-engine/core";
 import { RenderStore } from "@lattice-engine/render";
 import { Entity, Query, Res } from "thyseus";
 import { Text as TroikaText } from "troika-three-text";
@@ -16,6 +17,7 @@ import { AnchorX, AnchorY } from "../types";
 // OverrideMaterialManager.workaroundEnabled = true;
 
 export function createText(
+  warehouse: Res<Warehouse>,
   renderStore: Res<RenderStore>,
   textStore: Res<TextStore>,
   entities: Query<[Entity, Text]>
@@ -32,7 +34,8 @@ export function createText(
       textStore.textObjects.set(entity.id, object);
     }
 
-    object.text = text.value;
+    object.text = text.value.read(warehouse) ?? "";
+
     object.fontSize = text.fontSize;
 
     switch (text.anchorX) {

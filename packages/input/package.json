@@ -14,7 +14,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build --emptyOutDir",
+    "build": "tsc --noEmit && vite build --emptyOutDir",
     "dev": "vite build --watch"
   },
   "devDependencies": {

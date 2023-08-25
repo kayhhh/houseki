@@ -15,7 +15,7 @@ import { DebugResource, PhysicsConfig, PhysicsStore } from "../resources";
 
 export function generateDebug(
   commands: Commands,
-  warehouse: Res<Warehouse>,
+  warehouse: Res<Mut<Warehouse>>,
   debug: Res<Mut<DebugResource>>,
   physicsStore: Res<PhysicsStore>,
   physicsConfig: Res<PhysicsConfig>,

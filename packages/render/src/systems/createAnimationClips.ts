@@ -1,3 +1,4 @@
+import { Warehouse } from "@lattice-engine/core";
 import { AnimationClip, KeyframeTrack } from "@lattice-engine/scene";
 import {
   AnimationClip as ThreeAnimationClip,
@@ -9,6 +10,7 @@ import { RenderStore } from "../resources";
 
 export function createAnimationClips(
   renderStore: Res<RenderStore>,
+  warehouse: Res<Warehouse>,
   clips: Query<[Entity, AnimationClip]>,
   tracks: Query<[Entity, KeyframeTrack]>
 ) {
@@ -28,7 +30,7 @@ export function createAnimationClips(
       }
     }
 
-    const name = clip.name || `AnimationClip_${entity.id}`;
+    const name = clip.name.read(warehouse) || `AnimationClip_${entity.id}`;
 
     // Create new objects
     if (!object) {

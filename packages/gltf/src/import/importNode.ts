@@ -48,7 +48,7 @@ export function importNode(
 
   importCollider(context, commands, node, entityId);
   importPhysicsBody(context, commands, node, entityId);
-  importText(commands, node, entityId);
+  importText(commands, warehouse, node, entityId);
   importExtras(commands, warehouse, node, entityId);
 
   node

@@ -2,6 +2,7 @@ import {
   Commands,
   dropStruct,
   Entity,
+  Mut,
   Query,
   Res,
   SystemRes,
@@ -18,13 +19,13 @@ class LocalStore {
 
 export function fetchAssets(
   commands: Commands,
-  warehouse: Res<Warehouse>,
+  warehouse: Res<Mut<Warehouse>>,
   localStore: SystemRes<LocalStore>,
   toLoad: Query<[Entity, Asset], Without<Loading>>,
   loading: Query<[Entity, Asset], With<Loading>>
 ) {
   for (const [entity, resource] of toLoad) {
-    const uri = resource.uri;
+    const uri = resource.uri.read(warehouse);
     if (!uri) continue;
 
     const loaded = localStore.loaded.get(uri);
@@ -36,7 +37,9 @@ export function fetchAssets(
       continue;
     }
 
-    const loadMessage = new Loading(`Fetching ${uri}`);
+    const loadMessage = new Loading();
+    loadMessage.message.write(`Fetching ${uri}`, warehouse);
+
     commands.getById(entity.id).add(loadMessage);
     dropStruct(loadMessage);
 
@@ -46,7 +49,9 @@ export function fetchAssets(
   }
 
   for (const [entity, resource] of loading) {
-    const loaded = localStore.loaded.get(resource.uri);
+    const uri = resource.uri.read(warehouse) ?? "";
+    const loaded = localStore.loaded.get(uri);
+
     if (loaded) {
       resource.data.write(loaded, warehouse);
       commands.getById(entity.id).remove(Loading);

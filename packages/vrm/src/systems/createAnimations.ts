@@ -1,5 +1,6 @@
+import { Warehouse } from "@lattice-engine/core";
 import { AnimationMixer } from "three";
-import { Entity, Query, Res, SystemRes, With } from "thyseus";
+import { Entity, Mut, Query, Res, SystemRes, With } from "thyseus";
 
 import { Vrm, VrmAnimation } from "../components";
 import { VrmStore } from "../resources";
@@ -26,6 +27,7 @@ class LocalStore {
  * Loads FBX animations and applies them to VRMs.
  */
 export function createAnimations(
+  warehouse: Res<Mut<Warehouse>>,
   localStore: SystemRes<LocalStore>,
   vrmStore: Res<VrmStore>,
   vrms: Query<Entity, With<Vrm>>,
@@ -56,13 +58,14 @@ export function createAnimations(
       ids.push(animationEntity.id);
 
       if (localStore.promises.has(animationEntity.id)) continue;
-      if (localStore.loaded.get(animationEntity.id) === animation.uri) continue;
+
+      const uri = animation.uri.read(warehouse) ?? "";
+      if (localStore.loaded.get(animationEntity.id) === uri) continue;
 
       vrmStore.actions.delete(animationEntity.id);
 
       if (!animation.uri) continue;
 
-      const uri = animation.uri;
       const animationId = animationEntity.id;
 
       const promise = loadMixamoAnimation(uri, object).then((clips) => {

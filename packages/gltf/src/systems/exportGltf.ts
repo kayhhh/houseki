@@ -168,11 +168,11 @@ export function exportGltf(
     }
 
     for (const [entity, t] of text) {
-      exportText(context, entity.id, t);
+      exportText(context, warehouse, entity.id, t);
     }
 
     for (const extra of extras) {
-      exportExtras(context, extra);
+      exportExtras(context, warehouse, extra);
     }
 
     for (const entity of staticBodies) {

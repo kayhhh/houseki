@@ -62,10 +62,11 @@ export function importGltf(
     ids.push(id);
 
     const doc = store.docs.get(id);
+    const uri = gltf.uri.read(warehouse) ?? "";
 
     // If URI has changed, load new document
-    if (store.uris.get(id) !== gltf.uri) {
-      store.uris.set(id, gltf.uri);
+    if (store.uris.get(id) !== uri) {
+      store.uris.set(id, uri);
 
       const loading = new Loading();
       loading.message.write(`Loading ${gltf.uri}`, warehouse);
@@ -74,7 +75,7 @@ export function importGltf(
       dropStruct(loading);
 
       // Start loading document
-      io.read(gltf.uri).then((doc) => store.docs.set(id, doc));
+      io.read(uri).then((doc) => store.docs.set(id, doc));
     } else if (doc) {
       // Remove old glTF entities
       const oldContext = store.contexts.get(id);
