@@ -10,14 +10,14 @@ import { useEngine } from "../../utils/useEngine";
 import { selectedModel } from "./systems";
 
 const MODELS = {
-  AnimatedCube: "/gltf/AnimatedCube/AnimatedCube.gltf",
-  BoxAnimated: "/gltf/BoxAnimated.glb",
-  Cube: "/gltf/Cube/Cube.gltf",
-  "Damaged Helmet": "/gltf/DamagedHelmet.glb",
-  "Flight Helmet": "/gltf/FlightHelmet/FlightHelmet.gltf",
-  MinecraftVillage: "/gltf/Minecraft-Village.glb",
-  "Texture Transform Test": "/gltf/TextureTransformMultiTest.glb",
-  Tokyo: "/gltf/tokyo.glb",
+  AnimatedCube: "/models/AnimatedCube/AnimatedCube.gltf",
+  BoxAnimated: "/models/BoxAnimated.glb",
+  Cube: "/models/Cube/Cube.gltf",
+  "Damaged Helmet": "/models/DamagedHelmet.glb",
+  "Flight Helmet": "/models/FlightHelmet/FlightHelmet.gltf",
+  MinecraftVillage: "/models/Minecraft-Village.glb",
+  "Texture Transform Test": "/models/TextureTransformMultiTest.glb",
+  Tokyo: "/models/tokyo.glb",
 };
 
 export default function Gltf() {
