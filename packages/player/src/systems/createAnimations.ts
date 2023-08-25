@@ -1,12 +1,12 @@
 import { Warehouse } from "@lattice-engine/core";
 import { VrmAnimation } from "@lattice-engine/vrm";
-import { Commands, dropStruct, Entity, Mut, Query } from "thyseus";
+import { Commands, dropStruct, Entity, Mut, Query, Res } from "thyseus";
 
 import { PlayerAvatar } from "../components";
 
 export function createAnimations(
   commands: Commands,
-  warehouse: Warehouse,
+  warehouse: Res<Mut<Warehouse>>,
   avatars: Query<[Entity, Mut<PlayerAvatar>]>,
   animations: Query<[Entity, Mut<VrmAnimation>]>
 ) {
