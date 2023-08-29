@@ -24,7 +24,7 @@
     "postprocessing": "^6.32.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "three": "~0.153.0",
-    "thyseus": "^0.14.0-beta.5",
+    "thyseus": "0.14.0-beta.8",
     "typescript": "~5.1.6",
     "vite": "^4.4.7",
     "vite-plugin-thyseus-ts": "workspace:^"
