@@ -1,6 +1,6 @@
 import { Asset } from "@lattice-engine/core";
 import { Image } from "@lattice-engine/scene";
-import { Entity, Query, Res, SystemRes } from "thyseus";
+import { Entity, Mut, Query, Res, SystemRes } from "thyseus";
 
 import { RenderStore } from "../resources";
 
@@ -20,11 +20,15 @@ class LocalStore {
  * Creates ImageBitmaps.
  */
 export function createImages(
-  renderStore: Res<RenderStore>,
+  renderStore: Res<Mut<RenderStore>>,
   localStore: SystemRes<LocalStore>,
   entities: Query<[Entity, Asset, Image]>
 ) {
   const ids: bigint[] = [];
+
+  localStore.bitmaps.forEach((bitmap, id) => {
+    renderStore.images.set(id, bitmap);
+  });
 
   for (const [entity, asset, image] of entities) {
     ids.push(entity.id);
@@ -54,7 +58,6 @@ export function createImages(
 
     createImageBitmap(blob, { imageOrientation }).then((bitmap) => {
       localStore.bitmaps.set(entityId, bitmap);
-      renderStore.images.set(entityId, bitmap);
     });
   }
 
