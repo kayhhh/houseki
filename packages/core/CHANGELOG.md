@@ -1,5 +1,11 @@
 # @lattice-engine/core
 
+## 1.0.0
+
+### Major Changes
+
+- 32d0cc6: upgrade to thyseus 14
+
 ## 0.2.7
 
 ### Patch Changes

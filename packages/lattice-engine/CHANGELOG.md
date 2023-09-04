@@ -1,5 +1,30 @@
 # lattice-engine
 
+## 1.0.0
+
+### Major Changes
+
+- 32d0cc6: upgrade to thyseus 14
+
+### Patch Changes
+
+- Updated dependencies [32d0cc6]
+  - @lattice-engine/postprocessing@4.0.0
+  - @lattice-engine/transform@6.0.0
+  - @lattice-engine/physics@5.0.0
+  - @lattice-engine/player@6.0.0
+  - @lattice-engine/portal@5.0.0
+  - @lattice-engine/render@5.0.0
+  - @lattice-engine/input@1.0.0
+  - @lattice-engine/orbit@6.0.0
+  - @lattice-engine/scene@1.0.0
+  - @lattice-engine/utils@6.0.0
+  - @lattice-engine/core@1.0.0
+  - @lattice-engine/gltf@6.0.0
+  - @lattice-engine/text@5.0.0
+  - @lattice-engine/csm@4.0.0
+  - @lattice-engine/vrm@5.0.0
+
 ## 0.3.19
 
 ### Patch Changes

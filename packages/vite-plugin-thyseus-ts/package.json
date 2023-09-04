@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-thyseus-ts",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "license": "GPL-3.0-or-later",
   "type": "module",
