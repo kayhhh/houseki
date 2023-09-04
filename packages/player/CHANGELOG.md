@@ -1,5 +1,21 @@
 # @lattice-engine/player
 
+## 6.0.0
+
+### Major Changes
+
+- 32d0cc6: upgrade to thyseus 14
+
+### Patch Changes
+
+- Updated dependencies [32d0cc6]
+  - @lattice-engine/physics@5.0.0
+  - @lattice-engine/render@5.0.0
+  - @lattice-engine/input@1.0.0
+  - @lattice-engine/scene@1.0.0
+  - @lattice-engine/core@1.0.0
+  - @lattice-engine/vrm@5.0.0
+
 ## 5.0.2
 
 ### Patch Changes

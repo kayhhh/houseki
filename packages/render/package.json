@@ -1,6 +1,6 @@
 {
   "name": "@lattice-engine/render",
-  "version": "4.0.2",
+  "version": "5.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/lattice-engine/lattice",

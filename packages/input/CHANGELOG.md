@@ -1,5 +1,16 @@
 # @lattice-engine/input
 
+## 1.0.0
+
+### Major Changes
+
+- 32d0cc6: upgrade to thyseus 14
+
+### Patch Changes
+
+- Updated dependencies [32d0cc6]
+  - @lattice-engine/core@1.0.0
+
 ## 0.3.6
 
 ### Patch Changes
