@@ -13,7 +13,7 @@ import {
   Transform,
 } from "lattice-engine/scene";
 import { Text } from "lattice-engine/text";
-import { Commands, dropStruct, Mut, Res } from "thyseus";
+import { Commands, Mut, Res } from "thyseus";
 
 import { createBox } from "../../utils/createBox";
 import { createLights } from "../../utils/createLights";
@@ -22,25 +22,20 @@ import { createScene } from "../../utils/createScene";
 import { createSphereGeometry } from "../../utils/geometry";
 
 export function initScene(
-  commands: Commands,
   warehouse: Res<Mut<Warehouse>>,
+  commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
 ) {
   physicsConfig.debug = true;
 
-  const { sceneId, rootId } = createScene(
-    commands,
-    warehouse,
-    coreStore,
-    sceneStruct
-  );
+  const { sceneId, rootId } = createScene(commands, coreStore, sceneStruct);
   createLights(commands, sceneId, 4096, 16);
 
-  createPlayer([0, 4, 0], sceneId, commands, warehouse, sceneStruct);
+  createPlayer([0, 4, 0], sceneId, commands, sceneStruct);
 
-  createBox(commands, warehouse, {
+  createBox(warehouse, commands, {
     parentId: rootId,
     size: [32, 1, 32],
     translation: [0, -0.5, 0],
@@ -55,9 +50,9 @@ export function initScene(
     .add(transform.set([-2, 0, -6]))
     .addType(GlobalTransform).id;
 
-  createStairs(commands, warehouse, 2, 0.125, 1, 10, stairsId);
-  createStairs(commands, warehouse, 2, 0.125, 0.5, 20, stairsId, [-3, 0, 0]);
-  createStairs(commands, warehouse, 2, 0.25, 0.5, 20, stairsId, [-6, 0, 0]);
+  createStairs(warehouse, commands, 2, 0.125, 1, 10, stairsId);
+  createStairs(warehouse, commands, 2, 0.125, 0.5, 20, stairsId, [-3, 0, 0]);
+  createStairs(warehouse, commands, 2, 0.25, 0.5, 20, stairsId, [-6, 0, 0]);
 
   const rampsId = commands
     .spawn(true)
@@ -65,37 +60,28 @@ export function initScene(
     .add(transform.set([2, 0, -6]))
     .addType(GlobalTransform).id;
 
-  createRamp(commands, warehouse, 2, 10, 1, 15, rampsId);
-  createRamp(commands, warehouse, 2, 10, 1, 30, rampsId, [3, 0, 0]);
-  createRamp(commands, warehouse, 2, 10, 1, 45, rampsId, [6, 0, 0]);
-  createRamp(commands, warehouse, 2, 10, 1, 60, rampsId, [9, 0, 0]);
+  createRamp(warehouse, commands, 2, 10, 1, 15, rampsId);
+  createRamp(warehouse, commands, 2, 10, 1, 30, rampsId, [3, 0, 0]);
+  createRamp(warehouse, commands, 2, 10, 1, 45, rampsId, [6, 0, 0]);
+  createRamp(warehouse, commands, 2, 10, 1, 60, rampsId, [9, 0, 0]);
 
   const ballRadius = 1;
-  const ballGeometry = createSphereGeometry(warehouse, ballRadius);
-  const sphereCollider = new SphereCollider(ballRadius);
-  const targetTransform = new TargetTransform();
 
   commands
     .spawn(true)
     .add(parent)
     .add(transform.set([0, 3, 8]))
-    .add(targetTransform.set([0, 3, 8]))
+    .add(new TargetTransform().set([0, 3, 8]))
     .addType(GlobalTransform)
-    .add(ballGeometry)
+    .add(createSphereGeometry(warehouse, ballRadius))
     .addType(Mesh)
-    .add(sphereCollider)
+    .add(new SphereCollider(ballRadius))
     .addType(DynamicBody);
-
-  dropStruct(ballGeometry);
-  dropStruct(sphereCollider);
-  dropStruct(targetTransform);
-  dropStruct(parent);
-  dropStruct(transform);
 }
 
 function createStairs(
-  commands: Commands,
   warehouse: Warehouse,
+  commands: Commands,
   stairWidth: number,
   stepHeight: number,
   stepWidth: number,
@@ -113,7 +99,7 @@ function createStairs(
     .addType(GlobalTransform).id;
 
   for (let i = 0; i < steps; i++) {
-    createBox(commands, warehouse, {
+    createBox(warehouse, commands, {
       parentId: stairId,
       size: [stairWidth, stepHeight, stepWidth],
       translation: [0, stepHeight * i + stepHeight / 2, -stepWidth * i],
@@ -121,10 +107,7 @@ function createStairs(
   }
 
   const text = new Text();
-  text.value.write(
-    `Step height: ${stepHeight}m\nStep width: ${stepWidth}m`,
-    warehouse
-  );
+  text.value = `Step height: ${stepHeight}m\nStep width: ${stepWidth}m`;
   text.fontSize = 0.3;
 
   commands
@@ -134,16 +117,12 @@ function createStairs(
     .addType(GlobalTransform)
     .add(text);
 
-  dropStruct(text);
-  dropStruct(parent);
-  dropStruct(transform);
-
   return stairId;
 }
 
 function createRamp(
-  commands: Commands,
   warehouse: Warehouse,
+  commands: Commands,
   rampWidth: number,
   rampHeight: number,
   rampDepth: number,
@@ -167,14 +146,14 @@ function createRamp(
   const z = 0;
   const w = Math.cos(angle / 2);
 
-  createBox(commands, warehouse, {
+  createBox(warehouse, commands, {
     parentId: rampId,
     rotation: [x, y, z, w],
     size: [rampWidth, rampDepth, rampHeight],
   });
 
   const text = new Text();
-  text.value.write(`Angle: ${rampAngle}°`, warehouse);
+  text.value = `Angle: ${rampAngle}°`;
   text.fontSize = 0.3;
 
   commands
@@ -183,8 +162,4 @@ function createRamp(
     .add(transform.set([0, 3, 0]))
     .addType(GlobalTransform)
     .add(text);
-
-  dropStruct(text);
-  dropStruct(parent);
-  dropStruct(transform);
 }

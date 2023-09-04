@@ -14,7 +14,7 @@ import {
   Transform,
 } from "lattice-engine/scene";
 import { TransformControls, TransformMode } from "lattice-engine/transform";
-import { Commands, dropStruct, Mut, Query, Res } from "thyseus";
+import { Commands, Mut, Query, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";
 import { createOrbitControls } from "../../utils/createOrbitControls";
@@ -22,8 +22,8 @@ import { createScene } from "../../utils/createScene";
 import { createBoxGeometry } from "../../utils/geometry";
 
 export function initScene(
-  commands: Commands,
   warehouse: Res<Mut<Warehouse>>,
+  commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
@@ -31,21 +31,14 @@ export function initScene(
   physicsConfig.debug = true;
 
   createOrbitControls(commands, sceneStruct);
-  const { rootId, sceneId } = createScene(
-    commands,
-    warehouse,
-    coreStore,
-    sceneStruct
-  );
+  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
   createLights(commands, sceneId);
 
   const outlinePass = new OutlinePass();
-  outlinePass.visibleEdgeColor.set([1, 0, 0]);
-  outlinePass.hiddenEdgeColor.set([0, 1, 1]);
+  outlinePass.visibleEdgeColor = [1, 0, 0];
+  outlinePass.hiddenEdgeColor = [0, 1, 1];
 
   commands.getById(sceneId).add(outlinePass);
-
-  dropStruct(outlinePass);
 
   const geometry = createBoxGeometry(warehouse);
   const parent = new Parent(rootId);
@@ -77,10 +70,6 @@ export function initScene(
   transformControls.targetId = boxId;
 
   commands.spawn(true).add(transformControls);
-
-  dropStruct(transform);
-  dropStruct(geometry);
-  dropStruct(parent);
 }
 
 export const transformConfig = {

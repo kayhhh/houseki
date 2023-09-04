@@ -3,15 +3,15 @@ import { Asset, Warehouse } from "@lattice-engine/core";
 import { ExportContext } from "./context";
 
 export function exportImage(
+  warehouse: Readonly<Warehouse>,
   context: ExportContext,
-  warehouse: Warehouse,
   entityId: bigint,
   asset: Asset
 ) {
   const texture = context.doc.createTexture();
 
-  const mimeType = asset.mimeType.read(warehouse) ?? "";
-  const uri = asset.uri.read(warehouse) ?? "";
+  const mimeType = asset.mimeType;
+  const uri = asset.uri;
 
   texture.setMimeType(mimeType);
 
@@ -21,10 +21,8 @@ export function exportImage(
     texture.setURI(uri);
   }
 
-  const buffer = asset.data.read(warehouse);
-
-  if (buffer) {
-    const array = new Uint8Array(buffer);
+  const array = asset.data.read(warehouse);
+  if (array) {
     texture.setImage(array);
   }
 

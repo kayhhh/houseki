@@ -9,13 +9,13 @@ import {
   SceneStruct,
   Transform,
 } from "@lattice-engine/scene";
-import { Commands, dropStruct, Entity, Mut, Query, Res, With } from "thyseus";
+import { Commands, Entity, Mut, Query, Res, With } from "thyseus";
 
 import { DebugResource, PhysicsConfig, PhysicsStore } from "../resources";
 
 export function generateDebug(
-  commands: Commands,
   warehouse: Res<Mut<Warehouse>>,
+  commands: Commands,
   debug: Res<Mut<DebugResource>>,
   physicsStore: Res<PhysicsStore>,
   physicsConfig: Res<PhysicsConfig>,
@@ -58,10 +58,6 @@ export function generateDebug(
       .add(parent).id;
 
     debug.linesId = linesId;
-
-    dropStruct(material);
-    dropStruct(mesh);
-    dropStruct(parent);
   }
 
   for (const [entity, geometry, parent] of meshes) {

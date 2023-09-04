@@ -1,12 +1,15 @@
 import { Resource, Vec2, Vec3, Vec4 } from "@lattice-engine/core";
-import { Entity, EntityCommands, initStruct, struct } from "thyseus";
-
 import {
-  KeyframeInterpolation,
-  KeyframePath,
-  MaterialAlphaMode,
-  MeshMode,
-} from "./types";
+  Entity,
+  EntityCommands,
+  type f32,
+  struct,
+  type u8,
+  type u16,
+  type u64,
+} from "thyseus";
+
+import { MeshMode } from "./types";
 
 export class Quat extends Vec4 {
   constructor(x = 0, y = 0, z = 0, w = 1) {
@@ -20,20 +23,18 @@ export class Quat extends Vec4 {
  */
 @struct
 export class Transform {
-  @struct.substruct(Vec3) declare translation: Vec3;
-  @struct.substruct(Quat) declare rotation: Quat;
-  @struct.substruct(Vec3) declare scale: Vec3;
+  translation: Vec3;
+  rotation: Quat;
+  scale: Vec3;
 
   constructor(
     translation: Readonly<[number, number, number]> = [0, 0, 0],
     rotation: Readonly<[number, number, number, number]> = [0, 0, 0, 1],
     scale: Readonly<[number, number, number]> = [1, 1, 1]
   ) {
-    initStruct(this);
-
-    this.translation.fromArray(translation);
-    this.rotation.fromArray(rotation);
-    this.scale.fromArray(scale);
+    this.translation = new Vec3(...translation);
+    this.rotation = new Quat(...rotation);
+    this.scale = new Vec3(...scale);
   }
 
   set(
@@ -65,28 +66,28 @@ export class GlobalTransform extends Transform {}
 
 @struct
 export class Name {
-  @struct.substruct(Resource) declare value: Resource<string>;
+  value: string;
+
+  constructor(value = "") {
+    this.value = value;
+  }
 }
 
 @struct
 export class Parent {
-  @struct.u64 declare id: bigint;
+  id: u64;
 
-  constructor(id?: bigint) {
-    initStruct(this);
-
-    if (id) this.id = id;
+  constructor(id = 0n) {
+    this.id = id;
   }
 
   setEntity(entity: Readonly<Entity> | EntityCommands): this {
     this.id = entity.id;
-
     return this;
   }
 
   setId(id: bigint): this {
     this.id = id;
-
     return this;
   }
 }
@@ -98,7 +99,7 @@ export class Scene {
    * Used for scene content (ie. meshes) not temporary runtime things (player, camera, etc).
    * Useful for saving/loading scenes.
    */
-  @struct.u64 declare rootId: bigint;
+  rootId: u64 = 0n;
 }
 
 /**
@@ -106,22 +107,19 @@ export class Scene {
  */
 @struct
 export class Skybox {
-  @struct.u64 declare imageId: bigint;
+  imageId: u64 = 0n;
 }
 
 @struct
 export class Mesh {
-  @struct.u64 declare parentId: bigint; // Entity ID
-  @struct.u64 declare materialId: bigint; // Entity ID
+  parentId: u64 = 0n;
+  materialId: u64 = 0n;
 
-  @struct.u8 declare mode: MeshMode;
-  @struct.bool declare frustumCulled: boolean;
+  mode: u8;
+  frustumCulled: boolean;
 
   constructor(material?: Entity | EntityCommands) {
-    initStruct(this);
-
-    if (material) this.materialId = material.id;
-
+    this.materialId = material?.id ?? 0n;
     this.mode = MeshMode.TRIANGLES;
     this.frustumCulled = true;
   }
@@ -129,42 +127,28 @@ export class Mesh {
 
 @struct
 export class Geometry {
-  @struct.substruct(Resource) declare indices: Resource<Uint32Array>;
-
-  @struct.substruct(Resource) declare colors: Resource<Float32Array>;
-  @struct.substruct(Resource) declare joints: Resource<Float32Array>;
-  @struct.substruct(Resource) declare normals: Resource<Float32Array>;
-  @struct.substruct(Resource) declare positions: Resource<Float32Array>;
-  @struct.substruct(Resource) declare uv1: Resource<Float32Array>;
-  @struct.substruct(Resource) declare uv2: Resource<Float32Array>;
-  @struct.substruct(Resource) declare uv3: Resource<Float32Array>;
-  @struct.substruct(Resource) declare uv: Resource<Float32Array>;
-  @struct.substruct(Resource) declare weights: Resource<Float32Array>;
+  indices: Resource<Uint32Array> = new Resource();
+  colors: Resource<Float32Array> = new Resource();
+  joints: Resource<Float32Array> = new Resource();
+  normals: Resource<Float32Array> = new Resource();
+  positions: Resource<Float32Array> = new Resource();
+  uv1: Resource<Float32Array> = new Resource();
+  uv2: Resource<Float32Array> = new Resource();
+  uv3: Resource<Float32Array> = new Resource();
+  uv: Resource<Float32Array> = new Resource();
+  weights: Resource<Float32Array> = new Resource();
 }
 
 @struct
 export class TextureInfo {
-  @struct.u16 declare magFilter: number;
-  @struct.u16 declare minFilter: number;
-  @struct.u16 declare wrapS: number;
-  @struct.u16 declare wrapT: number;
-  @struct.f32 declare texCoord: number;
-  @struct.f32 declare rotation: number;
-  @struct.substruct(Vec2) declare offset: Vec2;
-  @struct.substruct(Vec2) declare scale: Vec2;
-
-  constructor() {
-    initStruct(this);
-
-    this.magFilter = 9729;
-    this.minFilter = 9987;
-    this.wrapS = 10497;
-    this.wrapT = 10497;
-    this.texCoord = 0;
-    this.rotation = 0;
-    this.offset.set(0, 0);
-    this.scale.set(1, 1);
-  }
+  magFilter: u16 = 9729;
+  minFilter: u16 = 9987;
+  wrapS: u16 = 10497;
+  wrapT: u16 = 10497;
+  texCoord: f32 = 0;
+  rotation: f32 = 0;
+  offset: Vec2 = new Vec2(0, 0);
+  scale: Vec2 = new Vec2(1, 1);
 }
 
 /**
@@ -172,53 +156,48 @@ export class TextureInfo {
  */
 @struct
 export class Image {
-  @struct.bool declare flipY: boolean;
+  flipY: boolean;
 
   constructor(flipY = false) {
-    initStruct(this);
-
     this.flipY = flipY;
   }
 }
 
 @struct
 export class StandardMaterial {
-  @struct.bool declare vertexColors: boolean;
+  vertexColors: boolean = false;
 
-  @struct.u8 declare alphaMode: MaterialAlphaMode;
-  @struct.f32 declare alphaCutoff: number;
-  @struct.bool declare doubleSided: boolean;
+  alphaMode: u8 = 0;
+  alphaCutoff: f32 = 0;
+  doubleSided: boolean = false;
 
-  @struct.substruct(Vec4) declare baseColor: Vec4;
-  @struct.u64 declare baseColorTextureId: bigint; // Entity ID
-  @struct.substruct(TextureInfo) declare baseColorTextureInfo: TextureInfo;
+  baseColor: Vec4;
+  baseColorTextureId: u64 = 0n; // Entity ID
+  baseColorTextureInfo: TextureInfo = new TextureInfo();
 
-  @struct.substruct(Vec3) declare emissiveFactor: Vec3;
-  @struct.u64 declare emissiveTextureId: bigint; // Entity ID
-  @struct.substruct(TextureInfo) declare emissiveTextureInfo: TextureInfo;
+  emissiveFactor: Vec3 = new Vec3();
+  emissiveTextureId: u64 = 0n; // Entity ID
+  emissiveTextureInfo: TextureInfo = new TextureInfo();
 
-  @struct.f32 declare normalScale: number;
-  @struct.u64 declare normalTextureId: bigint; // Entity ID
-  @struct.substruct(TextureInfo) declare normalTextureInfo: TextureInfo;
+  normalScale: f32 = 0;
+  normalTextureId: u64 = 0n; // Entity ID
+  normalTextureInfo: TextureInfo = new TextureInfo();
 
-  @struct.f32 declare occlusionStrength: number;
-  @struct.u64 declare occlusionTextureId: bigint; // Entity ID
-  @struct.substruct(TextureInfo) declare occlusionTextureInfo: TextureInfo;
+  occlusionStrength: f32 = 0;
+  occlusionTextureId: u64 = 0n; // Entity ID
+  occlusionTextureInfo: TextureInfo = new TextureInfo();
 
-  @struct.f32 declare roughness: number;
-  @struct.f32 declare metalness: number;
-  @struct.u64 declare metallicRoughnessTextureId: bigint; // Entity ID
-  @struct.substruct(TextureInfo)
-  declare metallicRoughnessTextureInfo: TextureInfo;
+  roughness: f32 = 0;
+  metalness: f32 = 0;
+  metallicRoughnessTextureId: u64 = 0n; // Entity ID
+  metallicRoughnessTextureInfo: TextureInfo = new TextureInfo();
 
   constructor(
     color: [number, number, number, number] = [1, 1, 1, 1],
     metalness = 1,
     roughness = 1
   ) {
-    initStruct(this);
-
-    this.baseColor.fromArray(color);
+    this.baseColor = new Vec4(...color);
     this.normalScale = 1;
     this.occlusionStrength = 1;
     this.roughness = roughness;
@@ -228,42 +207,25 @@ export class StandardMaterial {
 
 @struct
 export class BasicMaterial {
-  @struct.bool declare doubleSided: boolean;
-  @struct.bool declare colorWrite: boolean;
-
-  constructor() {
-    initStruct(this);
-
-    this.doubleSided = false;
-    this.colorWrite = true;
-  }
+  doubleSided: boolean = false;
+  colorWrite: boolean = true;
 }
 
 @struct
 export class LineMaterial {
-  @struct.array({ length: 4, type: "f32" }) declare color: Float32Array;
-  @struct.bool declare vertexColors: boolean;
+  color: [f32, f32, f32, f32];
+  vertexColors: boolean = false;
 
   constructor(color = [1, 1, 1, 1]) {
-    initStruct(this);
-
-    this.color.set(color);
+    this.color = [...color] as [f32, f32, f32, f32];
   }
 }
 
 @struct
 export class PerspectiveCamera {
-  @struct.f32 declare fov: number;
-  @struct.f32 declare near: number;
-  @struct.f32 declare far: number;
-
-  constructor() {
-    initStruct(this);
-
-    this.fov = 75;
-    this.near = 0.1;
-    this.far = 1000;
-  }
+  fov: f32 = 75;
+  near: f32 = 0.1;
+  far: f32 = 1000;
 }
 
 /**
@@ -281,20 +243,15 @@ export class AnimationMixer {}
  */
 @struct
 export class AnimationClip {
-  @struct.u64 declare mixerId: bigint; // Entity ID
+  mixerId: u64; // Entity ID
+  name: string;
+  play: boolean;
+  loop: boolean;
+  speed: f32;
 
-  @struct.substruct(Resource) declare name: Resource<string>;
-
-  @struct.bool declare play: boolean;
-
-  @struct.bool declare loop: boolean;
-
-  @struct.f32 declare speed: number;
-
-  constructor(mixerId = 0n, play = false, loop = false, speed = 1) {
-    initStruct(this);
-
+  constructor(mixerId = 0n, name = "", play = false, loop = false, speed = 1) {
     this.mixerId = mixerId;
+    this.name = name;
     this.play = play;
     this.loop = loop;
     this.speed = speed;
@@ -306,56 +263,47 @@ export class AnimationClip {
  */
 @struct
 export class KeyframeTrack {
-  @struct.u64 declare clipId: bigint; // Entity ID
-
-  @struct.u64 declare targetId: bigint; // Entity ID
-
-  @struct.u8 declare path: KeyframePath;
-
-  @struct.u8 declare interpolation: KeyframeInterpolation;
-
-  @struct.substruct(Resource) declare times: Resource<Float32Array>;
-
-  @struct.substruct(Resource) declare values: Resource<Float32Array>;
+  clipId: u64 = 0n; // Entity ID
+  targetId: u64 = 0n; // Entity ID
+  path: u8 = 0;
+  interpolation: u8 = 0;
+  times: f32[] = [];
+  values: f32[] = [];
 }
 
 @struct
 export class AmbientLight {
-  @struct.array({ length: 3, type: "f32" }) declare color: Float32Array;
-  @struct.f32 declare intensity: number;
+  color: [f32, f32, f32];
+  intensity: f32;
 
   constructor(color = [1, 1, 1], intensity = 1) {
-    initStruct(this);
-
-    this.color.set(color);
+    this.color = [...color] as [f32, f32, f32];
     this.intensity = intensity;
   }
 }
 
 @struct
 export class DirectionalLight {
-  @struct.array({ length: 3, type: "f32" }) declare color: Float32Array;
-  @struct.f32 declare intensity: number;
+  color: [f32, f32, f32];
+  intensity: f32;
 
   constructor(color = [1, 1, 1], intensity = 1) {
-    initStruct(this);
-
-    this.color.set(color);
+    this.color = [...color] as [f32, f32, f32];
     this.intensity = intensity;
   }
 }
 
 @struct
 export class ShadowMap {
-  @struct.u16 declare mapSize: number;
-  @struct.f32 declare bias: number;
+  mapSize: u16;
+  bias: f32;
 
-  @struct.f32 declare left: number;
-  @struct.f32 declare right: number;
-  @struct.f32 declare top: number;
-  @struct.f32 declare bottom: number;
-  @struct.f32 declare near: number;
-  @struct.f32 declare far: number;
+  left: f32;
+  right: f32;
+  top: f32;
+  bottom: f32;
+  near: f32;
+  far: f32;
 
   constructor(
     mapSize = 2048,
@@ -367,8 +315,6 @@ export class ShadowMap {
     far = 1000,
     bias = -0.0001
   ) {
-    initStruct(this);
-
     this.mapSize = mapSize;
     this.left = left;
     this.right = right;

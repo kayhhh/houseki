@@ -10,10 +10,10 @@ import { importPhysicsBody } from "./importPhysicsBody";
 import { importText } from "./importText";
 
 export function importNode(
+  warehouse: Warehouse,
   node: Node,
   parentId: bigint,
   commands: Commands,
-  warehouse: Warehouse,
   context: ImportContext
 ) {
   const nodePosition = node.getTranslation();
@@ -29,10 +29,7 @@ export function importNode(
 
   context.parent.id = parentId;
 
-  context.name.value.write(
-    node.getName() || `Node_${context.nodes.size}`,
-    warehouse
-  );
+  context.name.value = node.getName() || `Node_${context.nodes.size}`;
 
   const entityId = commands
     .spawn(true)
@@ -44,16 +41,16 @@ export function importNode(
   context.nodes.set(node, entityId);
 
   const mesh = node.getMesh();
-  if (mesh) importMesh(mesh, entityId, commands, warehouse, context);
+  if (mesh) importMesh(warehouse, mesh, entityId, commands, context);
 
   importCollider(context, commands, node, entityId);
   importPhysicsBody(context, commands, node, entityId);
-  importText(commands, warehouse, node, entityId);
-  importExtras(commands, warehouse, node, entityId);
+  importText(commands, node, entityId);
+  importExtras(commands, node, entityId);
 
   node
     .listChildren()
     .forEach((child) =>
-      importNode(child, entityId, commands, warehouse, context)
+      importNode(warehouse, child, entityId, commands, context)
     );
 }

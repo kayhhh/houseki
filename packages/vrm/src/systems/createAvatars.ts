@@ -1,12 +1,10 @@
-import { Loading, Warehouse } from "@lattice-engine/core";
+import { Loading } from "@lattice-engine/core";
 import { VRM, VRMLoaderPlugin, VRMUtils } from "@pixiv/three-vrm";
 import { Mesh } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import {
   Commands,
-  dropStruct,
   Entity,
-  Mut,
   Query,
   Res,
   SystemRes,
@@ -34,7 +32,6 @@ class LocalStore {
  */
 export function createAvatars(
   commands: Commands,
-  warehouse: Res<Mut<Warehouse>>,
   vrmStore: Res<VrmStore>,
   localStore: SystemRes<LocalStore>,
   toLoad: Query<[Entity, Vrm], Without<Loading>>,
@@ -46,7 +43,7 @@ export function createAvatars(
     ids.push(entity.id);
 
     const entityId = entity.id;
-    const uri = vrm.uri.read(warehouse);
+    const uri = vrm.uri;
 
     // If the VRM uri hasn't changed, skip
     if (localStore.loadingURI.get(entityId) === uri) continue;
@@ -59,11 +56,9 @@ export function createAvatars(
     // Load the new VRM
     localStore.loadingURI.set(entityId, uri);
 
-    const loadMessage = new Loading();
-    loadMessage.message.write(`Loading ${uri}`, warehouse);
+    const loadMessage = new Loading(`Loading ${uri}`);
 
     commands.getById(entity.id).add(loadMessage);
-    dropStruct(loadMessage);
 
     loadVrm(entityId, uri, localStore);
   }

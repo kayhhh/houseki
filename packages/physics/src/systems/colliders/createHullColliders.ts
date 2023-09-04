@@ -49,10 +49,10 @@ export function createHullColliders(
       for (const [geometryEntity, geometry] of geometries) {
         if (geometryEntity.id !== meshId) continue;
 
-        const vertices = geometry.positions.read(warehouse);
-        if (!vertices) continue;
+        const positions = geometry.positions.read(warehouse);
+        if (!positions) continue;
 
-        const colliderDesc = ColliderDesc.convexHull(vertices);
+        const colliderDesc = ColliderDesc.convexHull(positions);
         if (!colliderDesc) continue;
 
         object = store.world.createCollider(colliderDesc, rigidbody);

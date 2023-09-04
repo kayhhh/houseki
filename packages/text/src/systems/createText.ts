@@ -1,6 +1,5 @@
 /// <reference types="../../troika.d.ts" />
 
-import { Warehouse } from "@lattice-engine/core";
 import { RenderStore } from "@lattice-engine/render";
 import { Entity, Query, Res } from "thyseus";
 import { Text as TroikaText } from "troika-three-text";
@@ -9,7 +8,7 @@ import { Text } from "../components";
 import { TextStore } from "../resources";
 import { AnchorX, AnchorY } from "../types";
 
-// TODO: Figure out how to enable this
+// TODO: Figure out how to enable workaround
 // Currently it breaks some other postprocessing effects,
 // such as the outline effect used by the transform controls package
 // https://github.com/protectwise/troika/tree/main/packages/troika-three-text#postprocessing
@@ -17,7 +16,6 @@ import { AnchorX, AnchorY } from "../types";
 // OverrideMaterialManager.workaroundEnabled = true;
 
 export function createText(
-  warehouse: Res<Warehouse>,
   renderStore: Res<RenderStore>,
   textStore: Res<TextStore>,
   entities: Query<[Entity, Text]>
@@ -34,7 +32,7 @@ export function createText(
       textStore.textObjects.set(entity.id, object);
     }
 
-    object.text = text.value.read(warehouse) ?? "";
+    object.text = text.value;
 
     object.fontSize = text.fontSize;
 

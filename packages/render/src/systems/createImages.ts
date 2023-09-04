@@ -1,6 +1,6 @@
 import { Asset, Warehouse } from "@lattice-engine/core";
 import { Image } from "@lattice-engine/scene";
-import { Entity, Query, Res, SystemRes } from "thyseus";
+import { Entity, Mut, Query, Res, SystemRes } from "thyseus";
 
 import { RenderStore } from "../resources";
 
@@ -13,7 +13,7 @@ class LocalStore {
   /**
    * Entity ID -> data used to create the ImageBitmap
    */
-  readonly loadedData = new Map<bigint, ArrayBuffer>();
+  readonly loadedData = new Map<bigint, Uint8Array>();
 }
 
 /**
@@ -21,11 +21,15 @@ class LocalStore {
  */
 export function createImages(
   warehouse: Res<Warehouse>,
-  renderStore: Res<RenderStore>,
+  renderStore: Res<Mut<RenderStore>>,
   localStore: SystemRes<LocalStore>,
   entities: Query<[Entity, Asset, Image]>
 ) {
   const ids: bigint[] = [];
+
+  localStore.bitmaps.forEach((bitmap, id) => {
+    renderStore.images.set(id, bitmap);
+  });
 
   for (const [entity, asset, image] of entities) {
     ids.push(entity.id);
@@ -33,10 +37,10 @@ export function createImages(
     // If already created, skip
     if (localStore.bitmaps.has(entity.id)) continue;
 
-    const data = asset.data.read(warehouse);
+    const array = asset.data.read(warehouse);
 
     // If data is empty, remove the bitmap
-    if (!data || data.byteLength === 0) {
+    if (!array) {
       localStore.bitmaps.delete(entity.id);
       localStore.loadedData.delete(entity.id);
       renderStore.images.delete(entity.id);
@@ -45,19 +49,17 @@ export function createImages(
 
     // If data hasn't changed, skip
     const loaded = localStore.loadedData.get(entity.id);
-    if (loaded && loaded.byteLength === data.byteLength) continue;
+    if (loaded && loaded === array) continue;
 
     // Create the bitmap
-    localStore.loadedData.set(entity.id, data);
+    localStore.loadedData.set(entity.id, array);
 
-    const type = asset.mimeType.read(warehouse);
-    const blob = new Blob([data], { type });
+    const blob = new Blob([array], { type: asset.mimeType });
     const entityId = entity.id;
     const imageOrientation: ImageOrientation = image.flipY ? "flipY" : "none";
 
     createImageBitmap(blob, { imageOrientation }).then((bitmap) => {
       localStore.bitmaps.set(entityId, bitmap);
-      renderStore.images.set(entityId, bitmap);
     });
   }
 

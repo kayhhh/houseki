@@ -1,6 +1,6 @@
 import { Vec3 } from "@lattice-engine/core";
 import { Transform } from "@lattice-engine/scene";
-import { Entity, EntityCommands, initStruct, struct } from "thyseus";
+import { Entity, EntityCommands, type f32, struct, type u64 } from "thyseus";
 
 export class TargetTransform extends Transform {}
 
@@ -8,34 +8,28 @@ export class Velocity extends Vec3 {}
 
 @struct
 export class BoxCollider {
-  @struct.substruct(Vec3) declare size: Vec3;
+  size: Vec3;
 
   constructor(size: Readonly<[number, number, number]> = [1, 1, 1]) {
-    initStruct(this);
-
-    this.size.fromArray(size);
+    this.size = new Vec3(...size);
   }
 }
 
 @struct
 export class SphereCollider {
-  @struct.f32 declare radius: number;
+  radius: f32;
 
   constructor(radius = 0.5) {
-    initStruct(this);
-
     this.radius = radius;
   }
 }
 
 @struct
 export class CapsuleCollider {
-  @struct.f32 declare radius: number;
-  @struct.f32 declare height: number;
+  radius: f32;
+  height: f32;
 
   constructor(radius = 0.5, height = 1) {
-    initStruct(this);
-
     this.radius = radius;
     this.height = height;
   }
@@ -43,12 +37,10 @@ export class CapsuleCollider {
 
 @struct
 export class CylinderCollider {
-  @struct.f32 declare radius: number;
-  @struct.f32 declare height: number;
+  radius: f32;
+  height: f32;
 
   constructor(radius = 0.5, height = 1) {
-    initStruct(this);
-
     this.radius = radius;
     this.height = height;
   }
@@ -56,23 +48,19 @@ export class CylinderCollider {
 
 @struct
 export class HullCollider {
-  @struct.u64 declare meshId: bigint;
+  meshId: u64;
 
   constructor(mesh?: Entity | EntityCommands) {
-    initStruct(this);
-
-    if (mesh) this.meshId = mesh.id;
+    this.meshId = mesh?.id ?? 0n;
   }
 }
 
 @struct
 export class MeshCollider {
-  @struct.u64 declare meshId: bigint;
+  meshId: u64;
 
   constructor(mesh?: Entity | EntityCommands) {
-    initStruct(this);
-
-    if (mesh) this.meshId = mesh.id;
+    this.meshId = mesh?.id ?? 0n;
   }
 }
 
@@ -81,52 +69,46 @@ export class StaticBody {}
 
 @struct
 export class KinematicBody {
-  @struct.f32 declare mass: number;
-  @struct.substruct(Vec3) declare linearVelocity: Vec3;
-  @struct.substruct(Vec3) declare angularVelocity: Vec3;
+  mass: f32;
+  linearVelocity: Vec3 = new Vec3();
+  angularVelocity: Vec3 = new Vec3();
 
   constructor(mass = 1) {
-    initStruct(this);
-
     this.mass = mass;
   }
 }
 
 @struct
 export class DynamicBody {
-  @struct.f32 declare mass: number;
-  @struct.substruct(Vec3) declare linearVelocity: Vec3;
-  @struct.substruct(Vec3) declare angularVelocity: Vec3;
+  mass: f32 = 0;
+  linearVelocity: Vec3 = new Vec3();
+  angularVelocity: Vec3 = new Vec3();
 
   constructor(mass = 1) {
-    initStruct(this);
-
     this.mass = mass;
   }
 }
 
 @struct
 export class CharacterController {
-  @struct.f32 declare offset: number;
+  offset: f32;
 
-  @struct.f32 declare maxSlopeClimbAngle: number;
-  @struct.f32 declare minSlopeSlideAngle: number;
+  maxSlopeClimbAngle: f32;
+  minSlopeSlideAngle: f32;
 
-  @struct.bool declare enableAutostep: boolean;
-  @struct.f32 declare maxStepHeight: number;
-  @struct.f32 declare minStepWidth: number;
-  @struct.bool declare stepOnDynamicBodies: boolean;
+  enableAutostep: boolean;
+  maxStepHeight: f32;
+  minStepWidth: f32;
+  stepOnDynamicBodies: boolean;
 
-  @struct.bool declare enableSnapToGround: boolean;
-  @struct.f32 declare snapToGroundDistance: number;
+  enableSnapToGround: boolean;
+  snapToGroundDistance: f32;
 
-  @struct.bool declare applyImpulsesToDynamicBodies: boolean;
+  applyImpulsesToDynamicBodies: boolean;
 
-  @struct.bool declare isGrounded: boolean;
+  isGrounded: boolean;
 
   constructor(offset = 0.02) {
-    initStruct(this);
-
     this.offset = offset;
 
     this.maxSlopeClimbAngle = (60 * Math.PI) / 180;
@@ -141,6 +123,7 @@ export class CharacterController {
     this.snapToGroundDistance = 0.2;
 
     this.applyImpulsesToDynamicBodies = true;
+    this.isGrounded = false;
   }
 }
 
@@ -149,21 +132,21 @@ export class CharacterController {
  */
 @struct
 export class Raycast {
-  @struct.substruct(Vec3) declare origin: Vec3;
-  @struct.substruct(Vec3) declare direction: Vec3;
-  @struct.f32 declare maxToi: number;
-  @struct.bool declare solid: boolean;
+  origin: Vec3 = new Vec3();
+  direction: Vec3 = new Vec3();
+  maxToi: f32;
+  solid: boolean;
 
   /**
    * Entity ID of a rigid body that should be excluded from the ray cast.
    */
-  @struct.u64 declare excludeRigidBodyId: bigint;
+  excludeRigidBodyId: u64 = 0n;
 
-  @struct.bool declare hit: boolean;
-  @struct.f32 declare hitToi: number;
-  @struct.u64 declare hitEntityId: bigint;
-  @struct.substruct(Vec3) declare hitPosition: Vec3;
-  @struct.substruct(Vec3) declare hitNormal: Vec3;
+  hit: boolean = false;
+  hitToi: f32 = 0;
+  hitEntityId: u64 = 0n;
+  hitPosition: Vec3 = new Vec3();
+  hitNormal: Vec3 = new Vec3();
 
   constructor(
     origin: Readonly<[number, number, number]> = [0, 0, 0],
@@ -171,11 +154,8 @@ export class Raycast {
     maxToi = 1000,
     solid = false
   ) {
-    initStruct(this);
-
-    this.origin.fromArray(origin);
-    this.direction.fromArray(direction);
-
+    this.origin = new Vec3(...origin);
+    this.direction = new Vec3(...direction);
     this.maxToi = maxToi;
     this.solid = solid;
   }

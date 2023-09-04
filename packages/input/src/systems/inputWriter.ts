@@ -14,6 +14,7 @@ import {
 import { InputStruct } from "../resources";
 import {
   keyboardEventToECS,
+  keyToECS,
   mouseEventToECS,
   pointerEventToECS,
   wheelEventToECS,
@@ -22,6 +23,11 @@ import {
 class LocalStore {
   canvas: HTMLCanvasElement | null = null;
   removeEventListeners: (() => void) | null = null;
+
+  isPointerDown = false;
+  isPointerLocked = false;
+
+  keyPressed = new Set<number>();
 
   // Store events in a queue so we can process them in the next frame
   readonly pointerMoveEvents: PointerMoveEvent[] = [];
@@ -61,44 +67,44 @@ export function inputWriter(
 
   // Process queued events
   for (const event of localStore.pointerMoveEvents) {
-    pointerMoveWriter.createFrom(event);
+    pointerMoveWriter.create(event);
   }
 
   for (const event of localStore.pointerDownEvents) {
-    inputStruct.isPointerDown = true;
-    pointerDownWriter.createFrom(event);
+    pointerDownWriter.create(event);
   }
 
   for (const event of localStore.pointerUpEvents) {
-    inputStruct.isPointerDown = false;
-    pointerUpWriter.createFrom(event);
+    pointerUpWriter.create(event);
   }
 
   for (const event of localStore.pointerCancelEvents) {
-    inputStruct.isPointerDown = false;
-    pointerCancelWriter.createFrom(event);
+    pointerCancelWriter.create(event);
   }
 
   for (const event of localStore.contextMenuEvents) {
-    contextMenuWriter.createFrom(event);
+    contextMenuWriter.create(event);
   }
 
   for (const event of localStore.onWheelEvents) {
-    onWheelWriter.createFrom(event);
+    onWheelWriter.create(event);
   }
 
   for (const event of localStore.keyDownEvents) {
-    keyDownWriter.createFrom(event);
-
-    // Update pressed keys
-    inputStruct.keys[event.key] = 1;
+    keyDownWriter.create(event);
   }
 
   for (const event of localStore.keyUpEvents) {
-    keyUpWriter.createFrom(event);
+    keyUpWriter.create(event);
+  }
 
-    // Update pressed keys
-    inputStruct.keys[event.key] = 0;
+  inputStruct.isPointerDown = localStore.isPointerDown;
+  inputStruct.isPointerLocked = localStore.isPointerLocked;
+
+  inputStruct.keys = 0n;
+
+  for (const key of localStore.keyPressed) {
+    inputStruct.setKeyPressed(key);
   }
 
   // Clear local queues
@@ -111,87 +117,98 @@ export function inputWriter(
   localStore.keyDownEvents.length = 0;
   localStore.keyUpEvents.length = 0;
 
-  // If canvas hasn't changed, we're done
   const canvas = coreStore.canvas;
-  if (localStore.canvas === canvas) return;
 
-  // Remove old listeners
-  if (localStore.removeEventListeners) localStore.removeEventListeners();
-
-  // Set new canvas
-  localStore.canvas = canvas;
-
-  if (!canvas) return;
-
-  // Add new listeners
-  function onPointerDown(event: PointerEvent) {
-    if (inputStruct.enablePointerLock) {
-      if (document.pointerLockElement !== canvas) canvas?.requestPointerLock();
-    } else {
-      canvas?.setPointerCapture(event.pointerId);
+  // If canvas changes, update listeners
+  if (localStore.canvas !== canvas) {
+    // Remove old listeners
+    if (localStore.removeEventListeners) {
+      localStore.removeEventListeners();
     }
 
-    localStore.pointerDownEvents.push(pointerEventToECS(event));
+    // Set new canvas
+    localStore.canvas = canvas;
+
+    if (canvas) {
+      // Add new listeners
+      const onPointerDown = (event: PointerEvent) => {
+        localStore.isPointerDown = true;
+
+        if (inputStruct.enablePointerLock) {
+          if (document.pointerLockElement !== canvas) {
+            canvas?.requestPointerLock();
+          }
+        } else {
+          canvas?.setPointerCapture(event.pointerId);
+        }
+
+        localStore.pointerDownEvents.push(pointerEventToECS(event));
+      };
+
+      const onPointerMove = (event: PointerEvent) => {
+        localStore.pointerMoveEvents.push(pointerEventToECS(event));
+      };
+
+      const onPointerCancel = (event: PointerEvent) => {
+        canvas?.releasePointerCapture(event.pointerId);
+        localStore.isPointerDown = false;
+        localStore.pointerCancelEvents.push(pointerEventToECS(event));
+      };
+
+      const onPointerUp = (event: PointerEvent) => {
+        canvas?.releasePointerCapture(event.pointerId);
+        localStore.isPointerDown = false;
+        localStore.pointerUpEvents.push(pointerEventToECS(event));
+      };
+
+      const onContextMenu = (event: MouseEvent) => {
+        event.preventDefault();
+        localStore.contextMenuEvents.push(mouseEventToECS(event));
+      };
+
+      const onWheel = (event: WheelEvent) => {
+        localStore.onWheelEvents.push(wheelEventToECS(event));
+      };
+
+      const onKeyDown = (event: KeyboardEvent) => {
+        localStore.keyPressed.add(keyToECS(event.key));
+        localStore.keyDownEvents.push(keyboardEventToECS(event));
+      };
+
+      const onKeyUp = (event: KeyboardEvent) => {
+        localStore.keyPressed.delete(keyToECS(event.key));
+        localStore.keyUpEvents.push(keyboardEventToECS(event));
+      };
+
+      const onPointerLockChange = () => {
+        localStore.isPointerLocked = document.pointerLockElement === canvas;
+      };
+
+      // Set initial pointer lock state
+      localStore.isPointerLocked = document.pointerLockElement === canvas;
+
+      canvas.addEventListener("pointerdown", onPointerDown);
+      canvas.addEventListener("pointermove", onPointerMove);
+      canvas.addEventListener("pointercancel", onPointerCancel);
+      canvas.addEventListener("pointerup", onPointerUp);
+      canvas.addEventListener("contextmenu", onContextMenu);
+      canvas.addEventListener("wheel", onWheel);
+      document.addEventListener("keydown", onKeyDown);
+      document.addEventListener("keyup", onKeyUp);
+      document.addEventListener("pointerlockchange", onPointerLockChange);
+
+      // Set remove listeners function
+      localStore.removeEventListeners = () => {
+        canvas.removeEventListener("pointerdown", onPointerDown);
+        canvas.removeEventListener("pointermove", onPointerMove);
+        canvas.removeEventListener("pointercancel", onPointerCancel);
+        canvas.removeEventListener("pointerup", onPointerUp);
+        canvas.removeEventListener("contextmenu", onContextMenu);
+        canvas.removeEventListener("wheel", onWheel);
+        document.removeEventListener("keydown", onKeyDown);
+        document.removeEventListener("keyup", onKeyUp);
+        document.removeEventListener("pointerlockchange", onPointerLockChange);
+      };
+    }
   }
-
-  function onPointerMove(event: PointerEvent) {
-    localStore.pointerMoveEvents.push(pointerEventToECS(event));
-  }
-
-  function onPointerCancel(event: PointerEvent) {
-    canvas?.releasePointerCapture(event.pointerId);
-    localStore.pointerCancelEvents.push(pointerEventToECS(event));
-  }
-
-  function onPointerUp(event: PointerEvent) {
-    canvas?.releasePointerCapture(event.pointerId);
-    localStore.pointerUpEvents.push(pointerEventToECS(event));
-  }
-
-  function onContextMenu(event: MouseEvent) {
-    event.preventDefault();
-    localStore.contextMenuEvents.push(mouseEventToECS(event));
-  }
-
-  function onWheel(event: WheelEvent) {
-    localStore.onWheelEvents.push(wheelEventToECS(event));
-  }
-
-  function onKeyDown(event: KeyboardEvent) {
-    localStore.keyDownEvents.push(keyboardEventToECS(event));
-  }
-
-  function onKeyUp(event: KeyboardEvent) {
-    localStore.keyUpEvents.push(keyboardEventToECS(event));
-  }
-
-  function onPointerLockChange() {
-    inputStruct.isPointerLocked = document.pointerLockElement === canvas;
-  }
-
-  // Set initial pointer lock state
-  inputStruct.isPointerLocked = document.pointerLockElement === canvas;
-
-  canvas.addEventListener("pointerdown", onPointerDown);
-  canvas.addEventListener("pointermove", onPointerMove);
-  canvas.addEventListener("pointercancel", onPointerCancel);
-  canvas.addEventListener("pointerup", onPointerUp);
-  canvas.addEventListener("contextmenu", onContextMenu);
-  canvas.addEventListener("wheel", onWheel);
-  document.addEventListener("keydown", onKeyDown);
-  document.addEventListener("keyup", onKeyUp);
-  document.addEventListener("pointerlockchange", onPointerLockChange);
-
-  // Set remove listeners function
-  localStore.removeEventListeners = () => {
-    canvas.removeEventListener("pointerdown", onPointerDown);
-    canvas.removeEventListener("pointermove", onPointerMove);
-    canvas.removeEventListener("pointercancel", onPointerCancel);
-    canvas.removeEventListener("pointerup", onPointerUp);
-    canvas.removeEventListener("contextmenu", onContextMenu);
-    canvas.removeEventListener("wheel", onWheel);
-    document.removeEventListener("keydown", onKeyDown);
-    document.removeEventListener("keyup", onKeyUp);
-    document.removeEventListener("pointerlockchange", onPointerLockChange);
-  };
 }

@@ -9,7 +9,7 @@ import {
   StandardMaterial,
   Transform,
 } from "lattice-engine/scene";
-import { Commands, dropStruct } from "thyseus";
+import { Commands, Mut, Res } from "thyseus";
 
 import { createBoxGeometry } from "./geometry";
 
@@ -20,13 +20,11 @@ export function cleanupMaterials() {
 
 let _textureId: bigint | undefined = undefined;
 
-function getTextureId(commands: Commands, warehouse: Warehouse) {
+function getTextureId(commands: Commands) {
   if (_textureId) return _textureId;
 
-  const asset = new Asset();
-  asset.uri.write("/DevGrid.png", warehouse);
+  const asset = new Asset("/DevGrid.png", "image/png");
   _textureId = commands.spawn(true).add(asset).addType(Image).id;
-  dropStruct(asset);
 
   return _textureId;
 }
@@ -36,13 +34,8 @@ function getTextureId(commands: Commands, warehouse: Warehouse) {
  */
 const materials = new Map<number, Map<number, bigint>>();
 
-function createMaterial(
-  commands: Commands,
-  warehouse: Warehouse,
-  scaleX: number,
-  scaleZ: number
-) {
-  const textureId = getTextureId(commands, warehouse);
+function createMaterial(commands: Commands, scaleX: number, scaleZ: number) {
+  const textureId = getTextureId(commands);
 
   const material = new StandardMaterial();
   material.roughness = 1;
@@ -56,8 +49,6 @@ function createMaterial(
 
   const materialId = commands.spawn(true).add(material).id;
 
-  dropStruct(material);
-
   const materialMap = materials.get(scaleX) || new Map<number, bigint>();
   materialMap.set(scaleZ, materialId);
   materials.set(scaleX, materialMap);
@@ -67,19 +58,18 @@ function createMaterial(
 
 function getMaterialId(
   commands: Commands,
-  warehouse: Warehouse,
   scaleX: number,
   scaleZ: number
 ): bigint {
   const existingId = materials.get(scaleX)?.get(scaleZ);
   if (existingId) return existingId;
 
-  return createMaterial(commands, warehouse, scaleX, scaleZ);
+  return createMaterial(commands, scaleX, scaleZ);
 }
 
 export function createBox(
+  warehouse: Res<Mut<Warehouse>>,
   commands: Commands,
-  warehouse: Warehouse,
   options: {
     size?: [number, number, number];
     translation?: [number, number, number];
@@ -102,12 +92,7 @@ export function createBox(
   const mesh = new Mesh();
 
   if (addTexture) {
-    const materialId = getMaterialId(
-      commands,
-      warehouse,
-      size[0] / 2,
-      size[2] / 2
-    );
+    const materialId = getMaterialId(commands, size[0] / 2, size[2] / 2);
     mesh.materialId = materialId;
   }
 
@@ -119,20 +104,12 @@ export function createBox(
     .add(geometry).id;
 
   if (parentId) {
-    const parent = new Parent(parentId);
-    commands.getById(boxId).add(parent);
-    dropStruct(parent);
+    commands.getById(boxId).add(new Parent(parentId));
   }
 
   if (addCollider) {
-    const collider = new BoxCollider();
-    collider.size.fromArray(size);
-    commands.getById(boxId).add(collider).addType(StaticBody);
-    dropStruct(collider);
+    commands.getById(boxId).add(new BoxCollider(size)).addType(StaticBody);
   }
-
-  dropStruct(geometry);
-  dropStruct(mesh);
 
   return boxId;
 }

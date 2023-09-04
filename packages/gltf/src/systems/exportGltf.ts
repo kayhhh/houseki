@@ -75,8 +75,8 @@ class LocalStore {
 }
 
 export function exportGltf(
-  localStore: SystemRes<LocalStore>,
   warehouse: Res<Mut<Warehouse>>,
+  localStore: SystemRes<LocalStore>,
   reader: EventReader<ExportGltf>,
   outWriter: EventWriter<ExportedGltf>,
   names: Query<[Entity, Name]>,
@@ -100,11 +100,12 @@ export function exportGltf(
   for (const binary of localStore.outBinary) {
     console.info(`📦 Exported glTF binary (${bytesToDisplay(binary.length)})`);
 
-    const event = outWriter.create();
-    event.binary = true;
-
     const blob = new Blob([binary], { type: "model/gltf-binary" });
-    event.uri.write(URL.createObjectURL(blob), warehouse);
+
+    const outEvent = new ExportedGltf();
+    outEvent.uri = URL.createObjectURL(blob);
+    outEvent.binary = true;
+    outWriter.create(outEvent);
 
     localStore.outBinary.shift();
   }
@@ -122,20 +123,19 @@ export function exportGltf(
       type: "application/json",
     });
 
-    const event = outWriter.create();
-    event.uri.write(URL.createObjectURL(blob), warehouse);
+    const outEvent = new ExportedGltf();
+    outEvent.uri = URL.createObjectURL(blob);
+    outEvent.binary = false;
+    outWriter.create(outEvent);
 
     localStore.outJson.shift();
   }
-
-  if (reader.length === 0) return;
 
   for (const event of reader) {
     const context = new ExportContext();
 
     for (const [entity, name] of names) {
-      const value = name.value.read(warehouse) ?? "";
-      context.names.set(entity.id, value);
+      context.names.set(entity.id, name.value);
     }
 
     let rootId: bigint | undefined;
@@ -152,7 +152,7 @@ export function exportGltf(
     }
 
     for (const [entity, asset] of images) {
-      exportImage(context, warehouse, entity.id, asset);
+      exportImage(warehouse, context, entity.id, asset);
     }
 
     for (const [entity, material] of materials) {
@@ -160,7 +160,7 @@ export function exportGltf(
     }
 
     for (const [entity, mesh, geometry] of meshes) {
-      exportMesh(context, warehouse, entity.id, mesh, geometry);
+      exportMesh(warehouse, context, entity.id, mesh, geometry);
     }
 
     for (const [entity, parent, transform] of nodes) {
@@ -168,11 +168,11 @@ export function exportGltf(
     }
 
     for (const [entity, t] of text) {
-      exportText(context, warehouse, entity.id, t);
+      exportText(context, entity.id, t);
     }
 
     for (const extra of extras) {
-      exportExtras(context, warehouse, extra);
+      exportExtras(context, extra);
     }
 
     for (const entity of staticBodies) {

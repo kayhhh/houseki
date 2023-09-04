@@ -1,4 +1,3 @@
-import { Warehouse } from "lattice-engine/core";
 import {
   ExportedGltf,
   ExportedJSON,
@@ -6,15 +5,7 @@ import {
   Gltf,
 } from "lattice-engine/gltf";
 import { DeepRemove, Scene, SceneStruct } from "lattice-engine/scene";
-import {
-  Commands,
-  dropStruct,
-  EventReader,
-  EventWriter,
-  Mut,
-  Query,
-  Res,
-} from "thyseus";
+import { Commands, EventReader, EventWriter, Query, Res } from "thyseus";
 
 import { selectedModel } from "../demos/gltf/systems";
 
@@ -32,14 +23,14 @@ export function sendExportEvent(
   writer: EventWriter<ExportGltf>,
   sceneStruct: Res<SceneStruct>
 ) {
-  const event = writer.create();
-  event.scene = sceneStruct.activeScene;
+  const event = new ExportGltf();
   event.binary = exportConfig.format === "binary";
+  event.scene = sceneStruct.activeScene;
+  writer.create(event);
 }
 
 export function handleExport(
   commands: Commands,
-  warehouse: Res<Mut<Warehouse>>,
   reader: EventReader<ExportedGltf>,
   scenes: Query<Scene>,
   deepRemove: EventWriter<DeepRemove>
@@ -47,7 +38,7 @@ export function handleExport(
   if (reader.length === 0) return;
 
   for (const event of reader) {
-    const uri = event.uri.read(warehouse) ?? "";
+    const uri = event.uri;
 
     if (exportConfig.mode === "download") {
       if (event.binary) {
@@ -80,8 +71,9 @@ export function handleExport(
 
       // Clear scene
       for (const scene of scenes) {
-        const remove = deepRemove.create();
-        remove.rootId = scene.rootId;
+        const deepRemoveEvent = new DeepRemove();
+        deepRemoveEvent.rootId = scene.rootId;
+        deepRemove.create(deepRemoveEvent);
 
         rootId = scene.rootId;
       }
@@ -90,10 +82,9 @@ export function handleExport(
       selectedModel.uri = uri;
 
       const gltf = new Gltf();
-      gltf.uri.write(uri, warehouse);
+      gltf.uri = uri;
 
       commands.getById(rootId).add(gltf);
-      dropStruct(gltf);
     }
   }
 

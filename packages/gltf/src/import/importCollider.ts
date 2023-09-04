@@ -1,5 +1,5 @@
 import { Node } from "@gltf-transform/core";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 import { Shape } from "../extensions/OMI_physics_shape/Shape";
 import { ImportContext } from "./context";
@@ -38,7 +38,6 @@ export function importCollider(
       context.cylinderCollider.radius = collider.getRadius();
       context.cylinderCollider.height = collider.getHeight();
       commands.getById(entityId).add(context.cylinderCollider);
-      dropStruct(context.cylinderCollider);
       break;
     }
 

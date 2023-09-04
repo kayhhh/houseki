@@ -11,14 +11,14 @@ import {
   StandardMaterial,
   TextureInfo,
 } from "@lattice-engine/scene";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";
 
 export function importMaterial(
+  warehouse: Warehouse,
   gltfMaterial: Material,
   commands: Commands,
-  warehouse: Warehouse,
   context: ImportContext
 ) {
   const cached = context.materials.get(gltfMaterial);
@@ -35,7 +35,7 @@ export function importMaterial(
     material.baseColor.fromArray(baseColor);
 
     const gltfTexture = gltfMaterial.getBaseColorTexture();
-    const textureId = createTexture(gltfTexture, warehouse, commands);
+    const textureId = createTexture(warehouse, gltfTexture, commands);
     if (textureId) {
       material.baseColorTextureId = textureId;
       context.textureIds.push(textureId);
@@ -50,7 +50,7 @@ export function importMaterial(
     material.emissiveFactor.fromArray(emissiveFactor);
 
     const gltfTexture = gltfMaterial.getEmissiveTexture();
-    const textureId = createTexture(gltfTexture, warehouse, commands);
+    const textureId = createTexture(warehouse, gltfTexture, commands);
     if (textureId) {
       material.emissiveTextureId = textureId;
       context.textureIds.push(textureId);
@@ -64,7 +64,7 @@ export function importMaterial(
     material.normalScale = gltfMaterial.getNormalScale();
 
     const gltfTexture = gltfMaterial.getNormalTexture();
-    const textureId = createTexture(gltfTexture, warehouse, commands);
+    const textureId = createTexture(warehouse, gltfTexture, commands);
     if (textureId) {
       material.normalTextureId = textureId;
       context.textureIds.push(textureId);
@@ -78,7 +78,7 @@ export function importMaterial(
     material.occlusionStrength = gltfMaterial.getOcclusionStrength();
 
     const gltfTexture = gltfMaterial.getOcclusionTexture();
-    const textureId = createTexture(gltfTexture, warehouse, commands);
+    const textureId = createTexture(warehouse, gltfTexture, commands);
     if (textureId) {
       material.occlusionTextureId = textureId;
       context.textureIds.push(textureId);
@@ -93,7 +93,7 @@ export function importMaterial(
     material.metalness = gltfMaterial.getMetallicFactor();
 
     const gltfTexture = gltfMaterial.getMetallicRoughnessTexture();
-    const textureId = createTexture(gltfTexture, warehouse, commands);
+    const textureId = createTexture(warehouse, gltfTexture, commands);
     if (textureId) {
       material.metallicRoughnessTextureId = textureId;
       context.textureIds.push(textureId);
@@ -103,17 +103,13 @@ export function importMaterial(
     applyTextureInfo(material.metallicRoughnessTextureInfo, info);
   }
 
-  context.name.value.write(
-    gltfMaterial.getName() || `Material_${context.materials.size}`,
-    warehouse
-  );
+  context.name.value =
+    gltfMaterial.getName() || `Material_${context.materials.size}`;
 
   const entityId = commands.spawn(true).add(material).id;
 
   context.materials.set(gltfMaterial, entityId);
   context.materialIds.push(entityId);
-
-  dropStruct(material);
 
   return entityId;
 }
@@ -144,8 +140,8 @@ function applyTextureInfo(info: TextureInfo, gltfInfo: GltfTextureInfo | null) {
 }
 
 function createTexture(
-  gltfTexture: GltfTexture | null,
   warehouse: Warehouse,
+  gltfTexture: GltfTexture | null,
   commands: Commands
 ) {
   if (!gltfTexture) return;
@@ -155,12 +151,9 @@ function createTexture(
 
   const asset = new Asset();
   asset.data.write(imageData, warehouse);
-
-  asset.mimeType.write(gltfTexture.getMimeType(), warehouse);
+  asset.mimeType = gltfTexture.getMimeType();
 
   const imageId = commands.spawn(true).add(asset).addType(Image).id;
-
-  dropStruct(asset);
 
   return imageId;
 }

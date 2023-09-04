@@ -1,5 +1,5 @@
 import { TransformControls as ThreeTransformControls } from "three/examples/jsm/controls/TransformControls";
-import { struct } from "thyseus";
+import { struct, type u32 } from "thyseus";
 
 /**
  * A mock element we can pass into Three.js.
@@ -33,10 +33,10 @@ export class TransformControlsStore {
 
 @struct
 export class CanvasRect {
-  @struct.u32 declare x: number;
-  @struct.u32 declare y: number;
-  @struct.u32 declare width: number;
-  @struct.u32 declare height: number;
-  @struct.u32 declare left: number;
-  @struct.u32 declare top: number;
+  x: u32 = 0;
+  y: u32 = 0;
+  width: u32 = 0;
+  height: u32 = 0;
+  left: u32 = 0;
+  top: u32 = 0;
 }

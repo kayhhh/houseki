@@ -14,17 +14,11 @@ export const selectedModel = {
 
 export function initScene(
   commands: Commands,
-  warehouse: Res<Mut<Warehouse>>,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>
 ) {
   createOrbitControls(commands, sceneStruct);
-  const { rootId, sceneId } = createScene(
-    commands,
-    warehouse,
-    coreStore,
-    sceneStruct
-  );
+  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
   createLights(commands, sceneId);
 
   commands.getById(sceneId).addType(N8AOPass);
@@ -40,6 +34,6 @@ export function loadGltf(
   entities: Query<Mut<Gltf>>
 ) {
   for (const gltf of entities) {
-    gltf.uri.write(selectedModel.uri, warehouse);
+    gltf.uri = selectedModel.uri;
   }
 }

@@ -1,4 +1,4 @@
-import { Mat4 } from "gl-matrix/dist/esm";
+import { Mat4, Quat, Vec3, Vec4 } from "gl-matrix/dist/esm";
 import { Entity, Mut, Query, With } from "thyseus";
 
 import { GlobalTransform, Parent, Scene, Transform } from "../components";
@@ -6,6 +6,11 @@ import { GlobalTransform, Parent, Scene, Transform } from "../components";
 const childrenMap = new Map<bigint, bigint[]>();
 const transforms = new Map<bigint, Mat4>();
 const globalTransforms = new Map<bigint, Mat4>();
+
+const quat = new Quat();
+const vec3 = new Vec3();
+const vec3b = new Vec3();
+const vec4 = new Vec4();
 
 export function updateGlobalTransforms(
   scenes: Query<Entity, With<Scene>>,
@@ -15,15 +20,22 @@ export function updateGlobalTransforms(
     const localMat = new Mat4();
     transforms.set(entity.id, localMat);
 
-    Mat4.fromRotationTranslationScale(
-      localMat,
-      transform.rotation.array,
-      transform.translation.array,
-      transform.scale.array
-    );
+    vec4.x = transform.rotation.x;
+    vec4.y = transform.rotation.y;
+    vec4.z = transform.rotation.z;
+    vec4.w = transform.rotation.w;
 
-    const globalMat = new Mat4();
-    globalTransforms.set(entity.id, globalMat);
+    vec3.x = transform.translation.x;
+    vec3.y = transform.translation.y;
+    vec3.z = transform.translation.z;
+
+    vec3b.x = transform.scale.x;
+    vec3b.y = transform.scale.y;
+    vec3b.z = transform.scale.z;
+
+    Mat4.fromRotationTranslationScale(localMat, vec4, vec3, vec3b);
+
+    globalTransforms.set(entity.id, localMat);
 
     const children = childrenMap.get(parent.id) ?? [];
     children.push(entity.id);
@@ -43,9 +55,14 @@ export function updateGlobalTransforms(
     const globalMat = globalTransforms.get(entity.id);
     if (!globalMat) continue;
 
-    Mat4.getRotation(globalTransform.rotation.array, globalMat);
-    Mat4.getTranslation(globalTransform.translation.array, globalMat);
-    Mat4.getScaling(globalTransform.scale.array, globalMat);
+    Mat4.getRotation(quat, globalMat);
+    globalTransform.rotation.fromObject(quat);
+
+    Mat4.getTranslation(vec3, globalMat);
+    globalTransform.translation.fromObject(vec3);
+
+    Mat4.getScaling(vec3, globalMat);
+    globalTransform.scale.fromObject(vec3);
   }
 
   childrenMap.clear();

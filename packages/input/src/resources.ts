@@ -1,32 +1,39 @@
-import { struct } from "thyseus";
-
-import { NUM_KEYS } from "./types";
+import { struct, type u64 } from "thyseus";
 
 @struct
 export class InputStruct {
   /**
    * Whether to enable pointer lock on the canvas.
    */
-  @struct.bool declare enablePointerLock: boolean;
+  enablePointerLock: boolean = false;
 
   /**
    * Whether the pointer is currently locked.
    */
-  @struct.bool declare isPointerLocked: boolean;
+  isPointerLocked: boolean = false;
 
   /**
    * Whether the pointer is currently down.
    */
-  @struct.bool declare isPointerDown: boolean;
+  isPointerDown: boolean = false;
 
   /**
    * The currently pressed keys.
-   * Each index is a `Key` enum value.
-   * The value is `1` if the key is pressed, `0` otherwise.
    */
-  @struct.array({ length: NUM_KEYS, type: "u8" }) declare keys: Uint8Array;
+  keys: u64 = 0n;
 
   keyPressed(key: number): boolean {
-    return this.keys[key] === 1;
+    const bit = 1n << BigInt(key);
+    return (this.keys & bit) === bit;
+  }
+
+  setKeyPressed(key: number): void {
+    this.keys |= 1n << BigInt(key);
+  }
+
+  clearKeyPressed(key: number): void {
+    if (this.keyPressed(key)) {
+      this.keys ^= 1n << BigInt(key);
+    }
   }
 }

@@ -13,7 +13,7 @@ import {
   StandardMaterial,
   Transform,
 } from "lattice-engine/scene";
-import { Commands, dropStruct, Mut, Res } from "thyseus";
+import { Commands, Mut, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";
 import { createOrbitControls } from "../../utils/createOrbitControls";
@@ -22,8 +22,8 @@ import { createScene } from "../../utils/createScene";
 import { createSphereGeometry } from "../../utils/geometry";
 
 export function initScene(
-  commands: Commands,
   warehouse: Res<Mut<Warehouse>>,
+  commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
@@ -31,23 +31,17 @@ export function initScene(
   physicsConfig.debug = true;
 
   createOrbitControls(commands, sceneStruct, [0, 5, 7]);
-  const { rootId, sceneId } = createScene(
-    commands,
-    warehouse,
-    coreStore,
-    sceneStruct
-  );
+  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
   createLights(commands, sceneId);
 
   const parent = new Parent(rootId);
 
-  const roomId = createRoom([8, 1, 8], commands, warehouse);
+  const roomId = createRoom(warehouse, [8, 1, 8], commands);
   commands.getById(roomId).add(parent);
 
   // Add dynamic balls
   const materialComponent = new StandardMaterial([1, 0.2, 0.5, 1], 0, 0);
   const materialId = commands.spawn(true).add(materialComponent).id;
-  dropStruct(materialComponent);
 
   const transform = new Transform();
   const targetTransform = new TargetTransform();
@@ -86,10 +80,4 @@ export function initScene(
 
     createBall(radius, [x, y, z]);
   }
-
-  dropStruct(transform);
-  dropStruct(parent);
-  dropStruct(mesh);
-  dropStruct(targetTransform);
-  dropStruct(sphereCollider);
 }

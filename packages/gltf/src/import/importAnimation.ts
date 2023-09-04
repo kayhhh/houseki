@@ -1,12 +1,11 @@
 import { Animation } from "@gltf-transform/core";
-import { Warehouse } from "@lattice-engine/core";
 import {
   AnimationClip,
   KeyframeInterpolation,
   KeyframePath,
   KeyframeTrack,
 } from "@lattice-engine/scene";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";
 
@@ -14,16 +13,12 @@ export function importAnimation(
   animation: Animation,
   rootId: bigint,
   commands: Commands,
-  warehouse: Warehouse,
   context: ImportContext
 ) {
-  const clip = new AnimationClip(rootId, true, true);
-  clip.name.write(animation.getName(), warehouse);
+  const clip = new AnimationClip(rootId, animation.getName(), true, true);
 
   const entityId = commands.spawn(true).add(clip).id;
   context.animationClipIds.push(entityId);
-
-  dropStruct(clip);
 
   animation.listChannels().forEach((channel) => {
     const track = new KeyframeTrack();
@@ -65,23 +60,19 @@ export function importAnimation(
       }
     }
 
-    // Initialize empty tracks to avoid errors
-    track.times.write(new Float32Array(), warehouse);
-    track.values.write(new Float32Array(), warehouse);
-
     if (sampler) {
       const inputAccessor = sampler.getInput();
       const inputArray = inputAccessor?.getArray();
 
       if (inputArray instanceof Float32Array) {
-        track.times.write(inputArray, warehouse);
+        track.times = Array.from(inputArray);
       }
 
       const outputAccessor = sampler.getOutput();
       const outputArray = outputAccessor?.getArray();
 
       if (outputArray instanceof Float32Array) {
-        track.values.write(outputArray, warehouse);
+        track.values = Array.from(outputArray);
       }
 
       track.interpolation = KeyframeInterpolation[sampler.getInterpolation()];
@@ -89,7 +80,5 @@ export function importAnimation(
 
     const trackEntityId = commands.spawn(true).add(track).id;
     context.keyframeTrackIds.push(trackEntityId);
-
-    dropStruct(track);
   });
 }

@@ -1,14 +1,24 @@
-import { Resource } from "@lattice-engine/core";
-import { struct } from "thyseus";
+import { struct, type u64 } from "thyseus";
 
 @struct
 export class Gltf {
-  @struct.substruct(Resource) declare uri: Resource<string>;
+  uri: string;
+
+  constructor(uri = "") {
+    this.uri = uri;
+  }
 }
 
 @struct
 export class Extra {
-  @struct.u64 declare target: bigint;
-  @struct.substruct(Resource) declare key: Resource<string>;
-  @struct.substruct(Resource) declare value: Resource<string>;
+  target: u64;
+
+  key: string;
+  value: string;
+
+  constructor(key = "", value = "") {
+    this.target = 0n;
+    this.key = key;
+    this.value = value;
+  }
 }

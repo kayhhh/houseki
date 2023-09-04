@@ -1,29 +1,33 @@
-import { Resource } from "@lattice-engine/core";
-import { initStruct, struct } from "thyseus";
+import { type f32, struct, type u8 } from "thyseus";
 
 import { AnchorX, AnchorY } from "./types";
 
 @struct
 export class Text {
-  @struct.substruct(Resource) declare value: Resource<string>;
+  value: string;
 
   /**
    * URI to a font file (.ttf, .otf, .woff)
    */
-  @struct.substruct(Resource) declare font: Resource<string>;
-  @struct.f32 declare fontSize: number;
+  font: string;
+  fontSize: f32;
 
-  @struct.u8 declare anchorX: AnchorX;
-  @struct.u8 declare anchorY: AnchorY;
+  anchorX: u8;
+  anchorY: u8;
 
-  @struct.array({ length: 3, type: "u8" }) declare color: Uint8Array;
+  color: [u8, u8, u8];
 
-  constructor(fontSize = 1, color: [number, number, number] = [255, 255, 255]) {
-    initStruct(this);
-
+  constructor(
+    value = "",
+    font = "",
+    fontSize = 1,
+    color: [u8, u8, u8] = [255, 255, 255]
+  ) {
+    this.value = value;
+    this.font = font;
     this.fontSize = fontSize;
     this.anchorX = AnchorX.Center;
     this.anchorY = AnchorY.Middle;
-    this.color.set(color);
+    this.color = [...color];
   }
 }

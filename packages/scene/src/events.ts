@@ -1,6 +1,6 @@
-import { struct } from "thyseus";
+import { struct, type u64 } from "thyseus";
 
 @struct
 export class DeepRemove {
-  @struct.u64 declare rootId: bigint;
+  rootId: u64 = 0n;
 }

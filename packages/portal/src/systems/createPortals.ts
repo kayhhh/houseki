@@ -1,15 +1,7 @@
 import { Warehouse } from "@lattice-engine/core";
 import { BoxCollider, StaticBody } from "@lattice-engine/physics";
 import { BasicMaterial, Mesh } from "@lattice-engine/scene";
-import {
-  Commands,
-  dropStruct,
-  Entity,
-  Mut,
-  Query,
-  Res,
-  Without,
-} from "thyseus";
+import { Commands, Entity, Mut, Query, Res, Without } from "thyseus";
 
 import { Portal, PortalMaterial } from "../components";
 import { createPlaneGeometry } from "../utils/geometry";
@@ -17,8 +9,8 @@ import { createPlaneGeometry } from "../utils/geometry";
 const PORTAL_DEPTH = 0.01;
 
 export function createPortals(
-  commands: Commands,
   warehouse: Res<Mut<Warehouse>>,
+  commands: Commands,
   portals: Query<
     [Entity, Portal],
     [Without<BoxCollider>, Without<Mesh>, Without<BasicMaterial>]
@@ -48,10 +40,5 @@ export function createPortals(
       .addType(Mesh)
       .add(basic)
       .addType(PortalMaterial);
-
-    dropStruct(basic);
-    dropStruct(geometry);
   }
-
-  dropStruct(collider);
 }

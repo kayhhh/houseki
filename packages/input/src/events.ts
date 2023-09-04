@@ -1,21 +1,28 @@
-import { struct } from "thyseus";
-
-import { Key, PointerType } from "./types";
+import {
+  type f32,
+  type f64,
+  type i8,
+  type i16,
+  struct,
+  type u8,
+  type u16,
+  type u32,
+} from "thyseus";
 
 @struct
 export class MouseEvent {
-  @struct.bool declare altKey: boolean;
-  @struct.i8 declare button: number;
-  @struct.u16 declare buttons: number;
-  @struct.u16 declare clientX: number;
-  @struct.u16 declare clientY: number;
-  @struct.bool declare ctrlKey: boolean;
-  @struct.bool declare metaKey: boolean;
-  @struct.i16 declare movementX: number;
-  @struct.i16 declare movementY: number;
-  @struct.u16 declare screenX: number;
-  @struct.u16 declare screenY: number;
-  @struct.bool declare shiftKey: boolean;
+  altKey: boolean = false;
+  button: i8 = 0;
+  buttons: u16 = 0;
+  clientX: u16 = 0;
+  clientY: u16 = 0;
+  ctrlKey: boolean = false;
+  metaKey: boolean = false;
+  movementX: i16 = 0;
+  movementY: i16 = 0;
+  screenX: u16 = 0;
+  screenY: u16 = 0;
+  shiftKey: boolean = false;
 }
 
 /**
@@ -23,47 +30,47 @@ export class MouseEvent {
  */
 @struct
 export class PointerEvent {
-  @struct.bool declare altKey: boolean;
-  @struct.i8 declare button: number;
-  @struct.u16 declare buttons: number;
-  @struct.u16 declare clientX: number;
-  @struct.u16 declare clientY: number;
-  @struct.bool declare ctrlKey: boolean;
-  @struct.bool declare metaKey: boolean;
-  @struct.i16 declare movementX: number;
-  @struct.i16 declare movementY: number;
-  @struct.u16 declare screenX: number;
-  @struct.u16 declare screenY: number;
-  @struct.bool declare shiftKey: boolean;
+  altKey: boolean = false;
+  button: i8 = 0;
+  buttons: u16 = 0;
+  clientX: u16 = 0;
+  clientY: u16 = 0;
+  ctrlKey: boolean = false;
+  metaKey: boolean = false;
+  movementX: i16 = 0;
+  movementY: i16 = 0;
+  screenX: u16 = 0;
+  screenY: u16 = 0;
+  shiftKey: boolean = false;
 
-  @struct.u32 declare pointerId: number;
-  @struct.u16 declare width: number;
-  @struct.u16 declare height: number;
-  @struct.f32 declare pressure: number;
-  @struct.f32 declare tangentialPressure: number;
-  @struct.f32 declare tiltX: number;
-  @struct.f32 declare tiltY: number;
-  @struct.u16 declare twist: number;
-  @struct.u8 declare pointerType: PointerType;
-  @struct.bool declare isPrimary: boolean;
+  pointerId: u32 = 0;
+  width: u16 = 0;
+  height: u16 = 0;
+  pressure: f32 = 0;
+  tangentialPressure: f32 = 0;
+  tiltX: f32 = 0;
+  tiltY: f32 = 0;
+  twist: u16 = 0;
+  pointerType: u8 = 0;
+  isPrimary: boolean = false;
 }
 
 @struct
 export class WheelEvent {
-  @struct.f64 declare deltaX: number;
-  @struct.f64 declare deltaY: number;
-  @struct.f64 declare deltaZ: number;
-  @struct.u32 declare deltaMode: number;
+  deltaX: f64 = 0;
+  deltaY: f64 = 0;
+  deltaZ: f64 = 0;
+  deltaMode: u32 = 0;
 }
 
 @struct
 export class KeyboardEvent {
-  @struct.bool declare altKey: boolean;
-  @struct.bool declare ctrlKey: boolean;
-  @struct.u8 declare key: Key;
-  @struct.bool declare metaKey: boolean;
-  @struct.bool declare repeat: boolean;
-  @struct.bool declare shiftKey: boolean;
+  altKey: boolean = false;
+  ctrlKey: boolean = false;
+  key: u8 = 0;
+  metaKey: boolean = false;
+  repeat: boolean = false;
+  shiftKey: boolean = false;
 }
 
 export class PointerMoveEvent extends PointerEvent {}

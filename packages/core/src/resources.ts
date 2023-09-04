@@ -1,4 +1,4 @@
-import { struct } from "thyseus";
+import { type f32, struct } from "thyseus";
 
 export class CoreStore {
   /**
@@ -9,9 +9,9 @@ export class CoreStore {
 
 @struct
 export class Time {
-  @struct.f32 declare mainTime: number;
-  @struct.f32 declare mainDelta: number;
+  mainTime: f32 = 0;
+  mainDelta: f32 = 0;
 
-  @struct.f32 declare fixedTime: number;
-  @struct.f32 declare fixedDelta: number;
+  fixedTime: f32 = 0;
+  fixedDelta: f32 = 0;
 }

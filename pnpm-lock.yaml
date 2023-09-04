@@ -9,10 +9,10 @@ importers:
         version: 2.26.2
       '@typescript-eslint/eslint-plugin':
         specifier: ^5.62.0
-        version: 5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.45.0)(typescript@5.1.6)
+        version: 5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.45.0)(typescript@5.2.2)
       '@typescript-eslint/parser':
         specifier: ^5.62.0
-        version: 5.62.0(eslint@8.45.0)(typescript@5.1.6)
+        version: 5.62.0(eslint@8.45.0)(typescript@5.2.2)
       eslint:
         specifier: ^8.45.0
         version: 8.45.0
@@ -71,8 +71,8 @@ importers:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       wouter:
         specifier: ^2.11.0
         version: 2.11.0(react@18.2.0)
@@ -84,8 +84,8 @@ importers:
         specifier: ^3.4.8
         version: 3.4.8
       '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9(thyseus@0.14.0-beta.9)(vite@4.4.7)
       '@types/react':
         specifier: ^18.2.15
         version: 18.2.15
@@ -108,32 +108,29 @@ importers:
         specifier: ^0.4.3
         version: 0.4.3(eslint@8.45.0)
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
 
   packages/core:
     devDependencies:
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/csm:
     devDependencies:
@@ -143,30 +140,27 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       three:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/gltf:
     dependencies:
@@ -195,48 +189,42 @@ importers:
       '@lattice-engine/text':
         specifier: workspace:^
         version: link:../text
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/input:
     devDependencies:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/lattice-engine:
     dependencies:
@@ -291,22 +279,22 @@ importers:
         version: 6.32.2(three@0.153.0)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       three:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: ^0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.28.1)(typescript@5.2.2)(vite@4.4.7)
 
   packages/orbit:
     devDependencies:
@@ -319,30 +307,27 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       three:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/physics:
     dependencies:
@@ -359,24 +344,21 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
       vite-plugin-wasm:
         specifier: ^3.2.2
         version: 3.2.2(vite@4.4.7)
@@ -401,30 +383,27 @@ importers:
       '@lattice-engine/vrm':
         specifier: workspace:^
         version: link:../vrm
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       three:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/portal:
     devDependencies:
@@ -443,9 +422,6 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
@@ -454,22 +430,22 @@ importers:
         version: 6.32.2(three@0.153.0)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       three:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/postprocessing:
     dependencies:
@@ -486,9 +462,6 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
@@ -497,22 +470,22 @@ importers:
         version: 6.32.2(three@0.153.0)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       three:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/render:
     devDependencies:
@@ -522,9 +495,6 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
@@ -533,22 +503,22 @@ importers:
         version: 6.32.2(three@0.153.0)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       three:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/scene:
     dependencies:
@@ -559,24 +529,21 @@ importers:
       '@lattice-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/text:
     dependencies:
@@ -593,30 +560,27 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       three:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/transform:
     devDependencies:
@@ -644,30 +608,27 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       three:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   packages/utils:
     devDependencies:
@@ -683,24 +644,39 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
+      vite:
+        specifier: ^4.4.7
+        version: 4.4.7
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
+
+  packages/vite-plugin-thyseus-ts:
+    devDependencies:
+      '@thyseus/transformer-rollup':
+        specifier: 0.14.0-beta.8
+        version: 0.14.0-beta.8(thyseus@0.14.0-beta.9)(vite@4.4.7)
+      thyseus:
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
+      typescript:
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
       vite-plugin-dts:
         specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+        version: 3.3.1(rollup@3.28.1)(typescript@5.2.2)(vite@4.4.7)
 
   packages/vrm:
     dependencies:
@@ -717,30 +693,27 @@ importers:
       '@lattice-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@thyseus/transformer-rollup':
-        specifier: ^0.13.0
-        version: 0.13.0(rollup@3.26.2)(thyseus@0.13.5)
       '@types/three':
         specifier: ~0.153.0
         version: 0.153.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
-        version: 2.2.4(rollup@3.26.2)
+        version: 2.2.4(rollup@3.28.1)
       three:
         specifier: ~0.153.0
         version: 0.153.0
       thyseus:
-        specifier: ^0.13.5
-        version: 0.13.5
+        specifier: 0.14.0-beta.9
+        version: 0.14.0-beta.9
       typescript:
-        specifier: ~5.1.6
-        version: 5.1.6
+        specifier: ~5.2.2
+        version: 5.2.2
       vite:
         specifier: ^4.4.7
         version: 4.4.7
-      vite-plugin-dts:
-        specifier: ^3.3.1
-        version: 3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7)
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
 
   scripts:
     devDependencies:
@@ -749,7 +722,7 @@ importers:
         version: 20.4.4
       ts-node:
         specifier: ^10.9.1
-        version: 10.9.1(@types/node@20.4.4)(typescript@5.1.6)
+        version: 10.9.1(@types/node@20.4.4)(typescript@5.2.2)
 
 packages:
 
@@ -2082,7 +2055,7 @@ packages:
       '@babel/runtime': 7.21.5
     dev: false
 
-  /@rollup/pluginutils@5.0.2(rollup@3.26.2):
+  /@rollup/pluginutils@5.0.2(rollup@3.28.1):
     resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -2094,7 +2067,7 @@ packages:
       '@types/estree': 1.0.1
       estree-walker: 2.0.2
       picomatch: 2.3.1
-      rollup: 3.26.2
+      rollup: 3.28.1
     dev: true
 
   /@rushstack/node-core-library@3.59.4:
@@ -2138,22 +2111,54 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@thyseus/transformer-rollup@0.13.0(rollup@3.26.2)(thyseus@0.13.5):
-    resolution: {integrity: sha512-uEKoGsHjjO38/Jr1IRT/lY/khnyNHhKn8Q3VfLKDUG6QFRg05mm07vy7Af6OFMvGuwnT7e2u9U7Pl3d4VnoTNA==}
+  /@thyseus/transformer-rollup@0.14.0-beta.8(thyseus@0.14.0-beta.9)(vite@4.4.7):
+    resolution: {integrity: sha512-9Bd+EoFZLaORynpJdjZhozUjDUzw2DBufwfNHqXmuM9xCcNfBoRnAWM5WhxFuvlyFaZY86wM9rn1+oKvlT7oJw==}
     peerDependencies:
-      thyseus: ~0.13
+      thyseus: ^0.14.0
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@3.26.2)
-      '@thyseus/typescript-transformer': 0.12.0-beta.7
-      thyseus: 0.13.5
+      '@rollup/pluginutils': 5.0.2(rollup@3.28.1)
+      '@thyseus/typescript-transformer': 0.14.0-beta.8(vite@4.4.7)
+      thyseus: 0.14.0-beta.9
+      typescript: 5.2.2
     transitivePeerDependencies:
       - rollup
+      - supports-color
+      - vite
     dev: true
 
-  /@thyseus/typescript-transformer@0.12.0-beta.7:
-    resolution: {integrity: sha512-IY/NXcNqiVXNWFLl5X7Pq68zFrk1i9wTOKYeEiJbXKkPlJzEnz56WalDo2bkzD5YJZMMSw+QPKKLiWkQjKqZmg==}
+  /@thyseus/transformer-rollup@0.14.0-beta.9(thyseus@0.14.0-beta.9)(vite@4.4.7):
+    resolution: {integrity: sha512-1+wNHNgD6bmplN2RVa5kRboIqv6Pg/jnWjU8h+mYvXgrmCibng3Vopo5xDg1y9AjG0JslMvw4KYtbPN42b1cVw==}
+    peerDependencies:
+      thyseus: ^0.14.0
     dependencies:
-      typescript: 5.1.6
+      '@rollup/pluginutils': 5.0.2(rollup@3.28.1)
+      '@thyseus/typescript-transformer': 0.14.0-beta.9(vite@4.4.7)
+      thyseus: 0.14.0-beta.9
+      typescript: 5.2.2
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+      - vite
+    dev: true
+
+  /@thyseus/typescript-transformer@0.14.0-beta.8(vite@4.4.7):
+    resolution: {integrity: sha512-zYs6LaXf5QhB2Ns2ZPOfc8TTStn/yU3pPSlFhjsDvLfc3DaniCTmbuxGe3W4uuCKIcEZBcAfY96JiE/dmSVLzA==}
+    dependencies:
+      typescript: 5.2.2
+      vite-tsconfig-paths: 4.2.0(typescript@5.2.2)(vite@4.4.7)
+    transitivePeerDependencies:
+      - supports-color
+      - vite
+    dev: true
+
+  /@thyseus/typescript-transformer@0.14.0-beta.9(vite@4.4.7):
+    resolution: {integrity: sha512-7wBLlfsTu4wkIW5TKCNjTXqk8I7p4gvlinbfCxnT4Je40nVMYzUtazYh8+2wBDe1R7DIn7yqzZ11lCy0kC530A==}
+    dependencies:
+      typescript: 5.2.2
+      vite-tsconfig-paths: 4.2.0(typescript@5.2.2)(vite@4.4.7)
+    transitivePeerDependencies:
+      - supports-color
+      - vite
     dev: true
 
   /@tsconfig/node10@1.0.9:
@@ -2247,14 +2252,14 @@ packages:
     dependencies:
       '@tweenjs/tween.js': 18.6.4
       '@types/stats.js': 0.17.0
-      '@types/webxr': 0.5.2
+      '@types/webxr': 0.5.4
       fflate: 0.6.10
       lil-gui: 0.17.0
 
-  /@types/webxr@0.5.2:
-    resolution: {integrity: sha512-szL74BnIcok9m7QwYtVmQ+EdIKwbjPANudfuvDrAF8Cljg9MKUlIoc1w5tjj9PMpeSH3U1Xnx//czQybJ0EfSw==}
+  /@types/webxr@0.5.4:
+    resolution: {integrity: sha512-41gfGLTtqXZhcmoDlLDHqMJDuwAMwhHwXf9Q2job3TUBsvkNfPNI/3IWVEtLH4tyY1ElWtfwIaoNeqeEX238/Q==}
 
-  /@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.45.0)(typescript@5.1.6):
+  /@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.45.0)(typescript@5.2.2):
     resolution: {integrity: sha512-TiZzBSJja/LbhNPvk6yc0JrX9XqhQ0hdh6M2svYfsHGejaKFIAGd9MQ+ERIMzLGlN/kZoYIgdxFV0PuljTKXag==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -2266,23 +2271,23 @@ packages:
         optional: true
     dependencies:
       '@eslint-community/regexpp': 4.5.1
-      '@typescript-eslint/parser': 5.62.0(eslint@8.45.0)(typescript@5.1.6)
+      '@typescript-eslint/parser': 5.62.0(eslint@8.45.0)(typescript@5.2.2)
       '@typescript-eslint/scope-manager': 5.62.0
-      '@typescript-eslint/type-utils': 5.62.0(eslint@8.45.0)(typescript@5.1.6)
-      '@typescript-eslint/utils': 5.62.0(eslint@8.45.0)(typescript@5.1.6)
+      '@typescript-eslint/type-utils': 5.62.0(eslint@8.45.0)(typescript@5.2.2)
+      '@typescript-eslint/utils': 5.62.0(eslint@8.45.0)(typescript@5.2.2)
       debug: 4.3.4
       eslint: 8.45.0
       graphemer: 1.4.0
       ignore: 5.2.4
       natural-compare-lite: 1.4.0
       semver: 7.5.3
-      tsutils: 3.21.0(typescript@5.1.6)
-      typescript: 5.1.6
+      tsutils: 3.21.0(typescript@5.2.2)
+      typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@typescript-eslint/parser@5.62.0(eslint@8.45.0)(typescript@5.1.6):
+  /@typescript-eslint/parser@5.62.0(eslint@8.45.0)(typescript@5.2.2):
     resolution: {integrity: sha512-VlJEV0fOQ7BExOsHYAGrgbEiZoi8D+Bl2+f6V2RrXerRSylnp+ZBHmPvaIa8cz0Ajx7WO7Z5RqfgYg7ED1nRhA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -2294,10 +2299,10 @@ packages:
     dependencies:
       '@typescript-eslint/scope-manager': 5.62.0
       '@typescript-eslint/types': 5.62.0
-      '@typescript-eslint/typescript-estree': 5.62.0(typescript@5.1.6)
+      '@typescript-eslint/typescript-estree': 5.62.0(typescript@5.2.2)
       debug: 4.3.4
       eslint: 8.45.0
-      typescript: 5.1.6
+      typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2310,7 +2315,7 @@ packages:
       '@typescript-eslint/visitor-keys': 5.62.0
     dev: true
 
-  /@typescript-eslint/type-utils@5.62.0(eslint@8.45.0)(typescript@5.1.6):
+  /@typescript-eslint/type-utils@5.62.0(eslint@8.45.0)(typescript@5.2.2):
     resolution: {integrity: sha512-xsSQreu+VnfbqQpW5vnCJdq1Z3Q0U31qiWmRhr98ONQmcp/yhiPJFPq8MXiJVLiksmOKSjIldZzkebzHuCGzew==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -2320,12 +2325,12 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/typescript-estree': 5.62.0(typescript@5.1.6)
-      '@typescript-eslint/utils': 5.62.0(eslint@8.45.0)(typescript@5.1.6)
+      '@typescript-eslint/typescript-estree': 5.62.0(typescript@5.2.2)
+      '@typescript-eslint/utils': 5.62.0(eslint@8.45.0)(typescript@5.2.2)
       debug: 4.3.4
       eslint: 8.45.0
-      tsutils: 3.21.0(typescript@5.1.6)
-      typescript: 5.1.6
+      tsutils: 3.21.0(typescript@5.2.2)
+      typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2335,7 +2340,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@typescript-eslint/typescript-estree@5.62.0(typescript@5.1.6):
+  /@typescript-eslint/typescript-estree@5.62.0(typescript@5.2.2):
     resolution: {integrity: sha512-CmcQ6uY7b9y694lKdRB8FEel7JbU/40iSAPomu++SjLMntB+2Leay2LO6i8VnJk58MtE9/nQSFIH6jpyRWyYzA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -2350,13 +2355,13 @@ packages:
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.5.3
-      tsutils: 3.21.0(typescript@5.1.6)
-      typescript: 5.1.6
+      tsutils: 3.21.0(typescript@5.2.2)
+      typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@typescript-eslint/utils@5.62.0(eslint@8.45.0)(typescript@5.1.6):
+  /@typescript-eslint/utils@5.62.0(eslint@8.45.0)(typescript@5.2.2):
     resolution: {integrity: sha512-n8oxjeb5aIbPFEtmQxQYOLI0i9n5ySBEY/ZEHHZqKQSFnxio1rv6dthascc9dLuwrL0RC5mPCxB7vnAVGAYWAQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -2367,7 +2372,7 @@ packages:
       '@types/semver': 7.5.0
       '@typescript-eslint/scope-manager': 5.62.0
       '@typescript-eslint/types': 5.62.0
-      '@typescript-eslint/typescript-estree': 5.62.0(typescript@5.1.6)
+      '@typescript-eslint/typescript-estree': 5.62.0(typescript@5.2.2)
       eslint: 8.45.0
       eslint-scope: 5.1.1
       semver: 7.5.3
@@ -2446,7 +2451,7 @@ packages:
       '@vue/shared': 3.3.4
     dev: true
 
-  /@vue/language-core@1.8.3(typescript@5.1.6):
+  /@vue/language-core@1.8.3(typescript@5.2.2):
     resolution: {integrity: sha512-AzhvMYoQkK/tg8CpAAttO19kx1zjS3+weYIr2AhlH/M5HebVzfftQoq4jZNFifjq+hyLKi8j9FiDMS8oqA89+A==}
     peerDependencies:
       typescript: '*'
@@ -2461,7 +2466,7 @@ packages:
       '@vue/shared': 3.3.4
       minimatch: 9.0.2
       muggle-string: 0.3.1
-      typescript: 5.1.6
+      typescript: 5.2.2
       vue-template-compiler: 2.7.14
     dev: true
 
@@ -2475,11 +2480,11 @@ packages:
     resolution: {integrity: sha512-7OjdcV8vQ74eiz1TZLzZP4JwqM5fA94K6yntPS5Z25r9HDuGNzaGdgvwKYq6S+MxwF0TFRwe50fIR/MYnakdkQ==}
     dev: true
 
-  /@vue/typescript@1.8.3(typescript@5.1.6):
+  /@vue/typescript@1.8.3(typescript@5.2.2):
     resolution: {integrity: sha512-6bdgSnIFpRYHlt70pHmnmNksPU00bfXgqAISeaNz3W6d2cH0OTfH8h/IhligQ82sJIhsuyfftQJ5518ZuKIhtA==}
     dependencies:
       '@volar/typescript': 1.7.10
-      '@vue/language-core': 1.8.3(typescript@5.1.6)
+      '@vue/language-core': 1.8.3(typescript@5.2.2)
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -3286,7 +3291,7 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 5.62.0(eslint@8.45.0)(typescript@5.1.6)
+      '@typescript-eslint/parser': 5.62.0(eslint@8.45.0)(typescript@5.2.2)
       debug: 3.2.7
       eslint: 8.45.0
       eslint-import-resolver-node: 0.3.7
@@ -3305,7 +3310,7 @@ packages:
       '@typescript-eslint/parser':
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 5.62.0(eslint@8.45.0)(typescript@5.1.6)
+      '@typescript-eslint/parser': 5.62.0(eslint@8.45.0)(typescript@5.2.2)
       array-includes: 3.1.6
       array.prototype.flat: 1.3.1
       array.prototype.flatmap: 1.3.1
@@ -3406,7 +3411,7 @@ packages:
       '@typescript-eslint/eslint-plugin':
         optional: true
     dependencies:
-      '@typescript-eslint/eslint-plugin': 5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.45.0)(typescript@5.1.6)
+      '@typescript-eslint/eslint-plugin': 5.62.0(@typescript-eslint/parser@5.62.0)(eslint@8.45.0)(typescript@5.2.2)
       eslint: 8.45.0
       eslint-rule-composer: 0.3.0
     dev: true
@@ -3736,8 +3741,8 @@ packages:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
 
-  /fsevents@2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+  /fsevents@2.3.3:
+    resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
@@ -3885,6 +3890,10 @@ packages:
       ignore: 5.2.4
       merge2: 1.4.1
       slash: 4.0.0
+    dev: true
+
+  /globrex@0.1.2:
+    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
     dev: true
 
   /gopd@1.0.1:
@@ -5188,12 +5197,12 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rollup-plugin-peer-deps-external@2.2.4(rollup@3.26.2):
+  /rollup-plugin-peer-deps-external@2.2.4(rollup@3.28.1):
     resolution: {integrity: sha512-AWdukIM1+k5JDdAqV/Cxd+nejvno2FVLVeZ74NKggm3Q5s9cbbcOgUPGdbxPi4BXu7xGaZ8HG12F+thImYu/0g==}
     peerDependencies:
       rollup: '*'
     dependencies:
-      rollup: 3.26.2
+      rollup: 3.28.1
     dev: true
 
   /rollup@3.26.2:
@@ -5202,7 +5211,15 @@ packages:
     hasBin: true
     requiresBuild: true
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
+    dev: true
+
+  /rollup@3.28.1:
+    resolution: {integrity: sha512-R9OMQmIHJm9znrU3m3cpE8uhN0fGdXiawME7aZIpQqvpS/85+Vt1Hq1/yVIcYfOmaQiHjvXkQAoJukvLpau6Yw==}
+    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.3
     dev: true
 
   /run-applescript@5.0.0:
@@ -5592,8 +5609,8 @@ packages:
   /three@0.153.0:
     resolution: {integrity: sha512-OCP2/uQR6GcDpSLnJt/3a4mdS0kNWcbfUXIwLoEMgLzEUIVIYsSDwskpmOii/AkDM+BBwrl6+CKgrjX9+E2aWg==}
 
-  /thyseus@0.13.5:
-    resolution: {integrity: sha512-UnO94weyONkiA4SCCw+FwCALRjQ6fOdaObwJTaKup+B/vUEPA9+usgmrQBLuQVT2Sz2oM6fyDG3EgADZHuAf7g==}
+  /thyseus@0.14.0-beta.9:
+    resolution: {integrity: sha512-Cc7UJ/DSmnTdAWYNQ7FPyFRimUIruf3m3gPmQ2lq6m1eIojaUcTPsoenZia77KvbOVComsjHiFGWZMN4Gl+fxQ==}
     dependencies:
       esm-env: 1.0.0
 
@@ -5650,7 +5667,7 @@ packages:
     resolution: {integrity: sha512-mzss4MeyzUkYBppn4x5cdAqrhBHFEuVmMMgLMTyFV23x6GvQMyo+/R5E5Lsbrt7WSt5RfvewjcwD1DChRTA9lA==}
     dev: false
 
-  /ts-node@10.9.1(@types/node@20.4.4)(typescript@5.1.6):
+  /ts-node@10.9.1(@types/node@20.4.4)(typescript@5.2.2):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -5676,9 +5693,22 @@ packages:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.1.6
+      typescript: 5.2.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
+    dev: true
+
+  /tsconfck@2.1.2(typescript@5.2.2):
+    resolution: {integrity: sha512-ghqN1b0puy3MhhviwO2kGF8SeMDNhEbnKxjK7h6+fvY9JAxqvXi8y5NAHSQv687OVboS2uZIByzGd45/YxrRHg==}
+    engines: {node: ^14.13.1 || ^16 || >=18}
+    hasBin: true
+    peerDependencies:
+      typescript: ^4.3.5 || ^5.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      typescript: 5.2.2
     dev: true
 
   /tsconfig-paths@3.14.2:
@@ -5697,14 +5727,14 @@ packages:
   /tslib@2.5.2:
     resolution: {integrity: sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==}
 
-  /tsutils@3.21.0(typescript@5.1.6):
+  /tsutils@3.21.0(typescript@5.2.2):
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
     peerDependencies:
       typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
     dependencies:
       tslib: 1.14.1
-      typescript: 5.1.6
+      typescript: 5.2.2
     dev: true
 
   /tty-table@4.2.1:
@@ -5829,8 +5859,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript@5.1.6:
-    resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
+  /typescript@5.2.2:
+    resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
@@ -5907,7 +5937,7 @@ packages:
     engines: {node: '>= 0.10'}
     dev: true
 
-  /vite-plugin-dts@3.3.1(rollup@3.26.2)(typescript@5.1.6)(vite@4.4.7):
+  /vite-plugin-dts@3.3.1(rollup@3.28.1)(typescript@5.2.2)(vite@4.4.7):
     resolution: {integrity: sha512-RFebFGg6GWKkZqRQ5n6ls8giSiygKMBriJTFp8N+CRbYgI4lMXBxXEx0z2bthfeQv/xB53Wmhn/LNOOqb9OQHQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -5918,13 +5948,13 @@ packages:
         optional: true
     dependencies:
       '@microsoft/api-extractor': 7.36.0
-      '@rollup/pluginutils': 5.0.2(rollup@3.26.2)
-      '@vue/language-core': 1.8.3(typescript@5.1.6)
+      '@rollup/pluginutils': 5.0.2(rollup@3.28.1)
+      '@vue/language-core': 1.8.3(typescript@5.2.2)
       debug: 4.3.4
       kolorist: 1.8.0
-      typescript: 5.1.6
+      typescript: 5.2.2
       vite: 4.4.7
-      vue-tsc: 1.8.3(typescript@5.1.6)
+      vue-tsc: 1.8.3(typescript@5.2.2)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
@@ -5937,6 +5967,23 @@ packages:
       vite: ^2 || ^3 || ^4
     dependencies:
       vite: 4.4.7
+    dev: true
+
+  /vite-tsconfig-paths@4.2.0(typescript@5.2.2)(vite@4.4.7):
+    resolution: {integrity: sha512-jGpus0eUy5qbbMVGiTxCL1iB9ZGN6Bd37VGLJU39kTDD6ZfULTTb1bcc5IeTWqWJKiWV5YihCaibeASPiGi8kw==}
+    peerDependencies:
+      vite: '*'
+    peerDependenciesMeta:
+      vite:
+        optional: true
+    dependencies:
+      debug: 4.3.4
+      globrex: 0.1.2
+      tsconfck: 2.1.2(typescript@5.2.2)
+      vite: 4.4.7
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
     dev: true
 
   /vite@4.4.7:
@@ -5971,7 +6018,7 @@ packages:
       postcss: 8.4.27
       rollup: 3.26.2
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /vue-template-compiler@2.7.14:
@@ -5981,16 +6028,16 @@ packages:
       he: 1.2.0
     dev: true
 
-  /vue-tsc@1.8.3(typescript@5.1.6):
+  /vue-tsc@1.8.3(typescript@5.2.2):
     resolution: {integrity: sha512-Ua4DHuYxjudlhCW2nRZtaXbhIDVncRGIbDjZhHpF8Z8vklct/G/35/kAPuGNSOmq0JcvhPAe28Oa7LWaUerZVA==}
     hasBin: true
     peerDependencies:
       typescript: '*'
     dependencies:
-      '@vue/language-core': 1.8.3(typescript@5.1.6)
-      '@vue/typescript': 1.8.3(typescript@5.1.6)
+      '@vue/language-core': 1.8.3(typescript@5.2.2)
+      '@vue/typescript': 1.8.3(typescript@5.2.2)
       semver: 7.5.3
-      typescript: 5.1.6
+      typescript: 5.2.2
     dev: true
 
   /wcwidth@1.0.1:

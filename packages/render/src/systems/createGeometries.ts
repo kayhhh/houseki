@@ -1,4 +1,4 @@
-import { Warehouse } from "@lattice-engine/core";
+import { Resource, Warehouse } from "@lattice-engine/core";
 import { Geometry } from "@lattice-engine/scene";
 import { BufferAttribute, BufferGeometry } from "three";
 import { Entity, Query, Res } from "thyseus";
@@ -27,55 +27,16 @@ export function createGeometries(
     }
 
     // Sync object properties
-    if (geometry.colors.id) {
-      const colors = geometry.colors.read(warehouse);
-      if (colors) setAttribute(object, "color", colors, 4);
-    }
-
-    if (geometry.positions.id) {
-      const positions = geometry.positions.read(warehouse);
-      if (positions) setAttribute(object, "position", positions, 3);
-    }
-
-    if (geometry.normals.id) {
-      const normals = geometry.normals.read(warehouse);
-      if (normals) setAttribute(object, "normal", normals, 3);
-    }
-
-    if (geometry.uv.id) {
-      const uvs = geometry.uv.read(warehouse);
-      if (uvs) setAttribute(object, "uv", uvs, 2);
-    }
-
-    if (geometry.uv1.id) {
-      const uvs = geometry.uv1.read(warehouse);
-      if (uvs) setAttribute(object, "uv1", uvs, 2);
-    }
-
-    if (geometry.uv2.id) {
-      const uvs = geometry.uv2.read(warehouse);
-      if (uvs) setAttribute(object, "uv2", uvs, 2);
-    }
-
-    if (geometry.uv3.id) {
-      const uvs = geometry.uv3.read(warehouse);
-      if (uvs) setAttribute(object, "uv3", uvs, 2);
-    }
-
-    if (geometry.joints.id) {
-      const joints = geometry.joints.read(warehouse);
-      if (joints) setAttribute(object, "skinIndex", joints, 4);
-    }
-
-    if (geometry.weights.id) {
-      const weights = geometry.weights.read(warehouse);
-      if (weights) setAttribute(object, "skinWeight", weights, 4);
-    }
-
-    if (geometry.indices.id) {
-      const indices = geometry.indices.read(warehouse);
-      if (indices) setAttribute(object, "index", indices, 1);
-    }
+    setAttribute(warehouse, object, "color", geometry.colors, 4);
+    setAttribute(warehouse, object, "position", geometry.positions, 3);
+    setAttribute(warehouse, object, "normal", geometry.normals, 3);
+    setAttribute(warehouse, object, "uv", geometry.uv, 2);
+    setAttribute(warehouse, object, "uv1", geometry.uv1, 2);
+    setAttribute(warehouse, object, "uv2", geometry.uv2, 2);
+    setAttribute(warehouse, object, "uv3", geometry.uv3, 2);
+    setAttribute(warehouse, object, "skinIndex", geometry.joints, 4);
+    setAttribute(warehouse, object, "skinWeight", geometry.weights, 4);
+    setAttribute(warehouse, object, "index", geometry.indices, 1);
   }
 
   // Remove objects that no longer exist
@@ -95,30 +56,37 @@ export function createGeometries(
  * Also supports setting the index.
  */
 function setAttribute(
+  warehouse: Readonly<Warehouse>,
   geometry: BufferGeometry,
   name: string,
-  data: ArrayLike<number>,
+  data: Resource<Float32Array | Uint32Array>,
   itemSize: number
 ) {
   const attribute =
     name === "index" ? geometry.getIndex() : geometry.getAttribute(name);
 
+  const array = data.read(warehouse);
+  if (!array) return;
+
   if (
     attribute instanceof BufferAttribute &&
     attribute.itemSize === itemSize &&
-    attribute.array.length === data.length
+    attribute.array.length === array.length
   ) {
     // Ignore if data is already set
-    if (attribute.array === data) return;
+    if (attribute.array === array) return;
 
     // Reuse existing attribute
-    attribute.set(data);
+    attribute.set(array);
     attribute.needsUpdate = true;
   } else {
     // Create new attribute
-    const attribute = new BufferAttribute(data, itemSize);
-
-    if (name === "index") geometry.setIndex(attribute);
-    else geometry.setAttribute(name, attribute);
+    if (name === "index") {
+      const attribute = new BufferAttribute(array, 1);
+      geometry.setIndex(attribute);
+    } else {
+      const attribute = new BufferAttribute(array, itemSize);
+      geometry.setAttribute(name, attribute);
+    }
   }
 }

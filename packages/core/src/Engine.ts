@@ -30,9 +30,12 @@ export class Engine {
    */
   async start() {
     const stopPromise = this.stop();
-    if (stopPromise) await stopPromise;
+    if (stopPromise) {
+      await stopPromise;
+    }
 
     this.#startPromise = this.world.runSchedule(LatticeSchedules.Startup);
+
     await this.#startPromise;
 
     this.#animationFrame = requestAnimationFrame(this.#loop.bind(this));
@@ -87,7 +90,9 @@ export class Engine {
    * Runs a schedule, if it exists.
    */
   async #runSchedule(schedule: symbol) {
-    if (this.world.schedules[schedule]) await this.world.runSchedule(schedule);
+    if (this.world.schedules[schedule]) {
+      await this.world.runSchedule(schedule);
+    }
   }
 
   queueSchedule(schedule: symbol) {

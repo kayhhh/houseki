@@ -8,10 +8,10 @@ export function createPlaneGeometry(
   height = 1
 ) {
   const geometry = new PlaneGeometry(width, height);
-  return writeGeometry(geometry, warehouse);
+  return writeGeometry(warehouse, geometry);
 }
 
-function writeGeometry(threeGeometry: BufferGeometry, warehouse: Warehouse) {
+function writeGeometry(warehouse: Warehouse, threeGeometry: BufferGeometry) {
   const positionsAttribute = threeGeometry.getAttribute(
     "position"
   ) as BufferAttribute;

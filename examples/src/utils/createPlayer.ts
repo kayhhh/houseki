@@ -1,4 +1,3 @@
-import { Warehouse } from "lattice-engine/core";
 import {
   CapsuleCollider,
   CharacterController,
@@ -24,7 +23,7 @@ import {
   Transform,
 } from "lattice-engine/scene";
 import { Vrm } from "lattice-engine/vrm";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 const PLAYER_HEIGHT = 1.6;
 const PLAYER_WIDTH = 0.4;
@@ -33,7 +32,6 @@ export function createPlayer(
   spawn: [number, number, number],
   rootId: bigint,
   commands: Commands,
-  warehouse: Warehouse,
   sceneStruct: SceneStruct
 ) {
   const parent = new Parent();
@@ -62,20 +60,15 @@ export function createPlayer(
     .addType(CharacterController)
     .add(player).id;
 
-  dropStruct(player);
-  dropStruct(targetTransform);
-  dropStruct(capsuleCollider);
-
   const playerAvatar = new PlayerAvatar();
-  playerAvatar.idleAnimation.write("/animation/Idle.fbx", warehouse);
-  playerAvatar.jumpAnimation.write("/animation/Falling.fbx", warehouse);
-  playerAvatar.leftWalkAnimation.write("/animation/LeftWalk.fbx", warehouse);
-  playerAvatar.rightWalkAnimation.write("/animation/RightWalk.fbx", warehouse);
-  playerAvatar.sprintAnimation.write("/animation/Sprint.fbx", warehouse);
-  playerAvatar.walkAnimation.write("/animation/Walk.fbx", warehouse);
+  playerAvatar.idleAnimation = "/animation/Idle.fbx";
+  playerAvatar.jumpAnimation = "/animation/Falling.fbx";
+  playerAvatar.leftWalkAnimation = "/animation/LeftWalk.fbx";
+  playerAvatar.rightWalkAnimation = "/animation/RightWalk.fbx";
+  playerAvatar.sprintAnimation = "/animation/Sprint.fbx";
+  playerAvatar.walkAnimation = "/animation/Walk.fbx";
 
-  const vrm = new Vrm(true);
-  vrm.uri.write("/k-robot.vrm", warehouse);
+  const vrm = new Vrm("/k-robot.vrm", true);
 
   commands
     .spawn(true)
@@ -84,9 +77,6 @@ export function createPlayer(
     .add(parent.setId(bodyId))
     .add(vrm)
     .add(playerAvatar);
-
-  dropStruct(playerAvatar);
-  dropStruct(vrm);
 
   const playerCamera = new PlayerCamera(
     PlayerCameraMode.Both,
@@ -103,11 +93,6 @@ export function createPlayer(
     .addType(PerspectiveCamera)
     .add(playerCamera)
     .addType(Raycast).id;
-
-  dropStruct(parent);
-  dropStruct(transform);
-  dropStruct(playerCamera);
-  dropStruct(targetRotation);
 
   sceneStruct.activeCamera = cameraId;
 }

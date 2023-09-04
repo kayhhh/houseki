@@ -10,7 +10,7 @@ import {
   Transform,
 } from "lattice-engine/scene";
 import { Quaternion, Vector3 } from "three";
-import { Commands, dropStruct, Mut, Res } from "thyseus";
+import { Commands, Mut, Res } from "thyseus";
 
 import { createBox } from "../../utils/createBox";
 import { createLights } from "../../utils/createLights";
@@ -27,18 +27,13 @@ export function initScene(
 ) {
   physicsConfig.debug = true;
 
-  const { rootId, sceneId } = createScene(
-    commands,
-    warehouse,
-    coreStore,
-    sceneStruct
-  );
+  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
   createLights(commands, sceneId);
-  createPlayer([0, 2, 0], rootId, commands, warehouse, sceneStruct);
+  createPlayer([0, 2, 0], rootId, commands, sceneStruct);
 
   commands.getById(sceneStruct.activeCamera).addType(PortalRaycast);
 
-  createBox(commands, warehouse, {
+  createBox(warehouse, commands, {
     parentId: rootId,
     size: [30, 1, 30],
     translation: [0, -1, 0],
@@ -79,8 +74,6 @@ export function initScene(
     .add(parent)
     .add(portal).id;
 
-  dropStruct(portal);
-
   const portalTarget = new PortalTarget();
 
   portalTarget.id = bId;
@@ -88,8 +81,6 @@ export function initScene(
 
   portalTarget.id = aId;
   commands.getById(bId).add(portalTarget);
-
-  dropStruct(portalTarget);
 
   const boxGeometry = createBoxGeometry(warehouse);
   const boxMaterial = new StandardMaterial([1, 0.3, 0.3, 1]);
@@ -115,8 +106,4 @@ export function initScene(
     .addType(Mesh)
     .add(boxGeometry)
     .add(boxMaterial);
-
-  dropStruct(boxGeometry);
-  dropStruct(boxMaterial);
-  dropStruct(parent);
 }

@@ -8,10 +8,10 @@ import { importAnimation } from "./importAnimation";
 import { importNode } from "./importNode";
 
 export function importDoc(
+  warehouse: Warehouse,
   doc: Document,
   entity: Readonly<Entity>,
-  commands: Commands,
-  warehouse: Warehouse
+  commands: Commands
 ) {
   const root = doc.getRoot();
   const scene = root.getDefaultScene() ?? root.listScenes()[0];
@@ -22,21 +22,19 @@ export function importDoc(
   scene
     .listChildren()
     .forEach((child) =>
-      importNode(child, entity.id, commands, warehouse, context)
+      importNode(warehouse, child, entity.id, commands, context)
     );
 
   root
     .listAnimations()
     .forEach((animation) =>
-      importAnimation(animation, entity.id, commands, warehouse, context)
+      importAnimation(animation, entity.id, commands, context)
     );
 
   if (root.listAnimations().length > 0) {
     const mixer = commands.getById(entity.id).addType(AnimationMixer);
     context.animationMixerIds.push(mixer.id);
   }
-
-  context.dropStructs();
 
   return context;
 }

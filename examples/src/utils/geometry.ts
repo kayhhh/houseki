@@ -10,7 +10,7 @@ import {
 
 export function createSphereGeometry(warehouse: Warehouse, radius = 0.5) {
   const sphere = new SphereGeometry(radius);
-  return writeGeometry(sphere, warehouse);
+  return writeGeometry(warehouse, sphere);
 }
 
 export function createBoxGeometry(
@@ -18,7 +18,7 @@ export function createBoxGeometry(
   size: Readonly<[number, number, number]> = [1, 1, 1]
 ) {
   const box = new BoxGeometry(...size);
-  return writeGeometry(box, warehouse);
+  return writeGeometry(warehouse, box);
 }
 
 export function createPlaneGeometry(
@@ -27,10 +27,10 @@ export function createPlaneGeometry(
   height = 1
 ) {
   const geometry = new PlaneGeometry(width, height);
-  return writeGeometry(geometry, warehouse);
+  return writeGeometry(warehouse, geometry);
 }
 
-function writeGeometry(threeGeometry: BufferGeometry, warehouse: Warehouse) {
+function writeGeometry(warehouse: Warehouse, threeGeometry: BufferGeometry) {
   const positionsAttribute = threeGeometry.getAttribute(
     "position"
   ) as BufferAttribute;

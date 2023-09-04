@@ -1,6 +1,5 @@
 import {
   Commands,
-  dropStruct,
   Entity,
   Mut,
   Query,
@@ -11,25 +10,27 @@ import {
 } from "thyseus";
 
 import { Asset, Loading } from "../components";
-import { Warehouse } from "../warehouse";
+import { Warehouse } from "../Warehouse";
 
 class LocalStore {
-  readonly loaded = new Map<string, ArrayBuffer>();
+  /**
+   * Entity ID -> URI
+   */
+  readonly loaded = new Map<string, Uint8Array>();
 }
 
 export function fetchAssets(
-  commands: Commands,
   warehouse: Res<Mut<Warehouse>>,
+  commands: Commands,
   localStore: SystemRes<LocalStore>,
-  toLoad: Query<[Entity, Asset], Without<Loading>>,
-  loading: Query<[Entity, Asset], With<Loading>>
+  toLoad: Query<[Entity, Mut<Asset>], Without<Loading>>,
+  loading: Query<[Entity, Mut<Asset>], With<Loading>>
 ) {
   for (const [entity, resource] of toLoad) {
-    const uri = resource.uri.read(warehouse);
+    const uri = resource.uri;
     if (!uri) continue;
 
     const loaded = localStore.loaded.get(uri);
-
     if (loaded) {
       if (loaded !== resource.data.read(warehouse)) {
         resource.data.write(loaded, warehouse);
@@ -37,20 +38,20 @@ export function fetchAssets(
       continue;
     }
 
-    const loadMessage = new Loading();
-    loadMessage.message.write(`Fetching ${uri}`, warehouse);
-
-    commands.getById(entity.id).add(loadMessage);
-    dropStruct(loadMessage);
+    commands.getById(entity.id).add(new Loading(`Fetching ${uri}`));
 
     fetch(uri)
       .then((response) => response.arrayBuffer())
-      .then((data) => localStore.loaded.set(uri, data));
+      .then((data) => {
+        const array = new Uint8Array(data);
+        localStore.loaded.set(uri, array);
+      });
   }
 
   for (const [entity, resource] of loading) {
-    const uri = resource.uri.read(warehouse) ?? "";
-    const loaded = localStore.loaded.get(uri);
+    if (!resource.uri) continue;
+
+    const loaded = localStore.loaded.get(resource.uri);
 
     if (loaded) {
       resource.data.write(loaded, warehouse);

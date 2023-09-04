@@ -1,12 +1,12 @@
 import { LoopOnce, LoopRepeat } from "three";
-import { Entity, Query, Res, struct, SystemRes, With } from "thyseus";
+import { Entity, type f32, Query, Res, struct, SystemRes, With } from "thyseus";
 
 import { Vrm, VrmAnimation } from "../components";
 import { VrmStore } from "../resources";
 
 @struct
 class LocalStore {
-  @struct.f32 declare lastTime: number;
+  lastTime: f32 = 0;
 }
 
 export function playAnimations(

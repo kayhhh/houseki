@@ -1,7 +1,7 @@
 import { Mesh as GltfMesh, Primitive } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
 import { Geometry, Mesh } from "@lattice-engine/scene";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";
 import { importMaterial } from "./importMaterial";
@@ -19,10 +19,10 @@ const THREE_TO_ECS_ATTRIBUTES = {
 } as const;
 
 export function importMesh(
+  warehouse: Warehouse,
   gltfMesh: GltfMesh,
   nodeId: bigint,
   commands: Commands,
-  warehouse: Warehouse,
   context: ImportContext
 ) {
   gltfMesh.listPrimitives().forEach((primitive) => {
@@ -33,15 +33,15 @@ export function importMesh(
 
     const geometry = new Geometry();
 
-    setAttribute("POSITION", primitive, geometry, warehouse);
-    setAttribute("NORMAL", primitive, geometry, warehouse);
-    setAttribute("TEXCOORD_0", primitive, geometry, warehouse);
-    setAttribute("TEXCOORD_1", primitive, geometry, warehouse);
-    setAttribute("TEXCOORD_2", primitive, geometry, warehouse);
-    setAttribute("TEXCOORD_3", primitive, geometry, warehouse);
-    setAttribute("COLOR_0", primitive, geometry, warehouse);
-    setAttribute("JOINTS_0", primitive, geometry, warehouse);
-    setAttribute("WEIGHTS_0", primitive, geometry, warehouse);
+    setAttribute(warehouse, "POSITION", primitive, geometry);
+    setAttribute(warehouse, "NORMAL", primitive, geometry);
+    setAttribute(warehouse, "TEXCOORD_0", primitive, geometry);
+    setAttribute(warehouse, "TEXCOORD_1", primitive, geometry);
+    setAttribute(warehouse, "TEXCOORD_2", primitive, geometry);
+    setAttribute(warehouse, "TEXCOORD_3", primitive, geometry);
+    setAttribute(warehouse, "COLOR_0", primitive, geometry);
+    setAttribute(warehouse, "JOINTS_0", primitive, geometry);
+    setAttribute(warehouse, "WEIGHTS_0", primitive, geometry);
 
     const indices = primitive.getIndices()?.getArray();
 
@@ -61,22 +61,16 @@ export function importMesh(
 
     const material = primitive.getMaterial();
     if (material) {
-      mesh.materialId = importMaterial(material, commands, warehouse, context);
+      mesh.materialId = importMaterial(warehouse, material, commands, context);
     }
 
-    context.name.value.write(
-      gltfMesh.getName() || `Mesh_${context.meshIds.length}`,
-      warehouse
-    );
+    context.name.value = gltfMesh.getName() || `Mesh_${context.meshIds.length}`;
 
     const meshId = commands
       .spawn(true)
       .add(mesh)
       .add(geometry)
       .add(context.name).id;
-
-    dropStruct(mesh);
-    dropStruct(geometry);
 
     context.meshIds.push(meshId);
   });
@@ -85,10 +79,10 @@ export function importMesh(
 }
 
 function setAttribute(
+  warehouse: Warehouse,
   name: keyof typeof THREE_TO_ECS_ATTRIBUTES,
   primitive: Primitive,
-  geometry: Geometry,
-  warehouse: Warehouse
+  geometry: Geometry
 ) {
   const array = primitive.getAttribute(name)?.getArray();
   const ecsName = THREE_TO_ECS_ATTRIBUTES[name];

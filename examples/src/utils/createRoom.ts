@@ -1,7 +1,7 @@
 import { Warehouse } from "lattice-engine/core";
 import { BoxCollider, StaticBody } from "lattice-engine/physics";
 import { GlobalTransform, Mesh, Parent, Transform } from "lattice-engine/scene";
-import { Commands, dropStruct } from "thyseus";
+import { Commands } from "thyseus";
 
 import { createBoxGeometry } from "./geometry";
 import { Vec3 } from "./types";
@@ -12,19 +12,18 @@ const THICKNESS = 0.5;
  * Creates a ground and four walls
  * @param size The size of the room
  * @param commands The Thyseus commands object
- * @param warehouse The Lattice warehouse object
  */
 export function createRoom(
+  warehouse: Warehouse,
   size: Vec3,
-  commands: Commands,
-  warehouse: Warehouse
+  commands: Commands
 ) {
   // Create ground
   const groundId = createBox(
+    warehouse,
     [size[0], THICKNESS, size[2]],
     [0, -THICKNESS / 2, 0],
-    commands,
-    warehouse
+    commands
   );
 
   // Create walls
@@ -33,34 +32,31 @@ export function createRoom(
   const z = size[2] / 2 - THICKNESS / 2;
 
   createBox(
+    warehouse,
     [THICKNESS, size[1], size[2]],
     [-x, y, 0],
     commands,
-    warehouse,
     groundId
   );
-
   createBox(
+    warehouse,
     [THICKNESS, size[1], size[2]],
     [x, y, 0],
     commands,
-    warehouse,
     groundId
   );
-
   createBox(
+    warehouse,
     [size[0], size[1], THICKNESS],
     [0, y, -z],
     commands,
-    warehouse,
     groundId
   );
-
   createBox(
+    warehouse,
     [size[0], size[1], THICKNESS],
     [0, y, z],
     commands,
-    warehouse,
     groundId
   );
 
@@ -71,10 +67,10 @@ export function createRoom(
  * Creates a box with a mesh, collider, and static body
  */
 function createBox(
+  warehouse: Warehouse,
   size: Vec3,
   translation: Vec3,
   commands: Commands,
-  warehouse: Warehouse,
   parentId?: bigint
 ) {
   const geometry = createBoxGeometry(warehouse, size);
@@ -91,13 +87,9 @@ function createBox(
     .add(collider)
     .addType(StaticBody);
 
-  dropStruct(transform);
-  dropStruct(collider);
-
   if (parentId) {
     const parent = new Parent(parentId);
     entity.add(parent);
-    dropStruct(parent);
   }
 
   return entity.id;

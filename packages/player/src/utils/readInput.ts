@@ -5,7 +5,7 @@ export type Input = {
   y: number;
 };
 
-export function readInput(inputStruct: InputStruct): Input {
+export function readInput(inputStruct: Readonly<InputStruct>): Input {
   const up =
     inputStruct.keyPressed(Key.w) || inputStruct.keyPressed(Key.ArrowUp);
   const down =

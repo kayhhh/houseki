@@ -3,10 +3,16 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["build/**", "dist/**"]
+      "outputs": ["dist/**"]
     },
-    "dev": { "cache": false, "persistent": true },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
     "test": {},
-    "test:watch": { "cache": false, "persistent": true }
+    "test:watch": {
+      "cache": false,
+      "persistent": true
+    }
   }
 }

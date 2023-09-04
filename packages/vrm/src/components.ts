@@ -1,20 +1,19 @@
-import { Resource } from "@lattice-engine/core";
-import { initStruct, struct } from "thyseus";
+import { type f32, struct, type u64 } from "thyseus";
 
 @struct
 export class Vrm {
   /**
    * The URI of the VRM file to load.
    */
-  @struct.substruct(Resource) declare uri: Resource<string>;
+  uri: string;
 
   /**
    * Whether to setup first person layers.
    */
-  @struct.bool declare setupFirstPerson: boolean;
+  setupFirstPerson: boolean;
 
-  constructor(setupFirstPerson = false) {
-    initStruct(this);
+  constructor(uri = "", setupFirstPerson = false) {
+    this.uri = uri;
     this.setupFirstPerson = setupFirstPerson;
   }
 }
@@ -24,17 +23,16 @@ export class Vrm {
  */
 @struct
 export class VrmAnimation {
-  @struct.u64 declare vrmId: bigint; // Vrm Entity ID
-  @struct.substruct(Resource) declare uri: Resource<string>;
-  @struct.bool declare play: boolean;
-  @struct.bool declare loop: boolean;
-  @struct.f32 declare weight: number;
-  @struct.f32 declare speed: number;
+  vrmId: u64; // Vrm Entity ID
+  uri: string;
+  play: boolean;
+  loop: boolean;
+  weight: f32;
+  speed: f32;
 
-  constructor(vrmId = 0n, play = false, loop = false, weight = 1.0) {
-    initStruct(this);
-
+  constructor(vrmId = 0n, uri = "", play = false, loop = false, weight = 1.0) {
     this.vrmId = vrmId;
+    this.uri = uri;
     this.play = play;
     this.loop = loop;
     this.weight = weight;

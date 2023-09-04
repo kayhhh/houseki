@@ -1,3 +1,4 @@
+import { GLTF } from "@gltf-transform/core";
 import { Warehouse } from "@lattice-engine/core";
 import { Geometry, Mesh } from "@lattice-engine/scene";
 
@@ -18,8 +19,8 @@ const ATTRIBUTE_TYPES = {
 } as const;
 
 export function exportMesh(
-  context: ExportContext,
   warehouse: Readonly<Warehouse>,
+  context: ExportContext,
   entityId: bigint,
   mesh: Mesh,
   geometry: Geometry
@@ -36,7 +37,7 @@ export function exportMesh(
   const primitive = context.doc.createPrimitive();
   gltfMesh.addPrimitive(primitive);
 
-  primitive.setMode(mesh.mode);
+  primitive.setMode(mesh.mode as GLTF.MeshPrimitiveMode);
 
   const materialId = mesh.materialId || entityId;
   const material = context.materials.get(materialId);
@@ -45,16 +46,17 @@ export function exportMesh(
 
   for (const [gltf, ecs] of Object.entries(GLTF_TO_ECS_ATTRIBUTES)) {
     const array = geometry[ecs].read(warehouse);
-    if (array?.length) {
-      const accessor = context.doc.createAccessor();
-      accessor.setArray(array);
-      accessor.setType(ATTRIBUTE_TYPES[ecs]);
-      primitive.setAttribute(gltf, accessor);
-    }
+    if (!array) continue;
+
+    const accessor = context.doc.createAccessor();
+    accessor.setArray(new Float32Array(array));
+    accessor.setType(ATTRIBUTE_TYPES[ecs]);
+    primitive.setAttribute(gltf, accessor);
   }
 
   const indices = geometry.indices.read(warehouse);
-  if (indices?.length) {
+
+  if (indices) {
     const accessor = context.doc.createAccessor();
     accessor.setArray(indices);
     accessor.setType("SCALAR");

@@ -1,14 +1,6 @@
 import { Document, WebIO } from "@gltf-transform/core";
 import { Loading, Warehouse } from "@lattice-engine/core";
-import {
-  Commands,
-  dropStruct,
-  Entity,
-  Mut,
-  Query,
-  Res,
-  SystemRes,
-} from "thyseus";
+import { Commands, Entity, Mut, Query, Res, SystemRes } from "thyseus";
 
 import { Gltf } from "../components";
 import { extensions } from "../extensions/extensions";
@@ -47,8 +39,8 @@ class GltfStore {
 }
 
 export function importGltf(
-  commands: Commands,
   warehouse: Res<Mut<Warehouse>>,
+  commands: Commands,
   store: SystemRes<GltfStore>,
   entities: Query<[Entity, Gltf]>
 ) {
@@ -62,17 +54,15 @@ export function importGltf(
     ids.push(id);
 
     const doc = store.docs.get(id);
-    const uri = gltf.uri.read(warehouse) ?? "";
+    const uri = gltf.uri;
 
     // If URI has changed, load new document
     if (store.uris.get(id) !== uri) {
       store.uris.set(id, uri);
 
-      const loading = new Loading();
-      loading.message.write(`Loading ${gltf.uri}`, warehouse);
+      const loading = new Loading(`Loading ${gltf.uri}`);
 
       commands.getById(entity.id).add(loading);
-      dropStruct(loading);
 
       // Start loading document
       io.read(uri).then((doc) => store.docs.set(id, doc));
@@ -85,7 +75,7 @@ export function importGltf(
       }
 
       // Load document into the ECS
-      const context = importDoc(doc, entity, commands, warehouse);
+      const context = importDoc(warehouse, doc, entity, commands);
 
       // Add context to store, for cleanup
       if (context) store.contexts.set(id, context);

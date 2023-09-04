@@ -1,4 +1,4 @@
-import { Mut, Res, struct, SystemRes, World } from "thyseus";
+import { type f32, Mut, Res, struct, SystemRes, World } from "thyseus";
 
 import { Time } from "../resources";
 import { LatticeSchedules } from "../schedules";
@@ -8,7 +8,7 @@ const FIXED_STEP_MS = 1000 / FIXED_HZ;
 
 @struct
 class LocalRes {
-  @struct.f32 declare timeSinceLastFixedUpdate: number;
+  timeSinceLastFixedUpdate: f32 = 0;
 }
 
 export async function runFixedLoop(
@@ -20,15 +20,21 @@ export async function runFixedLoop(
   const delta = now - time.fixedTime;
   localRes.timeSinceLastFixedUpdate += delta;
 
+  let nextFixedTime = now;
+
   while (localRes.timeSinceLastFixedUpdate >= FIXED_STEP_MS) {
-    time.fixedTime = now;
+    time.fixedTime = nextFixedTime;
     time.fixedDelta = FIXED_STEP_MS / 1000;
+
+    // @ts-expect-error
+    time.serialize();
 
     await runSchedule(world, LatticeSchedules.PreFixedUpdate);
     await runSchedule(world, LatticeSchedules.FixedUpdate);
     await runSchedule(world, LatticeSchedules.PostFixedUpdate);
 
     localRes.timeSinceLastFixedUpdate -= FIXED_STEP_MS;
+    nextFixedTime += FIXED_STEP_MS;
   }
 }
 
