@@ -1,5 +1,5 @@
 import { GlobalTransform, Parent, Transform } from "@lattice-engine/scene";
-import { Mat4, Quat, Vec3 } from "gl-matrix/dist/esm";
+import { Mat4, Quat, Vec3, Vec4 } from "gl-matrix/dist/esm";
 import { Entity, Mut, Or, Query, Res, With, Without } from "thyseus";
 
 import {
@@ -10,6 +10,7 @@ import {
 } from "../../components";
 import { PhysicsStore } from "../../resources";
 
+const vec4 = new Vec4();
 const vec3 = new Vec3();
 const vec3b = new Vec3();
 const quat = new Quat();
@@ -51,12 +52,20 @@ export function saveRigidBodies(
     const globalMat = new Mat4();
     globalTransforms.set(entity.id, globalMat);
 
-    Mat4.fromRotationTranslationScale(
-      globalMat,
-      globalTransform.rotation.toArray(),
-      globalTransform.translation.toArray(),
-      globalTransform.scale.toArray()
-    );
+    vec4.x = globalTransform.rotation.x;
+    vec4.y = globalTransform.rotation.y;
+    vec4.z = globalTransform.rotation.z;
+    vec4.w = globalTransform.rotation.w;
+
+    vec3.x = globalTransform.translation.x;
+    vec3.y = globalTransform.translation.y;
+    vec3.z = globalTransform.translation.z;
+
+    vec3b.x = globalTransform.scale.x;
+    vec3b.y = globalTransform.scale.y;
+    vec3b.z = globalTransform.scale.z;
+
+    Mat4.fromRotationTranslationScale(globalMat, vec4, vec3, vec3b);
 
     globalMat.invert();
   }

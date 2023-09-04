@@ -1,4 +1,5 @@
 import { Mesh as GltfMesh, Primitive } from "@gltf-transform/core";
+import { Warehouse } from "@lattice-engine/core";
 import { Geometry, Mesh } from "@lattice-engine/scene";
 import { Commands } from "thyseus";
 
@@ -18,6 +19,7 @@ const THREE_TO_ECS_ATTRIBUTES = {
 } as const;
 
 export function importMesh(
+  warehouse: Warehouse,
   gltfMesh: GltfMesh,
   nodeId: bigint,
   commands: Commands,
@@ -31,15 +33,15 @@ export function importMesh(
 
     const geometry = new Geometry();
 
-    setAttribute("POSITION", primitive, geometry);
-    setAttribute("NORMAL", primitive, geometry);
-    setAttribute("TEXCOORD_0", primitive, geometry);
-    setAttribute("TEXCOORD_1", primitive, geometry);
-    setAttribute("TEXCOORD_2", primitive, geometry);
-    setAttribute("TEXCOORD_3", primitive, geometry);
-    setAttribute("COLOR_0", primitive, geometry);
-    setAttribute("JOINTS_0", primitive, geometry);
-    setAttribute("WEIGHTS_0", primitive, geometry);
+    setAttribute(warehouse, "POSITION", primitive, geometry);
+    setAttribute(warehouse, "NORMAL", primitive, geometry);
+    setAttribute(warehouse, "TEXCOORD_0", primitive, geometry);
+    setAttribute(warehouse, "TEXCOORD_1", primitive, geometry);
+    setAttribute(warehouse, "TEXCOORD_2", primitive, geometry);
+    setAttribute(warehouse, "TEXCOORD_3", primitive, geometry);
+    setAttribute(warehouse, "COLOR_0", primitive, geometry);
+    setAttribute(warehouse, "JOINTS_0", primitive, geometry);
+    setAttribute(warehouse, "WEIGHTS_0", primitive, geometry);
 
     const indices = primitive.getIndices()?.getArray();
 
@@ -50,16 +52,16 @@ export function importMesh(
         indices32[i] = indices[i] ?? 0;
       }
 
-      geometry.indices = Array.from(indices32);
+      geometry.indices.write(indices32, warehouse);
     } else if (indices instanceof Uint32Array) {
-      geometry.indices = Array.from(indices);
+      geometry.indices.write(indices, warehouse);
     } else {
-      geometry.indices = [];
+      geometry.indices.write(new Uint32Array(), warehouse);
     }
 
     const material = primitive.getMaterial();
     if (material) {
-      mesh.materialId = importMaterial(material, commands, context);
+      mesh.materialId = importMaterial(warehouse, material, commands, context);
     }
 
     context.name.value = gltfMesh.getName() || `Mesh_${context.meshIds.length}`;
@@ -77,6 +79,7 @@ export function importMesh(
 }
 
 function setAttribute(
+  warehouse: Warehouse,
   name: keyof typeof THREE_TO_ECS_ATTRIBUTES,
   primitive: Primitive,
   geometry: Geometry
@@ -85,8 +88,8 @@ function setAttribute(
   const ecsName = THREE_TO_ECS_ATTRIBUTES[name];
 
   if (array instanceof Float32Array) {
-    geometry[ecsName] = Array.from(array);
+    geometry[ecsName].write(array, warehouse);
   } else {
-    geometry[ecsName] = [];
+    geometry[ecsName].write(new Float32Array(), warehouse);
   }
 }

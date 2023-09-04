@@ -1,4 +1,26 @@
-import { type f32, struct, u8 } from "thyseus";
+import { type f32, struct, u32 } from "thyseus";
+
+import { Warehouse } from "./Warehouse";
+
+/**
+ * A resource is a reference to a data object stored in the warehouse.
+ */
+@struct
+export class Resource<T> {
+  id: u32 = 0;
+
+  read(warehouse: Readonly<Warehouse>) {
+    return warehouse.get(this.id) as T | undefined;
+  }
+
+  write(data: T, warehouse: Warehouse) {
+    if (!this.id) {
+      this.id = warehouse.store(data);
+    } else {
+      warehouse.set(this.id, data);
+    }
+  }
+}
 
 /**
  * Marks an entity as loading.
@@ -23,7 +45,7 @@ export class Loading {
 export class Asset {
   uri: string;
   mimeType: string;
-  data: u8[] = [];
+  data: Resource<Uint8Array> = new Resource();
 
   constructor(uri = "", mimeType = "") {
     this.uri = uri;

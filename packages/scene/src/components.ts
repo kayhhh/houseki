@@ -1,4 +1,4 @@
-import { Vec2, Vec3, Vec4 } from "@lattice-engine/core";
+import { Resource, Vec2, Vec3, Vec4 } from "@lattice-engine/core";
 import {
   Entity,
   EntityCommands,
@@ -127,16 +127,16 @@ export class Mesh {
 
 @struct
 export class Geometry {
-  indices: f32[] = [];
-  colors: f32[] = [];
-  joints: f32[] = [];
-  normals: f32[] = [];
-  positions: f32[] = [];
-  uv1: f32[] = [];
-  uv2: f32[] = [];
-  uv3: f32[] = [];
-  uv: f32[] = [];
-  weights: f32[] = [];
+  indices: Resource<Uint32Array> = new Resource();
+  colors: Resource<Float32Array> = new Resource();
+  joints: Resource<Float32Array> = new Resource();
+  normals: Resource<Float32Array> = new Resource();
+  positions: Resource<Float32Array> = new Resource();
+  uv1: Resource<Float32Array> = new Resource();
+  uv2: Resource<Float32Array> = new Resource();
+  uv3: Resource<Float32Array> = new Resource();
+  uv: Resource<Float32Array> = new Resource();
+  weights: Resource<Float32Array> = new Resource();
 }
 
 @struct

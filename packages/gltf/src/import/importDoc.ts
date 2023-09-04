@@ -1,4 +1,5 @@
 import { Document } from "@gltf-transform/core";
+import { Warehouse } from "@lattice-engine/core";
 import { AnimationMixer } from "@lattice-engine/scene";
 import { Commands, Entity } from "thyseus";
 
@@ -7,6 +8,7 @@ import { importAnimation } from "./importAnimation";
 import { importNode } from "./importNode";
 
 export function importDoc(
+  warehouse: Warehouse,
   doc: Document,
   entity: Readonly<Entity>,
   commands: Commands
@@ -19,7 +21,9 @@ export function importDoc(
 
   scene
     .listChildren()
-    .forEach((child) => importNode(child, entity.id, commands, context));
+    .forEach((child) =>
+      importNode(warehouse, child, entity.id, commands, context)
+    );
 
   root
     .listAnimations()

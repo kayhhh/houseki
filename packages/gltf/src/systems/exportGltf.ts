@@ -1,6 +1,6 @@
 import { JSONDocument, WebIO } from "@gltf-transform/core";
 import { dedup, prune } from "@gltf-transform/functions";
-import { Asset } from "@lattice-engine/core";
+import { Asset, Warehouse } from "@lattice-engine/core";
 import {
   BoxCollider,
   CapsuleCollider,
@@ -28,6 +28,7 @@ import {
   EventReader,
   EventWriter,
   Query,
+  Res,
   SystemRes,
   With,
 } from "thyseus";
@@ -73,6 +74,7 @@ class LocalStore {
 }
 
 export function exportGltf(
+  warehouse: Res<Warehouse>,
   localStore: SystemRes<LocalStore>,
   reader: EventReader<ExportGltf>,
   outWriter: EventWriter<ExportedGltf>,
@@ -151,7 +153,7 @@ export function exportGltf(
     }
 
     for (const [entity, asset] of images) {
-      exportImage(context, entity.id, asset);
+      exportImage(warehouse, context, entity.id, asset);
     }
 
     for (const [entity, material] of materials) {
@@ -159,7 +161,7 @@ export function exportGltf(
     }
 
     for (const [entity, mesh, geometry] of meshes) {
-      exportMesh(context, entity.id, mesh, geometry);
+      exportMesh(warehouse, context, entity.id, mesh, geometry);
     }
 
     for (const [entity, parent, transform] of nodes) {

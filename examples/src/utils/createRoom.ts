@@ -1,3 +1,4 @@
+import { Warehouse } from "lattice-engine/core";
 import { BoxCollider, StaticBody } from "lattice-engine/physics";
 import { GlobalTransform, Mesh, Parent, Transform } from "lattice-engine/scene";
 import { Commands } from "thyseus";
@@ -12,9 +13,14 @@ const THICKNESS = 0.5;
  * @param size The size of the room
  * @param commands The Thyseus commands object
  */
-export function createRoom(size: Vec3, commands: Commands) {
+export function createRoom(
+  warehouse: Warehouse,
+  size: Vec3,
+  commands: Commands
+) {
   // Create ground
   const groundId = createBox(
+    warehouse,
     [size[0], THICKNESS, size[2]],
     [0, -THICKNESS / 2, 0],
     commands
@@ -25,13 +31,34 @@ export function createRoom(size: Vec3, commands: Commands) {
   const y = size[1] / 2 - THICKNESS / 2;
   const z = size[2] / 2 - THICKNESS / 2;
 
-  createBox([THICKNESS, size[1], size[2]], [-x, y, 0], commands, groundId);
-
-  createBox([THICKNESS, size[1], size[2]], [x, y, 0], commands, groundId);
-
-  createBox([size[0], size[1], THICKNESS], [0, y, -z], commands, groundId);
-
-  createBox([size[0], size[1], THICKNESS], [0, y, z], commands, groundId);
+  createBox(
+    warehouse,
+    [THICKNESS, size[1], size[2]],
+    [-x, y, 0],
+    commands,
+    groundId
+  );
+  createBox(
+    warehouse,
+    [THICKNESS, size[1], size[2]],
+    [x, y, 0],
+    commands,
+    groundId
+  );
+  createBox(
+    warehouse,
+    [size[0], size[1], THICKNESS],
+    [0, y, -z],
+    commands,
+    groundId
+  );
+  createBox(
+    warehouse,
+    [size[0], size[1], THICKNESS],
+    [0, y, z],
+    commands,
+    groundId
+  );
 
   return groundId;
 }
@@ -40,12 +67,13 @@ export function createRoom(size: Vec3, commands: Commands) {
  * Creates a box with a mesh, collider, and static body
  */
 function createBox(
+  warehouse: Warehouse,
   size: Vec3,
   translation: Vec3,
   commands: Commands,
   parentId?: bigint
 ) {
-  const geometry = createBoxGeometry(size);
+  const geometry = createBoxGeometry(warehouse, size);
 
   const transform = new Transform(translation);
   const collider = new BoxCollider(size);

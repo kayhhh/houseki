@@ -1,3 +1,4 @@
+import { Warehouse } from "lattice-engine/core";
 import { Geometry } from "lattice-engine/scene";
 import {
   BoxGeometry,
@@ -7,24 +8,29 @@ import {
   SphereGeometry,
 } from "three";
 
-export function createSphereGeometry(radius = 0.5) {
+export function createSphereGeometry(warehouse: Warehouse, radius = 0.5) {
   const sphere = new SphereGeometry(radius);
-  return writeGeometry(sphere);
+  return writeGeometry(warehouse, sphere);
 }
 
 export function createBoxGeometry(
+  warehouse: Warehouse,
   size: Readonly<[number, number, number]> = [1, 1, 1]
 ) {
   const box = new BoxGeometry(...size);
-  return writeGeometry(box);
+  return writeGeometry(warehouse, box);
 }
 
-export function createPlaneGeometry(width = 1, height = 1) {
+export function createPlaneGeometry(
+  warehouse: Warehouse,
+  width = 1,
+  height = 1
+) {
   const geometry = new PlaneGeometry(width, height);
-  return writeGeometry(geometry);
+  return writeGeometry(warehouse, geometry);
 }
 
-function writeGeometry(threeGeometry: BufferGeometry) {
+function writeGeometry(warehouse: Warehouse, threeGeometry: BufferGeometry) {
   const positionsAttribute = threeGeometry.getAttribute(
     "position"
   ) as BufferAttribute;
@@ -40,9 +46,9 @@ function writeGeometry(threeGeometry: BufferGeometry) {
   const indices = indicesAttribute.array as Uint16Array;
 
   const geometry = new Geometry();
-  geometry.positions = Array.from(positions);
-  geometry.normals = Array.from(normals);
-  geometry.uv = Array.from(uvs);
+  geometry.positions.write(positions, warehouse);
+  geometry.normals.write(normals, warehouse);
+  geometry.uv.write(uvs, warehouse);
 
   const indices32 = new Uint32Array(indices.length);
 
@@ -50,7 +56,7 @@ function writeGeometry(threeGeometry: BufferGeometry) {
     indices32[i] = indices[i] ?? 0;
   }
 
-  geometry.indices = Array.from(indices32);
+  geometry.indices.write(indices32, warehouse);
 
   return geometry;
 }

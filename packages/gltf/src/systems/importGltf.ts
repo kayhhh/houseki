@@ -1,6 +1,6 @@
 import { Document, WebIO } from "@gltf-transform/core";
-import { Loading } from "@lattice-engine/core";
-import { Commands, Entity, Query, SystemRes } from "thyseus";
+import { Loading, Warehouse } from "@lattice-engine/core";
+import { Commands, Entity, Mut, Query, Res, SystemRes } from "thyseus";
 
 import { Gltf } from "../components";
 import { extensions } from "../extensions/extensions";
@@ -39,6 +39,7 @@ class GltfStore {
 }
 
 export function importGltf(
+  warehouse: Res<Mut<Warehouse>>,
   commands: Commands,
   store: SystemRes<GltfStore>,
   entities: Query<[Entity, Gltf]>
@@ -72,7 +73,7 @@ export function importGltf(
       }
 
       // Load document into the ECS
-      const context = importDoc(doc, entity, commands);
+      const context = importDoc(warehouse, doc, entity, commands);
 
       // Add context to store, for cleanup
       if (context) store.contexts.set(id, context);

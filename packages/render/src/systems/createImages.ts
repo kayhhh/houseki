@@ -1,4 +1,4 @@
-import { Asset } from "@lattice-engine/core";
+import { Asset, Warehouse } from "@lattice-engine/core";
 import { Image } from "@lattice-engine/scene";
 import { Entity, Mut, Query, Res, SystemRes } from "thyseus";
 
@@ -13,13 +13,14 @@ class LocalStore {
   /**
    * Entity ID -> data used to create the ImageBitmap
    */
-  readonly loadedData = new Map<bigint, ArrayBuffer>();
+  readonly loadedData = new Map<bigint, Uint8Array>();
 }
 
 /**
  * Creates ImageBitmaps.
  */
 export function createImages(
+  warehouse: Res<Warehouse>,
   renderStore: Res<Mut<RenderStore>>,
   localStore: SystemRes<LocalStore>,
   entities: Query<[Entity, Asset, Image]>
@@ -36,8 +37,10 @@ export function createImages(
     // If already created, skip
     if (localStore.bitmaps.has(entity.id)) continue;
 
+    const array = asset.data.read(warehouse);
+
     // If data is empty, remove the bitmap
-    if (!asset.data.length) {
+    if (!array) {
       localStore.bitmaps.delete(entity.id);
       localStore.loadedData.delete(entity.id);
       renderStore.images.delete(entity.id);
@@ -46,11 +49,10 @@ export function createImages(
 
     // If data hasn't changed, skip
     const loaded = localStore.loadedData.get(entity.id);
-    if (loaded && loaded.byteLength === asset.data.length) continue;
+    if (loaded && loaded === array) continue;
 
     // Create the bitmap
-    const array = new Uint8Array(asset.data);
-    localStore.loadedData.set(entity.id, array.buffer);
+    localStore.loadedData.set(entity.id, array);
 
     const blob = new Blob([array], { type: asset.mimeType });
     const entityId = entity.id;

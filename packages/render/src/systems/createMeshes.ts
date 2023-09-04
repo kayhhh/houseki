@@ -79,8 +79,12 @@ export function createMeshes(
 
     const parentId = mesh.parentId || entity.id;
     const parentObject = store.nodes.get(parentId);
-    if (parentObject) parentObject.add(object);
-    else object.removeFromParent();
+
+    if (parentObject) {
+      parentObject.add(object);
+    } else {
+      object.removeFromParent();
+    }
   }
 
   // Remove objects that no longer exist

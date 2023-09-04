@@ -1,4 +1,4 @@
-import { CoreStore } from "lattice-engine/core";
+import { CoreStore, Warehouse } from "lattice-engine/core";
 import { PhysicsConfig } from "lattice-engine/physics";
 import { Portal, PortalRaycast, PortalTarget } from "lattice-engine/portal";
 import {
@@ -19,6 +19,7 @@ import { createScene } from "../../utils/createScene";
 import { createBoxGeometry } from "../../utils/geometry";
 
 export function initScene(
+  warehouse: Res<Mut<Warehouse>>,
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
   sceneStruct: Res<Mut<SceneStruct>>,
@@ -32,7 +33,7 @@ export function initScene(
 
   commands.getById(sceneStruct.activeCamera).addType(PortalRaycast);
 
-  createBox(commands, {
+  createBox(warehouse, commands, {
     parentId: rootId,
     size: [30, 1, 30],
     translation: [0, -1, 0],
@@ -81,7 +82,7 @@ export function initScene(
   portalTarget.id = aId;
   commands.getById(bId).add(portalTarget);
 
-  const boxGeometry = createBoxGeometry();
+  const boxGeometry = createBoxGeometry(warehouse);
   const boxMaterial = new StandardMaterial([1, 0.3, 0.3, 1]);
 
   // Red box

@@ -3,21 +3,24 @@ import {
   Entity,
   Mut,
   Query,
+  Res,
   SystemRes,
   With,
   Without,
 } from "thyseus";
 
 import { Asset, Loading } from "../components";
+import { Warehouse } from "../Warehouse";
 
 class LocalStore {
   /**
    * Entity ID -> URI
    */
-  readonly loaded = new Map<string, number[]>();
+  readonly loaded = new Map<string, Uint8Array>();
 }
 
 export function fetchAssets(
+  warehouse: Res<Mut<Warehouse>>,
   commands: Commands,
   localStore: SystemRes<LocalStore>,
   toLoad: Query<[Entity, Mut<Asset>], Without<Loading>>,
@@ -29,8 +32,8 @@ export function fetchAssets(
 
     const loaded = localStore.loaded.get(uri);
     if (loaded) {
-      if (loaded !== resource.data) {
-        resource.data = loaded;
+      if (loaded !== resource.data.read(warehouse)) {
+        resource.data.write(loaded, warehouse);
       }
       continue;
     }
@@ -41,7 +44,7 @@ export function fetchAssets(
       .then((response) => response.arrayBuffer())
       .then((data) => {
         const array = new Uint8Array(data);
-        localStore.loaded.set(uri, Array.from(array));
+        localStore.loaded.set(uri, array);
       });
   }
 
@@ -51,7 +54,7 @@ export function fetchAssets(
     const loaded = localStore.loaded.get(resource.uri);
 
     if (loaded) {
-      resource.data = loaded;
+      resource.data.write(loaded, warehouse);
       commands.getById(entity.id).remove(Loading);
     }
   }
