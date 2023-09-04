@@ -130,8 +130,6 @@ export function exportGltf(
     localStore.outJson.shift();
   }
 
-  if (reader.length === 0) return;
-
   for (const event of reader) {
     const context = new ExportContext();
 
