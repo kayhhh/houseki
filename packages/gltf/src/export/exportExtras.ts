@@ -6,11 +6,13 @@ export function exportExtras(context: ExportContext, extra: Extra) {
   if (!node) return;
 
   const extras = node.getExtras();
+  const key = extra.key;
+  const value = extra.value;
 
   try {
-    extras[extra.key] = JSON.parse(extra.value);
+    extras[key] = JSON.parse(value);
   } catch {
-    extras[extra.key] = extra.value;
+    extras[key] = extra.value;
   }
 
   node.setExtras(extras);

@@ -38,13 +38,15 @@ export function handleExport(
   if (reader.length === 0) return;
 
   for (const event of reader) {
+    const uri = event.uri;
+
     if (exportConfig.mode === "download") {
       if (event.binary) {
-        fetch(event.uri)
+        fetch(uri)
           .then((response) => response.blob())
           .then((blob) => downloadFile(blob, "scene.glb"));
       } else {
-        fetch(event.uri)
+        fetch(uri)
           .then((response) => response.text())
           .then((text) => {
             const json = JSON.parse(text) as ExportedJSON;
@@ -77,9 +79,11 @@ export function handleExport(
       }
 
       // Prevent gltf demo from resetting the uri
-      selectedModel.uri = event.uri;
+      selectedModel.uri = uri;
 
-      const gltf = new Gltf(event.uri);
+      const gltf = new Gltf();
+      gltf.uri = uri;
+
       commands.getById(rootId).add(gltf);
     }
   }

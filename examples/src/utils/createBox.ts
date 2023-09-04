@@ -23,7 +23,7 @@ let _textureId: bigint | undefined = undefined;
 function getTextureId(commands: Commands) {
   if (_textureId) return _textureId;
 
-  const asset = new Asset("/DevGrid.png");
+  const asset = new Asset("/DevGrid.png", "image/png");
   _textureId = commands.spawn(true).add(asset).addType(Image).id;
 
   return _textureId;

@@ -128,6 +128,7 @@ function createAnimation(
     return animationId;
   } else {
     const vrmAnimation = new VrmAnimation(vrmId, uri, false, true);
+
     const entityId = commands.spawn(true).add(vrmAnimation).id;
 
     return entityId;

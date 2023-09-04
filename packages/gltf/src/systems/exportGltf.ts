@@ -27,6 +27,7 @@ import {
   Entity,
   EventReader,
   EventWriter,
+  Mut,
   Query,
   Res,
   SystemRes,
@@ -74,7 +75,7 @@ class LocalStore {
 }
 
 export function exportGltf(
-  warehouse: Res<Warehouse>,
+  warehouse: Res<Mut<Warehouse>>,
   localStore: SystemRes<LocalStore>,
   reader: EventReader<ExportGltf>,
   outWriter: EventWriter<ExportedGltf>,

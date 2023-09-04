@@ -10,12 +10,15 @@ export function exportImage(
 ) {
   const texture = context.doc.createTexture();
 
-  texture.setMimeType(asset.mimeType);
+  const mimeType = asset.mimeType;
+  const uri = asset.uri;
 
-  if (asset.uri.startsWith("/")) {
-    texture.setURI(asset.uri.slice(1));
+  texture.setMimeType(mimeType);
+
+  if (uri.startsWith("/")) {
+    texture.setURI(uri.slice(1));
   } else {
-    texture.setURI(asset.uri);
+    texture.setURI(uri);
   }
 
   const array = asset.data.read(warehouse);

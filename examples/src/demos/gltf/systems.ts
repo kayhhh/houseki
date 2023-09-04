@@ -1,4 +1,4 @@
-import { CoreStore } from "lattice-engine/core";
+import { CoreStore, Warehouse } from "lattice-engine/core";
 import { Gltf } from "lattice-engine/gltf";
 import { N8AOPass } from "lattice-engine/postprocessing";
 import { SceneStruct } from "lattice-engine/scene";
@@ -29,7 +29,10 @@ export function initScene(
 /**
  * System to update the glTF uri.
  */
-export function loadGltf(entities: Query<Mut<Gltf>>) {
+export function loadGltf(
+  warehouse: Res<Mut<Warehouse>>,
+  entities: Query<Mut<Gltf>>
+) {
   for (const gltf of entities) {
     gltf.uri = selectedModel.uri;
   }

@@ -56,13 +56,14 @@ export function createAnimations(
       ids.push(animationEntity.id);
 
       if (localStore.promises.has(animationEntity.id)) continue;
-      if (localStore.loaded.get(animationEntity.id) === animation.uri) continue;
+
+      const uri = animation.uri;
+      if (localStore.loaded.get(animationEntity.id) === uri) continue;
 
       vrmStore.actions.delete(animationEntity.id);
 
       if (!animation.uri) continue;
 
-      const uri = animation.uri;
       const animationId = animationEntity.id;
 
       const promise = loadMixamoAnimation(uri, object).then((clips) => {

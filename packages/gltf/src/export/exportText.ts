@@ -14,9 +14,12 @@ export function exportText(
   const textExtension = context.doc.createExtension(MOZText);
   const textProp = textExtension.createText();
 
-  textProp.setValue(text.value);
+  const value = text.value;
+  const font = text.font;
+
+  textProp.setValue(value);
   textProp.setSize(text.fontSize);
-  textProp.setFontFile(text.font);
+  textProp.setFontFile(font);
 
   const color = [
     (text.color.at(0) ?? 0) / 255,

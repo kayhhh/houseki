@@ -151,7 +151,6 @@ function createTexture(
 
   const asset = new Asset();
   asset.data.write(imageData, warehouse);
-
   asset.mimeType = gltfTexture.getMimeType();
 
   const imageId = commands.spawn(true).add(asset).addType(Image).id;

@@ -27,8 +27,8 @@ export function initScene(
   physicsConfig.debug = true;
 
   const { sceneId, rootId } = createScene(commands, coreStore, sceneStruct);
-  createLights(commands, sceneId, 4096, 20);
 
+  createLights(commands, sceneId, 4096, 20);
   createPlayer([0, 5, 0], sceneId, commands, sceneStruct);
 
   commands

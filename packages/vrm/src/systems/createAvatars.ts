@@ -57,6 +57,7 @@ export function createAvatars(
     localStore.loadingURI.set(entityId, uri);
 
     const loadMessage = new Loading(`Loading ${uri}`);
+
     commands.getById(entity.id).add(loadMessage);
 
     loadVrm(entityId, uri, localStore);

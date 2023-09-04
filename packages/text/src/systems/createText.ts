@@ -8,7 +8,7 @@ import { Text } from "../components";
 import { TextStore } from "../resources";
 import { AnchorX, AnchorY } from "../types";
 
-// TODO: Figure out how to enable this
+// TODO: Figure out how to enable workaround
 // Currently it breaks some other postprocessing effects,
 // such as the outline effect used by the transform controls package
 // https://github.com/protectwise/troika/tree/main/packages/troika-three-text#postprocessing
@@ -33,6 +33,7 @@ export function createText(
     }
 
     object.text = text.value;
+
     object.fontSize = text.fontSize;
 
     switch (text.anchorX) {
