@@ -1,5 +1,13 @@
 # @lattice-engine/input
 
+## 1.0.1
+
+### Patch Changes
+
+- 215eff0: upgrade deps
+- Updated dependencies [215eff0]
+  - @lattice-engine/core@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

@@ -1,5 +1,16 @@
 # @lattice-engine/gltf
 
+## 6.0.1
+
+### Patch Changes
+
+- 215eff0: upgrade deps
+- Updated dependencies [215eff0]
+  - @lattice-engine/physics@5.0.1
+  - @lattice-engine/scene@1.0.1
+  - @lattice-engine/core@1.0.1
+  - @lattice-engine/text@5.0.1
+
 ## 6.0.0
 
 ### Major Changes
