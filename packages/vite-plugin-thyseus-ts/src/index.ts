@@ -1,4 +1,4 @@
-import { thyseus } from "@thyseus/transformer-rollup";
+import { thyseus } from "@thyseus/rollup-plugin-thyseus";
 import { Plugin } from "vite";
 import dts from "vite-plugin-dts";
 

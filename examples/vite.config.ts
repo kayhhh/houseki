@@ -1,4 +1,4 @@
-import { thyseus } from "@thyseus/transformer-rollup";
+import { thyseus } from "@thyseus/rollup-plugin-thyseus";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 

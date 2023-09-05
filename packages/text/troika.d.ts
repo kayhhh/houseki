@@ -1,5 +1,5 @@
 declare module "troika-three-text" {
-  export class Text extends Object3D {
+  export class Text {
     text: string;
     fontSize: number;
     anchorX: "left" | "center" | "right";

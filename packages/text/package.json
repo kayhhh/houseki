@@ -3,7 +3,7 @@
   "version": "5.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lattice-engine/lattice",
+    "url": "https://github.com/unavi-xyz/lattice",
     "directory": "packages/text"
   },
   "license": "GPL-3.0-or-later",
@@ -14,8 +14,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc --noEmit && vite build --emptyOutDir",
-    "dev": "vite build --watch"
+    "build": "tsc --noEmit && vite build --emptyOutDir && pnpm copy-dts",
+    "copy-dts": "cp troika.d.ts ./dist/troika.d.ts",
+    "dev": "pnpm copy-dts && vite build --watch"
   },
   "dependencies": {
     "troika-three-text": "^0.47.2"
@@ -24,10 +25,10 @@
     "@lattice-engine/core": "workspace:^",
     "@lattice-engine/render": "workspace:^",
     "@lattice-engine/scene": "workspace:^",
-    "@types/three": "~0.153.0",
+    "@types/three": "~0.154.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "three": "~0.153.0",
-    "thyseus": "0.14.0-beta.9",
+    "three": "~0.154.0",
+    "thyseus": "0.14.0",
     "typescript": "~5.2.2",
     "vite": "^4.4.7",
     "vite-plugin-thyseus-ts": "workspace:^"

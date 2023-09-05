@@ -3,7 +3,7 @@
   "version": "6.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lattice-engine/lattice",
+    "url": "https://github.com/unavi-xyz/lattice",
     "directory": "packages/gltf"
   },
   "license": "GPL-3.0-or-later",
@@ -29,7 +29,7 @@
     "@lattice-engine/scene": "workspace:^",
     "@lattice-engine/text": "workspace:^",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "thyseus": "0.14.0-beta.9",
+    "thyseus": "0.14.0",
     "typescript": "~5.2.2",
     "vite": "^4.4.7",
     "vite-plugin-thyseus-ts": "workspace:^"

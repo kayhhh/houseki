@@ -57,6 +57,10 @@ export default function App() {
         <a href="https://github.com/lattice-engine/lattice" target="_blank">
           GitHub
         </a>
+
+        <a href="https://github.com/lattice-engine/lattice" target="_blank">
+          GitHub
+        </a>
       </div>
 
       <Route path="/" component={About} />
