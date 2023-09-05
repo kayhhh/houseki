@@ -54,11 +54,7 @@ export default function App() {
 
         <h3>Links</h3>
 
-        <a href="https://github.com/lattice-engine/lattice" target="_blank">
-          GitHub
-        </a>
-
-        <a href="https://github.com/lattice-engine/lattice" target="_blank">
+        <a href="https://github.com/unavi-xyz/lattice" target="_blank">
           GitHub
         </a>
       </div>
