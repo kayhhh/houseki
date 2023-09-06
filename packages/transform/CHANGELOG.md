@@ -1,5 +1,20 @@
 # @lattice-engine/transform
 
+## 6.0.1
+
+### Patch Changes
+
+- 215eff0: upgrade deps
+- Updated dependencies [215eff0]
+  - @lattice-engine/postprocessing@4.0.1
+  - @lattice-engine/physics@5.0.1
+  - @lattice-engine/player@6.0.1
+  - @lattice-engine/render@5.0.1
+  - @lattice-engine/input@1.0.1
+  - @lattice-engine/orbit@6.0.1
+  - @lattice-engine/scene@1.0.1
+  - @lattice-engine/core@1.0.1
+
 ## 6.0.0
 
 ### Major Changes
