@@ -3,9 +3,9 @@ import {
   PointerDownEvent,
   PointerMoveEvent,
   PointerUpEvent,
-} from "@reddo/input";
-import { RenderStore } from "@reddo/render";
-import { Scene, SceneStruct } from "@reddo/scene";
+} from "@houseki-engine/input";
+import { RenderStore } from "@houseki-engine/render";
+import { Scene, SceneStruct } from "@houseki-engine/scene";
 import { Object3D, Raycaster, Vector2 } from "three";
 import { Entity, EventReader, Mut, Query, Res, SystemRes } from "thyseus";
 

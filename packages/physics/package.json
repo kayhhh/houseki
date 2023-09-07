@@ -1,9 +1,9 @@
 {
-  "name": "@reddo/physics",
+  "name": "@houseki-engine/physics",
   "version": "5.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/reddo",
+    "url": "https://github.com/unavi-xyz/houseki",
     "directory": "packages/physics"
   },
   "license": "GPL-3.0-or-later",
@@ -22,8 +22,8 @@
     "gl-matrix": "^4.0.0-beta.1"
   },
   "devDependencies": {
-    "@reddo/core": "workspace:^",
-    "@reddo/scene": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "thyseus": "0.14.0",
     "typescript": "~5.2.2",
@@ -32,8 +32,8 @@
     "vite-plugin-wasm": "^3.2.2"
   },
   "peerDependencies": {
-    "@reddo/core": "workspace:^",
-    "@reddo/scene": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "thyseus": "*"
   },
   "publishConfig": {

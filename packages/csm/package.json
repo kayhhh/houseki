@@ -1,9 +1,9 @@
 {
-  "name": "@reddo/csm",
+  "name": "@houseki-engine/csm",
   "version": "4.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/reddo",
+    "url": "https://github.com/unavi-xyz/houseki",
     "directory": "packages/csm"
   },
   "license": "GPL-3.0-or-later",
@@ -18,8 +18,8 @@
     "dev": "vite build --watch"
   },
   "devDependencies": {
-    "@reddo/render": "workspace:^",
-    "@reddo/scene": "workspace:^",
+    "@houseki-engine/render": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "@types/three": "~0.154.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "three": "~0.154.0",
@@ -29,8 +29,8 @@
     "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
-    "@reddo/render": "workspace:^",
-    "@reddo/scene": "workspace:^",
+    "@houseki-engine/render": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "three": "*",
     "thyseus": "*"
   },

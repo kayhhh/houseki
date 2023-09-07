@@ -1,5 +1,5 @@
-import { Vec3 } from "@reddo/core";
-import { Transform } from "@reddo/scene";
+import { Vec3 } from "@houseki-engine/core";
+import { Transform } from "@houseki-engine/scene";
 import { Entity, EntityCommands, type f32, struct, type u64 } from "thyseus";
 
 export class TargetTransform extends Transform {}

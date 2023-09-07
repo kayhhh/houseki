@@ -1,5 +1,5 @@
-import { Resource, Warehouse } from "@reddo/core";
-import { Geometry } from "@reddo/scene";
+import { Resource, Warehouse } from "@houseki-engine/core";
+import { Geometry } from "@houseki-engine/scene";
 import { BufferAttribute, BufferGeometry } from "three";
 import { Entity, Query, Res } from "thyseus";
 

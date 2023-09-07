@@ -1,4 +1,4 @@
-import { Asset, CoreStore } from "reddo/core";
+import { Asset, CoreStore } from "houseki/core";
 import {
   GlobalTransform,
   Image,
@@ -7,7 +7,7 @@ import {
   SceneStruct,
   Skybox,
   Transform,
-} from "reddo/scene";
+} from "houseki/scene";
 import { Commands } from "thyseus";
 
 export function createScene(

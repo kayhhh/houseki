@@ -1,5 +1,5 @@
-import { gltfPlugin } from "reddo/gltf";
-import { defaultPlugin } from "reddo/utils";
+import { gltfPlugin } from "houseki/gltf";
+import { defaultPlugin } from "houseki/utils";
 import { WorldBuilder } from "thyseus";
 
 import { exportLoadingInfo } from "../components/loading/system";

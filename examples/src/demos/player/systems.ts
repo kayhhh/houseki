@@ -1,18 +1,18 @@
-import { CoreStore, Warehouse } from "reddo/core";
+import { CoreStore, Warehouse } from "houseki/core";
 import {
   DynamicBody,
   PhysicsConfig,
   SphereCollider,
   TargetTransform,
-} from "reddo/physics";
+} from "houseki/physics";
 import {
   GlobalTransform,
   Mesh,
   Parent,
   SceneStruct,
   Transform,
-} from "reddo/scene";
-import { Text } from "reddo/text";
+} from "houseki/scene";
+import { Text } from "houseki/text";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createBox } from "../../utils/createBox";

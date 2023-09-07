@@ -1,4 +1,4 @@
-# @reddo/core
+# @houseki-engine/core
 
 ## 1.0.1
 

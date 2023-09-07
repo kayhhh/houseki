@@ -1,4 +1,4 @@
-import { Asset, Warehouse } from "@reddo/core";
+import { Asset, Warehouse } from "@houseki-engine/core";
 
 import { ExportContext } from "./context";
 

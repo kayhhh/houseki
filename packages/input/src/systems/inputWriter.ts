@@ -1,4 +1,4 @@
-import { CoreStore } from "@reddo/core";
+import { CoreStore } from "@houseki-engine/core";
 import { EventWriter, Mut, Res, SystemRes } from "thyseus";
 
 import {

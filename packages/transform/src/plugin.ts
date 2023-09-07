@@ -1,5 +1,5 @@
-import { sendEvents as orbitEvents } from "@reddo/orbit";
-import { rotateCamera as playerEvents } from "@reddo/player";
+import { sendEvents as orbitEvents } from "@houseki-engine/orbit";
+import { rotateCamera as playerEvents } from "@houseki-engine/player";
 import { run, System, WorldBuilder } from "thyseus";
 
 import { calcRect } from "./systems/calcRect";

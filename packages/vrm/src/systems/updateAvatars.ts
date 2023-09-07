@@ -1,5 +1,5 @@
-import { Time } from "@reddo/core";
-import { RenderStore } from "@reddo/render";
+import { Time } from "@houseki-engine/core";
+import { RenderStore } from "@houseki-engine/render";
 import { Entity, Query, Res } from "thyseus";
 
 import { Vrm } from "../components";

@@ -1,4 +1,4 @@
-import { Parent, Transform } from "@reddo/scene";
+import { Parent, Transform } from "@houseki-engine/scene";
 import { Object3D } from "three";
 import { Entity, Query, Res } from "thyseus";
 

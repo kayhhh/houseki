@@ -1,6 +1,6 @@
-import { Warehouse } from "@reddo/core";
-import { BoxCollider, StaticBody } from "@reddo/physics";
-import { BasicMaterial, Mesh } from "@reddo/scene";
+import { Warehouse } from "@houseki-engine/core";
+import { BoxCollider, StaticBody } from "@houseki-engine/physics";
+import { BasicMaterial, Mesh } from "@houseki-engine/scene";
 import { Commands, Entity, Mut, Query, Res, Without } from "thyseus";
 
 import { Portal, PortalMaterial } from "../components";

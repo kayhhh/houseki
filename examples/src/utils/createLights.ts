@@ -5,7 +5,7 @@ import {
   Parent,
   ShadowMap,
   Transform,
-} from "reddo/scene";
+} from "houseki/scene";
 import { Commands } from "thyseus";
 
 export function createLights(

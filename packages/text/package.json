@@ -1,9 +1,9 @@
 {
-  "name": "@reddo/text",
+  "name": "@houseki-engine/text",
   "version": "5.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/reddo",
+    "url": "https://github.com/unavi-xyz/houseki",
     "directory": "packages/text"
   },
   "license": "GPL-3.0-or-later",
@@ -22,9 +22,9 @@
     "troika-three-text": "^0.47.2"
   },
   "devDependencies": {
-    "@reddo/core": "workspace:^",
-    "@reddo/render": "workspace:^",
-    "@reddo/scene": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/render": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "@types/three": "~0.154.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "three": "~0.154.0",
@@ -34,9 +34,9 @@
     "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
-    "@reddo/core": "workspace:^",
-    "@reddo/render": "workspace:^",
-    "@reddo/scene": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/render": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "three": "*",
     "thyseus": "*"
   },

@@ -1,5 +1,5 @@
-import { ExportedGltf, ExportedJSON, ExportGltf, Gltf } from "reddo/gltf";
-import { DeepRemove, Scene, SceneStruct } from "reddo/scene";
+import { ExportedGltf, ExportedJSON, ExportGltf, Gltf } from "houseki/gltf";
+import { DeepRemove, Scene, SceneStruct } from "houseki/scene";
 import { Commands, EventReader, EventWriter, Query, Res } from "thyseus";
 
 import { selectedModel } from "../demos/gltf/systems";

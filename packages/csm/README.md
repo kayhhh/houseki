@@ -1,3 +1,3 @@
-# @reddo/csm
+# @houseki-engine/csm
 
 Cascading shadow maps

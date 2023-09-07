@@ -1,6 +1,6 @@
 // Helper script to add a new package to the monorepo
 // Will create a new package directory, package.json, etc.
-// As well as update reddo to include the new package
+// As well as update houseki to include the new package
 
 const fs = require("fs");
 const path = require("path");
@@ -35,7 +35,7 @@ fs.writeFileSync(
     files: ["dist"],
     license: "GPL-3.0-or-later",
     main: "./dist/index.js",
-    name: `@reddo/${packageName}`,
+    name: `@houseki-engine/${packageName}`,
     peerDependencies: {
       thyseus: "^0.13.2",
     },
@@ -45,7 +45,7 @@ fs.writeFileSync(
     repository: {
       directory: `packages/${packageName}`,
       type: "git",
-      url: "https://github.com/reddo/reddo",
+      url: "https://github.com/houseki/houseki",
     },
     scripts: {
       build: "vite build --emptyOutDir",
@@ -112,23 +112,26 @@ console.info("Creating README.md");
 const readmePath = path.join(packageDir, "README.md");
 fs.writeFileSync(
   readmePath,
-  `# @reddo/${packageName}
+  `# @houseki-engine/${packageName}
 `
 );
 
-// Enter reddo directory
-const reddoDir = path.join(__dirname, "../packages/reddo");
+// Enter houseki directory
+const housekiDir = path.join(__dirname, "../packages/houseki");
 
 console.info(`Creating src/${packageName}.ts`);
-const srcFilePath = path.join(reddoDir, "src", `${packageName}.ts`);
-fs.writeFileSync(srcFilePath, `export * from "@reddo/${packageName}";`);
+const srcFilePath = path.join(housekiDir, "src", `${packageName}.ts`);
+fs.writeFileSync(
+  srcFilePath,
+  `export * from "@houseki-engine/${packageName}";`
+);
 
 console.info(`Creating ${packageName}.d.ts`);
-const dtsPath = path.join(reddoDir, `${packageName}.d.ts`);
+const dtsPath = path.join(housekiDir, `${packageName}.d.ts`);
 fs.writeFileSync(dtsPath, `export * from "./dist/${packageName}";`);
 
 console.info(`Appending reference to index.d.ts`);
-const indexDtsPath = path.join(reddoDir, "index.d.ts");
+const indexDtsPath = path.join(housekiDir, "index.d.ts");
 fs.appendFileSync(
   indexDtsPath,
   `/// <reference path="./${packageName}.d.ts" />`
@@ -140,10 +143,10 @@ const sortedIndexDts = indexDts.split("\n").sort().join("\n");
 fs.writeFileSync(indexDtsPath, sortedIndexDts);
 
 console.info(`Updating package.json`);
-const reddoPackageJsonPath = path.join(reddoDir, "package.json");
-const packageJson = JSON.parse(fs.readFileSync(reddoPackageJsonPath));
+const housekiPackageJsonPath = path.join(housekiDir, "package.json");
+const packageJson = JSON.parse(fs.readFileSync(housekiPackageJsonPath));
 
-packageJson.dependencies[`@reddo/${packageName}`] = "workspace:^";
+packageJson.dependencies[`@houseki-engine/${packageName}`] = "workspace:^";
 packageJson.files.push(`${packageName}.d.ts`);
 packageJson.exports[`./${packageName}`] = {
   import: `./dist/${packageName}.js`,
@@ -162,11 +165,11 @@ packageJson.exports = sortedExports;
 // Sort the files array
 packageJson.files.sort();
 
-fs.writeFileSync(reddoPackageJsonPath, JSON.stringify(packageJson, null, 2));
+fs.writeFileSync(housekiPackageJsonPath, JSON.stringify(packageJson, null, 2));
 
 console.info(`Updating vite.config.mjs`);
-const reddoViteConfigPath = path.join(reddoDir, "vite.config.mjs");
-const viteConfig = fs.readFileSync(reddoViteConfigPath, "utf-8");
+const housekiViteConfigPath = path.join(housekiDir, "vite.config.mjs");
+const viteConfig = fs.readFileSync(housekiViteConfigPath, "utf-8");
 
 // Add the new package to entries object
 const entries = viteConfig.match(/entry: {([\s\S]*?)},/)[1];
@@ -180,7 +183,7 @@ const updatedViteConfig = viteConfig.replace(
 );
 
 // Write the updated config back to the file
-fs.writeFileSync(reddoViteConfigPath, updatedViteConfig);
+fs.writeFileSync(housekiViteConfigPath, updatedViteConfig);
 
 // Return to root directory
 process.chdir(path.join(__dirname, ".."));

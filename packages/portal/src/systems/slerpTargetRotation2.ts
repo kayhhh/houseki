@@ -1,6 +1,10 @@
-import { Time } from "@reddo/core";
-import { PlayerCamera, PlayerCameraView, TargetRotation } from "@reddo/player";
-import { Transform } from "@reddo/scene";
+import { Time } from "@houseki-engine/core";
+import {
+  PlayerCamera,
+  PlayerCameraView,
+  TargetRotation,
+} from "@houseki-engine/player";
+import { Transform } from "@houseki-engine/scene";
 import { Quaternion } from "three";
 import { Mut, Query, Res } from "thyseus";
 

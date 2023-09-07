@@ -1,5 +1,5 @@
-import { Engine, ReddoSchedules } from "reddo/core";
-import { orbitPlugin } from "reddo/orbit";
+import { Engine, HousekiSchedules } from "houseki/core";
+import { orbitPlugin } from "houseki/orbit";
 import { World } from "thyseus";
 
 import { demoPlugin } from "../../utils/demoPlugin";
@@ -11,6 +11,6 @@ export async function createWorld() {
   world = await Engine.createWorld()
     .addPlugin(demoPlugin)
     .addPlugin(orbitPlugin)
-    .addSystemsToSchedule(ReddoSchedules.Startup, initScene)
+    .addSystemsToSchedule(HousekiSchedules.Startup, initScene)
     .build();
 }

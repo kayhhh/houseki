@@ -1,5 +1,5 @@
 import { Document, WebIO } from "@gltf-transform/core";
-import { Loading, Warehouse } from "@reddo/core";
+import { Loading, Warehouse } from "@houseki-engine/core";
 import { Commands, Entity, Mut, Query, Res, SystemRes } from "thyseus";
 
 import { Gltf } from "../components";

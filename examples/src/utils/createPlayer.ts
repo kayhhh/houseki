@@ -5,7 +5,7 @@ import {
   Raycast,
   TargetTransform,
   Velocity,
-} from "reddo/physics";
+} from "houseki/physics";
 import {
   PlayerAvatar,
   PlayerBody,
@@ -14,15 +14,15 @@ import {
   PlayerCameraView,
   TargetRotation,
   TargetTranslation,
-} from "reddo/player";
+} from "houseki/player";
 import {
   GlobalTransform,
   Parent,
   PerspectiveCamera,
   SceneStruct,
   Transform,
-} from "reddo/scene";
-import { Vrm } from "reddo/vrm";
+} from "houseki/scene";
+import { Vrm } from "houseki/vrm";
 import { Commands } from "thyseus";
 
 const PLAYER_HEIGHT = 1.6;

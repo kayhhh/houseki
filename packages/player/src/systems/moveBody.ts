@@ -1,7 +1,11 @@
-import { Time } from "@reddo/core";
-import { InputStruct, Key } from "@reddo/input";
-import { CharacterController, TargetTransform, Velocity } from "@reddo/physics";
-import { GlobalTransform, Transform } from "@reddo/scene";
+import { Time } from "@houseki-engine/core";
+import { InputStruct, Key } from "@houseki-engine/input";
+import {
+  CharacterController,
+  TargetTransform,
+  Velocity,
+} from "@houseki-engine/physics";
+import { GlobalTransform, Transform } from "@houseki-engine/scene";
 import { lerp } from "three/src/math/MathUtils";
 import { Entity, Mut, Query, Res } from "thyseus";
 

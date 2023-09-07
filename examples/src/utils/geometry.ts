@@ -1,5 +1,5 @@
-import { Warehouse } from "reddo/core";
-import { Geometry } from "reddo/scene";
+import { Warehouse } from "houseki/core";
+import { Geometry } from "houseki/scene";
 import {
   BoxGeometry,
   BufferAttribute,

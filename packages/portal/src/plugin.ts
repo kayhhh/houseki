@@ -1,7 +1,10 @@
-import { ReddoSchedules } from "@reddo/core";
-import { lerpTargetTranslation, slerpCameraRotation } from "@reddo/player";
-import { renderCanvas, renderClearPass } from "@reddo/render";
-import { updateGlobalTransforms } from "@reddo/scene";
+import { HousekiSchedules } from "@houseki-engine/core";
+import {
+  lerpTargetTranslation,
+  slerpCameraRotation,
+} from "@houseki-engine/player";
+import { renderCanvas, renderClearPass } from "@houseki-engine/render";
+import { updateGlobalTransforms } from "@houseki-engine/scene";
 import { run, WorldBuilder } from "thyseus";
 
 import { createPortals } from "./systems/createPortals";
@@ -32,13 +35,13 @@ export function portalPlugin(builder: WorldBuilder) {
       run(slerpTargetRotation2).after(rotatePlayerCamera)
     )
     .addSystemsToSchedule(
-      ReddoSchedules.PreUpdate,
+      HousekiSchedules.PreUpdate,
       run(restoreOriginalTranslation).before(updateGlobalTransforms),
       run(restoreOriginalRotation).before(updateGlobalTransforms)
     )
-    .addSystemsToSchedule(ReddoSchedules.PostFixedUpdate, setPortalRaycasts)
+    .addSystemsToSchedule(HousekiSchedules.PostFixedUpdate, setPortalRaycasts)
     .addSystemsToSchedule(
-      ReddoSchedules.Render,
+      HousekiSchedules.Render,
       run(renderPortalMaterials).after(renderClearPass).before(renderCanvas)
     );
 }

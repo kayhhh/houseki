@@ -1,5 +1,5 @@
-import { CoreStore } from "@reddo/core";
-import { SceneStruct } from "@reddo/scene";
+import { CoreStore } from "@houseki-engine/core";
+import { SceneStruct } from "@houseki-engine/scene";
 import {
   EffectComposer,
   EffectPass,

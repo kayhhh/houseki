@@ -1,4 +1,4 @@
-import { LineMaterial } from "@reddo/scene";
+import { LineMaterial } from "@houseki-engine/scene";
 import { LineBasicMaterial } from "three";
 import { Entity, Query, Res } from "thyseus";
 

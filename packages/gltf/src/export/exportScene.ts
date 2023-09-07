@@ -1,4 +1,4 @@
-import { Scene } from "@reddo/scene";
+import { Scene } from "@houseki-engine/scene";
 
 import { ExportContext } from "./context";
 

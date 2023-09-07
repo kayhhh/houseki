@@ -1,5 +1,5 @@
-import { Parent } from "@reddo/scene";
-import { VrmStore } from "@reddo/vrm";
+import { Parent } from "@houseki-engine/scene";
+import { VrmStore } from "@houseki-engine/vrm";
 import { Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 

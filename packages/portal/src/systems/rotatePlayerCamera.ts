@@ -1,7 +1,11 @@
-import { Raycast } from "@reddo/physics";
-import { PlayerCamera, PlayerCameraView, TargetRotation } from "@reddo/player";
-import { RenderStore } from "@reddo/render";
-import { Transform } from "@reddo/scene";
+import { Raycast } from "@houseki-engine/physics";
+import {
+  PlayerCamera,
+  PlayerCameraView,
+  TargetRotation,
+} from "@houseki-engine/player";
+import { RenderStore } from "@houseki-engine/render";
+import { Transform } from "@houseki-engine/scene";
 import { Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 

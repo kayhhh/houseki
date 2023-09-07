@@ -1,6 +1,6 @@
-import { CoreStore } from "reddo/core";
-import { GlobalTransform, Parent, SceneStruct, Transform } from "reddo/scene";
-import { Vrm } from "reddo/vrm";
+import { CoreStore } from "houseki/core";
+import { GlobalTransform, Parent, SceneStruct, Transform } from "houseki/scene";
+import { Vrm } from "houseki/vrm";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

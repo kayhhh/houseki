@@ -1,6 +1,6 @@
 import { DefaultSchedule, StartSchedule } from "thyseus";
 
-export const ReddoSchedules = {
+export const HousekiSchedules = {
   ApplyCommands: Symbol("ApplyCommands"),
   Destroy: Symbol("Destroy"),
   FixedLoop: Symbol("FixedLoop"),

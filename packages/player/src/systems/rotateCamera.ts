@@ -1,4 +1,4 @@
-import { InputStruct, PointerMoveEvent } from "@reddo/input";
+import { InputStruct, PointerMoveEvent } from "@houseki-engine/input";
 import { Euler, Quaternion } from "three";
 import { EventReader, Mut, Query, Res } from "thyseus";
 

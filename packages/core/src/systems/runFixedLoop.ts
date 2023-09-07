@@ -1,7 +1,7 @@
 import { type f32, Mut, Res, struct, SystemRes, World } from "thyseus";
 
 import { Time } from "../resources";
-import { ReddoSchedules } from "../schedules";
+import { HousekiSchedules } from "../schedules";
 
 const FIXED_HZ = 60;
 const FIXED_STEP_MS = 1000 / FIXED_HZ;
@@ -29,9 +29,9 @@ export async function runFixedLoop(
     // @ts-expect-error
     time.serialize();
 
-    await runSchedule(world, ReddoSchedules.PreFixedUpdate);
-    await runSchedule(world, ReddoSchedules.FixedUpdate);
-    await runSchedule(world, ReddoSchedules.PostFixedUpdate);
+    await runSchedule(world, HousekiSchedules.PreFixedUpdate);
+    await runSchedule(world, HousekiSchedules.FixedUpdate);
+    await runSchedule(world, HousekiSchedules.PostFixedUpdate);
 
     localRes.timeSinceLastFixedUpdate -= FIXED_STEP_MS;
     nextFixedTime += FIXED_STEP_MS;

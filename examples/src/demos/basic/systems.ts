@@ -1,11 +1,11 @@
-import { CoreStore, Warehouse } from "reddo/core";
+import { CoreStore, Warehouse } from "houseki/core";
 import {
   GlobalTransform,
   Mesh,
   Parent,
   SceneStruct,
   Transform,
-} from "reddo/scene";
+} from "houseki/scene";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

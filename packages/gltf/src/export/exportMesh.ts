@@ -1,6 +1,6 @@
 import { GLTF } from "@gltf-transform/core";
-import { Warehouse } from "@reddo/core";
-import { Geometry, Mesh } from "@reddo/scene";
+import { Warehouse } from "@houseki-engine/core";
+import { Geometry, Mesh } from "@houseki-engine/scene";
 
 import { GLTF_TO_ECS_ATTRIBUTES } from "../constants";
 import { ExportContext } from "./context";

@@ -1,4 +1,4 @@
-# @reddo/scene
+# @houseki-engine/scene
 
 ## 1.0.1
 
@@ -6,7 +6,7 @@
 
 - 215eff0: upgrade deps
 - Updated dependencies [215eff0]
-  - @reddo/core@1.0.1
+  - @houseki-engine/core@1.0.1
 
 ## 1.0.0
 
@@ -17,7 +17,7 @@
 ### Patch Changes
 
 - Updated dependencies [32d0cc6]
-  - @reddo/core@1.0.0
+  - @houseki-engine/core@1.0.0
 
 ## 0.7.2
 
@@ -25,14 +25,14 @@
 
 - 4588798: remove string component types
 - Updated dependencies [4588798]
-  - @reddo/core@0.2.7
+  - @houseki-engine/core@0.2.7
 
 ## 0.7.1
 
 ### Patch Changes
 
 - Updated dependencies [33a8344]
-  - @reddo/core@0.2.6
+  - @houseki-engine/core@0.2.6
 
 ## 0.7.0
 
@@ -45,7 +45,7 @@
 ### Patch Changes
 
 - Updated dependencies [a74c565]
-  - @reddo/core@0.2.5
+  - @houseki-engine/core@0.2.5
 
 ## 0.6.1
 
@@ -53,7 +53,7 @@
 
 - ffea4d9: upgrade thyseus
 - Updated dependencies [ffea4d9]
-  - @reddo/core@0.2.4
+  - @houseki-engine/core@0.2.4
 
 ## 0.6.0
 
@@ -65,7 +65,7 @@
 
 - e3e7e0f: upgrade thyseus
 - Updated dependencies [e3e7e0f]
-  - @reddo/core@0.2.3
+  - @houseki-engine/core@0.2.3
 
 ## 0.5.0
 
@@ -77,7 +77,7 @@
 
 - 7a82a45: upgrade thyseus to 0.13.2
 - Updated dependencies [7a82a45]
-  - @reddo/core@0.2.2
+  - @houseki-engine/core@0.2.2
 
 ## 0.4.0
 
@@ -91,14 +91,14 @@
 
 - cc0fc73: upgrade thyseus
 - Updated dependencies [cc0fc73]
-  - @reddo/core@0.2.1
+  - @houseki-engine/core@0.2.1
 
 ## 0.3.0
 
 ### Patch Changes
 
 - Updated dependencies [589fac4]
-  - @reddo/core@0.2.0
+  - @houseki-engine/core@0.2.0
 
 ## 0.2.0
 
@@ -112,4 +112,4 @@
 
 - fddc570: Add pre and post update schedules. This removes all `first()` and `last()` scheduling calls, which was causing some weird bugs.
 - Updated dependencies [fddc570]
-  - @reddo/core@0.1.1
+  - @houseki-engine/core@0.1.1

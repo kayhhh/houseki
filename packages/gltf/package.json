@@ -1,9 +1,9 @@
 {
-  "name": "@reddo/gltf",
+  "name": "@houseki-engine/gltf",
   "version": "6.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/reddo",
+    "url": "https://github.com/unavi-xyz/houseki",
     "directory": "packages/gltf"
   },
   "license": "GPL-3.0-or-later",
@@ -24,10 +24,10 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@reddo/core": "workspace:^",
-    "@reddo/physics": "workspace:^",
-    "@reddo/scene": "workspace:^",
-    "@reddo/text": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/physics": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
+    "@houseki-engine/text": "workspace:^",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "thyseus": "0.14.0",
     "typescript": "~5.2.2",
@@ -35,10 +35,10 @@
     "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
-    "@reddo/core": "workspace:^",
-    "@reddo/physics": "workspace:^",
-    "@reddo/scene": "workspace:^",
-    "@reddo/text": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/physics": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
+    "@houseki-engine/text": "workspace:^",
     "thyseus": "*"
   },
   "publishConfig": {

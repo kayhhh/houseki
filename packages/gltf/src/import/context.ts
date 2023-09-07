@@ -9,8 +9,13 @@ import {
   MeshCollider,
   SphereCollider,
   TargetTransform,
-} from "@reddo/physics";
-import { GlobalTransform, Name, Parent, Transform } from "@reddo/scene";
+} from "@houseki-engine/physics";
+import {
+  GlobalTransform,
+  Name,
+  Parent,
+  Transform,
+} from "@houseki-engine/scene";
 
 type EntityID = bigint;
 

@@ -1,3 +1,3 @@
-# @reddo/utils
+# @houseki-engine/utils
 
 Utility functions.

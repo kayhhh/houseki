@@ -1,8 +1,8 @@
-import { Engine, ReddoSchedules } from "reddo/core";
-import { orbitPlugin } from "reddo/orbit";
-import { physicsPlugin } from "reddo/physics";
-import { postprocessingPlugin } from "reddo/postprocessing";
-import { getTransformPlugin } from "reddo/transform";
+import { Engine, HousekiSchedules } from "houseki/core";
+import { orbitPlugin } from "houseki/orbit";
+import { physicsPlugin } from "houseki/physics";
+import { postprocessingPlugin } from "houseki/postprocessing";
+import { getTransformPlugin } from "houseki/transform";
 import { World } from "thyseus";
 
 import { demoPlugin } from "../../utils/demoPlugin";
@@ -17,7 +17,7 @@ export async function createWorld() {
     .addPlugin(orbitPlugin)
     .addPlugin(postprocessingPlugin)
     .addPlugin(getTransformPlugin({ orbitControls: true, physics: true }))
-    .addSystemsToSchedule(ReddoSchedules.Startup, initScene)
+    .addSystemsToSchedule(HousekiSchedules.Startup, initScene)
     .addSystems(setTransformMode)
     .build();
 }

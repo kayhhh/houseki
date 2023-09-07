@@ -1,5 +1,8 @@
-import { RenderStore } from "@reddo/render";
-import { FIRSTPERSON_ONLY_LAYER, THIRDPERSON_ONLY_LAYER } from "@reddo/vrm";
+import { RenderStore } from "@houseki-engine/render";
+import {
+  FIRSTPERSON_ONLY_LAYER,
+  THIRDPERSON_ONLY_LAYER,
+} from "@houseki-engine/vrm";
 import { Entity, Query, Res } from "thyseus";
 
 import { PlayerCamera } from "../components";

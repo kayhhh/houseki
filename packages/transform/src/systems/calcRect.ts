@@ -1,4 +1,4 @@
-import { CoreStore } from "@reddo/core";
+import { CoreStore } from "@houseki-engine/core";
 import { Mut, Res } from "thyseus";
 
 import { CanvasRect } from "../resources";

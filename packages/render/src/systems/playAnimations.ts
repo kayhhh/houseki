@@ -1,4 +1,4 @@
-import { AnimationMixer } from "@reddo/scene";
+import { AnimationMixer } from "@houseki-engine/scene";
 import { Entity, Query, Res, SystemRes, With } from "thyseus";
 
 import { RenderStore } from "../resources";

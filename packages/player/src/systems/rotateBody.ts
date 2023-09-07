@@ -1,6 +1,6 @@
-import { Time } from "@reddo/core";
-import { TargetTransform, Velocity } from "@reddo/physics";
-import { Quat, Transform } from "@reddo/scene";
+import { Time } from "@houseki-engine/core";
+import { TargetTransform, Velocity } from "@houseki-engine/physics";
+import { Quat, Transform } from "@houseki-engine/scene";
 import { Quaternion, Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 

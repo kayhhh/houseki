@@ -1,8 +1,8 @@
-import { Engine, ReddoSchedules } from "reddo/core";
-import { physicsPlugin } from "reddo/physics";
-import { playerPlugin } from "reddo/player";
-import { textPlugin } from "reddo/text";
-import { vrmPlugin } from "reddo/vrm";
+import { Engine, HousekiSchedules } from "houseki/core";
+import { physicsPlugin } from "houseki/physics";
+import { playerPlugin } from "houseki/player";
+import { textPlugin } from "houseki/text";
+import { vrmPlugin } from "houseki/vrm";
 import { World } from "thyseus";
 
 import { demoPlugin } from "../../utils/demoPlugin";
@@ -17,6 +17,6 @@ export async function createWorld() {
     .addPlugin(playerPlugin)
     .addPlugin(textPlugin)
     .addPlugin(vrmPlugin)
-    .addSystemsToSchedule(ReddoSchedules.Startup, initScene)
+    .addSystemsToSchedule(HousekiSchedules.Startup, initScene)
     .build();
 }

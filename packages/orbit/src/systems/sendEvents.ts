@@ -10,7 +10,7 @@ import {
   PointerMoveEvent,
   PointerUpEvent,
   wheelEventFromECS,
-} from "@reddo/input";
+} from "@houseki-engine/input";
 import { EventReader, Res } from "thyseus";
 
 import { OrbitControlsStore } from "../resources";

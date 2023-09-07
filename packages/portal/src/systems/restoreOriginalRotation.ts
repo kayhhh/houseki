@@ -1,5 +1,5 @@
-import { TargetRotation } from "@reddo/player";
-import { Transform } from "@reddo/scene";
+import { TargetRotation } from "@houseki-engine/player";
+import { Transform } from "@houseki-engine/scene";
 import { Mut, Query } from "thyseus";
 
 import { OriginalRotation, OriginalTransform } from "../components";

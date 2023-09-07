@@ -1,5 +1,5 @@
 import { ColliderDesc } from "@dimforge/rapier3d";
-import { Parent } from "@reddo/scene";
+import { Parent } from "@houseki-engine/scene";
 import { Entity, Query, Res, With } from "thyseus";
 
 import { CylinderCollider } from "../../components";

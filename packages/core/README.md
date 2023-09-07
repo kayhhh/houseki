@@ -1,3 +1,3 @@
-# @reddo/core
+# @houseki-engine/core
 
-The core of the Reddo Engine.
+The core of the Houseki Engine.

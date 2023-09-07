@@ -1,5 +1,5 @@
-import { TargetTransform } from "@reddo/physics";
-import { Transform } from "@reddo/scene";
+import { TargetTransform } from "@houseki-engine/physics";
+import { Transform } from "@houseki-engine/scene";
 import { Entity, Mut, Query } from "thyseus";
 
 import { TransformControls } from "../components";

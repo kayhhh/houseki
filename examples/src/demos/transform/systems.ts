@@ -1,19 +1,19 @@
-import { CoreStore, Warehouse } from "reddo/core";
+import { CoreStore, Warehouse } from "houseki/core";
 import {
   BoxCollider,
   PhysicsConfig,
   StaticBody,
   TargetTransform,
-} from "reddo/physics";
-import { OutlinePass } from "reddo/postprocessing";
+} from "houseki/physics";
+import { OutlinePass } from "houseki/postprocessing";
 import {
   GlobalTransform,
   Mesh,
   Parent,
   SceneStruct,
   Transform,
-} from "reddo/scene";
-import { TransformControls, TransformMode } from "reddo/transform";
+} from "houseki/scene";
+import { TransformControls, TransformMode } from "houseki/transform";
 import { Commands, Mut, Query, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

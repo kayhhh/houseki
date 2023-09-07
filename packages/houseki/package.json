@@ -1,5 +1,5 @@
 {
-  "name": "reddo",
+  "name": "houseki",
   "version": "1.0.1",
   "keywords": [
     "webgl",
@@ -17,8 +17,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/reddo",
-    "directory": "packages/reddo"
+    "url": "https://github.com/unavi-xyz/houseki",
+    "directory": "packages/houseki"
   },
   "license": "GPL-3.0-or-later",
   "type": "module",
@@ -94,21 +94,21 @@
     "dev": "vite build --watch"
   },
   "dependencies": {
-    "@reddo/core": "workspace:^",
-    "@reddo/csm": "workspace:^",
-    "@reddo/gltf": "workspace:^",
-    "@reddo/input": "workspace:^",
-    "@reddo/orbit": "workspace:^",
-    "@reddo/physics": "workspace:^",
-    "@reddo/player": "workspace:^",
-    "@reddo/portal": "workspace:^",
-    "@reddo/postprocessing": "workspace:^",
-    "@reddo/render": "workspace:^",
-    "@reddo/scene": "workspace:^",
-    "@reddo/text": "workspace:^",
-    "@reddo/transform": "workspace:^",
-    "@reddo/utils": "workspace:^",
-    "@reddo/vrm": "workspace:^"
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/csm": "workspace:^",
+    "@houseki-engine/gltf": "workspace:^",
+    "@houseki-engine/input": "workspace:^",
+    "@houseki-engine/orbit": "workspace:^",
+    "@houseki-engine/physics": "workspace:^",
+    "@houseki-engine/player": "workspace:^",
+    "@houseki-engine/portal": "workspace:^",
+    "@houseki-engine/postprocessing": "workspace:^",
+    "@houseki-engine/render": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
+    "@houseki-engine/text": "workspace:^",
+    "@houseki-engine/transform": "workspace:^",
+    "@houseki-engine/utils": "workspace:^",
+    "@houseki-engine/vrm": "workspace:^"
   },
   "devDependencies": {
     "postprocessing": "^6.32.2",

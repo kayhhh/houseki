@@ -1,4 +1,4 @@
-import { Loading } from "reddo/core";
+import { Loading } from "houseki/core";
 import { Entity, Query, SystemRes } from "thyseus";
 import { create } from "zustand";
 

@@ -1,13 +1,13 @@
-import { CoreStore } from "reddo/core";
-import { Gltf } from "reddo/gltf";
-import { MeshCollider, PhysicsConfig, StaticBody } from "reddo/physics";
+import { CoreStore } from "houseki/core";
+import { Gltf } from "houseki/gltf";
+import { MeshCollider, PhysicsConfig, StaticBody } from "houseki/physics";
 import {
   GlobalTransform,
   Mesh,
   Parent,
   SceneStruct,
   Transform,
-} from "reddo/scene";
+} from "houseki/scene";
 import { Commands, Entity, Mut, Query, Res, With, Without } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

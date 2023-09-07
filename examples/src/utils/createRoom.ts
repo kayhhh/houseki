@@ -1,6 +1,6 @@
-import { Warehouse } from "reddo/core";
-import { BoxCollider, StaticBody } from "reddo/physics";
-import { GlobalTransform, Mesh, Parent, Transform } from "reddo/scene";
+import { Warehouse } from "houseki/core";
+import { BoxCollider, StaticBody } from "houseki/physics";
+import { GlobalTransform, Mesh, Parent, Transform } from "houseki/scene";
 import { Commands } from "thyseus";
 
 import { createBoxGeometry } from "./geometry";

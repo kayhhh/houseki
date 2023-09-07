@@ -1,6 +1,6 @@
-import { Engine, ReddoSchedules } from "reddo/core";
-import { orbitPlugin } from "reddo/orbit";
-import { vrmPlugin } from "reddo/vrm";
+import { Engine, HousekiSchedules } from "houseki/core";
+import { orbitPlugin } from "houseki/orbit";
+import { vrmPlugin } from "houseki/vrm";
 import { World } from "thyseus";
 
 import { demoPlugin } from "../../utils/demoPlugin";
@@ -13,6 +13,6 @@ export async function createWorld() {
     .addPlugin(demoPlugin)
     .addPlugin(orbitPlugin)
     .addPlugin(vrmPlugin)
-    .addSystemsToSchedule(ReddoSchedules.Startup, initScene)
+    .addSystemsToSchedule(HousekiSchedules.Startup, initScene)
     .build();
 }

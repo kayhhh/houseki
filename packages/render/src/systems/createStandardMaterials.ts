@@ -1,4 +1,8 @@
-import { MaterialAlphaMode, StandardMaterial, TextureInfo } from "@reddo/scene";
+import {
+  MaterialAlphaMode,
+  StandardMaterial,
+  TextureInfo,
+} from "@houseki-engine/scene";
 import {
   CanvasTexture,
   ClampToEdgeWrapping,

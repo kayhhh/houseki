@@ -2,7 +2,7 @@ import {
   KeyframeInterpolation,
   KeyframePath,
   KeyframeTrack,
-} from "@reddo/scene";
+} from "@houseki-engine/scene";
 import {
   InterpolateDiscrete,
   InterpolateLinear,

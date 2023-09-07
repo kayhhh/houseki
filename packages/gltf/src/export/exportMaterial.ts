@@ -1,6 +1,10 @@
 import { GLTF, TextureInfo as GltfTextureInfo } from "@gltf-transform/core";
 import { KHRTextureTransform } from "@gltf-transform/extensions";
-import { MaterialAlphaMode, StandardMaterial, TextureInfo } from "@reddo/scene";
+import {
+  MaterialAlphaMode,
+  StandardMaterial,
+  TextureInfo,
+} from "@houseki-engine/scene";
 
 import { ExportContext } from "./context";
 

@@ -1,6 +1,6 @@
 import { World } from "thyseus";
 
-import { ReddoSchedules } from "./schedules";
+import { HousekiSchedules } from "./schedules";
 
 /**
  * Stores the ECS world and manages the game loop.
@@ -34,7 +34,7 @@ export class Engine {
       await stopPromise;
     }
 
-    this.#startPromise = this.world.runSchedule(ReddoSchedules.Startup);
+    this.#startPromise = this.world.runSchedule(HousekiSchedules.Startup);
 
     await this.#startPromise;
 
@@ -42,19 +42,19 @@ export class Engine {
   }
 
   async #loop() {
-    await this.#runSchedule(ReddoSchedules.PreUpdate);
-    await this.#runSchedule(ReddoSchedules.Update);
-    await this.#runSchedule(ReddoSchedules.PostUpdate);
+    await this.#runSchedule(HousekiSchedules.PreUpdate);
+    await this.#runSchedule(HousekiSchedules.Update);
+    await this.#runSchedule(HousekiSchedules.PostUpdate);
 
-    await this.#runSchedule(ReddoSchedules.FixedLoop);
+    await this.#runSchedule(HousekiSchedules.FixedLoop);
 
     while (this.#scheduleQueue.length > 0) {
       const schedule = this.#scheduleQueue.shift();
       if (schedule) await this.#runSchedule(schedule);
     }
 
-    await this.#runSchedule(ReddoSchedules.Render);
-    await this.#runSchedule(ReddoSchedules.ApplyCommands);
+    await this.#runSchedule(HousekiSchedules.Render);
+    await this.#runSchedule(HousekiSchedules.ApplyCommands);
 
     this.#animationFrame = requestAnimationFrame(this.#loop.bind(this));
   }
@@ -81,9 +81,9 @@ export class Engine {
    */
   async destroy() {
     await this.stop();
-    await this.#runSchedule(ReddoSchedules.Destroy);
-    await this.#runSchedule(ReddoSchedules.Update);
-    await this.#runSchedule(ReddoSchedules.FixedUpdate);
+    await this.#runSchedule(HousekiSchedules.Destroy);
+    await this.#runSchedule(HousekiSchedules.Update);
+    await this.#runSchedule(HousekiSchedules.FixedUpdate);
   }
 
   /**

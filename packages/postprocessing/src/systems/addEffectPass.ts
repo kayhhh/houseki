@@ -1,5 +1,5 @@
-import { RenderStore } from "@reddo/render";
-import { SceneStruct } from "@reddo/scene";
+import { RenderStore } from "@houseki-engine/render";
+import { SceneStruct } from "@houseki-engine/scene";
 import { EffectComposer, EffectPass } from "postprocessing";
 import { Res, SystemRes } from "thyseus";
 

@@ -1,4 +1,4 @@
-# @reddo/physics
+# @houseki-engine/physics
 
 Physics using [Rapier](https://rapier.rs/).
 

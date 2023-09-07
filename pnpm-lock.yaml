@@ -55,6 +55,9 @@ importers:
 
   examples:
     dependencies:
+      houseki:
+        specifier: workspace:^
+        version: link:../packages/houseki
       leva:
         specifier: ^0.9.35
         version: 0.9.35(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
@@ -64,9 +67,6 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
-      reddo:
-        specifier: workspace:^
-        version: link:../packages/lattice-engine
       three:
         specifier: ~0.154.0
         version: 0.154.0
@@ -134,10 +134,10 @@ importers:
 
   packages/csm:
     devDependencies:
-      '@reddo/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@reddo/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -177,16 +177,16 @@ importers:
         specifier: ^3.21.4
         version: 3.21.4
     devDependencies:
-      '@reddo/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@reddo/physics':
+      '@houseki-engine/physics':
         specifier: workspace:^
         version: link:../physics
-      '@reddo/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@reddo/text':
+      '@houseki-engine/text':
         specifier: workspace:^
         version: link:../text
       rollup-plugin-peer-deps-external:
@@ -205,72 +205,51 @@ importers:
         specifier: workspace:^
         version: link:../vite-plugin-thyseus-ts
 
-  packages/input:
-    devDependencies:
-      '@reddo/core':
-        specifier: workspace:^
-        version: link:../core
-      rollup-plugin-peer-deps-external:
-        specifier: ^2.2.4
-        version: 2.2.4(rollup@3.28.1)
-      thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
-      typescript:
-        specifier: ~5.2.2
-        version: 5.2.2
-      vite:
-        specifier: ^4.4.7
-        version: 4.4.7
-      vite-plugin-thyseus-ts:
-        specifier: workspace:^
-        version: link:../vite-plugin-thyseus-ts
-
-  packages/lattice-engine:
+  packages/houseki:
     dependencies:
-      '@reddo/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@reddo/csm':
+      '@houseki-engine/csm':
         specifier: workspace:^
         version: link:../csm
-      '@reddo/gltf':
+      '@houseki-engine/gltf':
         specifier: workspace:^
         version: link:../gltf
-      '@reddo/input':
+      '@houseki-engine/input':
         specifier: workspace:^
         version: link:../input
-      '@reddo/orbit':
+      '@houseki-engine/orbit':
         specifier: workspace:^
         version: link:../orbit
-      '@reddo/physics':
+      '@houseki-engine/physics':
         specifier: workspace:^
         version: link:../physics
-      '@reddo/player':
+      '@houseki-engine/player':
         specifier: workspace:^
         version: link:../player
-      '@reddo/portal':
+      '@houseki-engine/portal':
         specifier: workspace:^
         version: link:../portal
-      '@reddo/postprocessing':
+      '@houseki-engine/postprocessing':
         specifier: workspace:^
         version: link:../postprocessing
-      '@reddo/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@reddo/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@reddo/text':
+      '@houseki-engine/text':
         specifier: workspace:^
         version: link:../text
-      '@reddo/transform':
+      '@houseki-engine/transform':
         specifier: workspace:^
         version: link:../transform
-      '@reddo/utils':
+      '@houseki-engine/utils':
         specifier: workspace:^
         version: link:../utils
-      '@reddo/vrm':
+      '@houseki-engine/vrm':
         specifier: workspace:^
         version: link:../vrm
     devDependencies:
@@ -296,15 +275,36 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1(rollup@3.28.1)(typescript@5.2.2)(vite@4.4.7)
 
+  packages/input:
+    devDependencies:
+      '@houseki-engine/core':
+        specifier: workspace:^
+        version: link:../core
+      rollup-plugin-peer-deps-external:
+        specifier: ^2.2.4
+        version: 2.2.4(rollup@3.28.1)
+      thyseus:
+        specifier: 0.14.0
+        version: 0.14.0
+      typescript:
+        specifier: ~5.2.2
+        version: 5.2.2
+      vite:
+        specifier: ^4.4.7
+        version: 4.4.7
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
+
   packages/orbit:
     devDependencies:
-      '@reddo/input':
+      '@houseki-engine/input':
         specifier: workspace:^
         version: link:../input
-      '@reddo/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@reddo/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -338,10 +338,10 @@ importers:
         specifier: ^4.0.0-beta.1
         version: 4.0.0-beta.1
     devDependencies:
-      '@reddo/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@reddo/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       rollup-plugin-peer-deps-external:
@@ -365,22 +365,22 @@ importers:
 
   packages/player:
     devDependencies:
-      '@reddo/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@reddo/input':
+      '@houseki-engine/input':
         specifier: workspace:^
         version: link:../input
-      '@reddo/physics':
+      '@houseki-engine/physics':
         specifier: workspace:^
         version: link:../physics
-      '@reddo/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@reddo/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@reddo/vrm':
+      '@houseki-engine/vrm':
         specifier: workspace:^
         version: link:../vrm
       '@types/three':
@@ -407,19 +407,19 @@ importers:
 
   packages/portal:
     devDependencies:
-      '@reddo/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@reddo/physics':
+      '@houseki-engine/physics':
         specifier: workspace:^
         version: link:../physics
-      '@reddo/player':
+      '@houseki-engine/player':
         specifier: workspace:^
         version: link:../player
-      '@reddo/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@reddo/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -453,13 +453,13 @@ importers:
         specifier: ^1.6.8
         version: 1.6.8(postprocessing@6.32.2)(three@0.154.0)
     devDependencies:
-      '@reddo/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@reddo/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@reddo/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -489,10 +489,10 @@ importers:
 
   packages/render:
     devDependencies:
-      '@reddo/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@reddo/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -526,7 +526,7 @@ importers:
         specifier: ^4.0.0-beta.1
         version: 4.0.0-beta.1
     devDependencies:
-      '@reddo/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
       rollup-plugin-peer-deps-external:
@@ -551,13 +551,13 @@ importers:
         specifier: ^0.47.2
         version: 0.47.2(three@0.154.0)
     devDependencies:
-      '@reddo/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@reddo/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@reddo/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -584,28 +584,28 @@ importers:
 
   packages/transform:
     devDependencies:
-      '@reddo/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@reddo/input':
+      '@houseki-engine/input':
         specifier: workspace:^
         version: link:../input
-      '@reddo/orbit':
+      '@houseki-engine/orbit':
         specifier: workspace:^
         version: link:../orbit
-      '@reddo/physics':
+      '@houseki-engine/physics':
         specifier: workspace:^
         version: link:../physics
-      '@reddo/player':
+      '@houseki-engine/player':
         specifier: workspace:^
         version: link:../player
-      '@reddo/postprocessing':
+      '@houseki-engine/postprocessing':
         specifier: workspace:^
         version: link:../postprocessing
-      '@reddo/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@reddo/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -632,16 +632,16 @@ importers:
 
   packages/utils:
     devDependencies:
-      '@reddo/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@reddo/input':
+      '@houseki-engine/input':
         specifier: workspace:^
         version: link:../input
-      '@reddo/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@reddo/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       rollup-plugin-peer-deps-external:
@@ -684,13 +684,13 @@ importers:
         specifier: ^2.0.3
         version: 2.0.3(@types/three@0.154.0)(three@0.154.0)
     devDependencies:
-      '@reddo/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@reddo/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@reddo/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':

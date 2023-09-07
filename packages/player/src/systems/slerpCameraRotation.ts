@@ -1,5 +1,5 @@
-import { Time } from "@reddo/core";
-import { Transform } from "@reddo/scene";
+import { Time } from "@houseki-engine/core";
+import { Transform } from "@houseki-engine/scene";
 import { Quaternion } from "three";
 import { Mut, Query, Res } from "thyseus";
 

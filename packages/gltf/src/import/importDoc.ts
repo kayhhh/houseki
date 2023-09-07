@@ -1,6 +1,6 @@
 import { Document } from "@gltf-transform/core";
-import { Warehouse } from "@reddo/core";
-import { AnimationMixer } from "@reddo/scene";
+import { Warehouse } from "@houseki-engine/core";
+import { AnimationMixer } from "@houseki-engine/scene";
 import { Commands, Entity } from "thyseus";
 
 import { ImportContext } from "./context";

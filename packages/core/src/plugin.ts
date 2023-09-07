@@ -1,6 +1,6 @@
 import { applyCommands, WorldBuilder } from "thyseus";
 
-import { ReddoSchedules } from "./schedules";
+import { HousekiSchedules } from "./schedules";
 import { despawnEntities } from "./systems/despawnEntities";
 import { fetchAssets } from "./systems/fetchAssets";
 import { initTime } from "./systems/initTime";
@@ -11,9 +11,9 @@ import { setMainTime } from "./systems/setMainTime";
 export function corePlugin(builder: WorldBuilder) {
   builder
     .addSystems(fetchAssets)
-    .addSystemsToSchedule(ReddoSchedules.ApplyCommands, applyCommands)
-    .addSystemsToSchedule(ReddoSchedules.Destroy, despawnEntities)
-    .addSystemsToSchedule(ReddoSchedules.FixedLoop, runFixedLoop)
-    .addSystemsToSchedule(ReddoSchedules.PreUpdate, setMainTime)
-    .addSystemsToSchedule(ReddoSchedules.Startup, initWorld, initTime);
+    .addSystemsToSchedule(HousekiSchedules.ApplyCommands, applyCommands)
+    .addSystemsToSchedule(HousekiSchedules.Destroy, despawnEntities)
+    .addSystemsToSchedule(HousekiSchedules.FixedLoop, runFixedLoop)
+    .addSystemsToSchedule(HousekiSchedules.PreUpdate, setMainTime)
+    .addSystemsToSchedule(HousekiSchedules.Startup, initWorld, initTime);
 }

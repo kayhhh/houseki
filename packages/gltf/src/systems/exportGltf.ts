@@ -1,6 +1,6 @@
 import { JSONDocument, WebIO } from "@gltf-transform/core";
 import { dedup, prune } from "@gltf-transform/functions";
-import { Asset, Warehouse } from "@reddo/core";
+import { Asset, Warehouse } from "@houseki-engine/core";
 import {
   BoxCollider,
   CapsuleCollider,
@@ -11,7 +11,7 @@ import {
   MeshCollider,
   SphereCollider,
   StaticBody,
-} from "@reddo/physics";
+} from "@houseki-engine/physics";
 import {
   Geometry,
   Image,
@@ -21,8 +21,8 @@ import {
   Scene,
   StandardMaterial,
   Transform,
-} from "@reddo/scene";
-import { Text } from "@reddo/text";
+} from "@houseki-engine/scene";
+import { Text } from "@houseki-engine/text";
 import {
   Entity,
   EventReader,

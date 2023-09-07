@@ -1,5 +1,5 @@
-import { RenderStore } from "@reddo/render";
-import { Transform } from "@reddo/scene";
+import { RenderStore } from "@houseki-engine/render";
+import { Transform } from "@houseki-engine/scene";
 import { Entity, Mut, Query, Res } from "thyseus";
 
 import { TransformControls } from "../components";

@@ -1,10 +1,10 @@
-import { CoreStore, Warehouse } from "reddo/core";
+import { CoreStore, Warehouse } from "houseki/core";
 import {
   DynamicBody,
   PhysicsConfig,
   SphereCollider,
   TargetTransform,
-} from "reddo/physics";
+} from "houseki/physics";
 import {
   GlobalTransform,
   Mesh,
@@ -12,7 +12,7 @@ import {
   SceneStruct,
   StandardMaterial,
   Transform,
-} from "reddo/scene";
+} from "houseki/scene";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

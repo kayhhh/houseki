@@ -1,4 +1,4 @@
-import { Time } from "@reddo/core";
+import { Time } from "@houseki-engine/core";
 import { Res } from "thyseus";
 
 import { PhysicsStore } from "../resources";

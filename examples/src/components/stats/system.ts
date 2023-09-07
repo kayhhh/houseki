@@ -1,4 +1,4 @@
-import { RenderStats } from "reddo/render";
+import { RenderStats } from "houseki/render";
 import { Res } from "thyseus";
 import { create } from "zustand";
 

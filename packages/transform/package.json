@@ -1,9 +1,9 @@
 {
-  "name": "@reddo/transform",
+  "name": "@houseki-engine/transform",
   "version": "6.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/reddo",
+    "url": "https://github.com/unavi-xyz/houseki",
     "directory": "packages/transform"
   },
   "license": "GPL-3.0-or-later",
@@ -18,14 +18,14 @@
     "dev": "vite build --watch"
   },
   "devDependencies": {
-    "@reddo/core": "workspace:^",
-    "@reddo/input": "workspace:^",
-    "@reddo/orbit": "workspace:^",
-    "@reddo/physics": "workspace:^",
-    "@reddo/player": "workspace:^",
-    "@reddo/postprocessing": "workspace:^",
-    "@reddo/render": "workspace:^",
-    "@reddo/scene": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/input": "workspace:^",
+    "@houseki-engine/orbit": "workspace:^",
+    "@houseki-engine/physics": "workspace:^",
+    "@houseki-engine/player": "workspace:^",
+    "@houseki-engine/postprocessing": "workspace:^",
+    "@houseki-engine/render": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "@types/three": "~0.154.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "three": "~0.154.0",
@@ -35,14 +35,14 @@
     "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
-    "@reddo/core": "workspace:^",
-    "@reddo/input": "workspace:^",
-    "@reddo/orbit": "workspace:^",
-    "@reddo/physics": "workspace:^",
-    "@reddo/player": "workspace:^",
-    "@reddo/postprocessing": "workspace:^",
-    "@reddo/render": "workspace:^",
-    "@reddo/scene": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/input": "workspace:^",
+    "@houseki-engine/orbit": "workspace:^",
+    "@houseki-engine/physics": "workspace:^",
+    "@houseki-engine/player": "workspace:^",
+    "@houseki-engine/postprocessing": "workspace:^",
+    "@houseki-engine/render": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "three": "*",
     "thyseus": "*"
   },

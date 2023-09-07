@@ -1,4 +1,4 @@
-import { InputStruct, Key } from "@reddo/input";
+import { InputStruct, Key } from "@houseki-engine/input";
 
 export type Input = {
   x: number;

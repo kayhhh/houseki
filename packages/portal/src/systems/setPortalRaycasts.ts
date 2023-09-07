@@ -1,5 +1,5 @@
-import { Raycast } from "@reddo/physics";
-import { GlobalTransform } from "@reddo/scene";
+import { Raycast } from "@houseki-engine/physics";
+import { GlobalTransform } from "@houseki-engine/scene";
 import { Quaternion, Vector3 } from "three";
 import { Entity, Mut, Query } from "thyseus";
 

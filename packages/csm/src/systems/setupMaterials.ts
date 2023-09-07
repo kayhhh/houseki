@@ -1,4 +1,4 @@
-import { RenderStore } from "@reddo/render";
+import { RenderStore } from "@houseki-engine/render";
 import { Res } from "thyseus";
 
 import { CSMStore } from "../resources";

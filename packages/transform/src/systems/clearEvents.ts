@@ -1,4 +1,4 @@
-import { PointerDownEvent, PointerMoveEvent } from "@reddo/input";
+import { PointerDownEvent, PointerMoveEvent } from "@houseki-engine/input";
 import { Entity, EventWriter, Query, Res } from "thyseus";
 
 import { TransformControls } from "../components";

@@ -1,6 +1,6 @@
 /// <reference types="../../troika.d.ts" />
 
-import { RenderStore } from "@reddo/render";
+import { RenderStore } from "@houseki-engine/render";
 import { Entity, Query, Res } from "thyseus";
 import { Text as TroikaText } from "troika-three-text";
 

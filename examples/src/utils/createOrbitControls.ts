@@ -1,10 +1,10 @@
-import { OrbitControls } from "reddo/orbit";
+import { OrbitControls } from "houseki/orbit";
 import {
   GlobalTransform,
   PerspectiveCamera,
   SceneStruct,
   Transform,
-} from "reddo/scene";
+} from "houseki/scene";
 import { Commands } from "thyseus";
 
 export function createOrbitControls(

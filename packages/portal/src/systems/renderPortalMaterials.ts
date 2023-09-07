@@ -1,6 +1,6 @@
-import { Time } from "@reddo/core";
-import { RenderStore } from "@reddo/render";
-import { SceneStruct } from "@reddo/scene";
+import { Time } from "@houseki-engine/core";
+import { RenderStore } from "@houseki-engine/render";
+import { SceneStruct } from "@houseki-engine/scene";
 import { ClearPass } from "postprocessing";
 import {
   AlwaysDepth,

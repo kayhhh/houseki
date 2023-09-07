@@ -1,7 +1,7 @@
-import { CoreStore, Warehouse } from "reddo/core";
-import { Gltf } from "reddo/gltf";
-import { N8AOPass } from "reddo/postprocessing";
-import { SceneStruct } from "reddo/scene";
+import { CoreStore, Warehouse } from "houseki/core";
+import { Gltf } from "houseki/gltf";
+import { N8AOPass } from "houseki/postprocessing";
+import { SceneStruct } from "houseki/scene";
 import { Commands, Mut, Query, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

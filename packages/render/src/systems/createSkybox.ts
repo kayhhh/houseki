@@ -1,4 +1,4 @@
-import { Scene, SceneStruct, Skybox } from "@reddo/scene";
+import { Scene, SceneStruct, Skybox } from "@houseki-engine/scene";
 import {
   BackSide,
   CanvasTexture,

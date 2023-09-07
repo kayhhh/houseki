@@ -1,4 +1,4 @@
-import { ReddoSchedules } from "@reddo/core";
+import { HousekiSchedules } from "@houseki-engine/core";
 import { run, WorldBuilder } from "thyseus";
 
 import { animatePlayer } from "./systems/animatePlayer";
@@ -30,5 +30,5 @@ export function playerPlugin(builder: WorldBuilder) {
         animatePlayer
       )
     )
-    .addSystemsToSchedule(ReddoSchedules.FixedUpdate, moveBody, setAirTime);
+    .addSystemsToSchedule(HousekiSchedules.FixedUpdate, moveBody, setAirTime);
 }

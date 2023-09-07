@@ -1,6 +1,6 @@
-import { Asset, Warehouse } from "reddo/core";
-import { BoxCollider, StaticBody } from "reddo/physics";
-import { WEBGL_CONSTANTS } from "reddo/render";
+import { Asset, Warehouse } from "houseki/core";
+import { BoxCollider, StaticBody } from "houseki/physics";
+import { WEBGL_CONSTANTS } from "houseki/render";
 import {
   GlobalTransform,
   Image,
@@ -8,7 +8,7 @@ import {
   Parent,
   StandardMaterial,
   Transform,
-} from "reddo/scene";
+} from "houseki/scene";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createBoxGeometry } from "./geometry";

@@ -1,17 +1,17 @@
-import { corePlugin } from "@reddo/core";
-import { inputPlugin } from "@reddo/input";
-import { renderPlugin } from "@reddo/render";
-import { scenePlugin } from "@reddo/scene";
+import { corePlugin } from "@houseki-engine/core";
+import { inputPlugin } from "@houseki-engine/input";
+import { renderPlugin } from "@houseki-engine/render";
+import { scenePlugin } from "@houseki-engine/scene";
 import { WorldBuilder } from "thyseus";
 
 /**
  * Adds features that most people expect to have in a game engine.
  *
  * Default plugins:
- * - `@reddo/core`
- * - `@reddo/input`
- * - `@reddo/render`
- * - `@reddo/scene`
+ * - `@houseki-engine/core`
+ * - `@houseki-engine/input`
+ * - `@houseki-engine/render`
+ * - `@houseki-engine/scene`
  */
 export function defaultPlugin(builder: WorldBuilder) {
   builder

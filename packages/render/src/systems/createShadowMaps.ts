@@ -1,4 +1,4 @@
-import { ShadowMap } from "@reddo/scene";
+import { ShadowMap } from "@houseki-engine/scene";
 import { Entity, Query, Res } from "thyseus";
 
 import { RenderStore } from "../resources";

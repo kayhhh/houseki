@@ -1,6 +1,6 @@
-import { CoreStore, Warehouse } from "reddo/core";
-import { CascadingShadowMaps } from "reddo/csm";
-import { SceneStruct } from "reddo/scene";
+import { CoreStore, Warehouse } from "houseki/core";
+import { CascadingShadowMaps } from "houseki/csm";
+import { SceneStruct } from "houseki/scene";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createBox } from "../../utils/createBox";

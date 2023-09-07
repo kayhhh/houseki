@@ -1,5 +1,5 @@
-import { RenderStore } from "@reddo/render";
-import { SceneStruct } from "@reddo/scene";
+import { RenderStore } from "@houseki-engine/render";
+import { SceneStruct } from "@houseki-engine/scene";
 import { Vector3 } from "three";
 import { CSM } from "three/examples/jsm/csm/CSM";
 import { Entity, Mut, Query, Res } from "thyseus";

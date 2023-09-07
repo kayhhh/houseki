@@ -1,7 +1,7 @@
-import { Time } from "@reddo/core";
-import { Velocity } from "@reddo/physics";
-import { Parent, Transform } from "@reddo/scene";
-import { VrmAnimation } from "@reddo/vrm";
+import { Time } from "@houseki-engine/core";
+import { Velocity } from "@houseki-engine/physics";
+import { Parent, Transform } from "@houseki-engine/scene";
+import { VrmAnimation } from "@houseki-engine/vrm";
 import { Entity, Mut, Query, Res } from "thyseus";
 
 import { PlayerAvatar, PlayerBody } from "../components";

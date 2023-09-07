@@ -1,9 +1,9 @@
 {
-  "name": "@reddo/core",
+  "name": "@houseki-engine/core",
   "version": "1.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/reddo",
+    "url": "https://github.com/unavi-xyz/houseki",
     "directory": "packages/core"
   },
   "license": "GPL-3.0-or-later",
