@@ -1,4 +1,4 @@
-import { Scene } from "@lattice-engine/scene";
+import { Scene } from "@reddo/scene";
 
 import { ExportContext } from "./context";
 

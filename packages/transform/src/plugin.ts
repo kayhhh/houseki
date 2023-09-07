@@ -1,5 +1,5 @@
-import { sendEvents as orbitEvents } from "@lattice-engine/orbit";
-import { rotateCamera as playerEvents } from "@lattice-engine/player";
+import { sendEvents as orbitEvents } from "@reddo/orbit";
+import { rotateCamera as playerEvents } from "@reddo/player";
 import { run, System, WorldBuilder } from "thyseus";
 
 import { calcRect } from "./systems/calcRect";

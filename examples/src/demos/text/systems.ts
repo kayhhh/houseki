@@ -1,11 +1,6 @@
-import { CoreStore } from "lattice-engine/core";
-import {
-  GlobalTransform,
-  Parent,
-  SceneStruct,
-  Transform,
-} from "lattice-engine/scene";
-import { Text } from "lattice-engine/text";
+import { CoreStore } from "reddo/core";
+import { GlobalTransform, Parent, SceneStruct, Transform } from "reddo/scene";
+import { Text } from "reddo/text";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

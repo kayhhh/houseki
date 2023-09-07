@@ -1,10 +1,7 @@
-import { LatticeSchedules } from "@lattice-engine/core";
-import {
-  lerpTargetTranslation,
-  slerpCameraRotation,
-} from "@lattice-engine/player";
-import { renderCanvas, renderClearPass } from "@lattice-engine/render";
-import { updateGlobalTransforms } from "@lattice-engine/scene";
+import { ReddoSchedules } from "@reddo/core";
+import { lerpTargetTranslation, slerpCameraRotation } from "@reddo/player";
+import { renderCanvas, renderClearPass } from "@reddo/render";
+import { updateGlobalTransforms } from "@reddo/scene";
 import { run, WorldBuilder } from "thyseus";
 
 import { createPortals } from "./systems/createPortals";
@@ -35,13 +32,13 @@ export function portalPlugin(builder: WorldBuilder) {
       run(slerpTargetRotation2).after(rotatePlayerCamera)
     )
     .addSystemsToSchedule(
-      LatticeSchedules.PreUpdate,
+      ReddoSchedules.PreUpdate,
       run(restoreOriginalTranslation).before(updateGlobalTransforms),
       run(restoreOriginalRotation).before(updateGlobalTransforms)
     )
-    .addSystemsToSchedule(LatticeSchedules.PostFixedUpdate, setPortalRaycasts)
+    .addSystemsToSchedule(ReddoSchedules.PostFixedUpdate, setPortalRaycasts)
     .addSystemsToSchedule(
-      LatticeSchedules.Render,
+      ReddoSchedules.Render,
       run(renderPortalMaterials).after(renderClearPass).before(renderCanvas)
     );
 }

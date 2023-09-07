@@ -1,8 +1,4 @@
-import {
-  MaterialAlphaMode,
-  StandardMaterial,
-  TextureInfo,
-} from "@lattice-engine/scene";
+import { MaterialAlphaMode, StandardMaterial, TextureInfo } from "@reddo/scene";
 import {
   CanvasTexture,
   ClampToEdgeWrapping,

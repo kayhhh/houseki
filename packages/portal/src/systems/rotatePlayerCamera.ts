@@ -1,11 +1,7 @@
-import { Raycast } from "@lattice-engine/physics";
-import {
-  PlayerCamera,
-  PlayerCameraView,
-  TargetRotation,
-} from "@lattice-engine/player";
-import { RenderStore } from "@lattice-engine/render";
-import { Transform } from "@lattice-engine/scene";
+import { Raycast } from "@reddo/physics";
+import { PlayerCamera, PlayerCameraView, TargetRotation } from "@reddo/player";
+import { RenderStore } from "@reddo/render";
+import { Transform } from "@reddo/scene";
 import { Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 

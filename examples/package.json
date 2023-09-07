@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "lattice-engine": "workspace:^",
     "leva": "^0.9.35",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "reddo": "workspace:^",
     "three": "~0.154.0",
     "thyseus": "^0.14.0",
     "wouter": "^2.11.0",

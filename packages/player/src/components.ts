@@ -1,5 +1,5 @@
-import { Vec3 } from "@lattice-engine/core";
-import { Quat } from "@lattice-engine/scene";
+import { Vec3 } from "@reddo/core";
+import { Quat } from "@reddo/scene";
 import { type f32, struct, type u8, type u64 } from "thyseus";
 
 import { PlayerCameraMode, PlayerCameraView } from "./types";

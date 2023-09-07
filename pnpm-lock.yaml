@@ -55,9 +55,6 @@ importers:
 
   examples:
     dependencies:
-      lattice-engine:
-        specifier: workspace:^
-        version: link:../packages/lattice-engine
       leva:
         specifier: ^0.9.35
         version: 0.9.35(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
@@ -67,6 +64,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
+      reddo:
+        specifier: workspace:^
+        version: link:../packages/lattice-engine
       three:
         specifier: ~0.154.0
         version: 0.154.0
@@ -134,10 +134,10 @@ importers:
 
   packages/csm:
     devDependencies:
-      '@lattice-engine/render':
+      '@reddo/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@reddo/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -177,16 +177,16 @@ importers:
         specifier: ^3.21.4
         version: 3.21.4
     devDependencies:
-      '@lattice-engine/core':
+      '@reddo/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/physics':
+      '@reddo/physics':
         specifier: workspace:^
         version: link:../physics
-      '@lattice-engine/scene':
+      '@reddo/scene':
         specifier: workspace:^
         version: link:../scene
-      '@lattice-engine/text':
+      '@reddo/text':
         specifier: workspace:^
         version: link:../text
       rollup-plugin-peer-deps-external:
@@ -207,7 +207,7 @@ importers:
 
   packages/input:
     devDependencies:
-      '@lattice-engine/core':
+      '@reddo/core':
         specifier: workspace:^
         version: link:../core
       rollup-plugin-peer-deps-external:
@@ -228,49 +228,49 @@ importers:
 
   packages/lattice-engine:
     dependencies:
-      '@lattice-engine/core':
+      '@reddo/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/csm':
+      '@reddo/csm':
         specifier: workspace:^
         version: link:../csm
-      '@lattice-engine/gltf':
+      '@reddo/gltf':
         specifier: workspace:^
         version: link:../gltf
-      '@lattice-engine/input':
+      '@reddo/input':
         specifier: workspace:^
         version: link:../input
-      '@lattice-engine/orbit':
+      '@reddo/orbit':
         specifier: workspace:^
         version: link:../orbit
-      '@lattice-engine/physics':
+      '@reddo/physics':
         specifier: workspace:^
         version: link:../physics
-      '@lattice-engine/player':
+      '@reddo/player':
         specifier: workspace:^
         version: link:../player
-      '@lattice-engine/portal':
+      '@reddo/portal':
         specifier: workspace:^
         version: link:../portal
-      '@lattice-engine/postprocessing':
+      '@reddo/postprocessing':
         specifier: workspace:^
         version: link:../postprocessing
-      '@lattice-engine/render':
+      '@reddo/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@reddo/scene':
         specifier: workspace:^
         version: link:../scene
-      '@lattice-engine/text':
+      '@reddo/text':
         specifier: workspace:^
         version: link:../text
-      '@lattice-engine/transform':
+      '@reddo/transform':
         specifier: workspace:^
         version: link:../transform
-      '@lattice-engine/utils':
+      '@reddo/utils':
         specifier: workspace:^
         version: link:../utils
-      '@lattice-engine/vrm':
+      '@reddo/vrm':
         specifier: workspace:^
         version: link:../vrm
     devDependencies:
@@ -298,13 +298,13 @@ importers:
 
   packages/orbit:
     devDependencies:
-      '@lattice-engine/input':
+      '@reddo/input':
         specifier: workspace:^
         version: link:../input
-      '@lattice-engine/render':
+      '@reddo/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@reddo/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -338,10 +338,10 @@ importers:
         specifier: ^4.0.0-beta.1
         version: 4.0.0-beta.1
     devDependencies:
-      '@lattice-engine/core':
+      '@reddo/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/scene':
+      '@reddo/scene':
         specifier: workspace:^
         version: link:../scene
       rollup-plugin-peer-deps-external:
@@ -365,22 +365,22 @@ importers:
 
   packages/player:
     devDependencies:
-      '@lattice-engine/core':
+      '@reddo/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/input':
+      '@reddo/input':
         specifier: workspace:^
         version: link:../input
-      '@lattice-engine/physics':
+      '@reddo/physics':
         specifier: workspace:^
         version: link:../physics
-      '@lattice-engine/render':
+      '@reddo/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@reddo/scene':
         specifier: workspace:^
         version: link:../scene
-      '@lattice-engine/vrm':
+      '@reddo/vrm':
         specifier: workspace:^
         version: link:../vrm
       '@types/three':
@@ -407,19 +407,19 @@ importers:
 
   packages/portal:
     devDependencies:
-      '@lattice-engine/core':
+      '@reddo/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/physics':
+      '@reddo/physics':
         specifier: workspace:^
         version: link:../physics
-      '@lattice-engine/player':
+      '@reddo/player':
         specifier: workspace:^
         version: link:../player
-      '@lattice-engine/render':
+      '@reddo/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@reddo/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -453,13 +453,13 @@ importers:
         specifier: ^1.6.8
         version: 1.6.8(postprocessing@6.32.2)(three@0.154.0)
     devDependencies:
-      '@lattice-engine/core':
+      '@reddo/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/render':
+      '@reddo/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@reddo/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -489,10 +489,10 @@ importers:
 
   packages/render:
     devDependencies:
-      '@lattice-engine/core':
+      '@reddo/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/scene':
+      '@reddo/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -526,7 +526,7 @@ importers:
         specifier: ^4.0.0-beta.1
         version: 4.0.0-beta.1
     devDependencies:
-      '@lattice-engine/core':
+      '@reddo/core':
         specifier: workspace:^
         version: link:../core
       rollup-plugin-peer-deps-external:
@@ -551,13 +551,13 @@ importers:
         specifier: ^0.47.2
         version: 0.47.2(three@0.154.0)
     devDependencies:
-      '@lattice-engine/core':
+      '@reddo/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/render':
+      '@reddo/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@reddo/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -584,28 +584,28 @@ importers:
 
   packages/transform:
     devDependencies:
-      '@lattice-engine/core':
+      '@reddo/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/input':
+      '@reddo/input':
         specifier: workspace:^
         version: link:../input
-      '@lattice-engine/orbit':
+      '@reddo/orbit':
         specifier: workspace:^
         version: link:../orbit
-      '@lattice-engine/physics':
+      '@reddo/physics':
         specifier: workspace:^
         version: link:../physics
-      '@lattice-engine/player':
+      '@reddo/player':
         specifier: workspace:^
         version: link:../player
-      '@lattice-engine/postprocessing':
+      '@reddo/postprocessing':
         specifier: workspace:^
         version: link:../postprocessing
-      '@lattice-engine/render':
+      '@reddo/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@reddo/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -632,16 +632,16 @@ importers:
 
   packages/utils:
     devDependencies:
-      '@lattice-engine/core':
+      '@reddo/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/input':
+      '@reddo/input':
         specifier: workspace:^
         version: link:../input
-      '@lattice-engine/render':
+      '@reddo/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@reddo/scene':
         specifier: workspace:^
         version: link:../scene
       rollup-plugin-peer-deps-external:
@@ -684,13 +684,13 @@ importers:
         specifier: ^2.0.3
         version: 2.0.3(@types/three@0.154.0)(three@0.154.0)
     devDependencies:
-      '@lattice-engine/core':
+      '@reddo/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/render':
+      '@reddo/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@reddo/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -5184,15 +5184,6 @@ packages:
       rollup: 3.28.1
     dev: true
 
-  /rollup@3.26.2:
-    resolution: {integrity: sha512-6umBIGVz93er97pMgQO08LuH3m6PUb3jlDUUGFsNJB6VgTCUaDFpupf5JfU30529m/UKOgmiX+uY6Sx8cOYpLA==}
-    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
-    hasBin: true
-    requiresBuild: true
-    optionalDependencies:
-      fsevents: 2.3.3
-    dev: true
-
   /rollup@3.28.1:
     resolution: {integrity: sha512-R9OMQmIHJm9znrU3m3cpE8uhN0fGdXiawME7aZIpQqvpS/85+Vt1Hq1/yVIcYfOmaQiHjvXkQAoJukvLpau6Yw==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
@@ -5995,7 +5986,7 @@ packages:
     dependencies:
       esbuild: 0.18.11
       postcss: 8.4.27
-      rollup: 3.26.2
+      rollup: 3.28.1
     optionalDependencies:
       fsevents: 2.3.3
     dev: true

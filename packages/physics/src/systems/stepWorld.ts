@@ -1,4 +1,4 @@
-import { Time } from "@lattice-engine/core";
+import { Time } from "@reddo/core";
 import { Res } from "thyseus";
 
 import { PhysicsStore } from "../resources";

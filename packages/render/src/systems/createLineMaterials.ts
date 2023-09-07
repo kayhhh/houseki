@@ -1,4 +1,4 @@
-import { LineMaterial } from "@lattice-engine/scene";
+import { LineMaterial } from "@reddo/scene";
 import { LineBasicMaterial } from "three";
 import { Entity, Query, Res } from "thyseus";
 

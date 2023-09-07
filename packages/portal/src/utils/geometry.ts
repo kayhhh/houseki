@@ -1,5 +1,5 @@
-import { Warehouse } from "@lattice-engine/core";
-import { Geometry } from "@lattice-engine/scene";
+import { Warehouse } from "@reddo/core";
+import { Geometry } from "@reddo/scene";
 import { BufferAttribute, BufferGeometry, PlaneGeometry } from "three";
 
 export function createPlaneGeometry(

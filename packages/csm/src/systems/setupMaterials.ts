@@ -1,4 +1,4 @@
-import { RenderStore } from "@lattice-engine/render";
+import { RenderStore } from "@reddo/render";
 import { Res } from "thyseus";
 
 import { CSMStore } from "../resources";

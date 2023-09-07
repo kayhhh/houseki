@@ -1,9 +1,9 @@
 {
-  "name": "@lattice-engine/csm",
+  "name": "@reddo/csm",
   "version": "4.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/lattice",
+    "url": "https://github.com/unavi-xyz/reddo",
     "directory": "packages/csm"
   },
   "license": "GPL-3.0-or-later",
@@ -18,8 +18,8 @@
     "dev": "vite build --watch"
   },
   "devDependencies": {
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
+    "@reddo/render": "workspace:^",
+    "@reddo/scene": "workspace:^",
     "@types/three": "~0.154.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "three": "~0.154.0",
@@ -29,8 +29,8 @@
     "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
+    "@reddo/render": "workspace:^",
+    "@reddo/scene": "workspace:^",
     "three": "*",
     "thyseus": "*"
   },

@@ -1,4 +1,4 @@
-import { KeyframePath, KeyframeTrack, Transform } from "@lattice-engine/scene";
+import { KeyframePath, KeyframeTrack, Transform } from "@reddo/scene";
 import { Entity, Mut, Query, Res } from "thyseus";
 
 import { RenderStore } from "../resources";

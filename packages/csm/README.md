@@ -1,3 +1,3 @@
-# @lattice-engine/csm
+# @reddo/csm
 
 Cascading shadow maps

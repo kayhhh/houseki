@@ -1,4 +1,4 @@
-import { AnimationClip, KeyframeTrack } from "@lattice-engine/scene";
+import { AnimationClip, KeyframeTrack } from "@reddo/scene";
 import {
   AnimationClip as ThreeAnimationClip,
   KeyframeTrack as ThreeKeyframeTrack,

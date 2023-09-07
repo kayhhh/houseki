@@ -1,19 +1,19 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
+import { CoreStore, Warehouse } from "reddo/core";
 import {
   BoxCollider,
   PhysicsConfig,
   StaticBody,
   TargetTransform,
-} from "lattice-engine/physics";
-import { OutlinePass } from "lattice-engine/postprocessing";
+} from "reddo/physics";
+import { OutlinePass } from "reddo/postprocessing";
 import {
   GlobalTransform,
   Mesh,
   Parent,
   SceneStruct,
   Transform,
-} from "lattice-engine/scene";
-import { TransformControls, TransformMode } from "lattice-engine/transform";
+} from "reddo/scene";
+import { TransformControls, TransformMode } from "reddo/transform";
 import { Commands, Mut, Query, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

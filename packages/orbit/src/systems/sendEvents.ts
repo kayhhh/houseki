@@ -10,7 +10,7 @@ import {
   PointerMoveEvent,
   PointerUpEvent,
   wheelEventFromECS,
-} from "@lattice-engine/input";
+} from "@reddo/input";
 import { EventReader, Res } from "thyseus";
 
 import { OrbitControlsStore } from "../resources";

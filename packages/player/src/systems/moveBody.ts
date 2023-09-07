@@ -1,11 +1,7 @@
-import { Time } from "@lattice-engine/core";
-import { InputStruct, Key } from "@lattice-engine/input";
-import {
-  CharacterController,
-  TargetTransform,
-  Velocity,
-} from "@lattice-engine/physics";
-import { GlobalTransform, Transform } from "@lattice-engine/scene";
+import { Time } from "@reddo/core";
+import { InputStruct, Key } from "@reddo/input";
+import { CharacterController, TargetTransform, Velocity } from "@reddo/physics";
+import { GlobalTransform, Transform } from "@reddo/scene";
 import { lerp } from "three/src/math/MathUtils";
 import { Entity, Mut, Query, Res } from "thyseus";
 

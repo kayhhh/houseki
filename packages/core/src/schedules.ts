@@ -1,6 +1,6 @@
 import { DefaultSchedule, StartSchedule } from "thyseus";
 
-export const LatticeSchedules = {
+export const ReddoSchedules = {
   ApplyCommands: Symbol("ApplyCommands"),
   Destroy: Symbol("Destroy"),
   FixedLoop: Symbol("FixedLoop"),

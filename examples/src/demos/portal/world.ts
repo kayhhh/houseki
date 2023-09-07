@@ -1,8 +1,8 @@
-import { Engine, LatticeSchedules } from "lattice-engine/core";
-import { physicsPlugin } from "lattice-engine/physics";
-import { playerPlugin } from "lattice-engine/player";
-import { portalPlugin } from "lattice-engine/portal";
-import { vrmPlugin } from "lattice-engine/vrm";
+import { Engine, ReddoSchedules } from "reddo/core";
+import { physicsPlugin } from "reddo/physics";
+import { playerPlugin } from "reddo/player";
+import { portalPlugin } from "reddo/portal";
+import { vrmPlugin } from "reddo/vrm";
 import { World } from "thyseus";
 
 import { demoPlugin } from "../../utils/demoPlugin";
@@ -17,6 +17,6 @@ export async function createWorld() {
     .addPlugin(vrmPlugin)
     .addPlugin(playerPlugin)
     .addPlugin(portalPlugin)
-    .addSystemsToSchedule(LatticeSchedules.Startup, initScene)
+    .addSystemsToSchedule(ReddoSchedules.Startup, initScene)
     .build();
 }

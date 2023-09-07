@@ -1,4 +1,4 @@
-# @lattice-engine/physics
+# @reddo/physics
 
 Physics using [Rapier](https://rapier.rs/).
 

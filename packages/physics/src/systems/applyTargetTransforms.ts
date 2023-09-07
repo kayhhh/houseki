@@ -1,5 +1,5 @@
-import { Time, Vec3 } from "@lattice-engine/core";
-import { Quat, Transform } from "@lattice-engine/scene";
+import { Time, Vec3 } from "@reddo/core";
+import { Quat, Transform } from "@reddo/scene";
 import { Quat as glQuat, Vec3 as glVec3 } from "gl-matrix/dist/esm";
 import { Mut, Query, Res } from "thyseus";
 

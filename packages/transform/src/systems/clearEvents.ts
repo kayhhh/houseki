@@ -1,4 +1,4 @@
-import { PointerDownEvent, PointerMoveEvent } from "@lattice-engine/input";
+import { PointerDownEvent, PointerMoveEvent } from "@reddo/input";
 import { Entity, EventWriter, Query, Res } from "thyseus";
 
 import { TransformControls } from "../components";

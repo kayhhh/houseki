@@ -1,10 +1,5 @@
-import {
-  ExportedGltf,
-  ExportedJSON,
-  ExportGltf,
-  Gltf,
-} from "lattice-engine/gltf";
-import { DeepRemove, Scene, SceneStruct } from "lattice-engine/scene";
+import { ExportedGltf, ExportedJSON, ExportGltf, Gltf } from "reddo/gltf";
+import { DeepRemove, Scene, SceneStruct } from "reddo/scene";
 import { Commands, EventReader, EventWriter, Query, Res } from "thyseus";
 
 import { selectedModel } from "../demos/gltf/systems";

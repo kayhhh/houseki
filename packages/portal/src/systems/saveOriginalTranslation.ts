@@ -1,5 +1,5 @@
-import { TargetTranslation } from "@lattice-engine/player";
-import { Transform } from "@lattice-engine/scene";
+import { TargetTranslation } from "@reddo/player";
+import { Transform } from "@reddo/scene";
 import { Mut, Query } from "thyseus";
 
 import { OriginalTransform, OriginalTranslation } from "../components";

@@ -1,4 +1,4 @@
-import { Parent, Transform } from "@lattice-engine/scene";
+import { Parent, Transform } from "@reddo/scene";
 import { Object3D } from "three";
 import { Entity, Query, Res } from "thyseus";
 

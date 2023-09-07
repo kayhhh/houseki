@@ -1,5 +1,5 @@
 {
-  "name": "lattice-engine",
+  "name": "reddo",
   "version": "1.0.1",
   "keywords": [
     "webgl",
@@ -17,8 +17,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/lattice",
-    "directory": "packages/lattice-engine"
+    "url": "https://github.com/unavi-xyz/reddo",
+    "directory": "packages/reddo"
   },
   "license": "GPL-3.0-or-later",
   "type": "module",
@@ -94,21 +94,21 @@
     "dev": "vite build --watch"
   },
   "dependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/csm": "workspace:^",
-    "@lattice-engine/gltf": "workspace:^",
-    "@lattice-engine/input": "workspace:^",
-    "@lattice-engine/orbit": "workspace:^",
-    "@lattice-engine/physics": "workspace:^",
-    "@lattice-engine/player": "workspace:^",
-    "@lattice-engine/portal": "workspace:^",
-    "@lattice-engine/postprocessing": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
-    "@lattice-engine/text": "workspace:^",
-    "@lattice-engine/transform": "workspace:^",
-    "@lattice-engine/utils": "workspace:^",
-    "@lattice-engine/vrm": "workspace:^"
+    "@reddo/core": "workspace:^",
+    "@reddo/csm": "workspace:^",
+    "@reddo/gltf": "workspace:^",
+    "@reddo/input": "workspace:^",
+    "@reddo/orbit": "workspace:^",
+    "@reddo/physics": "workspace:^",
+    "@reddo/player": "workspace:^",
+    "@reddo/portal": "workspace:^",
+    "@reddo/postprocessing": "workspace:^",
+    "@reddo/render": "workspace:^",
+    "@reddo/scene": "workspace:^",
+    "@reddo/text": "workspace:^",
+    "@reddo/transform": "workspace:^",
+    "@reddo/utils": "workspace:^",
+    "@reddo/vrm": "workspace:^"
   },
   "devDependencies": {
     "postprocessing": "^6.32.2",

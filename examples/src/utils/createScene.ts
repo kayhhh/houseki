@@ -1,4 +1,4 @@
-import { Asset, CoreStore } from "lattice-engine/core";
+import { Asset, CoreStore } from "reddo/core";
 import {
   GlobalTransform,
   Image,
@@ -7,7 +7,7 @@ import {
   SceneStruct,
   Skybox,
   Transform,
-} from "lattice-engine/scene";
+} from "reddo/scene";
 import { Commands } from "thyseus";
 
 export function createScene(

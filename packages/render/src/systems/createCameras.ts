@@ -1,4 +1,4 @@
-import { Parent, PerspectiveCamera, Transform } from "@lattice-engine/scene";
+import { Parent, PerspectiveCamera, Transform } from "@reddo/scene";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { Entity, Query, Res, With } from "thyseus";
 

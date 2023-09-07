@@ -1,5 +1,5 @@
-import { Raycast } from "@lattice-engine/physics";
-import { GlobalTransform } from "@lattice-engine/scene";
+import { Raycast } from "@reddo/physics";
+import { GlobalTransform } from "@reddo/scene";
 import { Quaternion, Vector3 } from "three";
 import { Entity, Mut, Query } from "thyseus";
 

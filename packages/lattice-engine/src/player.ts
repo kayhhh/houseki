@@ -1,1 +1,1 @@
-export * from "@lattice-engine/player";
+export * from "@reddo/player";

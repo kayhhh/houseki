@@ -1,11 +1,11 @@
-import { Raycast } from "@lattice-engine/physics";
+import { Raycast } from "@reddo/physics";
 import {
   COLLISION_OFFSET,
   PlayerCamera,
   PlayerCameraView,
   TargetTranslation,
-} from "@lattice-engine/player";
-import { Transform } from "@lattice-engine/scene";
+} from "@reddo/player";
+import { Transform } from "@reddo/scene";
 import { Vector3 } from "three";
 import { Entity, Mut, Query, With } from "thyseus";
 

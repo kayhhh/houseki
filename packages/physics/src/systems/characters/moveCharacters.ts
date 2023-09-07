@@ -1,4 +1,4 @@
-import { Time } from "@lattice-engine/core";
+import { Time } from "@reddo/core";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
 import { CharacterController, Velocity } from "../../components";

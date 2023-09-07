@@ -1,6 +1,6 @@
-import { InputStruct } from "lattice-engine/input";
 import { useControls } from "leva";
 import { useEffect } from "react";
+import { InputStruct } from "reddo/input";
 import { Mut, Res } from "thyseus";
 
 const store = {

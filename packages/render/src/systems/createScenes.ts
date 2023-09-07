@@ -1,4 +1,4 @@
-import { Scene } from "@lattice-engine/scene";
+import { Scene } from "@reddo/scene";
 import { Scene as ThreeScene, Texture } from "three";
 import { Entity, Query, Res, With } from "thyseus";
 

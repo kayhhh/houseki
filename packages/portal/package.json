@@ -1,9 +1,9 @@
 {
-  "name": "@lattice-engine/portal",
+  "name": "@reddo/portal",
   "version": "5.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/lattice",
+    "url": "https://github.com/unavi-xyz/reddo",
     "directory": "packages/portal"
   },
   "license": "GPL-3.0-or-later",
@@ -18,11 +18,11 @@
     "dev": "vite build --watch"
   },
   "devDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/physics": "workspace:^",
-    "@lattice-engine/player": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
+    "@reddo/core": "workspace:^",
+    "@reddo/physics": "workspace:^",
+    "@reddo/player": "workspace:^",
+    "@reddo/render": "workspace:^",
+    "@reddo/scene": "workspace:^",
     "@types/three": "~0.154.0",
     "postprocessing": "^6.32.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
@@ -33,11 +33,11 @@
     "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/physics": "workspace:^",
-    "@lattice-engine/player": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
+    "@reddo/core": "workspace:^",
+    "@reddo/physics": "workspace:^",
+    "@reddo/player": "workspace:^",
+    "@reddo/render": "workspace:^",
+    "@reddo/scene": "workspace:^",
     "postprocessing": "*",
     "three": "*",
     "thyseus": "*"

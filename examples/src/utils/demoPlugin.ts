@@ -1,5 +1,5 @@
-import { gltfPlugin } from "lattice-engine/gltf";
-import { defaultPlugin } from "lattice-engine/utils";
+import { gltfPlugin } from "reddo/gltf";
+import { defaultPlugin } from "reddo/utils";
 import { WorldBuilder } from "thyseus";
 
 import { exportLoadingInfo } from "../components/loading/system";

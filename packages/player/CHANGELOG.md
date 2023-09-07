@@ -1,4 +1,4 @@
-# @lattice-engine/player
+# @reddo/player
 
 ## 6.0.1
 
@@ -6,12 +6,12 @@
 
 - 215eff0: upgrade deps
 - Updated dependencies [215eff0]
-  - @lattice-engine/physics@5.0.1
-  - @lattice-engine/render@5.0.1
-  - @lattice-engine/input@1.0.1
-  - @lattice-engine/scene@1.0.1
-  - @lattice-engine/core@1.0.1
-  - @lattice-engine/vrm@5.0.1
+  - @reddo/physics@5.0.1
+  - @reddo/render@5.0.1
+  - @reddo/input@1.0.1
+  - @reddo/scene@1.0.1
+  - @reddo/core@1.0.1
+  - @reddo/vrm@5.0.1
 
 ## 6.0.0
 
@@ -22,12 +22,12 @@
 ### Patch Changes
 
 - Updated dependencies [32d0cc6]
-  - @lattice-engine/physics@5.0.0
-  - @lattice-engine/render@5.0.0
-  - @lattice-engine/input@1.0.0
-  - @lattice-engine/scene@1.0.0
-  - @lattice-engine/core@1.0.0
-  - @lattice-engine/vrm@5.0.0
+  - @reddo/physics@5.0.0
+  - @reddo/render@5.0.0
+  - @reddo/input@1.0.0
+  - @reddo/scene@1.0.0
+  - @reddo/core@1.0.0
+  - @reddo/vrm@5.0.0
 
 ## 5.0.2
 
@@ -35,12 +35,12 @@
 
 - 4588798: remove string component types
 - Updated dependencies [4588798]
-  - @lattice-engine/physics@4.0.2
-  - @lattice-engine/render@4.0.2
-  - @lattice-engine/input@0.3.6
-  - @lattice-engine/scene@0.7.2
-  - @lattice-engine/core@0.2.7
-  - @lattice-engine/vrm@4.0.2
+  - @reddo/physics@4.0.2
+  - @reddo/render@4.0.2
+  - @reddo/input@0.3.6
+  - @reddo/scene@0.7.2
+  - @reddo/core@0.2.7
+  - @reddo/vrm@4.0.2
 
 ## 5.0.1
 
@@ -48,12 +48,12 @@
 
 - d73cba1: update rotation lerp factor
 - Updated dependencies [33a8344]
-  - @lattice-engine/physics@4.0.1
-  - @lattice-engine/render@4.0.1
-  - @lattice-engine/core@0.2.6
-  - @lattice-engine/vrm@4.0.1
-  - @lattice-engine/input@0.3.5
-  - @lattice-engine/scene@0.7.1
+  - @reddo/physics@4.0.1
+  - @reddo/render@4.0.1
+  - @reddo/core@0.2.6
+  - @reddo/vrm@4.0.1
+  - @reddo/input@0.3.5
+  - @reddo/scene@0.7.1
 
 ## 5.0.0
 
@@ -61,17 +61,17 @@
 
 - 0e4d752: fix glitchy player movement
 - Updated dependencies [0e4d752]
-  - @lattice-engine/scene@0.7.0
-  - @lattice-engine/physics@4.0.0
-  - @lattice-engine/render@4.0.0
-  - @lattice-engine/vrm@4.0.0
+  - @reddo/scene@0.7.0
+  - @reddo/physics@4.0.0
+  - @reddo/render@4.0.0
+  - @reddo/vrm@4.0.0
 
 ## 4.0.4
 
 ### Patch Changes
 
 - Updated dependencies [3addbfb]
-  - @lattice-engine/physics@3.0.3
+  - @reddo/physics@3.0.3
 
 ## 4.0.3
 
@@ -80,19 +80,19 @@
 - 1ccc490: fix void teleport sometimes glitchy
 - b7ef674: fix weird animations when moving diagonal
 - Updated dependencies [a74c565]
-  - @lattice-engine/physics@3.0.2
-  - @lattice-engine/core@0.2.5
-  - @lattice-engine/input@0.3.4
-  - @lattice-engine/render@3.0.2
-  - @lattice-engine/scene@0.6.2
-  - @lattice-engine/vrm@3.0.3
+  - @reddo/physics@3.0.2
+  - @reddo/core@0.2.5
+  - @reddo/input@0.3.4
+  - @reddo/render@3.0.2
+  - @reddo/scene@0.6.2
+  - @reddo/vrm@3.0.3
 
 ## 4.0.2
 
 ### Patch Changes
 
 - Updated dependencies [f8d3ae5]
-  - @lattice-engine/vrm@3.0.2
+  - @reddo/vrm@3.0.2
 
 ## 4.0.1
 
@@ -100,12 +100,12 @@
 
 - ffea4d9: upgrade thyseus
 - Updated dependencies [ffea4d9]
-  - @lattice-engine/physics@3.0.1
-  - @lattice-engine/render@3.0.1
-  - @lattice-engine/input@0.3.3
-  - @lattice-engine/scene@0.6.1
-  - @lattice-engine/core@0.2.4
-  - @lattice-engine/vrm@3.0.1
+  - @reddo/physics@3.0.1
+  - @reddo/render@3.0.1
+  - @reddo/input@0.3.3
+  - @reddo/scene@0.6.1
+  - @reddo/core@0.2.4
+  - @reddo/vrm@3.0.1
 
 ## 4.0.0
 
@@ -118,12 +118,12 @@
 - e3e7e0f: upgrade thyseus
 - Updated dependencies [a1c368e]
 - Updated dependencies [e3e7e0f]
-  - @lattice-engine/render@3.0.0
-  - @lattice-engine/scene@0.6.0
-  - @lattice-engine/physics@3.0.0
-  - @lattice-engine/input@0.3.2
-  - @lattice-engine/core@0.2.3
-  - @lattice-engine/vrm@3.0.0
+  - @reddo/render@3.0.0
+  - @reddo/scene@0.6.0
+  - @reddo/physics@3.0.0
+  - @reddo/input@0.3.2
+  - @reddo/core@0.2.3
+  - @reddo/vrm@3.0.0
 
 ## 3.0.0
 
@@ -138,20 +138,20 @@
 - Updated dependencies [bf31ae9]
 - Updated dependencies [3eee506]
 - Updated dependencies [7a82a45]
-  - @lattice-engine/vrm@2.0.0
-  - @lattice-engine/scene@0.5.0
-  - @lattice-engine/physics@2.0.0
-  - @lattice-engine/render@2.0.0
-  - @lattice-engine/input@0.3.1
-  - @lattice-engine/core@0.2.2
+  - @reddo/vrm@2.0.0
+  - @reddo/scene@0.5.0
+  - @reddo/physics@2.0.0
+  - @reddo/render@2.0.0
+  - @reddo/input@0.3.1
+  - @reddo/core@0.2.2
 
 ## 2.0.1
 
 ### Patch Changes
 
 - Updated dependencies [ec1792a]
-  - @lattice-engine/render@1.0.1
-  - @lattice-engine/vrm@1.0.1
+  - @reddo/render@1.0.1
+  - @reddo/vrm@1.0.1
 
 ## 2.0.0
 
@@ -163,7 +163,7 @@
 
 - Updated dependencies [aab6de7]
 - Updated dependencies [c983ea1]
-  - @lattice-engine/input@0.3.0
+  - @reddo/input@0.3.0
 
 ## 1.0.0
 
@@ -171,10 +171,10 @@
 
 - 17bba7e: improve first person avatar clipping
 - Updated dependencies [e2015e3]
-  - @lattice-engine/scene@0.4.0
-  - @lattice-engine/physics@1.0.0
-  - @lattice-engine/render@1.0.0
-  - @lattice-engine/vrm@1.0.0
+  - @reddo/scene@0.4.0
+  - @reddo/physics@1.0.0
+  - @reddo/render@1.0.0
+  - @reddo/vrm@1.0.0
 
 ## 0.3.1
 
@@ -184,24 +184,24 @@
 - Updated dependencies [cc0fc73]
 - Updated dependencies [cc0fc73]
 - Updated dependencies [cc0fc73]
-  - @lattice-engine/vrm@0.3.1
-  - @lattice-engine/core@0.2.1
-  - @lattice-engine/input@0.2.1
-  - @lattice-engine/physics@0.3.1
-  - @lattice-engine/render@0.3.1
-  - @lattice-engine/scene@0.3.1
+  - @reddo/vrm@0.3.1
+  - @reddo/core@0.2.1
+  - @reddo/input@0.2.1
+  - @reddo/physics@0.3.1
+  - @reddo/render@0.3.1
+  - @reddo/scene@0.3.1
 
 ## 0.3.0
 
 ### Patch Changes
 
 - Updated dependencies [589fac4]
-  - @lattice-engine/core@0.2.0
-  - @lattice-engine/input@0.3.0
-  - @lattice-engine/physics@0.3.0
-  - @lattice-engine/render@0.3.0
-  - @lattice-engine/scene@0.3.0
-  - @lattice-engine/vrm@0.3.0
+  - @reddo/core@0.2.0
+  - @reddo/input@0.3.0
+  - @reddo/physics@0.3.0
+  - @reddo/render@0.3.0
+  - @reddo/scene@0.3.0
+  - @reddo/vrm@0.3.0
 
 ## 0.2.0
 
@@ -209,19 +209,19 @@
 
 - Updated dependencies [93c1536]
 - Updated dependencies [93c1536]
-  - @lattice-engine/render@0.2.0
-  - @lattice-engine/scene@0.2.0
-  - @lattice-engine/vrm@0.2.0
-  - @lattice-engine/physics@0.2.0
+  - @reddo/render@0.2.0
+  - @reddo/scene@0.2.0
+  - @reddo/vrm@0.2.0
+  - @reddo/physics@0.2.0
 
 ## 0.1.1
 
 ### Patch Changes
 
 - Updated dependencies [fddc570]
-  - @lattice-engine/core@0.1.1
-  - @lattice-engine/input@0.1.1
-  - @lattice-engine/physics@0.1.1
-  - @lattice-engine/render@0.1.1
-  - @lattice-engine/scene@0.1.1
-  - @lattice-engine/vrm@0.1.1
+  - @reddo/core@0.1.1
+  - @reddo/input@0.1.1
+  - @reddo/physics@0.1.1
+  - @reddo/render@0.1.1
+  - @reddo/scene@0.1.1
+  - @reddo/vrm@0.1.1
