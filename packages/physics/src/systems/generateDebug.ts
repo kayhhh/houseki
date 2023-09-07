@@ -1,4 +1,4 @@
-import { Warehouse } from "@lattice-engine/core";
+import { Warehouse } from "@reddo/core";
 import {
   Geometry,
   GlobalTransform,
@@ -8,7 +8,7 @@ import {
   Parent,
   SceneStruct,
   Transform,
-} from "@lattice-engine/scene";
+} from "@reddo/scene";
 import { Commands, Entity, Mut, Query, Res, With } from "thyseus";
 
 import { DebugResource, PhysicsConfig, PhysicsStore } from "../resources";

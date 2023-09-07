@@ -1,8 +1,5 @@
-import { RenderStore } from "@lattice-engine/render";
-import {
-  FIRSTPERSON_ONLY_LAYER,
-  THIRDPERSON_ONLY_LAYER,
-} from "@lattice-engine/vrm";
+import { RenderStore } from "@reddo/render";
+import { FIRSTPERSON_ONLY_LAYER, THIRDPERSON_ONLY_LAYER } from "@reddo/vrm";
 import { Entity, Query, Res } from "thyseus";
 
 import { PlayerCamera } from "../components";

@@ -1,5 +1,5 @@
-import { Loading } from "@lattice-engine/core";
 import { VRM, VRMLoaderPlugin, VRMUtils } from "@pixiv/three-vrm";
+import { Loading } from "@reddo/core";
 import { Mesh } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import {

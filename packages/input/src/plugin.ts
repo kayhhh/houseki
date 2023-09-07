@@ -1,8 +1,8 @@
-import { LatticeSchedules } from "@lattice-engine/core";
+import { ReddoSchedules } from "@reddo/core";
 import { WorldBuilder } from "thyseus";
 
 import { inputWriter } from "./systems/inputWriter";
 
 export function inputPlugin(builder: WorldBuilder) {
-  builder.addSystemsToSchedule(LatticeSchedules.PreUpdate, inputWriter);
+  builder.addSystemsToSchedule(ReddoSchedules.PreUpdate, inputWriter);
 }

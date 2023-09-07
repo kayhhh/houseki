@@ -1,4 +1,4 @@
-import { CoreStore } from "@lattice-engine/core";
+import { CoreStore } from "@reddo/core";
 import { EventWriter, Mut, Res, SystemRes } from "thyseus";
 
 import {

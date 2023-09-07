@@ -1,1 +1,1 @@
-export * from "@lattice-engine/csm";
+export * from "@reddo/csm";

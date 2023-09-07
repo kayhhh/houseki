@@ -1,5 +1,5 @@
-import { RenderStore } from "@lattice-engine/render";
-import { PerspectiveCamera, Transform } from "@lattice-engine/scene";
+import { RenderStore } from "@reddo/render";
+import { PerspectiveCamera, Transform } from "@reddo/scene";
 import { OrbitControls as ThreeOrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 

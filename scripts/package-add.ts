@@ -1,6 +1,6 @@
 // Helper script to add a new package to the monorepo
 // Will create a new package directory, package.json, etc.
-// As well as update lattice-engine to include the new package
+// As well as update reddo to include the new package
 
 const fs = require("fs");
 const path = require("path");
@@ -35,7 +35,7 @@ fs.writeFileSync(
     files: ["dist"],
     license: "GPL-3.0-or-later",
     main: "./dist/index.js",
-    name: `@lattice-engine/${packageName}`,
+    name: `@reddo/${packageName}`,
     peerDependencies: {
       thyseus: "^0.13.2",
     },
@@ -45,7 +45,7 @@ fs.writeFileSync(
     repository: {
       directory: `packages/${packageName}`,
       type: "git",
-      url: "https://github.com/lattice-engine/lattice",
+      url: "https://github.com/reddo/reddo",
     },
     scripts: {
       build: "vite build --emptyOutDir",
@@ -112,26 +112,23 @@ console.info("Creating README.md");
 const readmePath = path.join(packageDir, "README.md");
 fs.writeFileSync(
   readmePath,
-  `# @lattice-engine/${packageName}
+  `# @reddo/${packageName}
 `
 );
 
-// Enter lattice-engine directory
-const latticeDir = path.join(__dirname, "../packages/lattice-engine");
+// Enter reddo directory
+const reddoDir = path.join(__dirname, "../packages/reddo");
 
 console.info(`Creating src/${packageName}.ts`);
-const srcFilePath = path.join(latticeDir, "src", `${packageName}.ts`);
-fs.writeFileSync(
-  srcFilePath,
-  `export * from "@lattice-engine/${packageName}";`
-);
+const srcFilePath = path.join(reddoDir, "src", `${packageName}.ts`);
+fs.writeFileSync(srcFilePath, `export * from "@reddo/${packageName}";`);
 
 console.info(`Creating ${packageName}.d.ts`);
-const dtsPath = path.join(latticeDir, `${packageName}.d.ts`);
+const dtsPath = path.join(reddoDir, `${packageName}.d.ts`);
 fs.writeFileSync(dtsPath, `export * from "./dist/${packageName}";`);
 
 console.info(`Appending reference to index.d.ts`);
-const indexDtsPath = path.join(latticeDir, "index.d.ts");
+const indexDtsPath = path.join(reddoDir, "index.d.ts");
 fs.appendFileSync(
   indexDtsPath,
   `/// <reference path="./${packageName}.d.ts" />`
@@ -143,10 +140,10 @@ const sortedIndexDts = indexDts.split("\n").sort().join("\n");
 fs.writeFileSync(indexDtsPath, sortedIndexDts);
 
 console.info(`Updating package.json`);
-const latticePackageJsonPath = path.join(latticeDir, "package.json");
-const packageJson = JSON.parse(fs.readFileSync(latticePackageJsonPath));
+const reddoPackageJsonPath = path.join(reddoDir, "package.json");
+const packageJson = JSON.parse(fs.readFileSync(reddoPackageJsonPath));
 
-packageJson.dependencies[`@lattice-engine/${packageName}`] = "workspace:^";
+packageJson.dependencies[`@reddo/${packageName}`] = "workspace:^";
 packageJson.files.push(`${packageName}.d.ts`);
 packageJson.exports[`./${packageName}`] = {
   import: `./dist/${packageName}.js`,
@@ -165,11 +162,11 @@ packageJson.exports = sortedExports;
 // Sort the files array
 packageJson.files.sort();
 
-fs.writeFileSync(latticePackageJsonPath, JSON.stringify(packageJson, null, 2));
+fs.writeFileSync(reddoPackageJsonPath, JSON.stringify(packageJson, null, 2));
 
 console.info(`Updating vite.config.mjs`);
-const latticeViteConfigPath = path.join(latticeDir, "vite.config.mjs");
-const viteConfig = fs.readFileSync(latticeViteConfigPath, "utf-8");
+const reddoViteConfigPath = path.join(reddoDir, "vite.config.mjs");
+const viteConfig = fs.readFileSync(reddoViteConfigPath, "utf-8");
 
 // Add the new package to entries object
 const entries = viteConfig.match(/entry: {([\s\S]*?)},/)[1];
@@ -183,7 +180,7 @@ const updatedViteConfig = viteConfig.replace(
 );
 
 // Write the updated config back to the file
-fs.writeFileSync(latticeViteConfigPath, updatedViteConfig);
+fs.writeFileSync(reddoViteConfigPath, updatedViteConfig);
 
 // Return to root directory
 process.chdir(path.join(__dirname, ".."));

@@ -1,7 +1,7 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
-import { Gltf } from "lattice-engine/gltf";
-import { N8AOPass } from "lattice-engine/postprocessing";
-import { SceneStruct } from "lattice-engine/scene";
+import { CoreStore, Warehouse } from "reddo/core";
+import { Gltf } from "reddo/gltf";
+import { N8AOPass } from "reddo/postprocessing";
+import { SceneStruct } from "reddo/scene";
 import { Commands, Mut, Query, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

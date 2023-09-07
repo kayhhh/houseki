@@ -1,4 +1,4 @@
-import { GlobalTransform, Parent, Transform } from "@lattice-engine/scene";
+import { GlobalTransform, Parent, Transform } from "@reddo/scene";
 import { Mat4, Quat, Vec3, Vec4 } from "gl-matrix/dist/esm";
 import { Entity, Mut, Or, Query, Res, With, Without } from "thyseus";
 

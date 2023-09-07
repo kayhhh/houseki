@@ -1,4 +1,4 @@
-import { Asset, Warehouse } from "@lattice-engine/core";
+import { Asset, Warehouse } from "@reddo/core";
 
 import { ExportContext } from "./context";
 

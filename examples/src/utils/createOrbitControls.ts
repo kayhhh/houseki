@@ -1,10 +1,10 @@
-import { OrbitControls } from "lattice-engine/orbit";
+import { OrbitControls } from "reddo/orbit";
 import {
   GlobalTransform,
   PerspectiveCamera,
   SceneStruct,
   Transform,
-} from "lattice-engine/scene";
+} from "reddo/scene";
 import { Commands } from "thyseus";
 
 export function createOrbitControls(

@@ -1,5 +1,5 @@
-import { Asset, Warehouse } from "@lattice-engine/core";
-import { Image } from "@lattice-engine/scene";
+import { Asset, Warehouse } from "@reddo/core";
+import { Image } from "@reddo/scene";
 import { Entity, Mut, Query, Res, SystemRes } from "thyseus";
 
 import { RenderStore } from "../resources";

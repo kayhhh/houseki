@@ -1,5 +1,5 @@
-import { Time } from "@lattice-engine/core";
-import { CharacterController } from "@lattice-engine/physics";
+import { Time } from "@reddo/core";
+import { CharacterController } from "@reddo/physics";
 import { Mut, Query, Res } from "thyseus";
 
 import { PlayerBody } from "../components";

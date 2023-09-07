@@ -1,3 +1,3 @@
-# @lattice-engine/utils
+# @reddo/utils
 
 Utility functions.

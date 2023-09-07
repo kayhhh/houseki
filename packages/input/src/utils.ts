@@ -1,13 +1,13 @@
 import {
-  KeyboardEvent as LatticeKeyboardEvent,
-  MouseEvent as LatticeMouseEvent,
-  PointerEvent as LatticePointerEvent,
-  WheelEvent as LatticeWheelEvent,
+  KeyboardEvent as ReddoKeyboardEvent,
+  MouseEvent as ReddoMouseEvent,
+  PointerEvent as ReddoPointerEvent,
+  WheelEvent as ReddoWheelEvent,
 } from "./events";
 import { Key, PointerType } from "./types";
 
-export function pointerEventToECS(event: PointerEvent): LatticePointerEvent {
-  const data = new LatticePointerEvent();
+export function pointerEventToECS(event: PointerEvent): ReddoPointerEvent {
+  const data = new ReddoPointerEvent();
 
   data.altKey = event.altKey;
   data.button = event.button;
@@ -48,7 +48,7 @@ export type PointerEventType =
 
 export function pointerEventFromECS(
   type: PointerEventType,
-  event: LatticePointerEvent
+  event: ReddoPointerEvent
 ): PointerEvent {
   return new PointerEvent(type, {
     altKey: event.altKey,
@@ -74,8 +74,8 @@ export function pointerEventFromECS(
   });
 }
 
-export function mouseEventToECS(event: MouseEvent): LatticeMouseEvent {
-  const data = new LatticeMouseEvent();
+export function mouseEventToECS(event: MouseEvent): ReddoMouseEvent {
+  const data = new ReddoMouseEvent();
 
   data.altKey = event.altKey;
   data.button = event.button;
@@ -97,7 +97,7 @@ export type MouseEventType = "click" | "contextmenu" | "dblclick";
 
 export function mouseEventFromECS(
   type: MouseEventType,
-  event: LatticeMouseEvent
+  event: ReddoMouseEvent
 ): MouseEvent {
   return new MouseEvent(type, {
     altKey: event.altKey,
@@ -115,8 +115,8 @@ export function mouseEventFromECS(
   });
 }
 
-export function wheelEventToECS(event: WheelEvent): LatticeWheelEvent {
-  const data = new LatticeWheelEvent();
+export function wheelEventToECS(event: WheelEvent): ReddoWheelEvent {
+  const data = new ReddoWheelEvent();
 
   data.deltaMode = event.deltaMode;
   data.deltaX = event.deltaX;
@@ -130,7 +130,7 @@ export type WheelEventType = "wheel";
 
 export function wheelEventFromECS(
   type: WheelEventType,
-  event: LatticeWheelEvent
+  event: ReddoWheelEvent
 ): WheelEvent {
   return new WheelEvent(type, {
     deltaMode: event.deltaMode,
@@ -140,8 +140,8 @@ export function wheelEventFromECS(
   });
 }
 
-export function keyboardEventToECS(event: KeyboardEvent): LatticeKeyboardEvent {
-  const data = new LatticeKeyboardEvent();
+export function keyboardEventToECS(event: KeyboardEvent): ReddoKeyboardEvent {
+  const data = new ReddoKeyboardEvent();
 
   data.altKey = event.altKey;
   data.ctrlKey = event.ctrlKey;
@@ -157,7 +157,7 @@ export type KeyEventType = "keydown" | "keyup";
 
 export function keyboardEventFromECS(
   type: KeyEventType,
-  event: LatticeKeyboardEvent
+  event: ReddoKeyboardEvent
 ): KeyboardEvent {
   return new KeyboardEvent(type, {
     altKey: event.altKey,

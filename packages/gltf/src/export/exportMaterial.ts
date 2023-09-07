@@ -1,10 +1,6 @@
 import { GLTF, TextureInfo as GltfTextureInfo } from "@gltf-transform/core";
 import { KHRTextureTransform } from "@gltf-transform/extensions";
-import {
-  MaterialAlphaMode,
-  StandardMaterial,
-  TextureInfo,
-} from "@lattice-engine/scene";
+import { MaterialAlphaMode, StandardMaterial, TextureInfo } from "@reddo/scene";
 
 import { ExportContext } from "./context";
 

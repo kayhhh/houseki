@@ -1,6 +1,6 @@
-import { Warehouse } from "@lattice-engine/core";
-import { BoxCollider, StaticBody } from "@lattice-engine/physics";
-import { BasicMaterial, Mesh } from "@lattice-engine/scene";
+import { Warehouse } from "@reddo/core";
+import { BoxCollider, StaticBody } from "@reddo/physics";
+import { BasicMaterial, Mesh } from "@reddo/scene";
 import { Commands, Entity, Mut, Query, Res, Without } from "thyseus";
 
 import { Portal, PortalMaterial } from "../components";

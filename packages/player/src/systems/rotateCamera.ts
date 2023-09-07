@@ -1,4 +1,4 @@
-import { InputStruct, PointerMoveEvent } from "@lattice-engine/input";
+import { InputStruct, PointerMoveEvent } from "@reddo/input";
 import { Euler, Quaternion } from "three";
 import { EventReader, Mut, Query, Res } from "thyseus";
 

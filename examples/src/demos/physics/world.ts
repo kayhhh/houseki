@@ -1,6 +1,6 @@
-import { Engine, LatticeSchedules } from "lattice-engine/core";
-import { orbitPlugin } from "lattice-engine/orbit";
-import { physicsPlugin } from "lattice-engine/physics";
+import { Engine, ReddoSchedules } from "reddo/core";
+import { orbitPlugin } from "reddo/orbit";
+import { physicsPlugin } from "reddo/physics";
 import { World } from "thyseus";
 
 import { demoPlugin } from "../../utils/demoPlugin";
@@ -13,6 +13,6 @@ export async function createWorld() {
     .addPlugin(demoPlugin)
     .addPlugin(orbitPlugin)
     .addPlugin(physicsPlugin)
-    .addSystemsToSchedule(LatticeSchedules.Startup, initScene)
+    .addSystemsToSchedule(ReddoSchedules.Startup, initScene)
     .build();
 }

@@ -1,3 +1,3 @@
-# @lattice-engine/core
+# @reddo/core
 
-The core of the Lattice Engine.
+The core of the Reddo Engine.

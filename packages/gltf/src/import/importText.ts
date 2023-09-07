@@ -1,5 +1,5 @@
 import { Node } from "@gltf-transform/core";
-import { AnchorX, AnchorY, Text as TextComp } from "@lattice-engine/text";
+import { AnchorX, AnchorY, Text as TextComp } from "@reddo/text";
 import { Commands } from "thyseus";
 
 import { Text } from "../extensions/MOZ_text/Text";

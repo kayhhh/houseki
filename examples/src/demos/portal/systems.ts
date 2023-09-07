@@ -1,6 +1,6 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
-import { PhysicsConfig } from "lattice-engine/physics";
-import { Portal, PortalRaycast, PortalTarget } from "lattice-engine/portal";
+import { CoreStore, Warehouse } from "reddo/core";
+import { PhysicsConfig } from "reddo/physics";
+import { Portal, PortalRaycast, PortalTarget } from "reddo/portal";
 import {
   GlobalTransform,
   Mesh,
@@ -8,7 +8,7 @@ import {
   SceneStruct,
   StandardMaterial,
   Transform,
-} from "lattice-engine/scene";
+} from "reddo/scene";
 import { Quaternion, Vector3 } from "three";
 import { Commands, Mut, Res } from "thyseus";
 

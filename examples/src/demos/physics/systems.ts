@@ -1,10 +1,10 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
+import { CoreStore, Warehouse } from "reddo/core";
 import {
   DynamicBody,
   PhysicsConfig,
   SphereCollider,
   TargetTransform,
-} from "lattice-engine/physics";
+} from "reddo/physics";
 import {
   GlobalTransform,
   Mesh,
@@ -12,7 +12,7 @@ import {
   SceneStruct,
   StandardMaterial,
   Transform,
-} from "lattice-engine/scene";
+} from "reddo/scene";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

@@ -5,7 +5,7 @@ import {
   Parent,
   ShadowMap,
   Transform,
-} from "lattice-engine/scene";
+} from "reddo/scene";
 import { Commands } from "thyseus";
 
 export function createLights(

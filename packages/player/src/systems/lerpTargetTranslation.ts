@@ -1,5 +1,5 @@
-import { Time } from "@lattice-engine/core";
-import { Transform } from "@lattice-engine/scene";
+import { Time } from "@reddo/core";
+import { Transform } from "@reddo/scene";
 import { lerp } from "three/src/math/MathUtils";
 import { Mut, Query, Res } from "thyseus";
 

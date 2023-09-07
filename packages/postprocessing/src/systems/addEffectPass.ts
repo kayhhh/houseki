@@ -1,5 +1,5 @@
-import { RenderStore } from "@lattice-engine/render";
-import { SceneStruct } from "@lattice-engine/scene";
+import { RenderStore } from "@reddo/render";
+import { SceneStruct } from "@reddo/scene";
 import { EffectComposer, EffectPass } from "postprocessing";
 import { Res, SystemRes } from "thyseus";
 

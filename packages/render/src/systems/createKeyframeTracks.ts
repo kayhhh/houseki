@@ -2,7 +2,7 @@ import {
   KeyframeInterpolation,
   KeyframePath,
   KeyframeTrack,
-} from "@lattice-engine/scene";
+} from "@reddo/scene";
 import {
   InterpolateDiscrete,
   InterpolateLinear,

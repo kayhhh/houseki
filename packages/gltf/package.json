@@ -1,9 +1,9 @@
 {
-  "name": "@lattice-engine/gltf",
+  "name": "@reddo/gltf",
   "version": "6.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/lattice",
+    "url": "https://github.com/unavi-xyz/reddo",
     "directory": "packages/gltf"
   },
   "license": "GPL-3.0-or-later",
@@ -24,10 +24,10 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/physics": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
-    "@lattice-engine/text": "workspace:^",
+    "@reddo/core": "workspace:^",
+    "@reddo/physics": "workspace:^",
+    "@reddo/scene": "workspace:^",
+    "@reddo/text": "workspace:^",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "thyseus": "0.14.0",
     "typescript": "~5.2.2",
@@ -35,10 +35,10 @@
     "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/physics": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
-    "@lattice-engine/text": "workspace:^",
+    "@reddo/core": "workspace:^",
+    "@reddo/physics": "workspace:^",
+    "@reddo/scene": "workspace:^",
+    "@reddo/text": "workspace:^",
     "thyseus": "*"
   },
   "publishConfig": {

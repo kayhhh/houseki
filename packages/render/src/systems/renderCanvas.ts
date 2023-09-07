@@ -1,5 +1,5 @@
-import { CoreStore } from "@lattice-engine/core";
-import { SceneStruct } from "@lattice-engine/scene";
+import { CoreStore } from "@reddo/core";
+import { SceneStruct } from "@reddo/scene";
 import {
   EffectComposer,
   EffectPass,

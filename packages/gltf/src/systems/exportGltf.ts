@@ -1,6 +1,6 @@
 import { JSONDocument, WebIO } from "@gltf-transform/core";
 import { dedup, prune } from "@gltf-transform/functions";
-import { Asset, Warehouse } from "@lattice-engine/core";
+import { Asset, Warehouse } from "@reddo/core";
 import {
   BoxCollider,
   CapsuleCollider,
@@ -11,7 +11,7 @@ import {
   MeshCollider,
   SphereCollider,
   StaticBody,
-} from "@lattice-engine/physics";
+} from "@reddo/physics";
 import {
   Geometry,
   Image,
@@ -21,8 +21,8 @@ import {
   Scene,
   StandardMaterial,
   Transform,
-} from "@lattice-engine/scene";
-import { Text } from "@lattice-engine/text";
+} from "@reddo/scene";
+import { Text } from "@reddo/text";
 import {
   Entity,
   EventReader,

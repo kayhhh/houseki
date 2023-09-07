@@ -1,5 +1,5 @@
-import { TargetRotation } from "@lattice-engine/player";
-import { Transform } from "@lattice-engine/scene";
+import { TargetRotation } from "@reddo/player";
+import { Transform } from "@reddo/scene";
 import { Mut, Query } from "thyseus";
 
 import { OriginalRotation, OriginalTransform } from "../components";

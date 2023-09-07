@@ -1,4 +1,4 @@
-import { InputStruct, Key } from "@lattice-engine/input";
+import { InputStruct, Key } from "@reddo/input";
 
 export type Input = {
   x: number;

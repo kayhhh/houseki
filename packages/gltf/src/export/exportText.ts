@@ -1,4 +1,4 @@
-import { AnchorX, AnchorY, Text } from "@lattice-engine/text";
+import { AnchorX, AnchorY, Text } from "@reddo/text";
 
 import { MOZText } from "../extensions/MOZ_text/MOZText";
 import { ExportContext } from "./context";

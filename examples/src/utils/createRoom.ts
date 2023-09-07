@@ -1,6 +1,6 @@
-import { Warehouse } from "lattice-engine/core";
-import { BoxCollider, StaticBody } from "lattice-engine/physics";
-import { GlobalTransform, Mesh, Parent, Transform } from "lattice-engine/scene";
+import { Warehouse } from "reddo/core";
+import { BoxCollider, StaticBody } from "reddo/physics";
+import { GlobalTransform, Mesh, Parent, Transform } from "reddo/scene";
 import { Commands } from "thyseus";
 
 import { createBoxGeometry } from "./geometry";

@@ -3,9 +3,9 @@ import {
   PointerDownEvent,
   PointerMoveEvent,
   PointerUpEvent,
-} from "@lattice-engine/input";
-import { RenderStore } from "@lattice-engine/render";
-import { Scene, SceneStruct } from "@lattice-engine/scene";
+} from "@reddo/input";
+import { RenderStore } from "@reddo/render";
+import { Scene, SceneStruct } from "@reddo/scene";
 import { Object3D, Raycaster, Vector2 } from "three";
 import { Entity, EventReader, Mut, Query, Res, SystemRes } from "thyseus";
 

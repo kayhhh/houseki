@@ -1,4 +1,4 @@
-import { LatticeSchedules } from "@lattice-engine/core";
+import { ReddoSchedules } from "@reddo/core";
 import { run, WorldBuilder } from "thyseus";
 
 import { animatePlayer } from "./systems/animatePlayer";
@@ -30,5 +30,5 @@ export function playerPlugin(builder: WorldBuilder) {
         animatePlayer
       )
     )
-    .addSystemsToSchedule(LatticeSchedules.FixedUpdate, moveBody, setAirTime);
+    .addSystemsToSchedule(ReddoSchedules.FixedUpdate, moveBody, setAirTime);
 }

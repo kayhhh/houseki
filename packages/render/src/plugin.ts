@@ -1,4 +1,4 @@
-import { LatticeSchedules } from "@lattice-engine/core";
+import { ReddoSchedules } from "@reddo/core";
 import { run, WorldBuilder } from "thyseus";
 
 import { createAmbientLights } from "./systems/createAmbientLights";
@@ -50,7 +50,7 @@ export function renderPlugin(builder: WorldBuilder) {
       )
     )
     .addSystemsToSchedule(
-      LatticeSchedules.Render,
+      ReddoSchedules.Render,
       ...run.chain(renderClearPass, renderCanvas)
     );
 }

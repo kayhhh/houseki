@@ -1,6 +1,6 @@
-import { Asset, Warehouse } from "lattice-engine/core";
-import { BoxCollider, StaticBody } from "lattice-engine/physics";
-import { WEBGL_CONSTANTS } from "lattice-engine/render";
+import { Asset, Warehouse } from "reddo/core";
+import { BoxCollider, StaticBody } from "reddo/physics";
+import { WEBGL_CONSTANTS } from "reddo/render";
 import {
   GlobalTransform,
   Image,
@@ -8,7 +8,7 @@ import {
   Parent,
   StandardMaterial,
   Transform,
-} from "lattice-engine/scene";
+} from "reddo/scene";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createBoxGeometry } from "./geometry";

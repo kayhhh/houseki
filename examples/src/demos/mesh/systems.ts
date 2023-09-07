@@ -1,17 +1,13 @@
-import { CoreStore } from "lattice-engine/core";
-import { Gltf } from "lattice-engine/gltf";
-import {
-  MeshCollider,
-  PhysicsConfig,
-  StaticBody,
-} from "lattice-engine/physics";
+import { CoreStore } from "reddo/core";
+import { Gltf } from "reddo/gltf";
+import { MeshCollider, PhysicsConfig, StaticBody } from "reddo/physics";
 import {
   GlobalTransform,
   Mesh,
   Parent,
   SceneStruct,
   Transform,
-} from "lattice-engine/scene";
+} from "reddo/scene";
 import { Commands, Entity, Mut, Query, Res, With, Without } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

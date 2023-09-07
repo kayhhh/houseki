@@ -9,13 +9,8 @@ import {
   MeshCollider,
   SphereCollider,
   TargetTransform,
-} from "@lattice-engine/physics";
-import {
-  GlobalTransform,
-  Name,
-  Parent,
-  Transform,
-} from "@lattice-engine/scene";
+} from "@reddo/physics";
+import { GlobalTransform, Name, Parent, Transform } from "@reddo/scene";
 
 type EntityID = bigint;
 

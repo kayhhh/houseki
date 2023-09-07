@@ -1,19 +1,19 @@
-# lattice-engine
+# reddo
 
-A single package that exports all other lattice packages, for convenience.
+A single package that exports all other reddo packages, for convenience.
 
 ## Installation
 
 ```bash
-pnpm install lattice-engine
+pnpm install reddo
 ```
 
 ## Usage
 
-Import the package you want to use from the `lattice-engine` package.
+Import the package you want to use from the `reddo` package.
 
 For example:
 
 ```ts
-import { ... } from "lattice-engine/core";
+import { ... } from "reddo/core";
 ```

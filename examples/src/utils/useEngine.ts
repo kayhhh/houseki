@@ -1,6 +1,6 @@
-import { Engine } from "lattice-engine/core";
 import { buttonGroup, useControls } from "leva";
 import { useCallback, useEffect, useState } from "react";
+import { Engine } from "reddo/core";
 import { World } from "thyseus";
 
 import { cleanupMaterials } from "./createBox";

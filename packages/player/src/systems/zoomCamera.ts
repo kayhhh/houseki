@@ -1,5 +1,5 @@
-import { Time } from "@lattice-engine/core";
-import { OnWheelEvent } from "@lattice-engine/input";
+import { Time } from "@reddo/core";
+import { OnWheelEvent } from "@reddo/input";
 import { lerp } from "three/src/math/MathUtils";
 import { EventReader, Mut, Query, Res } from "thyseus";
 

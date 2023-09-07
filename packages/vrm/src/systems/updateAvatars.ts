@@ -1,5 +1,5 @@
-import { Time } from "@lattice-engine/core";
-import { RenderStore } from "@lattice-engine/render";
+import { Time } from "@reddo/core";
+import { RenderStore } from "@reddo/render";
 import { Entity, Query, Res } from "thyseus";
 
 import { Vrm } from "../components";

@@ -1,1 +1,1 @@
-export * from "@lattice-engine/scene";
+export * from "@reddo/scene";

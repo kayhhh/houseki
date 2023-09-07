@@ -1,6 +1,6 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
-import { CascadingShadowMaps } from "lattice-engine/csm";
-import { SceneStruct } from "lattice-engine/scene";
+import { CoreStore, Warehouse } from "reddo/core";
+import { CascadingShadowMaps } from "reddo/csm";
+import { SceneStruct } from "reddo/scene";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createBox } from "../../utils/createBox";

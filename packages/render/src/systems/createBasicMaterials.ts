@@ -1,4 +1,4 @@
-import { BasicMaterial } from "@lattice-engine/scene";
+import { BasicMaterial } from "@reddo/scene";
 import { DoubleSide, FrontSide, MeshBasicMaterial } from "three";
 import { Entity, Query, Res } from "thyseus";
 

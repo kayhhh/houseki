@@ -1,5 +1,5 @@
-import { RenderStore } from "@lattice-engine/render";
-import { SceneStruct } from "@lattice-engine/scene";
+import { RenderStore } from "@reddo/render";
+import { SceneStruct } from "@reddo/scene";
 import { N8AOPostPass } from "n8ao";
 import { Mut, Query, Res } from "thyseus";
 

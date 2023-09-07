@@ -1,7 +1,7 @@
-import { Time } from "@lattice-engine/core";
-import { Velocity } from "@lattice-engine/physics";
-import { Parent, Transform } from "@lattice-engine/scene";
-import { VrmAnimation } from "@lattice-engine/vrm";
+import { Time } from "@reddo/core";
+import { Velocity } from "@reddo/physics";
+import { Parent, Transform } from "@reddo/scene";
+import { VrmAnimation } from "@reddo/vrm";
 import { Entity, Mut, Query, Res } from "thyseus";
 
 import { PlayerAvatar, PlayerBody } from "../components";

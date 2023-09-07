@@ -8,7 +8,7 @@ export default function About() {
       <img src={Phos} alt="Phos" className="phos" />
 
       <div className="content">
-        <h1>Lattice Engine</h1>
+        <h1>Reddo Engine</h1>
 
         <p>
           A lightweight, modular, and extendable 3D game engine built for the

@@ -1,9 +1,9 @@
 {
-  "name": "@lattice-engine/utils",
+  "name": "@reddo/utils",
   "version": "6.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/lattice",
+    "url": "https://github.com/unavi-xyz/reddo",
     "directory": "packages/utils"
   },
   "license": "GPL-3.0-or-later",
@@ -18,10 +18,10 @@
     "dev": "vite build --watch"
   },
   "devDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/input": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
+    "@reddo/core": "workspace:^",
+    "@reddo/input": "workspace:^",
+    "@reddo/render": "workspace:^",
+    "@reddo/scene": "workspace:^",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "thyseus": "0.14.0",
     "typescript": "~5.2.2",
@@ -29,10 +29,10 @@
     "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/input": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
+    "@reddo/core": "workspace:^",
+    "@reddo/input": "workspace:^",
+    "@reddo/render": "workspace:^",
+    "@reddo/scene": "workspace:^",
     "thyseus": "*"
   },
   "publishConfig": {

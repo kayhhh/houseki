@@ -1,6 +1,6 @@
-import { Time } from "@lattice-engine/core";
-import { TargetTransform, Velocity } from "@lattice-engine/physics";
-import { Quat, Transform } from "@lattice-engine/scene";
+import { Time } from "@reddo/core";
+import { TargetTransform, Velocity } from "@reddo/physics";
+import { Quat, Transform } from "@reddo/scene";
 import { Quaternion, Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
