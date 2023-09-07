@@ -1,5 +1,5 @@
-import { Time } from "@lattice-engine/core";
-import { OnWheelEvent } from "@lattice-engine/input";
+import { Time } from "@houseki-engine/core";
+import { OnWheelEvent } from "@houseki-engine/input";
 import { lerp } from "three/src/math/MathUtils";
 import { EventReader, Mut, Query, Res } from "thyseus";
 

@@ -1,4 +1,4 @@
-import { Loading } from "@lattice-engine/core";
+import { Loading } from "@houseki-engine/core";
 import { VRM, VRMLoaderPlugin, VRMUtils } from "@pixiv/three-vrm";
 import { Mesh } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";

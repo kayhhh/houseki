@@ -1,4 +1,4 @@
-import { Engine } from "lattice-engine/core";
+import { Engine } from "houseki/core";
 import { buttonGroup, useControls } from "leva";
 import { useCallback, useEffect, useState } from "react";
 import { World } from "thyseus";

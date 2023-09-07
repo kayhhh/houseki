@@ -1,4 +1,4 @@
-import { Geometry, Mesh, MeshMode } from "@lattice-engine/scene";
+import { Geometry, Mesh, MeshMode } from "@houseki-engine/scene";
 import {
   BufferGeometry,
   Line,

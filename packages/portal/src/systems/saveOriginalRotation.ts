@@ -1,5 +1,5 @@
-import { TargetRotation } from "@lattice-engine/player";
-import { Transform } from "@lattice-engine/scene";
+import { TargetRotation } from "@houseki-engine/player";
+import { Transform } from "@houseki-engine/scene";
 import { Mut, Query } from "thyseus";
 
 import { OriginalRotation, OriginalTransform } from "../components";

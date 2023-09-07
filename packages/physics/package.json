@@ -1,9 +1,9 @@
 {
-  "name": "@lattice-engine/physics",
+  "name": "@houseki-engine/physics",
   "version": "5.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/lattice",
+    "url": "https://github.com/unavi-xyz/houseki",
     "directory": "packages/physics"
   },
   "license": "GPL-3.0-or-later",
@@ -18,22 +18,22 @@
     "dev": "vite build --watch"
   },
   "dependencies": {
-    "@dimforge/rapier3d": "^0.11.2",
     "gl-matrix": "^4.0.0-beta.1"
   },
   "devDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
+    "@dimforge/rapier3d": "^0.11.2",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "thyseus": "0.14.0",
     "typescript": "~5.2.2",
     "vite": "^4.4.7",
-    "vite-plugin-thyseus-ts": "workspace:^",
-    "vite-plugin-wasm": "^3.2.2"
+    "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
+    "@dimforge/rapier3d": "*",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "thyseus": "*"
   },
   "publishConfig": {

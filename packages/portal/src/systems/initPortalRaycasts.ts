@@ -1,4 +1,4 @@
-import { Raycast } from "@lattice-engine/physics";
+import { Raycast } from "@houseki-engine/physics";
 import {
   Commands,
   Entity,

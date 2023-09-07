@@ -1,4 +1,4 @@
-import { LatticeSchedules } from "@lattice-engine/core";
+import { HousekiSchedules } from "@houseki-engine/core";
 import { run, WorldBuilder } from "thyseus";
 
 import { addEffectPass } from "./systems/addEffectPass";
@@ -8,7 +8,7 @@ import { createOutlineEffects } from "./systems/createOutlineEffects";
 
 export function postprocessingPlugin(builder: WorldBuilder) {
   builder.addSystemsToSchedule(
-    LatticeSchedules.PostUpdate,
+    HousekiSchedules.PostUpdate,
     ...run.chain(
       [createOutlineEffects, createN8aoPass],
       [addEffectPass, addN8aoPass]

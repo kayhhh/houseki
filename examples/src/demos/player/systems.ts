@@ -1,18 +1,18 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
+import { CoreStore, Warehouse } from "houseki/core";
 import {
   DynamicBody,
   PhysicsConfig,
   SphereCollider,
   TargetTransform,
-} from "lattice-engine/physics";
+} from "houseki/physics";
 import {
   GlobalTransform,
   Mesh,
   Parent,
   SceneStruct,
   Transform,
-} from "lattice-engine/scene";
-import { Text } from "lattice-engine/text";
+} from "houseki/scene";
+import { Text } from "houseki/text";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createBox } from "../../utils/createBox";

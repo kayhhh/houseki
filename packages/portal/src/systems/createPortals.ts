@@ -1,6 +1,6 @@
-import { Warehouse } from "@lattice-engine/core";
-import { BoxCollider, StaticBody } from "@lattice-engine/physics";
-import { BasicMaterial, Mesh } from "@lattice-engine/scene";
+import { Warehouse } from "@houseki-engine/core";
+import { BoxCollider, StaticBody } from "@houseki-engine/physics";
+import { BasicMaterial, Mesh } from "@houseki-engine/scene";
 import { Commands, Entity, Mut, Query, Res, Without } from "thyseus";
 
 import { Portal, PortalMaterial } from "../components";

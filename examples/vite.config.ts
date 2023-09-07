@@ -1,6 +1,7 @@
 import { thyseus } from "@thyseus/rollup-plugin-thyseus";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import wasm from "vite-plugin-wasm";
 
 export default defineConfig({
   build: {
@@ -9,6 +10,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
+    wasm(),
     thyseus(),
     // Cross Origin Isolation required for multi-threading
     {

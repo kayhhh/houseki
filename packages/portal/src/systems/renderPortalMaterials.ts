@@ -1,6 +1,6 @@
-import { Time } from "@lattice-engine/core";
-import { RenderStore } from "@lattice-engine/render";
-import { SceneStruct } from "@lattice-engine/scene";
+import { Time } from "@houseki-engine/core";
+import { RenderStore } from "@houseki-engine/render";
+import { SceneStruct } from "@houseki-engine/scene";
 import { ClearPass } from "postprocessing";
 import {
   AlwaysDepth,

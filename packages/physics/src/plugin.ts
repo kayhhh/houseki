@@ -1,5 +1,5 @@
-import { LatticeSchedules } from "@lattice-engine/core";
-import { updateGlobalTransforms } from "@lattice-engine/scene";
+import { HousekiSchedules } from "@houseki-engine/core";
+import { updateGlobalTransforms } from "@houseki-engine/scene";
 import { run, WorldBuilder } from "thyseus";
 
 import { applyTargetTransforms } from "./systems/applyTargetTransforms";
@@ -25,7 +25,7 @@ import { stepWorld } from "./systems/stepWorld";
 export function physicsPlugin(builder: WorldBuilder) {
   builder
     .addSystemsToSchedule(
-      LatticeSchedules.FixedUpdate,
+      HousekiSchedules.FixedUpdate,
       ...run.chain(
         [createDynamicBodies, createKinematicBodies, createStaticBodies],
         [
@@ -44,7 +44,7 @@ export function physicsPlugin(builder: WorldBuilder) {
       )
     )
     .addSystemsToSchedule(
-      LatticeSchedules.PreUpdate,
+      HousekiSchedules.PreUpdate,
       run(applyTargetTransforms).before(updateGlobalTransforms)
     );
 }

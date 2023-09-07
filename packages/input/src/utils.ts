@@ -1,13 +1,13 @@
 import {
-  KeyboardEvent as LatticeKeyboardEvent,
-  MouseEvent as LatticeMouseEvent,
-  PointerEvent as LatticePointerEvent,
-  WheelEvent as LatticeWheelEvent,
+  KeyboardEvent as HousekiKeyboardEvent,
+  MouseEvent as HousekiMouseEvent,
+  PointerEvent as HousekiPointerEvent,
+  WheelEvent as HousekiWheelEvent,
 } from "./events";
 import { Key, PointerType } from "./types";
 
-export function pointerEventToECS(event: PointerEvent): LatticePointerEvent {
-  const data = new LatticePointerEvent();
+export function pointerEventToECS(event: PointerEvent): HousekiPointerEvent {
+  const data = new HousekiPointerEvent();
 
   data.altKey = event.altKey;
   data.button = event.button;
@@ -48,7 +48,7 @@ export type PointerEventType =
 
 export function pointerEventFromECS(
   type: PointerEventType,
-  event: LatticePointerEvent
+  event: HousekiPointerEvent
 ): PointerEvent {
   return new PointerEvent(type, {
     altKey: event.altKey,
@@ -74,8 +74,8 @@ export function pointerEventFromECS(
   });
 }
 
-export function mouseEventToECS(event: MouseEvent): LatticeMouseEvent {
-  const data = new LatticeMouseEvent();
+export function mouseEventToECS(event: MouseEvent): HousekiMouseEvent {
+  const data = new HousekiMouseEvent();
 
   data.altKey = event.altKey;
   data.button = event.button;
@@ -97,7 +97,7 @@ export type MouseEventType = "click" | "contextmenu" | "dblclick";
 
 export function mouseEventFromECS(
   type: MouseEventType,
-  event: LatticeMouseEvent
+  event: HousekiMouseEvent
 ): MouseEvent {
   return new MouseEvent(type, {
     altKey: event.altKey,
@@ -115,8 +115,8 @@ export function mouseEventFromECS(
   });
 }
 
-export function wheelEventToECS(event: WheelEvent): LatticeWheelEvent {
-  const data = new LatticeWheelEvent();
+export function wheelEventToECS(event: WheelEvent): HousekiWheelEvent {
+  const data = new HousekiWheelEvent();
 
   data.deltaMode = event.deltaMode;
   data.deltaX = event.deltaX;
@@ -130,7 +130,7 @@ export type WheelEventType = "wheel";
 
 export function wheelEventFromECS(
   type: WheelEventType,
-  event: LatticeWheelEvent
+  event: HousekiWheelEvent
 ): WheelEvent {
   return new WheelEvent(type, {
     deltaMode: event.deltaMode,
@@ -140,8 +140,8 @@ export function wheelEventFromECS(
   });
 }
 
-export function keyboardEventToECS(event: KeyboardEvent): LatticeKeyboardEvent {
-  const data = new LatticeKeyboardEvent();
+export function keyboardEventToECS(event: KeyboardEvent): HousekiKeyboardEvent {
+  const data = new HousekiKeyboardEvent();
 
   data.altKey = event.altKey;
   data.ctrlKey = event.ctrlKey;
@@ -157,7 +157,7 @@ export type KeyEventType = "keydown" | "keyup";
 
 export function keyboardEventFromECS(
   type: KeyEventType,
-  event: LatticeKeyboardEvent
+  event: HousekiKeyboardEvent
 ): KeyboardEvent {
   return new KeyboardEvent(type, {
     altKey: event.altKey,

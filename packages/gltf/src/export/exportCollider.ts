@@ -5,7 +5,7 @@ import {
   HullCollider,
   MeshCollider,
   SphereCollider,
-} from "@lattice-engine/physics";
+} from "@houseki-engine/physics";
 
 import { OMIPhysicsShape } from "../extensions/OMI_physics_shape/OMIPhysicsShape";
 import { ExportContext } from "./context";

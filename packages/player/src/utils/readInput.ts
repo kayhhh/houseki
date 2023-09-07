@@ -1,4 +1,4 @@
-import { InputStruct, Key } from "@lattice-engine/input";
+import { InputStruct, Key } from "@houseki-engine/input";
 
 export type Input = {
   x: number;

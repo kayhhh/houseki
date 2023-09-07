@@ -1,11 +1,11 @@
-import { CoreStore } from "lattice-engine/core";
+import { CoreStore } from "houseki/core";
 import {
   GlobalTransform,
   Parent,
   SceneStruct,
   Transform,
-} from "lattice-engine/scene";
-import { Text } from "lattice-engine/text";
+} from "houseki/scene";
+import { Text } from "houseki/text";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

@@ -1,4 +1,4 @@
-import { AnimationMixer } from "@lattice-engine/scene";
+import { AnimationMixer } from "@houseki-engine/scene";
 import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";

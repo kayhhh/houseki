@@ -1,4 +1,4 @@
-import { TransformMode } from "lattice-engine/transform";
+import { TransformMode } from "houseki/transform";
 import { useControls } from "leva";
 import { useEffect, useState } from "react";
 import { World } from "thyseus";

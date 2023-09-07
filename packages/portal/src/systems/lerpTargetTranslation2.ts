@@ -1,6 +1,6 @@
-import { Time } from "@lattice-engine/core";
-import { TargetTranslation } from "@lattice-engine/player";
-import { Transform } from "@lattice-engine/scene";
+import { Time } from "@houseki-engine/core";
+import { TargetTranslation } from "@houseki-engine/player";
+import { Transform } from "@houseki-engine/scene";
 import { lerp } from "three/src/math/MathUtils";
 import { Mut, Query, Res } from "thyseus";
 

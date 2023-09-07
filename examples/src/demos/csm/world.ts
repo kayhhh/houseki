@@ -1,6 +1,6 @@
-import { Engine, LatticeSchedules } from "lattice-engine/core";
-import { csmPlugin } from "lattice-engine/csm";
-import { orbitPlugin } from "lattice-engine/orbit";
+import { Engine, HousekiSchedules } from "houseki/core";
+import { csmPlugin } from "houseki/csm";
+import { orbitPlugin } from "houseki/orbit";
 import { World } from "thyseus";
 
 import { demoPlugin } from "../../utils/demoPlugin";
@@ -13,6 +13,6 @@ export async function createWorld() {
     .addPlugin(demoPlugin)
     .addPlugin(orbitPlugin)
     .addPlugin(csmPlugin)
-    .addSystemsToSchedule(LatticeSchedules.Startup, initScene)
+    .addSystemsToSchedule(HousekiSchedules.Startup, initScene)
     .build();
 }

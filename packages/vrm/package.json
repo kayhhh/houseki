@@ -1,9 +1,9 @@
 {
-  "name": "@lattice-engine/vrm",
+  "name": "@houseki-engine/vrm",
   "version": "5.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/lattice",
+    "url": "https://github.com/unavi-xyz/houseki",
     "directory": "packages/vrm"
   },
   "license": "GPL-3.0-or-later",
@@ -21,9 +21,9 @@
     "@pixiv/three-vrm": "^2.0.3"
   },
   "devDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/render": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "@types/three": "~0.154.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "three": "~0.154.0",
@@ -33,9 +33,9 @@
     "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/render": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "three": "*",
     "thyseus": "*"
   },

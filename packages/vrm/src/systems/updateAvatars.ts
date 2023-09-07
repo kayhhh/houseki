@@ -1,5 +1,5 @@
-import { Time } from "@lattice-engine/core";
-import { RenderStore } from "@lattice-engine/render";
+import { Time } from "@houseki-engine/core";
+import { RenderStore } from "@houseki-engine/render";
 import { Entity, Query, Res } from "thyseus";
 
 import { Vrm } from "../components";

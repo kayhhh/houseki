@@ -1,5 +1,5 @@
-import { gltfPlugin } from "lattice-engine/gltf";
-import { defaultPlugin } from "lattice-engine/utils";
+import { gltfPlugin } from "houseki/gltf";
+import { defaultPlugin } from "houseki/utils";
 import { WorldBuilder } from "thyseus";
 
 import { exportLoadingInfo } from "../components/loading/system";

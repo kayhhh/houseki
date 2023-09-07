@@ -1,5 +1,5 @@
 import { ColliderDesc } from "@dimforge/rapier3d";
-import { Parent } from "@lattice-engine/scene";
+import { Parent } from "@houseki-engine/scene";
 import { Entity, Query, Res, With } from "thyseus";
 
 import { CapsuleCollider } from "../../components";

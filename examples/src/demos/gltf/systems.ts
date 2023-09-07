@@ -1,7 +1,7 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
-import { Gltf } from "lattice-engine/gltf";
-import { N8AOPass } from "lattice-engine/postprocessing";
-import { SceneStruct } from "lattice-engine/scene";
+import { CoreStore, Warehouse } from "houseki/core";
+import { Gltf } from "houseki/gltf";
+import { N8AOPass } from "houseki/postprocessing";
+import { SceneStruct } from "houseki/scene";
 import { Commands, Mut, Query, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

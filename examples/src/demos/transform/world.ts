@@ -1,8 +1,8 @@
-import { Engine, LatticeSchedules } from "lattice-engine/core";
-import { orbitPlugin } from "lattice-engine/orbit";
-import { physicsPlugin } from "lattice-engine/physics";
-import { postprocessingPlugin } from "lattice-engine/postprocessing";
-import { getTransformPlugin } from "lattice-engine/transform";
+import { Engine, HousekiSchedules } from "houseki/core";
+import { orbitPlugin } from "houseki/orbit";
+import { physicsPlugin } from "houseki/physics";
+import { postprocessingPlugin } from "houseki/postprocessing";
+import { getTransformPlugin } from "houseki/transform";
 import { World } from "thyseus";
 
 import { demoPlugin } from "../../utils/demoPlugin";
@@ -17,7 +17,7 @@ export async function createWorld() {
     .addPlugin(orbitPlugin)
     .addPlugin(postprocessingPlugin)
     .addPlugin(getTransformPlugin({ orbitControls: true, physics: true }))
-    .addSystemsToSchedule(LatticeSchedules.Startup, initScene)
+    .addSystemsToSchedule(HousekiSchedules.Startup, initScene)
     .addSystems(setTransformMode)
     .build();
 }

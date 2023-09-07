@@ -1,6 +1,6 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
-import { PhysicsConfig } from "lattice-engine/physics";
-import { Portal, PortalRaycast, PortalTarget } from "lattice-engine/portal";
+import { CoreStore, Warehouse } from "houseki/core";
+import { PhysicsConfig } from "houseki/physics";
+import { Portal, PortalRaycast, PortalTarget } from "houseki/portal";
 import {
   GlobalTransform,
   Mesh,
@@ -8,7 +8,7 @@ import {
   SceneStruct,
   StandardMaterial,
   Transform,
-} from "lattice-engine/scene";
+} from "houseki/scene";
 import { Quaternion, Vector3 } from "three";
 import { Commands, Mut, Res } from "thyseus";
 

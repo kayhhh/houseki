@@ -1,10 +1,10 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
+import { CoreStore, Warehouse } from "houseki/core";
 import {
   DynamicBody,
   PhysicsConfig,
   SphereCollider,
   TargetTransform,
-} from "lattice-engine/physics";
+} from "houseki/physics";
 import {
   GlobalTransform,
   Mesh,
@@ -12,7 +12,7 @@ import {
   SceneStruct,
   StandardMaterial,
   Transform,
-} from "lattice-engine/scene";
+} from "houseki/scene";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

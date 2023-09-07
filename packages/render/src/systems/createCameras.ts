@@ -1,4 +1,4 @@
-import { Parent, PerspectiveCamera, Transform } from "@lattice-engine/scene";
+import { Parent, PerspectiveCamera, Transform } from "@houseki-engine/scene";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { Entity, Query, Res, With } from "thyseus";
 

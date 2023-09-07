@@ -1,4 +1,4 @@
-import { ShadowMap } from "@lattice-engine/scene";
+import { ShadowMap } from "@houseki-engine/scene";
 import { Entity, Query, Res } from "thyseus";
 
 import { RenderStore } from "../resources";

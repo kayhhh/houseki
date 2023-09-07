@@ -1,10 +1,10 @@
-import { LatticeSchedules } from "@lattice-engine/core";
+import { HousekiSchedules } from "@houseki-engine/core";
 import {
   lerpTargetTranslation,
   slerpCameraRotation,
-} from "@lattice-engine/player";
-import { renderCanvas, renderClearPass } from "@lattice-engine/render";
-import { updateGlobalTransforms } from "@lattice-engine/scene";
+} from "@houseki-engine/player";
+import { renderCanvas, renderClearPass } from "@houseki-engine/render";
+import { updateGlobalTransforms } from "@houseki-engine/scene";
 import { run, WorldBuilder } from "thyseus";
 
 import { createPortals } from "./systems/createPortals";
@@ -35,13 +35,13 @@ export function portalPlugin(builder: WorldBuilder) {
       run(slerpTargetRotation2).after(rotatePlayerCamera)
     )
     .addSystemsToSchedule(
-      LatticeSchedules.PreUpdate,
+      HousekiSchedules.PreUpdate,
       run(restoreOriginalTranslation).before(updateGlobalTransforms),
       run(restoreOriginalRotation).before(updateGlobalTransforms)
     )
-    .addSystemsToSchedule(LatticeSchedules.PostFixedUpdate, setPortalRaycasts)
+    .addSystemsToSchedule(HousekiSchedules.PostFixedUpdate, setPortalRaycasts)
     .addSystemsToSchedule(
-      LatticeSchedules.Render,
+      HousekiSchedules.Render,
       run(renderPortalMaterials).after(renderClearPass).before(renderCanvas)
     );
 }

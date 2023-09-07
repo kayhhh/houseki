@@ -1,11 +1,11 @@
-import { Raycast } from "@lattice-engine/physics";
+import { Raycast } from "@houseki-engine/physics";
 import {
   PlayerCamera,
   PlayerCameraView,
   TargetRotation,
-} from "@lattice-engine/player";
-import { RenderStore } from "@lattice-engine/render";
-import { Transform } from "@lattice-engine/scene";
+} from "@houseki-engine/player";
+import { RenderStore } from "@houseki-engine/render";
+import { Transform } from "@houseki-engine/scene";
 import { Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 

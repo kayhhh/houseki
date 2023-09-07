@@ -1,4 +1,4 @@
-import { DirectionalLight } from "@lattice-engine/scene";
+import { DirectionalLight } from "@houseki-engine/scene";
 import { DirectionalLight as ThreeDirectionalLight } from "three";
 import { Entity, Query, Res } from "thyseus";
 

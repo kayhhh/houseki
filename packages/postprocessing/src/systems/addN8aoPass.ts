@@ -1,4 +1,4 @@
-import { RenderStore } from "@lattice-engine/render";
+import { RenderStore } from "@houseki-engine/render";
 import { EffectComposer } from "postprocessing";
 import { Res, SystemRes } from "thyseus";
 

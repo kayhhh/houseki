@@ -1,4 +1,4 @@
-import { InputStruct } from "lattice-engine/input";
+import { InputStruct } from "houseki/input";
 import { useControls } from "leva";
 import { useEffect } from "react";
 import { Mut, Res } from "thyseus";

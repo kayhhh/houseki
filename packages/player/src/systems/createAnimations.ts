@@ -1,4 +1,4 @@
-import { VrmAnimation } from "@lattice-engine/vrm";
+import { VrmAnimation } from "@houseki-engine/vrm";
 import { Commands, Entity, Mut, Query } from "thyseus";
 
 import { PlayerAvatar } from "../components";

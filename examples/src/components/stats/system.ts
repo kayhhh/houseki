@@ -1,4 +1,4 @@
-import { RenderStats } from "lattice-engine/render";
+import { RenderStats } from "houseki/render";
 import { Res } from "thyseus";
 import { create } from "zustand";
 

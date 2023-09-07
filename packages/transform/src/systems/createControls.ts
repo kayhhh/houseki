@@ -1,5 +1,5 @@
-import { RenderStore } from "@lattice-engine/render";
-import { SceneStruct } from "@lattice-engine/scene";
+import { RenderStore } from "@houseki-engine/render";
+import { SceneStruct } from "@houseki-engine/scene";
 import { TransformControls as ThreeTransformControls } from "three/examples/jsm/controls/TransformControls";
 import { Entity, Query, Res } from "thyseus";
 

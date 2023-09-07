@@ -1,17 +1,17 @@
-import { CoreStore } from "lattice-engine/core";
-import { Gltf } from "lattice-engine/gltf";
+import { CoreStore } from "houseki/core";
+import { Gltf } from "houseki/gltf";
 import {
   MeshCollider,
   PhysicsConfig,
   StaticBody,
-} from "lattice-engine/physics";
+} from "houseki/physics";
 import {
   GlobalTransform,
   Mesh,
   Parent,
   SceneStruct,
   Transform,
-} from "lattice-engine/scene";
+} from "houseki/scene";
 import { Commands, Entity, Mut, Query, Res, With, Without } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

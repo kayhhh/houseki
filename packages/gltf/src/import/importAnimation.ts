@@ -4,7 +4,7 @@ import {
   KeyframeInterpolation,
   KeyframePath,
   KeyframeTrack,
-} from "@lattice-engine/scene";
+} from "@houseki-engine/scene";
 import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";

@@ -1,9 +1,9 @@
 {
-  "name": "@lattice-engine/player",
+  "name": "@houseki-engine/player",
   "version": "6.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/lattice",
+    "url": "https://github.com/unavi-xyz/houseki",
     "directory": "packages/player"
   },
   "license": "GPL-3.0-or-later",
@@ -18,12 +18,12 @@
     "dev": "vite build --watch"
   },
   "devDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/input": "workspace:^",
-    "@lattice-engine/physics": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
-    "@lattice-engine/vrm": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/input": "workspace:^",
+    "@houseki-engine/physics": "workspace:^",
+    "@houseki-engine/render": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
+    "@houseki-engine/vrm": "workspace:^",
     "@types/three": "~0.154.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "three": "~0.154.0",
@@ -33,12 +33,12 @@
     "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/input": "workspace:^",
-    "@lattice-engine/physics": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
-    "@lattice-engine/vrm": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/input": "workspace:^",
+    "@houseki-engine/physics": "workspace:^",
+    "@houseki-engine/render": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
+    "@houseki-engine/vrm": "workspace:^",
     "three": "*",
     "thyseus": "*"
   },

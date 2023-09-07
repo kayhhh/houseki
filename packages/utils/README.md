@@ -1,3 +1,3 @@
-# @lattice-engine/utils
+# @houseki-engine/utils
 
 Utility functions.

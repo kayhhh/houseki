@@ -1,4 +1,4 @@
-import { Resource, Vec2, Vec3, Vec4 } from "@lattice-engine/core";
+import { Resource, Vec2, Vec3, Vec4 } from "@houseki-engine/core";
 import {
   Entity,
   EntityCommands,

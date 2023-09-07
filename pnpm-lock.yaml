@@ -55,9 +55,12 @@ importers:
 
   examples:
     dependencies:
-      lattice-engine:
+      '@dimforge/rapier3d':
+        specifier: ^0.11.2
+        version: 0.11.2
+      houseki:
         specifier: workspace:^
-        version: link:../packages/lattice-engine
+        version: link:../packages/houseki
       leva:
         specifier: ^0.9.35
         version: 0.9.35(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
@@ -113,6 +116,9 @@ importers:
       vite:
         specifier: ^4.4.7
         version: 4.4.7
+      vite-plugin-wasm:
+        specifier: ^3.2.2
+        version: 3.2.2(vite@4.4.7)
 
   packages/core:
     devDependencies:
@@ -134,10 +140,10 @@ importers:
 
   packages/csm:
     devDependencies:
-      '@lattice-engine/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -177,16 +183,16 @@ importers:
         specifier: ^3.21.4
         version: 3.21.4
     devDependencies:
-      '@lattice-engine/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/physics':
+      '@houseki-engine/physics':
         specifier: workspace:^
         version: link:../physics
-      '@lattice-engine/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@lattice-engine/text':
+      '@houseki-engine/text':
         specifier: workspace:^
         version: link:../text
       rollup-plugin-peer-deps-external:
@@ -205,75 +211,57 @@ importers:
         specifier: workspace:^
         version: link:../vite-plugin-thyseus-ts
 
-  packages/input:
-    devDependencies:
-      '@lattice-engine/core':
-        specifier: workspace:^
-        version: link:../core
-      rollup-plugin-peer-deps-external:
-        specifier: ^2.2.4
-        version: 2.2.4(rollup@3.28.1)
-      thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
-      typescript:
-        specifier: ~5.2.2
-        version: 5.2.2
-      vite:
-        specifier: ^4.4.7
-        version: 4.4.7
-      vite-plugin-thyseus-ts:
-        specifier: workspace:^
-        version: link:../vite-plugin-thyseus-ts
-
-  packages/lattice-engine:
+  packages/houseki:
     dependencies:
-      '@lattice-engine/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/csm':
+      '@houseki-engine/csm':
         specifier: workspace:^
         version: link:../csm
-      '@lattice-engine/gltf':
+      '@houseki-engine/gltf':
         specifier: workspace:^
         version: link:../gltf
-      '@lattice-engine/input':
+      '@houseki-engine/input':
         specifier: workspace:^
         version: link:../input
-      '@lattice-engine/orbit':
+      '@houseki-engine/orbit':
         specifier: workspace:^
         version: link:../orbit
-      '@lattice-engine/physics':
+      '@houseki-engine/physics':
         specifier: workspace:^
         version: link:../physics
-      '@lattice-engine/player':
+      '@houseki-engine/player':
         specifier: workspace:^
         version: link:../player
-      '@lattice-engine/portal':
+      '@houseki-engine/portal':
         specifier: workspace:^
         version: link:../portal
-      '@lattice-engine/postprocessing':
+      '@houseki-engine/postprocessing':
         specifier: workspace:^
         version: link:../postprocessing
-      '@lattice-engine/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@lattice-engine/text':
+      '@houseki-engine/text':
         specifier: workspace:^
         version: link:../text
-      '@lattice-engine/transform':
+      '@houseki-engine/transform':
         specifier: workspace:^
         version: link:../transform
-      '@lattice-engine/utils':
+      '@houseki-engine/utils':
         specifier: workspace:^
         version: link:../utils
-      '@lattice-engine/vrm':
+      '@houseki-engine/vrm':
         specifier: workspace:^
         version: link:../vrm
     devDependencies:
+      '@dimforge/rapier3d':
+        specifier: ^0.11.2
+        version: 0.11.2
       postprocessing:
         specifier: ^6.32.2
         version: 6.32.2(three@0.154.0)
@@ -296,15 +284,36 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1(rollup@3.28.1)(typescript@5.2.2)(vite@4.4.7)
 
+  packages/input:
+    devDependencies:
+      '@houseki-engine/core':
+        specifier: workspace:^
+        version: link:../core
+      rollup-plugin-peer-deps-external:
+        specifier: ^2.2.4
+        version: 2.2.4(rollup@3.28.1)
+      thyseus:
+        specifier: 0.14.0
+        version: 0.14.0
+      typescript:
+        specifier: ~5.2.2
+        version: 5.2.2
+      vite:
+        specifier: ^4.4.7
+        version: 4.4.7
+      vite-plugin-thyseus-ts:
+        specifier: workspace:^
+        version: link:../vite-plugin-thyseus-ts
+
   packages/orbit:
     devDependencies:
-      '@lattice-engine/input':
+      '@houseki-engine/input':
         specifier: workspace:^
         version: link:../input
-      '@lattice-engine/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -331,17 +340,17 @@ importers:
 
   packages/physics:
     dependencies:
-      '@dimforge/rapier3d':
-        specifier: ^0.11.2
-        version: 0.11.2
       gl-matrix:
         specifier: ^4.0.0-beta.1
         version: 4.0.0-beta.1
     devDependencies:
-      '@lattice-engine/core':
+      '@dimforge/rapier3d':
+        specifier: ^0.11.2
+        version: 0.11.2
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       rollup-plugin-peer-deps-external:
@@ -359,28 +368,25 @@ importers:
       vite-plugin-thyseus-ts:
         specifier: workspace:^
         version: link:../vite-plugin-thyseus-ts
-      vite-plugin-wasm:
-        specifier: ^3.2.2
-        version: 3.2.2(vite@4.4.7)
 
   packages/player:
     devDependencies:
-      '@lattice-engine/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/input':
+      '@houseki-engine/input':
         specifier: workspace:^
         version: link:../input
-      '@lattice-engine/physics':
+      '@houseki-engine/physics':
         specifier: workspace:^
         version: link:../physics
-      '@lattice-engine/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
-      '@lattice-engine/vrm':
+      '@houseki-engine/vrm':
         specifier: workspace:^
         version: link:../vrm
       '@types/three':
@@ -407,19 +413,19 @@ importers:
 
   packages/portal:
     devDependencies:
-      '@lattice-engine/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/physics':
+      '@houseki-engine/physics':
         specifier: workspace:^
         version: link:../physics
-      '@lattice-engine/player':
+      '@houseki-engine/player':
         specifier: workspace:^
         version: link:../player
-      '@lattice-engine/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -453,13 +459,13 @@ importers:
         specifier: ^1.6.8
         version: 1.6.8(postprocessing@6.32.2)(three@0.154.0)
     devDependencies:
-      '@lattice-engine/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -489,10 +495,10 @@ importers:
 
   packages/render:
     devDependencies:
-      '@lattice-engine/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -526,7 +532,7 @@ importers:
         specifier: ^4.0.0-beta.1
         version: 4.0.0-beta.1
     devDependencies:
-      '@lattice-engine/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
       rollup-plugin-peer-deps-external:
@@ -551,13 +557,13 @@ importers:
         specifier: ^0.47.2
         version: 0.47.2(three@0.154.0)
     devDependencies:
-      '@lattice-engine/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -584,28 +590,28 @@ importers:
 
   packages/transform:
     devDependencies:
-      '@lattice-engine/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/input':
+      '@houseki-engine/input':
         specifier: workspace:^
         version: link:../input
-      '@lattice-engine/orbit':
+      '@houseki-engine/orbit':
         specifier: workspace:^
         version: link:../orbit
-      '@lattice-engine/physics':
+      '@houseki-engine/physics':
         specifier: workspace:^
         version: link:../physics
-      '@lattice-engine/player':
+      '@houseki-engine/player':
         specifier: workspace:^
         version: link:../player
-      '@lattice-engine/postprocessing':
+      '@houseki-engine/postprocessing':
         specifier: workspace:^
         version: link:../postprocessing
-      '@lattice-engine/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -632,16 +638,16 @@ importers:
 
   packages/utils:
     devDependencies:
-      '@lattice-engine/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/input':
+      '@houseki-engine/input':
         specifier: workspace:^
         version: link:../input
-      '@lattice-engine/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       rollup-plugin-peer-deps-external:
@@ -684,13 +690,13 @@ importers:
         specifier: ^2.0.3
         version: 2.0.3(@types/three@0.154.0)(three@0.154.0)
     devDependencies:
-      '@lattice-engine/core':
+      '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
-      '@lattice-engine/render':
+      '@houseki-engine/render':
         specifier: workspace:^
         version: link:../render
-      '@lattice-engine/scene':
+      '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
       '@types/three':
@@ -1158,7 +1164,6 @@ packages:
 
   /@dimforge/rapier3d@0.11.2:
     resolution: {integrity: sha512-B+AKkPmtJxED3goMTGU8v0ju8hUAUQGLgghzCos4G4OeN9X+mJ5lfN2xtNA0n8tJRJk2YfsMk9BOj/6AN89Acg==}
-    dev: false
 
   /@esbuild/android-arm64@0.18.11:
     resolution: {integrity: sha512-snieiq75Z1z5LJX9cduSAjUr7vEI1OdlzFPMw0HH5YI7qQHDd3qs+WZoMrWYDsfRJSq36lIA6mfZBkvL46KoIw==}
@@ -5184,15 +5189,6 @@ packages:
       rollup: 3.28.1
     dev: true
 
-  /rollup@3.26.2:
-    resolution: {integrity: sha512-6umBIGVz93er97pMgQO08LuH3m6PUb3jlDUUGFsNJB6VgTCUaDFpupf5JfU30529m/UKOgmiX+uY6Sx8cOYpLA==}
-    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
-    hasBin: true
-    requiresBuild: true
-    optionalDependencies:
-      fsevents: 2.3.3
-    dev: true
-
   /rollup@3.28.1:
     resolution: {integrity: sha512-R9OMQmIHJm9znrU3m3cpE8uhN0fGdXiawME7aZIpQqvpS/85+Vt1Hq1/yVIcYfOmaQiHjvXkQAoJukvLpau6Yw==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
@@ -5995,7 +5991,7 @@ packages:
     dependencies:
       esbuild: 0.18.11
       postcss: 8.4.27
-      rollup: 3.26.2
+      rollup: 3.28.1
     optionalDependencies:
       fsevents: 2.3.3
     dev: true

@@ -1,4 +1,4 @@
-import { GlobalTransform } from "@lattice-engine/scene";
+import { GlobalTransform } from "@houseki-engine/scene";
 import { Entity, Or, Query, Res, With } from "thyseus";
 
 import { DynamicBody, KinematicBody, StaticBody } from "../../components";

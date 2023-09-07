@@ -9,7 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "lattice-engine": "workspace:^",
+    "@dimforge/rapier3d": "^0.11.2",
+    "houseki": "workspace:^",
     "leva": "^0.9.35",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -29,6 +30,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "typescript": "~5.2.2",
-    "vite": "^4.4.7"
+    "vite": "^4.4.7",
+    "vite-plugin-wasm": "^3.2.2"
   }
 }

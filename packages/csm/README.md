@@ -1,3 +1,3 @@
-# @lattice-engine/csm
+# @houseki-engine/csm
 
 Cascading shadow maps

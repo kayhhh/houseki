@@ -4,7 +4,7 @@ import {
   MaterialAlphaMode,
   StandardMaterial,
   TextureInfo,
-} from "@lattice-engine/scene";
+} from "@houseki-engine/scene";
 
 import { ExportContext } from "./context";
 

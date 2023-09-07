@@ -1,17 +1,17 @@
-import { corePlugin } from "@lattice-engine/core";
-import { inputPlugin } from "@lattice-engine/input";
-import { renderPlugin } from "@lattice-engine/render";
-import { scenePlugin } from "@lattice-engine/scene";
+import { corePlugin } from "@houseki-engine/core";
+import { inputPlugin } from "@houseki-engine/input";
+import { renderPlugin } from "@houseki-engine/render";
+import { scenePlugin } from "@houseki-engine/scene";
 import { WorldBuilder } from "thyseus";
 
 /**
  * Adds features that most people expect to have in a game engine.
  *
  * Default plugins:
- * - `@lattice-engine/core`
- * - `@lattice-engine/input`
- * - `@lattice-engine/render`
- * - `@lattice-engine/scene`
+ * - `@houseki-engine/core`
+ * - `@houseki-engine/input`
+ * - `@houseki-engine/render`
+ * - `@houseki-engine/scene`
  */
 export function defaultPlugin(builder: WorldBuilder) {
   builder

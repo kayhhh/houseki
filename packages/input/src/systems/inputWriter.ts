@@ -1,4 +1,4 @@
-import { CoreStore } from "@lattice-engine/core";
+import { CoreStore } from "@houseki-engine/core";
 import { EventWriter, Mut, Res, SystemRes } from "thyseus";
 
 import {

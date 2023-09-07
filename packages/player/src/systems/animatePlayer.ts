@@ -1,7 +1,7 @@
-import { Time } from "@lattice-engine/core";
-import { Velocity } from "@lattice-engine/physics";
-import { Parent, Transform } from "@lattice-engine/scene";
-import { VrmAnimation } from "@lattice-engine/vrm";
+import { Time } from "@houseki-engine/core";
+import { Velocity } from "@houseki-engine/physics";
+import { Parent, Transform } from "@houseki-engine/scene";
+import { VrmAnimation } from "@houseki-engine/vrm";
 import { Entity, Mut, Query, Res } from "thyseus";
 
 import { PlayerAvatar, PlayerBody } from "../components";

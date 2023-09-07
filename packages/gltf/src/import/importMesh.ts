@@ -1,6 +1,6 @@
 import { Mesh as GltfMesh, Primitive } from "@gltf-transform/core";
-import { Warehouse } from "@lattice-engine/core";
-import { Geometry, Mesh } from "@lattice-engine/scene";
+import { Warehouse } from "@houseki-engine/core";
+import { Geometry, Mesh } from "@houseki-engine/scene";
 import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";

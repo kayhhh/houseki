@@ -1,7 +1,6 @@
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import { defineConfig } from "vite";
 import thyseusTS from "vite-plugin-thyseus-ts";
-import wasm from "vite-plugin-wasm";
 
 export default defineConfig({
   build: {
@@ -14,5 +13,5 @@ export default defineConfig({
     minify: false,
     target: "esnext",
   },
-  plugins: [peerDepsExternal(), wasm(), thyseusTS()],
+  plugins: [peerDepsExternal(), thyseusTS()],
 });

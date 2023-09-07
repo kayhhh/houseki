@@ -5,7 +5,7 @@ import {
   Parent,
   ShadowMap,
   Transform,
-} from "lattice-engine/scene";
+} from "houseki/scene";
 import { Commands } from "thyseus";
 
 export function createLights(

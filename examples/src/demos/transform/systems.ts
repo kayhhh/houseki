@@ -1,19 +1,19 @@
-import { CoreStore, Warehouse } from "lattice-engine/core";
+import { CoreStore, Warehouse } from "houseki/core";
 import {
   BoxCollider,
   PhysicsConfig,
   StaticBody,
   TargetTransform,
-} from "lattice-engine/physics";
-import { OutlinePass } from "lattice-engine/postprocessing";
+} from "houseki/physics";
+import { OutlinePass } from "houseki/postprocessing";
 import {
   GlobalTransform,
   Mesh,
   Parent,
   SceneStruct,
   Transform,
-} from "lattice-engine/scene";
-import { TransformControls, TransformMode } from "lattice-engine/transform";
+} from "houseki/scene";
+import { TransformControls, TransformMode } from "houseki/transform";
 import { Commands, Mut, Query, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";

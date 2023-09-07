@@ -1,5 +1,5 @@
-import { Time } from "@lattice-engine/core";
-import { Transform } from "@lattice-engine/scene";
+import { Time } from "@houseki-engine/core";
+import { Transform } from "@houseki-engine/scene";
 import { Quaternion } from "three";
 import { Mut, Query, Res } from "thyseus";
 

@@ -4,7 +4,7 @@ import {
   pointerEventFromECS,
   PointerMoveEvent,
   PointerUpEvent,
-} from "@lattice-engine/input";
+} from "@houseki-engine/input";
 import { EventReader, Res } from "thyseus";
 
 import { TransformControlsStore } from "../resources";

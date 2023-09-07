@@ -1,6 +1,6 @@
-import { Warehouse } from "lattice-engine/core";
-import { BoxCollider, StaticBody } from "lattice-engine/physics";
-import { GlobalTransform, Mesh, Parent, Transform } from "lattice-engine/scene";
+import { Warehouse } from "houseki/core";
+import { BoxCollider, StaticBody } from "houseki/physics";
+import { GlobalTransform, Mesh, Parent, Transform } from "houseki/scene";
 import { Commands } from "thyseus";
 
 import { createBoxGeometry } from "./geometry";

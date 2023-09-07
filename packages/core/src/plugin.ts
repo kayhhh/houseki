@@ -1,6 +1,6 @@
 import { applyCommands, WorldBuilder } from "thyseus";
 
-import { LatticeSchedules } from "./schedules";
+import { HousekiSchedules } from "./schedules";
 import { despawnEntities } from "./systems/despawnEntities";
 import { fetchAssets } from "./systems/fetchAssets";
 import { initTime } from "./systems/initTime";
@@ -11,9 +11,9 @@ import { setMainTime } from "./systems/setMainTime";
 export function corePlugin(builder: WorldBuilder) {
   builder
     .addSystems(fetchAssets)
-    .addSystemsToSchedule(LatticeSchedules.ApplyCommands, applyCommands)
-    .addSystemsToSchedule(LatticeSchedules.Destroy, despawnEntities)
-    .addSystemsToSchedule(LatticeSchedules.FixedLoop, runFixedLoop)
-    .addSystemsToSchedule(LatticeSchedules.PreUpdate, setMainTime)
-    .addSystemsToSchedule(LatticeSchedules.Startup, initWorld, initTime);
+    .addSystemsToSchedule(HousekiSchedules.ApplyCommands, applyCommands)
+    .addSystemsToSchedule(HousekiSchedules.Destroy, despawnEntities)
+    .addSystemsToSchedule(HousekiSchedules.FixedLoop, runFixedLoop)
+    .addSystemsToSchedule(HousekiSchedules.PreUpdate, setMainTime)
+    .addSystemsToSchedule(HousekiSchedules.Startup, initWorld, initTime);
 }

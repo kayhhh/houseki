@@ -1,6 +1,6 @@
 // Helper script to add a new package to the monorepo
 // Will create a new package directory, package.json, etc.
-// As well as update lattice-engine to include the new package
+// As well as update houseki to include the new package
 
 const fs = require("fs");
 const path = require("path");
@@ -35,7 +35,7 @@ fs.writeFileSync(
     files: ["dist"],
     license: "GPL-3.0-or-later",
     main: "./dist/index.js",
-    name: `@lattice-engine/${packageName}`,
+    name: `@houseki-engine/${packageName}`,
     peerDependencies: {
       thyseus: "^0.13.2",
     },
@@ -45,7 +45,7 @@ fs.writeFileSync(
     repository: {
       directory: `packages/${packageName}`,
       type: "git",
-      url: "https://github.com/lattice-engine/lattice",
+      url: "https://github.com/houseki/lattice",
     },
     scripts: {
       build: "vite build --emptyOutDir",
@@ -112,18 +112,18 @@ console.info("Creating README.md");
 const readmePath = path.join(packageDir, "README.md");
 fs.writeFileSync(
   readmePath,
-  `# @lattice-engine/${packageName}
+  `# @houseki-engine/${packageName}
 `
 );
 
-// Enter lattice-engine directory
-const latticeDir = path.join(__dirname, "../packages/lattice-engine");
+// Enter houseki directory
+const latticeDir = path.join(__dirname, "../packages/houseki");
 
 console.info(`Creating src/${packageName}.ts`);
 const srcFilePath = path.join(latticeDir, "src", `${packageName}.ts`);
 fs.writeFileSync(
   srcFilePath,
-  `export * from "@lattice-engine/${packageName}";`
+  `export * from "@houseki-engine/${packageName}";`
 );
 
 console.info(`Creating ${packageName}.d.ts`);
@@ -146,7 +146,7 @@ console.info(`Updating package.json`);
 const latticePackageJsonPath = path.join(latticeDir, "package.json");
 const packageJson = JSON.parse(fs.readFileSync(latticePackageJsonPath));
 
-packageJson.dependencies[`@lattice-engine/${packageName}`] = "workspace:^";
+packageJson.dependencies[`@houseki-engine/${packageName}`] = "workspace:^";
 packageJson.files.push(`${packageName}.d.ts`);
 packageJson.exports[`./${packageName}`] = {
   import: `./dist/${packageName}.js`,

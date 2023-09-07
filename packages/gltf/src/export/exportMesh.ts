@@ -1,6 +1,6 @@
 import { GLTF } from "@gltf-transform/core";
-import { Warehouse } from "@lattice-engine/core";
-import { Geometry, Mesh } from "@lattice-engine/scene";
+import { Warehouse } from "@houseki-engine/core";
+import { Geometry, Mesh } from "@houseki-engine/scene";
 
 import { GLTF_TO_ECS_ATTRIBUTES } from "../constants";
 import { ExportContext } from "./context";

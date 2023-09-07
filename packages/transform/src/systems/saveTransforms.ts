@@ -1,5 +1,5 @@
-import { RenderStore } from "@lattice-engine/render";
-import { Transform } from "@lattice-engine/scene";
+import { RenderStore } from "@houseki-engine/render";
+import { Transform } from "@houseki-engine/scene";
 import { Entity, Mut, Query, Res } from "thyseus";
 
 import { TransformControls } from "../components";

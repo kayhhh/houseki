@@ -1,5 +1,5 @@
-import { Parent } from "@lattice-engine/scene";
-import { VrmStore } from "@lattice-engine/vrm";
+import { Parent } from "@houseki-engine/scene";
+import { VrmStore } from "@houseki-engine/vrm";
 import { Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 

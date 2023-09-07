@@ -1,8 +1,8 @@
-import { RenderStore } from "@lattice-engine/render";
+import { RenderStore } from "@houseki-engine/render";
 import {
   FIRSTPERSON_ONLY_LAYER,
   THIRDPERSON_ONLY_LAYER,
-} from "@lattice-engine/vrm";
+} from "@houseki-engine/vrm";
 import { Entity, Query, Res } from "thyseus";
 
 import { PlayerCamera } from "../components";

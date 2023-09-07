@@ -9,13 +9,13 @@ import {
   MeshCollider,
   SphereCollider,
   TargetTransform,
-} from "@lattice-engine/physics";
+} from "@houseki-engine/physics";
 import {
   GlobalTransform,
   Name,
   Parent,
   Transform,
-} from "@lattice-engine/scene";
+} from "@houseki-engine/scene";
 
 type EntityID = bigint;
 

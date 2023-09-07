@@ -1,4 +1,4 @@
-import { AmbientLight } from "@lattice-engine/scene";
+import { AmbientLight } from "@houseki-engine/scene";
 import { AmbientLight as ThreeAmbientLight } from "three";
 import { Entity, Query, Res } from "thyseus";
 

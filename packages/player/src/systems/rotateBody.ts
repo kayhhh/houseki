@@ -1,6 +1,6 @@
-import { Time } from "@lattice-engine/core";
-import { TargetTransform, Velocity } from "@lattice-engine/physics";
-import { Quat, Transform } from "@lattice-engine/scene";
+import { Time } from "@houseki-engine/core";
+import { TargetTransform, Velocity } from "@houseki-engine/physics";
+import { Quat, Transform } from "@houseki-engine/scene";
 import { Quaternion, Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 

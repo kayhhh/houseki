@@ -1,6 +1,6 @@
 import { ColliderDesc } from "@dimforge/rapier3d";
-import { Warehouse } from "@lattice-engine/core";
-import { Geometry, Parent } from "@lattice-engine/scene";
+import { Warehouse } from "@houseki-engine/core";
+import { Geometry, Parent } from "@houseki-engine/scene";
 import { Entity, Query, Res, With } from "thyseus";
 
 import { HullCollider } from "../../components";

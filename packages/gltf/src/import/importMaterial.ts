@@ -4,13 +4,13 @@ import {
   TextureInfo as GltfTextureInfo,
 } from "@gltf-transform/core";
 import { Transform } from "@gltf-transform/extensions";
-import { Asset, Warehouse } from "@lattice-engine/core";
+import { Asset, Warehouse } from "@houseki-engine/core";
 import {
   Image,
   MaterialAlphaMode,
   StandardMaterial,
   TextureInfo,
-} from "@lattice-engine/scene";
+} from "@houseki-engine/scene";
 import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";

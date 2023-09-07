@@ -1,5 +1,5 @@
 import { Node } from "@gltf-transform/core";
-import { Warehouse } from "@lattice-engine/core";
+import { Warehouse } from "@houseki-engine/core";
 import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";

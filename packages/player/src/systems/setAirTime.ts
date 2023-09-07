@@ -1,5 +1,5 @@
-import { Time } from "@lattice-engine/core";
-import { CharacterController } from "@lattice-engine/physics";
+import { Time } from "@houseki-engine/core";
+import { CharacterController } from "@houseki-engine/physics";
 import { Mut, Query, Res } from "thyseus";
 
 import { PlayerBody } from "../components";

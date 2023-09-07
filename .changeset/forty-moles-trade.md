@@ -1,21 +1,21 @@
 ---
 "vite-plugin-thyseus-ts": patch
-"lattice-engine": patch
-"@lattice-engine/postprocessing": patch
-"@lattice-engine/transform": patch
-"@lattice-engine/physics": patch
-"@lattice-engine/player": patch
-"@lattice-engine/portal": patch
-"@lattice-engine/render": patch
-"@lattice-engine/input": patch
-"@lattice-engine/orbit": patch
-"@lattice-engine/scene": patch
-"@lattice-engine/utils": patch
-"@lattice-engine/core": patch
-"@lattice-engine/gltf": patch
-"@lattice-engine/text": patch
-"@lattice-engine/csm": patch
-"@lattice-engine/vrm": patch
+"houseki": patch
+"@houseki-engine/postprocessing": patch
+"@houseki-engine/transform": patch
+"@houseki-engine/physics": patch
+"@houseki-engine/player": patch
+"@houseki-engine/portal": patch
+"@houseki-engine/render": patch
+"@houseki-engine/input": patch
+"@houseki-engine/orbit": patch
+"@houseki-engine/scene": patch
+"@houseki-engine/utils": patch
+"@houseki-engine/core": patch
+"@houseki-engine/gltf": patch
+"@houseki-engine/text": patch
+"@houseki-engine/csm": patch
+"@houseki-engine/vrm": patch
 ---
 
 upgrade deps

@@ -1,5 +1,5 @@
 import { Node } from "@gltf-transform/core";
-import { StaticBody } from "@lattice-engine/physics";
+import { StaticBody } from "@houseki-engine/physics";
 import { Commands } from "thyseus";
 
 import { PhysicsBody } from "../extensions/OMI_physics_body/PhysicsBody";

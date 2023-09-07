@@ -1,3 +1,3 @@
-# @lattice-engine/core
+# @houseki-engine/core
 
-The core of the Lattice Engine.
+The core of the Houseki Engine.

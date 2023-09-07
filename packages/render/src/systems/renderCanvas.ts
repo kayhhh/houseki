@@ -1,5 +1,5 @@
-import { CoreStore } from "@lattice-engine/core";
-import { SceneStruct } from "@lattice-engine/scene";
+import { CoreStore } from "@houseki-engine/core";
+import { SceneStruct } from "@houseki-engine/scene";
 import {
   EffectComposer,
   EffectPass,

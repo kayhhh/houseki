@@ -1,4 +1,4 @@
-import { AnimationClip, AnimationMixer } from "@lattice-engine/scene";
+import { AnimationClip, AnimationMixer } from "@houseki-engine/scene";
 import {
   AnimationAction,
   AnimationMixer as ThreeAnimationMixer,

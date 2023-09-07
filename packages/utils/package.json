@@ -1,9 +1,9 @@
 {
-  "name": "@lattice-engine/utils",
+  "name": "@houseki-engine/utils",
   "version": "6.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/unavi-xyz/lattice",
+    "url": "https://github.com/unavi-xyz/houseki",
     "directory": "packages/utils"
   },
   "license": "GPL-3.0-or-later",
@@ -18,10 +18,10 @@
     "dev": "vite build --watch"
   },
   "devDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/input": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/input": "workspace:^",
+    "@houseki-engine/render": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "thyseus": "0.14.0",
     "typescript": "~5.2.2",
@@ -29,10 +29,10 @@
     "vite-plugin-thyseus-ts": "workspace:^"
   },
   "peerDependencies": {
-    "@lattice-engine/core": "workspace:^",
-    "@lattice-engine/input": "workspace:^",
-    "@lattice-engine/render": "workspace:^",
-    "@lattice-engine/scene": "workspace:^",
+    "@houseki-engine/core": "workspace:^",
+    "@houseki-engine/input": "workspace:^",
+    "@houseki-engine/render": "workspace:^",
+    "@houseki-engine/scene": "workspace:^",
     "thyseus": "*"
   },
   "publishConfig": {

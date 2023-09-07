@@ -1,4 +1,4 @@
-import { DynamicBody, KinematicBody } from "@lattice-engine/physics";
+import { DynamicBody, KinematicBody } from "@houseki-engine/physics";
 
 import { OMIPhysicsBody } from "../extensions/OMI_physics_body/OMIPhysicsBody";
 import { PhysicsBody } from "../extensions/OMI_physics_body/PhysicsBody";

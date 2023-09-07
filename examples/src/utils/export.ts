@@ -3,8 +3,8 @@ import {
   ExportedJSON,
   ExportGltf,
   Gltf,
-} from "lattice-engine/gltf";
-import { DeepRemove, Scene, SceneStruct } from "lattice-engine/scene";
+} from "houseki/gltf";
+import { DeepRemove, Scene, SceneStruct } from "houseki/scene";
 import { Commands, EventReader, EventWriter, Query, Res } from "thyseus";
 
 import { selectedModel } from "../demos/gltf/systems";

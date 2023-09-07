@@ -1,4 +1,4 @@
-import { OutlineTarget } from "@lattice-engine/postprocessing";
+import { OutlineTarget } from "@houseki-engine/postprocessing";
 import { Commands, Query, SystemRes } from "thyseus";
 
 import { TransformControls } from "../components";

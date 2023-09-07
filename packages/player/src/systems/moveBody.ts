@@ -1,11 +1,11 @@
-import { Time } from "@lattice-engine/core";
-import { InputStruct, Key } from "@lattice-engine/input";
+import { Time } from "@houseki-engine/core";
+import { InputStruct, Key } from "@houseki-engine/input";
 import {
   CharacterController,
   TargetTransform,
   Velocity,
-} from "@lattice-engine/physics";
-import { GlobalTransform, Transform } from "@lattice-engine/scene";
+} from "@houseki-engine/physics";
+import { GlobalTransform, Transform } from "@houseki-engine/scene";
 import { lerp } from "three/src/math/MathUtils";
 import { Entity, Mut, Query, Res } from "thyseus";
 

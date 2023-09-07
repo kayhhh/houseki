@@ -1,4 +1,4 @@
-import { AnimationClip, KeyframeTrack } from "@lattice-engine/scene";
+import { AnimationClip, KeyframeTrack } from "@houseki-engine/scene";
 import {
   AnimationClip as ThreeAnimationClip,
   KeyframeTrack as ThreeKeyframeTrack,

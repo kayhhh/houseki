@@ -1,5 +1,5 @@
-import { Raycast } from "@lattice-engine/physics";
-import { Transform } from "@lattice-engine/scene";
+import { Raycast } from "@houseki-engine/physics";
+import { Transform } from "@houseki-engine/scene";
 import { Quaternion, Vector3 } from "three";
 import { Mut, Query } from "thyseus";
 
