@@ -1,10 +1,5 @@
 import { CoreStore } from "houseki/core";
-import {
-  GlobalTransform,
-  Parent,
-  SceneStruct,
-  Transform,
-} from "houseki/scene";
+import { GlobalTransform, Parent, SceneStruct, Transform } from "houseki/scene";
 import { Vrm } from "houseki/vrm";
 import { Commands, Mut, Res } from "thyseus";
 

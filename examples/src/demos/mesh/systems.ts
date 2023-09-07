@@ -1,10 +1,6 @@
 import { CoreStore } from "houseki/core";
 import { Gltf } from "houseki/gltf";
-import {
-  MeshCollider,
-  PhysicsConfig,
-  StaticBody,
-} from "houseki/physics";
+import { MeshCollider, PhysicsConfig, StaticBody } from "houseki/physics";
 import {
   GlobalTransform,
   Mesh,

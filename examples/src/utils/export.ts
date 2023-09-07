@@ -1,9 +1,4 @@
-import {
-  ExportedGltf,
-  ExportedJSON,
-  ExportGltf,
-  Gltf,
-} from "houseki/gltf";
+import { ExportedGltf, ExportedJSON, ExportGltf, Gltf } from "houseki/gltf";
 import { DeepRemove, Scene, SceneStruct } from "houseki/scene";
 import { Commands, EventReader, EventWriter, Query, Res } from "thyseus";
 
