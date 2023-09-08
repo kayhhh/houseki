@@ -50,7 +50,9 @@ export class Engine {
 
     while (this.#scheduleQueue.length > 0) {
       const schedule = this.#scheduleQueue.shift();
-      if (schedule) await this.#runSchedule(schedule);
+      if (schedule) {
+        await this.#runSchedule(schedule);
+      }
     }
 
     await this.#runSchedule(HousekiSchedules.Render);

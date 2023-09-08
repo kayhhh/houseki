@@ -29,6 +29,9 @@ export function generateDebug(
       debug.linesId = 0n;
     }
 
+    // @ts-expect-error
+    debug.serialize();
+
     return;
   }
 

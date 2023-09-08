@@ -8,7 +8,8 @@ const FIXED_STEP_MS = 1000 / FIXED_HZ;
 
 @struct
 class LocalRes {
-  timeSinceLastFixedUpdate: f32 = 0;
+  lastLoop: f32 = 0;
+  lastUpdate: f32 = 0;
 }
 
 export async function runFixedLoop(
@@ -17,14 +18,16 @@ export async function runFixedLoop(
   localRes: SystemRes<LocalRes>
 ) {
   const now = performance.now();
-  const delta = now - time.fixedTime;
-  localRes.timeSinceLastFixedUpdate += delta;
+  const delta = now - localRes.lastLoop;
+  localRes.lastLoop = now;
 
-  let nextFixedTime = now;
+  localRes.lastUpdate += delta;
+  localRes.lastUpdate = Math.min(localRes.lastUpdate, 5000);
 
-  while (localRes.timeSinceLastFixedUpdate >= FIXED_STEP_MS) {
-    time.fixedTime = nextFixedTime;
-    time.fixedDelta = FIXED_STEP_MS / 1000;
+  time.fixedDelta = FIXED_STEP_MS / 1000;
+
+  while (localRes.lastUpdate >= FIXED_STEP_MS) {
+    time.fixedTime = now - localRes.lastUpdate;
 
     // @ts-expect-error
     time.serialize();
@@ -33,8 +36,7 @@ export async function runFixedLoop(
     await runSchedule(world, HousekiSchedules.FixedUpdate);
     await runSchedule(world, HousekiSchedules.PostFixedUpdate);
 
-    localRes.timeSinceLastFixedUpdate -= FIXED_STEP_MS;
-    nextFixedTime += FIXED_STEP_MS;
+    localRes.lastUpdate -= FIXED_STEP_MS;
   }
 }
 
