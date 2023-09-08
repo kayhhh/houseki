@@ -32,7 +32,7 @@ export function initScene(
     .add(new Transform(undefined, undefined, [4, 4, 4]))
     .addType(GlobalTransform)
     .add(new Parent(rootId))
-    .add(new Gltf("/gltf/Accumula-Town.glb"));
+    .add(new Gltf("/models/Accumula-Town.glb"));
 }
 
 export function addPhysics(
