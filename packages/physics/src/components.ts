@@ -2,9 +2,12 @@ import { Vec3 } from "@houseki-engine/core";
 import { Transform } from "@houseki-engine/scene";
 import { Entity, EntityCommands, type f32, struct, type u64 } from "thyseus";
 
-export class TargetTransform extends Transform {}
+@struct
+export class TargetTransform extends Transform {
+  prev: Transform = new Transform();
+}
 
-export class Velocity extends Vec3 {}
+export class Velocity extends Vec3 { }
 
 @struct
 export class BoxCollider {
@@ -65,7 +68,7 @@ export class MeshCollider {
 }
 
 @struct
-export class StaticBody {}
+export class StaticBody { }
 
 @struct
 export class KinematicBody {

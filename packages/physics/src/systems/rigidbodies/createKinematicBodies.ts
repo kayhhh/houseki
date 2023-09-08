@@ -25,7 +25,10 @@ export function createKinematicBodies(
   for (const id of store.kinematicBodies.keys()) {
     if (!ids.includes(id)) {
       const object = store.kinematicBodies.get(id);
-      if (object) store.world.removeRigidBody(object);
+      if (object) {
+        store.world.removeRigidBody(object);
+      }
+
       store.kinematicBodies.delete(id);
     }
   }
