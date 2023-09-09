@@ -12,8 +12,7 @@ export function applyTargetTransforms(
 ) {
   const delta = time.mainTime - fixedData.lastLoop;
   const lastUpdate = fixedData.lastUpdate + delta;
-  const percentThroughFrame = lastUpdate / (time.fixedDelta * 1000);
-  const K = Math.min(percentThroughFrame, 1);
+  const K = lastUpdate / (time.fixedDelta * 1000);
 
   for (const [transform, target, prev] of entities) {
     slerp(transform.rotation, prev.rotation, target.rotation, K);
