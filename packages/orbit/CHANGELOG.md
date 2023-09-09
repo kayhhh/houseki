@@ -1,5 +1,13 @@
 # @houseki-engine/orbit
 
+## 7.0.0
+
+### Patch Changes
+
+- @houseki-engine/input@2.0.0
+- @houseki-engine/render@6.0.0
+- @houseki-engine/scene@2.0.0
+
 ## 6.0.1
 
 ### Patch Changes

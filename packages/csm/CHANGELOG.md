@@ -1,5 +1,12 @@
 # @houseki-engine/csm
 
+## 5.0.0
+
+### Patch Changes
+
+- @houseki-engine/render@6.0.0
+- @houseki-engine/scene@2.0.0
+
 ## 4.0.1
 
 ### Patch Changes
