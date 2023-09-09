@@ -52,18 +52,25 @@ export function saveRigidBodies(
     const globalMat = new Mat4();
     globalTransforms.set(entity.id, globalMat);
 
-    vec4.x = globalTransform.rotation.x;
-    vec4.y = globalTransform.rotation.y;
-    vec4.z = globalTransform.rotation.z;
-    vec4.w = globalTransform.rotation.w;
-
-    vec3.x = globalTransform.translation.x;
-    vec3.y = globalTransform.translation.y;
-    vec3.z = globalTransform.translation.z;
-
-    vec3b.x = globalTransform.scale.x;
-    vec3b.y = globalTransform.scale.y;
-    vec3b.z = globalTransform.scale.z;
+    Vec4.set(
+      vec4,
+      globalTransform.rotation.x,
+      globalTransform.rotation.y,
+      globalTransform.rotation.z,
+      globalTransform.rotation.w
+    );
+    Vec3.set(
+      vec3,
+      globalTransform.translation.x,
+      globalTransform.translation.y,
+      globalTransform.translation.z
+    );
+    Vec3.set(
+      vec3b,
+      globalTransform.scale.x,
+      globalTransform.scale.y,
+      globalTransform.scale.z
+    );
 
     Mat4.fromRotationTranslationScale(globalMat, vec4, vec3, vec3b);
 
@@ -80,12 +87,11 @@ export function saveRigidBodies(
     const rotation = body.rotation();
 
     // Convert to local space
-    Vec3.set(vec3, translation.x, translation.y, translation.z);
     Quat.set(quat, rotation.x, rotation.y, rotation.z, rotation.w);
+    Vec3.set(vec3, translation.x, translation.y, translation.z);
     Vec3.set(vec3b, transform.scale.x, transform.scale.y, transform.scale.z);
 
     Mat4.fromRotationTranslationScale(mat4, quat, vec3, vec3b);
-
     Mat4.multiply(mat4, parentGlobal, mat4);
 
     Mat4.getTranslation(vec3, mat4);
@@ -105,12 +111,11 @@ export function saveRigidBodies(
     const rotation = body.rotation();
 
     // Convert to local space
-    Vec3.set(vec3, translation.x, translation.y, translation.z);
     Quat.set(quat, rotation.x, rotation.y, rotation.z, rotation.w);
+    Vec3.set(vec3, translation.x, translation.y, translation.z);
     Vec3.set(vec3b, target.scale.x, target.scale.y, target.scale.z);
 
     Mat4.fromRotationTranslationScale(mat4, quat, vec3, vec3b);
-
     Mat4.multiply(mat4, parentGlobal, mat4);
 
     Mat4.getTranslation(vec3, mat4);

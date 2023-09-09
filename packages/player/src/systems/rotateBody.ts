@@ -1,5 +1,5 @@
 import { Time } from "@houseki-engine/core";
-import { TargetTransform, Velocity } from "@houseki-engine/physics";
+import { Velocity } from "@houseki-engine/physics";
 import { Quat, Transform } from "@houseki-engine/scene";
 import { Quaternion, Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
@@ -19,44 +19,26 @@ export function rotateBody(
   time: Res<Time>,
   cameras: Query<[PlayerCamera, TargetRotation]>,
   bodies: Query<
-    [
-      Entity,
-      Velocity,
-      Mut<Transform>,
-      Mut<TargetTransform>,
-      Mut<TargetRotation>
-    ],
+    [Entity, Velocity, Mut<Transform>, Mut<TargetRotation>],
     With<PlayerBody>
   >
 ) {
   for (const [camera, cameraRotation] of cameras) {
-    for (const [
-      entity,
-      velocity,
-      transform,
-      targetTransform,
-      targetRotation,
-    ] of bodies) {
+    for (const [entity, velocity, transform, targetRotation] of bodies) {
       // Find the body that matches the camera
       if (entity.id !== camera.bodyId) continue;
 
       if (camera.currentView === PlayerCameraView.FirstPerson) {
-        rotateFirstPerson(
-          cameraRotation,
-          targetTransform.rotation,
-          targetRotation
-        );
+        rotateFirstPerson(cameraRotation, transform.rotation, targetRotation);
       } else if (camera.currentView === PlayerCameraView.ThirdPerson) {
         rotateThirdPerson(
           velocity,
           cameraRotation,
-          targetTransform.rotation,
+          transform.rotation,
           targetRotation,
           time
         );
       }
-
-      transform.rotation.copy(targetTransform.rotation);
     }
   }
 }

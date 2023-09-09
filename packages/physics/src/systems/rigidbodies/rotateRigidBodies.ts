@@ -15,7 +15,7 @@ export function rotateRigidBodies(
     const body = store.getRigidBody(entity.id);
 
     if (body) {
-      body.setRotation(globalTransform.rotation.toObject(), true);
+      body.setRotation(globalTransform.rotation, true);
     }
   }
 }

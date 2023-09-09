@@ -21,6 +21,7 @@ export function animatePlayer(
   for (const [entity, parent, avatar] of avatars) {
     for (const [bodyEntity, player, velocity, transform] of bodies) {
       if (bodyEntity.id !== parent.id) continue;
+
       const isFalling = player.airTime > FALL_THRESHOLD_SECONDS;
       const isJumping = player.jumpTime > 0 && player.airTime !== 0;
 

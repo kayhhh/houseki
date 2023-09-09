@@ -26,6 +26,13 @@ import { stepWorld } from "./systems/stepWorld";
 export function physicsPlugin(builder: WorldBuilder) {
   builder
     .addSystemsToSchedule(
+      HousekiSchedules.PreUpdate,
+      run(applyTargetTransforms)
+        .after(setMainTime)
+        .before(updateGlobalTransforms)
+    )
+    .addSystemsToSchedule(HousekiSchedules.PreFixedUpdate, saveTargetTransforms)
+    .addSystemsToSchedule(
       HousekiSchedules.FixedUpdate,
       ...run.chain(
         [createDynamicBodies, createKinematicBodies, createStaticBodies],
@@ -43,15 +50,5 @@ export function physicsPlugin(builder: WorldBuilder) {
         stepWorld,
         [runRaycasts, saveCharacters, saveRigidBodies, generateDebug]
       )
-    )
-    .addSystemsToSchedule(
-      HousekiSchedules.PreUpdate,
-      run(applyTargetTransforms)
-        .after(setMainTime)
-        .before(updateGlobalTransforms)
-    )
-    .addSystemsToSchedule(
-      HousekiSchedules.PreFixedUpdate,
-      saveTargetTransforms
     );
 }

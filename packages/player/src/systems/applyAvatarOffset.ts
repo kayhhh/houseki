@@ -1,4 +1,4 @@
-import { Parent } from "@houseki-engine/scene";
+import { GlobalTransform, Parent } from "@houseki-engine/scene";
 import { VrmStore } from "@houseki-engine/vrm";
 import { Vector3 } from "three";
 import { Entity, Mut, Query, Res, With } from "thyseus";
@@ -6,55 +6,56 @@ import { Entity, Mut, Query, Res, With } from "thyseus";
 import { PlayerAvatar, PlayerCamera, TargetTranslation } from "../components";
 import { PlayerCameraView } from "../types";
 
-const vector3 = new Vector3();
-const vector3b = new Vector3();
+const vec3 = new Vector3();
+const vec3b = new Vector3();
 
 /**
  * System to apply offset to camera based on avatar position.
  */
 export function applyAvatarOffset(
   vrmStore: Res<VrmStore>,
-  avatars: Query<[Entity, Parent], With<PlayerAvatar>>,
+  avatars: Query<[Entity, Parent, GlobalTransform], With<PlayerAvatar>>,
   cameras: Query<[PlayerCamera, Mut<TargetTranslation>]>
 ) {
   for (const [camera, targetTranslation] of cameras) {
-    let foundAvatar = false;
+    targetTranslation.set(0, 0, 0);
 
-    for (const [entity, parent] of avatars) {
+    for (const [entity, parent, globalTransform] of avatars) {
       // Find avatar that matches the camera body
       if (camera.bodyId !== parent.id) continue;
 
-      foundAvatar = true;
-
       const vrm = vrmStore.avatars.get(entity.id);
-      if (!vrm) continue;
 
-      const leftEye = vrm.humanoid.normalizedHumanBones.leftEye?.node;
-      const rightEye = vrm.humanoid.normalizedHumanBones.rightEye?.node;
-      const head = vrm.humanoid.normalizedHumanBones.head.node;
-
-      // Get position of head or eyes
-      if (camera.currentView === PlayerCameraView.FirstPerson) {
-        if (leftEye && rightEye) {
-          leftEye
-            .getWorldPosition(vector3)
-            .add(rightEye.getWorldPosition(vector3b))
-            .divideScalar(2);
-        } else {
-          head.getWorldPosition(vector3);
-          vector3.y += 0.1;
-        }
-
-        vector3.addScaledVector(head.getWorldDirection(vector3b), -0.15);
+      if (!vrm) {
+        vec3.set(
+          globalTransform.translation.x,
+          globalTransform.translation.y + 0.1,
+          globalTransform.translation.z
+        );
       } else {
-        head.getWorldPosition(vector3);
+        const leftEye = vrm.humanoid.normalizedHumanBones.leftEye?.node;
+        const rightEye = vrm.humanoid.normalizedHumanBones.rightEye?.node;
+        const head = vrm.humanoid.normalizedHumanBones.head.node;
+
+        // Get position of head or eyes
+        if (camera.currentView === PlayerCameraView.FirstPerson) {
+          if (leftEye && rightEye) {
+            leftEye
+              .getWorldPosition(vec3)
+              .add(rightEye.getWorldPosition(vec3b))
+              .divideScalar(2);
+          } else {
+            head.getWorldPosition(vec3);
+            vec3.y += 0.1;
+          }
+
+          vec3.addScaledVector(head.getWorldDirection(vec3b), -0.15);
+        } else {
+          head.getWorldPosition(vec3);
+        }
       }
 
-      targetTranslation.fromObject(vector3);
-    }
-
-    if (!foundAvatar) {
-      targetTranslation.set(0, 0, 0);
+      targetTranslation.fromObject(vec3);
     }
   }
 }

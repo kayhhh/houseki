@@ -12,10 +12,10 @@ export function applyTargetTransforms(
 ) {
   // data.lastUpdate has not been calculated yet for this frame
   // so we add the delta to the lastUpdate here from the previous frame
-  const now = performance.now();
-  const delta = now - data.lastLoop;
+  const delta = time.mainTime - data.lastLoop;
   const lastUpdate = data.lastUpdate + delta;
-  const K = lastUpdate / (time.fixedDelta * 1000);
+  const percentThroughFrame = lastUpdate / (time.fixedDelta * 1000);
+  const K = Math.min(percentThroughFrame, 1);
 
   for (const [transform, target] of entities) {
     slerp(transform.rotation, target.prev.rotation, target.rotation, K);
@@ -28,39 +28,22 @@ const quat = new glQuat();
 const quatb = new glQuat();
 
 function slerp(out: Quat, start: Quat, end: Quat, K: number) {
-  quat.x = start.x;
-  quat.y = start.y;
-  quat.z = start.z;
-  quat.w = start.w;
-
-  quatb.x = end.x;
-  quatb.y = end.y;
-  quatb.z = end.z;
-  quatb.w = end.w;
+  glQuat.set(quat, start.x, start.y, start.z, start.w);
+  glQuat.set(quatb, end.x, end.y, end.z, end.w);
 
   glQuat.slerp(quat, quat, quatb, K);
 
-  out.x = quat.x;
-  out.y = quat.y;
-  out.z = quat.z;
-  out.w = quat.w;
+  out.fromObject(quat);
 }
 
 const vec3 = new glVec3();
 const vec3b = new glVec3();
 
 function lerp(out: Vec3, start: Vec3, end: Vec3, K: number) {
-  vec3.x = start.x;
-  vec3.y = start.y;
-  vec3.z = start.z;
-
-  vec3b.x = end.x;
-  vec3b.y = end.y;
-  vec3b.z = end.z;
+  glVec3.set(vec3, start.x, start.y, start.z);
+  glVec3.set(vec3b, end.x, end.y, end.z);
 
   glVec3.lerp(vec3, vec3, vec3b, K);
 
-  out.x = vec3.x;
-  out.y = vec3.y;
-  out.z = vec3.z;
+  out.fromObject(vec3);
 }

@@ -7,15 +7,15 @@ import { PlayerCamera, TargetTranslation } from "../components";
 import { COLLISION_OFFSET } from "../constants";
 import { PlayerCameraView } from "../types";
 
-const quaternion = new Quaternion();
-const vector3 = new Vector3();
+const quat = new Quaternion();
+const vec3 = new Vector3();
 
 export function moveCamera(
   cameras: Query<
     [PlayerCamera, Transform, Mut<TargetTranslation>, Mut<Raycast>]
   >
 ) {
-  for (const [camera, cameraTransform, targetTranslation, raycast] of cameras) {
+  for (const [camera, transform, targetTranslation, raycast] of cameras) {
     raycast.excludeRigidBodyId = camera.bodyId;
     raycast.maxToi = camera.distance;
 
@@ -28,22 +28,22 @@ export function moveCamera(
         ? raycast.hitToi * COLLISION_OFFSET
         : raycast.maxToi;
 
-      quaternion.set(
-        cameraTransform.rotation.x,
-        cameraTransform.rotation.y,
-        cameraTransform.rotation.z,
-        cameraTransform.rotation.w
+      quat.set(
+        transform.rotation.x,
+        transform.rotation.y,
+        transform.rotation.z,
+        transform.rotation.w
       );
-      vector3.set(0, 0, distance);
-      vector3.applyQuaternion(quaternion);
+      vec3.set(0, 0, distance);
+      vec3.applyQuaternion(quat);
 
-      targetTranslation.x += vector3.x;
-      targetTranslation.y += vector3.y;
-      targetTranslation.z += vector3.z;
+      targetTranslation.x += vec3.x;
+      targetTranslation.y += vec3.y;
+      targetTranslation.z += vec3.z;
 
-      vector3.normalize();
+      vec3.normalize();
 
-      raycast.direction.fromObject(vector3);
+      raycast.direction.fromObject(vec3);
     }
   }
 }

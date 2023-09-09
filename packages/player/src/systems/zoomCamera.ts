@@ -9,7 +9,7 @@ import { PlayerCameraMode, PlayerCameraView } from "../types";
 const MIN_CAMERA_DISTANCE = 1;
 const MAX_CAMERA_DISTANCE = 10;
 
-const LERP_STRENGTH = 1e-8;
+const LERP_STRENGTH = 1e-6;
 
 /**
  * Zooms the camera in and out when in third person,
