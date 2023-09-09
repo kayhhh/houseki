@@ -2,6 +2,7 @@ import { CoreStore, Warehouse } from "houseki/core";
 import {
   DynamicBody,
   PhysicsConfig,
+  PrevTargetTransform,
   SphereCollider,
   TargetTransform,
 } from "houseki/physics";
@@ -61,6 +62,7 @@ export function initScene(
       .add(parent)
       .add(transform)
       .add(targetTransform)
+      .addType(PrevTargetTransform)
       .addType(GlobalTransform)
       .add(mesh)
       .add(ballGeometry)

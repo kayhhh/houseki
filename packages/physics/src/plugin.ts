@@ -1,4 +1,4 @@
-import { HousekiSchedules, setMainTime } from "@houseki-engine/core";
+import { HousekiSchedules } from "@houseki-engine/core";
 import { updateGlobalTransforms } from "@houseki-engine/scene";
 import { run, WorldBuilder } from "thyseus";
 
@@ -20,18 +20,15 @@ import { moveRigidBodies } from "./systems/rigidbodies/moveRigidBodies";
 import { rotateRigidBodies } from "./systems/rigidbodies/rotateRigidBodies";
 import { saveRigidBodies } from "./systems/rigidbodies/saveRigidBodies";
 import { runRaycasts } from "./systems/runRaycasts";
-import { saveTargetTransforms } from "./systems/saveTargetTransforms";
+import { savePrevTargetTransforms } from "./systems/savePrevTargetTransforms";
 import { stepWorld } from "./systems/stepWorld";
 
 export function physicsPlugin(builder: WorldBuilder) {
   builder
     .addSystemsToSchedule(
-      HousekiSchedules.PreUpdate,
-      run(applyTargetTransforms)
-        .after(setMainTime)
-        .before(updateGlobalTransforms)
+      HousekiSchedules.PreFixedUpdate,
+      savePrevTargetTransforms
     )
-    .addSystemsToSchedule(HousekiSchedules.PreFixedUpdate, saveTargetTransforms)
     .addSystemsToSchedule(
       HousekiSchedules.FixedUpdate,
       ...run.chain(
@@ -50,5 +47,9 @@ export function physicsPlugin(builder: WorldBuilder) {
         stepWorld,
         [runRaycasts, saveCharacters, saveRigidBodies, generateDebug]
       )
+    )
+    .addSystemsToSchedule(
+      HousekiSchedules.PreUpdate,
+      run(applyTargetTransforms).before(updateGlobalTransforms)
     );
 }

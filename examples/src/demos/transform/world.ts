@@ -16,7 +16,7 @@ export async function createWorld() {
     .addPlugin(physicsPlugin)
     .addPlugin(orbitPlugin)
     .addPlugin(postprocessingPlugin)
-    .addPlugin(getTransformPlugin({ orbitControls: true, physics: true }))
+    .addPlugin(getTransformPlugin({ orbitControls: true }))
     .addSystemsToSchedule(HousekiSchedules.Startup, initScene)
     .addSystems(setTransformMode)
     .build();

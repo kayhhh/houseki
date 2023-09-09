@@ -2,6 +2,7 @@ import { CoreStore, Warehouse } from "houseki/core";
 import {
   BoxCollider,
   PhysicsConfig,
+  PrevTargetTransform,
   StaticBody,
   TargetTransform,
 } from "houseki/physics";
@@ -61,6 +62,7 @@ export function initScene(
     .add(boxCollider)
     .addType(StaticBody)
     .addType(TargetTransform)
+    .addType(PrevTargetTransform)
     .addType(GlobalTransform)
     .add(parent)
     .addType(Mesh)

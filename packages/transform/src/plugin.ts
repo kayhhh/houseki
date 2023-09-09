@@ -1,11 +1,13 @@
+import { HousekiSchedules } from "@houseki-engine/core";
 import { sendEvents as orbitEvents } from "@houseki-engine/orbit";
+import { applyTargetTransforms } from "@houseki-engine/physics";
 import { rotateCamera as playerEvents } from "@houseki-engine/player";
 import { run, System, WorldBuilder } from "thyseus";
 
+import { saveTargetTransforms } from "./systems";
 import { calcRect } from "./systems/calcRect";
 import { clearEvents } from "./systems/clearEvents";
 import { createControls } from "./systems/createControls";
-import { saveTargetTransforms } from "./systems/saveTargetTransforms";
 import { saveTransforms } from "./systems/saveTransforms";
 import { selectTarget } from "./systems/selectTarget";
 import { sendEvents } from "./systems/sendEvents";
@@ -14,11 +16,11 @@ import { setOutlineTargets } from "./systems/setOutlineTargets";
 /**
  * @param orbitControls - Whether orbit controls are used.
  * @param playerControls - Whether player controls are used.
+ * @param physics - Whether physics are used.
  */
 export function getTransformPlugin({
   orbitControls = false,
   playerControls = false,
-  physics = false,
 }) {
   const beforeEvents: System[] = [];
 
@@ -31,20 +33,21 @@ export function getTransformPlugin({
   }
 
   return function transformPlugin(builder: WorldBuilder) {
-    builder.addSystems(
-      calcRect,
-      ...run.chain(
-        selectTarget,
-        createControls,
-        sendEvents,
-        saveTransforms,
-        setOutlineTargets
-      ),
-      run(clearEvents).after(sendEvents).before(beforeEvents)
-    );
-
-    if (physics) {
-      builder.addSystems(run(saveTargetTransforms).after(saveTransforms));
-    }
+    builder
+      .addSystemsToSchedule(
+        HousekiSchedules.PreUpdate,
+        run(saveTargetTransforms).before(applyTargetTransforms)
+      )
+      .addSystems(
+        calcRect,
+        ...run.chain(
+          selectTarget,
+          createControls,
+          sendEvents,
+          saveTransforms,
+          setOutlineTargets
+        ),
+        run(clearEvents).after(sendEvents).before(beforeEvents)
+      );
   };
 }

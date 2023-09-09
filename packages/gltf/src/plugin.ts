@@ -7,5 +7,5 @@ import { importGltf } from "./systems/importGltf";
 export function gltfPlugin(builder: WorldBuilder) {
   builder
     .addSystems(importGltf)
-    .addSystemsToSchedule(HousekiSchedules.PreUpdate, exportGltf);
+    .addSystemsToSchedule(HousekiSchedules.PostUpdate, exportGltf);
 }

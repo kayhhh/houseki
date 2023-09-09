@@ -16,6 +16,7 @@ import { zoomCamera } from "./systems/zoomCamera";
 
 export function playerPlugin(builder: WorldBuilder) {
   builder
+    .addSystemsToSchedule(HousekiSchedules.FixedUpdate, moveBody, setAirTime)
     .addSystems(
       createAnimations,
       setCameraLayers,
@@ -29,6 +30,5 @@ export function playerPlugin(builder: WorldBuilder) {
         rotateBody,
         animatePlayer
       )
-    )
-    .addSystemsToSchedule(HousekiSchedules.FixedUpdate, moveBody, setAirTime);
+    );
 }

@@ -4,5 +4,5 @@ import { WorldBuilder } from "thyseus";
 import { inputWriter } from "./systems/inputWriter";
 
 export function inputPlugin(builder: WorldBuilder) {
-  builder.addSystemsToSchedule(HousekiSchedules.PreUpdate, inputWriter);
+  builder.addSystemsToSchedule(HousekiSchedules.PreLoop, inputWriter);
 }

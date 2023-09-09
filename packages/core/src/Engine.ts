@@ -42,11 +42,10 @@ export class Engine {
   }
 
   async #loop() {
-    await this.#runSchedule(HousekiSchedules.PreUpdate);
-    await this.#runSchedule(HousekiSchedules.Update);
-    await this.#runSchedule(HousekiSchedules.PostUpdate);
+    await this.#runSchedule(HousekiSchedules.PreLoop);
 
-    await this.#runSchedule(HousekiSchedules.FixedLoop);
+    await this.#runSchedule(HousekiSchedules.RunFixedUpdate);
+    await this.#runSchedule(HousekiSchedules.RunMainUpdate);
 
     while (this.#scheduleQueue.length > 0) {
       const schedule = this.#scheduleQueue.shift();
@@ -57,6 +56,8 @@ export class Engine {
 
     await this.#runSchedule(HousekiSchedules.Render);
     await this.#runSchedule(HousekiSchedules.ApplyCommands);
+
+    await this.#runSchedule(HousekiSchedules.PostLoop);
 
     this.#animationFrame = requestAnimationFrame(this.#loop.bind(this));
   }

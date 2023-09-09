@@ -21,11 +21,9 @@ export function saveTransforms(
       const targetObject = renderStore.nodes.get(nodeEnt.id);
       if (!targetObject) continue;
 
-      transform.translation.fromArray(targetObject.position.toArray());
-      transform.rotation.fromArray(
-        targetObject.quaternion.toArray() as [number, number, number, number]
-      );
-      transform.scale.fromArray(targetObject.scale.toArray());
+      transform.translation.fromObject(targetObject.position);
+      transform.rotation.fromObject(targetObject.quaternion);
+      transform.scale.fromObject(targetObject.scale);
     }
   }
 }

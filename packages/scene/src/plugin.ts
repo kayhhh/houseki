@@ -6,10 +6,10 @@ import { updateGlobalTransforms } from "./systems/updateGlobalTransforms";
 
 export function scenePlugin(builder: WorldBuilder) {
   builder
-    .addSystems(deepRemove)
-    .addSystemsToSchedule(HousekiSchedules.PreUpdate, updateGlobalTransforms)
     .addSystemsToSchedule(
       HousekiSchedules.PreFixedUpdate,
       updateGlobalTransforms
-    );
+    )
+    .addSystemsToSchedule(HousekiSchedules.PreUpdate, updateGlobalTransforms)
+    .addSystems(deepRemove);
 }

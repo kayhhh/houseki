@@ -5,15 +5,15 @@ import { despawnEntities } from "./systems/despawnEntities";
 import { fetchAssets } from "./systems/fetchAssets";
 import { initTime } from "./systems/initTime";
 import { initWorld } from "./systems/initWorld";
-import { runFixedLoop } from "./systems/runFixedLoop";
-import { setMainTime } from "./systems/setMainTime";
+import { runFixedUpdate } from "./systems/runFixedUpdate";
+import { runMainUpdate } from "./systems/runMainUpdate";
 
 export function corePlugin(builder: WorldBuilder) {
   builder
     .addSystems(fetchAssets)
     .addSystemsToSchedule(HousekiSchedules.ApplyCommands, applyCommands)
     .addSystemsToSchedule(HousekiSchedules.Destroy, despawnEntities)
-    .addSystemsToSchedule(HousekiSchedules.FixedLoop, runFixedLoop)
-    .addSystemsToSchedule(HousekiSchedules.PreUpdate, setMainTime)
+    .addSystemsToSchedule(HousekiSchedules.RunFixedUpdate, runFixedUpdate)
+    .addSystemsToSchedule(HousekiSchedules.RunMainUpdate, runMainUpdate)
     .addSystemsToSchedule(HousekiSchedules.Startup, initWorld, initTime);
 }

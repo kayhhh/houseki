@@ -35,7 +35,7 @@ export function portalPlugin(builder: WorldBuilder) {
       run(slerpTargetRotation2).after(rotatePlayerCamera)
     )
     .addSystemsToSchedule(
-      HousekiSchedules.PreUpdate,
+      HousekiSchedules.PreLoop,
       run(restoreOriginalTranslation).before(updateGlobalTransforms),
       run(restoreOriginalRotation).before(updateGlobalTransforms)
     )

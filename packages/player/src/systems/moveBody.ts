@@ -2,6 +2,7 @@ import { Time } from "@houseki-engine/core";
 import { InputStruct, Key } from "@houseki-engine/input";
 import {
   CharacterController,
+  PrevTargetTransform,
   TargetTransform,
   Velocity,
 } from "@houseki-engine/physics";
@@ -28,6 +29,7 @@ export function moveBody(
       CharacterController,
       Mut<Transform>,
       Mut<TargetTransform>,
+      Mut<PrevTargetTransform>,
       Mut<GlobalTransform>,
       Mut<Velocity>
     ]
@@ -44,6 +46,7 @@ export function moveBody(
       character,
       transform,
       targetTransform,
+      prevTargetTransform,
       globalTransform,
       velocity,
     ] of bodies) {
@@ -77,6 +80,7 @@ export function moveBody(
         velocity.set(0, 0, 0);
         transform.translation.copy(player.spawnPoint);
         targetTransform.translation.copy(player.spawnPoint);
+        prevTargetTransform.translation.copy(player.spawnPoint);
         globalTransform.translation.copy(player.spawnPoint);
       }
 

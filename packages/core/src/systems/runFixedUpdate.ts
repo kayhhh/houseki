@@ -12,7 +12,7 @@ export class FixedLoopData {
   lastUpdate: f32 = 0;
 }
 
-export async function runFixedLoop(
+export async function runFixedUpdate(
   world: World,
   time: Res<Mut<Time>>,
   data: Res<Mut<FixedLoopData>>
