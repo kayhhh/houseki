@@ -1,5 +1,15 @@
 # @houseki-engine/core
 
+## 1.1.0
+
+### Minor Changes
+
+- 5a49832: refactor engine loop
+
+### Patch Changes
+
+- 845c663: fix fixed loop time math
+
 ## 1.0.1
 
 ### Patch Changes
