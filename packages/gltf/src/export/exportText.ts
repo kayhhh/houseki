@@ -14,17 +14,14 @@ export function exportText(
   const textExtension = context.doc.createExtension(MOZText);
   const textProp = textExtension.createText();
 
-  const value = text.value;
-  const font = text.font;
-
-  textProp.setValue(value);
+  textProp.setValue(text.value);
   textProp.setSize(text.fontSize);
-  textProp.setFontFile(font);
+  textProp.setFontFile(text.font);
 
   const color = [
-    (text.color.at(0) ?? 0) / 255,
-    (text.color.at(1) ?? 0) / 255,
-    (text.color.at(2) ?? 0) / 255,
+    text.color[0] / 255,
+    text.color[1] / 255,
+    text.color[2] / 255,
     1,
   ] as [number, number, number, number];
 

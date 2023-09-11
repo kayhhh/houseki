@@ -31,12 +31,7 @@ function writeGeometry(warehouse: Warehouse, threeGeometry: BufferGeometry) {
   geometry.normals.write(normals, warehouse);
   geometry.uv.write(uvs, warehouse);
 
-  const indices32 = new Uint32Array(indices.length);
-
-  for (let i = 0; i < indices.length; i++) {
-    indices32[i] = indices[i] ?? 0;
-  }
-
+  const indices32 = Uint32Array.from(indices);
   geometry.indices.write(indices32, warehouse);
 
   return geometry;

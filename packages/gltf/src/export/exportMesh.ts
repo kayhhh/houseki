@@ -42,14 +42,16 @@ export function exportMesh(
   const materialId = mesh.materialId || entityId;
   const material = context.materials.get(materialId);
 
-  if (material) primitive.setMaterial(material);
+  if (material) {
+    primitive.setMaterial(material);
+  }
 
   for (const [gltf, ecs] of Object.entries(GLTF_TO_ECS_ATTRIBUTES)) {
     const array = geometry[ecs].read(warehouse);
-    if (!array) continue;
+    if (!array || array.length === 0) continue;
 
     const accessor = context.doc.createAccessor();
-    accessor.setArray(new Float32Array(array));
+    accessor.setArray(array);
     accessor.setType(ATTRIBUTE_TYPES[ecs]);
     primitive.setAttribute(gltf, accessor);
   }

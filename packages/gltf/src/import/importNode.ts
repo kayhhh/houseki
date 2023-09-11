@@ -26,9 +26,7 @@ export function importNode(
 
   context.transform.set(nodePosition, nodeRotation, nodeScale);
   context.globalTransform.set(globalPosition, globalRotation, globalScale);
-
   context.parent.id = parentId;
-
   context.name.value = node.getName() || `Node_${context.nodes.size}`;
 
   const entityId = commands
@@ -41,7 +39,9 @@ export function importNode(
   context.nodes.set(node, entityId);
 
   const mesh = node.getMesh();
-  if (mesh) importMesh(warehouse, mesh, entityId, commands, context);
+  if (mesh) {
+    importMesh(warehouse, mesh, entityId, commands, context);
+  }
 
   importCollider(context, commands, node, entityId);
   importPhysicsBody(context, commands, node, entityId);

@@ -36,7 +36,7 @@ export function addEffectPass(
     if (cameraId === null) return;
 
     const camera = renderStore.perspectiveCameras.get(cameraId);
-    if (!camera) return;
+    if (!camera) return
 
     // We want to add the pass immediately after the render pass
     // before other post-processing effects, like anti-aliasing.

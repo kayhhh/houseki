@@ -28,7 +28,6 @@ export function importMesh(
   gltfMesh.listPrimitives().forEach((primitive) => {
     const mesh = new Mesh();
     mesh.parentId = nodeId;
-
     mesh.mode = primitive.getMode();
 
     const geometry = new Geometry();
@@ -46,12 +45,7 @@ export function importMesh(
     const indices = primitive.getIndices()?.getArray();
 
     if (indices instanceof Uint16Array) {
-      const indices32 = new Uint32Array(indices.length);
-
-      for (let i = 0; i < indices.length; i++) {
-        indices32[i] = indices[i] ?? 0;
-      }
-
+      const indices32 = Uint32Array.from(indices);
       geometry.indices.write(indices32, warehouse);
     } else if (indices instanceof Uint32Array) {
       geometry.indices.write(indices, warehouse);

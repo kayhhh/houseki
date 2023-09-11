@@ -167,8 +167,8 @@ export function exportGltf(
       exportNode(context, entity.id, parent.id, transform);
     }
 
-    for (const [entity, t] of text) {
-      exportText(context, entity.id, t);
+    for (const [entity, txt] of text) {
+      exportText(context, entity.id, txt);
     }
 
     for (const extra of extras) {
@@ -224,7 +224,9 @@ export function exportGltf(
     });
   }
 
-  reader.clear();
+  if (reader.length > 0) {
+    reader.clear();
+  }
 }
 
 function bytesToDisplay(bytes: number) {

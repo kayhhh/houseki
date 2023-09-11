@@ -78,7 +78,9 @@ export function importGltf(
       const context = importDoc(warehouse, doc, entity, commands);
 
       // Add context to store, for cleanup
-      if (context) store.contexts.set(id, context);
+      if (context) {
+        store.contexts.set(id, context);
+      }
 
       // Remove document from store
       store.docs.delete(id);

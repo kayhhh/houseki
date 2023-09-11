@@ -83,7 +83,9 @@ export function handleExport(
     }
   }
 
-  reader.clear();
+  if (reader.length > 0) {
+    reader.clear();
+  }
 }
 
 function downloadFile(blob: Blob, name: string) {
