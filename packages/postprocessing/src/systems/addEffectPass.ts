@@ -1,7 +1,7 @@
 import { RenderStore } from "@houseki-engine/render";
 import { SceneStruct } from "@houseki-engine/scene";
 import { EffectComposer, EffectPass } from "postprocessing";
-import { Res, SystemRes } from "thyseus";
+import { Mut, Res, SystemRes } from "thyseus";
 
 import { OutlineRes } from "../resources";
 
@@ -15,7 +15,7 @@ class LocalRes {
 export function addEffectPass(
   renderStore: Res<RenderStore>,
   sceneStruct: Res<SceneStruct>,
-  outlineRes: Res<OutlineRes>,
+  outlineRes: Res<Mut<OutlineRes>>,
   localRes: SystemRes<LocalRes>
 ) {
   const composerChanged = renderStore.composer !== localRes.composer;
@@ -49,5 +49,7 @@ export function addEffectPass(
 
     renderStore.composer.addPass(localRes.pass, renderIndex + 1);
     localRes.composer = renderStore.composer;
+
+    outlineRes.hasChanged = false;
   }
 }

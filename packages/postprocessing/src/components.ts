@@ -12,7 +12,7 @@ export class OutlinePass {
 
   opacity: f32 = 1;
   edgeStrength: f32 = 3;
-  resolution: u16 = 1 - 24;
+  resolution: u16 = 1024;
   multisampling: u8 = 4;
   xray: boolean = true;
 }

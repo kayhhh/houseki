@@ -26,7 +26,9 @@ export function createOutlineEffects(
     let effect = res.effect;
 
     if (!effect || effect.resolution.width !== outline.resolution) {
-      if (effect) effect.dispose();
+      if (effect) {
+        effect.dispose();
+      }
 
       effect = new OutlineEffect(scene, camera, {
         resolutionX: outline.resolution,
@@ -43,19 +45,8 @@ export function createOutlineEffects(
     effect.xRay = outline.xray;
     effect.blendMode.opacity.value = outline.opacity;
 
-    const visibleEdgeColor = [
-      outline.visibleEdgeColor[0],
-      outline.visibleEdgeColor[1],
-      outline.visibleEdgeColor[2],
-    ] as [number, number, number];
-    effect.visibleEdgeColor.fromArray(visibleEdgeColor);
-
-    const hiddenEdgeColor = [
-      outline.hiddenEdgeColor[0],
-      outline.hiddenEdgeColor[1],
-      outline.hiddenEdgeColor[2],
-    ] as [number, number, number];
-    effect.hiddenEdgeColor.fromArray(hiddenEdgeColor);
+    effect.visibleEdgeColor.fromArray(outline.visibleEdgeColor);
+    effect.hiddenEdgeColor.fromArray(outline.hiddenEdgeColor);
 
     effect.selection.clear();
 
@@ -75,6 +66,6 @@ export function createOutlineEffects(
   if (outlines.length === 0) {
     res.effect?.dispose();
     res.effect = null;
-    res.hasChanged;
+    res.hasChanged = true;
   }
 }
