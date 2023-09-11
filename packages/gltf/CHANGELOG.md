@@ -1,5 +1,11 @@
 # @houseki-engine/gltf
 
+## 7.0.1
+
+### Patch Changes
+
+- 7d92268: fix gltf primitive export
+
 ## 7.0.0
 
 ### Patch Changes
