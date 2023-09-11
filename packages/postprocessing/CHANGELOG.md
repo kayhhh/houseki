@@ -1,5 +1,12 @@
 # @houseki-engine/postprocessing
 
+## 5.0.1
+
+### Patch Changes
+
+- a738524: fix effect pass perf, was rebuilding too often
+- a738524: fix outline effect resolution
+
 ## 5.0.0
 
 ### Patch Changes
