@@ -1,5 +1,11 @@
 # @houseki-engine/gltf
 
+## 7.2.0
+
+### Minor Changes
+
+- 92e00a4: add scene to gltf info
+
 ## 7.1.0
 
 ### Minor Changes
