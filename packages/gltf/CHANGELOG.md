@@ -1,5 +1,11 @@
 # @houseki-engine/gltf
 
+## 7.1.0
+
+### Minor Changes
+
+- a3b2406: add GltfInfo to gltf imports
+
 ## 7.0.1
 
 ### Patch Changes
