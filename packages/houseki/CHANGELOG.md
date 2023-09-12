@@ -1,5 +1,12 @@
 # houseki
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [92e00a4]
+  - @houseki-engine/gltf@7.2.0
+
 ## 1.1.0
 
 ### Minor Changes
