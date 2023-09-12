@@ -62,7 +62,7 @@ export function importGltf(
 
       const loading = new Loading(`Loading ${gltf.uri}`);
 
-      commands.getById(entity.id).add(loading);
+      commands.get(entity).add(loading);
 
       // Start loading document
       io.read(uri).then((doc) => store.docs.set(id, doc));
@@ -86,7 +86,7 @@ export function importGltf(
       store.docs.delete(id);
 
       // Remove loading component
-      commands.getById(entity.id).remove(Loading);
+      commands.get(entity).remove(Loading);
     }
   }
 

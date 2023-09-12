@@ -43,7 +43,7 @@ export function addPhysics(
   for (const [entity, mesh] of meshes) {
     // Add mesh collider
     commands
-      .getById(entity.id)
+      .get(entity)
       .addType(Transform)
       .addType(GlobalTransform)
       .add(new Parent(mesh.parentId))

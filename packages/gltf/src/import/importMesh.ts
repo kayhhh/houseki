@@ -58,7 +58,7 @@ export function importMesh(
       mesh.materialId = importMaterial(warehouse, material, commands, context);
     }
 
-    context.name.value = gltfMesh.getName() || `Mesh_${context.meshIds.length}`;
+    context.name.value = gltfMesh.getName();
 
     const meshId = commands
       .spawn(true)

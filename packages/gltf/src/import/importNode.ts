@@ -27,7 +27,7 @@ export function importNode(
   context.transform.set(nodePosition, nodeRotation, nodeScale);
   context.globalTransform.set(globalPosition, globalRotation, globalScale);
   context.parent.id = parentId;
-  context.name.value = node.getName() || `Node_${context.nodes.size}`;
+  context.name.value = node.getName();
 
   const entityId = commands
     .spawn(true)

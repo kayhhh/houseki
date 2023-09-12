@@ -22,3 +22,10 @@ export class Extra {
     this.value = value;
   }
 }
+
+@struct
+export class GltfInfo {
+  nodes: u64[] = [];
+  meshes: u64[] = [];
+  materials: u64[] = [];
+}

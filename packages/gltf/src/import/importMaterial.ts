@@ -103,8 +103,7 @@ export function importMaterial(
     applyTextureInfo(material.metallicRoughnessTextureInfo, info);
   }
 
-  context.name.value =
-    gltfMaterial.getName() || `Material_${context.materials.size}`;
+  context.name.value = gltfMaterial.getName();
 
   const entityId = commands.spawn(true).add(material).id;
 

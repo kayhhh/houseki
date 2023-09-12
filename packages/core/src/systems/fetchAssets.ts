@@ -38,7 +38,7 @@ export function fetchAssets(
       continue;
     }
 
-    commands.getById(entity.id).add(new Loading(`Fetching ${uri}`));
+    commands.get(entity).add(new Loading(`Fetching ${uri}`));
 
     fetch(uri)
       .then((response) => response.arrayBuffer())
@@ -55,7 +55,7 @@ export function fetchAssets(
 
     if (loaded) {
       resource.data.write(loaded, warehouse);
-      commands.getById(entity.id).remove(Loading);
+      commands.get(entity).remove(Loading);
     }
   }
 }

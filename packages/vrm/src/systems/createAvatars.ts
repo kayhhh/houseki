@@ -55,7 +55,7 @@ export function createAvatars(
     if (!uri) continue;
 
     localStore.loadingURI.set(entityId, uri);
-    commands.getById(entity.id).add(new Loading(`Loading ${uri}`));
+    commands.get(entity).add(new Loading(`Loading ${uri}`));
     loadVrm(entityId, uri, localStore);
   }
 
@@ -66,7 +66,7 @@ export function createAvatars(
 
     if (loaded) {
       // VRM is loaded, remove loading component
-      commands.getById(entity.id).remove(Loading);
+      commands.get(entity).remove(Loading);
       vrmStore.avatars.set(entity.id, loaded);
     }
   }
