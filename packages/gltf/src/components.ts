@@ -1,4 +1,4 @@
-import { struct, type u64 } from "thyseus";
+import { struct, u8, type u64 } from "thyseus";
 
 @struct
 export class Gltf {
@@ -25,6 +25,8 @@ export class Extra {
 
 @struct
 export class GltfInfo {
+  defaultScene: u8 = 0;
+  scenes: u64[] = [];
   nodes: u64[] = [];
   meshes: u64[] = [];
   materials: u64[] = [];

@@ -40,6 +40,18 @@ export function importDoc(
   // Set indices
   const info = new GltfInfo();
 
+  root.listScenes().forEach((s, i) => {
+    if (s === root.getDefaultScene()) {
+      info.defaultScene = i;
+    }
+
+    if (s === scene) {
+      info.scenes.push(entity.id);
+    } else {
+      info.scenes.push(0n);
+    }
+  });
+
   root.listNodes().forEach((node) => {
     const entityId = context.nodes.get(node);
     if (!entityId) return;
