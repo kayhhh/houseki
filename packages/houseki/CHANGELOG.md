@@ -1,5 +1,16 @@
 # houseki
 
+## 1.1.0
+
+### Minor Changes
+
+- a3b2406: add GltfInfo to gltf imports
+
+### Patch Changes
+
+- Updated dependencies [a3b2406]
+  - @houseki-engine/gltf@7.1.0
+
 ## 1.0.4
 
 ### Patch Changes
