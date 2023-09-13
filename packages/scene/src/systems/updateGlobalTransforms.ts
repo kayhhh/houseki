@@ -1,17 +1,16 @@
-import { Mat4, Quat, Vec3, Vec4 } from "gl-matrix/dist/esm";
+import { Matrix4, Quaternion, Vector3 } from "three";
 import { Entity, Mut, Query, SystemRes, With } from "thyseus";
 
 import { GlobalTransform, Parent, Scene, Transform } from "../components";
 
-const quat = new Quat();
-const vec3 = new Vec3();
-const vec3b = new Vec3();
-const vec4 = new Vec4();
+const quat = new Quaternion();
+const vec3 = new Vector3();
+const vec3b = new Vector3();
 
 class LocalStore {
   children = new Map<bigint, bigint[]>();
-  transforms = new Map<bigint, Mat4>();
-  globalTransforms = new Map<bigint, Mat4>();
+  transforms = new Map<bigint, Matrix4>();
+  globalTransforms = new Map<bigint, Matrix4>();
 }
 
 export function updateGlobalTransforms(
@@ -21,25 +20,23 @@ export function updateGlobalTransforms(
 ) {
   // Init global transform mats
   for (const [entity, parent, transform] of nodes) {
-    const localMat = new Mat4();
+    const localMat = new Matrix4();
     localStore.transforms.set(entity.id, localMat);
 
-    Vec4.set(
-      vec4,
+    vec3.set(
+      transform.translation.x,
+      transform.translation.y,
+      transform.translation.z
+    );
+    quat.set(
       transform.rotation.x,
       transform.rotation.y,
       transform.rotation.z,
       transform.rotation.w
     );
-    Vec3.set(
-      vec3,
-      transform.translation.x,
-      transform.translation.y,
-      transform.translation.z
-    );
-    Vec3.set(vec3b, transform.scale.x, transform.scale.y, transform.scale.z);
+    vec3b.set(transform.scale.x, transform.scale.y, transform.scale.z);
 
-    Mat4.fromRotationTranslationScale(localMat, vec4, vec3, vec3b);
+    localMat.compose(vec3, quat, vec3b);
 
     localStore.globalTransforms.set(entity.id, localMat);
 
@@ -63,14 +60,11 @@ export function updateGlobalTransforms(
     const globalMat = localStore.globalTransforms.get(entity.id);
     if (!globalMat) continue;
 
-    Mat4.getRotation(quat, globalMat);
-    globalTransform.rotation.fromObject(quat);
+    globalMat.decompose(vec3, quat, vec3b);
 
-    Mat4.getTranslation(vec3, globalMat);
     globalTransform.translation.fromObject(vec3);
-
-    Mat4.getScaling(vec3, globalMat);
-    globalTransform.scale.fromObject(vec3);
+    globalTransform.rotation.fromObject(quat);
+    globalTransform.scale.fromObject(vec3b);
   }
 
   localStore.children.clear();
@@ -81,13 +75,13 @@ export function updateGlobalTransforms(
 function updateTransformRecursive(
   entityId: bigint,
   childrenMap: Map<bigint, bigint[]>,
-  transforms: Map<bigint, Mat4>,
-  globalTransforms: Map<bigint, Mat4>
+  transforms: Map<bigint, Matrix4>,
+  globalTransforms: Map<bigint, Matrix4>
 ) {
   const children = childrenMap.get(entityId);
   if (!children) return;
 
-  const parentGlobal = globalTransforms.get(entityId) ?? new Mat4();
+  const parentGlobal = globalTransforms.get(entityId) ?? new Matrix4();
 
   for (const childId of children) {
     const childLocal = transforms.get(childId);
@@ -96,7 +90,7 @@ function updateTransformRecursive(
     const childGlobal = globalTransforms.get(childId);
     if (!childGlobal) continue;
 
-    Mat4.multiply(childGlobal, parentGlobal, childLocal);
+    childGlobal.multiplyMatrices(parentGlobal, childLocal);
 
     updateTransformRecursive(
       childId,

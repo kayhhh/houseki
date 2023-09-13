@@ -32,7 +32,18 @@ export function importPhysicsBody(
         physicsBody.getAngularVelocity()
       );
 
-      commands.getById(entityId).add(context.kinematicBody);
+      const nodePosition = node.getTranslation();
+      const nodeRotation = node.getRotation();
+      const nodeScale = node.getScale();
+
+      context.targetTransform.set(nodePosition, nodeRotation, nodeScale);
+      context.prevTargetTransform.set(nodePosition, nodeRotation, nodeScale);
+
+      commands
+        .getById(entityId)
+        .add(context.kinematicBody)
+        .add(context.targetTransform)
+        .add(context.prevTargetTransform);
       break;
     }
 
@@ -50,11 +61,13 @@ export function importPhysicsBody(
       const nodeScale = node.getScale();
 
       context.targetTransform.set(nodePosition, nodeRotation, nodeScale);
+      context.prevTargetTransform.set(nodePosition, nodeRotation, nodeScale);
 
       commands
         .getById(entityId)
         .add(context.dynamicBody)
-        .add(context.targetTransform);
+        .add(context.targetTransform)
+        .add(context.prevTargetTransform);
       break;
     }
 

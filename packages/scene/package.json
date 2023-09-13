@@ -17,12 +17,11 @@
     "build": "tsc --noEmit && vite build --emptyOutDir",
     "dev": "vite build --watch"
   },
-  "dependencies": {
-    "gl-matrix": "^4.0.0-beta.1"
-  },
   "devDependencies": {
     "@houseki-engine/core": "workspace:^",
+    "@types/three": "~0.154.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "three": "~0.154.0",
     "thyseus": "0.14.0",
     "typescript": "~5.2.2",
     "vite": "^4.4.7",
@@ -30,6 +29,7 @@
   },
   "peerDependencies": {
     "@houseki-engine/core": "workspace:^",
+    "three": "*",
     "thyseus": "*"
   },
   "publishConfig": {

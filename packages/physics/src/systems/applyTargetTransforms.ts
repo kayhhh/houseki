@@ -1,6 +1,6 @@
 import { FixedLoopData, Time, Vec3 } from "@houseki-engine/core";
 import { Quat, Transform } from "@houseki-engine/scene";
-import { Quat as glQuat, Vec3 as glVec3 } from "gl-matrix/dist/esm";
+import { Quaternion, Vector3 } from "three";
 import { Mut, Query, Res } from "thyseus";
 
 import { PrevTargetTransform, TargetTransform } from "../components";
@@ -21,26 +21,26 @@ export function applyTargetTransforms(
   }
 }
 
-const quat = new glQuat();
-const quatb = new glQuat();
+const quat = new Quaternion();
+const quatb = new Quaternion();
 
 function slerp(out: Quat, start: Quat, end: Quat, K: number) {
-  glQuat.set(quat, start.x, start.y, start.z, start.w);
-  glQuat.set(quatb, end.x, end.y, end.z, end.w);
+  quat.set(start.x, start.y, start.z, start.w);
+  quatb.set(end.x, end.y, end.z, end.w);
 
-  glQuat.slerp(quat, quat, quatb, K);
+  quat.slerp(quatb, K);
 
   out.fromObject(quat);
 }
 
-const vec3 = new glVec3();
-const vec3b = new glVec3();
+const vec3 = new Vector3();
+const vec3b = new Vector3();
 
 function lerp(out: Vec3, start: Vec3, end: Vec3, K: number) {
-  glVec3.set(vec3, start.x, start.y, start.z);
-  glVec3.set(vec3b, end.x, end.y, end.z);
+  vec3.set(start.x, start.y, start.z);
+  vec3b.set(end.x, end.y, end.z);
 
-  glVec3.lerp(vec3, vec3, vec3b, K);
+  vec3.lerp(vec3b, K);
 
   out.fromObject(vec3);
 }

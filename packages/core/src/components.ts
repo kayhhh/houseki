@@ -1,4 +1,4 @@
-import { type f32, struct, u32 } from "thyseus";
+import { f64, struct, u32 } from "thyseus";
 
 import { Warehouse } from "./Warehouse";
 
@@ -55,8 +55,8 @@ export class Asset {
 
 @struct
 export class Vec2 {
-  x: f32;
-  y: f32;
+  x: f64;
+  y: f64;
 
   set(x: number, y: number) {
     this.x = x;
@@ -97,9 +97,9 @@ export class Vec2 {
 
 @struct
 export class Vec3 {
-  x: f32;
-  y: f32;
-  z: f32;
+  x: f64;
+  y: f64;
+  z: f64;
 
   set(x: number, y: number, z: number) {
     this.x = x;
@@ -146,10 +146,10 @@ export class Vec3 {
 
 @struct
 export class Vec4 {
-  x: f32;
-  y: f32;
-  z: f32;
-  w: f32;
+  x: f64;
+  y: f64;
+  z: f64;
+  w: f64;
 
   set(x: number, y: number, z: number, w: number) {
     this.x = x;

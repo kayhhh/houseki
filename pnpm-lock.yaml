@@ -334,9 +334,6 @@ importers:
       '@dimforge/rapier3d':
         specifier: ^0.11.2
         version: 0.11.2
-      gl-matrix:
-        specifier: ^4.0.0-beta.1
-        version: 4.0.0-beta.1
     devDependencies:
       '@houseki-engine/core':
         specifier: workspace:^
@@ -344,9 +341,15 @@ importers:
       '@houseki-engine/scene':
         specifier: workspace:^
         version: link:../scene
+      '@types/three':
+        specifier: ~0.154.0
+        version: 0.154.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.29.1)
+      three:
+        specifier: ~0.154.0
+        version: 0.154.0
       thyseus:
         specifier: 0.14.0
         version: 0.14.0
@@ -521,17 +524,19 @@ importers:
         version: link:../vite-plugin-thyseus-ts
 
   packages/scene:
-    dependencies:
-      gl-matrix:
-        specifier: ^4.0.0-beta.1
-        version: 4.0.0-beta.1
     devDependencies:
       '@houseki-engine/core':
         specifier: workspace:^
         version: link:../core
+      '@types/three':
+        specifier: ~0.154.0
+        version: 0.154.0
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.29.1)
+      three:
+        specifier: ~0.154.0
+        version: 0.154.0
       thyseus:
         specifier: 0.14.0
         version: 0.14.0
@@ -3795,10 +3800,6 @@ packages:
 
   /github-from-package@0.0.0:
     resolution: {integrity: sha512-SyHy3T1v2NUXn29OsWdxmK6RwHD+vkj3v8en8AOBZ1wBQ/hCAQ5bAQTD02kW4W9tUp/3Qh6J8r9EvntiyCmOOw==}
-    dev: false
-
-  /gl-matrix@4.0.0-beta.1:
-    resolution: {integrity: sha512-T46Kej6rIIASFFRtUj6CmsWutu8XHHccdPwAfwkJrr4MkOsKKaQprSTjMhUGuVVmqN3iJO9CwYX1DjACr2Wn6g==}
     dev: false
 
   /glob-parent@5.1.2:

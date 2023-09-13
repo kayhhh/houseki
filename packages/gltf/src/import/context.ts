@@ -7,6 +7,7 @@ import {
   HullCollider,
   KinematicBody,
   MeshCollider,
+  PrevTargetTransform,
   SphereCollider,
   TargetTransform,
 } from "@houseki-engine/physics";
@@ -35,6 +36,7 @@ export class ImportContext {
   readonly transform = new Transform();
   readonly globalTransform = new GlobalTransform();
   readonly targetTransform = new TargetTransform();
+  readonly prevTargetTransform = new PrevTargetTransform();
   readonly name = new Name();
 
   readonly kinematicBody = new KinematicBody();

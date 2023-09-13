@@ -1,6 +1,6 @@
 import { CoreStore, Warehouse } from "houseki/core";
 import {
-  BoxCollider,
+  MeshCollider,
   PhysicsConfig,
   PrevTargetTransform,
   StaticBody,
@@ -15,6 +15,7 @@ import {
   Transform,
 } from "houseki/scene";
 import { TransformControls, TransformMode } from "houseki/transform";
+import { Euler, Quaternion } from "three";
 import { Commands, Mut, Query, Res } from "thyseus";
 
 import { createLights } from "../../utils/createLights";
@@ -44,9 +45,8 @@ export function initScene(
   const geometry = createBoxGeometry(warehouse);
   const parent = new Parent(rootId);
   const transform = new Transform([2, 0, 0]);
-  const boxCollider = new BoxCollider([1, 1, 1]);
 
-  commands
+  const boxId = commands
     .spawn(true)
     .add(transform)
     .addType(GlobalTransform)
@@ -56,13 +56,26 @@ export function initScene(
 
   transform.translation.set(0, 0, 0);
 
-  const boxId = commands
+  const euler = new Euler(0, 75, 0);
+  const quat = new Quaternion();
+  quat.setFromEuler(euler);
+  transform.rotation.fromObject(quat);
+
+  transform.scale.set(2, 1, 1);
+
+  const targetTransform = new TargetTransform();
+  targetTransform.copy(transform);
+
+  const prevTargetTransform = new PrevTargetTransform();
+  prevTargetTransform.copy(transform);
+
+  commands
     .spawn(true)
     .add(transform)
-    .add(boxCollider)
+    .add(targetTransform)
+    .add(prevTargetTransform)
+    .addType(MeshCollider)
     .addType(StaticBody)
-    .addType(TargetTransform)
-    .addType(PrevTargetTransform)
     .addType(GlobalTransform)
     .add(parent)
     .addType(Mesh)
