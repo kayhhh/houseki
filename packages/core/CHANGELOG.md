@@ -1,5 +1,11 @@
 # @houseki-engine/core
 
+## 1.1.1
+
+### Patch Changes
+
+- 710c860: change Vec2, Vec3, and Vec4 from float32 to float64
+
 ## 1.1.0
 
 ### Minor Changes

@@ -1,5 +1,12 @@
 # @houseki-engine/input
 
+## 2.0.1
+
+### Patch Changes
+
+- Updated dependencies [710c860]
+  - @houseki-engine/core@1.1.1
+
 ## 2.0.0
 
 ### Patch Changes

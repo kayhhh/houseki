@@ -1,5 +1,13 @@
 # @houseki-engine/scene
 
+## 2.0.1
+
+### Patch Changes
+
+- 710c860: fix transformation math (remove gl-matrix)
+- Updated dependencies [710c860]
+  - @houseki-engine/core@1.1.1
+
 ## 2.0.0
 
 ### Patch Changes
