@@ -1,5 +1,16 @@
 # @houseki-engine/utils
 
+## 7.0.1
+
+### Patch Changes
+
+- Updated dependencies [710c860]
+- Updated dependencies [710c860]
+  - @houseki-engine/scene@2.0.1
+  - @houseki-engine/core@1.1.1
+  - @houseki-engine/render@6.0.1
+  - @houseki-engine/input@2.0.1
+
 ## 7.0.0
 
 ### Patch Changes

@@ -1,5 +1,27 @@
 # houseki
 
+## 1.1.2
+
+### Patch Changes
+
+- Updated dependencies [710c860]
+- Updated dependencies [710c860]
+  - @houseki-engine/physics@6.0.1
+  - @houseki-engine/scene@2.0.1
+  - @houseki-engine/core@1.1.1
+  - @houseki-engine/gltf@7.2.1
+  - @houseki-engine/player@7.0.1
+  - @houseki-engine/portal@6.0.1
+  - @houseki-engine/transform@7.0.2
+  - @houseki-engine/csm@5.0.1
+  - @houseki-engine/orbit@7.0.1
+  - @houseki-engine/postprocessing@5.0.2
+  - @houseki-engine/render@6.0.1
+  - @houseki-engine/text@6.0.1
+  - @houseki-engine/utils@7.0.1
+  - @houseki-engine/vrm@6.0.1
+  - @houseki-engine/input@2.0.1
+
 ## 1.1.1
 
 ### Patch Changes
