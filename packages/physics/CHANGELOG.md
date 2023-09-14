@@ -1,5 +1,11 @@
 # @houseki-engine/physics
 
+## 6.1.1
+
+### Patch Changes
+
+- d39a258: physics import / export fixes
+
 ## 6.1.0
 
 ### Minor Changes

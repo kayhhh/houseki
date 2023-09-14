@@ -1,5 +1,14 @@
 # @houseki-engine/portal
 
+## 7.0.1
+
+### Patch Changes
+
+- d39a258: fix portal plugin scheduling
+- Updated dependencies [d39a258]
+  - @houseki-engine/physics@6.1.1
+  - @houseki-engine/player@8.0.1
+
 ## 7.0.0
 
 ### Patch Changes

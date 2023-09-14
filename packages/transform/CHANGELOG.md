@@ -1,5 +1,13 @@
 # @houseki-engine/transform
 
+## 8.0.1
+
+### Patch Changes
+
+- Updated dependencies [d39a258]
+  - @houseki-engine/physics@6.1.1
+  - @houseki-engine/player@8.0.1
+
 ## 8.0.0
 
 ### Patch Changes
