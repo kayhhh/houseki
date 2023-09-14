@@ -17,8 +17,8 @@ export class PhysicsStore {
   readonly sphereColliders = new Map<bigint, Collider>();
   readonly capsuleColliders = new Map<bigint, Collider>();
   readonly cylinderColliders = new Map<bigint, Collider>();
-  readonly hullColliders = new Map<bigint, Collider>();
-  readonly meshColliders = new Map<bigint, Collider>();
+  readonly hullColliders = new Map<bigint, Collider[]>();
+  readonly meshColliders = new Map<bigint, Collider[]>();
 
   /**
    * Entity ID -> Rapier rigidbody
@@ -54,15 +54,30 @@ export class PhysicsStore {
   /**
    * Returns the Rapier collider for the given entity ID.
    */
-  getCollider(id: bigint) {
-    return (
-      this.boxColliders.get(id) ??
-      this.sphereColliders.get(id) ??
-      this.capsuleColliders.get(id) ??
-      this.cylinderColliders.get(id) ??
-      this.hullColliders.get(id) ??
-      this.meshColliders.get(id)
-    );
+  getCollider(id: bigint): Collider | Collider[] | undefined {
+    if (this.boxColliders.has(id)) {
+      return this.boxColliders.get(id);
+    }
+
+    if (this.sphereColliders.has(id)) {
+      return this.sphereColliders.get(id);
+    }
+
+    if (this.capsuleColliders.has(id)) {
+      return this.capsuleColliders.get(id);
+    }
+
+    if (this.cylinderColliders.has(id)) {
+      return this.cylinderColliders.get(id);
+    }
+
+    if (this.hullColliders.has(id)) {
+      return this.hullColliders.get(id);
+    }
+
+    if (this.meshColliders.has(id)) {
+      return this.meshColliders.get(id);
+    }
   }
 
   findColliderEntity(collider: Collider) {
@@ -83,11 +98,11 @@ export class PhysicsStore {
     }
 
     for (const [id, c] of this.hullColliders) {
-      if (collider === c) return id;
+      if (c.includes(collider)) return id;
     }
 
     for (const [id, c] of this.meshColliders) {
-      if (collider === c) return id;
+      if (c.includes(collider)) return id;
     }
 
     return undefined;

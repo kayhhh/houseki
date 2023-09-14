@@ -8,7 +8,7 @@ import {
   SceneStruct,
   Transform,
 } from "houseki/scene";
-import { Commands, Entity, Mut, Query, Res, With, Without } from "thyseus";
+import { Commands, Mut, Query, Res, Without } from "thyseus";
 
 import { createLights } from "../../utils/createLights";
 import { createPlayer } from "../../utils/createPlayer";
@@ -37,23 +37,14 @@ export function initScene(
 
 export function addPhysics(
   commands: Commands,
-  meshes: Query<[Entity, Mesh], Without<[MeshCollider, Parent]>>,
-  nodes: Query<Entity, [With<Transform>, Without<StaticBody>]>
+  meshes: Query<Mesh, Without<[MeshCollider, Parent]>>
 ) {
-  for (const [entity, mesh] of meshes) {
-    // Add mesh collider
-    commands
-      .get(entity)
-      .addType(Transform)
-      .addType(GlobalTransform)
-      .add(new Parent(mesh.parentId))
-      .addType(MeshCollider);
+  const processed: bigint[] = [];
 
-    // Add static body to parent
-    for (const nodeEntity of nodes) {
-      if (nodeEntity.id !== mesh.parentId) continue;
+  for (const mesh of meshes) {
+    if (processed.includes(mesh.parentId)) continue;
+    processed.push(mesh.parentId);
 
-      commands.getById(entity.id).addType(StaticBody);
-    }
+    commands.getById(mesh.parentId).addType(MeshCollider).addType(StaticBody);
   }
 }

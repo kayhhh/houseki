@@ -1,3 +1,4 @@
+import { Collider } from "@dimforge/rapier3d";
 import { Time } from "@houseki-engine/core";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
@@ -19,9 +20,20 @@ export function moveCharacters(
 
   for (const [entity, velocity] of bodies) {
     const controller = physicsStore.characterControllers.get(entity.id);
-    const collider = physicsStore.getCollider(entity.id);
+    let collider = physicsStore.getCollider(entity.id);
     const rigidbody = physicsStore.getRigidBody(entity.id);
     if (!controller || !collider || !rigidbody) continue;
+
+    if (Array.isArray(collider)) {
+      if (collider.length === 0) {
+        continue;
+      } else if (collider.length === 1) {
+        collider = collider[0] as Collider;
+      } else {
+        console.warn("Character controller cannot be a compound collider");
+        continue;
+      }
+    }
 
     // Apply gravity to velocity
     velocity.x += physicsStore.world.gravity.x * delta;
