@@ -1,5 +1,12 @@
 # @houseki-engine/player
 
+## 8.0.0
+
+### Patch Changes
+
+- Updated dependencies [b023781]
+  - @houseki-engine/physics@6.1.0
+
 ## 7.0.1
 
 ### Patch Changes

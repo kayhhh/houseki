@@ -1,5 +1,11 @@
 # @houseki-engine/physics
 
+## 6.1.0
+
+### Minor Changes
+
+- b023781: improve mesh collider logic, now uses a compound collider for all meshes attached to the node, rather than separate MeshCollider / RigidBody components for each Mesh
+
 ## 6.0.1
 
 ### Patch Changes
