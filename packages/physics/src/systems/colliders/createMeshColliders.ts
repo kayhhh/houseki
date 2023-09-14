@@ -32,6 +32,7 @@ export function createMeshColliders(
 
     if (!rigidbody) {
       const parentId = parentIds.get(entity.id);
+
       if (parentId) {
         rigidbodyId = parentId;
         rigidbody = store.getRigidBody(parentId);
@@ -82,7 +83,10 @@ export function createMeshColliders(
   for (const id of store.meshColliders.keys()) {
     if (!ids.includes(id)) {
       const object = store.meshColliders.get(id);
-      if (object) store.world.removeCollider(object, true);
+
+      if (object) {
+        store.world.removeCollider(object, true);
+      }
 
       store.meshColliders.delete(id);
     }

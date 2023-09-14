@@ -23,9 +23,10 @@ type EntityID = bigint;
 export class ImportContext {
   readonly nodes = new Map<Node, EntityID>();
   readonly meshes = new Map<Mesh, EntityID>();
+  readonly primitives = new Map<Mesh, EntityID[]>();
   readonly materials = new Map<Material, EntityID>();
 
-  readonly meshIds: EntityID[] = [];
+  readonly primitiveIds: EntityID[] = [];
   readonly materialIds: EntityID[] = [];
   readonly textureIds: EntityID[] = [];
   readonly animationClipIds: EntityID[] = [];

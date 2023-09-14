@@ -25,6 +25,8 @@ export function importMesh(
   commands: Commands,
   context: ImportContext
 ) {
+  const primitives: bigint[] = [];
+
   gltfMesh.listPrimitives().forEach((primitive) => {
     const mesh = new Mesh();
     mesh.parentId = nodeId;
@@ -66,10 +68,12 @@ export function importMesh(
       .add(geometry)
       .add(context.name).id;
 
-    context.meshIds.push(meshId);
+    context.primitiveIds.push(meshId);
+    primitives.push(meshId);
   });
 
   context.meshes.set(gltfMesh, nodeId);
+  context.primitives.set(gltfMesh, primitives);
 }
 
 function setAttribute(

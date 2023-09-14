@@ -8,7 +8,7 @@ export function removeGltf(context: ImportContext, commands: Commands) {
     commands.despawnById(id);
   }
 
-  for (const id of context.meshIds) {
+  for (const id of context.primitiveIds) {
     commands.despawnById(id);
   }
 

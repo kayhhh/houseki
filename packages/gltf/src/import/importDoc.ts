@@ -55,18 +55,30 @@ export function importDoc(
   root.listNodes().forEach((node) => {
     const entityId = context.nodes.get(node);
     if (!entityId) return;
+
     info.nodes.push(entityId);
   });
 
   root.listMeshes().forEach((mesh) => {
     const entityId = context.meshes.get(mesh);
     if (!entityId) return;
+
     info.meshes.push(entityId);
+
+    const primitives = context.primitives.get(mesh);
+
+    if (primitives) {
+      info.meshPrimitives.push(...primitives);
+      info.meshPrimitiveCounts.push(primitives.length);
+    } else {
+      info.meshPrimitiveCounts.push(0);
+    }
   });
 
   root.listMaterials().forEach((material) => {
     const entityId = context.materials.get(material);
     if (!entityId) return;
+
     info.materials.push(entityId);
   });
 

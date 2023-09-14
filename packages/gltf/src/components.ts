@@ -1,4 +1,4 @@
-import { struct, u8, type u64 } from "thyseus";
+import { struct, u8, u16, type u64 } from "thyseus";
 
 @struct
 export class Gltf {
@@ -29,5 +29,10 @@ export class GltfInfo {
   scenes: u64[] = [];
   nodes: u64[] = [];
   meshes: u64[] = [];
+  meshPrimitives: u64[] = [];
+  /**
+   * The number of primitives in each mesh.
+   */
+  meshPrimitiveCounts: u16[] = [];
   materials: u64[] = [];
 }
