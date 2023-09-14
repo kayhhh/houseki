@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const colliderTypeSchema = z.enum([
+const shapeTypeSchema = z.enum([
   "box",
   "sphere",
   "capsule",
@@ -9,7 +9,7 @@ const colliderTypeSchema = z.enum([
   "trimesh",
 ]);
 
-export type ColliderType = z.infer<typeof colliderTypeSchema>;
+export type ShapeType = z.infer<typeof shapeTypeSchema>;
 
 const gltfId = z.number().min(0);
 
@@ -19,7 +19,7 @@ export const shapeSchema = z
     mesh: gltfId.optional(),
     radius: z.number().optional(),
     size: z.array(z.number()).length(3).optional(),
-    type: colliderTypeSchema,
+    type: shapeTypeSchema,
   })
   .refine((obj) => {
     try {
@@ -85,20 +85,20 @@ export const shapeSchema = z
     }
   });
 
-export type ColliderDef = z.infer<typeof shapeSchema>;
+export type ShapeJson = z.infer<typeof shapeSchema>;
 
-export const colliderExtensionSchema = z.object({
+export const shapeExtensionSchema = z.object({
   extensions: z.unknown().optional(),
   extras: z.unknown().optional(),
   shapes: z.array(shapeSchema).min(1),
 });
 
-export type ColliderExtensionDef = z.infer<typeof colliderExtensionSchema>;
+export type ShapeExtensionJson = z.infer<typeof shapeExtensionSchema>;
 
-export const nodeColliderSchema = z.object({
+export const nodeShapeSchema = z.object({
   extensions: z.unknown().optional(),
   extras: z.unknown().optional(),
   shape: gltfId,
 });
 
-export type NodeColliderDef = z.infer<typeof nodeColliderSchema>;
+export type NodeShapeJson = z.infer<typeof nodeShapeSchema>;

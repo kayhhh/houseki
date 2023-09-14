@@ -2,11 +2,11 @@ import { Extension, ReaderContext, WriterContext } from "@gltf-transform/core";
 
 import { EXTENSION_NAME } from "./constants";
 import {
-  ColliderDef,
-  ColliderExtensionDef,
-  colliderExtensionSchema,
-  NodeColliderDef,
-  nodeColliderSchema,
+  NodeShapeJson,
+  nodeShapeSchema,
+  ShapeExtensionJson,
+  shapeExtensionSchema,
+  ShapeJson,
 } from "./schemas";
 import { Shape } from "./Shape";
 
@@ -28,91 +28,97 @@ export class OMIPhysicsShape extends Extension {
     )
       return this;
 
-    const parsedRootDef = colliderExtensionSchema.safeParse(
+    const parsedRootJson = shapeExtensionSchema.safeParse(
       context.jsonDoc.json.extensions[this.extensionName]
     );
 
-    if (!parsedRootDef.success) {
-      console.warn(parsedRootDef.error);
+    if (!parsedRootJson.success) {
+      console.warn(parsedRootJson.error);
       return this;
     }
 
-    const rootDef = parsedRootDef.data;
+    const rootJson = parsedRootJson.data;
 
-    // Create colliders
-    const colliders = rootDef.shapes.map((colliderDef) => {
-      const collider = this.createShape();
-      collider.setType(colliderDef.type);
+    // Create shapes
+    const shapes = rootJson.shapes.map((shapeJson) => {
+      const shape = this.createShape();
+      shape.setType(shapeJson.type);
 
-      if (colliderDef.size !== undefined)
-        collider.setSize([
-          colliderDef.size[0] ?? 0,
-          colliderDef.size[1] ?? 0,
-          colliderDef.size[2] ?? 0,
+      if (shapeJson.size !== undefined) {
+        shape.setSize([
+          shapeJson.size[0] ?? 0,
+          shapeJson.size[1] ?? 0,
+          shapeJson.size[2] ?? 0,
         ]);
-      if (colliderDef.radius !== undefined)
-        collider.setRadius(colliderDef.radius);
-      if (colliderDef.height !== undefined)
-        collider.setHeight(colliderDef.height);
-      if (colliderDef.mesh !== undefined) {
-        const mesh = context.meshes[colliderDef.mesh];
-        if (mesh) collider.setMesh(mesh);
       }
 
-      return collider;
+      if (shapeJson.radius !== undefined) {
+        shape.setRadius(shapeJson.radius);
+      }
+
+      if (shapeJson.height !== undefined) {
+        shape.setHeight(shapeJson.height);
+      }
+
+      if (shapeJson.mesh !== undefined) {
+        const mesh = context.meshes[shapeJson.mesh];
+        if (mesh) {
+          shape.setMesh(mesh);
+        }
+      }
+
+      return shape;
     });
 
-    // Add colliders to nodes
-    const nodeDefs = context.jsonDoc.json.nodes ?? [];
+    // Add shapes to nodes
+    const nodeJsons = context.jsonDoc.json.nodes ?? [];
 
-    nodeDefs.forEach((nodeDef, nodeIndex) => {
-      if (!nodeDef.extensions || !nodeDef.extensions[this.extensionName])
+    nodeJsons.forEach((nodeJson, nodeIndex) => {
+      if (!nodeJson.extensions || !nodeJson.extensions[this.extensionName])
         return;
 
-      const parsedColliderNodeDef = nodeColliderSchema.safeParse(
-        nodeDef.extensions[this.extensionName]
+      const parsedShape = nodeShapeSchema.safeParse(
+        nodeJson.extensions[this.extensionName]
       );
 
-      if (!parsedColliderNodeDef.success) {
-        console.warn(parsedColliderNodeDef.error);
+      if (!parsedShape.success) {
+        console.warn(parsedShape.error);
         return;
       }
-
-      const colliderNodeDef = parsedColliderNodeDef.data;
 
       const node = context.nodes[nodeIndex];
       if (!node) return;
 
-      const collider = colliders[colliderNodeDef.shape];
-      if (!collider) return;
+      const shape = shapes[parsedShape.data.shape];
+      if (!shape) return;
 
-      node.setExtension(this.extensionName, collider);
+      node.setExtension(this.extensionName, shape);
     });
 
     return this;
   }
 
   write(context: WriterContext) {
-    const jsonDoc = context.jsonDoc;
-
     if (this.properties.size === 0) return this;
 
-    // Create collider definitions
-    const colliderDefs = [];
-    const colliderIndexMap = new Map<Shape, number>();
+    // Create shape definitions
+    const shapeJsons = [];
+    const shapeIndexMap = new Map<Shape, number>();
 
     for (const property of this.properties) {
       if (property instanceof Shape) {
-        const colliderDef: ColliderDef = {
-          type: property.getType(),
+        const type = property.getType();
+
+        const shapeJson: ShapeJson = {
+          type,
         };
 
-        switch (property.getType()) {
+        switch (type) {
           case "box": {
             const size = property.getSize();
             if (!size) throw new Error("Size not set");
 
-            colliderDef.size = size;
+            shapeJson.size = size;
             break;
           }
 
@@ -120,7 +126,7 @@ export class OMIPhysicsShape extends Extension {
             const radius = property.getRadius();
             if (radius === null) throw new Error("Radius not set");
 
-            colliderDef.radius = radius;
+            shapeJson.radius = radius;
             break;
           }
 
@@ -132,8 +138,8 @@ export class OMIPhysicsShape extends Extension {
             const height = property.getHeight();
             if (height === null) throw new Error("Height not set");
 
-            colliderDef.radius = radius;
-            colliderDef.height = height;
+            shapeJson.radius = radius;
+            shapeJson.height = height;
             break;
           }
 
@@ -145,49 +151,54 @@ export class OMIPhysicsShape extends Extension {
             const meshIndex = context.meshIndexMap.get(mesh);
             if (meshIndex === undefined) throw new Error("Mesh not found");
 
-            colliderDef.mesh = meshIndex;
+            shapeJson.mesh = meshIndex;
             break;
           }
         }
 
-        colliderDefs.push(colliderDef);
-        colliderIndexMap.set(property, colliderDefs.length - 1);
+        shapeJsons.push(shapeJson);
+        shapeIndexMap.set(property, shapeJsons.length - 1);
       }
     }
 
-    // Add collider references to nodes
+    // Add shape references to nodes
     this.document
       .getRoot()
       .listNodes()
       .forEach((node) => {
-        const collider = node.getExtension<Shape>(Shape.EXTENSION_NAME);
-        if (!collider) return;
+        const shape = node.getExtension<Shape>(Shape.EXTENSION_NAME);
+        if (!shape) return;
 
         const nodeIndex = context.nodeIndexMap.get(node);
         if (nodeIndex === undefined) throw new Error("Node index not found");
 
-        const nodes = jsonDoc.json.nodes;
+        const nodes = context.jsonDoc.json.nodes;
         if (!nodes) throw new Error("Nodes not found");
 
-        const nodeDef = nodes[nodeIndex];
-        if (!nodeDef) throw new Error("Node def not found");
+        const nodeJson = nodes[nodeIndex];
+        if (!nodeJson) throw new Error("Node json not found");
 
-        const colliderIndex = colliderIndexMap.get(collider);
-        if (colliderIndex === undefined)
-          throw new Error("Collider index not found");
+        const shapeIndex = shapeIndexMap.get(shape);
+        if (shapeIndex === undefined) throw new Error("Shape index not found");
 
-        nodeDef.extensions ??= {};
+        nodeJson.extensions ??= {};
 
-        const colliderDef: NodeColliderDef = { shape: colliderIndex };
-        nodeDef.extensions[this.extensionName] = colliderDef;
+        const nodeShapeJson: NodeShapeJson = {
+          shape: shapeIndex,
+        };
+
+        nodeJson.extensions[this.extensionName] = nodeShapeJson;
       });
 
     // Add extension definition to root
-    if (colliderDefs.length > 0) {
-      const rootDef: ColliderExtensionDef = { shapes: colliderDefs };
+    if (shapeJsons.length > 0) {
+      const rootJson: ShapeExtensionJson = { shapes: shapeJsons };
 
-      if (!jsonDoc.json.extensions) jsonDoc.json.extensions = {};
-      jsonDoc.json.extensions[this.extensionName] = rootDef;
+      if (!context.jsonDoc.json.extensions) {
+        context.jsonDoc.json.extensions = {};
+      }
+
+      context.jsonDoc.json.extensions[this.extensionName] = rootJson;
     }
 
     return this;

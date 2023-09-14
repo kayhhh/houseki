@@ -88,7 +88,8 @@ export function exportHullCollider(
   const node = context.nodes.get(entityId);
   if (!node) return;
 
-  const mesh = context.meshes.get(collider.meshId);
+  const meshId = collider.meshId || entityId;
+  const mesh = context.meshes.get(meshId);
   if (!mesh) return;
 
   const physicsBodyExt = context.doc.createExtension(OMIPhysicsShape);
@@ -108,7 +109,8 @@ export function exportMeshCollider(
   const node = context.nodes.get(entityId);
   if (!node) return;
 
-  const mesh = context.meshes.get(collider.meshId);
+  const meshId = collider.meshId || entityId;
+  const mesh = context.meshes.get(meshId);
   if (!mesh) return;
 
   const physicsBodyExt = context.doc.createExtension(OMIPhysicsShape);

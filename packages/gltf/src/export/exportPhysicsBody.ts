@@ -27,7 +27,7 @@ export function exportDynamicBody(
   const extension = context.doc.createExtension(OMIPhysicsBody);
   const physicsBody = extension.createPhysicsBody();
 
-  physicsBody.setType("Rigid");
+  physicsBody.setType("Dynamic");
   physicsBody.setMass(body.mass);
   physicsBody.setLinearVelocity(body.linearVelocity.toArray());
   physicsBody.setAngularVelocity(body.angularVelocity.toArray());

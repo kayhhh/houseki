@@ -47,7 +47,7 @@ export function importPhysicsBody(
       break;
     }
 
-    case "Rigid": {
+    case "Dynamic": {
       context.dynamicBody.mass = physicsBody.getMass();
       context.dynamicBody.linearVelocity.fromArray(
         physicsBody.getLinearVelocity()

@@ -17,6 +17,8 @@ const mat4 = new Matrix4();
 
 export function saveRigidBodies(
   store: Res<PhysicsStore>,
+  dynamicBodies: Query<[Entity, Mut<DynamicBody>]>,
+  kinematicBodies: Query<[Entity, Mut<KinematicBody>]>,
   bodies: Query<
     Parent,
     [
@@ -37,6 +39,24 @@ export function saveRigidBodies(
   >,
   transforms: Query<[Entity, GlobalTransform]>
 ) {
+  for (const [entity, body] of dynamicBodies) {
+    const rigidbody = store.getRigidBody(entity.id);
+    if (!rigidbody) continue;
+
+    body.mass = rigidbody.mass();
+    body.linearVelocity.fromObject(rigidbody.linvel());
+    body.angularVelocity.fromObject(rigidbody.angvel());
+  }
+
+  for (const [entity, body] of kinematicBodies) {
+    const rigidbody = store.getRigidBody(entity.id);
+    if (!rigidbody) continue;
+
+    body.mass = rigidbody.mass();
+    body.linearVelocity.fromObject(rigidbody.linvel());
+    body.angularVelocity.fromObject(rigidbody.angvel());
+  }
+
   const parentIds = new Set<bigint>();
 
   for (const parent of bodies) {

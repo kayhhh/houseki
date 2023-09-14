@@ -1,22 +1,27 @@
 import { RigidBodyDesc } from "@dimforge/rapier3d";
-import { Entity, Query, Res, With } from "thyseus";
+import { Entity, Query, Res } from "thyseus";
 
 import { KinematicBody } from "../../components";
 import { PhysicsStore } from "../../resources";
 
 export function createKinematicBodies(
   store: Res<PhysicsStore>,
-  bodies: Query<Entity, With<KinematicBody>>
+  bodies: Query<[Entity, KinematicBody]>
 ) {
   const ids: bigint[] = [];
 
-  for (const entity of bodies) {
+  for (const [entity, body] of bodies) {
     ids.push(entity.id);
 
     // Create new bodies
     if (!store.kinematicBodies.has(entity.id)) {
       const rigidBodyDesc = RigidBodyDesc.kinematicVelocityBased();
       const object = store.world.createRigidBody(rigidBodyDesc);
+
+      object.setAdditionalMass(body.mass, true);
+      object.setLinvel(body.linearVelocity, true);
+      object.setAngvel(body.angularVelocity, true);
+
       store.kinematicBodies.set(entity.id, object);
     }
   }

@@ -163,11 +163,16 @@ export function exportGltf(
       exportMesh(warehouse, context, entity.id, mesh, geometry);
     }
 
+    const exportedNodes: bigint[] = [];
+
     for (const [entity, parent, transform] of nodes) {
+      // TODO: Only export nodes that are in the scene
       exportNode(context, entity.id, parent.id, transform);
+      exportedNodes.push(entity.id);
     }
 
     for (const [entity, txt] of text) {
+      if (!exportedNodes.includes(entity.id)) continue;
       exportText(context, entity.id, txt);
     }
 
@@ -176,38 +181,47 @@ export function exportGltf(
     }
 
     for (const entity of staticBodies) {
+      if (!exportedNodes.includes(entity.id)) continue;
       exportStaticBody(context, entity.id);
     }
 
     for (const [entity, dynamicBody] of dynamicBodies) {
+      if (!exportedNodes.includes(entity.id)) continue;
       exportDynamicBody(context, entity.id, dynamicBody);
     }
 
     for (const [entity, kinematicBody] of kinematicBodies) {
+      if (!exportedNodes.includes(entity.id)) continue;
       exportKinematicBody(context, entity.id, kinematicBody);
     }
 
     for (const [entity, boxCollider] of boxColliders) {
+      if (!exportedNodes.includes(entity.id)) continue;
       exportBoxCollider(context, entity.id, boxCollider);
     }
 
     for (const [entity, sphereCollider] of sphereColliders) {
+      if (!exportedNodes.includes(entity.id)) continue;
       exportSphereCollider(context, entity.id, sphereCollider);
     }
 
     for (const [entity, capsuleCollider] of capsuleColliders) {
+      if (!exportedNodes.includes(entity.id)) continue;
       exportCapsuleCollider(context, entity.id, capsuleCollider);
     }
 
     for (const [entity, cylinderCollider] of cylinderColliders) {
+      if (!exportedNodes.includes(entity.id)) continue;
       exportCylinderCollider(context, entity.id, cylinderCollider);
     }
 
     for (const [entity, meshCollider] of meshColliders) {
+      if (!exportedNodes.includes(entity.id)) continue;
       exportMeshCollider(context, entity.id, meshCollider);
     }
 
     for (const [entity, hullCollider] of hullColliders) {
+      if (!exportedNodes.includes(entity.id)) continue;
       exportHullCollider(context, entity.id, hullCollider);
     }
 

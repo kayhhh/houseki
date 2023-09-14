@@ -4,7 +4,6 @@ import {
   slerpCameraRotation,
 } from "@houseki-engine/player";
 import { renderCanvas, renderClearPass } from "@houseki-engine/render";
-import { updateGlobalTransforms } from "@houseki-engine/scene";
 import { run, WorldBuilder } from "thyseus";
 
 import { createPortals } from "./systems/createPortals";
@@ -36,8 +35,8 @@ export function portalPlugin(builder: WorldBuilder) {
     )
     .addSystemsToSchedule(
       HousekiSchedules.PreLoop,
-      run(restoreOriginalTranslation).before(updateGlobalTransforms),
-      run(restoreOriginalRotation).before(updateGlobalTransforms)
+      restoreOriginalTranslation,
+      restoreOriginalRotation
     )
     .addSystemsToSchedule(HousekiSchedules.PostFixedUpdate, setPortalRaycasts)
     .addSystemsToSchedule(

@@ -1,13 +1,6 @@
 import { z } from "zod";
 
-const physicsBodyTypeSchema = z.enum([
-  "Static",
-  "Kinematic",
-  "Character",
-  "Rigid",
-  "Vehicle",
-  "Trigger",
-]);
+const physicsBodyTypeSchema = z.enum(["Static", "Kinematic", "Dynamic"]);
 
 export type PhysicsBodyType = z.infer<typeof physicsBodyTypeSchema>;
 

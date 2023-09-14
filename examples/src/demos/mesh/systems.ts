@@ -8,7 +8,7 @@ import {
   SceneStruct,
   Transform,
 } from "houseki/scene";
-import { Commands, Mut, Query, Res, Without } from "thyseus";
+import { Commands, Entity, Mut, Query, Res, Without } from "thyseus";
 
 import { createLights } from "../../utils/createLights";
 import { createPlayer } from "../../utils/createPlayer";
@@ -37,7 +37,8 @@ export function initScene(
 
 export function addPhysics(
   commands: Commands,
-  meshes: Query<Mesh, Without<[MeshCollider, Parent]>>
+  meshes: Query<Mesh>,
+  withoutMeshCollider: Query<Entity, Without<MeshCollider>>
 ) {
   const processed: bigint[] = [];
 
@@ -45,6 +46,10 @@ export function addPhysics(
     if (processed.includes(mesh.parentId)) continue;
     processed.push(mesh.parentId);
 
-    commands.getById(mesh.parentId).addType(MeshCollider).addType(StaticBody);
+    for (const entity of withoutMeshCollider) {
+      if (entity.id === mesh.parentId) {
+        commands.get(entity).addType(MeshCollider).addType(StaticBody);
+      }
+    }
   }
 }

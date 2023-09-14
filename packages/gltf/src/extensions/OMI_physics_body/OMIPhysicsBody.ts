@@ -16,43 +16,45 @@ export class OMIPhysicsBody extends Extension {
   }
 
   read(context: ReaderContext) {
-    const nodeDefs = context.jsonDoc.json.nodes ?? [];
+    const nodeJsons = context.jsonDoc.json.nodes ?? [];
 
-    nodeDefs.forEach((nodeDef, index) => {
-      if (!nodeDef.extensions || !nodeDef.extensions[this.extensionName])
+    nodeJsons.forEach((nodeJson, index) => {
+      if (!nodeJson.extensions || !nodeJson.extensions[this.extensionName])
         return;
 
       const node = context.nodes[index];
       if (!node) return;
 
-      const parsedDef = nodePhysicsBodySchema.safeParse(
-        nodeDef.extensions[this.extensionName]
+      const parsedJson = nodePhysicsBodySchema.safeParse(
+        nodeJson.extensions[this.extensionName]
       );
 
-      if (!parsedDef.success) {
-        console.warn(parsedDef.error);
+      if (!parsedJson.success) {
+        console.warn(parsedJson.error);
         return;
       }
 
-      const physicsBodyDef = parsedDef.data;
+      const physicsBodyJson = parsedJson.data;
       const physicsBody = this.createPhysicsBody();
 
-      physicsBody.setType(physicsBodyDef.type);
+      if (!physicsBodyJson) return;
 
-      if (physicsBodyDef.mass !== undefined) {
-        physicsBody.setMass(physicsBodyDef.mass);
+      physicsBody.setType(physicsBodyJson.type);
+
+      if (physicsBodyJson.mass !== undefined) {
+        physicsBody.setMass(physicsBodyJson.mass);
       }
 
-      if (physicsBodyDef.inertiaTensor !== undefined) {
-        physicsBody.setInertiaTensor(physicsBodyDef.inertiaTensor);
+      if (physicsBodyJson.inertiaTensor !== undefined) {
+        physicsBody.setInertiaTensor(physicsBodyJson.inertiaTensor);
       }
 
-      if (physicsBodyDef.linearVelocity !== undefined) {
-        physicsBody.setLinearVelocity(physicsBodyDef.linearVelocity);
+      if (physicsBodyJson.linearVelocity !== undefined) {
+        physicsBody.setLinearVelocity(physicsBodyJson.linearVelocity);
       }
 
-      if (physicsBodyDef.angularVelocity !== undefined) {
-        physicsBody.setAngularVelocity(physicsBodyDef.angularVelocity);
+      if (physicsBodyJson.angularVelocity !== undefined) {
+        physicsBody.setAngularVelocity(physicsBodyJson.angularVelocity);
       }
 
       node.setExtension(this.extensionName, physicsBody);
@@ -62,6 +64,7 @@ export class OMIPhysicsBody extends Extension {
   }
 
   write(context: WriterContext) {
+    // Write physics bodies
     this.document
       .getRoot()
       .listNodes()
@@ -75,12 +78,12 @@ export class OMIPhysicsBody extends Extension {
         if (nodeIndex === undefined) return;
 
         if (!context.jsonDoc.json.nodes) return;
-        const nodeDef = context.jsonDoc.json.nodes[nodeIndex];
-        if (!nodeDef) return;
+        const nodeJson = context.jsonDoc.json.nodes[nodeIndex];
+        if (!nodeJson) return;
 
-        nodeDef.extensions = nodeDef.extensions ?? {};
+        nodeJson.extensions = nodeJson.extensions ?? {};
 
-        const physicsBodyDef: NodePhysicsBody = {
+        const physicsBodyJson: NodePhysicsBody = {
           angularVelocity: physicsBody.getAngularVelocity(),
           inertiaTensor: physicsBody.getInertiaTensor(),
           linearVelocity: physicsBody.getLinearVelocity(),
@@ -88,23 +91,23 @@ export class OMIPhysicsBody extends Extension {
           type: physicsBody.getType(),
         };
 
-        if (physicsBodyDef.mass === 1) {
-          delete physicsBodyDef.mass;
+        if (physicsBodyJson?.mass === 1) {
+          delete physicsBodyJson.mass;
         }
 
-        if (physicsBodyDef.linearVelocity?.every((v) => v === 0)) {
-          delete physicsBodyDef.linearVelocity;
+        if (physicsBodyJson?.linearVelocity?.every((v) => v === 0)) {
+          delete physicsBodyJson.linearVelocity;
         }
 
-        if (physicsBodyDef.angularVelocity?.every((v) => v === 0)) {
-          delete physicsBodyDef.angularVelocity;
+        if (physicsBodyJson?.angularVelocity?.every((v) => v === 0)) {
+          delete physicsBodyJson.angularVelocity;
         }
 
-        if (physicsBodyDef.inertiaTensor?.every((v) => v === 0)) {
-          delete physicsBodyDef.inertiaTensor;
+        if (physicsBodyJson?.inertiaTensor?.every((v) => v === 0)) {
+          delete physicsBodyJson.inertiaTensor;
         }
 
-        nodeDef.extensions[this.extensionName] = physicsBodyDef;
+        nodeJson.extensions[this.extensionName] = physicsBodyJson;
       });
 
     return this;

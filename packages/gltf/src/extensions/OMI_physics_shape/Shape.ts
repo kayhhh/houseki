@@ -7,23 +7,24 @@ import {
 } from "@gltf-transform/core";
 
 import { EXTENSION_NAME } from "./constants";
-import { ColliderType } from "./schemas";
+import { ShapeType } from "./schemas";
 
-interface ICollider extends IProperty {
-  type: ColliderType;
+interface IShape extends IProperty {
+  type: ShapeType;
   size: [number, number, number];
   radius: number;
   height: number;
   mesh: Mesh;
+  isTrigger: boolean;
 }
 
-export class Shape extends ExtensionProperty<ICollider> {
+export class Shape extends ExtensionProperty<IShape> {
   static override readonly EXTENSION_NAME = EXTENSION_NAME;
   declare extensionName: typeof EXTENSION_NAME;
   declare propertyType: "Collider";
   declare parentTypes: [PropertyType.NODE];
 
-  static Type: Record<string, ColliderType> = {
+  static Type: Record<string, ShapeType> = {
     BOX: "box",
     CAPSULE: "capsule",
     CONVEX: "convex",
@@ -38,7 +39,7 @@ export class Shape extends ExtensionProperty<ICollider> {
     this.parentTypes = [PropertyType.NODE];
   }
 
-  protected override getDefaults(): Nullable<ICollider> {
+  protected override getDefaults(): Nullable<IShape> {
     return Object.assign(super.getDefaults(), {
       height: 2,
       isTrigger: false,
@@ -53,7 +54,7 @@ export class Shape extends ExtensionProperty<ICollider> {
     return this.get("type");
   }
 
-  setType(type: ColliderType) {
+  setType(type: ShapeType) {
     this.set("type", type);
   }
 
@@ -87,5 +88,13 @@ export class Shape extends ExtensionProperty<ICollider> {
 
   setMesh(mesh: Mesh) {
     this.setRef("mesh", mesh);
+  }
+
+  getIsTrigger() {
+    return this.get("isTrigger");
+  }
+
+  setIsTrigger(isTrigger: boolean) {
+    this.set("isTrigger", isTrigger);
   }
 }
