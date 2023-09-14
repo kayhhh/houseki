@@ -1,5 +1,11 @@
 # @houseki-engine/gltf
 
+## 7.3.0
+
+### Minor Changes
+
+- 2257d2a: add mesh primitives to GltfInfo
+
 ## 7.2.1
 
 ### Patch Changes
