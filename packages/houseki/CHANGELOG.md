@@ -1,5 +1,16 @@
 # houseki
 
+## 1.1.4
+
+### Patch Changes
+
+- Updated dependencies [b023781]
+  - @houseki-engine/physics@6.1.0
+  - @houseki-engine/gltf@8.0.0
+  - @houseki-engine/player@8.0.0
+  - @houseki-engine/portal@7.0.0
+  - @houseki-engine/transform@8.0.0
+
 ## 1.1.3
 
 ### Patch Changes
