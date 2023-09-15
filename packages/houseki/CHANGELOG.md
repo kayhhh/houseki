@@ -1,5 +1,12 @@
 # houseki
 
+## 1.1.6
+
+### Patch Changes
+
+- Updated dependencies [fb73089]
+  - @houseki-engine/transform@8.1.0
+
 ## 1.1.5
 
 ### Patch Changes

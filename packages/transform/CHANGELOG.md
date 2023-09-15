@@ -1,5 +1,11 @@
 # @houseki-engine/transform
 
+## 8.1.0
+
+### Minor Changes
+
+- fb73089: add dragging state to TransformControls component
+
 ## 8.0.1
 
 ### Patch Changes
