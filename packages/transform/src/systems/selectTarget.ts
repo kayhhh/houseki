@@ -55,7 +55,6 @@ export function selectTarget(
 
       if (object.dragging) {
         dragging = true;
-        break;
       }
     }
 

@@ -8,6 +8,7 @@ import { saveTargetTransforms } from "./systems";
 import { calcRect } from "./systems/calcRect";
 import { clearEvents } from "./systems/clearEvents";
 import { createControls } from "./systems/createControls";
+import { saveDragging } from "./systems/saveDragging";
 import { saveTransforms } from "./systems/saveTransforms";
 import { selectTarget } from "./systems/selectTarget";
 import { sendEvents } from "./systems/sendEvents";
@@ -43,6 +44,7 @@ export function getTransformPlugin({
         ...run.chain(
           selectTarget,
           createControls,
+          saveDragging,
           sendEvents,
           saveTransforms,
           setOutlineTargets

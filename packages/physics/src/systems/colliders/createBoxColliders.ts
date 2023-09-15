@@ -25,21 +25,22 @@ export function createBoxColliders(
 
     let rigidbodyId = entity.id;
     let rigidbody = store.getRigidBody(rigidbodyId);
+
     if (!rigidbody) {
       const parentId = parentIds.get(entity.id);
+
       if (parentId) {
         rigidbodyId = parentId;
         rigidbody = store.getRigidBody(parentId);
       }
     }
-    if (!rigidbody) continue;
 
     // Create new colliders
     if (!object || object.parent() !== rigidbody) {
       // Remove old collider
-      if (object) store.world.removeCollider(object, true);
-
-      if (!rigidbody) continue;
+      if (object) {
+        store.world.removeCollider(object, true);
+      }
 
       const colliderDesc = ColliderDesc.cuboid(
         collider.size.x / 2,
@@ -62,7 +63,9 @@ export function createBoxColliders(
   for (const id of store.boxColliders.keys()) {
     if (!ids.includes(id)) {
       const object = store.boxColliders.get(id);
-      if (object) store.world.removeCollider(object, true);
+      if (object) {
+        store.world.removeCollider(object, true);
+      }
 
       store.boxColliders.delete(id);
     }

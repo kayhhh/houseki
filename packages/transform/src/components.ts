@@ -7,6 +7,8 @@ export class TransformControls {
   enabled: boolean = true;
   outline: boolean = true;
 
+  dragging: boolean = false;
+
   /**
    * Whether to clear events when dragging starts.
    * Useful when combining with other controls.
