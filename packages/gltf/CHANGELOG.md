@@ -1,5 +1,11 @@
 # @houseki-engine/gltf
 
+## 8.2.0
+
+### Minor Changes
+
+- ff6178f: add back in GltfInfo (im dumb)
+
 ## 8.1.0
 
 ### Minor Changes
