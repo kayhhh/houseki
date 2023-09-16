@@ -1,5 +1,12 @@
 # @houseki-engine/gltf
 
+## 8.1.0
+
+### Minor Changes
+
+- dbe0d67: Load all gltf scenes on import, using new SubScene and SceneView components
+- dbe0d67: Remove GltfInfo
+
 ## 8.0.1
 
 ### Patch Changes
