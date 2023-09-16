@@ -53,4 +53,6 @@ export function importNode(
     .forEach((child) =>
       importNode(warehouse, child, entityId, commands, context)
     );
+
+  return entityId;
 }

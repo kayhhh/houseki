@@ -1,9 +1,15 @@
 import { Document } from "@gltf-transform/core";
 import { Warehouse } from "@houseki-engine/core";
-import { AnimationMixer } from "@houseki-engine/scene";
+import {
+  AnimationMixer,
+  GlobalTransform,
+  Name,
+  Parent,
+  Transform,
+} from "@houseki-engine/scene";
 import { Commands, Entity } from "thyseus";
 
-import { GltfInfo } from "../components";
+import { SceneView, SubScene } from "../components";
 import { ImportContext } from "./context";
 import { importAnimation } from "./importAnimation";
 import { importNode } from "./importNode";
@@ -14,75 +20,48 @@ export function importDoc(
   entity: Readonly<Entity>,
   commands: Commands
 ) {
-  const root = doc.getRoot();
-  const scene = root.getDefaultScene() ?? root.listScenes()[0];
-  if (!scene) return;
-
   const context = new ImportContext();
 
-  scene
-    .listChildren()
-    .forEach((child) =>
-      importNode(warehouse, child, entity.id, commands, context)
-    );
+  const root = doc.getRoot();
+  const defaultScene = root.getDefaultScene() ?? root.listScenes()[0];
+  if (!defaultScene) return;
 
-  root
-    .listAnimations()
-    .forEach((animation) =>
-      importAnimation(animation, entity.id, commands, context)
-    );
+  const view = new SceneView();
+
+  root.listScenes().map((scene) => {
+    const sceneEntityId = commands
+      .spawn(true)
+      .add(new Name(scene.getName()))
+      .addType(Transform)
+      .addType(GlobalTransform)
+      .addType(Parent).id;
+
+    view.scenes.push(sceneEntityId);
+
+    if (scene === defaultScene) {
+      view.active = sceneEntityId;
+    }
+
+    const subScene = new SubScene();
+
+    scene.listChildren().forEach((child) => {
+      const id = importNode(warehouse, child, 0n, commands, context);
+      subScene.nodes.push(id);
+    });
+
+    commands.getById(sceneEntityId).add(subScene);
+  });
+
+  commands.get(entity).add(view);
+
+  root.listAnimations().forEach((animation) => {
+    importAnimation(animation, entity.id, commands, context);
+  });
 
   if (root.listAnimations().length > 0) {
-    const mixer = commands.get(entity).addType(AnimationMixer);
+    const mixer = commands.getById(entity.id).addType(AnimationMixer);
     context.animationMixerIds.push(mixer.id);
   }
-
-  // Set indices
-  const info = new GltfInfo();
-
-  root.listScenes().forEach((s, i) => {
-    if (s === root.getDefaultScene()) {
-      info.defaultScene = i;
-    }
-
-    if (s === scene) {
-      info.scenes.push(entity.id);
-    } else {
-      info.scenes.push(0n);
-    }
-  });
-
-  root.listNodes().forEach((node) => {
-    const entityId = context.nodes.get(node);
-    if (!entityId) return;
-
-    info.nodes.push(entityId);
-  });
-
-  root.listMeshes().forEach((mesh) => {
-    const entityId = context.meshes.get(mesh);
-    if (!entityId) return;
-
-    info.meshes.push(entityId);
-
-    const primitives = context.primitives.get(mesh);
-
-    if (primitives) {
-      info.meshPrimitives.push(...primitives);
-      info.meshPrimitiveCounts.push(primitives.length);
-    } else {
-      info.meshPrimitiveCounts.push(0);
-    }
-  });
-
-  root.listMaterials().forEach((material) => {
-    const entityId = context.materials.get(material);
-    if (!entityId) return;
-
-    info.materials.push(entityId);
-  });
-
-  commands.get(entity).add(info);
 
   return context;
 }
