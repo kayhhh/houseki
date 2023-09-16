@@ -9,7 +9,7 @@ import {
 } from "@houseki-engine/scene";
 import { Commands, Entity } from "thyseus";
 
-import { SceneView, SubScene } from "../components";
+import { GltfInfo, SceneView, SubScene } from "../components";
 import { ImportContext } from "./context";
 import { importAnimation } from "./importAnimation";
 import { importNode } from "./importNode";
@@ -26,6 +26,7 @@ export function importDoc(
   const defaultScene = root.getDefaultScene() ?? root.listScenes()[0];
   if (!defaultScene) return;
 
+  const info = new GltfInfo();
   const view = new SceneView();
 
   root.listScenes().map((scene) => {
@@ -37,6 +38,7 @@ export function importDoc(
       .addType(Parent).id;
 
     view.scenes.push(sceneEntityId);
+    info.scenes.push(sceneEntityId);
 
     if (scene === defaultScene) {
       view.active = sceneEntityId;
@@ -52,8 +54,6 @@ export function importDoc(
     commands.getById(sceneEntityId).add(subScene);
   });
 
-  commands.get(entity).add(view);
-
   root.listAnimations().forEach((animation) => {
     importAnimation(animation, entity.id, commands, context);
   });
@@ -62,6 +62,38 @@ export function importDoc(
     const mixer = commands.getById(entity.id).addType(AnimationMixer);
     context.animationMixerIds.push(mixer.id);
   }
+
+  root.listNodes().forEach((node) => {
+    const entityId = context.nodes.get(node);
+    if (!entityId) return;
+
+    info.nodes.push(entityId);
+  });
+
+  root.listMeshes().forEach((mesh) => {
+    const entityId = context.meshes.get(mesh);
+    if (!entityId) return;
+
+    info.meshes.push(entityId);
+
+    const primitives = context.primitives.get(mesh);
+
+    if (primitives) {
+      info.meshPrimitives.push(...primitives);
+      info.meshPrimitiveCounts.push(primitives.length);
+    } else {
+      info.meshPrimitiveCounts.push(0);
+    }
+  });
+
+  root.listMaterials().forEach((material) => {
+    const entityId = context.materials.get(material);
+    if (!entityId) return;
+
+    info.materials.push(entityId);
+  });
+
+  commands.get(entity).add(info).add(view);
 
   return context;
 }
