@@ -23,12 +23,12 @@ export const ExportSchedule = Symbol("Export");
 
 export function sendExportEvent(
   writer: EventWriter<ExportGltf>,
-  views: Query<SceneView, With<RenderView>>
+  views: Query<Entity, [With<RenderView>, With<SceneView>]>
 ) {
-  for (const sceneView of views) {
+  for (const entity of views) {
     const event = new ExportGltf();
     event.binary = exportConfig.format === "binary";
-    event.scene = sceneView.active;
+    event.scene = entity.id;
     writer.create(event);
   }
 }
