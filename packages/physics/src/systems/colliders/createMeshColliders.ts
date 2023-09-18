@@ -11,7 +11,7 @@ export function createMeshColliders(
   store: Res<PhysicsStore>,
   colliders: Query<[Entity, MeshCollider]>,
   withParent: Query<[Entity, Parent], With<MeshCollider>>,
-  nodes: Query<[Entity, GlobalTransform]>,
+  globals: Query<[Entity, GlobalTransform]>,
   geometries: Query<[Entity, Geometry]>,
   meshes: Query<[Entity, Mesh]>
 ) {
@@ -69,7 +69,7 @@ export function createMeshColliders(
           const scaledVertices = new Float32Array(vertices.length);
 
           // Scale vertices using global transform
-          for (const [nodeEnt, globalTransform] of nodes) {
+          for (const [nodeEnt, globalTransform] of globals) {
             if (nodeEnt.id !== rigidbodyId) continue;
 
             for (let i = 0; i < vertices.length; i += 3) {

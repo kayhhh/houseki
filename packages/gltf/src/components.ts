@@ -10,17 +10,6 @@ export class Gltf {
 }
 
 @struct
-export class SubScene {
-  nodes: u64[] = [];
-}
-
-@struct
-export class SceneView {
-  active: u64 = 0n;
-  scenes: u64[] = [];
-}
-
-@struct
 export class Extra {
   target: u64;
 

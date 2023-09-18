@@ -1,6 +1,6 @@
 import { CoreStore, Warehouse } from "houseki/core";
 import { CascadingShadowMaps } from "houseki/csm";
-import { SceneStruct } from "houseki/scene";
+import { RenderView } from "houseki/scene";
 import { Commands, Mut, Res } from "thyseus";
 
 import { createBox } from "../../utils/createBox";
@@ -14,11 +14,12 @@ const BOX_SCALE = 2;
 export function initScene(
   warehouse: Res<Mut<Warehouse>>,
   commands: Commands,
-  coreStore: Res<Mut<CoreStore>>,
-  sceneStruct: Res<Mut<SceneStruct>>
+  coreStore: Res<Mut<CoreStore>>
 ) {
-  const cameraId = createOrbitControls(commands, sceneStruct);
-  const { rootId } = createScene(commands, coreStore, sceneStruct);
+  const cameraId = createOrbitControls(commands);
+  const { viewId, sceneId } = createScene(commands, coreStore);
+
+  commands.getById(viewId).add(new RenderView(cameraId));
 
   const csm = new CascadingShadowMaps();
   csm.shadowMapSize = 4096;
@@ -27,7 +28,7 @@ export function initScene(
   commands.getById(cameraId).add(csm);
 
   createBox(warehouse, commands, {
-    parentId: rootId,
+    parentId: sceneId,
     size: [GROUND_SIZE, 1, GROUND_SIZE],
     translation: [0, -1, 0],
   });
@@ -39,7 +40,7 @@ export function initScene(
     const y = scale * 1.5;
 
     createBox(warehouse, commands, {
-      parentId: rootId,
+      parentId: sceneId,
       size: [scale, scale, scale],
       translation: [x, y, z],
     });

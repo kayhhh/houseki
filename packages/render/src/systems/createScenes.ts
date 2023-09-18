@@ -9,11 +9,11 @@ import { RenderStore } from "../resources";
  */
 export function createScenes(
   renderStore: Res<RenderStore>,
-  entities: Query<Entity, With<Scene>>
+  scenes: Query<Entity, With<Scene>>
 ) {
   const ids: bigint[] = [];
 
-  for (const entity of entities) {
+  for (const entity of scenes) {
     ids.push(entity.id);
 
     let object = renderStore.scenes.get(entity.id);

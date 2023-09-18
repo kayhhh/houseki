@@ -92,14 +92,21 @@ export class Parent {
   }
 }
 
+export class Scene {}
+
 @struct
-export class Scene {
-  /**
-   * Entity ID of the root node of the scene.
-   * Used for scene content (ie. meshes) not temporary runtime things (player, camera, etc).
-   * Useful for saving/loading scenes.
-   */
-  rootId: u64 = 0n;
+export class SceneView {
+  active: u64 = 0n;
+  scenes: u64[] = [];
+}
+
+@struct
+export class RenderView {
+  cameraId: u64;
+
+  constructor(cameraId?: bigint) {
+    this.cameraId = cameraId ?? 0n;
+  }
 }
 
 /**

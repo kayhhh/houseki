@@ -5,11 +5,13 @@ import {
   GlobalTransform,
   Name,
   Parent,
+  Scene,
+  SceneView,
   Transform,
 } from "@houseki-engine/scene";
 import { Commands, Entity } from "thyseus";
 
-import { GltfInfo, SceneView, SubScene } from "../components";
+import { GltfInfo } from "../components";
 import { ImportContext } from "./context";
 import { importAnimation } from "./importAnimation";
 import { importNode } from "./importNode";
@@ -24,34 +26,29 @@ export function importDoc(
 
   const root = doc.getRoot();
   const defaultScene = root.getDefaultScene() ?? root.listScenes()[0];
-  if (!defaultScene) return;
 
   const info = new GltfInfo();
   const view = new SceneView();
 
-  root.listScenes().map((scene) => {
+  root.listScenes().map((gltfScene) => {
     const sceneEntityId = commands
       .spawn(true)
-      .add(new Name(scene.getName()))
+      .add(new Name(gltfScene.getName()))
+      .addType(Parent)
       .addType(Transform)
       .addType(GlobalTransform)
-      .addType(Parent).id;
+      .addType(Scene).id;
 
     view.scenes.push(sceneEntityId);
     info.scenes.push(sceneEntityId);
 
-    if (scene === defaultScene) {
+    if (gltfScene === defaultScene) {
       view.active = sceneEntityId;
     }
 
-    const subScene = new SubScene();
-
-    scene.listChildren().forEach((child) => {
-      const id = importNode(warehouse, child, 0n, commands, context);
-      subScene.nodes.push(id);
+    gltfScene.listChildren().forEach((child) => {
+      importNode(warehouse, child, sceneEntityId, commands, context);
     });
-
-    commands.getById(sceneEntityId).add(subScene);
   });
 
   root.listAnimations().forEach((animation) => {

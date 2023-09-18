@@ -1,15 +1,13 @@
-import { Parent } from "@houseki-engine/scene";
+import { Parent, Scene, SceneView } from "@houseki-engine/scene";
 import { Entity, Mut, Query, With } from "thyseus";
-
-import { SceneView, SubScene } from "../components";
 
 export function switchSceneView(
   views: Query<[Entity, SceneView]>,
-  subScenes: Query<[Entity, Mut<Parent>], With<SubScene>>
+  scenes: Query<[Entity, Mut<Parent>], With<Scene>>
 ) {
   for (const [entity, view] of views) {
-    for (const [sceneEnt, parent] of subScenes) {
-      if (!view.scenes.includes(sceneEnt.id)) return;
+    for (const [sceneEnt, parent] of scenes) {
+      if (!view.scenes.includes(sceneEnt.id)) continue;
 
       if (view.active === sceneEnt.id) {
         parent.id = entity.id;

@@ -20,7 +20,6 @@ import {
   GlobalTransform,
   Parent,
   PerspectiveCamera,
-  SceneStruct,
   Transform,
 } from "houseki/scene";
 import { Vrm } from "houseki/vrm";
@@ -32,8 +31,7 @@ const PLAYER_WIDTH = 0.4;
 export function createPlayer(
   spawn: [number, number, number],
   rootId: bigint,
-  commands: Commands,
-  sceneStruct: SceneStruct
+  commands: Commands
 ) {
   const parent = new Parent();
   const transform = new Transform();
@@ -96,5 +94,5 @@ export function createPlayer(
     .add(playerCamera)
     .addType(Raycast).id;
 
-  sceneStruct.activeCamera = cameraId;
+  return cameraId;
 }

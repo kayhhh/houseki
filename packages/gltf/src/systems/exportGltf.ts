@@ -19,6 +19,7 @@ import {
   Name,
   Parent,
   Scene,
+  SceneView,
   StandardMaterial,
   Transform,
 } from "@houseki-engine/scene";
@@ -56,6 +57,7 @@ import {
   exportStaticBody,
 } from "../export/exportPhysicsBody";
 import { exportScene } from "../export/exportScene";
+import { exportSceneView } from "../export/exportSceneView";
 import { exportText } from "../export/exportText";
 import { parentNodes } from "../export/parentNodes";
 import { extensions } from "../extensions/extensions";
@@ -80,7 +82,8 @@ export function exportGltf(
   reader: EventReader<ExportGltf>,
   outWriter: EventWriter<ExportedGltf>,
   names: Query<[Entity, Name]>,
-  scenes: Query<[Entity, Scene]>,
+  sceneViews: Query<[Entity, SceneView]>,
+  scenes: Query<Entity, With<Scene>>,
   nodes: Query<[Entity, Parent, Transform]>,
   meshes: Query<[Entity, Mesh, Geometry]>,
   materials: Query<[Entity, StandardMaterial]>,
@@ -138,17 +141,9 @@ export function exportGltf(
       context.names.set(entity.id, name.value);
     }
 
-    let rootId: bigint | undefined;
-
-    for (const [entity, scene] of scenes) {
+    for (const [entity, sceneView] of sceneViews) {
       if (entity.id !== event.scene) continue;
-      rootId = scene.rootId;
-      exportScene(context, scene);
-    }
-
-    if (rootId === undefined) {
-      console.warn("No scene found to export");
-      continue;
+      exportSceneView(context, sceneView);
     }
 
     for (const [entity, asset] of images) {
@@ -163,16 +158,11 @@ export function exportGltf(
       exportMesh(warehouse, context, entity.id, mesh, geometry);
     }
 
-    const exportedNodes: bigint[] = [];
-
     for (const [entity, parent, transform] of nodes) {
-      // TODO: Only export nodes that are in the scene
       exportNode(context, entity.id, parent.id, transform);
-      exportedNodes.push(entity.id);
     }
 
     for (const [entity, txt] of text) {
-      if (!exportedNodes.includes(entity.id)) continue;
       exportText(context, entity.id, txt);
     }
 
@@ -181,61 +171,61 @@ export function exportGltf(
     }
 
     for (const entity of staticBodies) {
-      if (!exportedNodes.includes(entity.id)) continue;
       exportStaticBody(context, entity.id);
     }
 
     for (const [entity, dynamicBody] of dynamicBodies) {
-      if (!exportedNodes.includes(entity.id)) continue;
       exportDynamicBody(context, entity.id, dynamicBody);
     }
 
     for (const [entity, kinematicBody] of kinematicBodies) {
-      if (!exportedNodes.includes(entity.id)) continue;
       exportKinematicBody(context, entity.id, kinematicBody);
     }
 
     for (const [entity, boxCollider] of boxColliders) {
-      if (!exportedNodes.includes(entity.id)) continue;
       exportBoxCollider(context, entity.id, boxCollider);
     }
 
     for (const [entity, sphereCollider] of sphereColliders) {
-      if (!exportedNodes.includes(entity.id)) continue;
       exportSphereCollider(context, entity.id, sphereCollider);
     }
 
     for (const [entity, capsuleCollider] of capsuleColliders) {
-      if (!exportedNodes.includes(entity.id)) continue;
       exportCapsuleCollider(context, entity.id, capsuleCollider);
     }
 
     for (const [entity, cylinderCollider] of cylinderColliders) {
-      if (!exportedNodes.includes(entity.id)) continue;
       exportCylinderCollider(context, entity.id, cylinderCollider);
     }
 
     for (const [entity, meshCollider] of meshColliders) {
-      if (!exportedNodes.includes(entity.id)) continue;
       exportMeshCollider(context, entity.id, meshCollider);
     }
 
     for (const [entity, hullCollider] of hullColliders) {
-      if (!exportedNodes.includes(entity.id)) continue;
       exportHullCollider(context, entity.id, hullCollider);
     }
 
-    parentNodes(context, rootId);
+    parentNodes(context);
+
+    for (const entity of scenes) {
+      if (entity.id !== event.scene) continue;
+      exportScene(context, entity.id);
+    }
 
     const isBinary = event.binary;
 
-    context.doc.transform(dedup(), prune({ keepLeaves: true })).then((doc) => {
-      if (isBinary) {
-        io.writeBinary(doc).then((binary) => localStore.outBinary.push(binary));
-      } else {
-        io.writeJSON(doc).then((json) => localStore.outJson.push(json));
-      }
-    });
+    context.doc
+      .transform(dedup(), prune({ keepLeaves: event.keepLeaves }))
+      .then((doc) => {
+        if (isBinary) {
+          io.writeBinary(doc).then((binary) =>
+            localStore.outBinary.push(binary)
+          );
+        } else {
+          io.writeJSON(doc).then((json) => localStore.outJson.push(json));
+        }
+      });
   }
 
   if (reader.length > 0) {

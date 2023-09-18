@@ -5,7 +5,7 @@ import {
   GlobalTransform,
   Mesh,
   Parent,
-  SceneStruct,
+  RenderView,
   Transform,
 } from "houseki/scene";
 import { Commands, Entity, Mut, Query, Res, Without } from "thyseus";
@@ -17,28 +17,32 @@ import { createScene } from "../../utils/createScene";
 export function initScene(
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
-  sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
 ) {
   physicsConfig.debug = true;
 
-  const { sceneId, rootId } = createScene(commands, coreStore, sceneStruct);
+  const { viewId, sceneId } = createScene(commands, coreStore);
+  const cameraId = createPlayer([0, 5, 0], sceneId, commands);
+
+  commands.getById(viewId).add(new RenderView(cameraId));
 
   createLights(commands, sceneId, 4096, 20);
-  createPlayer([0, 5, 0], sceneId, commands, sceneStruct);
+
+  const transform = new Transform();
+  transform.scale.set(4, 4, 4);
 
   commands
     .spawn(true)
-    .add(new Transform(undefined, undefined, [4, 4, 4]))
+    .add(transform)
     .addType(GlobalTransform)
-    .add(new Parent(rootId))
+    .add(new Parent(sceneId))
     .add(new Gltf("/models/Accumula-Town.glb"));
 }
 
 export function addPhysics(
   commands: Commands,
   meshes: Query<Mesh>,
-  withoutMeshCollider: Query<Entity, Without<MeshCollider>>
+  withoutCollider: Query<Entity, [Without<MeshCollider>, Without<StaticBody>]>
 ) {
   const processed: bigint[] = [];
 
@@ -46,10 +50,9 @@ export function addPhysics(
     if (processed.includes(mesh.parentId)) continue;
     processed.push(mesh.parentId);
 
-    for (const entity of withoutMeshCollider) {
-      if (entity.id === mesh.parentId) {
-        commands.get(entity).addType(MeshCollider).addType(StaticBody);
-      }
+    for (const entity of withoutCollider) {
+      if (entity.id !== mesh.parentId) continue;
+      commands.get(entity).addType(MeshCollider).addType(StaticBody);
     }
   }
 }

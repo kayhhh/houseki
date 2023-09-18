@@ -6,7 +6,8 @@ import {
   Mesh,
   MeshMode,
   Parent,
-  SceneStruct,
+  RenderView,
+  SceneView,
   Transform,
 } from "@houseki-engine/scene";
 import { Commands, Entity, Mut, Query, Res, With } from "thyseus";
@@ -19,7 +20,7 @@ export function generateDebug(
   debug: Res<Mut<DebugResource>>,
   physicsStore: Res<PhysicsStore>,
   physicsConfig: Res<PhysicsConfig>,
-  sceneStruct: Res<SceneStruct>,
+  views: Query<SceneView, With<RenderView>>,
   meshes: Query<[Entity, Mut<Geometry>, Mut<Parent>], With<LineMaterial>>
 ) {
   if (!physicsConfig.debug) {
@@ -37,6 +38,12 @@ export function generateDebug(
 
   const buffers = physicsStore.world.debugRender();
 
+  let sceneId = 0n;
+
+  for (const view of views) {
+    sceneId = view.active;
+  }
+
   let linesFound = false;
 
   if (!debug.linesId) {
@@ -49,7 +56,7 @@ export function generateDebug(
     mesh.mode = MeshMode.LINES;
     mesh.frustumCulled = false;
 
-    const parent = new Parent(sceneStruct.activeScene);
+    const parent = new Parent(sceneId);
 
     const linesId = commands
       .spawn(true)
@@ -68,7 +75,7 @@ export function generateDebug(
 
     linesFound = true;
 
-    parent.id = sceneStruct.activeScene;
+    parent.id = sceneId;
 
     geometry.positions.write(buffers.vertices, warehouse);
     geometry.colors.write(buffers.colors, warehouse);

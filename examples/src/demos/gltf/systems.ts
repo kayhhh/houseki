@@ -1,7 +1,7 @@
 import { CoreStore } from "houseki/core";
 import { Gltf } from "houseki/gltf";
 import { N8AOPass } from "houseki/postprocessing";
-import { SceneStruct } from "houseki/scene";
+import { GlobalTransform, Parent, RenderView, Transform } from "houseki/scene";
 import { Commands, Mut, Query, Res } from "thyseus";
 
 import { createOrbitControls } from "../../utils/createOrbitControls";
@@ -11,23 +11,25 @@ export const selectedModel = {
   uri: "",
 };
 
-export function initScene(
-  commands: Commands,
-  coreStore: Res<Mut<CoreStore>>,
-  sceneStruct: Res<Mut<SceneStruct>>
-) {
-  createOrbitControls(commands, sceneStruct);
-  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+export function initScene(commands: Commands, coreStore: Res<Mut<CoreStore>>) {
+  const cameraId = createOrbitControls(commands);
+  const { viewId, sceneId } = createScene(commands, coreStore);
 
-  commands.getById(sceneId).addType(N8AOPass);
-  commands.getById(rootId).addType(Gltf);
+  commands.getById(viewId).add(new RenderView(cameraId)).addType(N8AOPass);
+
+  commands
+    .spawn(true)
+    .addType(Transform)
+    .addType(GlobalTransform)
+    .add(new Parent(sceneId))
+    .addType(Gltf);
 }
 
 /**
  * System to update the glTF uri.
  */
-export function loadGltf(entities: Query<Mut<Gltf>>) {
-  for (const gltf of entities) {
+export function loadGltf(gltfs: Query<Mut<Gltf>>) {
+  for (const gltf of gltfs) {
     gltf.uri = selectedModel.uri;
   }
 }

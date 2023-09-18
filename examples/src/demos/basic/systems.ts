@@ -3,7 +3,7 @@ import {
   GlobalTransform,
   Mesh,
   Parent,
-  SceneStruct,
+  RenderView,
   Transform,
 } from "houseki/scene";
 import { Commands, Mut, Res } from "thyseus";
@@ -16,18 +16,20 @@ import { createBoxGeometry } from "../../utils/geometry";
 export function initScene(
   warehouse: Res<Mut<Warehouse>>,
   commands: Commands,
-  coreStore: Res<Mut<CoreStore>>,
-  sceneStruct: Res<Mut<SceneStruct>>
+  coreStore: Res<Mut<CoreStore>>
 ) {
-  createOrbitControls(commands, sceneStruct);
-  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+  const cameraId = createOrbitControls(commands);
+  const { viewId, sceneId } = createScene(commands, coreStore);
+
+  commands.getById(viewId).add(new RenderView(cameraId));
+
   createLights(commands, sceneId);
 
   commands
     .spawn(true)
     .addType(Transform)
     .addType(GlobalTransform)
-    .add(new Parent(rootId))
+    .add(new Parent(sceneId))
     .addType(Mesh)
     .add(createBoxGeometry(warehouse));
 }

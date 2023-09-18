@@ -10,7 +10,7 @@ import {
   GlobalTransform,
   Mesh,
   Parent,
-  SceneStruct,
+  RenderView,
   Transform,
 } from "houseki/scene";
 import { Text } from "houseki/text";
@@ -26,23 +26,23 @@ export function initScene(
   warehouse: Res<Mut<Warehouse>>,
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
-  sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
 ) {
   physicsConfig.debug = true;
 
-  const { sceneId, rootId } = createScene(commands, coreStore, sceneStruct);
+  const { viewId, sceneId } = createScene(commands, coreStore);
+  const cameraId = createPlayer([0, 4, 0], sceneId, commands);
+
+  commands.getById(viewId).add(new RenderView(cameraId));
+
   createLights(commands, sceneId, 4096, 16);
-
-  createPlayer([0, 4, 0], sceneId, commands, sceneStruct);
-
   createBox(warehouse, commands, {
-    parentId: rootId,
+    parentId: sceneId,
     size: [32, 1, 32],
     translation: [0, -0.5, 0],
   });
 
-  const parent = new Parent(rootId);
+  const parent = new Parent(sceneId);
   const transform = new Transform();
 
   const stairsId = commands

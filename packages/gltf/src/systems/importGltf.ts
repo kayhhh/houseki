@@ -1,8 +1,9 @@
 import { Document, WebIO } from "@gltf-transform/core";
 import { Loading, Warehouse } from "@houseki-engine/core";
-import { Commands, Entity, Mut, Query, Res, SystemRes } from "thyseus";
+import { SceneView } from "@houseki-engine/scene";
+import { Commands, Entity, Mut, Query, Res, SystemRes, With } from "thyseus";
 
-import { Gltf } from "../components";
+import { Gltf, GltfInfo } from "../components";
 import { extensions } from "../extensions/extensions";
 import { ImportContext } from "../import/context";
 import { importDoc } from "../import/importDoc";
@@ -42,11 +43,13 @@ export function importGltf(
   warehouse: Res<Mut<Warehouse>>,
   commands: Commands,
   store: SystemRes<GltfStore>,
-  entities: Query<[Entity, Gltf]>
+  gltfs: Query<[Entity, Gltf]>,
+  withView: Query<Entity, [With<Gltf>, With<SceneView>]>,
+  withInfo: Query<Entity, [With<Gltf>, With<GltfInfo>]>
 ) {
   const ids: bigint[] = [];
 
-  for (const [entity, gltf] of entities) {
+  for (const [entity, gltf] of gltfs) {
     // If no uri, ignore
     if (!gltf.uri) continue;
 
@@ -54,18 +57,25 @@ export function importGltf(
     ids.push(id);
 
     const doc = store.docs.get(id);
-    const uri = gltf.uri;
 
     // If URI has changed, load new document
-    if (store.uris.get(id) !== uri) {
-      store.uris.set(id, uri);
+    if (store.uris.get(id) !== gltf.uri) {
+      store.uris.set(id, gltf.uri);
 
-      const loading = new Loading(`Loading ${gltf.uri}`);
+      commands.get(entity).add(new Loading(`Loading ${gltf.uri}`));
 
-      commands.get(entity).add(loading);
+      for (const ent of withView) {
+        if (ent.id !== id) continue;
+        commands.get(ent).remove(SceneView);
+      }
+
+      for (const ent of withInfo) {
+        if (ent.id !== id) continue;
+        commands.get(ent).remove(GltfInfo);
+      }
 
       // Start loading document
-      io.read(uri).then((doc) => store.docs.set(id, doc));
+      io.read(gltf.uri).then((doc) => store.docs.set(id, doc));
     } else if (doc) {
       // Remove old glTF entities
       const oldContext = store.contexts.get(id);

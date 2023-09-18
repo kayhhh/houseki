@@ -1,5 +1,5 @@
 import { RenderStore } from "@houseki-engine/render";
-import { SceneStruct } from "@houseki-engine/scene";
+import { RenderView } from "@houseki-engine/scene";
 import { OutlineEffect } from "postprocessing";
 import { Entity, Mut, Query, Res, With } from "thyseus";
 
@@ -7,58 +7,57 @@ import { OutlinePass, OutlineTarget } from "../components";
 import { OutlineRes } from "../resources";
 
 export function createOutlineEffects(
-  sceneStruct: Res<SceneStruct>,
   renderStore: Res<RenderStore>,
   res: Res<Mut<OutlineRes>>,
   outlines: Query<[Entity, OutlinePass]>,
-  targets: Query<Entity, With<OutlineTarget>>
+  targets: Query<Entity, With<OutlineTarget>>,
+  views: Query<RenderView>
 ) {
-  for (const [entity, outline] of outlines) {
-    const cameraId = sceneStruct.activeCamera;
-    if (cameraId === null) return;
+  for (const renderView of views) {
+    for (const [entity, outline] of outlines) {
+      const camera = renderStore.perspectiveCameras.get(renderView.cameraId);
+      if (!camera) return;
 
-    const camera = renderStore.perspectiveCameras.get(cameraId);
-    if (!camera) return;
+      const scene = renderStore.scenes.get(entity.id);
+      if (!scene) return;
 
-    const scene = renderStore.scenes.get(entity.id);
-    if (!scene) return;
+      let effect = res.effect;
 
-    let effect = res.effect;
+      if (!effect || effect.resolution.width !== outline.resolution) {
+        if (effect) {
+          effect.dispose();
+        }
 
-    if (!effect || effect.resolution.width !== outline.resolution) {
-      if (effect) {
-        effect.dispose();
+        effect = new OutlineEffect(scene, camera, {
+          resolutionX: outline.resolution,
+          resolutionY: outline.resolution,
+        });
+        res.effect = effect;
+        res.hasChanged = true;
       }
 
-      effect = new OutlineEffect(scene, camera, {
-        resolutionX: outline.resolution,
-        resolutionY: outline.resolution,
-      });
-      res.effect = effect;
-      res.hasChanged = true;
-    }
+      effect.mainScene = scene;
+      effect.mainCamera = camera;
+      effect.edgeStrength = outline.edgeStrength;
+      effect.multisampling = outline.multisampling;
+      effect.xRay = outline.xray;
+      effect.blendMode.opacity.value = outline.opacity;
 
-    effect.mainScene = scene;
-    effect.mainCamera = camera;
-    effect.edgeStrength = outline.edgeStrength;
-    effect.multisampling = outline.multisampling;
-    effect.xRay = outline.xray;
-    effect.blendMode.opacity.value = outline.opacity;
+      effect.visibleEdgeColor.fromArray(outline.visibleEdgeColor);
+      effect.hiddenEdgeColor.fromArray(outline.hiddenEdgeColor);
 
-    effect.visibleEdgeColor.fromArray(outline.visibleEdgeColor);
-    effect.hiddenEdgeColor.fromArray(outline.hiddenEdgeColor);
+      effect.selection.clear();
 
-    effect.selection.clear();
+      for (const targetEntity of targets) {
+        const object = renderStore.nodes.get(targetEntity.id);
+        if (!object) continue;
 
-    for (const targetEntity of targets) {
-      const object = renderStore.nodes.get(targetEntity.id);
-      if (!object) continue;
+        effect.selection.add(object);
 
-      effect.selection.add(object);
-
-      object.traverse((child) => {
-        effect?.selection.add(child);
-      });
+        object.traverse((child) => {
+          effect?.selection.add(child);
+        });
+      }
     }
   }
 

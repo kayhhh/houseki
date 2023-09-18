@@ -1,7 +1,7 @@
 import { RenderStore } from "@houseki-engine/render";
-import { SceneStruct } from "@houseki-engine/scene";
+import { RenderView } from "@houseki-engine/scene";
 import { EffectComposer, EffectPass } from "postprocessing";
-import { Mut, Res, SystemRes } from "thyseus";
+import { Mut, Query, Res, SystemRes } from "thyseus";
 
 import { OutlineRes } from "../resources";
 
@@ -14,29 +14,27 @@ class LocalRes {
 
 export function addEffectPass(
   renderStore: Res<RenderStore>,
-  sceneStruct: Res<SceneStruct>,
   outlineRes: Res<Mut<OutlineRes>>,
-  localRes: SystemRes<LocalRes>
+  localRes: SystemRes<LocalRes>,
+  views: Query<RenderView>
 ) {
   const composerChanged = renderStore.composer !== localRes.composer;
   const effectsChanged = outlineRes.hasChanged;
+  if (!composerChanged && !effectsChanged) return;
 
-  if (composerChanged || effectsChanged) {
+  for (const renderView of views) {
     if (localRes.pass) {
       renderStore.composer.removePass(localRes.pass);
       localRes.pass.dispose();
     }
 
+    const camera = renderStore.perspectiveCameras.get(renderView.cameraId);
+    if (!camera) return;
+
     const validEffects = [outlineRes.effect].filter(
       (effect): effect is NotNull<typeof effect> => effect !== null
     );
     if (validEffects.length === 0) return;
-
-    const cameraId = sceneStruct.activeCamera;
-    if (cameraId === null) return;
-
-    const camera = renderStore.perspectiveCameras.get(cameraId);
-    if (!camera) return;
 
     // We want to add the pass immediately after the render pass
     // before other post-processing effects, like anti-aliasing.

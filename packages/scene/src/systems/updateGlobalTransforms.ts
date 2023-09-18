@@ -1,7 +1,13 @@
 import { Matrix4, Quaternion, Vector3 } from "three";
 import { Entity, Mut, Query, SystemRes, With } from "thyseus";
 
-import { GlobalTransform, Parent, Scene, Transform } from "../components";
+import {
+  GlobalTransform,
+  Parent,
+  RenderView,
+  SceneView,
+  Transform,
+} from "../components";
 
 const quat = new Quaternion();
 const vec3 = new Vector3();
@@ -15,13 +21,15 @@ class LocalStore {
 
 export function updateGlobalTransforms(
   localStore: SystemRes<LocalStore>,
-  scenes: Query<Entity, With<Scene>>,
-  nodes: Query<[Entity, Parent, Transform, Mut<GlobalTransform>]>
+  views: Query<SceneView, With<RenderView>>,
+  nodes: Query<[Entity, Parent, Transform]>,
+  globals: Query<[Entity, Mut<GlobalTransform>]>
 ) {
   // Init global transform mats
   for (const [entity, parent, transform] of nodes) {
     const localMat = new Matrix4();
     localStore.transforms.set(entity.id, localMat);
+    localStore.globalTransforms.set(entity.id, localMat);
 
     vec3.set(
       transform.translation.x,
@@ -38,25 +46,25 @@ export function updateGlobalTransforms(
 
     localMat.compose(vec3, quat, vec3b);
 
-    localStore.globalTransforms.set(entity.id, localMat);
-
     const children = localStore.children.get(parent.id) ?? [];
     children.push(entity.id);
     localStore.children.set(parent.id, children);
   }
 
   // Calculate global transforms
-  for (const entity of scenes) {
-    updateTransformRecursive(
-      entity.id,
-      localStore.children,
-      localStore.transforms,
-      localStore.globalTransforms
-    );
+  for (const sceneView of views) {
+    for (const sceneId of sceneView.scenes) {
+      updateTransformRecursive(
+        sceneId,
+        localStore.children,
+        localStore.transforms,
+        localStore.globalTransforms
+      );
+    }
   }
 
   // Update global transform components
-  for (const [entity, , , globalTransform] of nodes) {
+  for (const [entity, globalTransform] of globals) {
     const globalMat = localStore.globalTransforms.get(entity.id);
     if (!globalMat) continue;
 
@@ -85,12 +93,11 @@ function updateTransformRecursive(
 
   for (const childId of children) {
     const childLocal = transforms.get(childId);
-    if (!childLocal) continue;
-
     const childGlobal = globalTransforms.get(childId);
-    if (!childGlobal) continue;
 
-    childGlobal.multiplyMatrices(parentGlobal, childLocal);
+    if (childGlobal && childLocal) {
+      childGlobal.multiplyMatrices(parentGlobal, childLocal);
+    }
 
     updateTransformRecursive(
       childId,

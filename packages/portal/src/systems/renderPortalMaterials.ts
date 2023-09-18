@@ -1,6 +1,6 @@
 import { Time } from "@houseki-engine/core";
 import { RenderStore } from "@houseki-engine/render";
-import { SceneStruct } from "@houseki-engine/scene";
+import { RenderView, SceneView } from "@houseki-engine/scene";
 import { ClearPass } from "postprocessing";
 import {
   AlwaysDepth,
@@ -88,111 +88,113 @@ type Portal = [entranceObj: Object3D, exitObj: Object3D];
 export function renderPortalMaterials(
   time: Res<Time>,
   renderStore: Res<Mut<RenderStore>>,
-  sceneStruct: Res<SceneStruct>,
-  portalTargets: Query<[Entity, PortalTarget], With<PortalMaterial>>
+  portalTargets: Query<[Entity, PortalTarget], With<PortalMaterial>>,
+  views: Query<[RenderView, SceneView]>
 ) {
-  const camera = renderStore.perspectiveCameras.get(sceneStruct.activeCamera);
-  if (!camera) return;
+  for (const [renderView, sceneView] of views) {
+    const camera = renderStore.perspectiveCameras.get(renderView.cameraId);
+    if (!camera) return;
 
-  const scene = renderStore.scenes.get(sceneStruct.activeScene);
-  if (!scene) return;
+    const scene = renderStore.scenes.get(sceneView.active);
+    if (!scene) return;
 
-  store = renderStore;
-  delta = time.mainDelta;
+    store = renderStore;
+    delta = time.mainDelta;
 
-  renderStore.renderer.localClippingEnabled = true;
-  renderStore.renderer.shadowMap.autoUpdate = false; // Avoid re-computing shadows
-  renderStore.renderer.autoClear = false;
+    renderStore.renderer.localClippingEnabled = true;
+    renderStore.renderer.shadowMap.autoUpdate = false; // Avoid re-computing shadows
+    renderStore.renderer.autoClear = false;
 
-  camera.getWorldPosition(cameraPosition);
-  camera.updateMatrixWorld(true);
-  camera.matrixAutoUpdate = false;
+    camera.getWorldPosition(cameraPosition);
+    camera.updateMatrixWorld(true);
+    camera.matrixAutoUpdate = false;
 
-  const portals: Portal[] = [];
+    const portals: Portal[] = [];
 
-  for (const [entity, portalTarget] of portalTargets) {
-    const entrance = renderStore.nodes.get(entity.id);
-    if (!entrance) continue;
+    for (const [entity, portalTarget] of portalTargets) {
+      const entrance = renderStore.nodes.get(entity.id);
+      if (!entrance) continue;
 
-    const exit = renderStore.nodes.get(portalTarget.id);
-    if (!exit) continue;
+      const exit = renderStore.nodes.get(portalTarget.id);
+      if (!exit) continue;
 
-    entrance.updateMatrixWorld(true);
+      entrance.updateMatrixWorld(true);
 
-    portals.push([entrance, exit]);
-  }
+      portals.push([entrance, exit]);
+    }
 
-  const recursionDepth = 0;
+    const recursionDepth = 0;
 
-  for (const [entrance, exit] of portals) {
-    // 1. Increment stencil buffer
-    INCREMENT_STENCIL_MAT.stencilRef = recursionDepth;
-    render(scene, camera, entrance, INCREMENT_STENCIL_MAT);
+    for (const [entrance, exit] of portals) {
+      // 1. Increment stencil buffer
+      INCREMENT_STENCIL_MAT.stencilRef = recursionDepth;
+      render(scene, camera, entrance, INCREMENT_STENCIL_MAT);
 
-    // 2. Render scene from portal exit, with incremented stencil buffer as mask
-    exitCamera.copy(camera);
-    exitCamera.layers.enableAll();
-    computeViewMatrix(exitCamera, camera, entrance, exit);
-    computeProjectionMatrix(exitCamera, exit);
+      // 2. Render scene from portal exit, with incremented stencil buffer as mask
+      exitCamera.copy(camera);
+      exitCamera.layers.enableAll();
+      computeViewMatrix(exitCamera, camera, entrance, exit);
+      computeProjectionMatrix(exitCamera, exit);
 
-    traverseMaterials(scene, (mat) => {
-      materialSettings.set(mat, {
-        stencilFunc: mat.stencilFunc,
-        stencilRef: mat.stencilRef,
-        stencilWrite: mat.stencilWrite,
-        stencilWriteMask: mat.stencilWriteMask,
+      traverseMaterials(scene, (mat) => {
+        materialSettings.set(mat, {
+          stencilFunc: mat.stencilFunc,
+          stencilRef: mat.stencilRef,
+          stencilWrite: mat.stencilWrite,
+          stencilWriteMask: mat.stencilWriteMask,
+        });
+        mat.stencilFunc = EqualStencilFunc;
+        mat.stencilRef = recursionDepth + 1;
+        mat.stencilWrite = true;
+        mat.stencilWriteMask = 0x00;
       });
-      mat.stencilFunc = EqualStencilFunc;
-      mat.stencilRef = recursionDepth + 1;
+
+      clear(false, true, false);
+      render(scene, exitCamera);
+
+      traverseMaterials(scene, (mat) => {
+        const settings = materialSettings.get(mat);
+        if (settings?.stencilFunc !== undefined) {
+          mat.stencilFunc = settings.stencilFunc;
+        }
+        if (settings?.stencilRef !== undefined) {
+          mat.stencilRef = settings.stencilRef;
+        }
+        if (settings?.stencilWrite !== undefined) {
+          mat.stencilWrite = settings.stencilWrite;
+        }
+        if (settings?.stencilWriteMask !== undefined) {
+          mat.stencilWriteMask = settings.stencilWriteMask;
+        }
+      });
+
+      // 3. Decrement stencil buffer
+      DECREMENT_STENCIL_MAT.stencilRef = recursionDepth + 1;
+      render(scene, camera, entrance, DECREMENT_STENCIL_MAT);
+    }
+
+    // 4. Render portals into depth buffer
+    group.clear();
+    for (const [entrance] of portals) {
+      group.add(entrance);
+    }
+
+    clear(false, true, false);
+    render(scene, camera, group, DEPTH_MAT);
+
+    // 5. Prepare for normal scene rendering
+    traverseMaterials(scene, (mat) => {
+      mat.stencilFunc = LessEqualStencilFunc;
+      mat.stencilRef = recursionDepth;
       mat.stencilWrite = true;
       mat.stencilWriteMask = 0x00;
     });
 
-    clear(false, true, false);
-    render(scene, exitCamera);
+    camera.matrixAutoUpdate = true;
+    renderStore.renderer.shadowMap.autoUpdate = true;
 
-    traverseMaterials(scene, (mat) => {
-      const settings = materialSettings.get(mat);
-      if (settings?.stencilFunc !== undefined) {
-        mat.stencilFunc = settings.stencilFunc;
-      }
-      if (settings?.stencilRef !== undefined) {
-        mat.stencilRef = settings.stencilRef;
-      }
-      if (settings?.stencilWrite !== undefined) {
-        mat.stencilWrite = settings.stencilWrite;
-      }
-      if (settings?.stencilWriteMask !== undefined) {
-        mat.stencilWriteMask = settings.stencilWriteMask;
-      }
-    });
-
-    // 3. Decrement stencil buffer
-    DECREMENT_STENCIL_MAT.stencilRef = recursionDepth + 1;
-    render(scene, camera, entrance, DECREMENT_STENCIL_MAT);
+    materialSettings.clear();
   }
-
-  // 4. Render portals into depth buffer
-  group.clear();
-  for (const [entrance] of portals) {
-    group.add(entrance);
-  }
-
-  clear(false, true, false);
-  render(scene, camera, group, DEPTH_MAT);
-
-  // 5. Prepare for normal scene rendering
-  traverseMaterials(scene, (mat) => {
-    mat.stencilFunc = LessEqualStencilFunc;
-    mat.stencilRef = recursionDepth;
-    mat.stencilWrite = true;
-    mat.stencilWriteMask = 0x00;
-  });
-
-  camera.matrixAutoUpdate = true;
-  renderStore.renderer.shadowMap.autoUpdate = true;
-
-  materialSettings.clear();
 }
 
 function render(

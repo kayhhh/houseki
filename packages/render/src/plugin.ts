@@ -30,6 +30,7 @@ export function renderPlugin(builder: WorldBuilder) {
     .addSystems(
       createSkybox,
       ...run.chain(
+        createScenes,
         createImages,
         [
           createBasicMaterials,
@@ -39,9 +40,9 @@ export function renderPlugin(builder: WorldBuilder) {
         ],
         createMeshes,
         createNodes,
+        createCameras,
         [createAmbientLights, createDirectionalLights],
         createShadowMaps,
-        [createScenes, createCameras],
         createKeyframeTracks,
         createAnimationClips,
         createAnimationMixers,

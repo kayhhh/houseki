@@ -16,7 +16,7 @@ export function createNodes(
   for (const [entity, transform, parent] of entities) {
     ids.push(entity.id);
 
-    let object = store.nodes.get(entity.id);
+    let object = store.nodes.get(entity.id) ?? store.scenes.get(entity.id);
 
     // Create new objects
     if (!object) {
@@ -46,8 +46,10 @@ export function createNodes(
     const parentObject =
       store.nodes.get(parent.id) ?? store.scenes.get(parent.id);
 
-    if (parentObject && object.parent !== parentObject) {
+    if (parentObject) {
       parentObject.add(object);
+    } else {
+      object.removeFromParent();
     }
   }
 

@@ -5,7 +5,7 @@ import {
   GlobalTransform,
   Mesh,
   Parent,
-  SceneStruct,
+  RenderView,
   StandardMaterial,
   Transform,
 } from "houseki/scene";
@@ -22,25 +22,25 @@ export function initScene(
   warehouse: Res<Mut<Warehouse>>,
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
-  sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
 ) {
   physicsConfig.debug = true;
 
-  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+  const { viewId, sceneId } = createScene(commands, coreStore);
+  const cameraId = createPlayer([0, 2, 0], sceneId, commands);
+
+  commands.getById(viewId).add(new RenderView(cameraId));
+  commands.getById(cameraId).addType(PortalRaycast);
+
   createLights(commands, sceneId);
-  createPlayer([0, 2, 0], rootId, commands, sceneStruct);
-
-  commands.getById(sceneStruct.activeCamera).addType(PortalRaycast);
-
   createBox(warehouse, commands, {
-    parentId: rootId,
+    parentId: sceneId,
     size: [30, 1, 30],
     translation: [0, -1, 0],
   });
 
   const transform = new Transform();
-  const parent = new Parent(rootId);
+  const parent = new Parent(sceneId);
 
   const portal = new Portal(3, 3);
 

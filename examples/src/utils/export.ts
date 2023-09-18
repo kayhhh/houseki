@@ -1,6 +1,13 @@
 import { ExportedGltf, ExportedJSON, ExportGltf, Gltf } from "houseki/gltf";
-import { DeepRemove, Scene, SceneStruct } from "houseki/scene";
-import { Commands, EventReader, EventWriter, Query, Res } from "thyseus";
+import { DeepRemove, RenderView, SceneView } from "houseki/scene";
+import {
+  Commands,
+  Entity,
+  EventReader,
+  EventWriter,
+  Query,
+  With,
+} from "thyseus";
 
 import { selectedModel } from "../demos/gltf/systems";
 
@@ -16,18 +23,20 @@ export const ExportSchedule = Symbol("Export");
 
 export function sendExportEvent(
   writer: EventWriter<ExportGltf>,
-  sceneStruct: Res<SceneStruct>
+  views: Query<SceneView, With<RenderView>>
 ) {
-  const event = new ExportGltf();
-  event.binary = exportConfig.format === "binary";
-  event.scene = sceneStruct.activeScene;
-  writer.create(event);
+  for (const sceneView of views) {
+    const event = new ExportGltf();
+    event.binary = exportConfig.format === "binary";
+    event.scene = sceneView.active;
+    writer.create(event);
+  }
 }
 
 export function handleExport(
   commands: Commands,
   reader: EventReader<ExportedGltf>,
-  scenes: Query<Scene>,
+  views: Query<[Entity, SceneView], With<RenderView>>,
   deepRemove: EventWriter<DeepRemove>
 ) {
   if (reader.length === 0) return;
@@ -64,13 +73,15 @@ export function handleExport(
     } else if (exportConfig.mode === "test") {
       let rootId = 0n;
 
-      // Clear scene
-      for (const scene of scenes) {
-        const deepRemoveEvent = new DeepRemove();
-        deepRemoveEvent.rootId = scene.rootId;
-        deepRemove.create(deepRemoveEvent);
+      for (const [entity, view] of views) {
+        rootId = entity.id;
 
-        rootId = scene.rootId;
+        for (const entityId of view.scenes) {
+          // Clear scene
+          const deepRemoveEvent = new DeepRemove();
+          deepRemoveEvent.rootId = entityId;
+          deepRemove.create(deepRemoveEvent);
+        }
       }
 
       // Prevent gltf demo from resetting the uri

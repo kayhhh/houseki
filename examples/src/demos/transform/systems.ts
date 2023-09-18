@@ -11,7 +11,7 @@ import {
   GlobalTransform,
   Mesh,
   Parent,
-  SceneStruct,
+  RenderView,
   Transform,
 } from "houseki/scene";
 import { TransformControls, TransformMode } from "houseki/transform";
@@ -27,13 +27,15 @@ export function initScene(
   warehouse: Res<Mut<Warehouse>>,
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
-  sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
 ) {
   physicsConfig.debug = true;
 
-  createOrbitControls(commands, sceneStruct);
-  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+  const cameraId = createOrbitControls(commands);
+  const { viewId, sceneId } = createScene(commands, coreStore);
+
+  commands.getById(viewId).add(new RenderView(cameraId));
+
   createLights(commands, sceneId);
 
   const outlinePass = new OutlinePass();
@@ -43,7 +45,7 @@ export function initScene(
   commands.getById(sceneId).add(outlinePass);
 
   const geometry = createBoxGeometry(warehouse);
-  const parent = new Parent(rootId);
+  const parent = new Parent(sceneId);
   const transform = new Transform([2, 0, 0]);
 
   const boxId = commands

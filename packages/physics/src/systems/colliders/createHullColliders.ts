@@ -11,7 +11,7 @@ export function createHullColliders(
   store: Res<PhysicsStore>,
   colliders: Query<[Entity, HullCollider]>,
   withParent: Query<[Entity, Parent], With<HullCollider>>,
-  nodes: Query<[Entity, GlobalTransform]>,
+  globals: Query<[Entity, GlobalTransform]>,
   geometries: Query<[Entity, Geometry]>,
   meshes: Query<[Entity, Mesh]>
 ) {
@@ -68,7 +68,7 @@ export function createHullColliders(
           const scaledVertices = new Float32Array(vertices.length);
 
           // Scale vertices using global transform
-          for (const [nodeEntity, globalTransform] of nodes) {
+          for (const [nodeEntity, globalTransform] of globals) {
             if (nodeEntity.id !== rigidbodyId) continue;
 
             for (let i = 0; i < vertices.length; i += 3) {

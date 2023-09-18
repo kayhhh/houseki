@@ -1,20 +1,8 @@
 import { Asset, CoreStore } from "houseki/core";
-import {
-  GlobalTransform,
-  Image,
-  Parent,
-  Scene,
-  SceneStruct,
-  Skybox,
-  Transform,
-} from "houseki/scene";
+import { Image, Parent, Scene, SceneView, Skybox } from "houseki/scene";
 import { Commands } from "thyseus";
 
-export function createScene(
-  commands: Commands,
-  coreStore: CoreStore,
-  sceneStruct: SceneStruct
-) {
+export function createScene(commands: Commands, coreStore: CoreStore) {
   const canvas = document.querySelector("canvas");
   coreStore.canvas = canvas;
 
@@ -22,23 +10,20 @@ export function createScene(
   const image = new Image(true);
   const skyboxId = commands.spawn(true).add(asset).add(image).id;
 
-  const rootId = commands
-    .spawn(true)
-    .addType(Transform)
-    .addType(GlobalTransform).id;
-
   const skybox = new Skybox();
   skybox.imageId = skyboxId;
 
-  const scene = new Scene();
-  scene.rootId = rootId;
+  const sceneId = commands
+    .spawn(true)
+    .addType(Scene)
+    .addType(Parent)
+    .add(skybox).id;
 
-  const sceneId = commands.spawn(true).add(scene).add(skybox).id;
+  const view = new SceneView();
+  view.scenes.push(sceneId);
+  view.active = sceneId;
 
-  sceneStruct.activeScene = sceneId;
+  const viewId = commands.spawn(true).add(view).id;
 
-  const parent = new Parent(sceneId);
-  commands.getById(rootId).add(parent);
-
-  return { rootId, sceneId };
+  return { sceneId, viewId };
 }

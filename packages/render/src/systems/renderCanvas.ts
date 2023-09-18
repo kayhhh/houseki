@@ -1,5 +1,5 @@
 import { CoreStore } from "@houseki-engine/core";
-import { SceneStruct } from "@houseki-engine/scene";
+import { RenderView, SceneView } from "@houseki-engine/scene";
 import {
   EffectComposer,
   EffectPass,
@@ -8,7 +8,7 @@ import {
   SMAAPreset,
 } from "postprocessing";
 import { PCFSoftShadowMap, WebGLRenderer } from "three";
-import { Mut, Res } from "thyseus";
+import { Mut, Query, Res } from "thyseus";
 
 import { RenderStats, RenderStore } from "../resources";
 
@@ -17,69 +17,65 @@ import { RenderStats, RenderStore } from "../resources";
  */
 export function renderCanvas(
   coreStore: Res<CoreStore>,
-  sceneStruct: Res<SceneStruct>,
   renderStore: Res<Mut<RenderStore>>,
-  stats: Res<Mut<RenderStats>>
+  stats: Res<Mut<RenderStats>>,
+  views: Query<[RenderView, SceneView]>
 ) {
   const canvas = coreStore.canvas;
   if (!canvas) return;
 
-  const cameraId = sceneStruct.activeCamera;
-  if (cameraId === null) return;
-
-  const camera = renderStore.perspectiveCameras.get(cameraId);
-  if (!camera) return;
-
-  const sceneId = sceneStruct.activeScene;
-  if (sceneId === null) return;
-
-  const scene = renderStore.scenes.get(sceneId);
-  if (!scene) return;
-
   let renderer = renderStore.renderer;
 
-  // Create a new renderer if the canvas has changed
-  if (renderer.domElement !== canvas) {
-    // Dispose old renderer
-    renderer.dispose();
-    renderStore.composer.dispose();
+  for (const [renderView, sceneView] of views) {
+    const camera = renderStore.perspectiveCameras.get(renderView.cameraId);
+    if (!camera) return;
 
-    // Create new renderer
-    renderer = new WebGLRenderer({
-      canvas: canvas ?? undefined,
-      depth: false,
-      powerPreference: "high-performance",
-      stencil: false,
-    });
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = PCFSoftShadowMap;
-    renderer.info.autoReset = false;
+    const scene = renderStore.scenes.get(sceneView.active);
+    if (!scene) return;
 
-    const composer = new EffectComposer(renderer, {
-      depthBuffer: true,
-      stencilBuffer: true,
-    });
+    // Create a new renderer if the canvas has changed
+    if (renderer.domElement !== canvas) {
+      // Dispose old renderer
+      renderer.dispose();
+      renderStore.composer.dispose();
 
-    const renderPass = new RenderPass(scene, camera);
-    renderPass.clearPass.enabled = false;
+      // Create new renderer
+      renderer = new WebGLRenderer({
+        canvas: canvas ?? undefined,
+        depth: false,
+        powerPreference: "high-performance",
+        stencil: false,
+      });
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = PCFSoftShadowMap;
+      renderer.info.autoReset = false;
 
-    const effectPass = new EffectPass(
-      camera,
-      new SMAAEffect({ preset: SMAAPreset.HIGH })
-    );
+      const composer = new EffectComposer(renderer, {
+        depthBuffer: true,
+        stencilBuffer: true,
+      });
 
-    composer.addPass(renderPass);
-    composer.addPass(effectPass);
+      const renderPass = new RenderPass(scene, camera);
+      renderPass.clearPass.enabled = false;
 
-    renderStore.renderer = renderer;
-    renderStore.composer = composer;
+      const effectPass = new EffectPass(
+        camera,
+        new SMAAEffect({ preset: SMAAPreset.HIGH })
+      );
+
+      composer.addPass(renderPass);
+      composer.addPass(effectPass);
+
+      renderStore.renderer = renderer;
+      renderStore.composer = composer;
+    }
+
+    renderStore.composer.setSize(canvas.width, canvas.height);
+    renderStore.composer.setMainCamera(camera);
+    renderStore.composer.setMainScene(scene);
+
+    renderStore.composer.render();
   }
-
-  renderStore.composer.setSize(canvas.width, canvas.height);
-  renderStore.composer.setMainCamera(camera);
-  renderStore.composer.setMainScene(scene);
-
-  renderStore.composer.render();
 
   stats.frame += 1;
   stats.calls = renderer.info.render.calls;

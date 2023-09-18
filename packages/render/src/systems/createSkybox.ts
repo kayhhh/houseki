@@ -1,4 +1,4 @@
-import { Scene, SceneStruct, Skybox } from "@houseki-engine/scene";
+import { RenderView, Scene, Skybox } from "@houseki-engine/scene";
 import {
   BackSide,
   CanvasTexture,
@@ -23,8 +23,8 @@ class LocalRes {
 export function createSkybox(
   localRes: SystemRes<LocalRes>,
   renderStore: Res<RenderStore>,
-  sceneStruct: Res<SceneStruct>,
-  scenes: Query<[Entity, Skybox], With<Scene>>
+  scenes: Query<[Entity, Skybox], With<Scene>>,
+  views: Query<RenderView>
 ) {
   const ids: bigint[] = [];
 
@@ -51,9 +51,11 @@ export function createSkybox(
       sceneObj.add(object);
     }
 
-    // Move box to camera position
-    const camera = renderStore.perspectiveCameras.get(sceneStruct.activeCamera);
-    if (camera) {
+    // Move object to camera position
+    for (const view of views) {
+      const camera = renderStore.perspectiveCameras.get(view.cameraId);
+      if (!camera) continue;
+
       object.position.copy(camera.position);
       object.scale.setScalar(camera.far * 0.95);
     }

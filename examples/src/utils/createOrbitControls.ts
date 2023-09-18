@@ -1,15 +1,9 @@
 import { OrbitControls } from "houseki/orbit";
-import {
-  GlobalTransform,
-  PerspectiveCamera,
-  SceneStruct,
-  Transform,
-} from "houseki/scene";
+import { GlobalTransform, PerspectiveCamera, Transform } from "houseki/scene";
 import { Commands } from "thyseus";
 
 export function createOrbitControls(
   commands: Commands,
-  sceneStruct: SceneStruct,
   translation: [number, number, number] = [0, 2, 4]
 ) {
   const transform = new Transform(translation);
@@ -20,8 +14,6 @@ export function createOrbitControls(
     .addType(GlobalTransform)
     .addType(PerspectiveCamera)
     .addType(OrbitControls).id;
-
-  sceneStruct.activeCamera = cameraId;
 
   return cameraId;
 }

@@ -9,7 +9,11 @@ import {
 
 export class ExportContext {
   doc = new Document();
-  scene: Scene;
+
+  defaultScene: Scene;
+  defaultSceneId: bigint = 0n;
+
+  scenes = new Map<bigint, Scene>();
 
   /**
    * Entity ID -> Texture
@@ -42,8 +46,8 @@ export class ExportContext {
   names = new Map<bigint, string>();
 
   constructor() {
-    this.scene = this.doc.createScene();
-    this.doc.getRoot().setDefaultScene(this.scene);
+    this.defaultScene = this.doc.createScene();
+    this.doc.getRoot().setDefaultScene(this.defaultScene);
 
     this.doc.createBuffer();
   }

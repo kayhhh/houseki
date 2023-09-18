@@ -15,8 +15,8 @@ export function createLights(
   shadowArea = 8
 ) {
   const parent = new Parent(parentId);
-
   const ambient = new AmbientLight([1, 1, 1], 0.25);
+
   commands
     .spawn(true)
     .add(ambient)

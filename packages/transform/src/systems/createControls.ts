@@ -1,5 +1,5 @@
 import { RenderStore } from "@houseki-engine/render";
-import { SceneStruct } from "@houseki-engine/scene";
+import { RenderView, SceneView } from "@houseki-engine/scene";
 import { TransformControls as ThreeTransformControls } from "three/examples/jsm/controls/TransformControls";
 import { Entity, Query, Res } from "thyseus";
 
@@ -9,10 +9,10 @@ import { TransformMode } from "../types";
 
 export function createControls(
   renderStore: Res<RenderStore>,
-  sceneStruct: Res<SceneStruct>,
   canvasRect: Res<CanvasRect>,
   store: Res<TransformControlsStore>,
-  transformControls: Query<[Entity, TransformControls]>
+  transformControls: Query<[Entity, TransformControls]>,
+  views: Query<[RenderView, SceneView]>
 ) {
   const ids: bigint[] = [];
 
@@ -27,59 +27,61 @@ export function createControls(
   });
 
   // Create new objects
-  for (const [entity, controls] of transformControls) {
-    ids.push(entity.id);
+  for (const [renderView, sceneView] of views) {
+    for (const [entity, controls] of transformControls) {
+      ids.push(entity.id);
 
-    let object = store.objects.get(entity.id);
+      let object = store.objects.get(entity.id);
 
-    if (!object) {
-      const cameraObject = renderStore.perspectiveCameras.get(
-        sceneStruct.activeCamera
-      );
-      if (!cameraObject) continue;
+      if (!object) {
+        const cameraObject = renderStore.perspectiveCameras.get(
+          renderView.cameraId
+        );
+        if (!cameraObject) continue;
 
-      const sceneObject = renderStore.scenes.get(sceneStruct.activeScene);
-      if (!sceneObject) continue;
+        const sceneObject = renderStore.scenes.get(sceneView.active);
+        if (!sceneObject) continue;
 
-      object = new ThreeTransformControls(
-        cameraObject,
-        store.mockElement as any
-      );
+        object = new ThreeTransformControls(
+          cameraObject,
+          store.mockElement as any
+        );
 
-      sceneObject.add(object);
+        sceneObject.add(object);
 
-      store.objects.set(entity.id, object);
-    }
-
-    object.enabled = controls.enabled;
-
-    for (const child of object.children) {
-      child.visible = controls.enabled;
-    }
-
-    switch (controls.mode) {
-      case TransformMode.Translate: {
-        object.setMode("translate");
-        break;
+        store.objects.set(entity.id, object);
       }
 
-      case TransformMode.Rotate: {
-        object.setMode("rotate");
-        break;
+      object.enabled = controls.enabled;
+
+      for (const child of object.children) {
+        child.visible = controls.enabled;
       }
 
-      case TransformMode.Scale: {
-        object.setMode("scale");
-        break;
+      switch (controls.mode) {
+        case TransformMode.Translate: {
+          object.setMode("translate");
+          break;
+        }
+
+        case TransformMode.Rotate: {
+          object.setMode("rotate");
+          break;
+        }
+
+        case TransformMode.Scale: {
+          object.setMode("scale");
+          break;
+        }
       }
-    }
 
-    const targetObject = renderStore.nodes.get(controls.targetId);
+      const targetObject = renderStore.nodes.get(controls.targetId);
 
-    if (targetObject) {
-      object.attach(targetObject);
-    } else {
-      object.detach();
+      if (targetObject) {
+        object.attach(targetObject);
+      } else {
+        object.detach();
+      }
     }
   }
 

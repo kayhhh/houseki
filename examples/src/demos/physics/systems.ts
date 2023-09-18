@@ -10,7 +10,7 @@ import {
   GlobalTransform,
   Mesh,
   Parent,
-  SceneStruct,
+  RenderView,
   StandardMaterial,
   Transform,
 } from "houseki/scene";
@@ -26,18 +26,19 @@ export function initScene(
   warehouse: Res<Mut<Warehouse>>,
   commands: Commands,
   coreStore: Res<Mut<CoreStore>>,
-  sceneStruct: Res<Mut<SceneStruct>>,
   physicsConfig: Res<Mut<PhysicsConfig>>
 ) {
   physicsConfig.debug = true;
 
-  createOrbitControls(commands, sceneStruct, [0, 5, 7]);
-  const { rootId, sceneId } = createScene(commands, coreStore, sceneStruct);
+  const cameraId = createOrbitControls(commands, [0, 5, 7]);
+  const { viewId, sceneId } = createScene(commands, coreStore);
+
+  commands.getById(viewId).add(new RenderView(cameraId));
+
   createLights(commands, sceneId);
-
-  const parent = new Parent(rootId);
-
   const roomId = createRoom(warehouse, [8, 1, 8], commands);
+
+  const parent = new Parent(sceneId);
   commands.getById(roomId).add(parent);
 
   // Add dynamic balls
