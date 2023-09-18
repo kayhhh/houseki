@@ -1,5 +1,6 @@
 import { Texture } from "@gltf-transform/core";
 import { Asset, Warehouse } from "@houseki-engine/core";
+import { Image } from "@houseki-engine/scene";
 import { Commands } from "thyseus";
 
 export function importTexture(
