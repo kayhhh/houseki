@@ -1,4 +1,8 @@
-import { AnimationClip, AnimationMixer } from "@houseki-engine/scene";
+import {
+  AnimationClip,
+  AnimationMixer,
+  SceneView,
+} from "@houseki-engine/scene";
 import {
   AnimationAction,
   AnimationMixer as ThreeAnimationMixer,
@@ -19,37 +23,37 @@ class LocalStore {
 export function createAnimationMixers(
   renderStore: Res<RenderStore>,
   localStore: SystemRes<LocalStore>,
-  entities: Query<Entity, With<AnimationMixer>>,
+  mixers: Query<[Entity, SceneView], With<AnimationMixer>>,
   clips: Query<[Entity, AnimationClip]>
 ) {
   const ids: bigint[] = [];
   const clipIds: bigint[] = [];
 
-  for (const entity of entities) {
-    const nodeObject = renderStore.nodes.get(entity.id);
-    if (!nodeObject) continue;
+  for (const [entity, view] of mixers) {
+    const rootObj = renderStore.scenes.get(view.active);
+    if (!rootObj) continue;
 
     ids.push(entity.id);
 
-    let object = renderStore.animationMixers.get(entity.id);
+    let mixer = renderStore.animationMixers.get(entity.id);
 
     // Create new objects
-    if (!object || object.getRoot() !== nodeObject) {
+    if (!mixer || mixer.getRoot() !== rootObj) {
       // Remove old object
-      if (object) {
-        object.stopAllAction();
+      if (mixer) {
+        mixer.stopAllAction();
 
         localStore.actions.forEach((action) => {
-          if (action.getMixer() === object) {
-            object.uncacheAction(action.getClip());
+          if (action.getMixer() === mixer) {
+            mixer.uncacheAction(action.getClip());
           }
         });
 
-        object.uncacheRoot(nodeObject);
+        mixer.uncacheRoot(rootObj);
       }
 
-      object = new ThreeAnimationMixer(nodeObject);
-      renderStore.animationMixers.set(entity.id, object);
+      mixer = new ThreeAnimationMixer(rootObj);
+      renderStore.animationMixers.set(entity.id, mixer);
     }
 
     // Sync clip actions
@@ -64,7 +68,7 @@ export function createAnimationMixers(
       let action = localStore.actions.get(clipEntity.id);
 
       if (!action) {
-        action = object.clipAction(clipObject);
+        action = mixer.clipAction(clipObject);
         localStore.actions.set(clipEntity.id, action);
       }
 
