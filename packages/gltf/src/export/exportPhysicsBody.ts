@@ -1,7 +1,6 @@
 import { DynamicBody, KinematicBody } from "@houseki-engine/physics";
 
 import { OMIPhysicsBody } from "../extensions/OMI_physics_body/OMIPhysicsBody";
-import { PhysicsBody } from "../extensions/OMI_physics_body/PhysicsBody";
 import { ExportContext } from "./context";
 
 export function exportStaticBody(context: ExportContext, entityId: bigint) {
@@ -9,11 +8,11 @@ export function exportStaticBody(context: ExportContext, entityId: bigint) {
   if (!node) return;
 
   const extension = context.doc.createExtension(OMIPhysicsBody);
-  const physicsBody = extension.createPhysicsBody();
+  const property = extension.createPhysicsBody();
 
-  physicsBody.setType("Static");
+  property.setType("Static");
 
-  node.setExtension(PhysicsBody.EXTENSION_NAME, physicsBody);
+  node.setExtension(property.extensionName, property);
 }
 
 export function exportDynamicBody(
@@ -25,14 +24,14 @@ export function exportDynamicBody(
   if (!node) return;
 
   const extension = context.doc.createExtension(OMIPhysicsBody);
-  const physicsBody = extension.createPhysicsBody();
+  const property = extension.createPhysicsBody();
 
-  physicsBody.setType("Dynamic");
-  physicsBody.setMass(body.mass);
-  physicsBody.setLinearVelocity(body.linearVelocity.toArray());
-  physicsBody.setAngularVelocity(body.angularVelocity.toArray());
+  property.setType("Dynamic");
+  property.setMass(body.mass);
+  property.setLinearVelocity(body.linearVelocity.toArray());
+  property.setAngularVelocity(body.angularVelocity.toArray());
 
-  node.setExtension(PhysicsBody.EXTENSION_NAME, physicsBody);
+  node.setExtension(property.extensionName, property);
 }
 
 export function exportKinematicBody(
@@ -44,12 +43,12 @@ export function exportKinematicBody(
   if (!node) return;
 
   const extension = context.doc.createExtension(OMIPhysicsBody);
-  const physicsBody = extension.createPhysicsBody();
+  const property = extension.createPhysicsBody();
 
-  physicsBody.setType("Kinematic");
-  physicsBody.setMass(body.mass);
-  physicsBody.setLinearVelocity(body.linearVelocity.toArray());
-  physicsBody.setAngularVelocity(body.angularVelocity.toArray());
+  property.setType("Kinematic");
+  property.setMass(body.mass);
+  property.setLinearVelocity(body.linearVelocity.toArray());
+  property.setAngularVelocity(body.angularVelocity.toArray());
 
-  node.setExtension(PhysicsBody.EXTENSION_NAME, physicsBody);
+  node.setExtension(property.extensionName, property);
 }

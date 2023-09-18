@@ -1,12 +1,7 @@
-import {
-  Material,
-  Texture as GltfTexture,
-  TextureInfo as GltfTextureInfo,
-} from "@gltf-transform/core";
+import { Material, TextureInfo as GltfTextureInfo } from "@gltf-transform/core";
 import { Transform } from "@gltf-transform/extensions";
-import { Asset, Warehouse } from "@houseki-engine/core";
+import { Warehouse } from "@houseki-engine/core";
 import {
-  Image,
   MaterialAlphaMode,
   StandardMaterial,
   TextureInfo,
@@ -14,6 +9,7 @@ import {
 import { Commands } from "thyseus";
 
 import { ImportContext } from "./context";
+import { importTexture } from "./importTexture";
 
 export function importMaterial(
   warehouse: Warehouse,
@@ -35,7 +31,7 @@ export function importMaterial(
     material.baseColor.fromArray(baseColor);
 
     const gltfTexture = gltfMaterial.getBaseColorTexture();
-    const textureId = createTexture(warehouse, gltfTexture, commands);
+    const textureId = importTexture(warehouse, gltfTexture, commands);
     if (textureId) {
       material.baseColorTextureId = textureId;
       context.textureIds.push(textureId);
@@ -50,7 +46,7 @@ export function importMaterial(
     material.emissiveFactor.fromArray(emissiveFactor);
 
     const gltfTexture = gltfMaterial.getEmissiveTexture();
-    const textureId = createTexture(warehouse, gltfTexture, commands);
+    const textureId = importTexture(warehouse, gltfTexture, commands);
     if (textureId) {
       material.emissiveTextureId = textureId;
       context.textureIds.push(textureId);
@@ -64,7 +60,7 @@ export function importMaterial(
     material.normalScale = gltfMaterial.getNormalScale();
 
     const gltfTexture = gltfMaterial.getNormalTexture();
-    const textureId = createTexture(warehouse, gltfTexture, commands);
+    const textureId = importTexture(warehouse, gltfTexture, commands);
     if (textureId) {
       material.normalTextureId = textureId;
       context.textureIds.push(textureId);
@@ -78,7 +74,7 @@ export function importMaterial(
     material.occlusionStrength = gltfMaterial.getOcclusionStrength();
 
     const gltfTexture = gltfMaterial.getOcclusionTexture();
-    const textureId = createTexture(warehouse, gltfTexture, commands);
+    const textureId = importTexture(warehouse, gltfTexture, commands);
     if (textureId) {
       material.occlusionTextureId = textureId;
       context.textureIds.push(textureId);
@@ -93,7 +89,7 @@ export function importMaterial(
     material.metalness = gltfMaterial.getMetallicFactor();
 
     const gltfTexture = gltfMaterial.getMetallicRoughnessTexture();
-    const textureId = createTexture(warehouse, gltfTexture, commands);
+    const textureId = importTexture(warehouse, gltfTexture, commands);
     if (textureId) {
       material.metallicRoughnessTextureId = textureId;
       context.textureIds.push(textureId);
@@ -136,23 +132,4 @@ function applyTextureInfo(info: TextureInfo, gltfInfo: GltfTextureInfo | null) {
     info.offset.fromArray([0, 0]);
     info.scale.fromArray([1, 1]);
   }
-}
-
-function createTexture(
-  warehouse: Warehouse,
-  gltfTexture: GltfTexture | null,
-  commands: Commands
-) {
-  if (!gltfTexture) return;
-
-  const imageData = gltfTexture.getImage();
-  if (!imageData) return;
-
-  const asset = new Asset();
-  asset.data.write(imageData, warehouse);
-  asset.mimeType = gltfTexture.getMimeType();
-
-  const imageId = commands.spawn(true).add(asset).addType(Image).id;
-
-  return imageId;
 }

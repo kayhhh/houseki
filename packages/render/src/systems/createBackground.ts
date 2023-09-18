@@ -20,6 +20,9 @@ class LocalRes {
   readonly objects = new Map<bigint, Mesh>();
 }
 
+/**
+ * Creates a background image for the scene.
+ */
 export function createBackground(
   localRes: SystemRes<LocalRes>,
   renderStore: Res<RenderStore>,
@@ -38,13 +41,12 @@ export function createBackground(
 
     // Create new objects
     if (!object) {
-      const geometry = new SphereGeometry();
-
-      const material = new MeshBasicMaterial();
-      material.side = BackSide;
+      // We use a mesh instead of scene.background, due to issues with
+      // poral rendering. Not sure if a three.js bug or not.
+      const geometry = new SphereGeometry(1, 16, 16);
+      const material = new MeshBasicMaterial({ side: BackSide });
 
       object = new Mesh(geometry, material);
-      object.scale.setScalar(500);
 
       localRes.objects.set(entity.id, object);
 

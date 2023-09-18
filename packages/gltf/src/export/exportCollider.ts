@@ -19,12 +19,12 @@ export function exportBoxCollider(
   if (!node) return;
 
   const extension = context.doc.createExtension(OMIPhysicsShape);
-  const physicsBody = extension.createShape();
+  const property = extension.createShape();
 
-  physicsBody.setType("box");
-  physicsBody.setSize(collider.size.toArray());
+  property.setType("box");
+  property.setSize(collider.size.toArray());
 
-  node.setExtension(OMIPhysicsShape.EXTENSION_NAME, physicsBody);
+  node.setExtension(property.extensionName, property);
 }
 
 export function exportSphereCollider(
@@ -36,12 +36,12 @@ export function exportSphereCollider(
   if (!node) return;
 
   const extension = context.doc.createExtension(OMIPhysicsShape);
-  const physicsBody = extension.createShape();
+  const property = extension.createShape();
 
-  physicsBody.setType("sphere");
-  physicsBody.setRadius(collider.radius);
+  property.setType("sphere");
+  property.setRadius(collider.radius);
 
-  node.setExtension(OMIPhysicsShape.EXTENSION_NAME, physicsBody);
+  node.setExtension(property.extensionName, property);
 }
 
 export function exportCapsuleCollider(
@@ -53,13 +53,13 @@ export function exportCapsuleCollider(
   if (!node) return;
 
   const extension = context.doc.createExtension(OMIPhysicsShape);
-  const physicsBody = extension.createShape();
+  const property = extension.createShape();
 
-  physicsBody.setType("capsule");
-  physicsBody.setRadius(collider.radius);
-  physicsBody.setHeight(collider.height);
+  property.setType("capsule");
+  property.setRadius(collider.radius);
+  property.setHeight(collider.height);
 
-  node.setExtension(OMIPhysicsShape.EXTENSION_NAME, physicsBody);
+  node.setExtension(property.extensionName, property);
 }
 
 export function exportCylinderCollider(
@@ -71,13 +71,13 @@ export function exportCylinderCollider(
   if (!node) return;
 
   const extension = context.doc.createExtension(OMIPhysicsShape);
-  const physicsBody = extension.createShape();
+  const property = extension.createShape();
 
-  physicsBody.setType("cylinder");
-  physicsBody.setRadius(collider.radius);
-  physicsBody.setHeight(collider.height);
+  property.setType("cylinder");
+  property.setRadius(collider.radius);
+  property.setHeight(collider.height);
 
-  node.setExtension(OMIPhysicsShape.EXTENSION_NAME, physicsBody);
+  node.setExtension(property.extensionName, property);
 }
 
 export function exportHullCollider(
@@ -92,13 +92,13 @@ export function exportHullCollider(
   const mesh = context.meshes.get(meshId);
   if (!mesh) return;
 
-  const physicsBodyExt = context.doc.createExtension(OMIPhysicsShape);
-  const physicsBody = physicsBodyExt.createShape();
+  const extension = context.doc.createExtension(OMIPhysicsShape);
+  const property = extension.createShape();
 
-  physicsBody.setType("convex");
-  physicsBody.setMesh(mesh);
+  property.setType("convex");
+  property.setMesh(mesh);
 
-  node.setExtension(OMIPhysicsShape.EXTENSION_NAME, physicsBody);
+  node.setExtension(property.extensionName, property);
 }
 
 export function exportMeshCollider(
@@ -113,11 +113,11 @@ export function exportMeshCollider(
   const mesh = context.meshes.get(meshId);
   if (!mesh) return;
 
-  const physicsBodyExt = context.doc.createExtension(OMIPhysicsShape);
-  const physicsBody = physicsBodyExt.createShape();
+  const extension = context.doc.createExtension(OMIPhysicsShape);
+  const property = extension.createShape();
 
-  physicsBody.setType("trimesh");
-  physicsBody.setMesh(mesh);
+  property.setType("trimesh");
+  property.setMesh(mesh);
 
-  node.setExtension(OMIPhysicsShape.EXTENSION_NAME, physicsBody);
+  node.setExtension(property.extensionName, property);
 }

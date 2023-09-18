@@ -14,6 +14,7 @@ import { Commands, Entity } from "thyseus";
 import { GltfInfo } from "../components";
 import { ImportContext } from "./context";
 import { importAnimation } from "./importAnimation";
+import { importBackground } from "./importBackground";
 import { importNode } from "./importNode";
 
 export function importDoc(
@@ -45,6 +46,8 @@ export function importDoc(
     if (gltfScene === defaultScene) {
       view.active = sceneEntityId;
     }
+
+    importBackground(warehouse, commands, gltfScene, sceneEntityId);
 
     gltfScene.listChildren().forEach((child) => {
       importNode(warehouse, child, sceneEntityId, commands, context);

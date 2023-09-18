@@ -11,12 +11,12 @@ export function exportText(
   const node = context.nodes.get(entityId);
   if (!node) return;
 
-  const textExtension = context.doc.createExtension(MOZText);
-  const textProp = textExtension.createText();
+  const extension = context.doc.createExtension(MOZText);
+  const property = extension.createText();
 
-  textProp.setValue(text.value);
-  textProp.setSize(text.fontSize);
-  textProp.setFontFile(text.font);
+  property.setValue(text.value);
+  property.setSize(text.fontSize);
+  property.setFontFile(text.font);
 
   const color = [
     text.color[0] / 255,
@@ -25,41 +25,41 @@ export function exportText(
     1,
   ] as [number, number, number, number];
 
-  textProp.setColor(color);
+  property.setColor(color);
 
   switch (text.anchorX) {
     case AnchorX.Left: {
-      textProp.setAlignX("left");
+      property.setAlignX("left");
       break;
     }
 
     case AnchorX.Center: {
-      textProp.setAlignX("center");
+      property.setAlignX("center");
       break;
     }
 
     case AnchorX.Right: {
-      textProp.setAlignX("right");
+      property.setAlignX("right");
       break;
     }
   }
 
   switch (text.anchorY) {
     case AnchorY.Top: {
-      textProp.setAlignY("top");
+      property.setAlignY("top");
       break;
     }
 
     case AnchorY.Middle: {
-      textProp.setAlignY("middle");
+      property.setAlignY("middle");
       break;
     }
 
     case AnchorY.Bottom: {
-      textProp.setAlignY("bottom");
+      property.setAlignY("bottom");
       break;
     }
   }
 
-  node.setExtension(MOZText.EXTENSION_NAME, textProp);
+  node.setExtension(property.extensionName, property);
 }

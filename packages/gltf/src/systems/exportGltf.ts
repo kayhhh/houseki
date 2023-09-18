@@ -13,6 +13,7 @@ import {
   StaticBody,
 } from "@houseki-engine/physics";
 import {
+  Background,
   Geometry,
   Image,
   Mesh,
@@ -38,6 +39,7 @@ import {
 import { Extra } from "../components";
 import { ExportedGltf, ExportGltf } from "../events";
 import { ExportContext } from "../export/context";
+import { exportBackground } from "../export/exportBackground";
 import {
   exportBoxCollider,
   exportCapsuleCollider,
@@ -84,6 +86,7 @@ export function exportGltf(
   names: Query<[Entity, Name]>,
   sceneViews: Query<[Entity, SceneView]>,
   scenes: Query<Entity, With<Scene>>,
+  backgrounds: Query<[Entity, Background]>,
   nodes: Query<[Entity, Parent, Transform]>,
   meshes: Query<[Entity, Mesh, Geometry]>,
   materials: Query<[Entity, StandardMaterial]>,
@@ -211,6 +214,10 @@ export function exportGltf(
     for (const entity of scenes) {
       if (entity.id !== event.scene) continue;
       exportScene(context, entity.id);
+    }
+
+    for (const [entity, background] of backgrounds) {
+      exportBackground(context, entity.id, background);
     }
 
     const isBinary = event.binary;
