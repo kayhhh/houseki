@@ -8,10 +8,10 @@ export function createScene(commands: Commands, coreStore: CoreStore) {
 
   const asset = new Asset("/Skybox.jpg", "image/jpeg");
   const image = new Image(true);
-  const skyboxImageId = commands.spawn(true).add(asset).add(image).id;
+  const bgImageId = commands.spawn(true).add(asset).add(image).id;
 
   const background = new Background();
-  background.imageId = skyboxImageId;
+  background.imageId = bgImageId;
 
   const sceneId = commands
     .spawn(true)

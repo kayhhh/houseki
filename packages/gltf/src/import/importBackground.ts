@@ -18,11 +18,11 @@ export function importBackground(
   const texture = ext.getTexture();
   if (!texture) return;
 
-  const imageId = importTexture(warehouse, texture, commands);
+  const imageId = importTexture(warehouse, texture, commands, true);
   if (!imageId) return;
 
   const background = new BackgroundComp();
-  background.imageId = 0n;
+  background.imageId = imageId;
 
   commands.getById(entityId).add(background);
 }

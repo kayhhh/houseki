@@ -6,7 +6,8 @@ import { Commands } from "thyseus";
 export function importTexture(
   warehouse: Warehouse,
   gltfTexture: Texture | null,
-  commands: Commands
+  commands: Commands,
+  flipY = false
 ) {
   if (!gltfTexture) return;
 
@@ -17,7 +18,8 @@ export function importTexture(
   asset.data.write(imageData, warehouse);
   asset.mimeType = gltfTexture.getMimeType();
 
-  const imageId = commands.spawn(true).add(asset).addType(Image).id;
+  const image = new Image(flipY);
+  const imageId = commands.spawn(true).add(asset).add(image).id;
 
   return imageId;
 }
