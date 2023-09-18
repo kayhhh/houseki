@@ -1,7 +1,7 @@
 import { CoreStore } from "houseki/core";
 import { Gltf } from "houseki/gltf";
 import { N8AOPass } from "houseki/postprocessing";
-import { GlobalTransform, Parent, RenderView, Transform } from "houseki/scene";
+import { RenderView } from "houseki/scene";
 import { Commands, Mut, Query, Res } from "thyseus";
 
 import { createOrbitControls } from "../../utils/createOrbitControls";
@@ -16,13 +16,7 @@ export function initScene(commands: Commands, coreStore: Res<Mut<CoreStore>>) {
   const { viewId, sceneId } = createScene(commands, coreStore);
 
   commands.getById(viewId).add(new RenderView(cameraId)).addType(N8AOPass);
-
-  commands
-    .spawn(true)
-    .addType(Transform)
-    .addType(GlobalTransform)
-    .add(new Parent(sceneId))
-    .addType(Gltf);
+  commands.getById(sceneId).addType(Gltf);
 }
 
 /**

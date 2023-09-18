@@ -144,12 +144,12 @@ export function exportGltf(
       context.names.set(entity.id, name.value);
     }
 
-    let scenesToExport: bigint[] = [];
+    const scenesToExport: bigint[] = [];
 
     for (const [entity, sceneView] of sceneViews) {
       if (entity.id !== event.scene) continue;
       exportSceneView(context, sceneView);
-      scenesToExport = sceneView.scenes;
+      scenesToExport.push(...sceneView.scenes);
     }
 
     for (const [entity, asset] of images) {
@@ -215,9 +215,9 @@ export function exportGltf(
     parentNodes(context);
 
     for (const entity of scenes) {
-      if (entity.id !== event.scene && !scenesToExport.includes(entity.id))
-        continue;
-      exportScene(context, entity.id);
+      if (entity.id === event.scene || scenesToExport.includes(entity.id)) {
+        exportScene(context, entity.id);
+      }
     }
 
     for (const [entity, background] of backgrounds) {
