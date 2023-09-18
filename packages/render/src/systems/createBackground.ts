@@ -1,4 +1,4 @@
-import { RenderView, Scene, Skybox } from "@houseki-engine/scene";
+import { Background, RenderView, Scene } from "@houseki-engine/scene";
 import {
   BackSide,
   CanvasTexture,
@@ -15,20 +15,20 @@ import { disposeMaterial } from "../utils/dispose";
 
 class LocalRes {
   /**
-   * Entity ID -> Skybox
+   * Entity ID -> Background object
    */
   readonly objects = new Map<bigint, Mesh>();
 }
 
-export function createSkybox(
+export function createBackground(
   localRes: SystemRes<LocalRes>,
   renderStore: Res<RenderStore>,
-  scenes: Query<[Entity, Skybox], With<Scene>>,
+  scenes: Query<[Entity, Background], With<Scene>>,
   views: Query<RenderView>
 ) {
   const ids: bigint[] = [];
 
-  for (const [entity, skybox] of scenes) {
+  for (const [entity, background] of scenes) {
     ids.push(entity.id);
 
     const sceneObj = renderStore.scenes.get(entity.id);
@@ -61,7 +61,7 @@ export function createSkybox(
     }
 
     // Set texture
-    const bitmap = renderStore.images.get(skybox.imageId);
+    const bitmap = renderStore.images.get(background.imageId);
 
     if (sceneObj.environment) {
       if (sceneObj.environment.image === bitmap) continue;

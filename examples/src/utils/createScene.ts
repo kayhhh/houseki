@@ -1,5 +1,5 @@
 import { Asset, CoreStore } from "houseki/core";
-import { Image, Parent, Scene, SceneView, Skybox } from "houseki/scene";
+import { Background, Image, Parent, Scene, SceneView } from "houseki/scene";
 import { Commands } from "thyseus";
 
 export function createScene(commands: Commands, coreStore: CoreStore) {
@@ -8,16 +8,16 @@ export function createScene(commands: Commands, coreStore: CoreStore) {
 
   const asset = new Asset("/Skybox.jpg", "image/jpeg");
   const image = new Image(true);
-  const skyboxId = commands.spawn(true).add(asset).add(image).id;
+  const skyboxImageId = commands.spawn(true).add(asset).add(image).id;
 
-  const skybox = new Skybox();
-  skybox.imageId = skyboxId;
+  const background = new Background();
+  background.imageId = skyboxImageId;
 
   const sceneId = commands
     .spawn(true)
     .addType(Scene)
     .addType(Parent)
-    .add(skybox).id;
+    .add(background).id;
 
   const view = new SceneView();
   view.scenes.push(sceneId);
