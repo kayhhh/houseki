@@ -1,5 +1,14 @@
 # @houseki-engine/vrm
 
+## 7.0.0
+
+### Patch Changes
+
+- Updated dependencies [b0cdca5]
+- Updated dependencies [04031cf]
+  - @houseki-engine/scene@2.1.0
+  - @houseki-engine/render@7.0.0
+
 ## 6.0.1
 
 ### Patch Changes

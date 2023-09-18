@@ -1,5 +1,17 @@
 # @houseki-engine/render
 
+## 7.0.0
+
+### Minor Changes
+
+- 04031cf: refactor scene structure
+
+### Patch Changes
+
+- Updated dependencies [b0cdca5]
+- Updated dependencies [04031cf]
+  - @houseki-engine/scene@2.1.0
+
 ## 6.0.1
 
 ### Patch Changes

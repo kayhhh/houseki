@@ -1,5 +1,21 @@
 # @houseki-engine/gltf
 
+## 9.0.0
+
+### Minor Changes
+
+- 04031cf: refactor scene structure
+- b0cdca5: create UNV_background extension
+
+### Patch Changes
+
+- 7ed7071: fix GltfInfo not registered
+- Updated dependencies [b0cdca5]
+- Updated dependencies [04031cf]
+  - @houseki-engine/scene@2.1.0
+  - @houseki-engine/physics@7.0.0
+  - @houseki-engine/text@7.0.0
+
 ## 8.2.0
 
 ### Minor Changes

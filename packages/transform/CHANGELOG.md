@@ -1,5 +1,22 @@
 # @houseki-engine/transform
 
+## 9.0.0
+
+### Minor Changes
+
+- 04031cf: refactor scene structure
+
+### Patch Changes
+
+- Updated dependencies [b0cdca5]
+- Updated dependencies [04031cf]
+  - @houseki-engine/scene@2.1.0
+  - @houseki-engine/postprocessing@6.0.0
+  - @houseki-engine/physics@7.0.0
+  - @houseki-engine/render@7.0.0
+  - @houseki-engine/orbit@8.0.0
+  - @houseki-engine/player@9.0.0
+
 ## 8.1.0
 
 ### Minor Changes

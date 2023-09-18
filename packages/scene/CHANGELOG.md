@@ -1,5 +1,12 @@
 # @houseki-engine/scene
 
+## 2.1.0
+
+### Minor Changes
+
+- b0cdca5: rename Skybox -> Background
+- 04031cf: refactor scene structure
+
 ## 2.0.1
 
 ### Patch Changes
