@@ -254,8 +254,8 @@ importers:
         version: link:../vrm
     devDependencies:
       postprocessing:
-        specifier: ^6.32.2
-        version: 6.32.2(three@0.154.0)
+        specifier: ^6.33.1
+        version: 6.33.1(three@0.154.0)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.29.1)
@@ -429,8 +429,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       postprocessing:
-        specifier: ^6.32.2
-        version: 6.32.2(three@0.154.0)
+        specifier: ^6.33.1
+        version: 6.33.1(three@0.154.0)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.29.1)
@@ -454,7 +454,7 @@ importers:
     dependencies:
       n8ao:
         specifier: ^1.6.8
-        version: 1.6.8(postprocessing@6.32.2)(three@0.154.0)
+        version: 1.6.8(postprocessing@6.33.1)(three@0.154.0)
     devDependencies:
       '@houseki-engine/core':
         specifier: workspace:^
@@ -469,8 +469,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       postprocessing:
-        specifier: ^6.32.2
-        version: 6.32.2(three@0.154.0)
+        specifier: ^6.33.1
+        version: 6.33.1(three@0.154.0)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.29.1)
@@ -502,8 +502,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       postprocessing:
-        specifier: ^6.32.2
-        version: 6.32.2(three@0.154.0)
+        specifier: ^6.33.1
+        version: 6.33.1(three@0.154.0)
       rollup-plugin-peer-deps-external:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.29.1)
@@ -4594,13 +4594,13 @@ packages:
     resolution: {integrity: sha512-ckmWDJjphvd/FvZawgygcUeQCxzvohjFO5RxTjj4eq8kw359gFF3E1brjfI+viLMxss5JrHTDRHZvu2/tuy0Qg==}
     dev: true
 
-  /n8ao@1.6.8(postprocessing@6.32.2)(three@0.154.0):
+  /n8ao@1.6.8(postprocessing@6.33.1)(three@0.154.0):
     resolution: {integrity: sha512-3xaBaoMIplgPdBK+9mZefa8stWEoA2673h2734wYMxm/hUkMLENMhzymDe+WZueFQq93ly4xpl5s1NJrQBzFOQ==}
     peerDependencies:
       postprocessing: '>=6.30.0'
       three: '>=0.137'
     dependencies:
-      postprocessing: 6.32.2(three@0.154.0)
+      postprocessing: 6.33.1(three@0.154.0)
       three: 0.154.0
     dev: false
 
@@ -4907,11 +4907,11 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
-  /postprocessing@6.32.2(three@0.154.0):
-    resolution: {integrity: sha512-BpjIHeElXRmkcqO6p8Pi6W1uDcivQa2FVQ/Swnoo32Cg5bq/bb0mh9hXSHeCkIBD0W4D2KU8Fg7jBICztcN9iQ==}
+  /postprocessing@6.33.1(three@0.154.0):
+    resolution: {integrity: sha512-dUxDGNgBzkTYjzkDVDBIFqZ6zLbzeaqwk8r3ZCMrv08MBX1c68goS8CKvwYvZtltacKnSSBv5f66HQgSSEOEBQ==}
     engines: {node: '>= 0.13.2'}
     peerDependencies:
-      three: '>= 0.138.0 < 0.155.0'
+      three: '>= 0.138.0 < 0.157.0'
     dependencies:
       three: 0.154.0
 
