@@ -19,7 +19,7 @@
     "dev": "pnpm copy-dts && vite build --watch"
   },
   "dependencies": {
-    "troika-three-text": "^0.47.2"
+    "troika-three-text": "^0.48.0"
   },
   "devDependencies": {
     "@houseki-engine/core": "workspace:^",
