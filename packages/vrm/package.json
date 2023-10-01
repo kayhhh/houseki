@@ -26,7 +26,7 @@
     "@houseki-engine/scene": "workspace:^",
     "@types/three": "~0.154.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "three": "~0.154.0",
+    "three": "~0.157.0",
     "thyseus": "0.14.0",
     "typescript": "~5.2.2",
     "vite": "^4.4.7",
