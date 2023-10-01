@@ -71,8 +71,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       thyseus:
-        specifier: ^0.14.0
-        version: 0.14.0
+        specifier: ^0.15.0
+        version: 0.15.0
       wouter:
         specifier: ^2.11.0
         version: 2.11.0(react@18.2.0)
@@ -85,7 +85,7 @@ importers:
         version: 3.6.0
       '@thyseus/rollup-plugin-thyseus':
         specifier: ^0.14.0
-        version: 0.14.0(thyseus@0.14.0)(vite@4.4.7)
+        version: 0.14.0(thyseus@0.15.0)(vite@4.4.7)
       '@types/react':
         specifier: ^18.2.15
         version: 18.2.15
@@ -120,8 +120,8 @@ importers:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.29.1)
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -150,8 +150,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -193,8 +193,8 @@ importers:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.29.1)
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -263,8 +263,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       thyseus:
-        specifier: ^0.14.0
-        version: 0.14.0
+        specifier: ^0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -284,8 +284,8 @@ importers:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.29.1)
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -317,8 +317,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -351,8 +351,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -396,8 +396,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -438,8 +438,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -478,8 +478,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -511,8 +511,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -538,8 +538,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -575,8 +575,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -623,8 +623,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -653,8 +653,8 @@ importers:
         specifier: ^2.2.4
         version: 2.2.4(rollup@3.29.1)
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -669,10 +669,10 @@ importers:
     devDependencies:
       '@thyseus/rollup-plugin-thyseus':
         specifier: ^0.14.0
-        version: 0.14.0(thyseus@0.14.0)(vite@4.4.7)
+        version: 0.14.0(thyseus@0.15.0)(vite@4.4.7)
       thyseus:
-        specifier: ^0.14.0
-        version: 0.14.0
+        specifier: ^0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -708,8 +708,8 @@ importers:
         specifier: ~0.154.0
         version: 0.154.0
       thyseus:
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.15.0
+        version: 0.15.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -2116,14 +2116,14 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@thyseus/rollup-plugin-thyseus@0.14.0(thyseus@0.14.0)(vite@4.4.7):
+  /@thyseus/rollup-plugin-thyseus@0.14.0(thyseus@0.15.0)(vite@4.4.7):
     resolution: {integrity: sha512-r+pyRwIatHiujtOjApi8vdMcbKNm3XDgvrMIzdgsEoMYjAkUhQaDdJoVFEwp/XqVY0VoJPJupwO3kQnwrjgNog==}
     peerDependencies:
       thyseus: ^0.14.0
     dependencies:
       '@rollup/pluginutils': 5.0.2(rollup@3.29.1)
       '@thyseus/typescript-transformer': 0.14.0(vite@4.4.7)
-      thyseus: 0.14.0
+      thyseus: 0.15.0
       typescript: 5.2.2
     transitivePeerDependencies:
       - rollup
@@ -5588,8 +5588,8 @@ packages:
   /three@0.154.0:
     resolution: {integrity: sha512-Uzz8C/5GesJzv8i+Y2prEMYUwodwZySPcNhuJUdsVMH2Yn4Nm8qlbQe6qRN5fOhg55XB0WiLfTPBxVHxpE60ug==}
 
-  /thyseus@0.14.0:
-    resolution: {integrity: sha512-WBNkAQnPMNlQX+wVQUhBZg/rlzQ7DvRG9+7VhMmza2w9SWnrKmPciOaB2MULuezwGwCWCoWCsczfpib9PXMIcA==}
+  /thyseus@0.15.0:
+    resolution: {integrity: sha512-NUESYkk/Fiz/oqv3ywfO8oon5hg11zrFQjNSorGe5Mj9fHUTrojzG/dh4VXf4xIia3+PwnCf3XewgU6eLWqYSw==}
     dependencies:
       esm-env: 1.0.0
 

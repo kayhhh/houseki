@@ -22,7 +22,7 @@
     "@types/three": "~0.154.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "three": "~0.154.0",
-    "thyseus": "0.14.0",
+    "thyseus": "0.15.0",
     "typescript": "~5.2.2",
     "vite": "^4.4.7",
     "vite-plugin-thyseus-ts": "workspace:^"

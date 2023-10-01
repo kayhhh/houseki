@@ -114,7 +114,7 @@
     "postprocessing": "^6.32.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "three": "~0.154.0",
-    "thyseus": "^0.14.0",
+    "thyseus": "^0.15.0",
     "typescript": "~5.2.2",
     "vite": "^4.4.7",
     "vite-plugin-dts": "^3.3.1"
@@ -122,7 +122,7 @@
   "peerDependencies": {
     "postprocessing": "^6.32.2",
     "three": "~0.154.0",
-    "thyseus": "^0.14.0"
+    "thyseus": "^0.15.0"
   },
   "publishConfig": {
     "access": "public"
