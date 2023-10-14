@@ -11,7 +11,7 @@
     "dev": "tsc -w"
   },
   "devDependencies": {
-    "@thyseus/rollup-plugin-thyseus": "^0.14.0",
+    "@thyseus/rollup-plugin-thyseus": "^0.15.0",
     "thyseus": "^0.14.0",
     "typescript": "~5.2.2",
     "vite": "^4.4.7",

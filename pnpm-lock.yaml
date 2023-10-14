@@ -84,8 +84,8 @@ importers:
         specifier: ^3.6.0
         version: 3.6.0
       '@thyseus/rollup-plugin-thyseus':
-        specifier: ^0.14.0
-        version: 0.14.0(thyseus@0.14.0)(vite@4.4.7)
+        specifier: ^0.15.0
+        version: 0.15.0(thyseus@0.14.0)(vite@4.4.7)
       '@types/react':
         specifier: ^18.2.24
         version: 18.2.24
@@ -668,8 +668,8 @@ importers:
   packages/vite-plugin-thyseus-ts:
     devDependencies:
       '@thyseus/rollup-plugin-thyseus':
-        specifier: ^0.14.0
-        version: 0.14.0(thyseus@0.14.0)(vite@4.4.7)
+        specifier: ^0.15.0
+        version: 0.15.0(thyseus@0.14.0)(vite@4.4.7)
       thyseus:
         specifier: ^0.14.0
         version: 0.14.0
@@ -2116,13 +2116,13 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@thyseus/rollup-plugin-thyseus@0.14.0(thyseus@0.14.0)(vite@4.4.7):
-    resolution: {integrity: sha512-r+pyRwIatHiujtOjApi8vdMcbKNm3XDgvrMIzdgsEoMYjAkUhQaDdJoVFEwp/XqVY0VoJPJupwO3kQnwrjgNog==}
+  /@thyseus/rollup-plugin-thyseus@0.15.0(thyseus@0.14.0)(vite@4.4.7):
+    resolution: {integrity: sha512-gPcb7XMpL9bGTvykSXjmMIw/c/RyCou+rnR3C8s8V1q5LBEAjfGDyma5N+VZiEv6Xg5oXsb5Tmc5xclrNI1kCQ==}
     peerDependencies:
-      thyseus: ^0.14.0
+      thyseus: ^0.15.0
     dependencies:
       '@rollup/pluginutils': 5.0.2(rollup@3.29.1)
-      '@thyseus/typescript-transformer': 0.14.0(vite@4.4.7)
+      '@thyseus/typescript-transformer': 0.15.0(vite@4.4.7)
       thyseus: 0.14.0
       typescript: 5.2.2
     transitivePeerDependencies:
@@ -2131,8 +2131,8 @@ packages:
       - vite
     dev: true
 
-  /@thyseus/typescript-transformer@0.14.0(vite@4.4.7):
-    resolution: {integrity: sha512-QmyGzf14xa8yQZKr89SWgMIL9/NZhDa6Rr/uFImQA3PFVOPpj+uBy2jKUjsSrU6YFDtcaCD5ipVv6m3jsy9g8w==}
+  /@thyseus/typescript-transformer@0.15.0(vite@4.4.7):
+    resolution: {integrity: sha512-4i4QF19BaoHGgq83O6BDZrQS9gXNuEKI8il3npNsryTGWvzXO3AFlqsljGtYQ1EtEBlZPWfCZ4vd6mvqp+lTxQ==}
     dependencies:
       typescript: 5.2.2
       vite-tsconfig-paths: 4.2.0(typescript@5.2.2)(vite@4.4.7)
