@@ -24,7 +24,7 @@
     "@houseki-engine/render": "workspace:^",
     "@houseki-engine/scene": "workspace:^",
     "@types/three": "~0.154.0",
-    "postprocessing": "^6.32.2",
+    "postprocessing": "^6.33.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "three": "~0.154.0",
     "thyseus": "0.14.0",
