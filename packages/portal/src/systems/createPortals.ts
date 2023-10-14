@@ -11,10 +11,7 @@ const PORTAL_DEPTH = 0.01;
 export function createPortals(
   warehouse: Res<Mut<Warehouse>>,
   commands: Commands,
-  portals: Query<
-    [Entity, Portal],
-    [Without<BoxCollider>, Without<Mesh>, Without<BasicMaterial>]
-  >
+  portals: Query<[Entity, Portal], Without<BoxCollider, Mesh, BasicMaterial>>
 ) {
   if (portals.length === 0) return;
 

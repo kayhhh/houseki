@@ -10,7 +10,7 @@ export function saveTransforms(
   store: Res<OrbitControlsStore>,
   entities: Query<
     [Entity, Mut<Transform>],
-    With<[OrbitControls, PerspectiveCamera]>
+    With<OrbitControls, PerspectiveCamera>
   >
 ) {
   for (const [entity, transform] of entities) {

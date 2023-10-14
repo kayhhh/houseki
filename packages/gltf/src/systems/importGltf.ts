@@ -44,8 +44,8 @@ export function importGltf(
   commands: Commands,
   store: SystemRes<GltfStore>,
   gltfs: Query<[Entity, Gltf]>,
-  withView: Query<Entity, [With<Gltf>, With<SceneView>]>,
-  withInfo: Query<Entity, [With<Gltf>, With<GltfInfo>]>
+  withView: Query<Entity, With<Gltf, SceneView>>,
+  withInfo: Query<Entity, With<Gltf, GltfInfo>>
 ) {
   const ids: bigint[] = [];
 

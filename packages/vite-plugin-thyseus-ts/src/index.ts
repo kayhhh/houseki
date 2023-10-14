@@ -13,7 +13,7 @@ const tys = thyseus();
  */
 export default function thyseusTS(): Plugin[] {
   return [
-    tys,
+    tys as unknown as Plugin,
     dts({
       resolvers: [
         {

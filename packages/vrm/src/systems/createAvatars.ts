@@ -35,7 +35,7 @@ export function createAvatars(
   vrmStore: Res<VrmStore>,
   localStore: SystemRes<LocalStore>,
   toLoad: Query<[Entity, Vrm], Without<Loading>>,
-  loading: Query<Entity, With<[Vrm, Loading]>>
+  loading: Query<Entity, With<Vrm, Loading>>
 ) {
   const ids: bigint[] = [];
 

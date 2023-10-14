@@ -23,7 +23,7 @@ export const ExportSchedule = Symbol("Export");
 
 export function sendExportEvent(
   writer: EventWriter<ExportGltf>,
-  views: Query<Entity, [With<RenderView>, With<SceneView>]>
+  views: Query<Entity, With<RenderView, SceneView>>
 ) {
   for (const entity of views) {
     const event = new ExportGltf();

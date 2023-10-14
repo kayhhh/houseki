@@ -1,6 +1,6 @@
 import { GlobalTransform, Parent, Transform } from "@houseki-engine/scene";
 import { Matrix4, Quaternion, Vector3 } from "three";
-import { Entity, Mut, Or, Query, Res, With, Without } from "thyseus";
+import { And, Entity, Mut, Or, Query, Res, With, Without } from "thyseus";
 
 import {
   DynamicBody,
@@ -21,21 +21,21 @@ export function saveRigidBodies(
   kinematicBodies: Query<[Entity, Mut<KinematicBody>]>,
   bodies: Query<
     Parent,
-    [
-      With<[Transform, GlobalTransform]>,
-      Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>
-    ]
+    And<
+      With<Transform, GlobalTransform>,
+      Or<With<StaticBody>, With<KinematicBody>, With<DynamicBody>>
+    >
   >,
   withTarget: Query<
     [Entity, Parent, Mut<TargetTransform>],
-    [Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>]
+    Or<With<StaticBody>, With<KinematicBody>, With<DynamicBody>>
   >,
   withoutTarget: Query<
     [Entity, Parent, Mut<Transform>],
-    [
-      Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>,
+    And<
+      Or<With<StaticBody>, With<KinematicBody>, With<DynamicBody>>,
       Without<TargetTransform>
-    ]
+    >
   >,
   transforms: Query<[Entity, GlobalTransform]>
 ) {

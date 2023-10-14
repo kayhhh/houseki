@@ -1,5 +1,6 @@
 import { Raycast } from "@houseki-engine/physics";
 import {
+  And,
   Commands,
   Entity,
   Mut,
@@ -32,12 +33,10 @@ export function initPortalRaycasts(
   portalRaycasts: Query<[Entity, Mut<PortalRaycast>]>,
   withoutOriginals: Query<
     Entity,
-    [
+    And<
       With<PortalRaycast>,
-      Without<OriginalTransform>,
-      Without<OriginalTranslation>,
-      Without<OriginalRotation>
-    ]
+      Without<OriginalTransform, OriginalTranslation, OriginalRotation>
+    >
   >
 ) {
   for (const entity of withoutOriginals) {

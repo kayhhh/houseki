@@ -13,11 +13,11 @@ export function moveRigidBodies(
   store: Res<PhysicsStore>,
   globalTransforms: Query<
     [Entity, GlobalTransform],
-    [Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>]
+    Or<With<StaticBody>, With<KinematicBody>, With<DynamicBody>>
   >,
   velocities: Query<
     [Entity, Velocity],
-    [Or<With<StaticBody>, Or<With<KinematicBody>, With<DynamicBody>>>]
+    Or<With<StaticBody>, With<KinematicBody>, With<DynamicBody>>
   >
 ) {
   // Set positions

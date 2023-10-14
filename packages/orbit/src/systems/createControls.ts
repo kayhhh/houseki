@@ -11,7 +11,7 @@ export function createControls(
   store: Res<Mut<OrbitControlsStore>>,
   entities: Query<
     [Entity, Mut<Transform>],
-    With<[OrbitControls, PerspectiveCamera]>
+    With<OrbitControls, PerspectiveCamera>
   >
 ) {
   const ids: bigint[] = [];

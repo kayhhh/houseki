@@ -42,7 +42,7 @@ export function initScene(
 export function addPhysics(
   commands: Commands,
   meshes: Query<Mesh>,
-  withoutCollider: Query<Entity, [Without<MeshCollider>, Without<StaticBody>]>
+  withoutCollider: Query<Entity, Without<MeshCollider, StaticBody>>
 ) {
   const processed: bigint[] = [];
 

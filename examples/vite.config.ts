@@ -9,7 +9,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    thyseus(),
+    thyseus() as any,
     // Cross Origin Isolation required for multi-threading
     {
       configureServer: (server) => {
