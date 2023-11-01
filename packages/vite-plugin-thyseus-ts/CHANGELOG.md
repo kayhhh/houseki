@@ -1,5 +1,11 @@
 # vite-plugin-thyseus-ts
 
+## 1.1.0
+
+### Minor Changes
+
+- 7b6110f: upgrade to thyseus 15
+
 ## 1.0.1
 
 ### Patch Changes

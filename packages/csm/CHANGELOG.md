@@ -1,5 +1,19 @@
 # @houseki-engine/csm
 
+## 7.0.0
+
+### Minor Changes
+
+- 7b6110f: upgrade to thyseus 15
+
+### Patch Changes
+
+- 78f9105: upgrade deps
+- Updated dependencies [78f9105]
+- Updated dependencies [7b6110f]
+  - @houseki-engine/render@8.0.0
+  - @houseki-engine/scene@3.0.0
+
 ## 6.0.0
 
 ### Minor Changes

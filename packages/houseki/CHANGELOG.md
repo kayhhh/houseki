@@ -1,5 +1,32 @@
 # houseki
 
+## 1.2.0
+
+### Minor Changes
+
+- 7b6110f: upgrade to thyseus 15
+
+### Patch Changes
+
+- 78f9105: upgrade deps
+- Updated dependencies [78f9105]
+- Updated dependencies [7b6110f]
+  - @houseki-engine/core@1.2.0
+  - @houseki-engine/csm@7.0.0
+  - @houseki-engine/gltf@10.0.0
+  - @houseki-engine/input@3.0.0
+  - @houseki-engine/orbit@9.0.0
+  - @houseki-engine/physics@8.0.0
+  - @houseki-engine/player@10.0.0
+  - @houseki-engine/portal@9.0.0
+  - @houseki-engine/postprocessing@7.0.0
+  - @houseki-engine/render@8.0.0
+  - @houseki-engine/scene@3.0.0
+  - @houseki-engine/text@8.0.0
+  - @houseki-engine/transform@10.0.0
+  - @houseki-engine/utils@9.0.0
+  - @houseki-engine/vrm@8.0.0
+
 ## 1.1.9
 
 ### Patch Changes
