@@ -553,8 +553,8 @@ importers:
   packages/text:
     dependencies:
       troika-three-text:
-        specifier: ^0.48.0
-        version: 0.48.0(three@0.154.0)
+        specifier: ^0.49.0
+        version: 0.49.0(three@0.154.0)
     devDependencies:
       '@houseki-engine/core':
         specifier: workspace:^
@@ -5771,28 +5771,28 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /troika-three-text@0.48.0(three@0.154.0):
-    resolution: {integrity: sha512-Oy1nepnkHC0HB6Otux/0W4ZlwlbIXeyeJMyZDEj4Rct+a3yPAkNAgVfYECk36lfTK8S5DDQ65mJx/PHHmQCYBw==}
+  /troika-three-text@0.49.0(three@0.154.0):
+    resolution: {integrity: sha512-sn9BNC6eIX8OO3iAkPwjecJ7Pn21Ve8P1UNFMNeQzXx759rrqS4i4pSZs7FLMYdWyCKVXBFGimBySFwRKLjq/Q==}
     peerDependencies:
       three: '>=0.125.0'
     dependencies:
       bidi-js: 1.0.2
       three: 0.154.0
-      troika-three-utils: 0.48.0(three@0.154.0)
-      troika-worker-utils: 0.48.0
+      troika-three-utils: 0.49.0(three@0.154.0)
+      troika-worker-utils: 0.49.0
       webgl-sdf-generator: 1.1.1
     dev: false
 
-  /troika-three-utils@0.48.0(three@0.154.0):
-    resolution: {integrity: sha512-zaa1ZLFj09359WNLgA+3WqVJd9QTgB8otxL35URKb+1iHvma9OtY+y/TJjdX9r4qp1HH4aI8z8mHspmWZ83nXg==}
+  /troika-three-utils@0.49.0(three@0.154.0):
+    resolution: {integrity: sha512-umitFL4cT+Fm/uONmaQEq4oZlyRHWwVClaS6ZrdcueRvwc2w+cpNQ47LlJKJswpqtMFWbEhOLy0TekmcPZOdYA==}
     peerDependencies:
       three: '>=0.125.0'
     dependencies:
       three: 0.154.0
     dev: false
 
-  /troika-worker-utils@0.48.0:
-    resolution: {integrity: sha512-NWtRXje3N6SeBH95teq3I+ygoEVWCMC0+TX/FEQIot0/h3oI3+zOsfpZLwnKn1ILcTY8rYGyT9gjJ0ijtKxRBg==}
+  /troika-worker-utils@0.49.0:
+    resolution: {integrity: sha512-1xZHoJrG0HFfCvT/iyN41DvI/nRykiBtHqFkGaGgJwq5iXfIZFBiPPEHFpPpgyKM3Oo5ITHXP5wM2TNQszYdVg==}
     dev: false
 
   /ts-api-utils@1.0.3(typescript@5.2.2):
