@@ -81,8 +81,8 @@ importers:
         version: 4.3.9(react@18.2.0)
     devDependencies:
       '@gltf-transform/core':
-        specifier: ^3.6.0
-        version: 3.6.0
+        specifier: ^3.8.0
+        version: 3.8.0
       '@thyseus/rollup-plugin-thyseus':
         specifier: ^0.15.0
         version: 0.15.0(thyseus@0.15.0)(vite@4.4.11)
@@ -165,8 +165,8 @@ importers:
   packages/gltf:
     dependencies:
       '@gltf-transform/core':
-        specifier: ^3.6.0
-        version: 3.6.0
+        specifier: ^3.8.0
+        version: 3.8.0
       '@gltf-transform/extensions':
         specifier: ^3.6.0
         version: 3.6.0
@@ -1448,22 +1448,22 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@gltf-transform/core@3.6.0:
-    resolution: {integrity: sha512-AJt/+0YeS8v0dWwhWoNv0mBsMilcowrpx9W+CS3dpNxQgzZmVOyD4jVMeoj3KqAGoNl+Wl+Ms6Pzj1oJ8akqyA==}
+  /@gltf-transform/core@3.8.0:
+    resolution: {integrity: sha512-rujR8BMfMuaCaLFpRw7U8AtRnuUi6WejlJnvTm1brt6x8gs75WdySvjT1neAHUs1H0flxQmxab7D0LrhG+8PUw==}
     dependencies:
       property-graph: 1.3.1
 
   /@gltf-transform/extensions@3.6.0:
     resolution: {integrity: sha512-757Lfk7fochyP3R+WqpSCvZx3tlVqGXBs2s90JgjkRbf14ChqhDvHNCoE2/1KU6En5ok4QcE9KBZ0SNePF2E5Q==}
     dependencies:
-      '@gltf-transform/core': 3.6.0
+      '@gltf-transform/core': 3.8.0
       ktx-parse: 0.6.0
     dev: false
 
   /@gltf-transform/functions@3.6.0:
     resolution: {integrity: sha512-3PXKRxtMp7w9bB9WsMjIZpqW+1D8gQ+JsT5j1NYS1ts+BAzh2+UtNb7y6wVn4r602zwSrMpNZzhBvXSlJ3fsFg==}
     dependencies:
-      '@gltf-transform/core': 3.6.0
+      '@gltf-transform/core': 3.8.0
       '@gltf-transform/extensions': 3.6.0
       ktx-parse: 0.6.0
       ndarray: 1.0.19
