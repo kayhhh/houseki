@@ -1,5 +1,18 @@
 # @houseki-engine/input
 
+## 3.0.0
+
+### Minor Changes
+
+- 7b6110f: upgrade to thyseus 15
+
+### Patch Changes
+
+- 78f9105: upgrade deps
+- Updated dependencies [78f9105]
+- Updated dependencies [7b6110f]
+  - @houseki-engine/core@1.2.0
+
 ## 2.0.1
 
 ### Patch Changes
